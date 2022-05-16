@@ -1,15 +1,20 @@
-theme.css
-build
-dist
-node_modules
-.DS_Store
-.idea
-sassdoc
+# node_modules/
+# dist/
+# e2e/
+# .idea/
+# documentacao.txt
 
-src/assets/theme/theme-*.css
-src/assets/layout/css/*.css
-src/assets/sass/theme/designer
-src/assets/sass/theme/extensions
+# # Elastic Beanstalk Files
+# .elasticbeanstalk/*
+# !.elasticbeanstalk/*.cfg.yml
+# !.elasticbeanstalk/*.global.yml
+
+node_modules/
+dist/
+e2e/
+.idea/
+documentacao.txt
+
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
@@ -17,8 +22,8 @@ src/assets/sass/theme/extensions
 /tmp
 /out-tsc
 
-# dependencies
-/node_modules
+# # dependencies
+# /node_modules
 
 # profiling files
 chrome-profiler-events.json
