@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 theme.css
 build
 dist
@@ -11,7 +10,6 @@ src/assets/theme/theme-*.css
 src/assets/layout/css/*.css
 src/assets/sass/theme/designer
 src/assets/sass/theme/extensions
-=======
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
@@ -55,4 +53,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
->>>>>>> ebf7b042b82e8ae8b00af9d125b5bbd6829f52bf
