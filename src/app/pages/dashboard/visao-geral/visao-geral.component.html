@@ -1,0 +1,104 @@
+<div class="p-grid p-fluid">
+    <!-- Primeiro Card -->
+    <div class="p-col-4">
+        <div class="p-col-6 p-offset-3">
+            <app-date-navigator (alterouData)="mudouData($event)"></app-date-navigator>
+        </div>
+        <div class="p-col-12">
+            <p-card>
+                <div class="card-resumo-item">
+                    <span>Saldo Anterior </span><span>R$ {{posicaoLivroCaixa?.SaldoInicial | virgulaPipe}}</span></div>
+                <div class="card-resumo-item">
+                    <span>Pagamentos </span><span>R$ {{posicaoLivroCaixa?.PagamentosCaixa | virgulaPipe}}</span>
+                </div>
+                <div class="card-resumo-item">
+                    <span>Recebimento </span><span>R$ {{posicaoLivroCaixa?.RecebimentosCaixa | virgulaPipe}}</span>
+                </div>
+                <hr />
+                <div class="card-resumo-item item-azul">
+                    <span>Saldo Atual </span><span>R$ {{posicaoLivroCaixa?.SaldoFinal | virgulaPipe}}</span></div>
+                <div class="card-resumo-item item-vermelho">
+                    <span>Previsto no Mes </span><span>R$ {{posicaoLivroCaixa?.PrevistoMesAtual | virgulaPipe}}</span>
+                </div>
+                <hr />
+                <div class="card-resumo-item item-verde">
+                    <span>Saldo Projetado </span><span>R$ {{posicaoLivroCaixa?.SaldoProjetado | virgulaPipe}}</span>
+                </div>
+            </p-card>
+        </div>
+    </div>
+    <!-- Primeiro Grqafico -->
+    <div class="p-col-8">
+        <div style="background-color: #F5F8F9; border: 1px solid #e2e5e6;">
+            <h3 style="width: 100%; text-align: center; margin-top: 5px;">Livro Caixa X Notas</h3>
+            <div class="card-info" style="border: none;" #combinedChartContainer>
+                <app-geral-livro-caixa-x-notas-chart [container]="combinedChartContainer" [pagamentos]="pagamentos"
+                    [recebimentos]="recebimentos" [compras]="compras" [vendas]="vendas" [barChartLabels]="dataLabel">
+                </app-geral-livro-caixa-x-notas-chart>
+                <!-- <p-chart type="line" [data]="lineData"></p-chart> -->
+            </div>
+        </div>
+    </div>
+    <!-- Segundo card -->
+    <div class="p-col-4">
+        <p-card>
+            <div class="card-resumo-item">
+                <span>Vendas no Mes </span><span>R$ {{posicaoLivroCaixa?.Vendas | virgulaPipe}}</span></div>
+            <hr>
+            <div class="card-resumo-item">
+                <span>Compras no Mes </span><span>R$ {{posicaoLivroCaixa?.Compras | virgulaPipe}}</span></div>
+            <div class="card-resumo-item item-verde">
+                <span>Balanço no Mes </span><span>R$ {{balancoMensal | virgulaPipe}}</span></div>
+            <hr />
+            <div class="card-resumo-item"><span>Vendas no Ano </span><span>R$ {{vendasAnual | virgulaPipe}}</span>
+            </div>
+            <div class="card-resumo-item item-azul">
+                <span>Compras no Ano </span><span>R$ {{comprasAnual | virgulaPipe}}</span></div>
+            <hr />
+            <div class="card-resumo-item item-verde">
+                <span>Balanço no Ano </span><span>R$ {{balancoAnual | virgulaPipe}}</span></div>
+        </p-card>
+    </div>
+    <!-- Segundo Grafico -->
+
+    <div class="p-col-8">
+        <div style="background-color: #F5F8F9; border: 1px solid #e2e5e6;">
+            <h3 style="width: 100%; text-align: center; margin-top: 5px;">Evolução do Saldo do livro caixa</h3>
+            <div class="card-info" #lineChartContainer style="border-top: none;">
+                <app-geral-evolucao-saldo-livro-caixa-chart [container]="lineChartContainer" [lineChartLabels]="dataLabel"
+                    [dataChart]="saldoFinal"></app-geral-evolucao-saldo-livro-caixa-chart>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-col-4 p-lg-6" style="margin-top: 30px;">
+        <div class="card">
+            <h5 class="centerText">Bar Chart</h5>
+            <p-chart type="bar" [data]="barData"></p-chart>
+        </div>
+    </div>
+    <div class="p-col-4 p-lg-6" style="margin-top: 30px;">
+        <div class="card">
+            <h5 class="centerText">Doughnut Chart</h5>
+            <p-chart type="doughnut" [data]="pieData"></p-chart>
+        </div>
+    </div>
+    <div class="p-col-4 p-lg-6">
+        <div class="card">
+            <h5 class="centerText">Radar Chart</h5>
+            <p-chart type="radar" [data]="radarData"></p-chart>
+        </div>
+    </div>
+    <div class="p-col-4 p-lg-6">
+        <div class="card">
+            <h5 class="centerText">Pie Chart</h5>
+            <p-chart type="pie" [data]="pieData"></p-chart>
+        </div>
+    </div>
+    <div class="p-col-4 p-lg-6">
+        <div class="card">
+            <h5 class="centerText">Polar Area Chart</h5>
+            <p-chart type="polarArea" [data]="polarData"></p-chart>
+        </div>
+    </div>
+</div>

@@ -7,8 +7,6 @@
 - Migrate to PrimeOne Design Architecture
 - Upgrade to Angular and PrimeNG 10
 
-#### Migration Guide
-
 ###### 8.0.1 to 9.0.0
 
 Angular 9 and PrimeNG 9

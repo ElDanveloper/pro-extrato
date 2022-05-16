@@ -1,0 +1,22 @@
+<p-dialog [modal]="true" [responsive]="true" [contentStyle]="{'width':'600px', 'overflow':'visible'}" [maximizable]="true"
+          [header]="'Entrar Como:'" [(visible)]="modalVisible">
+    <div class="p-col-12 p-fluid">
+           <div class="p-col-12">
+                <p-table [totalRecords]="finalidade.length" [value]="finalidade" [lazy]="false">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th [ngStyle]="{width: '30%'}"> </th>
+                            <th [ngStyle]="{width: '15%'}"> </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData>
+                        <tr>
+                            <td>{{rowData.name}}</td>
+                            <td><button pButton label="Selecionar" (click)="confirmar(rowData)"></button></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+           </div>
+            &nbsp;
+    </div>
+</p-dialog>

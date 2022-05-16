@@ -1,0 +1,28 @@
+<div class="p-col">
+    <div class="p-grid p-col-8" style="margin-left: 280px; margin-top: 110px;">
+        <div class="card">
+            <!-- <div>Pesquisar Empresa</div> -->
+            <div style="margin-left: 40px;" class="p-inputgroup p-col-10">
+                <input pInputText [(ngModel)]="filtro" placeholder="Pesquisar Empresa" />
+                <button pButton icon="pi pi-search"></button>
+            </div>
+            <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
+                [paginator]="true" [rows]="qtdLinhas || 7" [totalRecords]="empresas.length" [value]="empresas"
+                [lazy]="false" [rowsPerPageOptions]="opcoesLinhas">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th [ngStyle]="{width: '70%'}"> Empresa</th>
+                        <th [ngStyle]="{width: '10%'}"> </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData>
+                    <tr>
+                        <td>{{rowData.nome}}</td>
+                        <td><button pButton label="Acessar" (click)="home(rowData)"></button></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="date-select-container">
+    <span class="ui-inputgroup-addon" (click)="backDate()" style="cursor: pointer;">
+        <i class="pi pi-angle-left"></i>
+    </span>
+    <div class="input-date-container">
+    <span class="mes-label" [ngStyle]="{'color':colorFont == 0 ? 'black' : 'white'}" (click)="openCloseOpcoes($event)">{{dataLabel}}</span>
+
+    </div>
+    <span class="ui-inputgroup-addon" (click)="nextDate()" style="cursor: pointer;">
+        <i class="pi pi-angle-right"></i>
+    </span>
+
+    <div class="meses-options" [class.exibir-opcoes-mes]="exibirOpcoesMes" (clickOutside)="clickOutside()">
+        <div style="width: 80px; margin-bottom: 10px;">
+        <!-- <p-dropdown [options]="anosOptions" [ngModel]="yearValueToDropdown" (onChange)="setYear($event)"></p-dropdown> -->
+        </div>
+        <div class="meses-options-itens">
+            <div class="mes-item" (click)="setMonth(0)" [class.mes-item-selected]="dataInit.getMonth() === 0">Jan</div>
+            <div class="mes-item" (click)="setMonth(1)" [class.mes-item-selected]="dataInit.getMonth() === 1">Fev</div>
+            <div class="mes-item" (click)="setMonth(2)" [class.mes-item-selected]="dataInit.getMonth() === 2">Mar</div>
+            <div class="mes-item" (click)="setMonth(3)" [class.mes-item-selected]="dataInit.getMonth() === 3">Abr</div>
+            <div class="mes-item" (click)="setMonth(4)" [class.mes-item-selected]="dataInit.getMonth() === 4">Mai</div>
+            <div class="mes-item" (click)="setMonth(5)" [class.mes-item-selected]="dataInit.getMonth() === 5">Jun</div>
+            <div class="mes-item" (click)="setMonth(6)" [class.mes-item-selected]="dataInit.getMonth() === 6">Jul</div>
+            <div class="mes-item" (click)="setMonth(7)" [class.mes-item-selected]="dataInit.getMonth() === 7">Ago</div>
+            <div class="mes-item" (click)="setMonth(8)" [class.mes-item-selected]="dataInit.getMonth() === 8">Set</div>
+            <div class="mes-item" (click)="setMonth(9)" [class.mes-item-selected]="dataInit.getMonth() === 9">Out</div>
+            <div class="mes-item" (click)="setMonth(10)" [class.mes-item-selected]="dataInit.getMonth() === 10">Nov</div>
+            <div class="mes-item" (click)="setMonth(11)" [class.mes-item-selected]="dataInit.getMonth() === 11">Dez</div>
+        </div>
+    </div>
+</div>
