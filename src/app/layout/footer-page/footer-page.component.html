@@ -1,0 +1,8 @@
+<div [ngClass]="{'p-grid margem': !end,'p-grid': end, 'p-fluid': true}" style="display: flex; justify-content: flex-end; margin-top: 5px;">
+    <div class="p-col-4" style="margin-right:10px;">
+        <button pButton type="button" [label]="labelCancelar" style="background: #ee746d;" (click)="clickCancelar()"></button>
+    </div>
+    <div class="p-col-4">
+        <button pButton type="button" [label]="labelConfirmar" (click)="clickConfirmar()"></button>
+    </div>
+</div>

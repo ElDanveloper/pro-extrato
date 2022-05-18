@@ -1,3 +1,5 @@
+import { ModaisModule } from './../modais/modais.module';
+import { ModalComponent } from './modal/modal.component';
 import { DateNavigatorComponent } from './date-navigator/date-navigator.component';
 import { LayoutsModule } from './../layout/layouts.module';
 import { TemaModule } from './../tema.module';
@@ -10,7 +12,7 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
     declarations: [
         // OpcoesTableComponent,   
         DateNavigatorComponent,    
-        // ModalComponent, 
+        ModalComponent, 
         // DividedGridComponent,
         // PainelComponent,
         // InputComponent,
@@ -29,14 +31,13 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         CommonModule,
         TemaModule,
         DiretivasModule,
-        LayoutsModule,
-        
-        //ModaisModule,
+        LayoutsModule,        
+        // ModaisModule,
     ],
     exports: [
         // OpcoesTableComponent,
         DateNavigatorComponent,
-        // ModalComponent,
+        ModalComponent,
         // DividedGridComponent,
         // PainelComponent,
         // InputComponent,

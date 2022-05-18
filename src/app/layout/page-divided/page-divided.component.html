@@ -1,0 +1,8 @@
+<div class="p-grid p-col-12 p-fluid">
+    <div [ngClass]="{'p-col-9': padrao, 'p-col-12': !padrao}">
+            <ng-content select="[principal]"></ng-content>
+        </div>
+        <div class="p-col-3">
+            <ng-content select="[secundario]"></ng-content>
+        </div>
+</div>

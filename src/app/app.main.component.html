@@ -9,6 +9,57 @@
             'layout-menu-static-inactive': staticMenuDesktopInactive,
             'layout-menu-static-active': staticMenuMobileActive, 'p-ripple-disabled': !ripple, 'p-input-filled': inputStyle === 'filled'}">
 
+            <app-topbar></app-topbar>
+          
+
+        <div class="layout-menu" [ngClass]="{'layout-menu-dark':darkMenu}" (click)="onMenuClick()">
+            <app-inline-profile *ngIf="profileMode=='inline'&&!isHorizontal()"></app-inline-profile>
+            <app-menu></app-menu>
+        </div>
+
+        <div *ngIf="exibirLoader | async" style="position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
+
+        <div class="layout-main">
+            <!-- <app-breadcrumb></app-breadcrumb> -->
+
+            <div class="layout-content">
+                <router-outlet></router-outlet>
+            </div>
+
+            <!-- <app-footer></app-footer> -->
+        </div>
+
+        <!-- <app-rightpanel></app-rightpanel>  -->
+        <!-- <app-config></app-config> -->
+
+        <div class="layout-mask"></div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="layout-wrapper" (click)="onLayoutClick()">
+
+    <div class="layout-container"
+         [ngClass]="{'menu-layout-static': !isOverlay(),
+            'menu-layout-overlay': isOverlay(),
+            'layout-menu-overlay-active': overlayMenuActive,
+            'menu-layout-horizontal': isHorizontal(),
+            'menu-layout-slim': isSlim(),
+            'layout-menu-static-inactive': staticMenuDesktopInactive,
+            'layout-menu-static-active': staticMenuMobileActive, 'p-ripple-disabled': !ripple, 'p-input-filled': inputStyle === 'filled'}">
+
         <app-topbar></app-topbar>
 
         <div class="layout-menu" [ngClass]="{'layout-menu-dark':darkMenu}" (click)="onMenuClick($event)">
@@ -32,4 +83,4 @@
         <div class="layout-mask"></div>
     </div>
 
-</div>
+</div> -->

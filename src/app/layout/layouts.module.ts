@@ -1,3 +1,6 @@
+import { PageHeaderComponent } from './page-header/page-header.component';
+import { PageDividedComponent } from './page-divided/page-divided.component';
+import { FooterPageComponent } from './footer-page/footer-page.component';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { RouterModule } from '@angular/router';
@@ -9,9 +12,9 @@ import { NgModule } from "@angular/core";
 
 @NgModule({
     declarations: [
-        // FooterPageComponent,
-        // PageDividedComponent,
-        // PageHeaderComponent,
+        FooterPageComponent,
+        PageDividedComponent,
+        PageHeaderComponent,
     ],
     imports: [
         CommonModule,
@@ -22,9 +25,9 @@ import { NgModule } from "@angular/core";
         TableModule,
     ],
     exports: [
-        // FooterPageComponent,
-        // PageDividedComponent,
-        // PageHeaderComponent,
+        FooterPageComponent,
+        PageDividedComponent,
+        PageHeaderComponent,
     ],    
 })
 export class LayoutsModule { }

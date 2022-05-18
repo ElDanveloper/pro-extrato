@@ -1,3 +1,4 @@
+import { ModalTrocarEmpresaComponent } from './modal-trocar-empresa/modal-trocar-empresa.component';
 import { LayoutsModule } from './../layout/layouts.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
 @NgModule({
   declarations: [
       ModalSelecionarEmpresaEscritorioComponent,      
+      ModalTrocarEmpresaComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -31,6 +33,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
     ],
     exports: [
         ModalSelecionarEmpresaEscritorioComponent,        
+        ModalTrocarEmpresaComponent,
         //ModalPagamentoViaContaCorrenteComponent,
     ]
 })

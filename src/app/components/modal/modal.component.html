@@ -1,0 +1,25 @@
+<p-dialog [contentStyle]="contentStyle"
+          [maximizable]="true" [modal]="fundo" (onHide)="cancelar()"
+           [(visible)]="modalVisible" [positionTop]="50" [style]="style">
+    <p-header>
+        <h2 style="display: inline;">{{title}}</h2>
+    </p-header>
+    <div class="ui-g-12 ui-g-nopad ui-fluid" *ngIf="contentAfterInited">
+        <p-scrollPanel [style]="styleScroll">
+        <div [ngClass]="{'ui-g-9': contentAfterInited.secondContent, 'ui-g-12': !contentAfterInited.secondContent}">
+            <ng-container *ngTemplateOutlet="contentAfterInited.content"></ng-container>
+        </div>
+        <div *ngIf="contentAfterInited.secondContent" class="ui-g-3">
+            <ng-container *ngTemplateOutlet="contentAfterInited.secondContent"></ng-container>
+        </div>
+        </p-scrollPanel>
+    </div>
+
+    <div *ngIf="exibirLoader | async" style="position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+
+    <div *ngIf="exibirLoaderNetwork | async" style="position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</p-dialog>

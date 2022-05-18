@@ -1,0 +1,14 @@
+<div class="page-header">
+    <div (click)="navigate(urls[0].path)">
+        <h4 class="no-active">{{urls[0].nome}}</h4>
+    </div>
+    <div>
+        <i class="pi pi-angle-right"></i>
+    </div>
+    <div>
+        <h4>{{urls[1]?.nome || ''}}</h4>
+    </div>
+
+    <ng-content></ng-content>
+
+</div>
