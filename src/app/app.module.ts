@@ -1,3 +1,5 @@
+import { UsuariosListaComponent } from './pages/usuarios/usuarios-lista/usuarios-lista.component';
+import { EmpresasListaComponent } from './pages/empresas/empresas-lista/empresas-lista.component';
 import { VisaoGeralComponent } from './pages/dashboard/visao-geral/visao-geral.component';
 import { GeralLivroCaixaXNotasChartComponent } from './pages/dashboard/geral-livro-caixa-x-notas-chart/geral-livro-caixa-x-notas-chart.component';
 import { GeralEvolucaoSaldoLivroCaixaChartComponent } from './pages/dashboard/geral-evolucao-saldo-livro-caixa-chart/geral-evolucao-saldo-livro-caixa-chart.component';
@@ -70,6 +72,8 @@ import { LayoutsModule } from './layout/layouts.module';
         GeralEvolucaoSaldoLivroCaixaChartComponent,
         GeralLivroCaixaXNotasChartComponent,
         VisaoGeralComponent,        
+        EmpresasListaComponent,
+        UsuariosListaComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

@@ -1,3 +1,5 @@
+import { ModalUsuarioCadastroComponent } from './modal-usuario-cadastro/modal-usuario-cadastro.component';
+import { ModalEmpresaCadastroComponent } from './modal-empresa-cadastro/modal-empresa-cadastro.component';
 import { ModalTrocarEmpresaComponent } from './modal-trocar-empresa/modal-trocar-empresa.component';
 import { LayoutsModule } from './../layout/layouts.module';
 import { NgModule } from '@angular/core';
@@ -16,6 +18,8 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
   declarations: [
       ModalSelecionarEmpresaEscritorioComponent,      
       ModalTrocarEmpresaComponent,
+      ModalEmpresaCadastroComponent,
+      ModalUsuarioCadastroComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -34,6 +38,8 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
     exports: [
         ModalSelecionarEmpresaEscritorioComponent,        
         ModalTrocarEmpresaComponent,
+        ModalEmpresaCadastroComponent,
+        ModalUsuarioCadastroComponent,
         //ModalPagamentoViaContaCorrenteComponent,
     ]
 })

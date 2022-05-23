@@ -18,28 +18,28 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Empresas', icon: 'fa fa-building',
-                items: []
+                label: 'Empresas', icon: 'fa fa-building', routerLink: ['empresas-lista']
+                // items: []
             },
             {
-                label: 'Usuários', icon: 'fa fa-users',
-                items: []
+                label: 'Usuários', icon: 'fa fa-users', routerLink: ['usuarios-lista']
+                // items: []
             },
             {
-                label: 'Exportação', icon: 'fa fa-upload',
-                items: []
+                label: 'Exportação', icon: 'fa fa-upload', routerLink: ['']
+                // items: []
             },
             {
-                label: 'Contas', icon: 'fa fa-university',
-                items: []
+                label: 'Contas', icon: 'fa fa-university', routerLink: ['']
+                // items: []
             },
             {
-                label: 'Natureza Financeira', icon: 'fa fa-building-o',
-                items: []
+                label: 'Natureza Financeira', icon: 'fa fa-building-o', routerLink: ['']
+                // items: []
             },
             {
-                label: 'Relatórios', icon: 'fa fa-print',
-                items: []
+                label: 'Relatórios', icon: 'fa fa-print', routerLink: ['']
+                // items: []
             },            
         ]
     }    

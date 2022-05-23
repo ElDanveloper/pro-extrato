@@ -1,3 +1,5 @@
+import { UsuariosListaComponent } from './pages/usuarios/usuarios-lista/usuarios-lista.component';
+import { EmpresasListaComponent } from './pages/empresas/empresas-lista/empresas-lista.component';
 import { LoginGuard } from './auth/service/login.guard';
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
@@ -15,6 +17,8 @@ const routes: Routes = [
         path: '', component: AppMainComponent, canActivate: [AuthGuard],
          children: [
              {path: 'home', component: VisaoGeralComponent},
+             {path: 'empresas-lista', component: EmpresasListaComponent},
+             {path: 'usuarios-lista', component: UsuariosListaComponent},
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
                    
         ]        

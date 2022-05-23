@@ -1,3 +1,6 @@
+import { InputCpfCnpjComponent } from './input-cpf-cnpj/input-cpf-cnpj.component';
+import { OpcoesTableComponent } from './opcoes-table/opcoes-table.component';
+import { SelectComponent } from './select/select.component';
 import { ModaisModule } from './../modais/modais.module';
 import { ModalComponent } from './modal/modal.component';
 import { DateNavigatorComponent } from './date-navigator/date-navigator.component';
@@ -10,14 +13,14 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
 
 @NgModule({
     declarations: [
-        // OpcoesTableComponent,   
+        OpcoesTableComponent,   
         DateNavigatorComponent,    
         ModalComponent, 
         // DividedGridComponent,
         // PainelComponent,
         // InputComponent,
-        // SelectComponent,
-        // InputCpfCnpjComponent,
+        SelectComponent,
+        InputCpfCnpjComponent,
         // InputTelefoneComponent,
         // CustomModalComponent,
         // DateComponent,
@@ -35,14 +38,14 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         // ModaisModule,
     ],
     exports: [
-        // OpcoesTableComponent,
+        OpcoesTableComponent,
         DateNavigatorComponent,
         ModalComponent,
         // DividedGridComponent,
         // PainelComponent,
         // InputComponent,
-        // SelectComponent,
-        // InputCpfCnpjComponent,
+        SelectComponent,
+        InputCpfCnpjComponent,
         // InputTelefoneComponent,
         // CustomModalComponent,
         // DateComponent,

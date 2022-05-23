@@ -1,0 +1,10 @@
+<div [ngClass]="{'center-content': center}" style="color: #000;">
+    <div>
+        <div [ngClass]="gridClass" class="p-col-nopad">
+            <div class="p-col-nopad" *ngIf="label"><label [attr.for]="id">{{label}}</label></div>
+                <p-dropdown [placeholder]="placeholder" [options]="options" [id]="id"
+                            filter="true" (onChange)="changeValue($event)" [(ngModel)]="value" [readonly]="isReadOnly" [style]="{backgroundColor: '#fff'}"></p-dropdown>
+        </div>
+    </div>
+</div>
+<!--, overflowX: 'hidden'-->

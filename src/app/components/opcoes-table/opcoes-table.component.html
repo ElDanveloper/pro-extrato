@@ -1,0 +1,11 @@
+<div class="container" (clickOutside)="esconderOpcoes($event)">
+    <div class="opcoes" [ngClass]="{'opcoes-active': showOptions}" (click)="exibirOpcoes($event)">
+        <i class="pi pi-ellipsis-v"></i>
+    </div>
+    <ul [ngClass]="ulClasses" [class.direita]="direita">
+        <li *ngFor="let opcao of options" (click)="opcaoClicada($event, opcao)">
+            <i class="{{opcao.icon}}"></i>
+            {{opcao.label}}
+        </li>
+    </ul>
+</div>

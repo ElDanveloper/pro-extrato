@@ -1,0 +1,75 @@
+.container {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top:0;
+}
+
+.opcoes {
+    display: block;
+    position: relative;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: black;
+    cursor: pointer;
+    margin: 0;
+    padding-top: 5px;
+    text-align: center;
+    &:hover {
+        background-color: #eaedee;
+    }
+}
+
+.opcoes-active {
+    background-color: #DDDDDD;
+}
+
+.exibir-ul {
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.esconder-ul {
+    display: none;
+}
+
+ul {
+    position: absolute;
+    background: #FFF;
+    box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, 0.26), 0 1px 5px 0 rgba(0, 0, 0, 0.16);
+    list-style: none;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    min-width: 160px;
+    left: -150px;
+    top: 10px;
+    z-index: 10000;
+
+    li {
+        text-align: left;
+        padding: 7px 7px;
+        overflow: hidden;
+        color: #000;
+
+        i {
+            font-weight: normal !important;
+            padding-right: 5px;
+        }
+
+        &:hover {
+            overflow: hidden;
+            background-color: #9ECF36;
+            color: white;
+            cursor: pointer;
+        }
+    }
+}
+
+.direita {
+    left: 20px;
+    min-width: 200px;
+}

@@ -1,0 +1,50 @@
+<p-card [header]="'Empresas'">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-8">
+            <div class="p-inputgroup">
+                <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" pInputText>
+                <button pButton type="button" icon="fa fa-search" (click)="carregarLista()"
+                        ></button>
+            </div>
+        </div>
+        <div class="p-field p-col-12 p-md-2" style="position: relative;">
+            <app-select #selectValue [options]="selectSort"></app-select>
+        </div>
+        <div class="p-field p-col-12 p-md-2">
+            <button pButton label="Cadastrar" (click)="navegar()"></button>
+            
+        </div>
+    </div>
+
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista2" [lazy]="true" (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+            <th [ngStyle]="{width: '40%'}"> Nome </th>            
+            <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>
+            <th [ngStyle]="{width: '8%'}"> Ações </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData>
+            <tr>
+            <td><span (click)="linkPessoa(rowData)" class="link-pessoa">{{rowData.Nome}}</span></td>
+            <td>{{rowData.CpfCnpj | cpfCnpj}}</td>
+            <td><app-opcoes-table [value]="rowData"
+                                  [opcoes]="opcoesTable"></app-opcoes-table></td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-card>
+
+<p-confirmDialog header="Confirmacao" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+<p-toast position="bottom-right"></p-toast>
+
+<div style="position: fixed; top: -200%">
+    <button pButton type="button" label="" #cadastrarEmpresa></button>
+</div>
+
+<app-modal [fundo]="true" *appModalOpenOnClick="[cadastrarEmpresa, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
+    <app-modal-empresa-cadastro #content></app-modal-empresa-cadastro>
+</app-modal>
+
+<!-- <app-modal-cadastrar-pessoa [modalVisible]="modalCadastrarPessoa" #content (closeModal)="modalCadastrarPessoa = false"></app-modal-cadastrar-pessoa> -->

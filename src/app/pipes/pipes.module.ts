@@ -1,3 +1,4 @@
+import { CpfCnpjPipe } from './cpf-cnpj.pipe';
 import { VirgulaPipe } from './virgula.pipe';
 import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
@@ -12,7 +13,7 @@ import { NgModule } from "@angular/core";
         // ZeroExtraPipe,
         // BoolPipe,
         // SimNaoPipe,
-        // CpfCnpjPipe,
+        CpfCnpjPipe,
     ],
     imports: [
         CommonModule,
@@ -26,7 +27,7 @@ import { NgModule } from "@angular/core";
         // ZeroExtraPipe,
         // BoolPipe,
         // SimNaoPipe,
-        // CpfCnpjPipe,
+        CpfCnpjPipe,
     ],
 })
 export class PipesModule { }
