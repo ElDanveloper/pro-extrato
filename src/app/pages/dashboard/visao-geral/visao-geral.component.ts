@@ -1,5 +1,4 @@
 import { Util, sub } from '../../../controller/Util';
-import { getUrlRelatorio } from '../../../controller/staticValues';
 import { NetworkService } from '../../../services/network.service';
 import { AppBreadcrumbService } from '../../../app.breadcrumb.service';
 import {Component, OnInit} from '@angular/core';

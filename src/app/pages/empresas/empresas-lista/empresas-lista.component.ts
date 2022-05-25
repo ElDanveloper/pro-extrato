@@ -1,5 +1,5 @@
 import { NetworkService } from './../../../services/network.service';
-import { qtdLinhas, getUrlHunnoRh } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlClient } from './../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ConfirmationService, Message, MessageService, SelectItem} from "primeng/api";
@@ -18,14 +18,14 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
     // modalCadastrarPessoa = false
 
     // public entidade: string = 'empregador'
-    jaPesquisou = false
-    pagina = 0;
-    public first: number = 0
-    public loading: boolean
+    // jaPesquisou = false
+    // pagina = 0;
+    // public first: number = 0
+    // public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
-    public totalItens: number
-    lista2 = []
+    public totalItens2: number
+    // lista2 = []
     @ViewChild('inputPesquisa') public inputPesquisa
     @ViewChild('selectValue') public selectValue
     public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
@@ -41,11 +41,12 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
     
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlHunnoRh(), 'relempregadosVO')
+        super(networkService, getUrlClient(), 'deleted/false')
     }
 
     ngOnInit() {        
-        this.carregarLista()
+        this.carregarDados()
+        this.totalItens2 = this.lista.length
     }
 
     pressionaEnter(e) {

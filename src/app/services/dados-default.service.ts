@@ -1,4 +1,4 @@
-import { getUrlVenda, getUrlHunnoRh } from './../controller/staticValues';
+import {  getUrlHunnoRh } from './../controller/staticValues';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { forkJoin } from "rxjs/internal/observable/forkJoin"

@@ -1,4 +1,4 @@
-import { getUrlCompra } from 'src/app/controller/staticValues';
+// import { getUrlCompra } from 'src/app/controller/staticValues';
 import { Util } from './../controller/Util';
 import { catchError, map } from 'rxjs/operators';
 import { getUrlCad, URL_BASE } from './../controller/staticValues';
@@ -147,12 +147,12 @@ export class NetworkService {
         return this.http.post(`${url}/${endpoint}`, file, {headers, responseType: 'arraybuffer', observe: 'response' })
     }
 
-    uploadXML(file) {
-        const formData: FormData = new FormData();
-        formData.append('xml', file, file.name);
-        return this.http.post(`${getUrlCompra()}/compras/ImportarXMLNfe`, formData)
-            .pipe(map((res: Response) => res['value']), catchError(this.errorHandler))
-    }
+    // uploadXML(file) {
+    //     const formData: FormData = new FormData();
+    //     formData.append('xml', file, file.name);
+    //     return this.http.post(`${getUrlCompra()}/compras/ImportarXMLNfe`, formData)
+    //         .pipe(map((res: Response) => res['value']), catchError(this.errorHandler))
+    // }
 
 
     public salvarEBaixarArquivo(url: string, entidade: string, data: Object): Observable<any> {

@@ -1,7 +1,7 @@
 import { NetworkService } from './../services/network.service';
 
 import { Subscription } from 'rxjs';
-import { qtdLinhas, opcoesLinhas, getUrlCad, getUrlHunnoRh } from './staticValues';
+import { qtdLinhas, opcoesLinhas, getUrlHunnoRh } from './staticValues';
 import { OnDestroy, ViewChild} from '@angular/core';
 
 export class BaseListSimples implements OnDestroy {
@@ -32,7 +32,7 @@ export class BaseListSimples implements OnDestroy {
         this.entidade = entidad
     }
 
-    public lazyLoad(event): void {
+    public lazyLoad(event): void {        
         this.pagina = event.first /event.rows
         if (!this.jaPesquisou) return
         this.loading = true
@@ -54,14 +54,15 @@ export class BaseListSimples implements OnDestroy {
             v = this.inputPesquisa.nativeElement.value || ''
         } catch (e) {
             v = ''
-        }
+        }        
         this.carregarDados(`?Texto=${v}&CampoOrdem=Nome&Limite=${this.top}&Pagina=${this.pagina}`)
     }
 
-    public carregarDados(parametros): void {
+    public carregarDados(parametros?): void {
         this.$subscriptionListar = this.networkService.getSimples(this.url, this.entidade).subscribe((listaSec: any) => {
-            this.totalItens = listaSec[0]? listaSec[0]['QtdReg'] : 0;
-            this.lista = listaSec
+            // this.totalItens = listaSec[0]? listaSec[0]['QtdReg'] : 0;       
+            this.totalItens = listaSec.length     
+            this.lista = listaSec            
         })
 
     }

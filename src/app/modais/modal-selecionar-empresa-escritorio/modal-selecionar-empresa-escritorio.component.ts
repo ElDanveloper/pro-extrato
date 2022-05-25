@@ -5,7 +5,7 @@ import {DadosDefaultService} from "../../services/dados-default.service";
 import {NetworkService} from "../../services/network.service";
 import {MessageService} from "primeng/api";
 import { Router } from '@angular/router';
-import {EMPRESA_COMPLETA_STORAGE_KEY, getUrlNfe} from "../../controller/staticValues";
+import {EMPRESA_COMPLETA_STORAGE_KEY} from "../../controller/staticValues";
 
 @Component({
     selector: 'app-modal-selecionar-empresa-escritorio',

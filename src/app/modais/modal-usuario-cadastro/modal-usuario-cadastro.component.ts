@@ -1,3 +1,4 @@
+import { getUrlClient } from './../../controller/staticValues';
 import { AuthService } from './../../auth/service/auth.service';
 import { BaseFormPost } from './../../controller/BaseFormPost';
 import {Component, Input, OnInit} from '@angular/core';
@@ -8,7 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "primeng/api";
 import { HttpResponse, HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { getUrlHunnoCont, TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinhas, EMPRESA_STORAGE_KEY} from '../../controller/staticValues'
+import { TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinhas, EMPRESA_STORAGE_KEY} from '../../controller/staticValues'
 
 @Component({
   selector: 'app-modal-usuario-cadastro',
@@ -64,10 +65,10 @@ export class ModalUsuarioCadastroComponent extends BaseFormPost implements OnIni
     }
 
     public trocarEmpresa(v) {
-        this.$primeiraEtapaSubscribe = this.networkService.getSimples(getUrlHunnoCont(), `acesso/ChangeToken?IdEmpresa=${v.Id}`).subscribe((res: any) => {
+        this.$primeiraEtapaSubscribe = this.networkService.getSimples(getUrlClient(), `acesso/ChangeToken?IdEmpresa=${v.Id}`).subscribe((res: any) => {
             console.log(res.value);
             sessionStorage.setItem(TOKEN_STORAGE_KEY, res.value)
-            this.$segundaEtapaSubscribe = this.networkService.buscar('Empresa', v.Id, '', getUrlHunnoCont()).subscribe(emp => {               
+            this.$segundaEtapaSubscribe = this.networkService.buscar('Empresa', v.Id, '', getUrlClient()).subscribe(emp => {               
                 sessionStorage.setItem(EMPRESA_STORAGE_KEY, JSON.stringify(this.lista.find(x => x['Id'] === v.Id)))
                 sessionStorage.setItem(EMPRESA_COMPLETA_STORAGE_KEY, JSON.stringify(emp))
                 window.location.reload()
@@ -82,7 +83,7 @@ export class ModalUsuarioCadastroComponent extends BaseFormPost implements OnIni
         }, responseType: 'blob', observe: 'response'}).pipe().subscribe({
             next: (response: any) => {
                 this.totalItens = response.headers.get('count')
-                this.networkService.getSimplesFromHeader(getUrlHunnoCont(), `apura/EmpresasContador?Texto=${this.filtro}`, count, page).subscribe((v: any) => {
+                this.networkService.getSimplesFromHeader(getUrlClient(), `apura/EmpresasContador?Texto=${this.filtro}`, count, page).subscribe((v: any) => {
                     this.lista = v.value;
                     this.jaPesquisou = true
                 })

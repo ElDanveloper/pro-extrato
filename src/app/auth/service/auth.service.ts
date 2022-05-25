@@ -33,6 +33,10 @@ export class AuthService {
         return this.http.get(`https://app.hunno.com.br/api/suport/contractor/user`).pipe(catchError(this.errorHandler))
     }
 
+    public selectAuthenticacao(contractor: {}) {
+        return this.http.post(`https://app.hunno.com.br/api/update/token/selected`, contractor).pipe(map(res => res)).pipe(catchError(this.errorHandler))
+    }
+
     public quartaAuthenticacao(usuarioEmpresa: {}) {
         return this.http.post(`${API_AUTH}/security/SecurityUserService/LoginUsuarioEmpresa`, usuarioEmpresa).pipe(map(res => res['value'])).pipe(catchError(this.errorHandler))
     }

@@ -1,5 +1,5 @@
 import { NetworkService } from './../../../services/network.service';
-import { qtdLinhas, getUrlHunnoRh } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlClient, getUrlUser } from './../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ConfirmationService, Message, MessageService, SelectItem} from "primeng/api";
@@ -40,11 +40,11 @@ export class UsuariosListaComponent extends BaseListSimples implements OnInit, O
     
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlHunnoRh(), 'relempregadosVO')
+        super(networkService, getUrlUser(), 'contractor')
     }
 
     ngOnInit() {        
-        this.carregarLista()
+        this.carregarDados()
     }
 
     pressionaEnter(e) {

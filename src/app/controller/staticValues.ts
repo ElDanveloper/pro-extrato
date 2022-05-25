@@ -20,23 +20,25 @@ export const URL_API_STORAGE_KEY = 'url_api'
 export const PERMISSOES = 'permissoes'
 export const VERSAO_SISTEMA = 'versao_sistema'
 
-export const qtdLinhas = () => 7
+export const qtdLinhas = () => 10
 export const opcoesLinhas = () => [10,20,30,40,50,60,70,80,90,100, 500, 1000]
 
 export const getUrlCad = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}cad/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
-export const getUrlVenda = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}venda/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
-export const getUrlNfe = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}nfe/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
-export const getUrlNfce = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}nfce/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
-export const getUrlDfe = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}dfe/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
-export const getUrlFinanceiro = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}financeiro/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
-export const getUrlPcp = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}pcp/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
-export const getUrlCompra = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}compra/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
-export const getUrlRelatorio = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}rel/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
-export const getUrlContabil = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}contabil/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
-export const getUrlHunnoCont = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}hunnocont/maxus`
+// export const getUrlVenda = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}venda/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
+// export const getUrlNfe = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}nfe/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
+// export const getUrlNfce = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}nfce/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
+// export const getUrlDfe = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}dfe/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
+// export const getUrlFinanceiro = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}financeiro/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
+// export const getUrlPcp = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}pcp/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
+// export const getUrlCompra = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}compra/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
+// export const getUrlRelatorio = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}rel/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
+// export const getUrlContabil = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}contabil/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
+// export const getUrlHunnoCont = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}hunnocont/maxus`
 export const getUrlHunnoRh = () => `${API_AUTH}/rh/hunno`
+export const getUrlClient = () => `${API_AUTH}/api/client`
+export const getUrlUser = () => `${API_AUTH}/api/user`
 export const URL_BASE = `https://api.hunnodev.com.br:2004`
-export const API_AUTH = `https://api.hunno.com.br:2004`
+export const API_AUTH = `https://app.hunno.com.br`
 export const URL_UPLOAD = `https://bpoymh2e3b.execute-api.us-east-1.amazonaws.com/prod/upload-file`
 
 export const S3_BUCKET_URL = `https://toqweb-images.s3.amazonaws.com/`

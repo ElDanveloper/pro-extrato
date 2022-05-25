@@ -34,6 +34,7 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
     $quartaEtapaSubscribe: Subscription;
     $buscarClienteSubscribe: Subscription;
     $buscarEmpresaSubscribe: Subscription;
+    $buscarTokenSelectSubscribe: Subscription;
 
   constructor(public route: ActivatedRoute, private authService: AuthService, private networkService: NetworkService, private router: Router, private messageService: MessageService, private dadosDefaultService: DadosDefaultService) {
 
@@ -44,7 +45,8 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
         //this.usuario = JSON.parse(sessionStorage.getItem(USUARIO_STORAGE_KEY))
         if(Number(param.get('value')) === 1){
             this.dadosDefaultService.exibirLoader.next(true)
-            this.$listarEmpresaSubscribe = this.authService.segundaAuthenticacao().subscribe((res: any) => {                
+            this.$listarEmpresaSubscribe = this.authService.segundaAuthenticacao().subscribe((res: any) => {      
+                console.log('Segunda autenticação ---> ')          
                 this.lista = res
                 this.totalItens = res.length
             }).add(() => this.dadosDefaultService.exibirLoader.next(false))
@@ -52,6 +54,7 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
         if(Number(param.get('value')) === 2){
             this.dadosDefaultService.exibirLoader.next(true)
             this.$listarEmpresaSubscribe = this.authService.terceiraAuthenticacao().subscribe((res: any) => {                
+                console.log('Terceira autenticação ---->')
                 this.lista = res
                 this.totalItens = res.length
             }).add(() => this.dadosDefaultService.exibirLoader.next(false))
@@ -76,8 +79,12 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
     }
 
     home(v){                 
-        sessionStorage.setItem(EMPRESA_STORAGE_KEY, JSON.stringify(this.lista.find(x => x['id'] === v.id)))
+        let contractor_id = this.lista.find(x => x['id'] === v.id)
+        sessionStorage.setItem(EMPRESA_STORAGE_KEY, JSON.stringify(contractor_id))
         // sessionStorage.removeItem(TOKEN_TEMP_STORAGE_KEY)
+        this.$buscarTokenSelectSubscribe = this.authService.selectAuthenticacao({contractor_id: contractor_id.id}).subscribe(res => {
+            sessionStorage.setItem(TOKEN_STORAGE_KEY, res["token"])
+        })
         this.router.navigate(['/home'], {replaceUrl: true})
     }
 
