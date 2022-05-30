@@ -1,0 +1,9 @@
+<div [ngClass]="{'center-content': center}" style="color: #000;">
+    <div [ngClass]="{'p-col-12 p-grid-nopad': row}">
+        <div [ngClass]="gridClass">
+            <label [attr.for]="id">{{label}}</label><br/>
+            <input [ngClass]="{'invalid': campoInvalido, 'lowercase': lowercase}" [type]="type" [id]="id" [placeholder]="placeholder" [disabled]="isReadOnly" [(ngModel)]="value"
+                  (blur)="onBlur.emit($event)" (keypress)="keyPress($event)" autocomplete="off" pInputText [maxLength]="maxLength"/>
+        </div>
+    </div>
+</div>

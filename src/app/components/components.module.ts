@@ -1,3 +1,7 @@
+import { PainelComponent } from './painel/painel.component';
+import { DateComponent } from './date/date.component';
+import { InputTelefoneComponent } from './input-telefone/input-telefone.component';
+import { InputComponent } from './input/input.component';
 import { InputCpfCnpjComponent } from './input-cpf-cnpj/input-cpf-cnpj.component';
 import { OpcoesTableComponent } from './opcoes-table/opcoes-table.component';
 import { SelectComponent } from './select/select.component';
@@ -17,13 +21,13 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         DateNavigatorComponent,    
         ModalComponent, 
         // DividedGridComponent,
-        // PainelComponent,
-        // InputComponent,
+        PainelComponent,
+        InputComponent,
         SelectComponent,
         InputCpfCnpjComponent,
-        // InputTelefoneComponent,
+        InputTelefoneComponent,
         // CustomModalComponent,
-        // DateComponent,
+        DateComponent,
         // InputIntegerComponent,
         // RadioButtonComponent,
         // InputMoneyComponent,
@@ -42,13 +46,13 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         DateNavigatorComponent,
         ModalComponent,
         // DividedGridComponent,
-        // PainelComponent,
-        // InputComponent,
+        PainelComponent,
+        InputComponent,
         SelectComponent,
         InputCpfCnpjComponent,
-        // InputTelefoneComponent,
+        InputTelefoneComponent,
         // CustomModalComponent,
-        // DateComponent,
+        DateComponent,
         // InputIntegerComponent,
         // RadioButtonComponent,
         // InputMoneyComponent,

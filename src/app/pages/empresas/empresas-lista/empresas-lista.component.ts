@@ -30,13 +30,15 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
     @ViewChild('selectValue') public selectValue
     public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
     cadastrar = false
-    // opcoesTable = [
-    //     {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editar(e)},
-    //     {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletar(e)},
-    //     {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
-    //             this.router.navigate([`/historico-pessoa/${e.Id}`])
-    //         }},
-    // ]
+    opcoesTable = [
+        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
+            this.router.navigate([`/parametros`])
+        }},
+        {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
+        {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
+                this.router.navigate([`/historico-pessoa/${e.Id}`])
+            }},
+    ]
 
     
 
@@ -61,7 +63,8 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
 
     
     public navegar() {
-        this.cadastrarEmpresa.nativeElement.click()        
+        this.router.navigate([`/empresas/cadastro`])
+        // this.cadastrarEmpresa.nativeElement.click()        
     }
     
 

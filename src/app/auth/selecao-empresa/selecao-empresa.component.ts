@@ -46,15 +46,13 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
         if(Number(param.get('value')) === 1){
             this.dadosDefaultService.exibirLoader.next(true)
             this.$listarEmpresaSubscribe = this.authService.segundaAuthenticacao().subscribe((res: any) => {      
-                console.log('Segunda autenticação ---> ')          
                 this.lista = res
                 this.totalItens = res.length
             }).add(() => this.dadosDefaultService.exibirLoader.next(false))
         }
         if(Number(param.get('value')) === 2){
             this.dadosDefaultService.exibirLoader.next(true)
-            this.$listarEmpresaSubscribe = this.authService.terceiraAuthenticacao().subscribe((res: any) => {                
-                console.log('Terceira autenticação ---->')
+            this.$listarEmpresaSubscribe = this.authService.terceiraAuthenticacao().subscribe((res: any) => {                                
                 this.lista = res
                 this.totalItens = res.length
             }).add(() => this.dadosDefaultService.exibirLoader.next(false))

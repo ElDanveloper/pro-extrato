@@ -21,15 +21,15 @@
             <tr>
             <th [ngStyle]="{width: '40%'}"> Nome </th>            
             <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>
-            <!-- <th [ngStyle]="{width: '8%'}"> Ações </th> -->
+            <th [ngStyle]="{width: '8%'}"> Ações </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
             <tr>
             <td><span (click)="linkPessoa(rowData)" class="link-pessoa">{{rowData.nome}}</span></td>
             <td>{{rowData.cpf_cnpj | cpfCnpj}}</td>
-            <!-- <td><app-opcoes-table [value]="rowData"
-                                  [opcoes]="opcoesTable"></app-opcoes-table></td> -->
+            <td><app-opcoes-table [value]="rowData"
+                                  [opcoes]="opcoesTable"></app-opcoes-table></td>
             </tr>
         </ng-template>
     </p-table>

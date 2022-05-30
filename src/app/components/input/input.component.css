@@ -1,0 +1,7 @@
+.invalid {
+    border-color: rgba(255, 0, 4, 0.4);
+}
+
+.lowercase {
+    text-transform: lowercase!important;
+}

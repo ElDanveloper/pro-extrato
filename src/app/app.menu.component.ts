@@ -18,11 +18,11 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Empresas', icon: 'fa fa-building', routerLink: ['empresas-lista']
+                label: 'Empresas', icon: 'fa fa-building', routerLink: ['empresas']
                 // items: []
             },
             {
-                label: 'Usuários', icon: 'fa fa-users', routerLink: ['usuarios-lista']
+                label: 'Usuários', icon: 'fa fa-users', routerLink: ['usuarios']
                 // items: []
             },
             {

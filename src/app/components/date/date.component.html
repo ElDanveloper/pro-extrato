@@ -1,0 +1,8 @@
+<div [ngClass]="{'center-content': center}">
+    <div [ngClass]="{'p-col-12 p-col-nopad': row}">
+        <div [ngClass]="gridClass">
+            <label [attr.for]="id">{{label}}</label>
+            <p-calendar [view]="view" [(ngModel)]="value" [dateFormat]="dateFormat" [showIcon]="true" [yearNavigator]="yearNavigator" (onSelect)="changeValue($event)" [disabled]="isReadOnly" [showTime]="showTime"></p-calendar>
+        </div>
+    </div>
+</div>

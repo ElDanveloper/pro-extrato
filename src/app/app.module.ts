@@ -1,3 +1,6 @@
+import { UsuariosCadastroComponent } from './pages/usuarios/usuarios-cadastro/usuarios-cadastro.component';
+import { ParametrosComponent } from './pages/parametros/parametros.component';
+import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
 import { UsuariosListaComponent } from './pages/usuarios/usuarios-lista/usuarios-lista.component';
 import { EmpresasListaComponent } from './pages/empresas/empresas-lista/empresas-lista.component';
 import { VisaoGeralComponent } from './pages/dashboard/visao-geral/visao-geral.component';
@@ -39,6 +42,7 @@ import {MenuService} from './app.menu.service';
 
 import {TemaModule} from './tema.module';
 import { LayoutsModule } from './layout/layouts.module';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
     imports: [BrowserModule,
@@ -53,7 +57,8 @@ import { LayoutsModule } from './layout/layouts.module';
         ComponentsModule,
         PipesModule,
         ModaisModule,   
-        LayoutsModule,           
+        LayoutsModule, 
+        ImageCropperModule,          
         
     ],
     declarations: [
@@ -74,6 +79,9 @@ import { LayoutsModule } from './layout/layouts.module';
         VisaoGeralComponent,        
         EmpresasListaComponent,
         UsuariosListaComponent,
+        EmpresasCadastroComponent,
+        ParametrosComponent,
+        UsuariosCadastroComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

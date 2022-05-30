@@ -1,0 +1,12 @@
+
+<div [class]="classe">
+    <p-accordion>
+        <p-accordionTab [header]="title" [selected]="opened">
+                <ng-content></ng-content>
+                &nbsp;
+            <div style="margin-top: 30px;">
+            <ng-content select="[lista]"></ng-content>
+            </div>
+        </p-accordionTab>
+    </p-accordion>
+</div>
