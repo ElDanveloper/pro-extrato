@@ -22,11 +22,7 @@ export class AppMenuComponent implements OnInit {
                 // items: []
             },
             {
-                label: 'Usuários', icon: 'fa fa-users', routerLink: ['usuarios']
-                // items: []
-            },
-            {
-                label: 'Exportação', icon: 'fa fa-upload', routerLink: ['']
+                label: 'Pessoas', icon: 'fa fa-users', routerLink: ['']
                 // items: []
             },
             {

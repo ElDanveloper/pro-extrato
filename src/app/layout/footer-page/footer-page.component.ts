@@ -10,6 +10,8 @@ export class FooterPageComponent implements OnInit {
     @Input() end = false
     @Input() labelConfirmar = 'Salvar'
     @Input() labelCancelar = 'Cancelar'
+    @Input() tamanhoConfirma = 'p-col-4'
+    @Input() tamanhoCancelar = 'p-col-4'
 
     @Output() cancelar = new EventEmitter<any>()
     @Output() confirmar = new EventEmitter<any>()

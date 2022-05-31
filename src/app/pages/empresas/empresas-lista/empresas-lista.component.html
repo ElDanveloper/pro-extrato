@@ -1,4 +1,4 @@
-<p-card [header]="'Empresas'">
+<p-card [header]="'Listagem de Empresas'">
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 p-md-8">
             <div class="p-inputgroup">
@@ -7,8 +7,12 @@
                         ></button>
             </div>
         </div>
-        <div class="p-field p-col-12 p-md-2" style="position: relative;">
+        <!-- <div class="p-field p-col-12 p-md-2" style="position: relative;">
             <app-select #selectValue [options]="selectSort"></app-select>
+        </div> -->
+        <div class="p-field p-col-12 p-md-2" style="margin-top: 15px;">
+            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 25px; cursor: pointer;"></i>
+            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 35px; cursor: pointer"></i>
         </div>
         <div class="p-field p-col-12 p-md-2">
             <button pButton label="Cadastrar" (click)="navegar()"></button>
@@ -19,15 +23,21 @@
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
         <ng-template pTemplate="header" let-columns>
             <tr>
+                <th [ngStyle]="{width: '5%'}"> Código </th>                
             <th [ngStyle]="{width: '40%'}"> Nome </th>            
             <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>
-            <th [ngStyle]="{width: '8%'}"> Ações </th>
+            <th [ngStyle]="{width: '10%'}"> Fone </th>
+            <th [ngStyle]="{width: '20%'}"> Email </th>
+            <th [ngStyle]="{width: '5%'}"> Ações </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
             <tr>
+            <td>{{rowData.code_client}}</td>    
             <td><span (click)="linkPessoa(rowData)" class="link-pessoa">{{rowData.nome}}</span></td>
             <td>{{rowData.cpf_cnpj | cpfCnpj}}</td>
+            <td>{{rowData.fone_format}}</td>
+            <td>{{rowData.email}}</td>
             <td><app-opcoes-table [value]="rowData"
                                   [opcoes]="opcoesTable"></app-opcoes-table></td>
             </tr>

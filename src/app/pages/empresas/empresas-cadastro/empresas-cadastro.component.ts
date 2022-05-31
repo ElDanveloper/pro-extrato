@@ -1,18 +1,18 @@
+import { Util, hasValue } from './../../../controller/Util';
+import { SERVERLESS_URL, getUrlClient } from './../../../controller/staticValues';
 import { Formulario } from './../../../controller/Formulario';
-import { autoCompleteDelayTime, getUrlCad, SERVERLESS_URL } from './../../../controller/staticValues';
-import { hasValue, Util } from './../../../controller/Util';
-import { DadosDefaultService } from './../../../services/dados-default.service';
-import { NetworkService } from './../../../services/network.service';
-import { getEstados } from './../../../controller/staticValues';
-import { BaseFormPost } from './../../../controller/BaseFormPost';
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MessageService, SelectItem} from "primeng/api";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {Endereco, ErroCep, NgxViacepService} from "@brunoc/ngx-viacep";
-import {Subscription} from "rxjs";
-import {Dimensions, ImageCroppedEvent} from "ngx-image-cropper";
-import { Company } from '../../../model/company.model';
+import { Company } from './../../../model/company.model';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Endereco, ErroCep, NgxViacepService } from '@brunoc/ngx-viacep';
+import { MessageService, SelectItem } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import { BaseFormPost } from 'src/app/controller/BaseFormPost';
+import { getEstados } from 'src/app/controller/staticValues';
+import { DadosDefaultService } from 'src/app/services/dados-default.service';
+import { NetworkService } from 'src/app/services/network.service';
+import { Dimensions, ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
     selector: 'app-empresas-cadastro',
@@ -22,7 +22,7 @@ import { Company } from '../../../model/company.model';
 
 export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, OnDestroy {
 
-    // @ViewChild('uploadImagem', {static: false}) uploadImagem
+    @ViewChild('uploadImagem', {static: false}) uploadImagem
 
     $subscription1: Subscription;
     $subscription2: Subscription;
@@ -81,14 +81,14 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
     modalAdicionarEndereco = false;
     modalContato = false;
     contatoParaEdicao
-    itemsRowEndereco = [
-        // {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editarEndereco(e)},
-        // {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletarEndereco(e)},
-    ]
-    itemsRowContato = [
-        // {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editarContato(e)},
-        // {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletarContato(e)},
-    ]
+    // itemsRowEndereco = [
+    //     {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editarEndereco(e)},
+    //     {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletarEndereco(e)},
+    // ]
+    // itemsRowContato = [
+    //     {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editarContato(e)},
+    //     {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletarContato(e)},
+    // ]
     public contaContabilSugests = []
     onLabel = 'Sim'
     offLabel = 'Não'
@@ -103,7 +103,7 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
     private timeOut: any = 0
 
 
-    //Novo
+    Novo
     selectIndCooperativa: SelectItem[] = [
         {value: '0', label: '0 - Não é Cooperativa'},
         {value: '1', label: '1 - Cooperativa de Trabalho'},
@@ -117,50 +117,43 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
     ]
 
     selectTributario: SelectItem[] = []
+   
 
-    constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService,
-                private viaCep: NgxViacepService) {
+    constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService, private viaCep: NgxViacepService) {
         super(networkService, dadosDefault, router, 'company', messageService);
-        this.form = Formulario.createForm(new Company(), this.fb);
-        // this.form.addControl("PessoaFisicaForm", Formulario.createForm(new PersonFisical(), this.fb));
-        // this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
-
-        // this.form.get('PessoaForm').get('Tipo').setValue('F');
-        // this.form.get('Ativo').setValue(true)
-        // this.form.get('Cliente').setValue(true)
-        // this.form.get('CodContaContabil').setValue(1)
+        this.form = Formulario.createForm(new Company(), this.fb);this.form = Formulario.createForm(new Company(), this.fb);
     }
 
-    get imagem() {
-        const staticImg = '../../../assets/images/user.png'
-        const img = this.form.get('PessoaForm').get('CaminhoFoto').value
-        return hasValue(img) ? img : staticImg
-    };
+     get imagem() {
+            const staticImg = '../../../assets/images/user.png'
+            const img = this.form.get('PessoaForm').get('CaminhoFoto').value
+            return hasValue(img) ? img : staticImg
+        };
 
     ngOnInit() {
-        console.log('Teste ----> ')
-    //     // this.$subscription1 = this.dadosDefault.pessoa().subscribe(values => {
-    //     //     this.selectSituacaoPessoa = values[0];
-    //     //     this.selectOperacaoFiscal = values[1];
-    //     //     this.selectNaturezaFinanceira = values[2];
-    //     //     this.selectVendedor = values[3];
-    //     //     this.selectTipoEndereco = values[4];
-    //     //     this.selectContaContabil = values[5]
-    //     //     this.selectTabela = values[6]
-    //     //     this.selectPais = values[7]
+
+            // this.$subscription1 = this.dadosDefault.pessoa().subscribe(values => {
+            // this.selectSituacaoPessoa = values[0];
+            // this.selectOperacaoFiscal = values[1];
+            // this.selectNaturezaFinanceira = values[2];
+            // this.selectVendedor = values[3];
+            // this.selectTipoEndereco = values[4];
+            // this.selectContaContabil = values[5]
+            // this.selectTabela = values[6]
+            // this.selectPais = values[7]
 
     // this.$subscription1 = this.dadosDefault.empregador().subscribe(values => {
     //     this.selectTributario = values[0];
     // })
 
-            // if (this.id) {
-            //     this.dadosDefault.exibirLoader.next(true)
-            //     this.$subscription2 = this.networkService.buscar('empregador', this.id, null).subscribe((value: any) => {
+            if (this.id) {
+                this.dadosDefault.exibirLoader.next(true)
+                this.$subscription2 = this.networkService.buscar('empregador', this.id, null).subscribe((value: any) => {
 
-            //         this.idPessoa = value.IdPessoa.Id
+                    this.idPessoa = value.IdPessoa.Id
 
-            //         const data = Formulario.prepareValueToForm(new Company(), value, null, null, Company.checkbox());
-            //         Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
+                    const data = Formulario.prepareValueToForm(new Company(), value, null, null, Company.checkbox());
+                    Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
 
                     // if (value.IdPessoa) {
                     //     const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), value.IdPessoa, Pessoa.datas(), null, Pessoa.checkbox());
@@ -172,23 +165,23 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
                     //     Object.keys(dataPessoaFisica).forEach(key => this.form.get('PessoaFisicaForm').get(key).setValue(dataPessoaFisica[key]))
                     // }
 
-            //         this.$subscription3 = this.networkService.getSimples(getUrlCad(), `pessoaendereco?$filter=IdPessoa eq ${value.IdPessoa.Id}`).subscribe((v: any) => {
-            //             this.enderecosTable = v.value
-            //         })
+                    // this.$subscription3 = this.networkService.getSimples(getUrlCad(), `pessoaendereco?$filter=IdPessoa eq ${value.IdPessoa.Id}`).subscribe((v: any) => {
+                    //     this.enderecosTable = v.value
+                    // })
 
-            //         this.$subscription4 = this.networkService.getSimples(getUrlCad(), `pessoacontato?$filter=IdPessoa eq ${value.IdPessoa.Id}`).subscribe((v: any) => {
-            //             this.contatosTable = v.value
-            //         })
+                    // this.$subscription4 = this.networkService.getSimples(getUrlCad(), `pessoacontato?$filter=IdPessoa eq ${value.IdPessoa.Id}`).subscribe((v: any) => {
+                    //     this.contatosTable = v.value
+                    // })
 
-            //     }).add(() => this.dadosDefault.exibirLoader.next(false))
-            // } else {
-            //     this.form.get('DataCadastro').setValue(new Date())
-            // }
+                }).add(() => this.dadosDefault.exibirLoader.next(false))
+            } else {
+                this.form.get('DataCadastro').setValue(new Date())
+            }
         // });
 
-        // this.$subscription5 = this.route.paramMap.subscribe(params => {
-        //     this.id = params.get('id')
-        // })
+        this.$subscription5 = this.route.paramMap.subscribe(params => {
+            this.id = params.get('id')
+        })
     }
 
     processarFormulario() {
@@ -253,19 +246,18 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
                 imagem: this.croppedImage,
             }).subscribe((resFoto: any) => {
                 vFinal.Pessoa.IdPessoa.CaminhoFoto = resFoto.url
-                this.$subscription6 = this.networkService.salvarPost(getUrlCad(), 'pessoas/pessoaempresa2', vFinal).subscribe((v: any) => {
-                    this.router.navigate(['/pessoa'])
-                }).add(() => this.networkService.exibirLoader.next(false))
+                // this.$subscription6 = this.networkService.salvarPost(getUrlCad(), 'pessoas/pessoaempresa2', vFinal).subscribe((v: any) => {
+                //     this.router.navigate(['/pessoa'])
+                // }).add(() => this.networkService.exibirLoader.next(false))
             }, e => this.networkService.exibirLoader.next(false))
         } else {
-            this.$subscription6 = this.networkService.salvarPost(getUrlCad(), 'pessoas/pessoaempresa2', vFinal).subscribe((v: any) => {
-                this.router.navigate(['/pessoa'])
-            }).add(() => this.networkService.exibirLoader.next(false))
+            // this.$subscription6 = this.networkService.salvarPost(getUrlCad(), 'pessoas/pessoaempresa2', vFinal).subscribe((v: any) => {
+            //     this.router.navigate(['/pessoa'])
+            // }).add(() => this.networkService.exibirLoader.next(false))
         }
 
-
     }
-
+    
     adicionarEndereco(value) {
         const {index, ...data} = value
         if (typeof index !== 'undefined' && index !== null) {
@@ -296,7 +288,7 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
         cnpj = cnpj.join('')
 
         if (cnpj.length === 11) {
-            this.$subscription7 = this.networkService.getSimples(getUrlCad(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
+            this.$subscription7 = this.networkService.getSimples(getUrlClient(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
                 this.form.get('PessoaForm').get('Tipo').setValue('F')
                 const vApi = v.value
                 if (vApi && vApi.length === 1) {
@@ -324,7 +316,7 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
         }
 
         if (cnpj.length === 14) {
-            this.$subscription8 = this.networkService.getSimples(getUrlCad(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
+            this.$subscription8 = this.networkService.getSimples(getUrlClient(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
                 this.form.get('PessoaForm').get('Tipo').setValue('J')
                 const vApi = v.value
                 if (vApi && vApi.length === 1) {
@@ -438,20 +430,20 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
         this.dadosDefault.dadosAdicionarContato.next({index: undefined})
     }
 
-    procurarContaContabil({query}) {
-        clearTimeout(this.timeOut);
-        this.timeOut = setTimeout(() => {
-            this.$subscription12 = this.networkService.listar(getUrlCad(), 'planocontas', 0, 100, 'Descricao', 'asc', {
-                col: 'Descricao',
-                value: query
-            }, null).subscribe(v => {
-                this.contaContabilSugests = v;
-                this.timeOut = 0
-            }, e => {
-                this.timeOut = 0
-            })
-        }, autoCompleteDelayTime)
-    }
+    // procurarContaContabil({query}) {
+    //     clearTimeout(this.timeOut);
+    //     this.timeOut = setTimeout(() => {
+    //         this.$subscription12 = this.networkService.listar(getUrlCad(), 'planocontas', 0, 100, 'Descricao', 'asc', {
+    //             col: 'Descricao',
+    //             value: query
+    //         }, null).subscribe(v => {
+    //             this.contaContabilSugests = v;
+    //             this.timeOut = 0
+    //         }, e => {
+    //             this.timeOut = 0
+    //         })
+    //     }, autoCompleteDelayTime)
+    // }
 
     cancelarLocal() {
         this.router.navigate(['/pessoa'])
@@ -498,7 +490,7 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
         const regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg|.png|.gif)$");
         if (!regex.test(event.target.value.toLowerCase())) {
             this.messageService.add(Util.pushInfoMessage('Arquivo nao é uma imagem valida'))
-            // this.uploadImagem.nativeElement.value = ''
+            this.uploadImagem.nativeElement.value = ''
             return
         }
 
@@ -514,7 +506,7 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
             image.onload = () => {
                 if (image.height < 640 && image.width < 640) {
                     this.messageService.add(Util.pushInfoMessage('Imagem muito pequena, um dos lados tem que ter pelo menos 640px'))
-                    // this.uploadImagem.nativeElement.value = ''
+                    this.uploadImagem.nativeElement.value = ''
                     return
                 }
                 this.imageChangedEvent = event;
@@ -546,10 +538,10 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
     }
 
     private deletarEndereco(e: any) {
-        if (e.Id) {
-            this.$subscription10 = this.networkService.deletar(getUrlCad(), 'pessoaendereco', e.Id).subscribe(v => {
-            });
-        }
+        // if (e.Id) {
+        //     this.$subscription10 = this.networkService.deletar(getUrlCad(), 'pessoaendereco', e.Id).subscribe(v => {
+        //     });
+        // }
         const index = this.enderecosTable.findIndex(v => v === e)
         this.enderecosTable.splice(index, 1)
     }
@@ -561,10 +553,10 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
     }
 
     private deletarContato(e: any) {
-        if (e.Id) {
-            this.$subscription11 = this.networkService.deletar(getUrlCad(), 'pessoacontato', e.Id).subscribe(v => {
-            });
-        }
+        // if (e.Id) {
+        //     this.$subscription11 = this.networkService.deletar(getUrlCad(), 'pessoacontato', e.Id).subscribe(v => {
+        //     });
+        // }
         const index = this.contatosTable.findIndex(v => v === e)
         this.contatosTable.splice(index, 1)
     }
@@ -574,5 +566,6 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
         const index = this.contatosTable.findIndex(v => v === e)
         this.dadosDefault.dadosAdicionarContato.next({...e, index})
     }
+
 
 }

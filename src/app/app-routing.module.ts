@@ -1,5 +1,5 @@
-import { UsuariosCadastroComponent } from './pages/usuarios/usuarios-cadastro/usuarios-cadastro.component';
 import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
+import { UsuariosCadastroComponent } from './pages/usuarios/usuarios-cadastro/usuarios-cadastro.component';
 import { ParametrosComponent } from './pages/parametros/parametros.component';
 import { UsuariosListaComponent } from './pages/usuarios/usuarios-lista/usuarios-lista.component';
 import { EmpresasListaComponent } from './pages/empresas/empresas-lista/empresas-lista.component';
@@ -20,11 +20,11 @@ const routes: Routes = [
         path: '', component: AppMainComponent, canActivate: [AuthGuard],
          children: [
              {path: 'home', component: VisaoGeralComponent},
-             {path: 'empresas', component: EmpresasListaComponent},
-             {path: 'empresas/cadastro', component: EmpresasCadastroComponent},
+             {path: 'empresas', component: EmpresasListaComponent},           
              {path: 'usuarios', component: UsuariosListaComponent},
              {path: 'parametros', component: ParametrosComponent},             
-             {path: 'usuario-cadastro', component: UsuariosCadastroComponent}
+             {path: 'usuario-cadastro', component: UsuariosCadastroComponent},
+             {path: 'empresas/cadastro', component: EmpresasCadastroComponent}
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
                    
         ]        

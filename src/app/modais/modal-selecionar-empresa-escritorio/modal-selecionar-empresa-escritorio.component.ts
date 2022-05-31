@@ -18,8 +18,8 @@ export class ModalSelecionarEmpresaEscritorioComponent implements OnInit {
     @Output() closeModal = new EventEmitter()
 
     finalidade = [
-        {name: "Empresa",value: 1},
-        {name: "Escritório de Contabilidade", value: 2}
+        {name: "Ambiente Empresa",value: 1},
+        {name: "Ambiente Contador", value: 2}
     ]
 
     constructor(private fb: FormBuilder, private dadosDefault: DadosDefaultService, private networkService: NetworkService, private messageService: MessageService,private router: Router) {

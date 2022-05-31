@@ -1,6 +1,7 @@
+import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
+import { EmpresasCadastro3Component } from './pages/empresas/empresas-cadastro3/empresas-cadastro3.component';
 import { UsuariosCadastroComponent } from './pages/usuarios/usuarios-cadastro/usuarios-cadastro.component';
 import { ParametrosComponent } from './pages/parametros/parametros.component';
-import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
 import { UsuariosListaComponent } from './pages/usuarios/usuarios-lista/usuarios-lista.component';
 import { EmpresasListaComponent } from './pages/empresas/empresas-lista/empresas-lista.component';
 import { VisaoGeralComponent } from './pages/dashboard/visao-geral/visao-geral.component';
@@ -43,6 +44,7 @@ import {MenuService} from './app.menu.service';
 import {TemaModule} from './tema.module';
 import { LayoutsModule } from './layout/layouts.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
 
 @NgModule({
     imports: [BrowserModule,
@@ -58,7 +60,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         PipesModule,
         ModaisModule,   
         LayoutsModule, 
-        ImageCropperModule,          
+        ImageCropperModule,  
+        NgxViacepModule,        
         
     ],
     declarations: [
@@ -78,10 +81,11 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         GeralLivroCaixaXNotasChartComponent,
         VisaoGeralComponent,        
         EmpresasListaComponent,
-        UsuariosListaComponent,
-        EmpresasCadastroComponent,
+        UsuariosListaComponent,        
         ParametrosComponent,
         UsuariosCadastroComponent,
+        EmpresasCadastro3Component,
+        EmpresasCadastroComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
