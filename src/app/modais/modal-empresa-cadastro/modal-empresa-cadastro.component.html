@@ -1,21 +1,74 @@
-<ng-template #conteudo>
+<p-dialog [modal]="true" [responsive]="true" [contentStyle]="{'width':'800px', 'overflow':'visible'}"
+    [maximizable]="false" [header]="'Cadastro de Empresa'" [(visible)]="modalVisible" (onHide)="fecharModal()">
+    <p-card [formGroup]="form">
+        <div *ngIf="primeiraEtapa" class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-9">
+                <app-input-cpf-cnpj primeiro [label]="'Cnpj'" formControlName="Cnpj" [row]="true"
+                   ></app-input-cpf-cnpj>
+            </div>
+            <div class="p-field p-col-3" style="margin-top: 15px;">
+                <button pButton label="Avançar" (click)="avancar()"></button>
+            </div>
+        </div>
+        <div *ngIf="!primeiraEtapa">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12">
+                    <app-input [label]="'Nome ou Razão Social'" formControlName="Nome"></app-input>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-6">
+                    <app-input [label]="'Email'" formControlName="Email"></app-input>
+                </div>
+                <div class="p-field p-col-6">
+                    <app-input [label]="'Contato'" formControlName="Contato"></app-input>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-6">
+                    <app-input-telefone [label]="'Celular'" formControlName="Celular"></app-input-telefone>
+                </div>
+                <div class="p-field p-col-6">
+                    <app-select [label]="'Segmento'" formGroupName="SegmentoId"></app-select>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-8">
+                    <app-select [label]="'Empresa Modelo'" [options]="empresas"></app-select>
+                </div>
+                <div class="p-field p-col-4">
+                    <app-select [label]="'Responsavel'" formControlName="ResponsavelId"></app-select>
+                </div>
+            </div>
+            <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-3'" [tamanhoCancelar]="'p-col-3'"
+                (confirmar)="processarFormulario()" (cancelar)="fecharModal()" [labelConfirmar]="'Confirmar'">
+            </app-footer-page>
+        </div>
+    </p-card>
+</p-dialog>
+
+
+
+
+
+<!-- <ng-template #conteudo>
     <app-page-divided [formGroup]="form" [padrao]="true">
         <div principal>
             <p-card [formGroup]="form">
-                <div *ngIf="primeiraEtapa" class="p-grid p-fluid" formGroupName="PessoaForm">
-                    <div class="p-md-10">
-                            <div class="p-md-12">
+                <div *ngIf="primeiraEtapa" class="p-col p-fluid">
+                    <div class="p-col-3">
+                            <div class="p-col-12">
                                 <app-input-cpf-cnpj primeiro [label]="'Cpf / Cnpj'" [row]="true"
                                                     (onBlur)="buscaCnpj($event)" (onKeypress)="buscaCnpj($event)"></app-input-cpf-cnpj>
                             </div>
                     </div>
-                    <div class="p-md-2">
-                        <div class="p-md-12" style="margin-top: 25px;">
+                    <div class="p-col-2">
+                        <div class="p-col-12" style="margin-top: 25px;">
                             <button pButton label="Avançar" (click)="avancarOuVoltar(2)"></button>
                         </div>
                     </div>
                 </div>
             </p-card>
-        </div>
+        </div> 
     </app-page-divided> 
-</ng-template>
+</ng-template> -->

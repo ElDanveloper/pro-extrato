@@ -4,12 +4,12 @@
     <p-header>
         <h2 style="display: inline;">{{title}}</h2>
     </p-header>
-    <div class="ui-g-12 ui-g-nopad ui-fluid" *ngIf="contentAfterInited">
+    <div class="p-col-12 ui-g-nopad p-fluid" *ngIf="contentAfterInited">
         <p-scrollPanel [style]="styleScroll">
-        <div [ngClass]="{'ui-g-9': contentAfterInited.secondContent, 'ui-g-12': !contentAfterInited.secondContent}">
+        <div [ngClass]="{'p-col-9': contentAfterInited.secondContent, 'p-col-12': !contentAfterInited.secondContent}">
             <ng-container *ngTemplateOutlet="contentAfterInited.content"></ng-container>
         </div>
-        <div *ngIf="contentAfterInited.secondContent" class="ui-g-3">
+        <div *ngIf="contentAfterInited.secondContent" class="p-col-3">
             <ng-container *ngTemplateOutlet="contentAfterInited.secondContent"></ng-container>
         </div>
         </p-scrollPanel>

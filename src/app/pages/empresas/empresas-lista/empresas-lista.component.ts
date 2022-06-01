@@ -25,6 +25,7 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
     public totalItens2: number
+    modalCadastrarEmpresa = false
     // lista2 = []
     @ViewChild('inputPesquisa') public inputPesquisa
     @ViewChild('selectValue') public selectValue
@@ -32,7 +33,7 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
     cadastrar = false
     opcoesTable = [
         {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
-            this.router.navigate([`/parametros`])
+            this.router.navigate([`/empresa`])
         }},
         {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
         {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
@@ -63,8 +64,9 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
 
     
     public navegar() {
-        this.router.navigate([`/empresas/cadastro`])
-        // this.cadastrarEmpresa.nativeElement.click()        
+        // this.router.navigate([`/cadastro`])
+        // this.cadastrarEmpresa.nativeElement.click()   
+        this.modalCadastrarEmpresa = true     
     }
     
 

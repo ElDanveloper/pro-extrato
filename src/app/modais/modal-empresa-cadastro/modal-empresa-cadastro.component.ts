@@ -1,15 +1,18 @@
-import { getUrlClient } from './../../controller/staticValues';
+import { Company } from './../../model/company.model';
+import { Formulario } from './../../controller/Formulario';
+import { Util } from './../../controller/Util';
+import { getUrlClient, getUrlCnpj } from './../../controller/staticValues';
 import { AuthService } from './../../auth/service/auth.service';
 import { BaseFormPost } from './../../controller/BaseFormPost';
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {NetworkService} from "../../services/network.service";
-import {DadosDefaultService} from "../../services/dados-default.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MessageService} from "primeng/api";
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { NetworkService } from "../../services/network.service";
+import { DadosDefaultService } from "../../services/dados-default.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MessageService } from "primeng/api";
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinhas, EMPRESA_STORAGE_KEY} from '../../controller/staticValues'
+import { TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinhas, EMPRESA_STORAGE_KEY } from '../../controller/staticValues'
 
 @Component({
   selector: 'app-modal-empresa-cadastro',
@@ -18,89 +21,154 @@ import { TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinha
 })
 export class ModalEmpresaCadastroComponent extends BaseFormPost implements OnInit {
 
-    entidade = 'Cadastro'
-    @Input() data;    
-    lista;
-    totalItens
-    count = opcoesLinhas()
-    qtdLinhas = qtdLinhas()
-    page = 0
-    public top: number = qtdLinhas()
-    filtro = '';
-    jaPesquisou = false 
-    public loading: boolean
+  @Input() modalVisible = false
+  @Input() listaEmpresa = []
+  @Output() dadosSalvos = new EventEmitter()
+  @Output() closeModal = new EventEmitter()
+  form: FormGroup
 
-    $primeiraEtapaSubscribe: Subscription;
-    $segundaEtapaSubscribe: Subscription;
-    $listarEmpresaSubscribe: Subscription;
-    //novos
-    form: FormGroup;
+  $subscription1: Subscription;
+  $subscription2: Subscription;
+  $subscription3: Subscription;
+  $subscription4: Subscription;
 
+  primeiraEtapa = true
+  empresas = []
 
-    primeiraEtapa = true
+  constructor(public http: HttpClient, public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService, private authService: AuthService) {
+    super(networkService, dadosDefault, router, 'company', messageService)
+    this.form = Formulario.createForm(new Company(), this.fb); this.form = Formulario.createForm(new Company(), this.fb);
+  }
 
-    constructor(public http: HttpClient, public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService, private authService: AuthService) {
-        super(networkService, dadosDefault, router, '', messageService)
-        // this.form = Formulario.createForm(new PessoaContractor(), this.fb);
-        // this.form.addControl("PessoaFisicaForm", Formulario.createForm(new PersonFisical(), this.fb));
-        // this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
+  ngOnInit() {
+    
+  }
 
-        // this.form.get('PessoaForm').get('Tipo').setValue('F');
-        // this.form.get('Ativo').setValue(true)
-        // this.form.get('Cliente').setValue(true)
-        // this.form.get('CodContaContabil').setValue(1)
+  ngOnChanges() {
+    if (this.modalVisible) {
+      this.empresas = this.listaEmpresa.map(v => ({ label: v.nome, value: v.id }));
     }
+  }
 
-    ngOnInit() {
-        
+  buscaCnpj() {
+    // console.log('Key ---> ' + e.type + ' En ----> ' + e.key)
+    // if (e.type === 'keypress' && e.key !== 'Enter') return;
+
+
+    let cnpj = this.form.get('Cnpj').value.toString().match(/\d/g);
+    console.log('Cnpj ----> ' + cnpj + ' Length ---> ' + cnpj.length)
+    if (cnpj === null || (cnpj.join('').length !== 11 && cnpj.join('').length !== 14)) {
+      this.messageService.add(Util.pushErrorMsg('Cnpj Invalido'))
+      return;
     }
+    cnpj = cnpj.join('')
 
-    carregarDados(count, page){
-        this.dadosDefault.exibirLoader.next(true)
-        this.$listarEmpresaSubscribe = this.authService.segundaAuthenticacao().subscribe((res: any) => {                
-            this.lista = res
-            this.totalItens = res.length
-        }).add(() => this.dadosDefault.exibirLoader.next(false))      
-    }
-
-    public trocarEmpresa(v) {
-        this.$primeiraEtapaSubscribe = this.networkService.getSimples(getUrlClient(), `acesso/ChangeToken?IdEmpresa=${v.Id}`).subscribe((res: any) => {
-            console.log(res.value);
-            sessionStorage.setItem(TOKEN_STORAGE_KEY, res.value)
-            this.$segundaEtapaSubscribe = this.networkService.buscar('Empresa', v.Id, '', getUrlClient()).subscribe(emp => {               
-                sessionStorage.setItem(EMPRESA_STORAGE_KEY, JSON.stringify(this.lista.find(x => x['Id'] === v.Id)))
-                sessionStorage.setItem(EMPRESA_COMPLETA_STORAGE_KEY, JSON.stringify(emp))
-                window.location.reload()
-            })
-        })
-    }
-
-    filtrar(count, page){
-        this.http.get(`https://api.toqweb.com.br:2004/hunnocont/maxus/apura/EmpresasContador?Texto=${this.filtro}`, {headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        }, responseType: 'blob', observe: 'response'}).pipe().subscribe({
-            next: (response: any) => {
-                this.totalItens = response.headers.get('count')
-                this.networkService.getSimplesFromHeader(getUrlClient(), `apura/EmpresasContador?Texto=${this.filtro}`, count, page).subscribe((v: any) => {
-                    this.lista = v.value;
-                    this.jaPesquisou = true
-                })
-            }
-        })
-    }
-
-    lazyLoad(event): void {
-        if (!this.jaPesquisou) return
-        this.loading = true
-        if (this.lista) {
-            if (this.top !== event.rows && event.rows !== undefined) {
-                this.top = event.rows
-                event.first = 0
-            }
-            this.carregarDados(this.top, event.first)
-            this.loading = false
+    if (cnpj.length === 11) {
+      this.$subscription1 = this.networkService.getSimples(getUrlCnpj(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
+        // this.form.get('PessoaForm').get('Tipo').setValue('F')
+        const vApi = v.value
+        if (vApi && vApi.length === 1) {
+          this.form.get('Nome').setValue(vApi[0].Nome)
+          this.form.get('Fantasia').setValue(vApi[0].Fantasia)
+          // this.form.get('PessoaForm').get('Id').setValue(vApi[0].Id)
+          this.form.get('Logradouro').setValue(vApi[0].Logradouro)
+          this.form.get('Complemento').setValue(vApi[0].Complemento)
+          this.form.get('Contato').setValue(vApi[0].Contato)
+          this.form.get('Email').setValue(vApi[0].Email)
+          this.form.get('Numero').setValue(vApi[0].Numero)
+          this.form.get('CodigoIbge').setValue(vApi[0].CodigoIbge)
+          // this.form.get('Fone1').setValue(vApi[0].Fone1)
+          // this.form.get('Fone2').setValue(vApi[0].Fone2)
+          this.form.get('Celular').setValue(vApi[0].Celular)
+          this.form.get('Bairro').setValue(vApi[0].Bairro)
+          this.form.get('Uf').setValue(vApi[0].Uf)
+          this.form.get('Cep').setValue(vApi[0].Cep)
+          this.form.get('Cidade').setValue(vApi[0].Cidade)
+          // this.form.get('IdCondPagamento').setValue(vApi[0].IdCondPagamento)
+          // this.form.get('PessoaForm').get('ContribuinteIcms').setValue(vApi[0].ContribuinteIcms)
         }
+        return
+      })
     }
+
+    if (cnpj.length === 14) {
+      this.$subscription2 = this.networkService.getSimples(getUrlCnpj(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
+        // this.form.get('PessoaForm').get('Tipo').setValue('J')
+        const vApi = v.value
+        if (vApi && vApi.length === 1) {
+          this.form.get('Nome').setValue(vApi[0].Nome)
+          this.form.get('Fantasia').setValue(vApi[0].Fantasia)
+          // this.form.get('PessoaForm').get('Id').setValue(vApi[0].Id)
+          this.form.get('Contato').setValue(vApi[0].Contato)
+          // this.form.get('Complemento').setValue(vApi[0].Complemento)
+          // this.form.get('Logradouro').setValue(vApi[0].Logradouro)
+          this.form.get('Celular').setValue(vApi[0].Celular)
+          // this.form.get('Numero').setValue(vApi[0].Numero)
+          // this.form.get('Uf').setValue(vApi[0].UF)
+          // this.form.get('Bairro').setValue(vApi[0].Bairro)
+          // this.form.get('CodigoIbge').setValue(vApi[0].CodigoIbge)
+          // this.form.get('Fone1').setValue(vApi[0].Fone1)
+          // this.form.get('Fone2').setValue(vApi[0].Fone2)
+          this.form.get('Email').setValue(vApi[0].Email)
+          // this.form.get('Cep').setValue(vApi[0].Cep)
+          // this.form.get('Cidade').setValue(vApi[0].Cidade)
+          // this.form.get('IdCondPagamento').setValue(vApi[0].IdCondPagamento)
+          // this.form.get('PessoaForm').get('ContribuinteIcms').setValue(vApi[0].ContribuinteIcms)
+        } else if (cnpj.length === 14) {
+          this.buscarCnpjReceitaWs(cnpj)
+        }
+      })
+    }
+  }
+
+  buscarCnpjReceitaWs(cnpj) {
+    this.$subscription3 = this.dadosDefault.buscarCnpj(cnpj).subscribe((v: any) => {
+      this.form.get('Nome').setValue(v['nome']);
+      this.form.get('Fantasia').setValue(v['fantasia']);
+      this.form.get('Cep').setValue(v['cep']);
+      this.form.get('Logradouro').setValue(v['logradouro']);
+      this.form.get('Numero').setValue(v['numero']);
+      this.form.get('Complemento').setValue(v['complemento']);
+      this.form.get('Bairro').setValue(v['bairro']);
+      this.form.get('Cidade').setValue(v['municipio']);
+      this.form.get('Uf').setValue(v['uf'])
+      this.form.get('Celular').setValue(v['telefone'])
+      this.form.get('Email').setValue(v['email'])
+      // this.verificaCepValido(true)
+    })
+  }
+
+  avancar() {
+    this.buscaCnpj()
+    this.primeiraEtapa = false
+  }
+
+  processarFormulario() {
+    let inv = false
+    if (this.form.invalid) {
+      Object.keys(this.form.controls).forEach(c => {
+        if (this.form.get(c).invalid) {
+          this.messageService.add({ severity: 'error', summary: `O campo ${c} e obrigatorio` })
+          inv = true
+        }
+      })
+      if (inv) return
+    }
+
+    // const { PessoaForm, PessoaFisicaForm, ...data } = Object.assign({}, this.form.value)
+
+    let value: any = { ...Formulario.parseForm(new Company(), this.form.value, null, null, null, null, Company.checkbox()) };
+
+    this.networkService.exibirLoader.next(true);
+    this.$subscription4 = this.networkService.salvarPost(getUrlClient(), 'pessoas/pessoaempresa2', value).subscribe((v: any) => {
+      this.router.navigate(['/pessoa'])
+    }).add(() => this.networkService.exibirLoader.next(false))
+  }
+
+  fecharModal() {
+    this.closeModal.emit(false)
+    this.form.reset()
+    this.primeiraEtapa = true
+  }
 
 }

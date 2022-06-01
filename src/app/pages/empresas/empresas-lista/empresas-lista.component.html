@@ -53,8 +53,8 @@
     <button pButton type="button" label="" #cadastrarEmpresa></button>
 </div>
 
-<app-modal [fundo]="true" *appModalOpenOnClick="[cadastrarEmpresa, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
+<!-- <app-modal [fundo]="true" *appModalOpenOnClick="[cadastrarEmpresa, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
     <app-modal-empresa-cadastro #content></app-modal-empresa-cadastro>
-</app-modal>
+</app-modal> -->
 
-<!-- <app-modal-cadastrar-pessoa [modalVisible]="modalCadastrarPessoa" #content (closeModal)="modalCadastrarPessoa = false"></app-modal-cadastrar-pessoa> -->
+<app-modal-empresa-cadastro [modalVisible]="modalCadastrarEmpresa" #content (closeModal)="modalCadastrarEmpresa = false" [listaEmpresa]="lista"></app-modal-empresa-cadastro>

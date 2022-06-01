@@ -1,9 +1,31 @@
-<div class="p-grid p-fluid">
-    <div class="p-col-5 p-offset-3">        
+<p-toast position="bottom-right"></p-toast><div class="p-grid p-fluid">
+  <div class="p-offset-3" style="padding-left: 7rem;">
+      <p-tabMenu #tab [model]="itemsTabMenu" [activeItem]="activeItem" (click)="setActiveItem(tab)">
+          <ng-template pTemplate="item" let-item let-i="index">
+              <div style="position: relative; text-align: center; min-width: 10em">
+                  <div class="ui-menuitem-icon" [ngClass]="item.icon" *ngIf="item.icon" style="font-size: 2em"></div>
+                  <div class="ui-menuitem-text">
+                      {{item.label}}
+                  </div>
+              </div>
+          </ng-template>
+      </p-tabMenu>
+  </div>
+  <div class="p-col-12" style="max-width: 100%; overflow: hidden;">
+    <app-empresas-cadastro *ngIf="currentIndex === 0"></app-empresas-cadastro>
+      <!-- <router-outlet></router-outlet> -->
+  </div>
+
+</div>
+<p-toast position="bottom-right"></p-toast>
+
+
+<!-- <div class="p-col p-fluid">
+    <div class="p-col-offset-3">        
          <div class="menu" style="margin-left: 50px;">            
         <p-tabMenu #tab [model]="items" [activeItem]="activeItem" (click)="setActiveItem(tab)">
                     <ng-template pTemplate="item" let-item let-i="index">
-                    <div style="position: relative; text-align: center; min-width: 7.2em">
+                    <div class="p-offset-3" style="position: relative; text-align: center; min-width: 7.2em">
                       <div class="p-menuitem-icon" [ngClass]="item.icon" *ngIf="item.icon" style="font-size: 2em">
                         </div>
                           <div class="p-menuitem-text">
@@ -16,9 +38,9 @@
 
         <div class="p-col-12">
 
-            <!-- <app-empresas-cadastro *ngIf="currentIndex === 0"></app-empresas-cadastro> -->
+            <app-empresas-cadastro *ngIf="currentIndex === 0"></app-empresas-cadastro>
 
-            <!-- <app-usuarios-cadastro *ngIf="currentIndex === 1"></app-usuarios-cadastro> -->
+            <app-usuarios-cadastro *ngIf="currentIndex === 1"></app-usuarios-cadastro> -->
 
             <!-- <app-estabelecimento-list *ngIf="currentIndex === 1"></app-estabelecimento-list>
 
@@ -41,5 +63,5 @@
             <!--        <app-parametros-financeiros *ngIf="currentIndex === 4"></app-parametros-financeiros>-->
 
 
-        </div>
-    </div>
+       <!-- </div>
+    </div> -->

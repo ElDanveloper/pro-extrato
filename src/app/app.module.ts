@@ -1,5 +1,4 @@
 import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
-import { EmpresasCadastro3Component } from './pages/empresas/empresas-cadastro3/empresas-cadastro3.component';
 import { UsuariosCadastroComponent } from './pages/usuarios/usuarios-cadastro/usuarios-cadastro.component';
 import { ParametrosComponent } from './pages/parametros/parametros.component';
 import { UsuariosListaComponent } from './pages/usuarios/usuarios-lista/usuarios-lista.component';
@@ -83,8 +82,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         EmpresasListaComponent,
         UsuariosListaComponent,        
         ParametrosComponent,
-        UsuariosCadastroComponent,
-        EmpresasCadastro3Component,
+        UsuariosCadastroComponent,        
         EmpresasCadastroComponent
     ],
     providers: [

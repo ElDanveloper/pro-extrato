@@ -22,9 +22,9 @@ const routes: Routes = [
              {path: 'home', component: VisaoGeralComponent},
              {path: 'empresas', component: EmpresasListaComponent},           
              {path: 'usuarios', component: UsuariosListaComponent},
-             {path: 'parametros', component: ParametrosComponent},             
+             {path: 'empresa', component: ParametrosComponent},             
              {path: 'usuario-cadastro', component: UsuariosCadastroComponent},
-             {path: 'empresas/cadastro', component: EmpresasCadastroComponent}
+             {path: 'cadastro', component: EmpresasCadastroComponent}
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
                    
         ]        

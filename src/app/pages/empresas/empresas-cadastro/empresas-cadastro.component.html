@@ -86,45 +86,9 @@
                         (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()" [labelConfirmar]="'Confirmar'">
                     </app-footer-page>
                 </div>
-            </div>
-            <!-- <app-page-divided>
-                <div principal>
-                    <div class="p-fluid p-formgrid p-grid">
-                        
-                    </div>
-                    <div class="p-fluid p-formgrid p-grid">
-                       
-                    </div>
-                </div> -->
-            <!-- <div secundario>
-                    <p-card [style]="{marginTop: '20px'}" [header]="'Foto'" formGroupName="ProdutoForm">
-                        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
-                            [containWithinAspectRatio]="true" [aspectRatio]="4 / 4" [resizeToWidth]="640"
-                            [style.display]="showCropper ? null : 'none'" format="png"
-                            (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
-                            (cropperReady)="cropperReady($event)" (loadImageFailed)="loadImageFailed()"
-                            [onlyScaleDown]="true" [roundCropper]="false"></image-cropper>
-                        <div *ngIf="!imageChangedEvent" class="img-container">
-                            <img [src]="imagem" alt="">
-                        </div>
-                        <input type="file" (change)="fileChangeEvent($event)" #uploadImagem class="esconder" />
-                        <button pButton label="Upload Imagem" (click)="clickUploadImagem()"></button>
-                    </p-card>
-                </div> -->
-            <!-- </app-page-divided> -->
-
-            <!-- <app-painel title="Dados Tributários">
-              
-              
-            </app-painel>
-            &nbsp; -->
+            </div>        
         </p-card>
     </div>
-    <!-- </app-page-divided> -->
-
-    <!--   </div> -->
-
-
 
 </ng-template>
 <p-toast position="bottom-right"></p-toast>

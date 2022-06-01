@@ -35,7 +35,7 @@ static validacoes() {
 }
 
 static mascaras() {
-    return ['Cnpj', 'Cep']
+    return ['Cnpj', 'Cep', 'Celular']
 }
 
 }

@@ -1,5 +1,5 @@
 <div [ngClass]="{'center-content': center}">
-    <div [ngClass]="{'ui-g-12 ui-g-nopad': row}">
+    <div [ngClass]="{'p-col-12 p-g-nopad': row}">
         <div [ngClass]="gridClass">
             <label [attr.for]="id">{{label}}</label>
             <input [ngClass]="{'invalid': campoInvalido}" [type]="type" [id]="id" [placeholder]="placeholder" [readOnly]="!!isReadOnly" [(ngModel)]="value"
