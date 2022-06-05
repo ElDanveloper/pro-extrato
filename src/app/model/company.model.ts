@@ -21,6 +21,7 @@ public PessoaId: number = 0
 public Cnpj: string = ''
 public SegmentoId: number = 0
 public ResponsavelId: number = 0
+public IdCompany: 0
 
 constructor() {}
 

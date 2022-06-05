@@ -1,5 +1,6 @@
+import { Pessoa } from './../../../model/pessoa.model';
 import { Util, hasValue } from './../../../controller/Util';
-import { SERVERLESS_URL, getUrlClient } from './../../../controller/staticValues';
+import { SERVERLESS_URL, getUrlClient, getUrlPro } from './../../../controller/staticValues';
 import { Formulario } from './../../../controller/Formulario';
 import { Company } from './../../../model/company.model';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -15,12 +16,12 @@ import { NetworkService } from 'src/app/services/network.service';
 import { Dimensions, ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
-    selector: 'app-empresas-cadastro',
-    templateUrl: './empresas-cadastro.component.html',
-    styleUrls: ['./empresas-cadastro.component.css']
+    selector: 'app-pessoas-cadastro',
+    templateUrl: './pessoas-cadastro.component.html',
+    styleUrls: ['./pessoas-cadastro.component.css']
 })
 
-export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, OnDestroy {
+export class PessoasCadastroComponent extends BaseFormPost implements OnInit, OnDestroy {
 
     $subscription1: Subscription;
     $subscription2: Subscription;
@@ -35,7 +36,7 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
     $subscription11: Subscription;
     $subscription12: Subscription;
 
-    entidade = 'empresas';
+    entidade = 'pessoa';
     id;
     form: FormGroup;
     selectEstado = getEstados();
@@ -43,21 +44,18 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
     onLabel = 'Sim'
     offLabel = 'Não'
 
-    empresas = []
-    segmento = []
-    responsavel = []
+    categoria = []
+    
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService, private viaCep: NgxViacepService) {
-        super(networkService, dadosDefault, router, 'company', messageService);
-        this.form = Formulario.createForm(new Company(), this.fb); this.form = Formulario.createForm(new Company(), this.fb);
+        super(networkService, dadosDefault, router, 'pessoas', messageService);
+        this.form = Formulario.createForm(new Pessoa(), this.fb); this.form = Formulario.createForm(new Company(), this.fb);
     }
 
     ngOnInit() {
-        this.dadosDefault.empresa().subscribe(values => {
-            this.empresas = values[0]
-            this.segmento = values[1]
-            this.responsavel = values[2]
-            
+        this.dadosDefault.pessoa().subscribe(values => {
+            this.categoria = values[0]
+                        
           })
 
         this.$subscription5 = this.route.paramMap.subscribe(params => {
@@ -66,9 +64,9 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
 
         if (this.id) {
             this.dadosDefault.exibirLoader.next(true)
-            this.$subscription2 = this.networkService.buscar('company', this.id, null).subscribe((value: any) => {
+            this.$subscription2 = this.networkService.buscar('pessoa', this.id, null).subscribe((value: any) => {
 
-                const data = Formulario.prepareValueToForm(new Company(), value, null, null, Company.checkbox());
+                const data = Formulario.prepareValueToForm(new Pessoa(), value, Pessoa.datas(), Pessoa.relacionamentos(), Pessoa.checkbox());
                 Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
 
             }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -89,11 +87,11 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
 
         // const { PessoaForm, PessoaFisicaForm, ...data } = Object.assign({}, this.form.value)
 
-        let value: any = { ...Formulario.parseForm(new Company(), this.form.value, null, null, null, null, Company.checkbox()) };
+        let value: any = { ...Formulario.parseForm(new Pessoa(), this.form.value, Pessoa.referencias(), Pessoa.mascaras(), Pessoa.datas(), null, Company.checkbox()) };
 
         this.networkService.exibirLoader.next(true);
-        this.$subscription6 = this.networkService.salvarPost(getUrlClient(), 'pessoas/pessoaempresa2', value).subscribe((v: any) => {
-            this.router.navigate(['/pessoa'])
+        this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'pessoa', value).subscribe((v: any) => {
+            this.router.navigate(['/pessoas'])
         }).add(() => this.networkService.exibirLoader.next(false))
     }
 

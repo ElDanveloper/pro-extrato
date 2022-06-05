@@ -39,7 +39,7 @@ export class ModalComponent implements OnInit, AfterContentInit, AfterViewInit {
     @Input( )styleScroll = {width: '100%', height: '300px'};
 
     ngOnInit() {
-                
+        console.log('Load ----> ' + this.exibirLoader + ' - ' + this.exibirLoaderNetwork)
     }
 
     get contentStyle() {

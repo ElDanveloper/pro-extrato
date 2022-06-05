@@ -15,13 +15,13 @@ import { Subscription } from 'rxjs';
 import { TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinhas, EMPRESA_STORAGE_KEY } from '../../controller/staticValues'
 
 @Component({
-  selector: 'app-modal-empresa-cadastro',
-  templateUrl: './modal-empresa-cadastro.component.html',
-  styleUrls: ['./modal-empresa-cadastro.component.css']
+  selector: 'app-modal-pessoa-cadastro',
+  templateUrl: './modal-pessoa-cadastro.component.html',
+  styleUrls: ['./modal-pessoa-cadastro.component.css']
 })
-export class ModalEmpresaCadastroComponent extends BaseFormPost implements OnInit {
+export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit {
 
-  @Input() modalVisible = false
+  @Input() modalVisible = false  
   @Output() dadosSalvos = new EventEmitter()
   @Output() closeModal = new EventEmitter()
   form: FormGroup
@@ -32,41 +32,36 @@ export class ModalEmpresaCadastroComponent extends BaseFormPost implements OnIni
   $subscription4: Subscription;
 
   primeiraEtapa = true
-  empresas = []
-  segmento = []
-  responsavel = []
+  categoria = []
 
   exibirLoader = this.dadosDefault.exibirLoader
   exibirLoaderNetwork = this.networkService.exibirLoader
 
   constructor(public http: HttpClient, public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService, private authService: AuthService) {
-    super(networkService, dadosDefault, router, 'company', messageService)
+    super(networkService, dadosDefault, router, 'pessoa', messageService)
     this.form = Formulario.createForm(new Company(), this.fb); this.form = Formulario.createForm(new Company(), this.fb);
   }
 
   ngOnInit() {
-
+   
   }
 
   ngOnChanges() {
     if (this.modalVisible) {
-      this.dadosDefault.empresa().subscribe(values => {
-        this.empresas = values[0]
-        this.segmento = values[1]
-        this.responsavel = values[2]
-
+      this.dadosDefault.pessoa().subscribe(values => {
+        this.categoria = values[0]
       })
     }
   }
 
-  buscaCnpj() {
+  buscaCnpj() {       
     let cnpj = this.form.get('Cnpj').value.toString().match(/\d/g);
     if (cnpj === null || (cnpj.join('').length !== 11 && cnpj.join('').length !== 14)) {
-      this.messageService.add(Util.pushErrorMsg('Cnpj Invalido'))
+      this.messageService.add(Util.pushErrorMsg('Cnpj Invalido'))      
       return;
     }
 
-    if (cnpj.join('').length === 11) {
+    if(cnpj.join('').length === 11){
       this.messageService.add(Util.pushErrorMsg('Favor Digitar um CNPJ Válido'))
       return
     }
@@ -174,11 +169,11 @@ export class ModalEmpresaCadastroComponent extends BaseFormPost implements OnIni
 
     // value.Cnpj = value.Cnpj.join('')
 
-    value.Cnpj = value.Cnpj.toString().replace(/[^\d]+/g, '')
+    value.Cnpj = value.Cnpj.toString().replace(/[^\d]+/g,'')
     // this.form.get('Cnpj').value.toString().replace(/[^\d]+/g,'')
 
     this.networkService.exibirLoader.next(true);
-    this.$subscription4 = this.networkService.salvarPost(getUrlPro(), 'company', { Value: value }).subscribe((v: any) => {
+    this.$subscription4 = this.networkService.salvarPost(getUrlPro(), 'pessoa', {Value: value}).subscribe((v: any) => {
       this.router.navigate(['/empresas'])
     }).add(() => this.networkService.exibirLoader.next(false))
   }

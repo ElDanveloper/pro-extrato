@@ -1,4 +1,4 @@
-<p-card [header]="'Listagem de Empresas'">
+<p-card [header]="'Listagem de Pessoas'">
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 p-md-8">
             <div class="p-inputgroup">
@@ -22,22 +22,18 @@
 
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
         <ng-template pTemplate="header" let-columns>
-            <tr>
-                <th [ngStyle]="{width: '5%'}"> Código </th>                
-            <th [ngStyle]="{width: '40%'}"> Nome </th>            
-            <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>
-            <th [ngStyle]="{width: '10%'}"> Fone </th>
-            <th [ngStyle]="{width: '20%'}"> Email </th>
+            <tr>                             
+            <th [ngStyle]="{width: '40%'}"> Nome </th>      
+            <th [ngStyle]="{width: '30%'}"> Fantasia </th>      
+            <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>  
             <th [ngStyle]="{width: '5%'}"> Ações </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
-            <tr>
-            <td>{{rowData.code_client}}</td>    
-            <td><span (click)="linkPessoa(rowData)" class="link-pessoa">{{rowData.nome}}</span></td>
-            <td>{{rowData.cpf_cnpj | cpfCnpj}}</td>
-            <td>{{rowData.fone_format}}</td>
-            <td>{{rowData.email}}</td>
+            <tr>            
+            <td>{{rowData.Nome}}</td>
+            <td>{{rowData.Fantasia}}</td>
+            <td>{{rowData.CpfCnpj | cpfCnpj}}</td>                        
             <td><app-opcoes-table [value]="rowData"
                                   [opcoes]="opcoesTable"></app-opcoes-table></td>
             </tr>
@@ -57,4 +53,4 @@
     <app-modal-empresa-cadastro #content></app-modal-empresa-cadastro>
 </app-modal> -->
 
-<app-modal-empresa-cadastro [modalVisible]="modalCadastrarEmpresa" #content (closeModal)="modalCadastrarEmpresa = false"></app-modal-empresa-cadastro>
+<app-modal-pessoa-cadastro [modalVisible]="modalCadastrarEmpresa" #content (closeModal)="modalCadastrarEmpresa = false"></app-modal-pessoa-cadastro>

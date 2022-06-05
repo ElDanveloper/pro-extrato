@@ -1,3 +1,4 @@
+import { ModalPessoaCadastroComponent } from './modal-pessoa-cadastro/modal-pessoa-cadastro.component';
 import { ModalUsuarioCadastroComponent } from './modal-usuario-cadastro/modal-usuario-cadastro.component';
 import { ModalEmpresaCadastroComponent } from './modal-empresa-cadastro/modal-empresa-cadastro.component';
 import { ModalTrocarEmpresaComponent } from './modal-trocar-empresa/modal-trocar-empresa.component';
@@ -20,6 +21,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalTrocarEmpresaComponent,
       ModalEmpresaCadastroComponent,
       ModalUsuarioCadastroComponent,
+      ModalPessoaCadastroComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -40,6 +42,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalTrocarEmpresaComponent,
         ModalEmpresaCadastroComponent,
         ModalUsuarioCadastroComponent,
+        ModalPessoaCadastroComponent,
         //ModalPagamentoViaContaCorrenteComponent,
     ]
 })

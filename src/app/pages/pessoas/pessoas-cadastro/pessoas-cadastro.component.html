@@ -4,8 +4,8 @@
         <p-card>
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 p-md-2">
-                    <app-input-cpf-cnpj primeiro [label]="'Cnpj'" [row]="true" (onBlur)="buscaCnpj($event)"
-                        (onKeypress)="buscaCnpj($event)" formControlName="Cnpj"></app-input-cpf-cnpj>
+                    <app-input-cpf-cnpj primeiro [label]="'Cpf / Cnpj'" [row]="true" (onBlur)="buscaCnpj($event)"
+                        (onKeypress)="buscaCnpj($event)" formControlName="CpfCnpj"></app-input-cpf-cnpj>
                 </div>
                 <div class="p-field p-col-12 p-md-2">
                     <app-input [label]="'Código'" formControlName="Codigo"></app-input>
@@ -82,17 +82,10 @@
                     <app-input-telefone [label]="'Celular'" formControlName="Celular"></app-input-telefone>
                 </div>
                 <div class="p-field p-col-12 p-md-4">
-                    <app-select [label]="'Segmento'" formGroupName="SegmentoId" [options]="segmento"></app-select>
-                </div>
-                <div class="p-field p-col-12 p-md-4">
-                    <app-select [label]="'Empresa Modelo'" [options]="empresas" formControlName="IdCompany">
-                    </app-select>
-                </div>
+                    <app-select [label]="'Categoria Financeira'" [options]="categoria"></app-select>
+                </div>                
             </div>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-4">
-                    <app-select [label]="'Responsavel'" formControlName="ResponsavelId" [options]="responsavel"></app-select>
-                </div>
+            <div class="p-fluid p-formgrid p-grid">                
                 <div class="p-field p-col-12 p-md-8" style="margin-top: 10px;">
                     <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-2'" [tamanhoCancelar]="'p-col-2'"
                         (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()" [labelConfirmar]="'Confirmar'">

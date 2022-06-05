@@ -148,9 +148,9 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
     //     //     this.selectTabela = values[6]
     //     //     this.selectPais = values[7]
 
-    this.$subscription1 = this.dadosDefault.empregador().subscribe(values => {
-        this.selectTributario = values[0];
-    })
+    // this.$subscription1 = this.dadosDefault.empregador().subscribe(values => {
+    //     this.selectTributario = values[0];
+    // })
 
             if (this.id) {
                 this.dadosDefault.exibirLoader.next(true)

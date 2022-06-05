@@ -35,7 +35,7 @@ export const getUrlCad = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}ca
 // export const getUrlContabil = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}contabil/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
 // export const getUrlHunnoCont = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}hunnocont/maxus`
 export const getUrlCnpj = () => `https://api.toqweb.com.br:2004/cad/sandbox/`
-export const getUrlHunnoRh = () => `${API_AUTH}/rh/hunno`
+export const getUrlPro = () => `${API_AUTH_HUNNO}/pro/hunnoDEV`
 export const getUrlClient = () => `${API_AUTH}/api/client`
 export const getUrlUser = () => `${API_AUTH}/api/user`
 
@@ -45,7 +45,7 @@ export const API_AUTH = `http://75.119.134.38:8089`
 
 //Base Original
 // export const URL_BASE = `https://api.hunnodev.com.br:2004`
-// export const API_AUTH = `https://app.hunno.com.br`
+export const API_AUTH_HUNNO = `https://app.hunno.com.br:2004`
 export const URL_UPLOAD = `https://bpoymh2e3b.execute-api.us-east-1.amazonaws.com/prod/upload-file`
 
 export const S3_BUCKET_URL = `https://toqweb-images.s3.amazonaws.com/`

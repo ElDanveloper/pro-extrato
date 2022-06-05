@@ -1,3 +1,5 @@
+import { PessoasCadastroComponent } from './pages/pessoas/pessoas-cadastro/pessoas-cadastro.component';
+import { PessoasListaComponent } from './pages/pessoas/pessoas-lista/pessoas-lista.component';
 import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
 import { UsuariosCadastroComponent } from './pages/usuarios/usuarios-cadastro/usuarios-cadastro.component';
 import { ParametrosComponent } from './pages/parametros/parametros.component';
@@ -22,9 +24,11 @@ const routes: Routes = [
              {path: 'home', component: VisaoGeralComponent},
              {path: 'empresas', component: EmpresasListaComponent},           
              {path: 'usuarios', component: UsuariosListaComponent},
+             {path: 'pessoas', component: PessoasListaComponent},
              {path: 'empresa', component: ParametrosComponent},             
              {path: 'usuario-cadastro', component: UsuariosCadastroComponent},
-             {path: 'cadastro', component: EmpresasCadastroComponent}
+             {path: 'empresas-cadastro', component: EmpresasCadastroComponent},
+             {path: 'pessoas-cadastro', component: PessoasCadastroComponent},
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
                    
         ]        

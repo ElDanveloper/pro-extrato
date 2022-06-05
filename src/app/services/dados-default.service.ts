@@ -1,4 +1,5 @@
-import {  getUrlHunnoRh } from './../controller/staticValues';
+import { NetworkService } from './network.service';
+import { getUrlClient, getUrlPro, getUrlUser } from './../controller/staticValues';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { forkJoin } from "rxjs/internal/observable/forkJoin"
@@ -24,7 +25,7 @@ export class DadosDefaultService {
 
     listaModais: string[] = [];
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private networkService: NetworkService) {
 
     }
 
@@ -78,9 +79,23 @@ export class DadosDefaultService {
         return this.http.get(`https://bpoymh2e3b.execute-api.us-east-1.amazonaws.com/prod/consulta-cnpj/${cnpj}`)
     }
 
-    public empregador() {
-       let tributaria = this.http.get(`${getUrlHunnoRh()}/FolhaClasseTributaria`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Codigo})))) 
-       return forkJoin([tributaria])
+    // public empregador() {
+    //    let tributaria = this.http.get(`${getUrlHunnoRh()}/FolhaClasseTributaria`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Codigo})))) 
+    //    return forkJoin([tributaria])
+    // }
+
+    public empresa() {        
+        let company = this.http.get(`${getUrlClient()}/deleted/false`).pipe(map((res: any) => res.map(v => ({label: Util.up(v.nome), value: v.id}))))
+        let segment = this.http.get(`${getUrlPro()}/segment`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))))
+        let contractor = this.http.get(`${getUrlUser()}/contractor`).pipe(map((res: any) => res.map(v => ({label: Util.up(v.nome), value: v.id}))))        
+
+        return forkJoin([company, segment, contractor])
+    }
+
+    public pessoa() {
+        let category = this.http.get(`${getUrlPro()}/Category`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))))
+
+        return forkJoin([category])
     }
 
     // verificaNcmValido(value) {

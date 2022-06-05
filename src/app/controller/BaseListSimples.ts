@@ -1,7 +1,7 @@
 import { NetworkService } from './../services/network.service';
 
 import { Subscription } from 'rxjs';
-import { qtdLinhas, opcoesLinhas, getUrlHunnoRh } from './staticValues';
+import { qtdLinhas, opcoesLinhas, getUrlPro } from './staticValues';
 import { OnDestroy, ViewChild} from '@angular/core';
 
 export class BaseListSimples implements OnDestroy {
@@ -28,7 +28,7 @@ export class BaseListSimples implements OnDestroy {
     subscriptionLista: Subscription;
     subscriptionDeletar: Subscription;
 
-    constructor(public networkService: NetworkService, public url = getUrlHunnoRh(), entidad) {
+    constructor(public networkService: NetworkService, public url = getUrlPro(), entidad) {
         this.entidade = entidad
     }
 
@@ -60,9 +60,13 @@ export class BaseListSimples implements OnDestroy {
 
     public carregarDados(parametros?): void {
         this.$subscriptionListar = this.networkService.getSimples(this.url, this.entidade).subscribe((listaSec: any) => {
-            // this.totalItens = listaSec[0]? listaSec[0]['QtdReg'] : 0;       
-            this.totalItens = listaSec.length     
-            this.lista = listaSec            
+            if(listaSec[0]){
+                this.totalItens = listaSec[0]? listaSec[0]['QtdReg'] : 0;       
+            }else{
+                this.totalItens = listaSec.length     
+            }            
+            
+            this.lista = listaSec.value? listaSec.value : listaSec
         })
 
     }
