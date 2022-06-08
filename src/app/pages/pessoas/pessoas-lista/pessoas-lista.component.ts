@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 })
 export class PessoasListaComponent extends BaseListSimples implements OnInit, OnDestroy {
 
-    @ViewChild('cadastrarEmpresa') cadastrarEmpresa: ElementRef;
+    @ViewChild('cadastrarPessoa') cadastrarPessoa: ElementRef;
 
     // modalCadastrarPessoa = false
 
@@ -25,7 +25,7 @@ export class PessoasListaComponent extends BaseListSimples implements OnInit, On
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
     public totalItens2: number
-    modalCadastrarEmpresa = false
+    modalCadastrarPessoa = false
     // lista2 = []
     @ViewChild('inputPesquisa') public inputPesquisa
     @ViewChild('selectValue') public selectValue
@@ -33,7 +33,8 @@ export class PessoasListaComponent extends BaseListSimples implements OnInit, On
     cadastrar = false
     opcoesTable = [
         {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
-            this.router.navigate([`/empresa`])
+            console.log('Teste ---> ')
+            this.router.navigate([`/pessoas/cadastro`])
         }},
         {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
         {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
@@ -66,7 +67,7 @@ export class PessoasListaComponent extends BaseListSimples implements OnInit, On
     public navegar() {
         // this.router.navigate([`/cadastro`])
         // this.cadastrarEmpresa.nativeElement.click()   
-        this.modalCadastrarEmpresa = true     
+        this.modalCadastrarPessoa = true     
     }
     
 

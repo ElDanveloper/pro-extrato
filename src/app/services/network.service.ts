@@ -1,3 +1,4 @@
+import { getUrlPro } from './../controller/staticValues';
 // import { getUrlCompra } from 'src/app/controller/staticValues';
 import { Util } from './../controller/Util';
 import { catchError, map } from 'rxjs/operators';
@@ -80,8 +81,8 @@ export class NetworkService {
             .pipe(map((res: Response) => res['value']), catchError(this.errorHandler))
     }
 
-    public buscar(entidade, id, expanded?, url = getUrlCad()): Observable<{}> {
-        let query = `${url}/${entidade}(${id})`
+    public buscar(entidade, id, expanded?, url = getUrlPro()): Observable<{}> {
+        let query = `${url}/${entidade}/${id}`
         if (expanded) query = query + expanded
         return this.http.get(query).pipe(catchError(this.errorHandler))
     }

@@ -1,3 +1,5 @@
+import { Pessoa } from './../../model/pessoa.model';
+import { PersonClient } from './../../model/person-client.model';
 import { Company } from './../../model/company.model';
 import { Formulario } from './../../controller/Formulario';
 import { Util } from './../../controller/Util';
@@ -13,6 +15,7 @@ import { MessageService } from "primeng/api";
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinhas, EMPRESA_STORAGE_KEY } from '../../controller/staticValues'
+import { NaturezaFinanceira } from 'src/app/model/natureza-financeira.model';
 
 @Component({
   selector: 'app-modal-pessoa-cadastro',
@@ -21,7 +24,7 @@ import { TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinha
 })
 export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit {
 
-  @Input() modalVisible = false  
+  @Input() modalVisible = false
   @Output() dadosSalvos = new EventEmitter()
   @Output() closeModal = new EventEmitter()
   form: FormGroup
@@ -38,12 +41,14 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
   exibirLoaderNetwork = this.networkService.exibirLoader
 
   constructor(public http: HttpClient, public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService, private authService: AuthService) {
-    super(networkService, dadosDefault, router, 'pessoa', messageService)
-    this.form = Formulario.createForm(new Company(), this.fb); this.form = Formulario.createForm(new Company(), this.fb);
+    super(networkService, dadosDefault, router, 'person', messageService)
+    this.form = Formulario.createForm(new PersonClient(), this.fb);
+    this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
+    this.form.addControl("NaturezaForm", Formulario.createForm(new NaturezaFinanceira(), this.fb));
   }
 
   ngOnInit() {
-   
+
   }
 
   ngOnChanges() {
@@ -54,17 +59,19 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
     }
   }
 
-  buscaCnpj() {       
-    let cnpj = this.form.get('Cnpj').value.toString().match(/\d/g);
+  buscaCnpj() {
+    console.log('Buscar ----> ')
+    let cnpj = this.form.get('PessoaForm').get('CpfCnpj').value.toString().match(/\d/g);
+    console.log('cnpj ----> ' + cnpj)
     if (cnpj === null || (cnpj.join('').length !== 11 && cnpj.join('').length !== 14)) {
-      this.messageService.add(Util.pushErrorMsg('Cnpj Invalido'))      
+      this.messageService.add(Util.pushErrorMsg('Cnpj Invalido'))
       return;
     }
 
-    if(cnpj.join('').length === 11){
-      this.messageService.add(Util.pushErrorMsg('Favor Digitar um CNPJ Válido'))
-      return
-    }
+    // if (cnpj.join('').length === 11) {
+    //   this.messageService.add(Util.pushErrorMsg('Favor Digitar um CNPJ Válido'))
+    //   return
+    // }
     cnpj = cnpj.join('')
 
     this.buscarCnpjReceitaWs(cnpj)
@@ -128,6 +135,7 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
   }
 
   buscarCnpjReceitaWs(cnpj) {
+    console.log("Buscar na receita ----> ")
     this.dadosDefault.exibirLoader.next(true)
     this.$subscription3 = this.dadosDefault.buscarCnpj(cnpj).subscribe((v: any) => {
       this.form.get('Nome').setValue(v['nome']);
@@ -147,7 +155,9 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
   }
 
   avancar() {
+    console.log("Avançar -----> ")
     this.buscaCnpj()
+    // this.primeiraEtapa = false
 
   }
 
@@ -169,11 +179,11 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
 
     // value.Cnpj = value.Cnpj.join('')
 
-    value.Cnpj = value.Cnpj.toString().replace(/[^\d]+/g,'')
+    value.Cnpj = value.Cnpj.toString().replace(/[^\d]+/g, '')
     // this.form.get('Cnpj').value.toString().replace(/[^\d]+/g,'')
 
     this.networkService.exibirLoader.next(true);
-    this.$subscription4 = this.networkService.salvarPost(getUrlPro(), 'pessoa', {Value: value}).subscribe((v: any) => {
+    this.$subscription4 = this.networkService.salvarPost(getUrlPro(), 'pessoa', { Value: value }).subscribe((v: any) => {
       this.router.navigate(['/empresas'])
     }).add(() => this.networkService.exibirLoader.next(false))
   }

@@ -1,99 +1,507 @@
-<ng-container *ngTemplateOutlet="conteudo"></ng-container>
-<ng-template #conteudo>
-    <div [formGroup]="form">
-        <p-card>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-2">
-                    <app-input-cpf-cnpj primeiro [label]="'Cpf / Cnpj'" [row]="true" (onBlur)="buscaCnpj($event)"
-                        (onKeypress)="buscaCnpj($event)" formControlName="CpfCnpj"></app-input-cpf-cnpj>
-                </div>
-                <div class="p-field p-col-12 p-md-2">
-                    <app-input [label]="'Código'" formControlName="Codigo"></app-input>
-                </div>
-                <div class="p-field p-offset-6 p-col-2 p-md-2">
-                    <div>
-                        <span>Ativo</span>
-                    </div>
-                    <div>
-                        <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                            formControlName="Ativo">
-                        </p-toggleButton>
-                    </div>
-                </div>
-            </div>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-6">
-                    <app-input [label]="'Razão Social'" formControlName="Nome"></app-input>
-                </div>
-                <div class="p-field p-col-12 p-md-6">
-                    <app-input [label]="'Nome fantasia'" formControlName="Fantasia"></app-input>
-                </div>
-            </div>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-4 p-md-4" style="margin-left: 5px;">
-                    <div>Cep</div>
-                    <div style="display: flex;justify-content: flex-start;">
-                        <div style="padding-right: 0px;padding-left: 0px;">
-                            <p-inputMask id="cep" (onBlur)="verificaCepValido($event)" mask="99999-999"
-                                formControlName="Cep">
-                            </p-inputMask>
-                        </div>
-                        <button pButton type="button" icon="fa fa-search" (click)="modalCepVisible = true"></button>
-                    </div>
-                </div>
-            </div>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-9">
-                    <app-input [label]="'Endereço'" formControlName="Logradouro"></app-input>
-                </div>
-                <div class="p-field p-col-12 p-md-3">
-                    <app-input [label]="'Número'" formControlName="Numero"></app-input>
-                </div>
-            </div>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-7">
-                    <app-input [label]="'Complemento'" formControlName="Complemento"></app-input>
-                </div>
-                <div class="p-field p-col-12 p-md-5">
-                    <app-input [label]="'Bairro'" formControlName="Bairro"></app-input>
-                </div>
-            </div>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-4">
-                    <app-input [label]="'Cidade'" formControlName="Cidade"></app-input>
-                </div>
-                <div class="p-field p-col-12 p-md-4">
-                    <app-select [label]="'Estado'" [options]="selectEstado" formControlName="Uf"></app-select>
-                </div>
-                <div class="p-field p-col-12 p-md-4">
-                    <app-input [label]="'Codigo IBGE'" formControlName="CodigoIbge"></app-input>
-                </div>
-            </div>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-6">
-                    <app-input [label]="'Contato'" formControlName="Contato"></app-input>
-                </div>
-                <div class="p-field p-col-12 p-md-6">
-                    <app-input [label]="'Email'" formControlName="Email"></app-input>
-                </div>
-            </div>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-4">
-                    <app-input-telefone [label]="'Celular'" formControlName="Celular"></app-input-telefone>
-                </div>
-                <div class="p-field p-col-12 p-md-4">
-                    <app-select [label]="'Categoria Financeira'" [options]="categoria"></app-select>
-                </div>                
-            </div>
-            <div class="p-fluid p-formgrid p-grid">                
-                <div class="p-field p-col-12 p-md-8" style="margin-top: 10px;">
-                    <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-2'" [tamanhoCancelar]="'p-col-2'"
-                        (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()" [labelConfirmar]="'Confirmar'">
-                    </app-footer-page>
-                </div>
-            </div>
-        </p-card>
+ <app-page-header>    
+    <div style="display: flex;justify-content: flex-end;margin-left: 150px;" *ngIf="idPessoa">
+        <div>
+            <h3 style="color: rgb(0,175,250); cursor: pointer" (click)="verHistorico()">Ver Historico</h3>
+        </div>
+        <div style="margin-left: 20px;">
+            <button pButton label="Atualizar via Sefaz" (click)="atualizaPessoaSefaz()"></button>
+        </div>
+        <div style="margin-left: 20px;">
+            <button pButton label="Atualizar via Web" (click)="atualizaPessoaWeb()"></button>
+        </div>
     </div>
+</app-page-header>
+ <ng-container *ngTemplateOutlet="conteudo"></ng-container>
+ <ng-template #conteudo>
+    <div [formGroup]="form">
+        <app-page-divided>
+            <div principal>  <!-- CalcularTributosManualmente -->
+                 <p-card>
+                   <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input-cpf-cnpj [label]="'Cpf / Cnpj'" [row]="true" (onBlur)="buscaCnpj($event)" (onKeypress)="buscaCnpj($event)"></app-input-cpf-cnpj>
+                        </div>
+                        <!-- *ngIf="form.get('PessoaForm').get('Tipo').value !== 'J'" -->
+                         <div  class="p-field p-col-12 p-md-8">
+                            <app-input [label]="'Nome'"
+                                [tentativa]="tentativa" ></app-input>
+                        </div>
+                        <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'J'" -->
+                       <div   class="p-field p-col-12 p-md-8">
+                            <app-input [label]="'Nome/Razao'"
+                                ></app-input>
+                        </div>
+                        <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'J'" -->
+                        <div  class="p-field p-col-12 p-md-8">
+                            <app-input [label]="'Nome fantasia'"
+                                ></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <div style="margin-left: 5px;">Vendedor</div>
+                            <div class="p-inputgroup">
+                                <div class="p-col-10" style="padding-right: 0px;padding-left: 0px;">
+                                    <app-select [icon]="true" [options]="selectVendedor"
+                                        ></app-select>
+                                </div>
+                                <button #vendedor pButton type="button" icon="fa fa-plus" style="margin-left: -7px;"></button>
+                            </div>
+                        </div>
+                        &nbsp;
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Limite de credito'"></app-input>
+                        </div>
+                        &nbsp;
+                        <div class="p-field p-col-12 p-md-3" >
+                            <app-select label="Tipo Pessoa"  [options]="tiposPessoa"></app-select>
+                        </div>
+                        &nbsp;
+                        &nbsp;
+    
+                        <!-- endereco -->
+                        <div class="p-field p-col-12 p-md-4">
+                            <div>Cep</div>
+                            <div style="display: flex;justify-content: flex-start;">
+                                <div class="p-col-10" style="padding-right: 0px;padding-left: 0px;">
+                                    <p-inputMask id="cep" (onBlur)="verificaCepValido($event)"
+                                    mask="99999-999"></p-inputMask>
+                                </div>
+                                <button pButton type="button" icon="fa fa-search"
+                                    (click)="modalCepVisible = true"></button>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-8">
+                            <app-input [label]="'Endereco'" ></app-input>
+                        </div>
+    
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Numero'" ></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Complemento'" ></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Bairro'" ></app-input>
+                        </div>
+    
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-select [label]="'Estado'" [options]="selectEstado"
+                            ></app-select>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Cidade'" [isReadOnly]="true"></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Codigo ibge cidade'" [isReadOnly]="true"></app-input>
+                        </div>
+    
+                        <!-- contato -->
+                        <div class="p-field p-col-12 p-md-8">
+                            <app-input [label]="'Contato'" ></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Email'"  [lowercase]="true"></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input-telefone label="Telefone comercial" ></app-input-telefone>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input-telefone label="Telefone residencial" ></app-input-telefone>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input-telefone label="Telefone celular" ></app-input-telefone>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <app-painel title="Dados adicionais">
+                        <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'F'"  -->
+                            <div class="p-fluid p-formgrid p-grid" >
+                                <div class="p-field p-col-12 p-md-4">
+                                    <app-input [label]="'Registro geral'" ></app-input>
+                                </div>
+                                <div class="p-field p-col-12 p-md-4">
+                                    <app-input [label]="'Orgao RG'" ></app-input>
+                                </div>
+                                <div class="p-field p-col-12 p-md-4">
+                                    <app-date [label]="'Data de Emissao'" ></app-date>
+                                </div>
+                            </div>
+                            <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'E'" -->
+                            <div class="p-fluid p-formgrid p-grid"  >
+                                <div class="p-field p-col-12 p-md-4">
+                                    <app-input [label]="'Documento de identificacao'" ></app-input>
+                                </div>
+                                <div class="p-field p-col-12 p-md-4">
+                                    <app-select label="País"  [options]="selectPais"></app-select>
+                                </div>
+                            </div>
+                            <!-- *ngIf="form.get('PessoaForm').get('Tipo').value !== 'E'" -->
+                            <div class="p-fluid p-formgrid p-grid"  >
+                                <div class="p-field p-col-12 p-md-4">
+                                    <app-input [label]="'Inscricao estadual'"
+                                        ></app-input>
+                                </div>
+                                <div class="p-field p-col-12 p-md-4">
+                                    <app-input [label]="'Inscricao municipal'"
+                                        ></app-input>
+                                </div>
+                                <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'F'" -->
+                                <div class="p-field p-col-12 p-md-4">
+                                    <app-date  [label]="'Data de nascimento'"
+                                        ></app-date>
+                                </div>
+                                <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'J'" -->
+                                <div class="p-field p-col-12 p-md-4">
+                                    <app-input  [label]="'Suframa'"
+                                        ></app-input>
+                                </div>
+                            </div>
+
+                            <div class="p-fluid p-formgrid p-grid">
+                                <div class="p-field p-col-12 p-md-4">
+                                    <app-input-integer primeiro label="Codigo Controle" ></app-input-integer>
+                                </div>
+                            </div>
+                        
+                        &nbsp;
+                    </app-painel>
+                    &nbsp;
+                
+
+                <app-painel title="Informacoes contabeis">
+                    <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-4">
+                            <div>Conta contabil</div>
+                            <div class="p-inputgroup">
+                                <div class="p-col-10" style="padding-right: 0px;padding-left: 0px;">
+                                    <p-autoComplete [suggestions]="contaContabilSugests"
+                                                (completeMethod)="procurarContaContabil($event)" field="Descricao">
+                                    </p-autoComplete>
+                                </div>
+                                <span class="p-inputgroup-addon"><i class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-select [label]="'Tabela'" [options]="selectTabela"></app-select>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-select [label]="'Operacao fiscal'" [options]="selectOperacaoFiscal"
+                                    ></app-select>
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-4">
+                            <div>Natureza Financeira</div>
+                            <div class="p-inputgroup">
+                                <div class="p-col-10" style="padding-right: 0px;padding-left: 0px;">
+                                    <app-select [options]="selectNaturezaFinanceira" [icon]="true"></app-select>
+                                </div>
+                                <button style="margin-left: -7px;" #naturezafinanceira pButton type="button" icon="fa fa-plus"></button>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4" >
+                            <app-select segundo [label]="'CRT'" [options]="selectCrt"></app-select>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4" >
+                            <app-select terceiro [label]="'Tipo regime'" [options]="selectTipoRegime"></app-select>
+                        </div>                        
+                            <div class="p-col-12">
+                                <div class="p-col-12">
+                                    <label>Mensagem Nfe</label><br />
+                                    <textarea pInputTextarea [rows]="3"></textarea>
+                                </div>
+                            </div>                        
+                    </div>
+                    
+                </app-painel>
+                &nbsp;
+                <app-painel title="Enderecos Adicionais">
+                    <div class="p-grid p-jc-end">
+                        <div class="p-col-2">
+                            <button pButton primeiro type="button" label="Adicionar"
+                                    style="margin-top: 10px" (click)="novoEndereco()"></button>
+                        </div>
+                    </div>
+                    <p-table
+                        [columns]="[{field: 'Logradouro', header: 'Logradouro'}, {field: 'Numero', header: 'Numero'}, {field: 'Bairro', header: 'Bairro'}, {field: 'Cidade', header: 'Cidade'}]"
+                        [value]="enderecosTable" [rows]="15">
+                          <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns">{{col.header}}</th>
+                                <th style="width: 8%"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr [pSelectableRow]="rowData">
+                                <td *ngFor="let col of columns">{{rowData[col.field]}}</td>
+                                <td style="width: 15px;">
+                                    <app-opcoes-table [value]="rowData"
+                                                      [opcoes]="itemsRowEndereco"></app-opcoes-table>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </app-painel>
+                &nbsp;
+
+                <app-painel title="Contatos Adicionais">
+                    <div class="p-grid p-jc-end">
+                        <div class="p-col-2">
+                            <button pButton primeiro type="button" label="Adicionar"
+                                    style="margin-top: 10px" (click)="novoContato()"></button>
+                        </div>
+                    </div>
+                    <p-table [columns]="[{field: 'Nome', header: 'Nome'}, {field: 'Email', header: 'Email'},
+                        {field: 'FoneComercial', header: 'Telefone'}]" [value]="contatosTable" [rows]="15">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns">{{col.header}}</th>
+                                <th style="width: 8%"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr [pSelectableRow]="rowData">
+                                <td *ngFor="let col of columns">{{rowData[col.field]}}</td>
+                                <td style="width: 15px;">
+                                    <app-opcoes-table [value]="rowData"
+                                                      [opcoes]="itemsRowContato"></app-opcoes-table>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </app-painel>
+                &nbsp;
+
+                <app-painel title="Informacoes adicionais">
+                    <!-- {{formatDate(this.form.get('DataCadastro').value)}} -->
+                    <h3>Data de cadastro: </h3>
+                    <!-- *ngIf="form.get('PessoaForm').get('Tipo').value !== 'J'" -->
+                    <div class="p-fluid p-formgrid p-grid" >
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-select [label]="'Estado civil'" [options]="selectEstadoCivil"></app-select>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Municipio de nascimento'"
+                                ></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Nacionalidade'" ></app-input>
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Nome da mae'" ></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Nome do pai'" ></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Renda mensal'" ></app-input>
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Profissao'" ></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input [label]="'Conjulgue / Companheiro'"
+                                ></app-input>
+                        </div>
+                        <div class="p-field p-col-12 p-md-4">
+                            <app-input terceiro [label]="'Local de trabalho'"
+                                       ></app-input>
+                        </div>
+                    </div>
+                    <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-4">
+                            <div>Situção pessoa</div>
+                            <div class="p-inputgroup" >
+                                <div class="p-col-10" style="padding-left: 0px;padding-right: 0px;">
+                                    <app-select [icon]="true"[options]="selectSituacaoPessoa"
+                                        ></app-select>
+                                </div>
+                                <button style="margin-left: -7px;" #situacaopessoa pButton type="button" icon="fa fa-plus"></button>
+                            </div>
+                        </div>
+                        &nbsp;
+                        <div class="p-field p-col-12 p-md-4">
+                            <label>Observacoes</label><br/>
+                            <textarea pInputTextarea [rows]="3"></textarea>
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                            <label>Referencias comerciais</label><br/>
+                            <textarea pInputTextarea [rows]="3"></textarea>
+                        </div>
+                    </div>
+                    &nbsp;
+                </app-painel>
+                &nbsp;
+            </p-card>
+
+                <app-footer-page *ngIf="!modal" (cancelar)="cancelarLocal()"
+                                 (confirmar)="processarFormulario()"></app-footer-page>
+                &nbsp;
+            </div>
+
+            <div secundario>
+
+                <p-card [header]="'Tipo Pessoa'" [style]="{paddingBottom: '110px'}">
+                    <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-6"> <!-- style="display:flex;flex-direction: row;" -->
+                            <div>
+                                <span>Ativo</span>
+                            </div>
+                            <div>
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                ></p-toggleButton>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <div>
+                                <span>Cliente</span>
+                            </div>
+                            <div>
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                ></p-toggleButton>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <div>
+                                <span>Fornecedor</span>
+                            </div>
+                            <div>
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                ></p-toggleButton>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <div>
+                                <span>Transportador</span>
+                            </div>
+                            <div>
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                ></p-toggleButton>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <div>
+                                <span>Colaborador</span>
+                            </div>
+                            <div>
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                ></p-toggleButton>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <div>
+                                <span>Vendedor</span>
+                            </div>
+                            <div>
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                ></p-toggleButton>
+                            </div>
+                        </div>                    
+                        <div class="p-field p-col-12 p-md-6">
+                            <div>
+                                <span>Tributar Semelhante</span>
+                            </div>
+                            <div>
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                ></p-toggleButton>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <div>
+                                <span>Tributo</span>
+                            </div>
+                            <div>
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                ></p-toggleButton>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <div>
+                                <span>Conta Corrente</span>
+                            </div>
+                            <div>
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                ></p-toggleButton>
+                            </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <div>
+                                <span>Informar Pedido</span>
+                            </div>
+                            <div>
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                ></p-toggleButton>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;" class="p-field p-col-12 p-md-12">
+                            <!-- <div>
+                                <span></span>
+                            </div> -->
+                            <!-- <div class="ui-g-10"> -->
+                                <!-- <app-select primeiro [label]="'Contribuinte do ICMS'" [options]="selectICMS"
+                                ></app-select> -->
+                                <!-- <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                                formControlName="ContribuinteIcms"></p-toggleButton> -->
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    &nbsp;
+                </p-card>
+                <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'F'" -->
+                <p-card  [style]="{marginTop: '30px'}" header="Sexo">
+                    <div >
+                        <app-radio-button [options]="tiposSexo" ></app-radio-button>
+                    </div>
+                    &nbsp;
+                </p-card>
+
+                <p-card [style]="{marginTop: '30px'}" [header]="'Foto'">
+<!--                    <app-image-upload formControlName="CaminhoFoto" [image]="'../../../assets/images/user.png'"></app-image-upload>-->
+                    <image-cropper
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true"
+                        [containWithinAspectRatio]="true"
+                        [aspectRatio]="4 / 4"
+                        [resizeToWidth]="640"
+                        [style.display]="showCropper ? null : 'none'"
+                        format="png"
+                        (imageCropped)="imageCropped($event)"
+                        (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady($event)"
+                        (loadImageFailed)="loadImageFailed()"
+                        [onlyScaleDown]="true"
+                        [roundCropper]="false"
+                    ></image-cropper>
+                    <div *ngIf="!imageChangedEvent" class="img-container">
+                        <img [src]="imagem" alt="">
+                    </div>
+                    <input type="file" (change)="fileChangeEvent($event)" #uploadImagem class="esconder"/>
+                    <button pButton label="Upload Imagem" (click)="clickUploadImagem()"></button>
+                </p-card>
+            </div>
+        </app-page-divided>
+
+    </div>
+
+    <!-- <app-modal [fundo]="true" *appModalOpenOnClick="[situacaopessoa, '1Acd5FVs1']" [hash]="'1Acd5FVs1'">
+        <app-situacao-pessoa-cadastro #content (dadosSalvos)="changeSelect($event)"></app-situacao-pessoa-cadastro>
+    </app-modal>
+    <app-modal [fundo]="true" *appModalOpenOnClick="[naturezafinanceira, '1Acd5FVs2']" [hash]="'1Acd5FVs2'" [style]="{'max-height': '500px', 'overflow':'auto'}">
+        <app-modal-natureza-financeira #content (dadosSalvos)="changeSelect($event)"></app-modal-natureza-financeira>
+    </app-modal> -->
+
+    <!-- <app-modal *appModalOpenOnClick="[vendedor, '1Acd5FVs4']" [hash]="'1Acd5FVs4'" [fundo]="true">
+        <app-vendedor-cadastro #content (dadosSalvos)="changeSelect($event)"></app-vendedor-cadastro>
+    </app-modal> -->
+
+    <!-- <app-pesquisar-cep [modalVisible]="modalCepVisible" #content (closeModal)="modalCepVisible = false"
+                       (dadosSalvos)="cepPesquisado($event)"></app-pesquisar-cep> -->
+
+    <!-- <app-adicionar-endereco [modalVisible]="modalAdicionarEndereco" #content (dadosSalvos)="adicionarEndereco($event)"
+                            (closeModal)="modalAdicionarEndereco = false"></app-adicionar-endereco> -->
+
+    <!-- <app-editar-contato [modalVisible]="modalContato" #content (closeModal)="modalContato = false"
+                        (dadosSalvos)="adicionarContato($event)" [data]="contatoParaEdicao" ></app-editar-contato> -->
 
 </ng-template>
 <p-toast position="bottom-right"></p-toast>

@@ -1,0 +1,149 @@
+<ng-template #conteudo>
+    <app-page-divided [formGroup]="form" [padrao]="id">
+        <div principal style="margin-bottom: 50px;">
+
+            <div class="p-fluid p-formgrid p-grid">
+                <app-select *ngIf="id" label="Grupo de Natureza 1" [options]="selectNatureza" formControlName="IdNaturezaFinGrupo"></app-select>
+
+                <div class="p-field p-col-12 p-md-8">
+                    <div>Conta Contábil</div>
+                    <div class="p-inputgroup">
+                        <div class="p-col-10" style="padding-left: 0px;padding-right: 0px;">
+                            <app-select [icon]="true" [options]="selectContaContabil" formControlName="IdPlanoConta"></app-select>
+                        </div>
+                        <button #contacontabil pButton type="button" icon="fa fa-plus"></button>
+                    </div>
+                </div>
+
+                <div class="p-field p-col-12 p-md-8">
+                    <div>Centro de Custos</div>
+                    <div class="p-inputgroup">
+                        <div class="p-col-10" style="padding-left: 0px;padding-right: 0px;">
+                            <app-select [icon]="true" [options]="selectCentroCustos" formControlName="IdCentroResultado"></app-select>
+                        </div>
+                        <button #centrocustos pButton type="button" icon="fa fa-plus"></button>
+                    </div>
+                </div>
+
+                <app-select *ngIf="id" label="Tipo de Documento" [options]="selectTipoDocumentos" formControlName="IdTipoDocumento"></app-select>
+
+                <app-select *ngIf="id" label="Meio Pagamento" [options]="selectMeioPagamento" formControlName="IdFinMeioPagamento"></app-select>
+
+                <div class="p-field p-col-12 p-md-8">
+                    <app-input [label]="'Classificação'" formControlName="Classificacao"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <button pButton label="Calcular Classificação" style="margin-top: 20px;" (clickOutside)="gerarClassificacao()"></button>
+                </div>
+
+                <div class="p-field p-col-12 p-md-12">
+                    <app-input label="Descrição" formControlName="Descricao"></app-input>
+                </div>
+                <app-input *ngIf="id" label="Histórico" formControlName="Historico"></app-input>
+                <app-input-integer *ngIf="id" label="Cod Controle" formControlName="CodControle" [maxLength]="8"></app-input-integer>
+
+                <app-select-icon-container *ngIf="id">
+                    <app-select [icon]="true" [label]="'Projeto'" [options]="selectProjeto" formControlName="IdProjeto"></app-select>
+                    <div class="ui-g-1 ui-md-2 ui-g-nopad ajustar-botao-select">
+                        <button #projeto pButton type="button" icon="fa fa-plus"></button>
+                    </div>
+
+
+                    <!-- <app-modal *appModalOpenOnClick="[projeto, '1Acd5FXd2']" [hash]="'1Acd5FXd2'">
+                        <app-projeto-cadastro #content (dadosSalvos)="changeSelect($event)"></app-projeto-cadastro>
+                    </app-modal> -->
+
+                </app-select-icon-container>
+            </div>
+
+            <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="fechar()" labelConfirmar="Confirmar"></app-footer-page>
+
+        </div>
+
+        <div secundario *ngIf="id">
+            <div class="ui-g-12">
+                <div class="ui-g-6">
+                    <span>Sintético</span>
+                </div>
+                <div class="ui-g-6">
+                    <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="Sintetico"></p-toggleButton>
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-6">
+                    <span>Indica Permuta de Contas</span>
+                </div>
+                <div class="ui-g-6">
+                    <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="IndicaPermuta"></p-toggleButton>
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-6">
+                    <span>Exibir Caixa/PDV</span>
+                </div>
+                <div class="ui-g-6">
+                    <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="ApareceCaixa"></p-toggleButton>
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-6">
+                    <span>Exibir Contas a Pagar</span>
+                </div>
+                <div class="ui-g-6">
+                    <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="ApareceAPagar"></p-toggleButton>
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-6">
+                    <span>Exibir Contas a Receber</span>
+                </div>
+                <div class="ui-g-6">
+                    <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="ApareceAReceber"></p-toggleButton>
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-6">
+                    <span>Exibir nas Entradas</span>
+                </div>
+                <div class="ui-g-6">
+                    <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="ApareceEntrada"></p-toggleButton>
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-6">
+                    <span>Exibir no Produto/Estoque</span>
+                </div>
+                <div class="ui-g-6">
+                    <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"></p-toggleButton>
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-6">
+                    <span>Exibir na Tesouraria/Banco</span>
+                </div>
+                <div class="ui-g-6">
+                    <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="ApareceTesouraria"></p-toggleButton>
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-6">
+                    <span>Livro Caixa</span>
+                </div>
+                <div class="ui-g-6">
+                    <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="LivroCaixa"></p-toggleButton>
+                </div>
+            </div>
+
+            <div class="ui-g-12" >
+                <label>Nível</label><br/>
+                <p-spinner formControlName="Nivel"></p-spinner>
+            </div>
+
+        </div>
+
+    </app-page-divided>
+
+
+
+
+</ng-template>

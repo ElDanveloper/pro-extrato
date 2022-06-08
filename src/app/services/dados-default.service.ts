@@ -113,15 +113,15 @@ export class DadosDefaultService {
     //     return forkJoin([rotaViagem, tipoEndereco])
     // }
 
-    // public modalNaturezaFinanceira() {
-    //     let centroResultado = this.http.get(`${getUrlCad()}/centroresultado?$filter=Sintetico eq false`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Id}))));
-    //     let planoContas = this.http.get(`${getUrlCad()}/planocontas?$filter=Sintetico eq false`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Codigo}))));
-    //     let naturezaFinGrupo = this.http.get(`${getUrlCad()}/naturezafingrupo?$filter=(NivelDfc eq 3)`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Nome), value: v.Id}))));
-    //     let tipoDocumento = this.http.get(`${getUrlCad()}/tipodocumento`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Id}))));
-    //     let projeto = this.http.get(`${getUrlCad()}/projeto`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Nome), value: v.Id}))));
-    //     let meiosPagamento = this.http.get(`${getUrlCad()}/finmeiopagamento`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Id}))));
-    //     return forkJoin([centroResultado, planoContas, naturezaFinGrupo, tipoDocumento, projeto, meiosPagamento])
-    // }
+    public modalNaturezaFinanceira() {
+        let centroResultado = this.http.get(`${getUrlCad()}/centroresultado?$filter=Sintetico eq false`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Id}))));
+        let planoContas = this.http.get(`${getUrlCad()}/planocontas?$filter=Sintetico eq false`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Codigo}))));
+        let naturezaFinGrupo = this.http.get(`${getUrlCad()}/naturezafingrupo?$filter=(NivelDfc eq 3)`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Nome), value: v.Id}))));
+        let tipoDocumento = this.http.get(`${getUrlCad()}/tipodocumento`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Id}))));
+        let projeto = this.http.get(`${getUrlCad()}/projeto`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Nome), value: v.Id}))));
+        let meiosPagamento = this.http.get(`${getUrlCad()}/finmeiopagamento`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Id}))));
+        return forkJoin([centroResultado, planoContas, naturezaFinGrupo, tipoDocumento, projeto, meiosPagamento])
+    }
 
     // pessoa() {
     //     let situacaoPessoa = this.http.get(`${getUrlCad()}/situacaopessoa`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Nome), value: v.Id}))), catchError(this.errorHandlerDefaultValues));

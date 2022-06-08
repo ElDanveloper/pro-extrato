@@ -1,7 +1,7 @@
 <p-dialog [modal]="true" [responsive]="true" [contentStyle]="{'width':'800px', 'overflow':'visible'}"
     [maximizable]="false" [header]="'Cadastro de Pessoa'" [(visible)]="modalVisible" (onHide)="fecharModal()">
     <p-card [formGroup]="form">
-        <div *ngIf="primeiraEtapa" class="p-fluid p-formgrid p-grid">
+        <div *ngIf="primeiraEtapa" class="p-fluid p-formgrid p-grid" formGroupName="PessoaForm">
             <div class="p-field p-col-9">
                 <app-input-cpf-cnpj primeiro [label]="'Cpf / Cnpj'" formControlName="CpfCnpj" [row]="true"
                    ></app-input-cpf-cnpj>
@@ -10,7 +10,7 @@
                 <button pButton label="Avançar" (click)="avancar()"></button>
             </div>
         </div>
-        <div *ngIf="!primeiraEtapa">
+        <div *ngIf="!primeiraEtapa" formGroupName="PessoaForm">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12">
                     <app-input [label]="'Nome ou Razão Social'" formControlName="Nome"></app-input>

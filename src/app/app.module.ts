@@ -1,3 +1,6 @@
+import { PainelPageComponent } from './painel-page-component/painel-page.component';
+import { ProjetoCadastroComponent } from './pages/projeto-cadastro/projeto-cadastro.component';
+import { SituacaoPessoaCadastroComponent } from './pages/pessoas/situacao-pessoa-cadastro/situacao-pessoa-cadastro.component';
 import { PessoasCadastroComponent } from './pages/pessoas/pessoas-cadastro/pessoas-cadastro.component';
 import { PessoasListaComponent } from './pages/pessoas/pessoas-lista/pessoas-lista.component';
 import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
@@ -88,6 +91,9 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         EmpresasCadastroComponent,
         PessoasListaComponent,
         PessoasCadastroComponent,
+        SituacaoPessoaCadastroComponent,
+        ProjetoCadastroComponent,
+        PainelPageComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

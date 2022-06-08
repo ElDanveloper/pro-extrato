@@ -33,7 +33,7 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
     cadastrar = false
     opcoesTable = [
         {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
-            this.router.navigate([`/empresa`])
+            this.router.navigate([`/empresas-cadastro/${e.id}`])
         }},
         {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
         {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {

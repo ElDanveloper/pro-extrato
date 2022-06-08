@@ -49,7 +49,7 @@ export class Util {
         try {
             return [{severity: 'error', summary: error, sticky: true}]
         } catch (e) {
-            return [{severity: 'error', summary: JSON.stringify(error), sticky: true}]
+            return [{severity: 'error', summary: JSON.stringify(error), life: 1000}]
         }
     }
 

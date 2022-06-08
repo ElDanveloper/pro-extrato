@@ -1,0 +1,7 @@
+<div [ngClass]="{'center-content': center}">
+    <div [ngClass]="{'p-col-12 p-g-nopad': row}">
+        <div style="margin-top: 7px;" *ngFor="let option of options" [ngClass]="gridClass">
+            <p-radioButton [name]="group" [value]="option.value" [label]="option.label" [(ngModel)]="value"></p-radioButton>
+        </div>
+    </div>
+</div>

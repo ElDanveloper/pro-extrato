@@ -1,0 +1,25 @@
+<app-page-header urlPath="/auxiliares/projeto"></app-page-header>
+<ng-container *ngTemplateOutlet="conteudo"></ng-container>
+<ng-template #conteudo>
+    <app-page-divided [formGroup]="form" [padrao]="false">
+        <div principal>
+            <p-card [header]="'Dados gerais'">
+                <app-input [label]="'Nome'" formControlName="Nome"></app-input>
+                <div class="ui-g-12">
+                    <div class="ui-g-12">
+                        <span>Ativo</span>
+                    </div>
+                    <div class="ui-g-12">
+                        <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                        formControlName="Ativo"></p-toggleButton>
+                    </div>
+                </div>
+                &nbsp;
+            </p-card>
+
+            <app-footer-page *ngIf="!modal" [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelar()"></app-footer-page>
+
+        </div>
+    </app-page-divided>
+    <p-toast position="bottom-right"></p-toast>
+</ng-template>

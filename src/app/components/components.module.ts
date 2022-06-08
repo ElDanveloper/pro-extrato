@@ -1,3 +1,6 @@
+import { SelectIconContainerComponent } from './select-icon-container/select-icon-container.component';
+import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { InputIntegerComponent } from './input-integer/input-integer.component';
 import { PainelComponent } from './painel/painel.component';
 import { DateComponent } from './date/date.component';
 import { InputTelefoneComponent } from './input-telefone/input-telefone.component';
@@ -28,8 +31,9 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         InputTelefoneComponent,
         // CustomModalComponent,
         DateComponent,
-        // InputIntegerComponent,
-        // RadioButtonComponent,
+        InputIntegerComponent,
+        RadioButtonComponent,
+        SelectIconContainerComponent,
         // InputMoneyComponent,
         // InputPesquisarPessoaComponent,
         
@@ -53,8 +57,9 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         InputTelefoneComponent,
         // CustomModalComponent,
         DateComponent,
-        // InputIntegerComponent,
-        // RadioButtonComponent,
+        InputIntegerComponent,
+        RadioButtonComponent,
+        SelectIconContainerComponent,
         // InputMoneyComponent,
         // InputPesquisarPessoaComponent,
     ],

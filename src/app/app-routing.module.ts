@@ -27,8 +27,8 @@ const routes: Routes = [
              {path: 'pessoas', component: PessoasListaComponent},
              {path: 'empresa', component: ParametrosComponent},             
              {path: 'usuario-cadastro', component: UsuariosCadastroComponent},
-             {path: 'empresas-cadastro', component: EmpresasCadastroComponent},
-             {path: 'pessoas-cadastro', component: PessoasCadastroComponent},
+             {path: 'empresas-cadastro/:id', component: EmpresasCadastroComponent},
+             {path: 'pessoas/cadastro', component: PessoasCadastroComponent},
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
                    
         ]        

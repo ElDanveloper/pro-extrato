@@ -1,5 +1,8 @@
+import { Pessoa } from './../../../model/pessoa.model';
+import { PessoaContractor } from './../../../model/pessoa-contractor.model';
+import { ContractorClient } from './../../../model/contractor-client.model';
 import { Util, hasValue } from './../../../controller/Util';
-import { SERVERLESS_URL, getUrlClient } from './../../../controller/staticValues';
+import { SERVERLESS_URL, getUrlClient, getUrlPro } from './../../../controller/staticValues';
 import { Formulario } from './../../../controller/Formulario';
 import { Company } from './../../../model/company.model';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -48,16 +51,17 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
     responsavel = []
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService, private viaCep: NgxViacepService) {
-        super(networkService, dadosDefault, router, 'company', messageService);
-        this.form = Formulario.createForm(new Company(), this.fb); this.form = Formulario.createForm(new Company(), this.fb);
+        super(networkService, dadosDefault, router, 'contractorclient', messageService);
+        this.form = Formulario.createForm(new ContractorClient(), this.fb); this.form = Formulario.createForm(new ContractorClient(), this.fb);
+        this.form.addControl("PessoaContractorForm", Formulario.createForm(new PessoaContractor(), this.fb));
+        this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
     }
 
     ngOnInit() {
         this.dadosDefault.empresa().subscribe(values => {
             this.empresas = values[0]
             this.segmento = values[1]
-            this.responsavel = values[2]
-            
+            this.responsavel = values[2]            
           })
 
         this.$subscription5 = this.route.paramMap.subscribe(params => {
@@ -66,10 +70,20 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
 
         if (this.id) {
             this.dadosDefault.exibirLoader.next(true)
-            this.$subscription2 = this.networkService.buscar('company', this.id, null).subscribe((value: any) => {
+            this.$subscription2 = this.networkService.buscar('contractorclient', this.id, Util.expandedQuery(ContractorClient.expanded()) ).subscribe((value: any) => {
 
-                const data = Formulario.prepareValueToForm(new Company(), value, null, null, Company.checkbox());
+                const data = Formulario.prepareValueToForm(new ContractorClient(), value, null, null, ContractorClient.checkbox());
                 Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
+
+                if (value.PersonContractorId) {
+                    const dataPessoaFisica = Formulario.prepareValueToForm(new PessoaContractor(), value.PersonContractorId, PessoaContractor.datas(), PessoaContractor.relacionamentos(), PessoaContractor.checkbox());
+                    Object.keys(dataPessoaFisica).forEach(key => this.form.get('PessoaContractorForm').get(key).setValue(dataPessoaFisica[key]))
+                }
+                
+                if (value.PersonContractorId.PessoaId) {                    
+                    const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), value.PersonContractorId.PessoaId, Pessoa.datas(), null, Pessoa.checkbox());
+                    Object.keys(dataPessoa).forEach(key => this.form.get('PessoaForm').get(key).setValue(dataPessoa[key]))
+                }
 
             }).add(() => this.dadosDefault.exibirLoader.next(false))
         }
@@ -87,13 +101,16 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
             if (inv) return
         }
 
-        // const { PessoaForm, PessoaFisicaForm, ...data } = Object.assign({}, this.form.value)
+        const { PessoaForm, PessoaContractorForm, ...data } = this.form.getRawValue()
 
-        let value: any = { ...Formulario.parseForm(new Company(), this.form.value, null, null, null, null, Company.checkbox()) };
+        let value = Formulario.parseForm(new ContractorClient(), data, ContractorClient.referencias(), null, ContractorClient.datas(), null, ContractorClient.checkbox());
+
+        value.PersonContractorId = Formulario.parseForm(new PessoaContractor(), PessoaContractorForm, PessoaContractor.referencias(), null, PessoaContractor.datas(), null, PessoaContractor.checkbox());
+        value.PersonContractorId.PessoaId = Formulario.parseForm(new Pessoa(), PessoaForm, Pessoa.referencias(), Pessoa.mascaras(), PessoaContractor.datas(), null, PessoaContractor.checkbox());
 
         this.networkService.exibirLoader.next(true);
-        this.$subscription6 = this.networkService.salvarPost(getUrlClient(), 'pessoas/pessoaempresa2', value).subscribe((v: any) => {
-            this.router.navigate(['/pessoa'])
+        this.$subscription6 = this.networkService.atualizarPost(getUrlPro(), 'Company', value).subscribe((v: any) => {
+            this.router.navigate(['/empresas'])
         }).add(() => this.networkService.exibirLoader.next(false))
     }
 

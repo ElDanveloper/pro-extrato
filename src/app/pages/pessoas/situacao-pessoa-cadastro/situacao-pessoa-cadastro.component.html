@@ -1,0 +1,16 @@
+<app-page-header [urlName]="'Situacao pessoa'"></app-page-header>
+<ng-container *ngTemplateOutlet="conteudo"></ng-container>
+<ng-template #conteudo>
+<app-page-divided [formGroup]="form">
+    <div principal>
+        <p-card [header]="'Dados gerais'">
+                <app-input primeiro [label]="'Nome'" formControlName="Nome"></app-input>
+            &nbsp;
+        </p-card>
+
+        <app-footer-page (cancelar)="fechar()" (confirmar)="processarFormulario()"></app-footer-page>
+
+    </div>
+</app-page-divided>
+</ng-template>
+<p-toast position="bottom-right"></p-toast>
