@@ -1,0 +1,60 @@
+<p-card [header]="'Listagem de Natureza'">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-8">
+            <div class="p-inputgroup">
+                <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" pInputText>
+                <button pButton type="button" icon="fa fa-search" (click)="carregarLista()"
+                        ></button>
+            </div>
+        </div>
+        <!-- <div class="p-field p-col-12 p-md-2" style="position: relative;">
+            <app-select #selectValue [options]="selectSort"></app-select>
+        </div> -->
+        <div class="p-field p-col-12 p-md-2" style="margin-top: 15px;">
+            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 25px; cursor: pointer;"></i>
+            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 35px; cursor: pointer"></i>
+        </div>
+        <div class="p-field p-col-12 p-md-2">
+            <button pButton label="Cadastrar" (click)="navegar()"></button>
+            
+        </div>
+    </div>
+
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
+        <ng-template pTemplate="header" let-columns>
+            <tr>   
+            <th [ngStyle]="{width: '7%'}"> Classificação </th>                          
+            <th [ngStyle]="{width: '40%'}"> Descrição </th>      
+            <th [ngStyle]="{width: '10%'}"> Cod. Controle </th>      
+            <th [ngStyle]="{width: '7%'}"> Sintético </th> 
+            <th [ngStyle]="{width: '10%'}"> Conta Contábil</th> 
+            <th [ngStyle]="{width: '5%'}"> Ações </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData>
+            <tr>   
+            <td>{{rowData.Classificacao}}</td>         
+            <td>{{rowData.Descricao}}</td>
+            <td>{{rowData.CodControle}}</td>
+            <td>{{rowData.Sintetico}}</td>   
+            <td>{{rowData.IdPlanoConta}}</td>                     
+            <td><app-opcoes-table [value]="rowData"
+                                  [opcoes]="opcoesTable"></app-opcoes-table></td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-card>
+
+<p-confirmDialog header="Confirmacao" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+<p-toast position="bottom-right"></p-toast>
+
+<div style="position: fixed; top: -200%">
+    <button pButton type="button" label="" #cadastrarNatureza></button>
+</div>
+
+<!-- <app-modal [fundo]="true" *appModalOpenOnClick="[cadastrarNatureza, '1Acd5WGj70']" [hash]="'1Acd5WGj70'" [autoOverflow]="true">
+    <app-modal-natureza-financeira-cadastro #content></app-modal-natureza-financeira-cadastro>
+</app-modal> -->
+
+<app-modal-natureza-financeira-cadastro [modalVisible]="modalCadastrarNatureza" #content (closeModal)="modalCadastrarNatureza = false"></app-modal-natureza-financeira-cadastro>

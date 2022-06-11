@@ -44,7 +44,7 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
     super(networkService, dadosDefault, router, 'person', messageService)
     this.form = Formulario.createForm(new PersonClient(), this.fb);
     this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
-    this.form.addControl("NaturezaForm", Formulario.createForm(new NaturezaFinanceira(), this.fb));
+    // this.form.addControl("NaturezaForm", Formulario.createForm(new NaturezaFinanceira(), this.fb));
   }
 
   ngOnInit() {
@@ -59,19 +59,14 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
     }
   }
 
-  buscaCnpj() {
-    console.log('Buscar ----> ')
+  buscaCnpj() {    
     let cnpj = this.form.get('PessoaForm').get('CpfCnpj').value.toString().match(/\d/g);
-    console.log('cnpj ----> ' + cnpj)
+    
     if (cnpj === null || (cnpj.join('').length !== 11 && cnpj.join('').length !== 14)) {
       this.messageService.add(Util.pushErrorMsg('Cnpj Invalido'))
       return;
     }
-
-    // if (cnpj.join('').length === 11) {
-    //   this.messageService.add(Util.pushErrorMsg('Favor Digitar um CNPJ Válido'))
-    //   return
-    // }
+    
     cnpj = cnpj.join('')
 
     this.buscarCnpjReceitaWs(cnpj)
@@ -134,28 +129,26 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
     //   }
   }
 
-  buscarCnpjReceitaWs(cnpj) {
-    console.log("Buscar na receita ----> ")
+  buscarCnpjReceitaWs(cnpj) {    
     this.dadosDefault.exibirLoader.next(true)
     this.$subscription3 = this.dadosDefault.buscarCnpj(cnpj).subscribe((v: any) => {
-      this.form.get('Nome').setValue(v['nome']);
-      this.form.get('Fantasia').setValue(v['fantasia']);
-      this.form.get('Cep').setValue(v['cep']);
-      this.form.get('Logradouro').setValue(v['logradouro']);
-      this.form.get('Numero').setValue(v['numero']);
-      this.form.get('Complemento').setValue(v['complemento']);
-      this.form.get('Bairro').setValue(v['bairro']);
-      this.form.get('Cidade').setValue(v['municipio']);
-      this.form.get('Uf').setValue(v['uf'])
-      this.form.get('Celular').setValue(v['telefone'])
-      this.form.get('Email').setValue(v['email'])
+      this.form.get('PessoaForm').get('Nome').setValue(v['nome']);
+      this.form.get('PessoaForm').get('Fantasia').setValue(v['fantasia']);
+      this.form.get('PessoaForm').get('Cep').setValue(v['cep']);
+      this.form.get('PessoaForm').get('Logradouro').setValue(v['logradouro']);
+      this.form.get('PessoaForm').get('Numero').setValue(v['numero']);
+      this.form.get('PessoaForm').get('Complemento').setValue(v['complemento']);
+      this.form.get('PessoaForm').get('Bairro').setValue(v['bairro']);
+      this.form.get('PessoaForm').get('Cidade').setValue(v['municipio']);
+      this.form.get('PessoaForm').get('Uf').setValue(v['uf'])
+      this.form.get('PessoaForm').get('Celular').setValue(v['telefone'])
+      this.form.get('PessoaForm').get('Email').setValue(v['email'])
       // this.verificaCepValido(true)
     }).add(() => this.dadosDefault.exibirLoader.next(false))
     this.primeiraEtapa = false
   }
 
   avancar() {
-    console.log("Avançar -----> ")
     this.buscaCnpj()
     // this.primeiraEtapa = false
 
@@ -173,18 +166,30 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
       if (inv) return
     }
 
-    // const { PessoaForm, PessoaFisicaForm, ...data } = Object.assign({}, this.form.value)
+    const {PessoaForm, ...data } = this.form.getRawValue()
+    let value = Formulario.parseForm(new PersonClient(), data, PersonClient.referencias(), null, null, null, null);
+    console.log('Pessoa ----> ' + JSON.stringify(PessoaForm))
+    console.log("Value -----> " + JSON.stringify(value))
 
-    let value: any = { ...Formulario.parseForm(new Company(), this.form.value, null, null, null, null, Company.checkbox()) };
+  //   const nfe = {
+  //     ...Formulario.parseForm(new NfeCabecalho(), {
+  //         ...cab, IdPessoa: this.form.get("IdClienteForm").value.Nome.Id,
+  //         CpfCnpj: this.form.get("IdClienteForm").value.Nome.CpfCnpj,
+  //     }, NfeCabecalho.referencias(), null, NfeCabecalho.datas(), null, NfeCabecalho.checkbox()),
+  //     "$id": 1,
+  // };
+
+    // value.NatureFinancialId = Formulario.parseForm(new NaturezaFinanceira(), NaturezaForm, NaturezaFinanceira.referencias(), null, null, null, NaturezaFinanceira.checkbox());
+    value.PersonId = Formulario.parseForm(new Pessoa(), PessoaForm, Pessoa.referencias(), Pessoa.mascaras(), Pessoa.datas(), null, Pessoa.checkbox());
 
     // value.Cnpj = value.Cnpj.join('')
 
-    value.Cnpj = value.Cnpj.toString().replace(/[^\d]+/g, '')
+    // value.PessoaId.CpfCnpj = value.PessoaId.CpfCnpj.toString().replace(/[^\d]+/g, '')
     // this.form.get('Cnpj').value.toString().replace(/[^\d]+/g,'')
-
+    console.log('Cnpj ---> ' + value.PersonId.CpfCnpj)
     this.networkService.exibirLoader.next(true);
-    this.$subscription4 = this.networkService.salvarPost(getUrlPro(), 'pessoa', { Value: value }).subscribe((v: any) => {
-      this.router.navigate(['/empresas'])
+    this.$subscription4 = this.networkService.salvarPost(getUrlPro(), 'person', value).subscribe((v: any) => {
+      this.router.navigate(['/pessoas'])
     }).add(() => this.networkService.exibirLoader.next(false))
   }
 

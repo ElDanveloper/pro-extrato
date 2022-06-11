@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DadosDefaultService } from './services/dados-default.service';
 import {Component, OnInit} from '@angular/core';
 import { MenuService } from './app.menu.service';
@@ -51,7 +52,7 @@ export class AppMainComponent implements OnInit {
 
     compactMode = true;
 
-    constructor(private menuService: MenuService, private primengConfig: PrimeNGConfig, private dadosDefault: DadosDefaultService, private messageService: MessageService) {}
+    constructor(private menuService: MenuService, private primengConfig: PrimeNGConfig, private dadosDefault: DadosDefaultService, private messageService: MessageService, private router: Router) {}
 
     exibirLoader = this.dadosDefault.exibirLoader
 
@@ -134,8 +135,9 @@ export class AppMainComponent implements OnInit {
         event.preventDefault();
     }
 
-    onTopbarSubItemClick(event) {
+    onTopbarSubItemClick(event, route?) {
         event.preventDefault();
+        this.router.navigate(['usuarios'])
     }
 
     onRightPanelButtonClick(event) {

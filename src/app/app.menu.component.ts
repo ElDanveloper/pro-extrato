@@ -30,7 +30,7 @@ export class AppMenuComponent implements OnInit {
                 // items: []
             },
             {
-                label: 'Natureza Financeira', icon: 'fa fa-building-o', routerLink: ['']
+                label: 'Natureza Financeira', icon: 'fa fa-building-o', routerLink: ['natureza-financeira']
                 // items: []
             },
             {

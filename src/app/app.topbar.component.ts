@@ -32,6 +32,14 @@ export class AppTopbarComponent {
         this.trocarEmpresa.nativeElement.click();
     }
 
+    navegar(pagina) {
+        switch(pagina){
+        case 1:
+            console.log('Entrei')
+            this.router.navigate([`usuarios`]);
+        }
+    }
+
 }
 
 

@@ -12,7 +12,7 @@ export class PersonClient {
     }
 
     static referencias() {
-        return [{chave: 'NatureFinancialId', referencia: 'NatureFinancial'}, {chave: 'PersonId', referencia: 'Pessoa'}]
+        return [{chave: 'NatureFinancialId', referencia: 'NaturezaFinanceira'}, {chave: 'PersonId', referencia: 'Pessoa'}]
     }
 
     static expanded() {

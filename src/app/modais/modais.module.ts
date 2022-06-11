@@ -1,3 +1,5 @@
+import { ProjetoCadastroComponent } from './../pages/projeto-cadastro/projeto-cadastro.component';
+import { ModalNaturezaFinanceiraCadastroComponent } from './modal-natureza-financeira-cadastro/modal-natureza-financeira-cadastro.component';
 import { ModalNaturezaFinanceiraComponent } from './modal-natureza-financeira/modal-natureza-financeira.component';
 import { ModalPessoaCadastroComponent } from './modal-pessoa-cadastro/modal-pessoa-cadastro.component';
 import { ModalUsuarioCadastroComponent } from './modal-usuario-cadastro/modal-usuario-cadastro.component';
@@ -24,6 +26,8 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalUsuarioCadastroComponent,
       ModalPessoaCadastroComponent,
       ModalNaturezaFinanceiraComponent,
+      ModalNaturezaFinanceiraCadastroComponent,
+      ProjetoCadastroComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -38,6 +42,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         DiretivasModule,
         ComponentsModule,
         LayoutsModule,
+        
     ],
     exports: [
         ModalSelecionarEmpresaEscritorioComponent,        
@@ -46,6 +51,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalUsuarioCadastroComponent,
         ModalPessoaCadastroComponent,
         ModalNaturezaFinanceiraComponent,
+        ModalNaturezaFinanceiraCadastroComponent,
         //ModalPagamentoViaContaCorrenteComponent,
     ]
 })

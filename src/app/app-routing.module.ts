@@ -1,3 +1,4 @@
+import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
 import { PessoasCadastroComponent } from './pages/pessoas/pessoas-cadastro/pessoas-cadastro.component';
 import { PessoasListaComponent } from './pages/pessoas/pessoas-lista/pessoas-lista.component';
 import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
@@ -13,6 +14,7 @@ import {LoginComponent} from './auth/login/login.component'
 import {SelecaoEmpresaComponent} from './auth/selecao-empresa/selecao-empresa.component';
 import { AuthGuard } from './auth/service/auth-guard';
 import { VisaoGeralComponent } from './pages/dashboard/visao-geral/visao-geral.component';
+import { ProjetoCadastroComponent } from './pages/projeto-cadastro/projeto-cadastro.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
@@ -25,11 +27,14 @@ const routes: Routes = [
              {path: 'empresas', component: EmpresasListaComponent},           
              {path: 'usuarios', component: UsuariosListaComponent},
              {path: 'pessoas', component: PessoasListaComponent},
+             {path: 'natureza-financeira', component: NaturezaFinanceiraListaComponent},
              {path: 'empresa', component: ParametrosComponent},             
              {path: 'usuario-cadastro', component: UsuariosCadastroComponent},
              {path: 'empresas-cadastro/:id', component: EmpresasCadastroComponent},
              {path: 'pessoas/cadastro', component: PessoasCadastroComponent},
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
+
+            {path: 'projeto', component: ProjetoCadastroComponent},
                    
         ]        
     },    
