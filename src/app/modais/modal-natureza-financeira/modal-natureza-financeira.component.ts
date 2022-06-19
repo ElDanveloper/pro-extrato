@@ -1,4 +1,4 @@
-import { NaturezaFinanceira } from './../../model/natureza-financeira.model';
+import { FinancialCategory } from './../../model/financial-category.model';
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {NetworkService} from "../../services/network.service";
@@ -22,7 +22,7 @@ export class ModalNaturezaFinanceiraComponent extends BaseFormPost implements On
     entidade = 'naturezafinanceira'
     title = 'Natureza Financeira'
     labelModal = 'Natureza Financeira'
-    entObj = new NaturezaFinanceira()
+    entObj = new FinancialCategory()
     @Input() id;
     @Input() idPai;
     @Output() closeModal = new EventEmitter();
@@ -42,7 +42,7 @@ export class ModalNaturezaFinanceiraComponent extends BaseFormPost implements On
     $subscriptionClassificacao: Subscription;
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService) {
-        super(networkService, dadosDefault, router, 'naturezafinanceira', messageService);
+        super(networkService, dadosDefault, router, 'financialcategory', messageService);
 
         this.form = Formulario.createForm(this.entObj, this.fb)
     }
@@ -58,8 +58,8 @@ export class ModalNaturezaFinanceiraComponent extends BaseFormPost implements On
         })
 
             if (this.id) {
-                this.$subscriptionBuscar = this.networkService.buscar(this.entidade, this.id, Util.expandedQuery(NaturezaFinanceira.expanded())).subscribe(value => {
-                    const data = Formulario.prepareValueToForm(this.entObj, value, null, NaturezaFinanceira.relacionamentos(), NaturezaFinanceira.checkbox())
+                this.$subscriptionBuscar = this.networkService.buscar(this.entidade, this.id, Util.expandedQuery(FinancialCategory.expanded())).subscribe(value => {
+                    const data = Formulario.prepareValueToForm(this.entObj, value, null, FinancialCategory.relacionamentos(), FinancialCategory.checkbox())
                     Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]))
                 })
             } else {
@@ -70,7 +70,7 @@ export class ModalNaturezaFinanceiraComponent extends BaseFormPost implements On
     }
 
     processarFormulario() {
-        this.save('contas/naturezaFinanceira', Formulario.parseForm(this.entObj, Object.assign({}, this.form.value), NaturezaFinanceira.referencias(), null, null, null, NaturezaFinanceira.checkbox()), true)
+        this.save('contas/naturezaFinanceira', Formulario.parseForm(this.entObj, Object.assign({}, this.form.value), FinancialCategory.referencias(), null, null, null, FinancialCategory.checkbox()), true)
     }
 
     changeSelect(value) {

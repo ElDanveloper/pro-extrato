@@ -15,7 +15,6 @@ import { MessageService } from "primeng/api";
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinhas, EMPRESA_STORAGE_KEY } from '../../controller/staticValues'
-import { NaturezaFinanceira } from 'src/app/model/natureza-financeira.model';
 
 @Component({
   selector: 'app-modal-pessoa-cadastro',

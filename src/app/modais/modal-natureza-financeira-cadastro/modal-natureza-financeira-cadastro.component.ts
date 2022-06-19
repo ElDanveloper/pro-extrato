@@ -1,4 +1,4 @@
-import { NaturezaFinanceira } from './../../model/natureza-financeira.model';
+import { FinancialCategory } from './../../model/financial-category.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BaseFormPost } from "../../controller/BaseFormPost";
 import { FormBuilder, FormGroup } from "@angular/forms";
@@ -70,7 +70,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService) {
         super(networkService, dadosDefault, router, 'pessoa', messageService);
-        this.form = Formulario.createForm(new NaturezaFinanceira(), this.fb);
+        this.form = Formulario.createForm(new FinancialCategory(), this.fb);
     }
 
     ngOnInit() {
@@ -107,7 +107,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
 
     processarFormulario() {
         console.log(this.form.getRawValue());
-        this.networkService.salvarPost(getUrlCad(), 'contas/naturezafinanceira', Formulario.parseForm(new NaturezaFinanceira(), Object.assign({}, this.form.value), NaturezaFinanceira.referencias(), null, null, null, NaturezaFinanceira.checkbox(), false)).subscribe(v => {
+        this.networkService.salvarPost(getUrlCad(), 'contas/naturezafinanceira', Formulario.parseForm(new FinancialCategory(), Object.assign({}, this.form.value), FinancialCategory.referencias(), null, null, null, FinancialCategory.checkbox(), false)).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Cadastro realizado com sucesso'));
             this.fecharModal();
         })
