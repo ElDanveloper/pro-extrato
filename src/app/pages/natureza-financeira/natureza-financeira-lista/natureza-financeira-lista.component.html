@@ -1,4 +1,4 @@
-<p-card [header]="'Listagem de Natureza'">
+<p-card [header]="'Listagem de Categoria Financeira'">
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 p-md-8">
             <div class="p-inputgroup">
@@ -15,7 +15,7 @@
             <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 35px; cursor: pointer"></i>
         </div>
         <div class="p-field p-col-12 p-md-2">
-            <button pButton label="Cadastrar" (click)="navegar()"></button>
+            <button pButton label="Nova Categoria" (click)="navegar()"></button>
             
         </div>
     </div>
@@ -33,11 +33,11 @@
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
             <tr>   
-            <td>{{rowData.Classificacao}}</td>         
-            <td>{{rowData.Descricao}}</td>
-            <td>{{rowData.CodControle}}</td>
-            <td>{{rowData.Sintetico}}</td>   
-            <td>{{rowData.IdPlanoConta}}</td>                     
+            <td>{{rowData.Classificate}}</td>         
+            <td>{{rowData.Description}}</td>
+            <td>{{rowData.CodeControl}}</td>
+            <td>{{rowData.Sintetic}}</td>   
+            <td>{{rowData.CostCenterId}}</td>                     
             <td><app-opcoes-table [value]="rowData"
                                   [opcoes]="opcoesTable"></app-opcoes-table></td>
             </tr>

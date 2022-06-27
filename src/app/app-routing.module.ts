@@ -1,3 +1,4 @@
+import { NaturezaFinanceiraCadastroComponent } from './pages/natureza-financeira/natureza-financeira-cadastro/natureza-financeira-cadastro.component';
 import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
 import { PessoasCadastroComponent } from './pages/pessoas/pessoas-cadastro/pessoas-cadastro.component';
 import { PessoasListaComponent } from './pages/pessoas/pessoas-lista/pessoas-lista.component';
@@ -29,9 +30,10 @@ const routes: Routes = [
              {path: 'pessoas', component: PessoasListaComponent},
              {path: 'natureza-financeira', component: NaturezaFinanceiraListaComponent},
              {path: 'empresa', component: ParametrosComponent},             
-             {path: 'usuario-cadastro', component: UsuariosCadastroComponent},
+             {path: 'usuario-cadastro/:id', component: UsuariosCadastroComponent},
              {path: 'empresas-cadastro/:id', component: EmpresasCadastroComponent},
-             {path: 'pessoas/cadastro', component: PessoasCadastroComponent},
+             {path: 'pessoas/cadastro/:id', component: PessoasCadastroComponent},
+             {path: 'natureza-financeira/cadastro/:id', component: NaturezaFinanceiraCadastroComponent},
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
 
             {path: 'projeto', component: ProjetoCadastroComponent},

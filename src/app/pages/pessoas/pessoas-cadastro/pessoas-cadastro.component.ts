@@ -13,6 +13,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {Endereco, ErroCep, NgxViacepService} from "@brunoc/ngx-viacep";
 import {Subscription} from "rxjs";
 import {Dimensions, ImageCroppedEvent} from "ngx-image-cropper";
+import { PersonClient } from 'src/app/model/person-client.model';
 
 @Component({
     selector: 'app-pessoas-cadastro',
@@ -104,9 +105,9 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService,
                 private viaCep: NgxViacepService) {
-        super(networkService, dadosDefault, router, 'pessoa', messageService);
-        this.form = Formulario.createForm(new Pessoa(), this.fb);
-        // this.form.addControl("PessoaFisicaForm", Formulario.createForm(new PessoaFisica(), this.fb));
+        super(networkService, dadosDefault, router, 'personClient', messageService);
+        this.form = Formulario.createForm(new PersonClient(), this.fb);
+        this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
         // this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
 
         // this.form.get('PessoaForm').get('Tipo').setValue('F');
@@ -123,6 +124,11 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
     };
 
     ngOnInit() {
+
+        this.$subscription5 = this.route.paramMap.subscribe(params => {
+            this.id = params.get('id')
+        })
+
         this.$subscription1 = this.dadosDefault.pessoa().subscribe(values => {
             // this.selectSituacaoPessoa = values[0];
             // this.selectOperacaoFiscal = values[1];
@@ -131,21 +137,20 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
             // this.selectTipoEndereco = values[4];
             // this.selectContaContabil = values[5]
             // this.selectTabela = values[6]
-            // this.selectPais = values[7]
-
+            // this.selectPais = values[7]            
             if (this.id) {
                 this.dadosDefault.exibirLoader.next(true)
-                this.$subscription2 = this.networkService.buscar('pessoaempresa', this.id, Util.expandedQuery(Pessoa.expanded())).subscribe((value: any) => {
+                this.$subscription2 = this.networkService.buscar('PersonClient', this.id, Util.expandedQuery(PersonClient.expanded())).subscribe((value: any) => {
 
-                    this.idPessoa = value.IdPessoa.Id
-
-                    const data = Formulario.prepareValueToForm(new Pessoa(), value, Pessoa.datas(), Pessoa.relacionamentos(), Pessoa.checkbox());
+                    this.idPessoa = value.PersonId.Id                    
+                    
+                    const data = Formulario.prepareValueToForm(new PersonClient(), value, null, PersonClient.relacionamentos(), null);
                     Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
 
-            //         if (value.IdPessoa) {
-            //             const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), value.IdPessoa, Pessoa.datas(), null, Pessoa.checkbox());
-            //             Object.keys(dataPessoa).forEach(key => this.form.get('PessoaForm').get(key).setValue(dataPessoa[key]))
-            //         }
+                    if (value.PersonId) {
+                        const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), value.IdPessoa, Pessoa.datas(), Pessoa.relacionamentos(), Pessoa.checkbox());
+                        Object.keys(dataPessoa).forEach(key => this.form.get('PessoaForm').get(key).setValue(dataPessoa[key]))
+                    }
 
                     // if (value.IdPessoaFisica) {
                     //     const dataPessoaFisica = Formulario.prepareValueToForm(new PessoaFisica(), value.IdPessoaFisica, PessoaFisica.datas(), PessoaFisica.relacionamentos(), PessoaFisica.checkbox());
@@ -166,9 +171,7 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
             }
         });
 
-        this.$subscription5 = this.route.paramMap.subscribe(params => {
-            this.id = params.get('id')
-        })
+       
     }
 
     processarFormulario() {
@@ -183,13 +186,13 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
             if (inv) return
         }
 
-        const cod = this.form.get('CodContaContabil').value ? this.form.get('CodContaContabil').value.Codigo : null
+        // const cod = this.form.get('CodContaContabil').value ? this.form.get('CodContaContabil').value.Codigo : null
 
         const {PessoaForm, PessoaFisicaForm, ...data} = Object.assign({}, this.form.value)
 
-        const temp = {...data, CodContaContabil: cod}
+        // const temp = {...data, CodContaContabil: cod}
         let value: any = {
-            ...Formulario.parseForm(new Pessoa(), temp, Pessoa.referencias(), null, Pessoa.datas(), null, Pessoa.checkbox()),
+            ...Formulario.parseForm(new Pessoa(), data, Pessoa.referencias(), null, Pessoa.datas(), null, Pessoa.checkbox()),
             Ativo: true,
             "$id": 1
         };
@@ -233,13 +236,13 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
                 imagem: this.croppedImage,
             }).subscribe((resFoto: any) => {
                 vFinal.Pessoa.IdPessoa.CaminhoFoto = resFoto.url
-                this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'pessoas/pessoaempresa2', vFinal).subscribe((v: any) => {
-                    this.router.navigate(['/pessoa'])
+                this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'person', vFinal).subscribe((v: any) => {
+                    this.router.navigate(['/pessoas'])
                 }).add(() => this.networkService.exibirLoader.next(false))
             }, e => this.networkService.exibirLoader.next(false))
         } else {
-            this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'pessoas/pessoaempresa2', vFinal).subscribe((v: any) => {
-                this.router.navigate(['/pessoa'])
+            this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'person', vFinal).subscribe((v: any) => {
+                this.router.navigate(['/pessoas'])
             }).add(() => this.networkService.exibirLoader.next(false))
         }
 
@@ -434,7 +437,7 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
     // }
 
     cancelarLocal() {
-        this.router.navigate(['/pessoa'])
+        this.router.navigate(['/pessoas'])
     }
 
     ngOnDestroy() {

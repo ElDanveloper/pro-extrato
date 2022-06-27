@@ -12,7 +12,7 @@ export class ContractorClient {
     public DateAlt: any = ''
     public Deleted: boolean = false
     public AccountantId: number = 0
-    public NaturezaFinanceiraId: number = 0
+    public FinancialCategoryId: number = 0
     public PlanAccountItemId: number = 0
     public PlanId: number = 0
     public PersonId: number = 0

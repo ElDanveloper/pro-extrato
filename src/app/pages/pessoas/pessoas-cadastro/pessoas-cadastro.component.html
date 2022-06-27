@@ -1,5 +1,5 @@
  <app-page-header>    
-    <div style="display: flex;justify-content: flex-end;margin-left: 150px;" *ngIf="idPessoa">
+    <!-- <div style="display: flex;justify-content: flex-end;margin-left: 150px;" *ngIf="idPessoa">
         <div>
             <h3 style="color: rgb(0,175,250); cursor: pointer" (click)="verHistorico()">Ver Historico</h3>
         </div>
@@ -9,34 +9,31 @@
         <div style="margin-left: 20px;">
             <button pButton label="Atualizar via Web" (click)="atualizaPessoaWeb()"></button>
         </div>
-    </div>
+    </div> -->
 </app-page-header>
  <ng-container *ngTemplateOutlet="conteudo"></ng-container>
  <ng-template #conteudo>
     <div [formGroup]="form">
-        <app-page-divided>
-            <div principal>  <!-- CalcularTributosManualmente -->
+        <app-page-divided formGroupName="PessoaForm">
+            <div principal >  <!-- CalcularTributosManualmente -->
                  <p-card>
                    <div class="p-fluid p-formgrid p-grid">
                         <div class="p-field p-col-12 p-md-4">
-                            <app-input-cpf-cnpj [label]="'Cpf / Cnpj'" [row]="true" (onBlur)="buscaCnpj($event)" (onKeypress)="buscaCnpj($event)"></app-input-cpf-cnpj>
-                        </div>
-                        <!-- *ngIf="form.get('PessoaForm').get('Tipo').value !== 'J'" -->
-                         <div  class="p-field p-col-12 p-md-8">
+                            <app-input-cpf-cnpj [label]="'Cpf / Cnpj'" [row]="true" (onBlur)="buscaCnpj($event)" (onKeypress)="buscaCnpj($event)" formControlName="CpfCnpj"></app-input-cpf-cnpj>
+                        </div>                        
+                         <div *ngIf="form.get('Tipo').value !== 'J'"  class="p-field p-col-12 p-md-8">
                             <app-input [label]="'Nome'"
-                                [tentativa]="tentativa" ></app-input>
-                        </div>
-                        <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'J'" -->
-                       <div   class="p-field p-col-12 p-md-8">
-                            <app-input [label]="'Nome/Razao'"
+                                [tentativa]="tentativa" formControlName="Nome"></app-input>
+                        </div>                        
+                       <div *ngIf="form.get('Tipo').value === 'J'"  class="p-field p-col-12 p-md-8">
+                            <app-input [label]="'Nome/Razao'" formControlName="Nome"
+                                ></app-input>
+                        </div>                        
+                        <div *ngIf="form.get('Tipo').value === 'J'" class="p-field p-col-12 p-md-8">
+                            <app-input [label]="'Nome fantasia'" formControlName="Fantasia"
                                 ></app-input>
                         </div>
-                        <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'J'" -->
-                        <div  class="p-field p-col-12 p-md-8">
-                            <app-input [label]="'Nome fantasia'"
-                                ></app-input>
-                        </div>
-                        <div class="p-field p-col-12 p-md-4">
+                        <!-- <div class="p-field p-col-12 p-md-4">
                             <div style="margin-left: 5px;">Vendedor</div>
                             <div class="p-inputgroup">
                                 <div class="p-col-10" style="padding-right: 0px;padding-left: 0px;">
@@ -45,16 +42,15 @@
                                 </div>
                                 <button #vendedor pButton type="button" icon="fa fa-plus" style="margin-left: -7px;"></button>
                             </div>
-                        </div>
-                        &nbsp;
+                        </div> -->
+                        <!-- &nbsp;
                         <div class="p-field p-col-12 p-md-4">
                             <app-input [label]="'Limite de credito'"></app-input>
-                        </div>
+                        </div> -->
                         &nbsp;
                         <div class="p-field p-col-12 p-md-3" >
-                            <app-select label="Tipo Pessoa"  [options]="tiposPessoa"></app-select>
-                        </div>
-                        &nbsp;
+                            <app-select label="Tipo Pessoa"  [options]="tiposPessoa" formControlName="Tipo"></app-select>
+                        </div>                        
                         &nbsp;
     
                         <!-- endereco -->
@@ -63,52 +59,52 @@
                             <div style="display: flex;justify-content: flex-start;">
                                 <div class="p-col-10" style="padding-right: 0px;padding-left: 0px;">
                                     <p-inputMask id="cep" (onBlur)="verificaCepValido($event)"
-                                    mask="99999-999"></p-inputMask>
+                                    mask="99999-999" formControlName="Cep"></p-inputMask>
                                 </div>
                                 <button pButton type="button" icon="fa fa-search"
                                     (click)="modalCepVisible = true"></button>
                             </div>
                         </div>
                         <div class="p-field p-col-12 p-md-8">
-                            <app-input [label]="'Endereco'" ></app-input>
+                            <app-input [label]="'Endereco'" formControlName="Logradouro"></app-input>
                         </div>
     
                         <div class="p-field p-col-12 p-md-4">
-                            <app-input [label]="'Numero'" ></app-input>
+                            <app-input [label]="'Numero'" formControlName="Numero"></app-input>
                         </div>
                         <div class="p-field p-col-12 p-md-4">
-                            <app-input [label]="'Complemento'" ></app-input>
+                            <app-input [label]="'Complemento'" formControlName="Complemento"></app-input>
                         </div>
                         <div class="p-field p-col-12 p-md-4">
-                            <app-input [label]="'Bairro'" ></app-input>
+                            <app-input [label]="'Bairro'" formControlName="Bairro"></app-input>
                         </div>
     
                         <div class="p-field p-col-12 p-md-4">
-                            <app-select [label]="'Estado'" [options]="selectEstado"
+                            <app-select [label]="'Estado'" [options]="selectEstado" formControlName="Uf"
                             ></app-select>
                         </div>
                         <div class="p-field p-col-12 p-md-4">
-                            <app-input [label]="'Cidade'" [isReadOnly]="true"></app-input>
+                            <app-input [label]="'Cidade'" [isReadOnly]="true" formControlName="Cidade"></app-input>
                         </div>
                         <div class="p-field p-col-12 p-md-4">
-                            <app-input [label]="'Codigo ibge cidade'" [isReadOnly]="true"></app-input>
+                            <app-input [label]="'Codigo ibge cidade'" [isReadOnly]="true" formControlName="CodigoIbge"></app-input>
                         </div>
     
                         <!-- contato -->
                         <div class="p-field p-col-12 p-md-8">
-                            <app-input [label]="'Contato'" ></app-input>
+                            <app-input [label]="'Contato'" formControlName="Contato"></app-input>
                         </div>
                         <div class="p-field p-col-12 p-md-4">
-                            <app-input [label]="'Email'"  [lowercase]="true"></app-input>
+                            <app-input [label]="'Email'"  [lowercase]="true" formControlName="Email"></app-input>
                         </div>
                         <div class="p-field p-col-12 p-md-4">
-                            <app-input-telefone label="Telefone comercial" ></app-input-telefone>
+                            <app-input-telefone label="Telefone comercial" formControlName="Fone1"></app-input-telefone>
                         </div>
                         <div class="p-field p-col-12 p-md-4">
-                            <app-input-telefone label="Telefone residencial" ></app-input-telefone>
+                            <app-input-telefone label="Telefone residencial" formControlName="Fone2"></app-input-telefone>
                         </div>
                         <div class="p-field p-col-12 p-md-4">
-                            <app-input-telefone label="Telefone celular" ></app-input-telefone>
+                            <app-input-telefone label="Telefone celular" formControlName="Celular"></app-input-telefone>
                         </div>
                     </div>
                     &nbsp;
@@ -137,11 +133,11 @@
                             <!-- *ngIf="form.get('PessoaForm').get('Tipo').value !== 'E'" -->
                             <div class="p-fluid p-formgrid p-grid"  >
                                 <div class="p-field p-col-12 p-md-4">
-                                    <app-input [label]="'Inscricao estadual'"
+                                    <app-input [label]="'Inscricao estadual'" formControlName="InscricaoEstadual"
                                         ></app-input>
                                 </div>
                                 <div class="p-field p-col-12 p-md-4">
-                                    <app-input [label]="'Inscricao municipal'"
+                                    <app-input [label]="'Inscricao municipal'" formControlName="InscricaoMunicipal"
                                         ></app-input>
                                 </div>
                                 <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'F'" -->
@@ -348,7 +344,7 @@
                                 <span>Ativo</span>
                             </div>
                             <div>
-                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="Ativo"
                                                 ></p-toggleButton>
                             </div>
                         </div>
@@ -456,7 +452,7 @@
                 </p-card>
 
                 <p-card [style]="{marginTop: '30px'}" [header]="'Foto'">
-<!--                    <app-image-upload formControlName="CaminhoFoto" [image]="'../../../assets/images/user.png'"></app-image-upload>-->
+                   <!-- <app-image-upload formControlName="CaminhoFoto" [image]="'../../../assets/images/user.png'"></app-image-upload> -->
                     <image-cropper
                         [imageChangedEvent]="imageChangedEvent"
                         [maintainAspectRatio]="true"

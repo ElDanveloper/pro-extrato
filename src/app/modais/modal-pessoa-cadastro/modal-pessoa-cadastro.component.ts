@@ -167,8 +167,6 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
 
     const {PessoaForm, ...data } = this.form.getRawValue()
     let value = Formulario.parseForm(new PersonClient(), data, PersonClient.referencias(), null, null, null, null);
-    console.log('Pessoa ----> ' + JSON.stringify(PessoaForm))
-    console.log("Value -----> " + JSON.stringify(value))
 
   //   const nfe = {
   //     ...Formulario.parseForm(new NfeCabecalho(), {
@@ -185,10 +183,10 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
 
     // value.PessoaId.CpfCnpj = value.PessoaId.CpfCnpj.toString().replace(/[^\d]+/g, '')
     // this.form.get('Cnpj').value.toString().replace(/[^\d]+/g,'')
-    console.log('Cnpj ---> ' + value.PersonId.CpfCnpj)
     this.networkService.exibirLoader.next(true);
     this.$subscription4 = this.networkService.salvarPost(getUrlPro(), 'person', value).subscribe((v: any) => {
-      this.router.navigate(['/pessoas'])
+      this.fecharModal()
+      // this.router.navigate(['/pessoas'])
     }).add(() => this.networkService.exibirLoader.next(false))
   }
 

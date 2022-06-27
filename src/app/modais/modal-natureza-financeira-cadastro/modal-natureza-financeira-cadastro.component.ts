@@ -1,3 +1,4 @@
+import { getUrlPro } from './../../controller/staticValues';
 import { FinancialCategory } from './../../model/financial-category.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BaseFormPost } from "../../controller/BaseFormPost";
@@ -107,7 +108,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
 
     processarFormulario() {
         console.log(this.form.getRawValue());
-        this.networkService.salvarPost(getUrlCad(), 'contas/naturezafinanceira', Formulario.parseForm(new FinancialCategory(), Object.assign({}, this.form.value), FinancialCategory.referencias(), null, null, null, FinancialCategory.checkbox(), false)).subscribe(v => {
+        this.networkService.salvarPost(getUrlPro(), 'FinancialCategories', Formulario.parseForm(new FinancialCategory(), Object.assign({}, this.form.value), FinancialCategory.referencias(), null, null, null, FinancialCategory.checkbox(), false)).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Cadastro realizado com sucesso'));
             this.fecharModal();
         })

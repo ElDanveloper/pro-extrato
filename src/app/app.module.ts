@@ -1,3 +1,4 @@
+import { NaturezaFinanceiraCadastroComponent } from './pages/natureza-financeira/natureza-financeira-cadastro/natureza-financeira-cadastro.component';
 import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
 import { PainelPageComponent } from './painel-page-component/painel-page.component';
 import { ProjetoCadastroComponent } from './pages/projeto-cadastro/projeto-cadastro.component';
@@ -96,6 +97,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         // ProjetoCadastroComponent,
         PainelPageComponent,
         NaturezaFinanceiraListaComponent,
+        NaturezaFinanceiraCadastroComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

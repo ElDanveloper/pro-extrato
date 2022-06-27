@@ -34,8 +34,7 @@ export class AppTopbarComponent {
 
     navegar(pagina) {
         switch(pagina){
-        case 1:
-            console.log('Entrei')
+        case 1:            
             this.router.navigate([`usuarios`]);
         }
     }

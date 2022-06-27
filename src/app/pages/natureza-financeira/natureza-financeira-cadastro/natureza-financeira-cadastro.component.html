@@ -1,0 +1,106 @@
+<ng-container *ngTemplateOutlet="conteudo"></ng-container>
+<ng-template #conteudo>
+    <div [formGroup]="form">
+        <p-card>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-2" formGroupName="PessoaForm">
+                    <app-input-cpf-cnpj primeiro [label]="'Cnpj'" [row]="true" (onBlur)="buscaCnpj($event)"
+                        (onKeypress)="buscaCnpj($event)" formControlName="CpfCnpj" [isReadOnly]="true"></app-input-cpf-cnpj>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <app-input [label]="'Código'" formControlName="CodeClient"></app-input>
+                </div>
+                <div class="p-field p-offset-6 p-col-2 p-md-2">
+                    <div>
+                        <span>Ativo</span>
+                    </div>
+                    <div>
+                        <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                            formControlName="Active">
+                        </p-toggleButton>
+                    </div>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid" formGroupName="PessoaContractorForm">
+                <div class="p-field p-col-12 p-md-6">
+                    <app-input [label]="'Razão Social'" formControlName="Nome"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-6">
+                    <app-input [label]="'Nome fantasia'" formControlName="Fantasia"></app-input>
+                </div>
+            </div>
+            <!-- <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-4 p-md-4" style="margin-left: 5px;">
+                    <div>Cep</div>
+                    <div style="display: flex;justify-content: flex-start;">
+                        <div style="padding-right: 0px;padding-left: 0px;">
+                            <p-inputMask id="cep" (onBlur)="verificaCepValido($event)" mask="99999-999"
+                                formControlName="Cep">
+                            </p-inputMask>
+                        </div>
+                        <button pButton type="button" icon="fa fa-search" (click)="modalCepVisible = true"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-9">
+                    <app-input [label]="'Endereço'" formControlName="Logradouro"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <app-input [label]="'Número'" formControlName="Numero"></app-input>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-7">
+                    <app-input [label]="'Complemento'" formControlName="Complemento"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-5">
+                    <app-input [label]="'Bairro'" formControlName="Bairro"></app-input>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-4">
+                    <app-input [label]="'Cidade'" formControlName="Cidade"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <app-select [label]="'Estado'" [options]="selectEstado" formControlName="Uf"></app-select>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <app-input [label]="'Codigo IBGE'" formControlName="CodigoIbge"></app-input>
+                </div>
+            </div> -->
+            <div class="p-fluid p-formgrid p-grid" formGroupName="PessoaContractorForm">
+                <div class="p-field p-col-12 p-md-6">
+                    <app-input [label]="'Contato'" formControlName="Contato"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-6">
+                    <app-input [label]="'Email'" formControlName="Email"></app-input>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid" >
+                <div class="p-field p-col-12 p-md-4" formGroupName="PessoaContractorForm">
+                    <app-input-telefone [label]="'Celular'" formControlName="Celular"></app-input-telefone>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <app-select [label]="'Segmento'" formGroupName="SegmentoId" [options]="segmento"></app-select>
+                </div>
+                <!-- <div class="p-field p-col-12 p-md-4">
+                    <app-select [label]="'Empresa Modelo'" [options]="empresas" formControlName="IdCompany">
+                    </app-select>
+                </div> -->
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <!-- <div class="p-field p-col-12 p-md-4">
+                    <app-select [label]="'Responsavel'" formControlName="ResponsavelId" [options]="responsavel"></app-select>
+                </div> -->
+                <div class="p-field p-col-12 p-md-12" style="margin-top: 10px;">
+                    <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-2'" [tamanhoCancelar]="'p-col-2'"
+                        (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()" [labelConfirmar]="'Confirmar'">
+                    </app-footer-page>
+                </div>
+            </div>
+        </p-card>
+    </div>
+
+</ng-template>
+<p-toast position="bottom-right"></p-toast>

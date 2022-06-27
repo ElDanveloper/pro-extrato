@@ -1,3 +1,6 @@
+import { PersonClient } from './../../../model/person-client.model';
+import { Util } from './../../../controller/Util';
+import { BaseListCompleta } from './../../../controller/base-list-completa';
 import { NetworkService } from './../../../services/network.service';
 import { qtdLinhas, getUrlClient, getUrlPro } from './../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
@@ -32,9 +35,8 @@ export class PessoasListaComponent extends BaseListSimples implements OnInit, On
     public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
     cadastrar = false
     opcoesTable = [
-        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
-            console.log('Teste ---> ')
-            this.router.navigate([`/pessoas/cadastro`])
+        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {            
+            this.router.navigate([`/pessoas/cadastro/${e.Id}`])
         }},
         {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
         {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
@@ -42,20 +44,36 @@ export class PessoasListaComponent extends BaseListSimples implements OnInit, On
             }},
     ]
 
-    
+    filtro = ''
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'pessoa')
+        super(networkService, getUrlPro(), 'PersonClient', Util.expandedQuery(PersonClient.expanded()))
     }
 
     ngOnInit() {        
         this.carregarLista()
+        console.log(this.lista)
         // this.totalItens2 = this.lista.length
     }
 
     pressionaEnter(e) {
         if (e.key === 'Enter') this.carregarLista()
     }
+
+    get pessoas () {
+            
+        return this.lista.filter(v => {
+            
+            if (v.Nome === null) {
+                v.Nome = ''
+            }               
+            if (v.CpfCnpj === null) {
+                v.CpfCnpj = ''
+            }
+            return v.Nome.toLowerCase().includes(this.filtro.toLowerCase()) || v.CpfCnpj.toString().includes(this.filtro)
+        })
+    
+}
 
     
 

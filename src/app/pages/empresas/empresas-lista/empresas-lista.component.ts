@@ -41,7 +41,7 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
             }},
     ]
 
-    
+    filtro = '';
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
         super(networkService, getUrlClient(), 'deleted/false')
@@ -52,8 +52,22 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
         this.totalItens2 = this.lista.length
     }
 
-    pressionaEnter(e) {
-        if (e.key === 'Enter') this.carregarLista()
+    // pressionaEnter(e?) {
+        get empresas () {
+
+            console.log(this.filtro)
+        // if (e.key === 'Enter') {
+            return this.lista.filter(v => {
+                
+                if (v.nome === null) {
+                    v.nome = ''
+                }               
+                if (v.cpf_cnpj === null) {
+                    v.cpf_cnpj = ''
+                }
+                return v.nome.toLowerCase().includes(this.filtro.toLowerCase()) || v.cpf_cnpj.toString().includes(this.filtro)
+            })
+        // }
     }
 
     

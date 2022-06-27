@@ -44,7 +44,7 @@ export class NaturezaFinanceiraListaComponent extends BaseListSimples implements
     
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'naturezafinanceira')
+        super(networkService, getUrlPro(), 'financialCategory')
     }
 
     ngOnInit() {        

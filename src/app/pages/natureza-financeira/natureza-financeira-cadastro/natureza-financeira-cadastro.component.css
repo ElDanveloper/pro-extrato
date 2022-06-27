@@ -1,0 +1,22 @@
+.margem {
+    margin-bottom: 30px;
+}
+
+image-cropper {
+    width: 100%;
+    max-width: 100%;
+}
+
+.img-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    width: 50%;
+    max-width: 50%;
+    margin-bottom: 10px;
+}
+
+::ng-deep .test { background: red; color: yellow;}
