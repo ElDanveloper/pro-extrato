@@ -1,15 +1,15 @@
 import { NetworkService } from './../../../services/network.service';
 import { qtdLinhas, getUrlClient } from './../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ConfirmationService, Message, MessageService, SelectItem} from "primeng/api";
-import {Router} from "@angular/router";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ConfirmationService, Message, MessageService, SelectItem } from "primeng/api";
+import { Router } from "@angular/router";
 
 
 @Component({
-  selector: 'app-empresas-lista',
-  templateUrl: './empresas-lista.component.html',
-  styleUrls: ['./empresas-lista.component.css']
+    selector: 'app-empresas-lista',
+    templateUrl: './empresas-lista.component.html',
+    styleUrls: ['./empresas-lista.component.css']
 })
 export class EmpresasListaComponent extends BaseListSimples implements OnInit, OnDestroy {
 
@@ -29,62 +29,65 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
     // lista2 = []
     @ViewChild('inputPesquisa') public inputPesquisa
     @ViewChild('selectValue') public selectValue
-    public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
+    public selectSort: SelectItem[] = [{ label: 'ID', value: 'ID' }, { label: 'NOME', value: 'NOME' }]
     cadastrar = false
     opcoesTable = [
-        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
-            this.router.navigate([`/empresas-cadastro/${e.id}`])
-        }},
-        {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
-        {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
+        {
+            label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
+                this.router.navigate([`/empresas-cadastro/${e.id}`])
+            }
+        },
+        { label: 'Excluir', icon: 'fa fa-close', command: (e) => { } },
+        {
+            label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
                 this.router.navigate([`/historico-pessoa/${e.Id}`])
-            }},
+            }
+        },
     ]
 
     filtro = '';
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlClient(), 'deleted/false')
+        super(networkService, getUrlClient(), 'deleted/false', null)
     }
 
-    ngOnInit() {        
+    ngOnInit() {
         this.carregarDados()
         this.totalItens2 = this.lista.length
+
     }
 
     // pressionaEnter(e?) {
-        get empresas () {
-
-            console.log(this.filtro)
+    get empresas() {
         // if (e.key === 'Enter') {
-            return this.lista.filter(v => {
-                
-                if (v.nome === null) {
-                    v.nome = ''
-                }               
-                if (v.cpf_cnpj === null) {
-                    v.cpf_cnpj = ''
-                }
-                return v.nome.toLowerCase().includes(this.filtro.toLowerCase()) || v.cpf_cnpj.toString().includes(this.filtro)
-            })
+        return this.lista.filter(v => {
+
+            if (v.nome === null) {
+                v.nome = ''
+            }
+            if (v.cpf_cnpj === null) {
+                v.cpf_cnpj = ''
+            }
+            return v.nome.toLowerCase().includes(this.filtro.toLowerCase()) || v.cpf_cnpj.toString().includes(this.filtro)
+        })
         // }
     }
 
-    
+
 
     linkPessoa(v) {
         this.router.navigate([`/historico-pessoa/${v.Id}/pedido`])
     }
 
-    
+
     public navegar() {
         // this.router.navigate([`/cadastro`])
         // this.cadastrarEmpresa.nativeElement.click()   
-        this.modalCadastrarEmpresa = true     
+        this.modalCadastrarEmpresa = true
     }
-    
 
-    
+
+
 
 
     // public deletar(rowData) {
@@ -104,7 +107,7 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
     //     this.router.navigate([`/${this.entidade}/${Util.cadastroRoute()}/${rowData.IdPessoaEmpresa}`])
     // }
 
-    
+
 
     ngOnDestroy(): void {
         // if(this.$subscriptionListar) this.$subscriptionListar.unsubscribe()

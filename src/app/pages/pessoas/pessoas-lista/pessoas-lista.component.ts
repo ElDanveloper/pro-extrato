@@ -1,3 +1,4 @@
+import { DadosDefaultService } from './../../../services/dados-default.service';
 import { PersonClient } from './../../../model/person-client.model';
 import { Util } from './../../../controller/Util';
 import { BaseListCompleta } from './../../../controller/base-list-completa';
@@ -46,13 +47,12 @@ export class PessoasListaComponent extends BaseListSimples implements OnInit, On
 
     filtro = ''
 
-    constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
+    constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) {
         super(networkService, getUrlPro(), 'PersonClient', Util.expandedQuery(PersonClient.expanded()))
     }
 
     ngOnInit() {        
         this.carregarLista()
-        console.log(this.lista)
         // this.totalItens2 = this.lista.length
     }
 
@@ -60,17 +60,15 @@ export class PessoasListaComponent extends BaseListSimples implements OnInit, On
         if (e.key === 'Enter') this.carregarLista()
     }
 
-    get pessoas () {
-            
-        return this.lista.filter(v => {
-            
-            if (v.Nome === null) {
-                v.Nome = ''
+    get pessoas () {               
+        return this.lista.filter(v => {            
+            if (v.PersonId.Nome === null) {
+                v.PersonId.Nome = ''
             }               
-            if (v.CpfCnpj === null) {
-                v.CpfCnpj = ''
+            if (v.PersonId.CpfCnpj === null) {
+                v.PersonId.CpfCnpj = ''
             }
-            return v.Nome.toLowerCase().includes(this.filtro.toLowerCase()) || v.CpfCnpj.toString().includes(this.filtro)
+            return v.PersonId.Nome.toLowerCase().includes(this.filtro.toLowerCase()) || v.PersonId.CpfCnpj.toString().includes(this.filtro)
         })
     
 }
@@ -83,6 +81,7 @@ export class PessoasListaComponent extends BaseListSimples implements OnInit, On
 
     
     public navegar() {
+        console.log('aqui ---> ')
         // this.router.navigate([`/cadastro`])
         // this.cadastrarEmpresa.nativeElement.click()   
         this.modalCadastrarPessoa = true     

@@ -1,22 +1,22 @@
 <div class="login-body-fixo">
-    <div class="card login-panel p-fluid">
+    <div class="card login-panel">
         <div class="p-grid">
             <div class="p-col-12">
-                <img src="assets/layout/images/hunno_novo.png">
+                <!-- <img src="assets/layout/images/hunno_novo.png"> -->
                 <h1>Bem vindo ao Pro Extrato</h1>
             </div>
             <form [formGroup]="form" (submit)="logarUsuario()">
                 <div style="margin-left: 20px;" class="p-col-12">
                     <span class="p-float-label">
-                        <input type="text" autocomplete="off" placeholder="Usuario" formControlName="email" pInputText>
-                        <!-- <label for="user">Username</label> -->
+                        <input type="text" autocomplete="off" formControlName="email" pInputText>
+                        <label for="user">Username</label>
                     </span>
                 </div>
                 <div style="margin-left: 20px;" class="p-col-12">
                     <span class="p-float-label">
-                        <input type="password" autocomplete="off" placeholder="Senha" formControlName="password"
+                        <input type="password" autocomplete="off" formControlName="password"
                             pInputText>
-                        <!-- <label for="password">Password</label> -->
+                        <label for="password">Password</label>
                     </span>
                 </div>
                 <div style="margin-left: 20px;" class="p-col-12">

@@ -1,3 +1,4 @@
+import { DadosDefaultService } from './../services/dados-default.service';
 import { NetworkService } from './../services/network.service';
 
 import { Subscription } from 'rxjs';
@@ -66,21 +67,15 @@ export class BaseListSimples implements OnDestroy {
         this.carregarDados(parametro)
     }
 
-    public carregarDados(parametros?): void {
+    public carregarDados(parametros = ''): void {              
         this.$subscriptionListar = this.networkService.getSimples(this.url, `${this.entidade}${parametros}`).subscribe((listaSec: any) => {
             if (listaSec[0]) {
                 this.totalItens = listaSec[0] ? listaSec[0]['QtdReg'] : 0;
             } else {
                 this.totalItens = listaSec.length
-            }
-            console.log(listaSec.value[0])
-            if (this.expanded) {
-                console.log(this.expanded)
-                this.lista = listaSec.value[0] ? listaSec.value[0] : listaSec
-            } else {
-                console.log('teste')
-                this.lista = listaSec.value ? listaSec.value : listaSec
-            }
+            }                                                        
+                this.lista = listaSec.value ? listaSec.value : listaSec                
+            
         })
 
     }

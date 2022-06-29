@@ -21,15 +21,15 @@
                         <div class="p-field p-col-12 p-md-4">
                             <app-input-cpf-cnpj [label]="'Cpf / Cnpj'" [row]="true" (onBlur)="buscaCnpj($event)" (onKeypress)="buscaCnpj($event)" formControlName="CpfCnpj"></app-input-cpf-cnpj>
                         </div>                        
-                         <div *ngIf="form.get('Tipo').value !== 'J'"  class="p-field p-col-12 p-md-8">
+                         <div *ngIf="form.get('PessoaForm').get('Tipo').value !== 'J'"  class="p-field p-col-12 p-md-8">
                             <app-input [label]="'Nome'"
                                 [tentativa]="tentativa" formControlName="Nome"></app-input>
                         </div>                        
-                       <div *ngIf="form.get('Tipo').value === 'J'"  class="p-field p-col-12 p-md-8">
+                       <div *ngIf="form.get('PessoaForm').get('Tipo').value === 'J'"  class="p-field p-col-12 p-md-8">
                             <app-input [label]="'Nome/Razao'" formControlName="Nome"
                                 ></app-input>
                         </div>                        
-                        <div *ngIf="form.get('Tipo').value === 'J'" class="p-field p-col-12 p-md-8">
+                        <div *ngIf="form.get('PessoaForm').get('Tipo').value === 'J'" class="p-field p-col-12 p-md-8">
                             <app-input [label]="'Nome fantasia'" formControlName="Fantasia"
                                 ></app-input>
                         </div>
@@ -335,10 +335,10 @@
                 &nbsp;
             </div>
 
-            <div secundario>
+            <div secundario formGroupName="PessoaForm">
 
                 <p-card [header]="'Tipo Pessoa'" [style]="{paddingBottom: '110px'}">
-                    <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-fluid p-formgrid p-grid" >
                         <div class="p-field p-col-12 p-md-6"> <!-- style="display:flex;flex-direction: row;" -->
                             <div>
                                 <span>Ativo</span>

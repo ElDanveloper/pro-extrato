@@ -38,7 +38,7 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
     $subscription11: Subscription;
     $subscription12: Subscription;
 
-    entidade = 'pessoaempresa';
+    entidade = 'personclient';
     id;
     form: FormGroup;
     enderecosTable = [];
@@ -147,8 +147,8 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
                     const data = Formulario.prepareValueToForm(new PersonClient(), value, null, PersonClient.relacionamentos(), null);
                     Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
 
-                    if (value.PersonId) {
-                        const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), value.IdPessoa, Pessoa.datas(), Pessoa.relacionamentos(), Pessoa.checkbox());
+                    if (value.PersonId) {                        
+                        const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), value.PersonId, Pessoa.datas(), Pessoa.relacionamentos(), Pessoa.checkbox());
                         Object.keys(dataPessoa).forEach(key => this.form.get('PessoaForm').get(key).setValue(dataPessoa[key]))
                     }
 
@@ -188,32 +188,21 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
 
         // const cod = this.form.get('CodContaContabil').value ? this.form.get('CodContaContabil').value.Codigo : null
 
-        const {PessoaForm, PessoaFisicaForm, ...data} = Object.assign({}, this.form.value)
+        const {PessoaForm, ...data} = Object.assign({}, this.form.value)
 
         // const temp = {...data, CodContaContabil: cod}
         let value: any = {
-            ...Formulario.parseForm(new Pessoa(), data, Pessoa.referencias(), null, Pessoa.datas(), null, Pessoa.checkbox()),
-            Ativo: true,
+            ...Formulario.parseForm(new PersonClient(), data, PersonClient.referencias(), null, null, null, null),
+            // Ativo: true,
             "$id": 1
         };
 
         
-        value.IdPessoa = {
+        value.PersonId = {
             ...Formulario.parseForm(new Pessoa(), {
-                ...PessoaForm,
-                Email: data.Email,
-                DataCadastro: data.DataCadastro,
-                DataNascimento: data.DataNascimento,
-                Logradouro: data.Logradouro,
-                Numero: data.Numero,
-                Complemento: data.Complemento,
-                Cep: data.Cep,
-                Cidade: data.Cidade,
-                CodigoIbge: data.CodigoIbge,
-                UF: data.UF,     
-                Bairro: data.Bairro           
-            }, null, Pessoa.mascaras(), Pessoa.datas(), null, Pessoa.checkbox()),
-            Ativo: true, Fantasia: value.Fantasia, Nome: value.Nome, "$id": 2
+                ...PessoaForm    
+            }, Pessoa.referencias(), Pessoa.mascaras(), Pessoa.datas(), null, Pessoa.checkbox()),
+            Ativo: true, "$id": 2
         };
 
         // if (this.form.get('PessoaForm').get('Tipo').value !== 'J') {
@@ -223,25 +212,25 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
         //     }
         // }
 
-        const vFinal = {           
+        // const vFinal = {           
             
-            Pessoa: value,
+        //     Pessoa: value,
             // Le: this.enderecosTable.map(x => Formulario.parseForm(new PessoaEndereco(), x, PessoaEndereco.referencias(), null, null, null, PessoaEndereco.checkbox())),
             // Lc: this.contatosTable.map(x => Formulario.parseForm(new PessoaContato(), x, PessoaContato.referencias(), null, PessoaContato.datas(), null, PessoaContato.checkbox())),
-        };
+        // };
 
         this.networkService.exibirLoader.next(true);
         if (this.imageChangedEvent) {
             this.networkService.salvarPost(SERVERLESS_URL, 'upload-imagem/pessoa', {
                 imagem: this.croppedImage,
             }).subscribe((resFoto: any) => {
-                vFinal.Pessoa.IdPessoa.CaminhoFoto = resFoto.url
-                this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'person', vFinal).subscribe((v: any) => {
+                value.PersonId.CaminhoFoto = resFoto.url
+                this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'person', value).subscribe((v: any) => {
                     this.router.navigate(['/pessoas'])
                 }).add(() => this.networkService.exibirLoader.next(false))
             }, e => this.networkService.exibirLoader.next(false))
         } else {
-            this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'person', vFinal).subscribe((v: any) => {
+            this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'person', value).subscribe((v: any) => {
                 this.router.navigate(['/pessoas'])
             }).add(() => this.networkService.exibirLoader.next(false))
         }
@@ -311,24 +300,24 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
                 this.form.get('PessoaForm').get('Tipo').setValue('J')
                 const vApi = v.value
                 if (vApi && vApi.length === 1) {
-                    this.form.get('Nome').setValue(vApi[0].Nome)
-                    this.form.get('Fantasia').setValue(vApi[0].Fantasia)
+                    this.form.get('PessoaForm').get('Nome').setValue(vApi[0].Nome)
+                    this.form.get('PessoaForm').get('Fantasia').setValue(vApi[0].Fantasia)
                     this.form.get('PessoaForm').get('Id').setValue(vApi[0].Id)
-                    this.form.get('Contato').setValue(vApi[0].Contato)
-                    this.form.get('Complemento').setValue(vApi[0].Complemento)
-                    this.form.get('Logradouro').setValue(vApi[0].Logradouro)
-                    this.form.get('Celular').setValue(vApi[0].Celular)
-                    this.form.get('Numero').setValue(vApi[0].Numero)
-                    this.form.get('UF').setValue(vApi[0].UF)
-                    this.form.get('Bairro').setValue(vApi[0].Bairro)
-                    this.form.get('CodigoIbge').setValue(vApi[0].CodigoIbge)
-                    this.form.get('Fone1').setValue(vApi[0].Fone1)
-                    this.form.get('Fone2').setValue(vApi[0].Fone2)
-                    this.form.get('Email').setValue(vApi[0].Email)
-                    this.form.get('Cep').setValue(vApi[0].Cep)
-                    this.form.get('Cidade').setValue(vApi[0].Cidade)
-                    this.form.get('IdCondPagamento').setValue(vApi[0].IdCondPagamento)
-                    this.form.get('PessoaForm').get('ContribuinteIcms').setValue(vApi[0].ContribuinteIcms)
+                    this.form.get('PessoaForm').get('Contato').setValue(vApi[0].Contato)
+                    this.form.get('PessoaForm').get('Complemento').setValue(vApi[0].Complemento)
+                    this.form.get('PessoaForm').get('Logradouro').setValue(vApi[0].Logradouro)
+                    this.form.get('PessoaForm').get('Celular').setValue(vApi[0].Celular)
+                    this.form.get('PessoaForm').get('Numero').setValue(vApi[0].Numero)
+                    this.form.get('PessoaForm').get('UF').setValue(vApi[0].UF)
+                    this.form.get('PessoaForm').get('Bairro').setValue(vApi[0].Bairro)
+                    this.form.get('PessoaForm').get('CodigoIbge').setValue(vApi[0].CodigoIbge)
+                    this.form.get('PessoaForm').get('Fone1').setValue(vApi[0].Fone1)
+                    this.form.get('PessoaForm').get('Fone2').setValue(vApi[0].Fone2)
+                    this.form.get('PessoaForm').get('Email').setValue(vApi[0].Email)
+                    this.form.get('PessoaForm').get('Cep').setValue(vApi[0].Cep)
+                    this.form.get('PessoaForm').get('Cidade').setValue(vApi[0].Cidade)
+                    this.form.get('PessoaForm').get('IdCondPagamento').setValue(vApi[0].IdCondPagamento)
+                    this.form.get('PessoaForm').get('PessoaForm').get('ContribuinteIcms').setValue(vApi[0].ContribuinteIcms)
                 } else if (cnpj.length === 14) {
                     this.buscarCnpjReceitaWs(cnpj)
                 }
@@ -338,40 +327,39 @@ export class PessoasCadastroComponent extends BaseFormPost implements OnInit, On
 
     buscarCnpjReceitaWs(cnpj) {
         this.$subscription9 = this.dadosDefault.buscarCnpj(cnpj).subscribe((v: any) => {
-            this.form.get('Nome').setValue(v['nome']);
-            this.form.get('Fantasia').setValue(v['fantasia']);
-            this.form.get('Cep').setValue(v['cep']);
-            this.form.get('Logradouro').setValue(v['logradouro']);
-            this.form.get('Numero').setValue(v['numero']);
-            this.form.get('Complemento').setValue(v['complemento']);
-            this.form.get('Bairro').setValue(v['bairro']);
-            this.form.get('Cidade').setValue(v['municipio']);
-            this.form.get('UF').setValue(v['uf'])
-            this.form.get('Fone1').setValue(v['telefone'])
-            this.form.get('Email').setValue(v['email'])
+            this.form.get('PessoaForm').get('Nome').setValue(v['nome']);
+            this.form.get('PessoaForm').get('Fantasia').setValue(v['fantasia']);
+            this.form.get('PessoaForm').get('Cep').setValue(v['cep']);
+            this.form.get('PessoaForm').get('Logradouro').setValue(v['logradouro']);
+            this.form.get('PessoaForm').get('Numero').setValue(v['numero']);
+            this.form.get('PessoaForm').get('Complemento').setValue(v['complemento']);
+            this.form.get('PessoaForm').get('Bairro').setValue(v['bairro']);
+            this.form.get('PessoaForm').get('Cidade').setValue(v['municipio']);
+            this.form.get('PessoaForm').get('UF').setValue(v['uf'])
+            this.form.get('PessoaForm').get('Fone1').setValue(v['telefone'])
+            this.form.get('PessoaForm').get('Email').setValue(v['email'])
             this.verificaCepValido(true)
         })
     }
 
     verificaCepValido(event) {
-        if (event === true || (event.key === 'Enter' || event.type === 'blur') && this.form.get('Cep').value !== null) {
-            let cep = this.form.get('Cep').value.toString().match(/\d/g)
+        if (event === true || (event.key === 'Enter' || event.type === 'blur') && this.form.get('PessoaForm').get('Cep').value !== null) {
+            let cep = this.form.get('PessoaForm').get('Cep').value.toString().match(/\d/g)
             if (cep === null) return
             cep = cep.join('');
             if (cep.length === 8) {
                 this.viaCep.buscarPorCep(cep)
                     .then((endereco: Endereco) => {
                         if (event === true) {
-                            this.form.get('CodigoIbge').setValue(endereco.ibge)
+                            this.form.get('PessoaForm').get('CodigoIbge').setValue(endereco.ibge)
                             return
-                        }
-                        console.log(endereco);
-                        this.form.get('Logradouro').setValue(endereco.logradouro);
-                        this.form.get('Complemento').setValue(endereco.complemento);
-                        this.form.get('Bairro').setValue(endereco.bairro);
-                        this.form.get('Cidade').setValue(endereco.localidade);
-                        this.form.get('UF').setValue(endereco.uf)
-                        this.form.get('CodigoIbge').setValue(endereco.ibge)
+                        }                        
+                        this.form.get('PessoaForm').get('Logradouro').setValue(endereco.logradouro);
+                        this.form.get('PessoaForm').get('Complemento').setValue(endereco.complemento);
+                        this.form.get('PessoaForm').get('Bairro').setValue(endereco.bairro);
+                        this.form.get('PessoaForm').get('Cidade').setValue(endereco.localidade);
+                        this.form.get('PessoaForm').get('UF').setValue(endereco.uf)
+                        this.form.get('PessoaForm').get('CodigoIbge').setValue(endereco.ibge)
                     }).catch((error: ErroCep) => {
                     this.messageService.add({severity: 'error', summary: 'Cep Nao Encontrado'})
                 })
