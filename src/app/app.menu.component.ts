@@ -26,11 +26,11 @@ export class AppMenuComponent implements OnInit {
                 // items: []
             },
             {
-                label: 'Contas', icon: 'fa fa-university', routerLink: ['']
+                label: 'Contas', icon: 'fa fa-university', routerLink: ['contas']
                 // items: []
             },
             {
-                label: 'Natureza Financeira', icon: 'fa fa-building-o', routerLink: ['natureza-financeira']
+                label: 'Categoria Financeira', icon: 'fa fa-building-o', routerLink: ['natureza-financeira']
                 // items: []
             },
             {
