@@ -1,0 +1,22 @@
+<div class="ui-g ui-fluid">
+    <div style="width: 100%; background-color: #EAEFF2; position: fixed; top: 70px; left: 0; z-index: 50;">
+    <div class="ui-g-offset-2 ui-g-8">
+        <p-tabMenu #tab [model]="itemsTabMenu" [activeItem]="activeItem" (click)="setActiveItem(tab)">
+            <ng-template pTemplate="item" let-item let-i="index">
+                <div style="position: relative; text-align: center; min-width: 10em">
+                    <div class="ui-menuitem-icon" [ngClass]="item.icon" *ngIf="item.icon" style="font-size: 2em"></div>
+                    <div class="ui-menuitem-text">
+                        {{item.label}}
+                    </div>
+                </div>
+            </ng-template>
+        </p-tabMenu>
+    </div>
+    </div>
+
+    <div class="ui-g-12 ui-g-nopad" style="margin-top: 50px;">
+    <router-outlet></router-outlet>
+    </div>
+
+</div>
+

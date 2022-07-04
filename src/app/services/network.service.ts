@@ -105,9 +105,9 @@ export class NetworkService {
         return this.http.post(`${getUrlCad()}/produtos/produtoagil`, v).pipe(catchError(this.errorHandler))
     }
 
-    public listarPost(url: string, filtro: {}): Observable<any> {
-        return this.http.post(`${getUrlCad()}/${url}`, filtro)
-            .pipe(map((res: Response) => res['value']), catchError(this.errorHandler))
+    public listarPost(url: string, filtro: {}): Observable<Object> {
+        return this.http.post(`${getUrlPro()}/${url}`, filtro)
+            // .pipe(map((res: Response) => res['value']), catchError(this.errorHandler))
     }
 
     public getSimples(url: string, entidade: string,): Observable<Object> {

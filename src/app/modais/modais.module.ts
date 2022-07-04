@@ -1,3 +1,6 @@
+import { ModalFinancialCategorySearchComponent } from './../components/input-financial-category-search/modal-financial-category-search/modal-financial-category-search.component';
+import { ModalReconcileInstallmentComponent } from './../pages/conciliation/modal-reconcile-installment/modal-reconcile-installment.component';
+import { ModalReconcileAccountingComponent } from './../pages/conciliation/modal-reconcile-accounting/modal-reconcile-accounting.component';
 import { ProjetoCadastroComponent } from './../pages/projeto-cadastro/projeto-cadastro.component';
 import { ModalNaturezaFinanceiraCadastroComponent } from './modal-natureza-financeira-cadastro/modal-natureza-financeira-cadastro.component';
 import { ModalNaturezaFinanceiraComponent } from './modal-natureza-financeira/modal-natureza-financeira.component';
@@ -28,6 +31,9 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalNaturezaFinanceiraComponent,
       ModalNaturezaFinanceiraCadastroComponent,
       ProjetoCadastroComponent,
+      ModalReconcileAccountingComponent,
+      ModalReconcileInstallmentComponent,
+      ModalFinancialCategorySearchComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -52,6 +58,9 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalPessoaCadastroComponent,
         ModalNaturezaFinanceiraComponent,
         ModalNaturezaFinanceiraCadastroComponent,
+        ModalReconcileAccountingComponent,
+        ModalReconcileInstallmentComponent,
+        ModalFinancialCategorySearchComponent,
         //ModalPagamentoViaContaCorrenteComponent,
     ]
 })

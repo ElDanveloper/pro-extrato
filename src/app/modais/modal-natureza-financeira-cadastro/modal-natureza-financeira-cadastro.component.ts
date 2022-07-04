@@ -99,7 +99,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     ngOnChanges() {
         if (this.modalVisible) {
             this.dadosDefault.exibirLoader.next(true)
-            this.networkService.getSimples(getUrlPro(), 'financialCategory?$filter=(level eq 2)').subscribe((v: any) => {
+            this.networkService.listarPost('financialCategories', {Level: 1}).subscribe((v: any) => {
                 this.selectListaNatureza = []
                 v.value.map(value => {
                     this.selectListaNatureza.push({ label: value.Description, value: { Classificacao: value.Classificate, Id: value.Id } })

@@ -45,7 +45,7 @@ export const API_AUTH = `http://75.119.134.38:8089`
 
 //Base Original
 // export const URL_BASE = `https://api.hunnodev.com.br:2004`
-export const API_AUTH_HUNNO = `https://app.hunno.com.br:2004`
+export const API_AUTH_HUNNO = `https://api.hunno.com.br:2004`
 export const URL_UPLOAD = `https://bpoymh2e3b.execute-api.us-east-1.amazonaws.com/prod/upload-file`
 
 export const S3_BUCKET_URL = `https://toqweb-images.s3.amazonaws.com/`

@@ -1,0 +1,43 @@
+<p-dialog [modal]="true" [responsive]="true" [contentStyle]="{'max-width':'800px'}" [maximizable]="true"
+          [header]="'Pesquisar Natureza Financeira'" [(visible)]="modalVisible" (onHide)="fecharModal()">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+            <div class="ui-inputgroup" style="margin-bottom: 10px;">
+                <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" pInputText>
+                <button style="width: 30px;" pButton type="button" icon="fa fa-search" (click)="carregarLista()"
+                        class="ui-button-warn"></button>
+            </div>
+            &nbsp;
+            <p-table [(selection)]="value" selectionMode="single" [paginator]="true" [rows]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" *ngIf="modalVisible" #p [lazy]="true" (onLazyLoad)="lazyLoad($event)">
+
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th [ngStyle]="{width: '80%'}"> Descrição </th>
+                        <th [ngStyle]="{width: '20%'}"> Cod Controle </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData>
+                    <tr [pSelectableRow]="rowData">
+                        <td>{{rowData.Descricao}}</td>
+                        <td>{{rowData.CodControle}}</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+            &nbsp;
+
+            <p-footer>
+                <div class="ui-g-12 ui-fluid">
+                    <div class="ui-g-offset-8 ui-g-2">
+                        <button pButton type="button" label="Cancelar" style="margin-right:10px" class="ui-button-danger" (click)="fecharModal()"></button>
+                    </div>
+                    <div class="ui-g-2">
+                        <button pButton type="button" label="Confirmar" (click)="confirmar()"></button>
+                    </div>
+                </div>
+            </p-footer>
+
+        </div>
+        &nbsp;
+    </div>
+</p-dialog>

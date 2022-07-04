@@ -1,3 +1,11 @@
+import { ReconcileInstallmentComponent } from './pages/conciliation/reconciled-transfer/reconcile-installment/reconcile-installment.component';
+import { ReconcileAccountingComponent } from './pages/conciliation/reconciled-transfer/reconcile-accounting/reconcile-accounting.component';
+import { ReconciledTransferComponent } from './pages/conciliation/reconciled-transfer/reconciled-transfer.component';
+import { UnreconciledAccountingComponent } from './pages/conciliation/unreconciled-accounting/unreconciled-accounting.component';
+import { UnreconciledExtractsComponent } from './pages/conciliation/unreconciled-extracts/unreconciled-extracts.component';
+import { ReconciledComponent } from './pages/conciliation/reconciled/reconciled.component';
+import { ReconciledExtractComponent } from './pages/conciliation/reconciled-extract/reconciled-extract.component';
+import { ConciliationComponent } from './pages/conciliation/conciliation.component';
 import { ContasListaComponent } from './pages/contas/contas-lista/contas-lista.component';
 import { NaturezaFinanceiraCadastroComponent } from './pages/natureza-financeira/natureza-financeira-cadastro/natureza-financeira-cadastro.component';
 import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
@@ -100,6 +108,14 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         NaturezaFinanceiraListaComponent,
         NaturezaFinanceiraCadastroComponent,
         ContasListaComponent,
+        ConciliationComponent,
+        ReconciledExtractComponent,
+        ReconciledComponent,
+        UnreconciledExtractsComponent,
+        UnreconciledAccountingComponent,
+        ReconciledTransferComponent,
+        ReconcileAccountingComponent,
+        ReconcileInstallmentComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

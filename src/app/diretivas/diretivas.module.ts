@@ -1,3 +1,4 @@
+import { AlignCenterDirective } from './align-center.directive';
 import { OpcoesTableControlDirective } from './../components/opcoes-table/opcoes-table-control.directive';
 import { ModalOpenOnClickPortalDirective } from './modal-open-on-click-portal.directive';
 // import { AlinharDireitaDirective } from './alinhar-direita.directive';
@@ -13,6 +14,7 @@ import { ModalOpenOnClickDirective } from './modal-open-on.click.directive'
         OpcoesTableControlDirective,
         ModalOpenOnClickDirective,
         ModalOpenOnClickPortalDirective,
+        AlignCenterDirective,
         // AlinharCentroDirective,
         // AlinharDireitaDirective,
         // ClipboardDirective,
@@ -25,6 +27,7 @@ import { ModalOpenOnClickDirective } from './modal-open-on.click.directive'
         OpcoesTableControlDirective,
         ModalOpenOnClickPortalDirective,
         ModalOpenOnClickDirective,
+        AlignCenterDirective,
         // AlinharCentroDirective,
         // AlinharDireitaDirective,
         // ClipboardDirective,

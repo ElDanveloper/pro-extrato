@@ -1,0 +1,9 @@
+.item {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+}
+
+.key {
+    font-weight: bold;
+}
