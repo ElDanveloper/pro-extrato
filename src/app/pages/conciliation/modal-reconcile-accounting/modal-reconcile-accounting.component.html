@@ -1,11 +1,11 @@
 <p-dialog [modal]="true" [responsive]="true" [contentStyle]="{'min-width':'900px', 'overflow':'visible'}"
           [maximizable]="true" (onHide)="fecharModal()"
           [header]="'Conciliar Contabil'" [(visible)]="modalVisible">
-    <div class="ui-g-12 ui-fluid">
-        <div class="ui-g-6">
+    <div class="p-col-12 p-fluid">
+        <div class="p-col-6">
             <h3>Valor a ser Conciliado: &nbsp;&nbsp; {{valorASerConciliado.Valor | virgulaPipe}}</h3>
         </div>
-        <div class="ui-g-offset-1 ui-g-5">
+        <div class="p-col-offset-1 p-col-5">
             <h3>Valor Selecionado: &nbsp;&nbsp; {{valorSelecionado | virgulaPipe}}</h3>
         </div>
         <p-pickList [source]="lista" [target]="selected" sourceHeader="Selecione" targetHeader="Selecionados" [responsive]="true" filterBy="Historico"
@@ -13,7 +13,7 @@
                     [showSourceControls]="false" [showTargetControls]="false" [draggable]="true" (onMoveToSource)="recalcularValorSelecionado()" (onMoveToTarget)="recalcularValorSelecionado()"
                     (onMoveAllToSource)="recalcularValorSelecionado()" (onMoveAllToTarget)="recalcularValorSelecionado()" [targetTrackBy]="trackTarget">
             <ng-template let-rowData pTemplate="item">
-                <div class="ui-helper-clearfix">
+                <div class="p-helper-clearfix">
                     <div style="margin-top: 5px;"><span style="font-weight: bold; display: inline-block; width: 80px;">Histórico: </span><span>{{rowData.Historico}}</span></div></div>
                 <div style="margin-top: 5px;"><span style="font-weight: bold; display: inline-block; width: 80px;">Data: </span><span>{{rowData.Data | date}}</span></div>
                 <div style="margin-top: 5px;"><span style="font-weight: bold; display: inline-block; width: 80px;">Valor: </span><span [ngClass]="colorValue(rowData.Valor)">{{rowData.Valor | virgulaPipe}}</span></div>

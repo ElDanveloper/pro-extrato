@@ -4,28 +4,28 @@
     <app-page-divided [padrao]="false">
         <div principal>
             <p-card>
-                <div class="ui-g-12 ui-fluid">
-                    <div class="ui-g-2">
+                <div class="p-col-12 p-fluid">
+                    <div class="p-col-2">
                         <h5>Valor a ser Conciliado: &nbsp; <span [ngClass]="colorValue(valorPositivado)">{{valorPositivado | virgulaPipe}}</span></h5>
                     </div>
-                    <div class="ui-g-2">
+                    <div class="p-col-2">
                         <h5>Data: &nbsp; <span>{{data.DataExtrato | date}}</span></h5>
                     </div>    
-                    <div class="ui-g-3">
+                    <div class="p-col-3">
                         <h5>Histórico: &nbsp; <span>{{data.HistoricoBanco}}</span></h5>
                     </div>             
-                    <div class="ui-g-2">
+                    <div class="p-col-2">
                         <h5>Valor Selecionado: &nbsp; <span [ngClass]="colorValue(valorSelecionado)">{{valorSelecionado | virgulaPipe}}</span></h5>
                     </div>       
-                    <div class="ui-g-offset-1 ui-g-2">
+                    <div class="p-col-offset-1 p-col-2">
                         <h5>Encargos: &nbsp; <span [ngClass]="colorValue(encargos)">{{encargos | virgulaPipe}}</span></h5>
                     </div>
                  </div>   
-                 <div class="ui-g-12 ui-fluid" style="margin-top: -20px;">
-                    <div class="ui-g-2">                        
+                 <div class="p-col-12 p-fluid" style="margin-top: -20px;">
+                    <div class="p-col-2">                        
                         <app-input-money [label]="'Valor a ser Pesquisado'" (onBlur)="carregarLista()" (keypress)="pressionaEnter($event)" [(ngModel)]="valor"></app-input-money>
                     </div>
-                    <div class="ui-g-4">
+                    <div class="p-col-4">
                         <app-input [label]="'Pesquisar pelo Histórico'" (onBlur)="carregarLista()" (keypress)="pressionaEnter($event)" [(ngModel)]="texto"></app-input>
                     </div>
 
@@ -43,7 +43,7 @@
                                 [showSourceControls]="false" [showTargetControls]="false" [draggable]="true" (onMoveToSource)="recalcularValorSelecionado()" (onMoveToTarget)="recalcularValorSelecionado()"
                                 (onMoveAllToSource)="recalcularValorSelecionado()" (onMoveAllToTarget)="recalcularValorSelecionado()" [targetTrackBy]="trackTarget">
                         <ng-template let-rowData pTemplate="item">
-                            <div class="ui-helper-clearfix">
+                            <div class="p-helper-clearfix">
                                 <div style="margin-top: 5px;"><span style="font-weight: bold; display: inline-block; width: 80px;">Historico: </span><span>{{rowData.Historico}}</span></div></div>
                             <div style="margin-top: 5px;"><span style="font-weight: bold; display: inline-block; width: 80px;">Data: </span><span>{{rowData.Vencimento | date}}</span></div>
                             <div style="margin-top: 5px;"><span style="font-weight: bold; display: inline-block; width: 80px;">Valor: </span><span [ngClass]="colorValue(rowData.Valor)">{{rowData.Valor | virgulaPipe}}</span></div>

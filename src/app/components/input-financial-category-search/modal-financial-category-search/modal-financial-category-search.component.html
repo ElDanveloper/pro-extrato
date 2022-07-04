@@ -1,8 +1,8 @@
 <p-dialog [modal]="true" [responsive]="true" [contentStyle]="{'max-width':'800px'}" [maximizable]="true"
           [header]="'Pesquisar Natureza Financeira'" [(visible)]="modalVisible" (onHide)="fecharModal()">
-    <div class="ui-g ui-fluid">
-        <div class="ui-g-12">
-            <div class="ui-inputgroup" style="margin-bottom: 10px;">
+    <div class="p-col p-fluid">
+        <div class="p-col-12">
+            <div class="p-inputgroup" style="margin-bottom: 10px;">
                 <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" pInputText>
                 <button style="width: 30px;" pButton type="button" icon="fa fa-search" (click)="carregarLista()"
                         class="ui-button-warn"></button>
@@ -27,11 +27,11 @@
             &nbsp;
 
             <p-footer>
-                <div class="ui-g-12 ui-fluid">
-                    <div class="ui-g-offset-8 ui-g-2">
+                <div class="p-col-12 p-fluid">
+                    <div class="p-col-offset-8 p-col-2">
                         <button pButton type="button" label="Cancelar" style="margin-right:10px" class="ui-button-danger" (click)="fecharModal()"></button>
                     </div>
-                    <div class="ui-g-2">
+                    <div class="p-col-2">
                         <button pButton type="button" label="Confirmar" (click)="confirmar()"></button>
                     </div>
                 </div>

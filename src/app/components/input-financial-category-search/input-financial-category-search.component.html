@@ -1,6 +1,6 @@
-<div class="ui-g-12 ui-fluid">
+<div class="p-col-12 p-fluid">
     <label *ngIf="label" [attr.for]="id">{{label}}</label><br *ngIf="label"/>
-    <div class="ui-inputgroup ui-g-nopad" style="width: 100%;">
+    <div class="p-inputgroup p-col-nopad" style="width: 100%;">
                 <input [ngClass]="{'invalid': campoInvalido}" [type]="type" [id]="id" [placeholder]="placeholder" [readOnly]="!!isReadOnly" [(ngModel)]="inputValue"
                        (blur)="openModal($event)" (keypress)="openModal($event)" autocomplete="off" pInputText #inputRef/>
                 <button style="width: 30px;" pButton type="button" icon="fa fa-search" (click)="modalPesquisa = true" tabindex="-1"></button>

@@ -4,25 +4,25 @@
     <app-page-divided [padrao]="false">
         <div principal>
             <p-card>
-                <div class="ui-g-12 ui-fluid" style="margin-top: -20px;">
-                    <div class="ui-g-2">
+                <div class="p-col-12 p-fluid" style="margin-top: -20px;">
+                    <div class="p-col-2">
                         <h5>Valor a ser Conciliado: &nbsp;&nbsp; <span
                                 [ngClass]="colorValue(data !== undefined ? data.Valor : 0)">{{data !== undefined ?
                                 data.Valor : 0 | virgulaPipe}}</span></h5>
                     </div>
-                    <div class="ui-g-2">
+                    <div class="p-col-2">
                         <h5>Data: &nbsp;&nbsp; <span>{{data.DataExtrato | date}}</span></h5>
                     </div>
-                    <div class="ui-g-3">
+                    <div class="p-col-3">
                         <h5>Histórico: &nbsp;&nbsp; <span>{{data.HistoricoBanco}}</span></h5>
                     </div>
-                    <div class="ui-g-offset-1 ui-g-4">
+                    <div class="p-col-offset-1 p-col-4">
                         <h5>Valor Selecionado: &nbsp;&nbsp; <span
                                 [ngClass]="colorValue(valorSelecionado)">{{valorSelecionado | virgulaPipe}}</span></h5>
                     </div>
                 </div>
-                <div class="ui-g-12 ui-fluid" style="margin-top: -20px;">
-                    <div class="ui-g-2">
+                <div class="p-col-12 p-fluid" style="margin-top: -20px;">
+                    <div class="p-col-2">
                         <app-input-money [label]="'Valor a ser Pesquisado'" (onBlur)="carregarLista()"
                             (keypress)="pressionaEnter($event)" [(ngModel)]="valor"></app-input-money>
                     </div>

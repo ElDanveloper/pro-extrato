@@ -1,18 +1,18 @@
-<div class="ui-g ui-fluid">
-    <div class="ui-g-1">
+<div class="p-col p-fluid">
+    <div class="p-col-1">
         <!-- <app-tutorial [Classificacao]="'3.07.03'"></app-tutorial> -->
     </div>
-    <div class="ui-g-1 ui-g-offset-6" style="font-size: 18px; margin-right: -50px;">
+    <div class="p-col-1 p-col-offset-6" style="font-size: 18px; margin-right: -50px;">
         <i class="fa fa-file-pdf" style="cursor: pointer;" (click)="downloadPdf()"></i>
     </div>
-    <div class="ui-g-2">
+    <div class="p-col-2">
         <button pButton label="Reprocessar Extrato" (click)="reprocessarExtrato()"></button>
     </div>
-    <div class="ui-g-2">
+    <div class="p-col-2">
         <button pButton label="Processar Conciliação" (click)="processarConciliacao()"></button>
     </div>
 </div>
-<div class="ui-g ui-fluid">
+<div class="p-col p-fluid">
     <p-table [paginator]="true" [rows]="10" [totalRecords]="extratoContaBanco.length" [value]="extratoContaBanco"
         [rowsPerPageOptions]="opcoesLinhas">
         <ng-template pTemplate="header">

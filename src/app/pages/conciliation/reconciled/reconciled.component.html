@@ -1,8 +1,8 @@
-<div class="ui-g ui-fluid">
-    <div class="ui-g-1 ui-g-offset-9" style="font-size: 18px; margin-right: -50px;">
+<div class="p-col p-fluid">
+    <div class="p-col-1 p-col-offset-9" style="font-size: 18px; margin-right: -50px;">
         <i class="fa fa-file-pdf" style="cursor: pointer;" (click)="downloadPdf()"></i>
     </div>
-    <div class="ui-g-2">
+    <div class="p-col-2">
         <button pButton label="Processar Conciliação" (click)="processarConciliacao()"></button>
     </div>
     <p-table [value]="contabilConciliados" [paginator]="true" [rows]="10" [totalRecords]="contabilConciliados.length" [rowsPerPageOptions]="opcoesLinhas">

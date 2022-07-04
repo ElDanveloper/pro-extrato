@@ -1,42 +1,42 @@
-<div class="ui-g ui-fluid" [formGroup]="form">
-    <div class="ui-g-4">
+<div class="p-col p-fluid" [formGroup]="form">
+    <div class="p-col-4">
         <p-card>
-            <div class="ui-g-12 ui-g-nopad">
-                <div class="ui-g-8">
-                    <div class="ui-g-12 ui-g-nopad item" style="color: #000;">
+            <div class="p-col-12 p-col-nopad">
+                <div class="p-col-8">
+                    <div class="p-col-12 p-col-nopad item" style="color: #000;">
                         <span class="key">Data </span>
                         <span class="value"> {{getData | date}}</span>
                     </div>
-                    <div class="ui-g-12 ui-g-nopad item" style="color: #000;">
+                    <div class="p-col-12 p-col-nopad item" style="color: #000;">
                         <span class="key">Valor </span>
                         <span [ngClass]="colorValue(getValor)"> {{getValor | virgulaPipe}}</span>
                     </div>
-                    <div class="ui-g-12 ui-g-nopad item" style="color: #000;"
+                    <div class="p-col-12 p-col-nopad item" style="color: #000;"
                          *ngIf="data && data.Documento !== undefined">
                         <span class="key">Doc </span>
                         <span class="value"> {{data.Documento}} </span>
                     </div>
-                    <div class="ui-g-12 ui-g-nopad" style="color: #000;">
+                    <div class="p-col-12 p-col-nopad" style="color: #000;">
                         <div class="key ui-g-12">Histórico</div>
-                        <div class="ui-g-12"> {{data ? data.HistoricoBanco : ''}} </div>
+                        <div class="p-col-12"> {{data ? data.HistoricoBanco : ''}} </div>
                     </div>
-                    <div class="ui-g-12 ui-g-nopad">
+                    <div class="p-col-12 p-col-nopad">
                         <p-checkbox binary="true" formControlName="selecionar"></p-checkbox>
                         <label style="margin-left: 5px; font-weight: bold;">Selecionado</label>
                     </div>
                 </div>
-                <div class="ui-g-4 ui-g-nopad">
-                    <div class="ui-g-12">
+                <div class="p-col-4 p-col-nopad">
+                    <div class="p-col-12">
                         <button pButton label="Novo" class="Novo" (click)="alterarCard(0)"></button>
                     </div>
-                    <div class="ui-g-12">
+                    <div class="p-col-12">
                         <button pButton label="Transferência" class="Novo" (click)="alterarCard(2)"></button>
                     </div>
-                    <div class="ui-g-12">
+                    <div class="p-col-12">
                         <button pButton type="button" label="Confirmar" class="ui-button-success"
                                 (click)="conciliarParaUnico('4')"></button>
                     </div>
-                    <div class="ui-g-12">
+                    <div class="p-col-12">
                         <p-splitButton label="Ações" class="ui-button-success" [model]="acoes"
                                        [style]="{width: '100%'}"></p-splitButton>
                     </div>
@@ -46,47 +46,47 @@
         </p-card>
     </div>
 
-    <div class="ui-g-8" *ngIf="index == 0">
+    <div class="p-col-8" *ngIf="index == 0">
         <p-card>
-            <div class="ui-g-12 ui-g-nopad">
-                <div class="ui-g-3 ui-fluid ui-g-nopad">
-                    <div class="ui-g-12 center-content">
+            <div class="p-col-12 p-col-nopad">
+                <div class="p-col-3 p-fluid p-col-nopad">
+                    <div class="p-col-12 center-content">
                         <button pButton type="button" label="Busca Contabil"
                                 (click)="openModalConciliarContabil()"></button>
                     </div>
-                    <div class="ui-g-12 center-content">
+                    <div class="p-col-12 center-content">
                         <button pButton type="button" label="Busca Financeiro"
                                 (click)="openModalConciliarParcela()"></button>
                     </div>
-                    <div class="ui-g-12 center-content">
+                    <div class="p-col-12 center-content">
                         <button pButton type="button" label="Conciliar" class="ui-button-success"
                                 (click)="conciliarParaUnico('4')"></button>
                     </div>
-                    <div class="ui-g-12 ui-g-nopad" style="margin-top: 5px;">
+                    <div class="p-col-12 ui-g-nopad" style="margin-top: 5px;">
                         <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
                         <label style="margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
                     </div>
                 </div>
-                <div class="ui-g-9 ui-g-nopad">
-                    <div class="ui-g-12">
-                        <div class="ui-g-3">Pessoa</div>
-                        <div class="ui-g-9">
+                <div class="p-col-9 p-col-nopad">
+                    <div class="p-col-12">
+                        <div class="p-col-3">Pessoa</div>
+                        <div class="p-col-9">
                             <app-input-pesquisar-pessoa formControlName="IdPessoa"
                                                         (ngModelChange)="selecionouPessoa($event)"
                                                         field="Nome"></app-input-pesquisar-pessoa>
                         </div>
                     </div>
-                    <div class="ui-g-12">
-                        <div class="ui-g-3">Natureza Financeira</div>
-                        <div class="ui-g-9">
+                    <div class="p-col-12">
+                        <div class="p-col-3">Natureza Financeira</div>
+                        <div class="p-col-9">
                             <app-input-pesquisar-natureza-financeira
                                 (ngModelChange)="selecionouNaturezaFinanceira($event)" formControlName="IdNatureza"
                                 filtroAdicional="ApareceTesouraria eq true"></app-input-pesquisar-natureza-financeira>
                         </div>
                     </div>
-                    <div class="ui-g-12">
-                        <div class="ui-g-3">Historico</div>
-                        <div class="ui-g-9"><input pInputText formControlName="Historico"></div>
+                    <div class="p-col-12">
+                        <div class="p-col-3">Historico</div>
+                        <div class="p-col-9"><input pInputText formControlName="Historico"></div>
                     </div>
                 </div>
             </div>
@@ -94,9 +94,9 @@
         </p-card>
     </div>
 
-    <div class="ui-g-8" *ngIf="index == 1">
+    <div class="p-col-8" *ngIf="index == 1">
         <p-card>
-            <div class="ui-g-12">
+            <div class="p-col-12">
                 <div style="margin-bottom: 10px; color: #000;">
                     <div class="key ui-g-3">Sugestão</div>
                     <div class="key ui-g-1">Data</div>
@@ -105,19 +105,19 @@
                     <div [ngClass]="colorValue(getValor)" class="ui-g-3"> {{getValor | virgulaPipe}}</div>
                 </div>
                 <div style="margin-bottom: 10px; color: #000;">
-                    <div class="key ui-g-3">Historico</div>
-                    <div class="value ui-g-9"> {{data ? data.Historico : ''}} </div>
+                    <div class="key p-col-3">Historico</div>
+                    <div class="value p-col-9"> {{data ? data.Historico : ''}} </div>
                 </div>
                 <div style="margin-bottom: 10px; color: #000;">
-                    <div class="ui-g-12 ui-g-nopad">
-                        <div class="key ui-g-3">Pessoa</div>
-                        <div class="value ui-g-9"> {{getNomePessoa(data)}} </div>
+                    <div class="p-col-12 p-col-nopad">
+                        <div class="key p-col-3">Pessoa</div>
+                        <div class="value p-col-9"> {{getNomePessoa(data)}} </div>
                     </div>
                 </div>
                 <div style="margin-bottom: 10px; color: #000;">
-                    <div class="ui-g-12 ui-g-nopad">
-                        <div class="key ui-g-3">Natureza Financeira</div>
-                        <div class="value ui-g-9"> {{getNomeNatureza(data)}} </div>
+                    <div class="p-col-12 p-col-nopad">
+                        <div class="key p-col-3">Natureza Financeira</div>
+                        <div class="value p-col-9"> {{getNomeNatureza(data)}} </div>
                     </div>
                 </div>
             </div>
@@ -125,19 +125,19 @@
         </p-card>
     </div>
 
-    <div class="ui-g-8" *ngIf="index == 2">
+    <div class="p-col-8" *ngIf="index == 2">
         <p-card>
-            <div class="ui-g-12 ui-fluid">
+            <div class="p-col-12 p-fluid">
 
-                <div class="ui-g-12">
+                <div class="p-col-12">
                     <app-select label="Conta de Destino" [options]="selectContaDestino"
                                 formControlName="IdContaCaixaDestino"></app-select>
                 </div>
-                <div class="ui-g-3">
+                <div class="p-col-3">
                     <button pButton type="button" label="Conciliar" class="ui-button-success"
                             (click)="conciliarParaUnico('2')"></button>
                 </div>
-                <div class="ui-g-6" style="margin-top: 5px;">
+                <div class="p-col-6" style="margin-top: 5px;">
                     <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
                     <label style="margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
                 </div>
