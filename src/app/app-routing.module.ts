@@ -1,3 +1,5 @@
+import { AccountLaunchComponent } from './pages/account/account-launch/account-launch.component';
+import { AccountListComponent } from './pages/Account/account-list/account-list.component';
 import { ReconcileInstallmentComponent } from './pages/conciliation/reconciled-transfer/reconcile-installment/reconcile-installment.component';
 import { ReconcileAccountingComponent } from './pages/conciliation/reconciled-transfer/reconcile-accounting/reconcile-accounting.component';
 import { UnreconciledAccountingComponent } from './pages/conciliation/unreconciled-accounting/unreconciled-accounting.component';
@@ -5,7 +7,6 @@ import { UnreconciledExtractsComponent } from './pages/conciliation/unreconciled
 import { ReconciledComponent } from './pages/conciliation/reconciled/reconciled.component';
 import { ReconciledExtractComponent } from './pages/conciliation/reconciled-extract/reconciled-extract.component';
 import { ConciliationComponent } from './pages/conciliation/conciliation.component';
-import { ContasListaComponent } from './pages/contas/contas-lista/contas-lista.component';
 import { NaturezaFinanceiraCadastroComponent } from './pages/natureza-financeira/natureza-financeira-cadastro/natureza-financeira-cadastro.component';
 import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
 import { PessoasCadastroComponent } from './pages/pessoas/pessoas-cadastro/pessoas-cadastro.component';
@@ -42,7 +43,8 @@ const routes: Routes = [
             { path: 'empresas-cadastro/:id', component: EmpresasCadastroComponent },
             { path: 'pessoas/cadastro/:id', component: PessoasCadastroComponent },
             { path: 'natureza-financeira/cadastro/:id', component: NaturezaFinanceiraCadastroComponent },
-            { path: 'contas', component: ContasListaComponent },
+            { path: 'account', component: AccountListComponent },
+            { path: 'account-launch/:id', component: AccountLaunchComponent},
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
 
             {

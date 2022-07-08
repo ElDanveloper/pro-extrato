@@ -129,6 +129,10 @@ export class Util {
         });
     }
 
+    static getDateComTresMesAntes(){
+        const currentDate = new Date()
+        return new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDay() - 60)
+    }
 
     static getDateComUmMesAntes() {
         const currentDate = new Date()

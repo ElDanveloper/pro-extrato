@@ -1,8 +1,8 @@
-<div class="p-col p-fluid">
-    <div class="p-col-1 p-col-offset-9" style="font-size: 18px; margin-right: -50px;">
-        <i class="fa fa-file-pdf" style="cursor: pointer;" (click)="downloadPdf()"></i>
+<div class="p-fluid p-formgrid p-grid">
+    <div class="p-col-1 p-offset-9" style="font-size: 18px; margin-right: -50px;">
+        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="downloadPdf()"></i>
     </div>
-    <div class="p-col-2">
+    <div class="p-col-2" style="margin-bottom: 10px;">
         <button pButton label="Processar Conciliação" (click)="processarConciliacao()"></button>
     </div>
     <p-table [value]="contabilNaoConciliados" [paginator]="true" [rows]="10" [totalRecords]="contabilNaoConciliados.length" [rowsPerPageOptions]="opcoesLinhas">

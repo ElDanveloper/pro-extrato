@@ -1,0 +1,152 @@
+<div class="content">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-col-2">
+            <label>Conta: &nbsp; {{contaCaixa ? contaCaixa.Nome : nome}}</label><br>
+            <div class="p-inputgroup">
+                <input type="text" pInputText placeholder="Filtrar" (keypress)="pressionaEnter($event)" #inputPesquisa>
+                <button style="width: 15%;" pButton type="button" icon="fa fa-search" (click)="atualizar()"></button>
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid p-col-4" style="margin-top: 17px;">
+            <div class="p-col-5">
+                <app-date #dataInicial [(ngModel)]="dataInit"></app-date>
+            </div>
+            <div class="p-col-5">
+                <app-date #dataFinal [(ngModel)]="dataFim"></app-date>
+            </div>
+        </div>
+        <div class="p-col-2" style="margin-top: 25px; margin-left: -65px;">
+            <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid p-col-4" style="margin-top: 20px;">
+            <div class="p-col-4">
+                <button pButton class="p-button-success" label="Recebimento"
+                    (click)="abrirModalPagamentoViaConta('R')"></button>
+            </div>
+            <div class="p-col-4">
+                <button pButton class="ui-button-danger" label="Pagamento"
+                    (click)="abrirModalPagamentoViaConta('P')"></button>
+            </div>
+            <div class="p-col-4">
+                <button pButton label="Transferência" (click)="abrirModalTransferencia()"></button>
+            </div>
+        </div>
+        <div class="p-field p-col-1 p-md-2" style="margin-top: 15px;">
+            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 25px; cursor: pointer;"></i>
+            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 35px; cursor: pointer"></i>
+        </div>
+        <!-- <div class="ui-g-1">
+            <app-tutorial [Classificacao]="'3.07.02'"></app-tutorial>
+        </div> -->
+        <div class="p-offset-2 p-col-2" style="margin-top: 10px;">
+            <button pButton label="Atualizar" (click)="atualizar()"></button>
+        </div>
+        <div class=" p-col-2" style="margin-top: 10px;">
+            <p-splitButton label="Ações" [model]="items"></p-splitButton>
+        </div>
+        <div class="p-col-2" style="margin-top: 10px;">
+            <button pButton label="Conciliação" (click)="conciliacao()"></button>
+        </div>
+        <div class="p-col-2" style="margin-top: 10px;">
+            <button pButton label="Trocar Conta" (click)="modalTrocarConta = true"></button>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid p-col-12" style="font-weight: bold; margin-top: 5px;">
+            <div class="p-col-3">Saldo Anterior:<span> R$ {{getTotalSaldoAnterior | virgulaPipe}}</span></div>
+            <div class="p-col-3">Entradas:<span> R$ {{getTotalEntradas | virgulaPipe}}</span></div>
+            <div class="p-col-3">Saídas:<span> R$ {{getTotalSaidas | virgulaPipe}}</span></div>
+            <div class="p-col-3">Saldo Atual:<span> R$ {{getTotalSaldoAtual | virgulaPipe}}</span></div>
+        </div>
+
+    </div>
+
+
+    <p-table [value]="lista" dataKey="Data">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 5%"></th>
+                <th style="width: 17%;">Data</th>
+                <th style="width: 10%;">Saldo Ant.</th>
+                <th style="width: 10%;">Entradas</th>
+                <th style="width: 10%;">Saídas</th>
+                <th style="width: 10%;">Saldo</th>
+            </tr>
+        </ng-template>
+        <ng-template let-expanded="expanded" let-rowData pTemplate="body">
+            <tr>
+                <td>
+                    <a [pRowToggler]="rowData" href="#">
+                        <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                    </a>
+                </td>
+                <td>{{rowData.Data | date}}</td>
+                <td appAlinharDireita [ngClass]="colorValue(rowData.SaldoAnterior)">{{rowData.SaldoAnterior |
+                    virgulaPipe}}
+                </td>
+                <td appAlinharDireita [ngClass]="colorValue(rowData.Debitos)">{{getValor(rowData.Debitos) |
+                    CommaPipeZero}}</td>
+                <td appAlinharDireita [ngClass]="colorValue(rowData.Creditos)">{{getValor(rowData.Creditos) |
+                    CommaPipeZero}}</td>
+                <td appAlinharDireita [ngClass]="colorValue(rowData.SaldoAtual)">{{rowData.SaldoAtual | virgulaPipe}}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template let-rowData pTemplate="rowexpansion">
+            <tr>
+                <td colspan="6">
+                    <p-table [paginator]="true" [(rows)]="qtdLinhas" [rowsPerPageOptions]="opcoesLinhas"
+                        [totalRecords]="rowData.Lancamentos.length" [value]="rowData.Lancamentos">
+                        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 60%;">Histórico</th>
+                <th style="width: 10%;">Documento</th>
+                <th style="width: 10%;">Entrada</th>
+                <th style="width: 10%;">Saída</th>
+                <th style="width: 10%;">Tipo</th>
+                <th style="width: 45px;"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData2 let-columns="columns">
+            <tr>
+                <td>{{rowData2.Historico}}</td>
+                <td>{{rowData2.Documento}}</td>
+                <td appAlinharDireita [ngClass]="colorValue(rowData2.Debitos)">{{getValor(rowData2.Debitos) |
+                    CommaPipeZero}}</td>
+                <td appAlinharDireita [ngClass]="colorValue(rowData2.Creditos)">{{getValor(rowData2.Creditos) |
+                    CommaPipeZero}}</td>
+                <td>{{rowData2.Tipo}}</td>
+                <td>
+                    <app-opcoes-table [value]="rowData2" [opcoes]="itemsRow"></app-opcoes-table>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    </td>
+    </tr>
+    </ng-template>
+    </p-table>
+
+</div>
+<div style="position: fixed; top: -200%">
+    <button pButton type="button" label="" #paymentviaaccount></button>
+</div>
+
+<div style="position: fixed; top: -200%">
+    <button pButton type="button" label="" #transfer></button>
+</div>
+
+<app-modal [fundo]="true" *appModalOpenOnClick="[paymentviaaccount, '1Acd5WGj1']" [hash]="'1Acd5WGj1'">
+    <app-modal-payment-via-account #content (dadosSalvos)="dadosSalvos()" [data]="data"></app-modal-payment-via-account>
+</app-modal>
+
+<app-modal [fundo]="true" *appModalOpenOnClick="[transfer, '1Acd5WGj2']" [hash]="'1Acd5WGj2'">
+    <app-modal-transfer #content (dadosSalvos)="dadosSalvos()" [data]="data"></app-modal-transfer>
+</app-modal>
+
+<app-modal-switch-account [modalVisible]="modalTrocarConta" #content (closeModal)="contaTrocada()"></app-modal-switch-account>
+
+
+<p-confirmDialog header="Confirmacao" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+<input type="file" #uploadInput style="opacity: 0; pointer-events: none;" (change)="uploadOfx($event)">
+<input type="file" #uploadRetornoInput style="opacity: 0; pointer-events: none;" (change)="importarRetorno($event)">

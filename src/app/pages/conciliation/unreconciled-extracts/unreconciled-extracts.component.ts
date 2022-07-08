@@ -69,21 +69,21 @@ export class UnreconciledExtractsComponent implements OnInit, OnDestroy {
             //     this.selectNaturezaFinanceira = v[1]
             // })
 
-            this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
-                const param = parametros.params
+            // this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
+            //     const param = parametros.params
 
-                let value: any = {}
-                value.idContaCaixa = param.id
-                value.dataInicial = param.dataInicial
-                value.dataFinal = param.dataFinal
+            //     let value: any = {}
+            //     value.idContaCaixa = param.id
+            //     value.dataInicial = param.dataInicial
+            //     value.dataFinal = param.dataFinal
 
-                this.dataIni = param.dataInicial
-                this.dataFim = param.dataFinal
-                this.id = param.id
+            //     this.dataIni = param.dataInicial
+            //     this.dataFim = param.dataFinal
+            //     this.id = param.id
 
-                this.dataPesquisa = value
-                this.loadData()
-            })
+            //     this.dataPesquisa = value
+            //     this.loadData()
+            // })
         }, 500)
     }
 
@@ -95,14 +95,14 @@ export class UnreconciledExtractsComponent implements OnInit, OnDestroy {
     }
 
     downloadPdf() {
-        this.dadosDefault.exibirLoader.next(true)
+        // this.dadosDefault.exibirLoader.next(true)
         // this.networkService.baixarPdf(getUrlFinanceiro(), `contabil/ExtratoPDF?DataIni=${this.dataIni}&DataFim=${this.dataFim}&IdConta=${Number(this.id)}&tipo=0`).subscribe(v => {
         //     Util.savePdf(v)
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     loadData() {
-        this.networkService.exibirLoader.next(true)
+        // this.networkService.exibirLoader.next(true)
 
         // this.$subscriptionPreConciliadoNaoConciliadoQTD = this.networkService.getSimplesQtd(getUrlFinanceiro(),
         //     `LancamentoPreConciliado?$filter=(IdContaCaixa eq ${this.dataPesquisa.idContaCaixa} and DataExtrato ge ${this.dataPesquisa.dataInicial} and DataExtrato le ${this.dataPesquisa.dataFinal} and (Conciliado eq 'N' or Conciliado eq 'P'))&$inlinecount=allpages&$top=0${Util.expandedQuery(LancamentoPreConciliado.expanded(), true)}`).subscribe(qtd => {
@@ -117,7 +117,7 @@ export class UnreconciledExtractsComponent implements OnInit, OnDestroy {
     }
 
     recarregar() {
-        this.networkService.exibirLoader.next(true)
+        // this.networkService.exibirLoader.next(true)
 
         // this.$subscriptionPreConciliadoNaoConciliadoQTD = this.networkService.getSimplesQtd(getUrlFinanceiro(),
         //     `LancamentoPreConciliado?$filter=(IdContaCaixa eq ${this.dataPesquisa.idContaCaixa} and DataExtrato ge ${this.dataPesquisa.dataInicial} and DataExtrato le ${this.dataPesquisa.dataFinal} and Conciliado eq 'N')&$inlinecount=allpages&$top=0`).subscribe(qtd => {

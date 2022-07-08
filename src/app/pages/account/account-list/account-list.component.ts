@@ -1,34 +1,35 @@
-import { BaseListSimples } from './../../../controller/BaseListSimples';
-import { NetworkService } from './../../../services/network.service';
-import { qtdLinhas, getUrlClient, getUrlUser } from './../../../controller/staticValues';
+import { getUrlPro } from './../../../controller/staticValues';
+import { BaseListSimples } from '../../../controller/BaseListSimples';
+import { NetworkService } from '../../../services/network.service';
+import { qtdLinhas, getUrlClient, getUrlUser } from '../../../controller/staticValues';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ConfirmationService, Message, MessageService, SelectItem} from "primeng/api";
 import {Router} from "@angular/router";
 
 
 @Component({
-  selector: 'app-contas-lista',
-  templateUrl: './contas-lista.component.html',
-  styleUrls: ['./contas-lista.component.css']
+  selector: 'app-account-list',
+  templateUrl: './account-list.component.html',
+  styleUrls: ['./account-list.component.css']
 })
-export class ContasListaComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class AccountListComponent extends BaseListSimples implements OnInit, OnDestroy {
 
     // @ViewChild('cadastrarPessoa') cadastrarPessoa: ElementRef;
 
     // modalCadastrarPessoa = false
 
     // public entidade: string = 'empregador'
-    jaPesquisou = false
-    pagina = 0;
-    public first: number = 0
-    public loading: boolean
-    public top: number = qtdLinhas()
+    // jaPesquisou = false
+    // pagina = 0;
+    // public first: number = 0
+    // public loading: boolean
+    // public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
-    public totalItens: number
-    lista2 = []
-    @ViewChild('inputPesquisa') public inputPesquisa
-    @ViewChild('selectValue') public selectValue
-    public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
+    // public totalItens: number
+    // lista2 = []
+    // @ViewChild('inputPesquisa') public inputPesquisa
+    // @ViewChild('selectValue') public selectValue
+    public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'Name'}, {label: 'Conta', value: 'AccountNumber'}]
     // opcoesTable = [
     //     {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editar(e)},
     //     {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletar(e)},
@@ -40,7 +41,7 @@ export class ContasListaComponent extends BaseListSimples implements OnInit, OnD
     
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlUser(), 'contractor')
+        super(networkService, getUrlPro(), 'proaccount')
     }
 
     ngOnInit() {        
@@ -53,8 +54,8 @@ export class ContasListaComponent extends BaseListSimples implements OnInit, OnD
 
     
 
-    linkPessoa(v) {
-        this.router.navigate([`/historico-pessoa/${v.Id}/pedido`])
+    linkLaunch(v) {
+        this.router.navigate([`/account-launch/${v.Id}`])
     }
 
     

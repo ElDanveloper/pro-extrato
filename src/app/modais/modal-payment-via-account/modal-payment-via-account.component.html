@@ -1,0 +1,64 @@
+<ng-template #conteudo>
+    <app-page-divided [padrao]="false">
+        <div principal>
+            <div >
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    <div class="p-col-3">
+                        <app-date #dataSelect label="Data" ></app-date>
+                    </div>
+                    <div class="p-col-9">
+                        <app-input-search-person label="Titular"  field="Nome"
+                            (valorSelecionado)="pessoaSelecionada($event)"></app-input-search-person>
+                    </div>
+                </div>
+
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    <div class="p-col-3">
+                        <app-input label="Nº Documento" ></app-input>
+                    </div>
+                    <div class="p-col-9">
+                        <app-input-financial-category-search [label]="'Natureza Financeira'"
+                             (valorSelecionado)="selecionouNatureza($event)">
+                        </app-input-financial-category-search>
+                    </div>
+                </div>
+
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    <div class="p-col-3">
+                        <app-input-money label="Valor" ></app-input-money>
+                    </div>
+                    <div class="p-col-7">
+                        <app-input label="Histórico" ></app-input>
+                    </div>
+                    <div class="p-col-2">
+                        <label>Livro Caixa</label><br />
+                        <p-toggleButton onLabel="Sim" offLabel="Não" [style]="{width: '150px'}"
+                            ></p-toggleButton>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    <div class="p-col-4">                                        
+                        <p-checkbox label="Fixar a Data" [value]="true" [(ngModel)]="vencimento">
+                    </p-checkbox>
+                    </div>
+                    <div class="p-col-4">
+                        <p-checkbox label="Fixar a Natureza Financeira" [value]="true" [(ngModel)]="natureza">
+                        </p-checkbox>
+                    </div>
+                    <div class="p-col-4">
+                        <p-checkbox label="Fixar o Histórico" [value]="true" [(ngModel)]="historico">
+                        </p-checkbox>
+                    </div>
+                </div>
+
+
+
+                <app-footer-page *ngIf="!modal" [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelar()"
+                    labelConfirmar="Gravar"></app-footer-page>
+
+            </div>
+        </div>
+    </app-page-divided>
+</ng-template>

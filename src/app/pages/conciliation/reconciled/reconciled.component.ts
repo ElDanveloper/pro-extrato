@@ -96,7 +96,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
     }
 
     processarConciliacao() {
-        this.dadosDefault.exibirLoader.next(true)
+        // this.dadosDefault.exibirLoader.next(true)
         // this.networkService.salvarPost(getUrlFinanceiro(), 'fin/processarConciliacao', {IdContaCaixa: Number(this.id), DataIni: this.dataInicial, DataFim: this.dataFinal}).subscribe(x => {
         //     this.messageService.add(Util.pushSuccessMsgSemDelay('Conciliações Processadas!'))
         //     this.carregarLista();

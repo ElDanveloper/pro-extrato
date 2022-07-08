@@ -1,3 +1,4 @@
+import { CommaPipeZeroPipe } from './comma-pipe-zero.pipe';
 import { DatePipe } from './date.pipe';
 import { CpfCnpjPipe } from './cpf-cnpj.pipe';
 import { VirgulaPipe } from './virgula.pipe';
@@ -16,6 +17,7 @@ import { NgModule } from "@angular/core";
         // BoolPipe,
         // SimNaoPipe,
         CpfCnpjPipe,
+        CommaPipeZeroPipe,
     ],
     imports: [
         CommonModule,
@@ -23,6 +25,7 @@ import { NgModule } from "@angular/core";
     exports: [
         VirgulaPipe,
         DatePipe,
+        CommaPipeZeroPipe,
         // VirgulaPipeSemZeroPipe,
         // DataPipe,
         // DataComHoraPipe,

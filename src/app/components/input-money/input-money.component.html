@@ -1,0 +1,9 @@
+<div [ngClass]="{'center-content': center, 'p-col-nopad': true}">
+    <div [ngClass]="{'p-col-12 p-col-nopad': row, 'p-col-nopad': true}">
+        <div [ngClass]="gridClass">
+            <label [attr.for]="id">{{label}}</label>
+            <input [type]="type" [id]="id" [placeholder]="placeholder" [disabled]="isReadOnly" [(ngModel)]="value" (blur)="adicionaMascara($event)"
+                  (focus)="focouNoInput($event)" (keypress)="insereDigitos($event)" (keydown.enter)="onEnterpress.emit(true)" #input autocomplete="off" pInputText #inputRef/>
+        </div>
+    </div>
+</div>

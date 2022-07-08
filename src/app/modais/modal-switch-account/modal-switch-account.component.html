@@ -1,0 +1,22 @@
+<p-dialog [modal]="true" [responsive]="true" [contentStyle]="{'min-width':'600px', 'min-height':'300px', 'overflow':'auto'}" [maximizable]="true"
+          [header]="'Selecione a Conta Caixa'" [(visible)]="modalVisible" (onHide)="fecharModal()">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-col-6 p-offset-2">
+            <app-select label="Conta Caixa" [options]="selectContaCaixa" (onValueChange)="selecionouContaCaixa($event)"></app-select>
+        </div>
+    </div>
+    <p-footer>
+        <app-footer-page [end]="true" (cancelar)="fecharModal()" (confirmar)="confirmar()" [labelConfirmar]="'Confirmar'"></app-footer-page>
+    </p-footer>
+
+    
+    <div *ngIf="exibirLoader | async"
+        style="position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+
+    <div *ngIf="exibirLoaderNetwork | async"
+        style="position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</p-dialog>

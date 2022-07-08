@@ -1,3 +1,5 @@
+import { AccountLaunchComponent } from './pages/account/account-launch/account-launch.component';
+import { AccountListComponent } from './pages/Account/account-list/account-list.component';
 import { ReconcileInstallmentComponent } from './pages/conciliation/reconciled-transfer/reconcile-installment/reconcile-installment.component';
 import { ReconcileAccountingComponent } from './pages/conciliation/reconciled-transfer/reconcile-accounting/reconcile-accounting.component';
 import { ReconciledTransferComponent } from './pages/conciliation/reconciled-transfer/reconciled-transfer.component';
@@ -6,7 +8,6 @@ import { UnreconciledExtractsComponent } from './pages/conciliation/unreconciled
 import { ReconciledComponent } from './pages/conciliation/reconciled/reconciled.component';
 import { ReconciledExtractComponent } from './pages/conciliation/reconciled-extract/reconciled-extract.component';
 import { ConciliationComponent } from './pages/conciliation/conciliation.component';
-import { ContasListaComponent } from './pages/contas/contas-lista/contas-lista.component';
 import { NaturezaFinanceiraCadastroComponent } from './pages/natureza-financeira/natureza-financeira-cadastro/natureza-financeira-cadastro.component';
 import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
 import { PainelPageComponent } from './painel-page-component/painel-page.component';
@@ -107,7 +108,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         PainelPageComponent,
         NaturezaFinanceiraListaComponent,
         NaturezaFinanceiraCadastroComponent,
-        ContasListaComponent,
+        AccountListComponent,
         ConciliationComponent,
         ReconciledExtractComponent,
         ReconciledComponent,
@@ -116,6 +117,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         ReconciledTransferComponent,
         ReconcileAccountingComponent,
         ReconcileInstallmentComponent,
+        AccountLaunchComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

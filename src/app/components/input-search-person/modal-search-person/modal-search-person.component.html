@@ -1,0 +1,116 @@
+<ng-container *ngTemplateOutlet="conteudo"></ng-container>
+<ng-template #conteudo>
+
+    <app-custom-modal [fundo]="false" *appModalOpenOnClick="[pessoa, '1Acd5FQj1']" [hash]="'1Acd5FQj1'">
+        <!-- <app-pessoa-simplificada #content (dadosSalvos)="changeSelect($event)"></app-pessoa-simplificada> -->
+    </app-custom-modal>
+
+    <app-page-divided [padrao]="false">
+        <div principal>
+
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-col-12"><div class="p-inputgroup" style="margin-bottom: 10px;">
+            <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" [(ngModel)]="data" pInputText>
+            <button style="width: 30px;" pButton type="button" icon="fa fa-search" (click)="carregarLista()"
+                    class="ui-button-warn"></button>
+        </div>
+        &nbsp;
+
+        <p-table [(selection)]="value" selectionMode="single" [paginator]="true" [rows]="5" [totalRecords]="totalItens" [value]="lista" >
+
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th [ngStyle]="{width: '70%'}"> Nome </th>
+                    <th [ngStyle]="{width: '30%'}"> Cpf/Cnpj </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+                <tr [pSelectableRow]="rowData">
+                    <td>{{rowData.Nome}}</td>
+                    <td>{{rowData.CpfCnpj}}</td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+        &nbsp;
+
+        <p-footer>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-col-2">
+                    <button #pessoa pButton type="button" label="Adicionar" style="margin-right:10px"></button>
+                </div>
+                <div class="p-offset-6 p-col-2">
+                    <button pButton type="button" label="Cancelar" style="margin-right:10px" class="ui-button-danger" (click)="fecharModal()"></button>
+                </div>
+                <div class="p-col-2">
+                    <button pButton type="button" label="Confirmar" (click)="processarFormulario()"></button>
+                </div>
+            </div>
+        </p-footer>
+        </div>
+        &nbsp;
+    </div>
+
+        </div>
+    </app-page-divided>
+
+</ng-template>
+
+<!-- <ng-container *ngTemplateOutlet="conteudo"></ng-container>
+<ng-template #conteudo>
+
+    <app-custom-modal [fundo]="false" *appModalOpenOnClick="[pessoa, '1Acd5FQj1']" [hash]="'1Acd5FQj1'">
+        <app-pessoa-simplificada #content (dadosSalvos)="changeSelect($event)"></app-pessoa-simplificada>
+    </app-custom-modal>
+
+    <app-page-divided [padrao]="false">
+        <div principal>
+
+    <div class="p-col p-fluid">
+        <div class="p-col-12"><div class="ui-inputgroup" style="margin-bottom: 10px;">
+            <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" [(ngModel)]="data" pInputText>
+            <button style="width: 30px;" pButton type="button" icon="fa fa-search" (click)="carregarLista()"
+                    class="ui-button-warn"></button>
+        </div>
+        &nbsp;
+
+        <p-table [(selection)]="value" selectionMode="single" [paginator]="true" [rows]="5" [totalRecords]="totalItens" [value]="lista" >
+
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th [ngStyle]="{width: '70%'}"> Nome </th>
+                    <th [ngStyle]="{width: '30%'}"> Cpf/Cnpj </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+                <tr [pSelectableRow]="rowData">
+                    <td>{{rowData.Nome}}</td>
+                    <td>{{rowData.CpfCnpj}}</td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+        &nbsp;
+
+        <p-footer>
+            <div class="p-col-12 p-fluid">
+                <div class="p-col-2">
+                    <button #pessoa pButton type="button" label="Adicionar" style="margin-right:10px"></button>
+                </div>
+                <div class="p-col-offset-6 p-col-2">
+                    <button pButton type="button" label="Cancelar" style="margin-right:10px" class="ui-button-danger" (click)="fecharModal()"></button>
+                </div>
+                <div class="p-col-2">
+                    <button pButton type="button" label="Confirmar" (click)="processarFormulario()"></button>
+                </div>
+            </div>
+        </p-footer>
+        </div>
+        &nbsp;
+    </div>
+
+        </div>
+    </app-page-divided>
+
+</ng-template>
+ -->

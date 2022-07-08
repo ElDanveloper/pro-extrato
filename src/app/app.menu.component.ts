@@ -26,7 +26,7 @@ export class AppMenuComponent implements OnInit {
                 // items: []
             },
             {
-                label: 'Contas', icon: 'fa fa-university', routerLink: ['contas']
+                label: 'Contas', icon: 'fa fa-university', routerLink: ['account']
                 // items: []
             },
             {

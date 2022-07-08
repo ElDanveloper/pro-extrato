@@ -1,0 +1,13 @@
+<div class="p-col-12 p-fluid">
+    <label *ngIf="label" [attr.for]="id">{{label}}</label><br *ngIf="label"/>
+    <div class="p-inputgroup p-g-nopad" style="width: 100%;">
+    <input [ngClass]="{'invalid': campoInvalido, 'lowercase': lowercase}" [type]="type" [id]="id" [placeholder]="placeholder" [readOnly]="!!isReadOnly" [(ngModel)]="inputValue"
+           (blur)="openModal($event)" (keypress)="openModal($event)" autocomplete="off" pInputText/>
+        <button style="width: 30px;" #pesquisarpessoa pButton type="button" icon="fa fa-search" [disabled]="isReadOnly"></button>
+    </div>
+</div>
+
+<app-custom-modal [fundo]="false" *appModalOpenOnClick="[pesquisarpessoa, '1AcW5FQj1']" [hash]="'1AcW5FQj1'" [showFooter]="false">
+<app-modal-search-person #content (dadosSalvos)="valorPesquisado($event)" [data]="inputValue"></app-modal-search-person>
+</app-custom-modal>
+

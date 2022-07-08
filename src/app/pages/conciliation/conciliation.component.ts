@@ -53,16 +53,16 @@ export class ConciliationComponent implements OnInit {
 
     atualizaItemSelecionado(v) {
         if (typeof v === 'object') v = v.url
-        if (v.toString().match(/\/extrato$/)) {
+        if (v.toString().match(/\/reconciled-extract$/)) {
             this.currentIndex = 0
             this.activeItem = this.itemsTabMenu[0];
-        } else if (v.toString().match(/\/conciliados$/)) {
+        } else if (v.toString().match(/\/reconciled$/)) {
             this.currentIndex = 1
             this.activeItem = this.itemsTabMenu[1];
-        } else if (v.toString().match(/\/extratos-nao-conciliados$/)) {
+        } else if (v.toString().match(/\/unreconciled-extracts$/)) {
             this.currentIndex = 2
             this.activeItem = this.itemsTabMenu[2];
-        } else if (v.toString().match(/\/contabil-nao-conciliados$/)) {
+        } else if (v.toString().match(/\/unreconciled-accounting$/)) {
             this.currentIndex = 3
             this.activeItem = this.itemsTabMenu[3];
         }
@@ -72,12 +72,12 @@ export class ConciliationComponent implements OnInit {
         this.currentIndex = this.itemsTabMenu.findIndex(v => v === e.activeItem)
         let r = ''
 
-        if (this.currentIndex === 0) r = 'extrato'
-        if (this.currentIndex === 1) r = 'conciliados'
-        if (this.currentIndex === 2) r = 'extratos-nao-conciliados'
-        if (this.currentIndex === 3) r = 'contabil-nao-conciliados'
+        if (this.currentIndex === 0) r = 'reconciled-extract'
+        if (this.currentIndex === 1) r = 'reconciled'
+        if (this.currentIndex === 2) r = 'unreconciled-extracts'
+        if (this.currentIndex === 3) r = 'unreconciled-accounting'
 
-        this.router.navigate([`conciliado/${this.id}/${this.dataInicial}/${this.dataFinal}/${r}`])
+        this.router.navigate([`conciliation/${r}`])
     }
 
     processarConciliacao() {

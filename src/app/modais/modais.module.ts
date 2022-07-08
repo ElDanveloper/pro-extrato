@@ -1,3 +1,9 @@
+import { ModalPaymentViaAccountComponent } from './modal-payment-via-account/modal-payment-via-account.component';
+import { ModalTransferComponent } from './modal-transfer/modal-transfer.component';
+import { ModalSwitchAccountComponent } from './modal-switch-account/modal-switch-account.component';
+import { InputSearchPersonComponent } from './../components/input-search-person/input-search-person.component';
+import { ModalSearchPersonComponent } from './../components/input-search-person/modal-search-person/modal-search-person.component';
+import { InputFinancialCategorySearchComponent } from './../components/input-financial-category-search/input-financial-category-search.component';
 import { ModalFinancialCategorySearchComponent } from './../components/input-financial-category-search/modal-financial-category-search/modal-financial-category-search.component';
 import { ModalReconcileInstallmentComponent } from './../pages/conciliation/modal-reconcile-installment/modal-reconcile-installment.component';
 import { ModalReconcileAccountingComponent } from './../pages/conciliation/modal-reconcile-accounting/modal-reconcile-accounting.component';
@@ -34,6 +40,12 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalReconcileAccountingComponent,
       ModalReconcileInstallmentComponent,
       ModalFinancialCategorySearchComponent,
+      InputFinancialCategorySearchComponent,
+      ModalSearchPersonComponent,
+      InputSearchPersonComponent,
+      ModalSwitchAccountComponent,
+      ModalTransferComponent,
+      ModalPaymentViaAccountComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -61,6 +73,13 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalReconcileAccountingComponent,
         ModalReconcileInstallmentComponent,
         ModalFinancialCategorySearchComponent,
+        InputFinancialCategorySearchComponent,
+        ModalSearchPersonComponent,
+        InputSearchPersonComponent,
+        ModalSwitchAccountComponent,
+        ModalTransferComponent,
+        ModalPaymentViaAccountComponent,
+     
         //ModalPagamentoViaContaCorrenteComponent,
     ]
 })

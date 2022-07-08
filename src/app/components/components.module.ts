@@ -1,3 +1,5 @@
+import { InputMoneyComponent } from './input-money/input-money.component';
+import { CustomModalComponent } from './custom-modal/custom-modal.component';
 import { InputFinancialCategorySearchComponent } from './input-financial-category-search/input-financial-category-search.component';
 import { SelectIconContainerComponent } from './select-icon-container/select-icon-container.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
@@ -30,12 +32,13 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         SelectComponent,
         InputCpfCnpjComponent,
         InputTelefoneComponent,
-        // CustomModalComponent,
+        CustomModalComponent,
         DateComponent,
         InputIntegerComponent,
         RadioButtonComponent,
         SelectIconContainerComponent,
-        InputFinancialCategorySearchComponent,
+        InputMoneyComponent,
+        // InputFinancialCategorySearchComponent,        
         // InputMoneyComponent,
         // InputPesquisarPessoaComponent,
         
@@ -45,7 +48,7 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         TemaModule,
         DiretivasModule,
         LayoutsModule,        
-        ModaisModule,
+        // ModaisModule,
     ],
     exports: [
         OpcoesTableComponent,
@@ -57,12 +60,13 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         SelectComponent,
         InputCpfCnpjComponent,
         InputTelefoneComponent,
-        // CustomModalComponent,
+        CustomModalComponent,
         DateComponent,
         InputIntegerComponent,
         RadioButtonComponent,
         SelectIconContainerComponent,
-        InputFinancialCategorySearchComponent,
+        InputMoneyComponent,
+        // InputFinancialCategorySearchComponent,
         // InputMoneyComponent,
         // InputPesquisarPessoaComponent,
     ],

@@ -1,0 +1,20 @@
+<ng-template #conteudo>
+    <app-page-divided [padrao]="false">
+        <div principal>
+            <div class="p-fluid p-formgrid p-grid" style="margin-bottom: 20px; margin-left: 2px;">
+                <app-select [icon]="true" [label]="'Conta Caixa - Destino'" [options]="selectContaCaixa"></app-select>
+            </div>
+
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-col-6">
+                    <app-date label="Data"></app-date>
+                </div>
+                <div class="p-col-6">
+                    <app-input-money label="Valor"></app-input-money>
+                </div>
+            </div>
+            <app-footer-page *ngIf="!modal" [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelar()" labelConfirmar="Gravar"></app-footer-page>
+
+        </div>
+    </app-page-divided>
+</ng-template>

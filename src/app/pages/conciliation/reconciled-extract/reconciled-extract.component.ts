@@ -62,19 +62,19 @@ export class ReconciledExtractComponent implements OnInit, OnDestroy {
   constructor(private networkService: NetworkService, private route: ActivatedRoute, private router: Router, private messageService: MessageService, public confirmationService: ConfirmationService, private dadosDefault: DadosDefaultService) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
-          const param = parametros.params
-          this.id = param.id
-          this.dataInicial = param.dataInicial
-          this.dataFinal = param.dataFinal
-            this.carregaDados()
-      })
-    },500)
+    // setTimeout(() => {
+    //   this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
+    //       const param = parametros.params
+    //       this.id = param.id
+    //       this.dataInicial = param.dataInicial
+    //       this.dataFinal = param.dataFinal
+    //         this.carregaDados()
+    //   })
+    // },500)
   }
 
   carregaDados() {
-      this.networkService.exibirLoader.next(true)
+    //   this.networkService.exibirLoader.next(true)
     //   this.$subscriptionExtratobanco = this.networkService.getSimples(getUrlFinanceiro(), `ExtratoContaBanco?$filter=(IdContaCaixa eq ${this.id} and DataMovimento ge ${this.dataInicial} and DataMovimento le ${this.dataFinal})&$orderby=DataMovimento&$orderby=Historico`).pipe(map((x: any) => x.value)).subscribe(x => {
     //       this.extratoContaBanco = x
     //   }).add(() => this.networkService.exibirLoader.next(false));
@@ -94,14 +94,14 @@ export class ReconciledExtractComponent implements OnInit, OnDestroy {
     }
 
     downloadPdf() {
-        this.dadosDefault.exibirLoader.next(true)
+        // this.dadosDefault.exibirLoader.next(true)
         // this.networkService.baixarPdf(getUrlFinanceiro(), `contabil/ExtratoPDF?DataIni=${this.dataInicial}&DataFim=${this.dataFinal}&IdConta=${Number(this.id)}&tipo=2`).subscribe(v => {
         //     Util.savePdf(v)
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     processarConciliacao() {
-        this.dadosDefault.exibirLoader.next(true)        
+        // this.dadosDefault.exibirLoader.next(true)        
         // this.networkService.salvarPost(getUrlFinanceiro(), 'fin/processarConciliacao', {IdContaCaixa: Number(this.id), DataIni: this.dataInicial, DataFim: this.dataFinal}).subscribe(x => {
         //     this.messageService.add(Util.pushSuccessMsgSemDelay('Conciliações Processadas!'))
         //     this.carregaDados();
@@ -109,7 +109,7 @@ export class ReconciledExtractComponent implements OnInit, OnDestroy {
     }
 
     reprocessarExtrato(){
-        this.dadosDefault.exibirLoader.next(true)
+        // this.dadosDefault.exibirLoader.next(true)
         // this.networkService.getSimples(getUrlFinanceiro(), `Fin/ProcessarConciliacaoInicial?DataIni=${this.dataInicial}&DataFim=${this.dataFinal}&IdContaCaixa=${this.id}`).subscribe(v => {
         //     this.carregaDados()
         //     this.messageService.add(Util.pushSuccessMsg("Processo Realizado com Sucesso!"))

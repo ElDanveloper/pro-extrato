@@ -1,0 +1,18 @@
+<div [ngStyle]="{zIndex: zIndexOverlay, background: overlay}" class="modal-overlay">
+
+    <div (click)="cancelClick($event)" [ngStyle]="{zIndex: zIndexBody, backgroundColor: '#F5F8F9'}" [ngClass]="classes">
+
+        <h3>{{title}}</h3>
+
+        <div class="p-col-12 p-col-nopad p-fluid">
+            <div class="corpo" *ngIf="contentAfterInited">
+                <ng-container *ngTemplateOutlet="contentAfterInited.content"></ng-container>
+            </div>
+        </div>
+
+        <p-footer *ngIf="showFooter">
+            <app-footer-page [end]="true" (cancelar)="cancelar()" (confirmar)="confirmar()"></app-footer-page>
+        </p-footer>
+
+    </div>
+</div>

@@ -1,6 +1,6 @@
-<div class="p-col-12 p-col-nopad">
-    <div class="p-col-1 p-col-offset-9" style="font-size: 18px; margin-right: -50px;">
-        <i class="fa fa-file-pdf" style="cursor: pointer;" (click)="downloadPdf()"></i>
+<div class="p-fluid p-formgrid p-grid">
+    <div class="p-col-1 p-offset-9" style="font-size: 18px; margin-right: -50px;">
+        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="downloadPdf()"></i>
     </div>
     <div class="p-col-2">
         <button pButton label="Processar Conciliação" (click)="processarConciliacao()"></button>
@@ -8,11 +8,12 @@
 </div>
 
 <div class="p-col-12 ui-g-nopad">
-    <div style="margin-bottom: 40px;" *ngFor="let item of lista; let i = index;">
-        <app-reconciled-transfer [data]="item" [optionsConta]="selectContaCaixa"
+    <!-- *ngFor="let item of lista; let i = index;" -->
+    <div style="margin-bottom: 40px;" >
+        <app-reconciled-transfer [data]="lista" [optionsConta]="selectContaCaixa"
                                       [optionsNaturezaFinanceira]="selectNaturezaFinanceira"
                                       type="extratoNaoConciliado" [dataPesquisa]="dataPesquisa"
-                                      (recarregarDados)="removerItem(i)"></app-reconciled-transfer>
+                                      (recarregarDados)="removerItem(1)"></app-reconciled-transfer>
     </div>
 </div>
 
