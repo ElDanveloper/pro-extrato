@@ -1,5 +1,5 @@
 import { AccountLaunchComponent } from './pages/account/account-launch/account-launch.component';
-import { AccountListComponent } from './pages/Account/account-list/account-list.component';
+import { AccountListComponent } from './pages/account/account-list/account-list.component';
 import { ReconcileInstallmentComponent } from './pages/conciliation/reconciled-transfer/reconcile-installment/reconcile-installment.component';
 import { ReconcileAccountingComponent } from './pages/conciliation/reconciled-transfer/reconcile-accounting/reconcile-accounting.component';
 import { UnreconciledAccountingComponent } from './pages/conciliation/unreconciled-accounting/unreconciled-accounting.component';

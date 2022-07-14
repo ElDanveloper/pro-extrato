@@ -1,5 +1,5 @@
+import { AccountListComponent } from './pages/account/account-list/account-list.component';
 import { AccountLaunchComponent } from './pages/account/account-launch/account-launch.component';
-import { AccountListComponent } from './pages/Account/account-list/account-list.component';
 import { ReconcileInstallmentComponent } from './pages/conciliation/reconciled-transfer/reconcile-installment/reconcile-installment.component';
 import { ReconcileAccountingComponent } from './pages/conciliation/reconciled-transfer/reconcile-accounting/reconcile-accounting.component';
 import { ReconciledTransferComponent } from './pages/conciliation/reconciled-transfer/reconciled-transfer.component';
@@ -62,6 +62,7 @@ import { LayoutsModule } from './layout/layouts.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxViacepModule } from '@brunoc/ngx-viacep';
 
+
 @NgModule({
     imports: [BrowserModule,
         FormsModule,
@@ -108,7 +109,6 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         PainelPageComponent,
         NaturezaFinanceiraListaComponent,
         NaturezaFinanceiraCadastroComponent,
-        AccountListComponent,
         ConciliationComponent,
         ReconciledExtractComponent,
         ReconciledComponent,
@@ -118,6 +118,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         ReconcileAccountingComponent,
         ReconcileInstallmentComponent,
         AccountLaunchComponent,
+        AccountListComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
