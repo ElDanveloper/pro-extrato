@@ -1,9 +1,9 @@
 import { getUrlPro } from './../../../controller/staticValues';
 import { BaseListSimples } from '../../../controller/BaseListSimples';
 import { NetworkService } from '../../../services/network.service';
-import { qtdLinhas, getUrlClient, getUrlUser } from '../../../controller/staticValues';
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ConfirmationService, Message, MessageService, SelectItem} from "primeng/api";
+import { qtdLinhas, } from '../../../controller/staticValues';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ConfirmationService, MessageService, SelectItem} from "primeng/api";
 import {Router} from "@angular/router";
 
 
