@@ -27,6 +27,7 @@ export class AppTopbarComponent {
     }
 
     deslogar() {
+        
         sessionStorage.clear()
         this.dadosDefault.counterEnvironment.next(false)
         this.router.navigate(['/login']);
