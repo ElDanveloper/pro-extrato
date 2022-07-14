@@ -22,7 +22,8 @@ export class DadosDefaultService {
     public exibirLoader = new BehaviorSubject(false);
     public setParametros = new BehaviorSubject(null);
     public parametros: Observable<any> = this.setParametros.asObservable();
-
+    public counterEnvironment = new BehaviorSubject(false)
+    
     listaModais: string[] = [];
 
     constructor(private http: HttpClient, private networkService: NetworkService) {

@@ -1,4 +1,4 @@
-import { opcoesLinhas } from './../../../controller/staticValues';
+import { opcoesLinhas, getUrlPro } from './../../../controller/staticValues';
 import { DadosDefaultService } from './../../../services/dados-default.service';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {map} from "rxjs/operators";
@@ -62,22 +62,22 @@ export class ReconciledExtractComponent implements OnInit, OnDestroy {
   constructor(private networkService: NetworkService, private route: ActivatedRoute, private router: Router, private messageService: MessageService, public confirmationService: ConfirmationService, private dadosDefault: DadosDefaultService) { }
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
-    //       const param = parametros.params
-    //       this.id = param.id
-    //       this.dataInicial = param.dataInicial
-    //       this.dataFinal = param.dataFinal
-    //         this.carregaDados()
-    //   })
-    // },500)
+    setTimeout(() => {
+      this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
+          const param = parametros.params
+          this.id = param.id
+          this.dataInicial = param.dataInicial
+          this.dataFinal = param.dataFinal
+            this.carregaDados()
+      })
+    },500)
   }
 
   carregaDados() {
-    //   this.networkService.exibirLoader.next(true)
-    //   this.$subscriptionExtratobanco = this.networkService.getSimples(getUrlFinanceiro(), `ExtratoContaBanco?$filter=(IdContaCaixa eq ${this.id} and DataMovimento ge ${this.dataInicial} and DataMovimento le ${this.dataFinal})&$orderby=DataMovimento&$orderby=Historico`).pipe(map((x: any) => x.value)).subscribe(x => {
-    //       this.extratoContaBanco = x
-    //   }).add(() => this.networkService.exibirLoader.next(false));
+      this.networkService.exibirLoader.next(true)
+      this.$subscriptionExtratobanco = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`).pipe(map((x: any) => x.value)).subscribe(x => {
+          this.extratoContaBanco = x
+      }).add(() => this.networkService.exibirLoader.next(false));
   }
 
     ngOnDestroy(): void {

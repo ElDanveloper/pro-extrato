@@ -48,11 +48,12 @@ const routes: Routes = [
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
 
             {
-                path: 'conciliation', component: ConciliationComponent, children: [
+                path: 'conciliation/:id/:dataInicial/:dataFinal', component: ConciliationComponent, children: [
                     { path: 'reconciled-extract', component: ReconciledExtractComponent },
                     { path: 'reconciled', component: ReconciledComponent },
                     { path: 'unreconciled-extracts', component: UnreconciledExtractsComponent },
                     { path: 'unreconciled-accounting', component: UnreconciledAccountingComponent },
+                    {path: '', pathMatch: 'full', redirectTo: 'reconciled-extract'},
                 ]
             },
 

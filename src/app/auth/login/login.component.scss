@@ -1,7 +1,8 @@
 h1 {
     font-size: 20px;
     font-weight: bold;
-    color: #2C3E50;
+    color: #3B4CC0;
+    // #2C3E50;
     // color: #B8860B;
     margin-top: 25px;
     margin-bottom: 0;
@@ -26,10 +27,12 @@ h1 {
 }
 
 .button-fixo {
-    background-color: #2C3E50;
+    background-color: #3B4CC0;
+    // #2C3E50;
     // background-color: #2f4050;
     &:hover {
-        background-color: #33CCCC;
+        background-color: #17E346;
+        // #33CCCC;
         // background-color: #1ab394;
     }
 

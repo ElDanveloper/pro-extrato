@@ -76,8 +76,8 @@ export class ConciliationComponent implements OnInit {
         if (this.currentIndex === 1) r = 'reconciled'
         if (this.currentIndex === 2) r = 'unreconciled-extracts'
         if (this.currentIndex === 3) r = 'unreconciled-accounting'
-
-        this.router.navigate([`conciliation/${r}`])
+        
+        this.router.navigate([`conciliation/${this.id}/${this.dataInicial}/${this.dataFinal}/${r}`])
     }
 
     processarConciliacao() {

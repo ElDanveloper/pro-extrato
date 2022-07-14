@@ -54,7 +54,9 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
             this.dadosDefaultService.exibirLoader.next(true)
             this.$listarEmpresaSubscribe = this.authService.terceiraAuthenticacao().subscribe((res: any) => {                                
                 this.lista = res
-                this.totalItens = res.length
+                this.totalItens = res.length            
+                this.dadosDefaultService.counterEnvironment.next(true)    
+                localStorage.setItem('counter', 'true')
             }).add(() => this.dadosDefaultService.exibirLoader.next(false))
         }
     })

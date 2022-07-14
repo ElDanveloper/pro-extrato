@@ -169,8 +169,9 @@
                 </ul>
             </li> -->
             <li style="margin-top: 0px;">
-                <span (click)="abrirModalTrocarEmpresa()" class="link-pessoa" style="font-size: 13px;color: white;">Empresa:</span><br>
-                <span (click)="abrirModalTrocarEmpresa()" class="link-pessoa" style="color: #dddddd;">{{empresa}}</span>
+                <span *ngIf="counter !== 'true'" (click)="abrirModalTrocarEmpresa()" class="link-pessoa" style="font-size: 13px;color: white;">Empresa:</span><br>
+                <span *ngIf="counter !== 'true'" (click)="abrirModalTrocarEmpresa()" class="link-pessoa" style="color: #dddddd;">{{empresa}}</span>
+                <button *ngIf="counter === 'true'" pButton type="button" class="trocar" style="background: #3B4CC0; margin-top: -20px; margin-right: 20px;" label="Selecionar Empresa" (click)="abrirModalTrocarEmpresa()"></button>
             </li>
             <!-- <li #search class="search-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === search}"
                 (click)="app.onTopbarItemClick($event,search)">

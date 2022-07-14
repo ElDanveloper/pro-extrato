@@ -156,7 +156,7 @@ export class AccountLaunchComponent implements OnInit {
     ];
 
     atualizar() {
-        this.dadosDefault.exibirLoader.next(true)
+        // this.dadosDefault.exibirLoader.next(true)
         // this.networkService.buscar('contacaixa', this.id, null, getUrlCad()).subscribe(v => {
         //     this.contaCaixa = v
         //     this.carregarLista()
@@ -215,7 +215,7 @@ export class AccountLaunchComponent implements OnInit {
         const ini = this.dataInit.getFullYear() + '-' + this.addZero(this.dataInit.getMonth() + 1) + '-' + this.addZero(this.dataInit.getDate());
         const fim = this.dataFim.getFullYear() + '-' + this.addZero(this.dataFim.getMonth() + 1) + '-' + this.addZero(this.dataFim.getDate());
 
-        this.router.navigate([`/conciliado/${this.id}/${ini}/${fim}`]);
+        this.router.navigate([`/conciliation/${this.id}/${ini}/${fim}`]);
     }
 
     colorValue(v) {

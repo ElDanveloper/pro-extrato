@@ -12,19 +12,23 @@ export class AppTopbarComponent {
 
     public empresa = ''
 
+    public counter = ''
+
     @ViewChild('trocarempresa') trocarEmpresa: ElementRef;
 
     constructor(public app: AppMainComponent, public dadosDefault: DadosDefaultService, public router: Router) {}
 
-    ngOnInit(): void {        
-        if(JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome'])
-            this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
-        if(JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome'])
-            this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome']
+    ngOnInit(): void {     
+        this.counter = localStorage.getItem('counter')
+        
+        if(!this.counter) this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
+        // if(JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome'])
+        //     this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome']
     }
 
     deslogar() {
         sessionStorage.clear()
+        this.dadosDefault.counterEnvironment.next(false)
         this.router.navigate(['/login']);
     }
 
