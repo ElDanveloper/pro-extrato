@@ -21,7 +21,9 @@ export class AppTopbarComponent {
     ngOnInit(): void {     
         this.counter = localStorage.getItem('counter')
         
-        if(!this.counter) this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
+        if(!this.counter) {
+            this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
+        }
         // if(JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome'])
         //     this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome']
     }
@@ -29,6 +31,7 @@ export class AppTopbarComponent {
     deslogar() {
         
         sessionStorage.clear()
+        localStorage.clear()
         this.dadosDefault.counterEnvironment.next(false)
         this.router.navigate(['/login']);
     }

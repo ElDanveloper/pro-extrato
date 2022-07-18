@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {NetworkService} from "../../../services/network.service";
@@ -6,7 +7,6 @@ import {Router} from "@angular/router";
 import {DadosDefaultService} from "../../../services/dados-default.service";
 import {MessageService} from "primeng/api";
 import {Subscription} from "rxjs";
-import {Formulario} from "../../../controller/Formulario";
 
 
 @Component({
@@ -76,44 +76,46 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
             memorizar: '',
         })
     }
-
-    get getData() {
+   
+    get getData() {         
+        
         if (!this.data) return
         switch (this.type) {
             case 'extratoNaoConciliado':
-                return this.data.DataExtrato
+                return this.data.DateMovement
             case 'contabilNaoConciliado':
             case 'contabilConciliado':
                 return this.data.Data
         }
+    
     }
 
     get getValor() {
-        return this.data.Valor
+        return this.data.Amount
     }
 
     ngOnInit() {
-        if (this.data) {
-            if (this.data.Conciliado === "P") {
+        if (this.data) {            
+            if (this.data.Reconciled === "P") {
                 this.index = 1
             }
-            this.form.get('IdContaCaixaDestino').setValue(this.data.IdContaCaixaDestino)
+            this.form.get('IdContaCaixaDestino').setValue(this.data.AccountId.Id)
             this.form.get('IdNatureza').setValue(this.data.IdNatureza?.Id)
-            this.form.get('Historico').setValue(this.data.HistoricoBanco)
-            this.form.get('Documento').setValue(this.data.Documento)
+            this.form.get('Historico').setValue(this.data.Historic)
+            this.form.get('Documento').setValue(this.data.Document)
             this.IdParcela = this.data.IdParcela
 
-            this.pessoa = this.data.IdPessoa
+            this.pessoa = this.data.PersonId
             if (this.pessoa) {
                 this.form.get('IdNatureza').setValue(this.pessoa.CodNatFinanceira)
                 this.form.get('IdPessoa').setValue(this.data.IdPessoa)
             }
 
-            if (this.data.IdNatureza) {
-                const index = this.selectNaturezaFinanceira.findIndex(x => x.value == this.data.IdNatureza.Id)
-                this.form.get('IdNatureza').setValue(this.data.IdNatureza)
+            if (this.data.FinancialCategoryId) {
+                const index = this.selectNaturezaFinanceira.findIndex(x => x.value == this.data.FinancialCategoryId.Id)
+                this.form.get('IdNatureza').setValue(this.data.FinancialCategoryId.Id)
                 if (index > 0) {
-                    this.naturezaFinanceira = this.data.IdNatureza
+                    this.naturezaFinanceira = this.data.FinancialCategoryId
                     this.form.get('IdNaturezaInput').setValue(this.form.get('IdNatureza').value + this.naturezaFinanceira.Historico)
 
                     this.form.get('IdNaturezaInput').setValue(this.selectNaturezaFinanceira[index].label)

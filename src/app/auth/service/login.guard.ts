@@ -14,15 +14,12 @@ export class LoginGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         if(sessionStorage.getItem(TOKEN_STORAGE_KEY)) {
-            console.log('Login if')
-           // this.router.navigate(['/'], {replaceUrl: true})
+            // this.router.navigate(['/'], {replaceUrl: true})
             return false
         } else if(sessionStorage.getItem(TOKEN_TEMP_STORAGE_KEY)) {
-            console.log('Login else if')
             this.router.navigate(['/selecao-empresa'])
             return false
         } else {
-            console.log('Login else')
             return true
         }
     }

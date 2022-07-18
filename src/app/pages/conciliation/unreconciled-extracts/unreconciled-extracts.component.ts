@@ -1,3 +1,5 @@
+import { ProStatementItem } from './../../../model/pro-statement-item.model';
+import { getUrlPro } from './../../../controller/staticValues';
 import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Subscription } from "rxjs";
 import { NetworkService } from "../../../services/network.service";
@@ -69,21 +71,21 @@ export class UnreconciledExtractsComponent implements OnInit, OnDestroy {
             //     this.selectNaturezaFinanceira = v[1]
             // })
 
-            // this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
-            //     const param = parametros.params
+            this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
+                const param = parametros.params
 
-            //     let value: any = {}
-            //     value.idContaCaixa = param.id
-            //     value.dataInicial = param.dataInicial
-            //     value.dataFinal = param.dataFinal
+                let value: any = {}
+                value.idContaCaixa = param.id
+                value.dataInicial = param.dataInicial
+                value.dataFinal = param.dataFinal
 
-            //     this.dataIni = param.dataInicial
-            //     this.dataFim = param.dataFinal
-            //     this.id = param.id
+                this.dataIni = param.dataInicial
+                this.dataFim = param.dataFinal
+                this.id = param.id
 
-            //     this.dataPesquisa = value
-            //     this.loadData()
-            // })
+                this.dataPesquisa = value
+                this.loadData()
+            })
         }, 500)
     }
 
@@ -102,17 +104,16 @@ export class UnreconciledExtractsComponent implements OnInit, OnDestroy {
     }
 
     loadData() {
-        // this.networkService.exibirLoader.next(true)
+        this.networkService.exibirLoader.next(true)
 
-        // this.$subscriptionPreConciliadoNaoConciliadoQTD = this.networkService.getSimplesQtd(getUrlFinanceiro(),
+        // this.$subscriptionPreConciliadoNaoConciliadoQTD = this.networkService.getSimplesQtd(getUrlFinanceiro(),&Reconciled='N'
         //     `LancamentoPreConciliado?$filter=(IdContaCaixa eq ${this.dataPesquisa.idContaCaixa} and DataExtrato ge ${this.dataPesquisa.dataInicial} and DataExtrato le ${this.dataPesquisa.dataFinal} and (Conciliado eq 'N' or Conciliado eq 'P'))&$inlinecount=allpages&$top=0${Util.expandedQuery(LancamentoPreConciliado.expanded(), true)}`).subscribe(qtd => {
         //         this.totalItens = qtd
-        //         this.$subscriptionPreConciliadoNaoConciliado = this.networkService.getSimples(getUrlFinanceiro(),
-        //             `LancamentoPreConciliado?$filter=(IdContaCaixa eq ${this.dataPesquisa.idContaCaixa} and DataExtrato ge ${this.dataPesquisa.dataInicial} and DataExtrato le ${this.dataPesquisa.dataFinal} and (Conciliado eq 'N' or Conciliado eq 'P'))&$top=${this.top}&$skip=${this.skip}${Util.expandedQuery(LancamentoPreConciliado.expanded(), true)}&$orderby=DataExtrato&$orderby=Conciliado desc&$orderby=HistoricoBanco`).pipe(map((x: any) => x.value)).subscribe(x => {
-        //                 this.lista = [...this.lista, ...x]
-        //                 this.skip = this.skip + this.top
-        //             }).add(() => this.networkService.exibirLoader.next(false));
-        //     })
+        this.$subscriptionPreConciliadoNaoConciliado = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.dataPesquisa.idContaCaixa}&DateIni=${this.dataPesquisa.dataInicial}&DateEnd=${this.dataPesquisa.dataFinal}${Util.expandedQuery(ProStatementItem.expanded(), true)}`).pipe(map((x: any) => x.value)).subscribe(x => {                     
+            this.lista = x
+            this.skip = this.skip + this.top
+        }).add(() => this.networkService.exibirLoader.next(false));
+        // })
 
     }
 

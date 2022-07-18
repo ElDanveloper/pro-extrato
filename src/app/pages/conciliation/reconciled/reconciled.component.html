@@ -5,7 +5,7 @@
     <div class="p-col-2" style="margin-bottom: 10px;">
         <button pButton label="Processar Conciliação" (click)="processarConciliacao()"></button>
     </div>
-    <p-table [value]="contabilConciliados" [paginator]="true" [rows]="10" [totalRecords]="contabilConciliados.length" [rowsPerPageOptions]="opcoesLinhas">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="contabilConciliados" [paginator]="true" [rows]="10" [totalRecords]="contabilConciliados.length" [rowsPerPageOptions]="opcoesLinhas">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th style="width: 3%">&nbsp;</th>
@@ -24,13 +24,13 @@
                 <td>
                     <p-tableCheckbox></p-tableCheckbox>
                 </td>
-                <td appAlignCenter>{{rowData.Data | date}}</td>
-                <td>{{rowData.Historico}}</td>
+                <td appAlignCenter>{{rowData.DateMovement | date}}</td>
+                <td>{{rowData.Historic}}</td>
                 <td>{{''}}</td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData.Valor)">{{rowData.Valor | virgulaPipe}}</td>
-                <td>{{rowData.Tipocontabil}}</td>
-                <td>{{rowData.Pessoa}}</td>
-                <td>{{rowData.Natureza}}</td>
+                <td appAlinharDireita [ngClass]="colorValue(rowData.Amount)">{{rowData.Amount | virgulaPipe}}</td>
+                <td>{{rowData.ReconciledType}}</td>
+                <td>{{rowData.PersonId}}</td>
+                <td>{{rowData.Category}}</td>
                 <td>
                     <app-opcoes-table [value]="rowData" [opcoes]="itemsRowConciliacao"></app-opcoes-table>
                 </td>

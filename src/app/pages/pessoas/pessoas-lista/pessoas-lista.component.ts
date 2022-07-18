@@ -80,8 +80,7 @@ export class PessoasListaComponent extends BaseListSimples implements OnInit, On
     }
 
     
-    public navegar() {
-        console.log('aqui ---> ')
+    public navegar() {        
         // this.router.navigate([`/cadastro`])
         // this.cadastrarEmpresa.nativeElement.click()   
         this.modalCadastrarPessoa = true     

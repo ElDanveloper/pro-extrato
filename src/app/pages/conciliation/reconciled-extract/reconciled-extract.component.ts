@@ -75,7 +75,7 @@ export class ReconciledExtractComponent implements OnInit, OnDestroy {
 
   carregaDados() {
       this.networkService.exibirLoader.next(true)
-      this.$subscriptionExtratobanco = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`).pipe(map((x: any) => x.value)).subscribe(x => {
+      this.$subscriptionExtratobanco = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}`).pipe(map((x: any) => x.value)).subscribe(x => {
           this.extratoContaBanco = x
       }).add(() => this.networkService.exibirLoader.next(false));
   }

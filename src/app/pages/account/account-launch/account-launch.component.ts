@@ -38,6 +38,7 @@ export class AccountLaunchComponent implements OnInit {
 
     ngOnInit() {
         this.defineLabelData();
+        
         this.route.params.subscribe(v => {
             this.id = v.id
         });        
@@ -57,7 +58,7 @@ export class AccountLaunchComponent implements OnInit {
         this.modalTrocarConta = false
     }
 
-    defineLabelData() {
+    defineLabelData() {        
         const monthLabel = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
         this.dataLabel = `${monthLabel[this.dataInit.getMonth()]} - ${this.dataInit.getFullYear()}`
     }
@@ -168,7 +169,7 @@ export class AccountLaunchComponent implements OnInit {
         const ini = this.dataInit.getFullYear() + '-' + this.addZero(this.dataInit.getMonth() + 1) + '-' + this.addZero(this.dataInit.getDate());
         const fim = this.dataFim.getFullYear() + '-' + this.addZero(this.dataFim.getMonth() + 1) + '-' + this.addZero(this.dataFim.getDate());
 
-        this.networkService.exibirLoader.next(true);
+        // this.networkService.exibirLoader.next(true);
         // this.networkService.getSimples(getUrlFinanceiro(), `fin/movimentoconta?IdConta=${this.contaCaixa.IdPlanoConta}&Limit=1000&pagina=0&DataIni=${ini}&DataFim=${fim}&$expand=Lancamentos`).subscribe((v: any) => {
         //     this.lista = v.value;
         // }).add(() => this.networkService.exibirLoader.next(false))
@@ -236,14 +237,14 @@ export class AccountLaunchComponent implements OnInit {
     }
 
     downloadPdf() {
-        this.dadosDefault.exibirLoader.next(true)
+        // this.dadosDefault.exibirLoader.next(true)
         // this.networkService.visualizarPdf(getUrlRelatorio(), `contabil/RazaoPDF?DataIni=${Util.dataParaStringComZero(this.dataInit)}&DataFim=${Util.dataParaStringComZero(this.dataFim)}&IdCaixa=${this.id}`).subscribe(v => {
         //     Util.savePdf(v);
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     downloadCsv(){
-        this.dadosDefault.exibirLoader.next(true)
+        // this.dadosDefault.exibirLoader.next(true)
         // this.networkService.visualizarPdf(getUrlRelatorio(), `contabil/RazaoCSV?DataIni=${Util.dataParaStringComZero(this.dataInit)}&DataFim=${Util.dataParaStringComZero(this.dataFim)}&IdCaixa=${this.id}`).subscribe(v => {
         //     Util.saveExcelFile(v);
         // }).add(() => this.dadosDefault.exibirLoader.next(false))

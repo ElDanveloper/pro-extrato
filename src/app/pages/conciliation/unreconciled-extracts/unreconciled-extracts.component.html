@@ -9,8 +9,8 @@
 
 <div class="p-col-12 ui-g-nopad">
     <!-- *ngFor="let item of lista; let i = index;" -->
-    <div style="margin-bottom: 40px;" >
-        <app-reconciled-transfer [data]="lista" [optionsConta]="selectContaCaixa"
+    <div style="margin-bottom: 40px;" *ngFor="let item of lista; let i = index;">
+        <app-reconciled-transfer [data]="item" [optionsConta]="selectContaCaixa"
                                       [optionsNaturezaFinanceira]="selectNaturezaFinanceira"
                                       type="extratoNaoConciliado" [dataPesquisa]="dataPesquisa"
                                       (recarregarDados)="removerItem(1)"></app-reconciled-transfer>
