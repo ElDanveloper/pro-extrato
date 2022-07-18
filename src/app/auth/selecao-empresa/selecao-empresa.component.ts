@@ -52,7 +52,7 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
         }
         if(Number(param.get('value')) === 2){
             this.dadosDefaultService.exibirLoader.next(true)
-            this.$listarEmpresaSubscribe = this.authService.terceiraAuthenticacao().subscribe((res: any) => {                                
+            this.$listarEmpresaSubscribe = this.authService.terceiraAuthenticacao().subscribe((res: any) => {                                      
                 this.lista = res
                 this.totalItens = res.length            
                 this.dadosDefaultService.counterEnvironment.next(true)    
@@ -79,10 +79,10 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
     }
 
     home(v){                 
-        let contractor_id = this.lista.find(x => x['id'] === v.id)
-        sessionStorage.setItem(EMPRESA_STORAGE_KEY, JSON.stringify(contractor_id))
+        let client_id = this.lista.find(x => x['id'] === v.id)
+        sessionStorage.setItem(EMPRESA_STORAGE_KEY, JSON.stringify(client_id))
         // sessionStorage.removeItem(TOKEN_TEMP_STORAGE_KEY)
-        this.$buscarTokenSelectSubscribe = this.authService.selectAuthenticacao({contractor_id: contractor_id.id}).subscribe(res => {
+        this.$buscarTokenSelectSubscribe = this.authService.selectAuthenticacao({client_id: client_id.id}).subscribe(res => {            
             sessionStorage.setItem(TOKEN_STORAGE_KEY, res["token"])
         })
         this.router.navigate(['/home'], {replaceUrl: true})

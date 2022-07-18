@@ -37,25 +37,25 @@ export class DateNavigatorComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.dateTopbar.dateInit.asObservable().subscribe(valueInit => {
-            this.dataInit = valueInit
-            this.dateTopbar.dateFim.asObservable().subscribe(valueFim => {
-                this.dataFim = valueFim
-            })
-        })
+        // this.dateTopbar.dateInit.asObservable().subscribe(valueInit => {
+        //     this.dataInit = valueInit
+        //     this.dateTopbar.dateFim.asObservable().subscribe(valueFim => {
+        //         this.dataFim = valueFim
+        //     })
+        // })
 
-        this.dateTopbar.emitirDateTopbar.subscribe(date => {
-            this.dataInit = date.dateInicial
-            this.dataFim = date.dateFinal
-            this.defineLabelData();
-        })
+        // this.dateTopbar.emitirDateTopbar.subscribe(date => {
+        //     this.dataInit = date.dateInicial
+        //     this.dataFim = date.dateFinal
+        //     this.defineLabelData();
+        // })
     }
     
     get yearValueToDropdown() {
         return this.dataInit.getFullYear()
     }
 
-    defineLabelData() {
+    defineLabelData() {        
         const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
         this.dataLabel = `${monthLabel[this.dataInit.getMonth()]} - ${this.dataInit.getFullYear()}`
     }

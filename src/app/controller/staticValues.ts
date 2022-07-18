@@ -38,6 +38,7 @@ export const getUrlCnpj = () => `https://api.toqweb.com.br:2004/cad/sandbox/`
 export const getUrlPro = () => `${API_AUTH_HUNNO}/pro/hunnoDEV`
 export const getUrlClient = () => `${API_AUTH}/api/client`
 export const getUrlUser = () => `${API_AUTH}/api/user`
+export const getUrlToken = () => `https://app.hunno.com.br/api/update/token`
 
 //Base teste
 export const URL_BASE = `http://75.119.134.38:8089`

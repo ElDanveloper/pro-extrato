@@ -1,25 +1,27 @@
-import { opcoesLinhas } from './../../../controller/staticValues';
+import { opcoesLinhas, getUrlPro } from './../../../controller/staticValues';
 import { DadosDefaultService } from './../../../services/dados-default.service';
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {NetworkService} from "../../../services/network.service";
-import {map} from "rxjs/operators";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Util} from "../../../controller/Util";
-import {ConfirmationService, MessageService} from "primeng/api";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from "rxjs";
+import { NetworkService } from "../../../services/network.service";
+import { map } from "rxjs/operators";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Util } from "../../../controller/Util";
+import { ConfirmationService, MessageService } from "primeng/api";
 
 @Component({
-  selector: 'app-reconciled',
-  templateUrl: './reconciled.component.html',
-  styleUrls: ['./reconciled.component.css']
+    selector: 'app-reconciled',
+    templateUrl: './reconciled.component.html',
+    styleUrls: ['./reconciled.component.css']
 })
 
 export class ReconciledComponent implements OnInit, OnDestroy {
 
     $subscription: Subscription;
-    $subscriptionContabilConciliado: Subscription;
+    $subscriptionConciliados: Subscription;
     contabilConciliados = []
     opcoesLinhas = opcoesLinhas()
+
+    extratConciliados = []
 
     id
     dataInicial
@@ -68,16 +70,18 @@ export class ReconciledComponent implements OnInit, OnDestroy {
             const param = parametros.params
             this.id = param.id
             this.dataInicial = param.dataInicial
-            this.dataFinal = param.dataFinal
-            // this.$subscriptionContabilConciliado = this.networkService.getSimples(getUrlFinanceiro(), `fin/contabilConciliados?IdContaCaixa=${this.id}&DataInicial=${this.dataInicial}&DataFinal=${this.dataFinal}&$orderby=Data&$orderby=Historico`).pipe(map((x: any) => x.value)).subscribe(x => {
-            //     this.contabilConciliados = x
-            // });
+            this.dataFinal = param.dataFinal           
         })
+
+        this.networkService.exibirLoader.next(true)
+        this.$subscriptionConciliados = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`).pipe(map((x: any) => x.value)).subscribe(x => {
+            this.extratConciliados = x
+        }).add(() => this.networkService.exibirLoader.next(false));
     }
 
     ngOnDestroy(): void {
-        if(this.$subscription) this.$subscription.unsubscribe();
-        if(this.$subscriptionContabilConciliado) this.$subscriptionContabilConciliado.unsubscribe();
+        if (this.$subscription) this.$subscription.unsubscribe();
+        if (this.$subscriptionConciliados) this.$subscriptionConciliados.unsubscribe();
     }
 
     downloadPdf() {
@@ -92,7 +96,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
             'texto-verde': false,
             'texto-vermelho': false,
         }
-        return Util.isNegative(v) ? {...classes, 'texto-vermelho': true} : {...classes, 'texto-verde': true}
+        return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
     }
 
     processarConciliacao() {

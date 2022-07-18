@@ -14,12 +14,13 @@
                     <div class="p-col-12 p-col-nopad item" style="color: #000;"
                          *ngIf="data && data.Documento !== undefined">
                         <span class="key">Doc </span>
-                        <span class="value"> {{data.Documento}} </span>
+                        <span class="value"> {{data.Document}} </span>
                     </div>
                     <div class="p-col-12 p-col-nopad" style="color: #000;">
-                        <div class="key ui-g-12">Histórico</div>
-                        <div class="p-col-12"> {{data ? data.HistoricoBanco : ''}} </div>
+                        <div class="key ui-g-12">Histórico</div> <br>
+                        <div class="p-col-12"> {{data ? data.Historic : ''}} </div>
                     </div>
+                     <br>
                     <div class="p-col-12 p-col-nopad">
                         <p-checkbox binary="true" formControlName="selecionar"></p-checkbox>
                         <label style="margin-left: 5px; font-weight: bold;">Selecionado</label>
@@ -33,11 +34,11 @@
                         <button pButton label="Transferência" class="Novo" (click)="alterarCard(2)"></button>
                     </div>
                     <div class="buttons p-col-12">
-                        <button pButton type="button" label="Confirmar" class="ui-button-success"
+                        <button pButton type="button" label="Confirmar" class="p-button-success"
                                 (click)="conciliarParaUnico('4')"></button>
                     </div>
                     <div class="p-col-12">
-                        <p-splitButton label="Ações" class="ui-button-success" [model]="acoes"
+                        <p-splitButton label="Ações" class="p-button-success" [model]="acoes"
                                        [style]="{width: '100%'}"></p-splitButton>
                     </div>
                 </div>
@@ -59,7 +60,7 @@
                                 (click)="openModalConciliarParcela()"></button>
                     </div>
                     <div class="buttons p-col-12 center-content">
-                        <button pButton type="button" label="Conciliar" class="ui-button-success"
+                        <button pButton type="button" label="Conciliar" class="p-button-success"
                                 (click)="conciliarParaUnico('4')"></button>
                     </div>
                     <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 6px;">
@@ -98,11 +99,11 @@
         <p-card>
             <div class="p-col-12">
                 <div style="margin-bottom: 10px; color: #000;">
-                    <div class="key ui-g-3">Sugestão</div>
-                    <div class="key ui-g-1">Data</div>
-                    <div class="value ui-g-2"> {{getData | date}}</div>
-                    <div class="key ui-g-1">Valor</div>
-                    <div [ngClass]="colorValue(getValor)" class="ui-g-3"> {{getValor | virgulaPipe}}</div>
+                    <div class="key p-col-3">Sugestão</div>
+                    <div class="key p-col-1">Data</div>
+                    <div class="value p-col-2"> {{getData | date}}</div>
+                    <div class="key p-col-1">Valor</div>
+                    <div [ngClass]="colorValue(getValor)" class="p-col-3"> {{getValor | virgulaPipe}}</div>
                 </div>
                 <div style="margin-bottom: 10px; color: #000;">
                     <div class="key p-col-3">Historico</div>
@@ -134,7 +135,7 @@
                                 formControlName="IdContaCaixaDestino"></app-select>
                 </div>
                 <div class="p-col-3">
-                    <button pButton type="button" label="Conciliar" class="ui-button-success"
+                    <button pButton type="button" label="Conciliar" class="p-button-success"
                             (click)="conciliarParaUnico('2')"></button>
                 </div>
                 <div class="p-col-6" style="margin-top: 5px;">

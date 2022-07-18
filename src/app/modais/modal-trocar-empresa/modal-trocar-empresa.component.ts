@@ -1,4 +1,5 @@
-import { getUrlClient } from './../../controller/staticValues';
+import { Util } from './../../controller/Util';
+import { getUrlClient, getUrlPro, getUrlToken } from './../../controller/staticValues';
 import {Component, Input, OnInit} from '@angular/core';
 
 import {FormBuilder, FormGroup} from "@angular/forms";
@@ -66,15 +67,17 @@ export class ModalTrocarEmpresaComponent extends BaseFormPost implements OnInit 
     }
 
     public trocarEmpresa(v) {
-        this.$primeiraEtapaSubscribe = this.networkService.getSimples(getUrlClient(), `acesso/ChangeToken?IdEmpresa=${v.Id}`).subscribe((res: any) => {
-            console.log(res.value);
-            sessionStorage.setItem(TOKEN_STORAGE_KEY, res.value)
-            this.$segundaEtapaSubscribe = this.networkService.buscar('Empresa', v.Id, '', getUrlClient()).subscribe(emp => {               
-                sessionStorage.setItem(EMPRESA_STORAGE_KEY, JSON.stringify(this.lista.find(x => x['Id'] === v.Id)))
-                sessionStorage.setItem(EMPRESA_COMPLETA_STORAGE_KEY, JSON.stringify(emp))
-                window.location.reload()
-            })
-        })
+        console.log(v)
+        this.dadosDefault.exibirLoader.next(true)
+        this.$primeiraEtapaSubscribe = this.networkService.salvarPost(getUrlToken(), `selected`, {client_id: v.id}).subscribe((res: any) => { 
+            console.log(res)           
+            sessionStorage.setItem(TOKEN_STORAGE_KEY, res.token)
+            // this.$segundaEtapaSubscribe = this.networkService.buscar('Empresa', v.Id, '', getUrlClient()).subscribe(emp => {               
+            //     sessionStorage.setItem(EMPRESA_STORAGE_KEY, JSON.stringify(this.lista.find(x => x['Id'] === v.Id)))
+            //     sessionStorage.setItem(EMPRESA_COMPLETA_STORAGE_KEY, JSON.stringify(emp))
+            //     window.location.reload()
+            // })
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
     filtrar(count, page){

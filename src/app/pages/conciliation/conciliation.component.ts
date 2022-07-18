@@ -16,6 +16,7 @@ export class ConciliationComponent implements OnInit {
         {label: 'Conciliados', icon: 'fa fa-fw fa-bar-chart'},
         {label: 'Extrato não Conciliado', icon: 'fa fa-fw fa-calendar'},
         {label: 'Contabil não Conciliado', icon: 'fa fa-fw fa-calendar'},
+        {label: 'Lançamentos', icon: 'fa fa-reply'},
     ];
 
     currentIndex = 0
@@ -65,17 +66,26 @@ export class ConciliationComponent implements OnInit {
         } else if (v.toString().match(/\/unreconciled-accounting$/)) {
             this.currentIndex = 3
             this.activeItem = this.itemsTabMenu[3];
+        } else if (v.toString().match(/\/account-launch$/)) {
+            this.currentIndex = 4
+            this.activeItem = this.itemsTabMenu[4];
         }
     }
 
     setActiveItem(e) {
         this.currentIndex = this.itemsTabMenu.findIndex(v => v === e.activeItem)
         let r = ''
-
+        
         if (this.currentIndex === 0) r = 'reconciled-extract'
         if (this.currentIndex === 1) r = 'reconciled'
         if (this.currentIndex === 2) r = 'unreconciled-extracts'
         if (this.currentIndex === 3) r = 'unreconciled-accounting'
+        if (this.currentIndex === 4) r = 'account-launch'
+
+        if (r === 'account-launch'){
+             this.router.navigate([`${r}/${this.id}`])
+             return
+        }
         
         this.router.navigate([`conciliation/${this.id}/${this.dataInicial}/${this.dataFinal}/${r}`])
     }

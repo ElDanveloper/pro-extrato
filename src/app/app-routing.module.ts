@@ -52,7 +52,7 @@ const routes: Routes = [
                     { path: 'reconciled-extract', component: ReconciledExtractComponent },
                     { path: 'reconciled', component: ReconciledComponent },
                     { path: 'unreconciled-extracts', component: UnreconciledExtractsComponent },
-                    { path: 'unreconciled-accounting', component: UnreconciledAccountingComponent },
+                    { path: 'unreconciled-accounting', component: UnreconciledAccountingComponent },                    
                     {path: '', pathMatch: 'full', redirectTo: 'reconciled-extract'},
                 ]
             },
