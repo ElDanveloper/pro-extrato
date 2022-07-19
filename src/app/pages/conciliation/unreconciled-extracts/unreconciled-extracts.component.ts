@@ -106,10 +106,10 @@ export class UnreconciledExtractsComponent implements OnInit, OnDestroy {
     loadData() {
         this.networkService.exibirLoader.next(true)
 
-        // this.$subscriptionPreConciliadoNaoConciliadoQTD = this.networkService.getSimplesQtd(getUrlFinanceiro(),&Reconciled='N'
+        // this.$subscriptionPreConciliadoNaoConciliadoQTD = this.networkService.getSimplesQtd(getUrlFinanceiro(),
         //     `LancamentoPreConciliado?$filter=(IdContaCaixa eq ${this.dataPesquisa.idContaCaixa} and DataExtrato ge ${this.dataPesquisa.dataInicial} and DataExtrato le ${this.dataPesquisa.dataFinal} and (Conciliado eq 'N' or Conciliado eq 'P'))&$inlinecount=allpages&$top=0${Util.expandedQuery(LancamentoPreConciliado.expanded(), true)}`).subscribe(qtd => {
         //         this.totalItens = qtd
-        this.$subscriptionPreConciliadoNaoConciliado = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.dataPesquisa.idContaCaixa}&DateIni=${this.dataPesquisa.dataInicial}&DateEnd=${this.dataPesquisa.dataFinal}${Util.expandedQuery(ProStatementItem.expanded(), true)}`).pipe(map((x: any) => x.value)).subscribe(x => {                     
+        this.$subscriptionPreConciliadoNaoConciliado = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.dataPesquisa.idContaCaixa}&DateIni=${this.dataPesquisa.dataInicial}&DateEnd=${this.dataPesquisa.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`).pipe(map((x: any) => x.value)).subscribe(x => {                     
             this.lista = x
             this.skip = this.skip + this.top
         }).add(() => this.networkService.exibirLoader.next(false));

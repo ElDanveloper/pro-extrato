@@ -1,3 +1,11 @@
+import { AccountStatusComponent } from './pages/settings-page/account-status/account-status.component';
+import { ParametersComponent } from './pages/settings-page/parameters/parameters.component';
+import { InvoicesListComponent } from './pages/settings-page/invoices-list/invoices-list.component';
+import { DepartmentsListComponent } from './pages/settings-page/departments/departments-list/departments-list.component';
+import { UsersListComponent } from './pages/settings-page/users/users-list/users-list.component';
+import { UsersRegistrationComponent } from './pages/settings-page/users/users-registration/users-registration.component';
+import { MainAccountantComponent } from './pages/settings-page/main-accountant/main-accountant.component';
+import { SettingsComponent } from './pages/settings-page/Settings.component';
 import { AccountListComponent } from './pages/account/account-list/account-list.component';
 import { AccountLaunchComponent } from './pages/account/account-launch/account-launch.component';
 import { ReconcileInstallmentComponent } from './pages/conciliation/reconciled-transfer/reconcile-installment/reconcile-installment.component';
@@ -11,14 +19,10 @@ import { ConciliationComponent } from './pages/conciliation/conciliation.compone
 import { NaturezaFinanceiraCadastroComponent } from './pages/natureza-financeira/natureza-financeira-cadastro/natureza-financeira-cadastro.component';
 import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
 import { PainelPageComponent } from './painel-page-component/painel-page.component';
-import { ProjetoCadastroComponent } from './pages/projeto-cadastro/projeto-cadastro.component';
 import { SituacaoPessoaCadastroComponent } from './pages/pessoas/situacao-pessoa-cadastro/situacao-pessoa-cadastro.component';
 import { PessoasCadastroComponent } from './pages/pessoas/pessoas-cadastro/pessoas-cadastro.component';
 import { PessoasListaComponent } from './pages/pessoas/pessoas-lista/pessoas-lista.component';
 import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
-import { UsuariosCadastroComponent } from './pages/usuarios/usuarios-cadastro/usuarios-cadastro.component';
-import { ParametrosComponent } from './pages/parametros/parametros.component';
-import { UsuariosListaComponent } from './pages/usuarios/usuarios-lista/usuarios-lista.component';
 import { EmpresasListaComponent } from './pages/empresas/empresas-lista/empresas-lista.component';
 import { VisaoGeralComponent } from './pages/dashboard/visao-geral/visao-geral.component';
 import { GeralLivroCaixaXNotasChartComponent } from './pages/dashboard/geral-livro-caixa-x-notas-chart/geral-livro-caixa-x-notas-chart.component';
@@ -98,14 +102,12 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         GeralLivroCaixaXNotasChartComponent,
         VisaoGeralComponent,        
         EmpresasListaComponent,
-        UsuariosListaComponent,        
-        ParametrosComponent,
-        UsuariosCadastroComponent,        
+        UsersListComponent,                
+        UsersRegistrationComponent,        
         EmpresasCadastroComponent,
         PessoasListaComponent,
         PessoasCadastroComponent,
         SituacaoPessoaCadastroComponent,
-        // ProjetoCadastroComponent,
         PainelPageComponent,
         NaturezaFinanceiraListaComponent,
         NaturezaFinanceiraCadastroComponent,
@@ -119,6 +121,12 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         ReconcileInstallmentComponent,
         AccountLaunchComponent,
         AccountListComponent,
+        SettingsComponent,
+        MainAccountantComponent,
+        DepartmentsListComponent,
+        InvoicesListComponent,
+        ParametersComponent,
+        AccountStatusComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

@@ -1,10 +1,10 @@
-import { Formulario } from './../../../controller/Formulario';
-import { autoCompleteDelayTime, getUrlCad, SERVERLESS_URL } from './../../../controller/staticValues';
-import { hasValue, Util } from './../../../controller/Util';
-import { DadosDefaultService } from './../../../services/dados-default.service';
-import { NetworkService } from './../../../services/network.service';
-import { getEstados } from './../../../controller/staticValues';
-import { BaseFormPost } from './../../../controller/BaseFormPost';
+import { Formulario } from '../../../../controller/Formulario';
+import { autoCompleteDelayTime, getUrlCad, SERVERLESS_URL } from '../../../../controller/staticValues';
+import { hasValue, Util } from '../../../../controller/Util';
+import { DadosDefaultService } from '../../../../services/dados-default.service';
+import { NetworkService } from '../../../../services/network.service';
+import { getEstados } from '../../../../controller/staticValues';
+import { BaseFormPost } from '../../../../controller/BaseFormPost';
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MessageService, SelectItem} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -12,15 +12,15 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {Endereco, ErroCep, NgxViacepService} from "@brunoc/ngx-viacep";
 import {Subscription} from "rxjs";
 import {Dimensions, ImageCroppedEvent} from "ngx-image-cropper";
-import { Company } from '../../../model/company.model';
+import { Company } from '../../../../model/company.model';
 
 @Component({
-    selector: 'app-usuarios-cadastro',
-    templateUrl: './usuarios-cadastro.component.html',
-    styleUrls: ['./usuarios-cadastro.component.css']
+    selector: 'app-users-registration',
+    templateUrl: './users-registration.component.html',
+    styleUrls: ['./users-registration.component.css']
 })
 
-export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, OnDestroy {
+export class UsersRegistrationComponent extends BaseFormPost implements OnInit, OnDestroy {
 
     @ViewChild('uploadImagem', {static: false}) uploadImagem
 
