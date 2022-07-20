@@ -1,3 +1,4 @@
+import { PersonClient } from './../model/person-client.model';
 import { getUrlPro } from './../controller/staticValues';
 // import { getUrlCompra } from 'src/app/controller/staticValues';
 import { Util } from './../controller/Util';
@@ -92,7 +93,7 @@ export class NetworkService {
     }
 
     listarPessoa(parametros) {
-        return this.http.get(`${getUrlCad()}/pessoas/Essencials${parametros}`)
+        return this.http.get(`${getUrlPro()}/PersonClient${parametros}${Util.expandedQuery(PersonClient.expanded())}`)
             .pipe(map((res: Response) => res['value']), catchError(this.errorHandler))
     }
 

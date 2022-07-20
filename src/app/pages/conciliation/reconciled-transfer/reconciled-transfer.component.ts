@@ -152,10 +152,14 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
 
 
     reconcileSingle() {
+
+        let nature = this.form.get('IdNatureza').value
+        let person = this.form.get('IdPessoa').value
+
         let body = {
             Id: this.data.AccountId.Id,
-            FinancialId: this.form.get('IdNatureza').get('Id').value,
-            PersonId: this.form.get('IdPessoa').get('Id').value,
+            FinancialId: nature.Id,
+            PersonId: person.Id,
             Obs: this.form.get('Historico').value,
             SavePerson: this.form.get('memorizarPessoa').value,
             SaveHistoric: this.form.get('memorizar').value
@@ -194,7 +198,8 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     }
 
     selecionouNaturezaFinanceira(e) {
-        this.form.get('Historico').setValue(this.data.HistoricoBanco + '  ' + e.Historico)
+        if (e.Historic === null) return
+        this.form.get('Historico').setValue(this.data.Historic + '  ' + e.Historic)
     }
 
     selecionouPessoa(e) {

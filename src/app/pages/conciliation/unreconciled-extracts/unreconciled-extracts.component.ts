@@ -64,6 +64,7 @@ export class UnreconciledExtractsComponent implements OnInit, OnDestroy {
 
     constructor(private networkService: NetworkService, private dadosDefault: DadosDefaultService, private route: ActivatedRoute, private messageService: MessageService, private router: Router) { }
 
+    
     ngOnInit() {
         setTimeout(() => {
             // this.$subscriptionDadosDefault = this.dadosDefault.dadosSelectConciliacao().subscribe(v => {

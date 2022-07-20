@@ -28,6 +28,8 @@ export class ModalSearchPersonComponent implements OnInit {
     public hash
     public modal = true;
 
+    filtro = ''
+
 
     constructor(public confirmationService: ConfirmationService, public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router) {
 
@@ -62,12 +64,25 @@ export class ModalSearchPersonComponent implements OnInit {
         this.dadosDefault.closeModal(this.hash);
     }
 
-    carregarLista() {
-        this.networkService.listarPessoa(`?Texto='${this.data}'&CampoOrdem=Nome&Pagina=0&Limite=1000`).subscribe(v => {
+    carregarLista() {        
+        this.networkService.listarPessoa(`?filter='${this.data}'&orderby=Nome&skip=0&top=1000`).subscribe(v => {
             this.totalItens = this.lista.length
             this.lista = v
         })
     }
+
+    get pessoas () {               
+        return this.lista.filter(v => {            
+            if (v.PersonId.Nome === null) {
+                v.PersonId.Nome = ''
+            }               
+            if (v.PersonId.CpfCnpj === null) {
+                v.PersonId.CpfCnpj = ''
+            }
+            return v.PersonId.Nome.toLowerCase().includes(this.data.toLowerCase()) || v.PersonId.CpfCnpj.toString().includes(this.data)
+        })
+    
+}
 
     pressionaEnter(event: KeyboardEvent) {
         if(event.key === 'Enter') this.carregarLista();

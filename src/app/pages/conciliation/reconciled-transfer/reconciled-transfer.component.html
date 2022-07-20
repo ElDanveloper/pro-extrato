@@ -25,23 +25,7 @@
                         <p-checkbox binary="true" formControlName="selecionar"></p-checkbox>
                         <label style="margin-left: 5px; font-weight: bold;">Selecionado</label>
                     </div>
-                </div>
-                <!-- <div class="p-col-4 p-fluid p-formgrid p-grid">
-                    <div class="buttons p-col-12">
-                        <button pButton label="Novo" class="Novo" (click)="alterarCard(0)"></button>
-                    </div>
-                    <div class="buttons p-col-12">
-                        <button pButton label="Transferência" class="Novo" (click)="alterarCard(2)"></button>
-                    </div>
-                    <div class="buttons p-col-12">
-                        <button pButton type="button" label="Confirmar" class="p-button-success"
-                                (click)="conciliarParaUnico('4')"></button>
-                    </div>
-                    <div class="p-col-12">
-                        <p-splitButton label="Ações" class="p-button-success" [model]="acoes"
-                                       [style]="{width: '100%'}"></p-splitButton>
-                    </div>
-                </div> -->
+                </div>               
             </div>
             &nbsp;
         </p-card>
@@ -50,18 +34,10 @@
     <div class="p-col-8" *ngIf="index == 0">
         <p-card>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-col-3 p-fluid p-col-nopad">
-                    <!-- <div class="buttons p-col-12 center-content">
-                        <button pButton type="button" label="Busca Contabil"
-                                (click)="openModalConciliarContabil()"></button>
-                    </div>
-                    <div class="buttons p-col-12 center-content">
-                        <button pButton type="button" label="Busca Financeiro"
-                                (click)="openModalConciliarParcela()"></button>
-                    </div> -->
+                <div class="p-col-3 p-fluid p-col-nopad">                   
                     <div class="buttons p-col-12 center-content">
                         <button pButton type="button" label="Conciliar" class="p-button-success"
-                                (click)="conciliarParaUnico('4')"></button>
+                                (click)="reconcileSingle()"></button>
                     </div>
                     <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 6px;">
                         <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
@@ -86,7 +62,7 @@
                         <div class="p-col-9">
                             <app-input-financial-category-search
                                 (ngModelChange)="selecionouNaturezaFinanceira($event)" formControlName="IdNatureza"
-                                filtroAdicional="ApareceTesouraria eq true"></app-input-financial-category-search>
+                                ></app-input-financial-category-search>
                         </div>
                     </div>
                     <div class="p-col-12" style="margin-left: 5px;">
