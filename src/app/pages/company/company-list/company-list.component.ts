@@ -1,5 +1,5 @@
-import { NetworkService } from './../../../services/network.service';
-import { qtdLinhas, getUrlClient } from './../../../controller/staticValues';
+import { NetworkService } from '../../../services/network.service';
+import { qtdLinhas, getUrlClient } from '../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, Message, MessageService, SelectItem } from "primeng/api";
@@ -7,11 +7,11 @@ import { Router } from "@angular/router";
 
 
 @Component({
-    selector: 'app-empresas-lista',
-    templateUrl: './empresas-lista.component.html',
-    styleUrls: ['./empresas-lista.component.css']
+    selector: 'app-company-list',
+    templateUrl: './company-list.component.html',
+    styleUrls: ['./company-list.component.css']
 })
-export class EmpresasListaComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class CompanyListComponent extends BaseListSimples implements OnInit, OnDestroy {
 
     @ViewChild('cadastrarEmpresa') cadastrarEmpresa: ElementRef;
 
@@ -34,7 +34,7 @@ export class EmpresasListaComponent extends BaseListSimples implements OnInit, O
     opcoesTable = [
         {
             label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
-                this.router.navigate([`/empresas-cadastro/${e.id}`])
+                this.router.navigate([`/company-registration/${e.id}`])
             }
         },
         { label: 'Excluir', icon: 'fa fa-close', command: (e) => { } },

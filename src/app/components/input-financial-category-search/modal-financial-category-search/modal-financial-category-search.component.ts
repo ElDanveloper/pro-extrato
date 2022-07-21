@@ -13,7 +13,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {NetworkService} from "../../../services/network.service";
 import {Router} from "@angular/router";
 import {Util} from "../../../controller/Util";
-import {getUrlCad, qtdLinhas} from "../../../controller/staticValues";
+import {getUrlCad, getUrlPro, qtdLinhas} from "../../../controller/staticValues";
 import {Paginator} from "primeng/paginator";
 import {Subscription} from "rxjs";
 
@@ -130,9 +130,9 @@ export class ModalFinancialCategorySearchComponent implements OnInit, OnChanges,
         }
 
         if(v.toString().match(/^\d+$/)) {
-            v = `CodControle eq ${v}`
+            v = `CodeControl eq ${v}`
         } else {
-            v = `contains(lower(Descricao), '${Util.lower(v)}')`
+            v = `contains(lower(Description), '${Util.lower(v)}')`
         }
 
         let filter = ''
@@ -140,14 +140,14 @@ export class ModalFinancialCategorySearchComponent implements OnInit, OnChanges,
 
 
         if(this.filtroAdicional) {
-            filter = `naturezafinanceira?$filter=(Sintetico eq false and ${this.filtroAdicional} and ${v})`
+            filter = `financialCategory?$filter=(Sintetic eq false and ${this.filtroAdicional} and ${v})`
         } else {
-            filter = `naturezafinanceira?$filter=(Sintetico eq false and ${v})`
+            filter = `financialCategory?$filter=(Sintetic eq false and ${v})`
         }
 
-        this.networkService.getSimplesQtd(getUrlCad(), `${filter}&$inlinecount=allpages&$top=0`).subscribe((qtd: number) => {
+        this.networkService.getSimplesQtd(getUrlPro(), `${filter}&$inlinecount=allpages&$top=0`).subscribe((qtd: number) => {
             this.totalItens = qtd
-        this.networkService.getSimples(getUrlCad(),`${filter}&$skip=${this.pagina}&$top=${this.top}`).subscribe((listaSec:any) => {
+        this.networkService.getSimples(getUrlPro(),`${filter}&$skip=${this.pagina}&$top=${this.top}`).subscribe((listaSec:any) => {
             this.lista = listaSec.value
         }, error1 => {
             this.messageService.add(Util.pushErrorMsg(error1))

@@ -1,5 +1,5 @@
-import { NetworkService } from './../../../services/network.service';
-import { qtdLinhas, getUrlClient, getUrlUser } from './../../../controller/staticValues';
+import { NetworkService } from '../../../../services/network.service';
+import { qtdLinhas, getUrlClient, getUrlUser } from '../../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ConfirmationService, Message, MessageService, SelectItem} from "primeng/api";
@@ -7,11 +7,11 @@ import {Router} from "@angular/router";
 
 
 @Component({
-  selector: 'app-usuarios-lista',
-  templateUrl: './usuarios-lista.component.html',
-  styleUrls: ['./usuarios-lista.component.css']
+  selector: 'app-users-list',
+  templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.css']
 })
-export class UsuariosListaComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class UsersListComponent extends BaseListSimples implements OnInit, OnDestroy {
 
     // @ViewChild('cadastrarPessoa') cadastrarPessoa: ElementRef;
 

@@ -1,12 +1,13 @@
+import { getUrlPro } from './../../../controller/staticValues';
 import { map } from 'rxjs/operators';
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {NetworkService} from "../../../services/network.service";
-import {Util} from "../../../controller/Util";
-import {Router} from "@angular/router";
-import {DadosDefaultService} from "../../../services/dados-default.service";
-import {MessageService} from "primeng/api";
-import {Subscription} from "rxjs";
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { NetworkService } from "../../../services/network.service";
+import { Util } from "../../../controller/Util";
+import { Router } from "@angular/router";
+import { DadosDefaultService } from "../../../services/dados-default.service";
+import { MessageService } from "primeng/api";
+import { Subscription } from "rxjs";
 
 
 @Component({
@@ -74,11 +75,12 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
             Documento: '',
             selecionar: '',
             memorizar: '',
+            memorizarPessoa: '',
         })
     }
-   
-    get getData() {         
-        
+
+    get getData() {
+
         if (!this.data) return
         switch (this.type) {
             case 'extratoNaoConciliado':
@@ -87,7 +89,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
             case 'contabilConciliado':
                 return this.data.Data
         }
-    
+
     }
 
     get getValor() {
@@ -95,7 +97,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     }
 
     ngOnInit() {
-        if (this.data) {            
+        if (this.data) {
             if (this.data.Reconciled === "P") {
                 this.index = 1
             }
@@ -148,32 +150,26 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         // this.dadosDefault.conciliarParcelaParams.next({data: this.data, params: this.dataPesquisa})
     }
 
-    conciliarParaUnico(tipoConciliacao) {
-        let idPessoa = this.form.get('IdPessoa').value
-        idPessoa = idPessoa && idPessoa.Id ? idPessoa.Id : null
-        let idNatureza = this.form.get('IdNatureza').value
-        idNatureza = idNatureza && idNatureza.Id ? idNatureza.Id : null
 
+    reconcileSingle() {
 
-        // const data = Formulario.parseForm(new LancamentoPreConciliado(), Object.assign({},
-        //     {
-        //         ...this.data,
-        //         IdPessoa: idPessoa,
-        //         IdNatureza: idNatureza,
-        //         Historico: this.form.get('Historico').value,
-        //         Documento: this.form.get('Documento').value,
-        //         TIpoConciliacao: this.index === 1 ? '3' : tipoConciliacao.toString(),
-        //         IdContaCaixaDestino: this.form.get('IdContaCaixaDestino').value
-        //     }), LancamentoPreConciliado.referencias(), null, LancamentoPreConciliado.datas())
-        // data.IdParcela = this.IdParcela
-        // if (data.IdPlanoConta === 0) data.IdPlanoConta = null
-        // if (data.IdLancContabil === 0) data.IdLancContabil = null
-        // this.$conciliarParaUnicoSubscription = this.networkService.salvarPost(getUrlFinanceiro(), 'fin/conciliarParaUnico', {
-        //     Ext: data,
-        //     Memorizar: this.form.get('memorizar').value == true
-        // }).subscribe(v => {
-        //     this.recarregarDados.emit(true)
-        // })
+        let nature = this.form.get('IdNatureza').value
+        let person = this.form.get('IdPessoa').value
+
+        let body = {
+            Id: this.data.AccountId.Id,
+            FinancialId: nature.Id,
+            PersonId: person.Id,
+            Obs: this.form.get('Historico').value,
+            SavePerson: this.form.get('memorizarPessoa').value,
+            SaveHistoric: this.form.get('memorizar').value
+        }
+
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.atualizarPost(getUrlPro(), 'UpdateStatementItem', body).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Conciliado com Sucesso!'))
+            this.recarregarDados.emit(true)            
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
     colorValue(v) {
@@ -181,7 +177,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
             'texto-verde': false,
             'texto-vermelho': false,
         }
-        return Util.isNegative(v) ? {...classes, 'texto-vermelho': true} : {...classes, 'texto-verde': true}
+        return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
     }
 
     getNomePessoa(data: any) {
@@ -203,11 +199,12 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     }
 
     selecionouNaturezaFinanceira(e) {
-        this.form.get('Historico').setValue(this.data.HistoricoBanco + '  ' + e.Historico)
+        if (e.Historic === null) return
+        this.form.get('Historico').setValue(this.data.Historic + '  ' + e.Historic)
     }
 
     selecionouPessoa(e) {
-        const {IdNatureza} = e
+        const { IdNatureza } = e
         if (IdNatureza.toString().match(/^\d+$/)) {
             // this.networkService.getSimples(getUrlCad(), `naturezaFinanceira?$filter=CodControle eq ${IdNatureza}`).subscribe((v: any) => {
             //     if (v.value.length) {

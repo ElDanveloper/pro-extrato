@@ -112,7 +112,7 @@ export class InputSearchPersonComponent implements ControlValueAccessor, OnInit 
         }
         if(this.inputValue === this.inputValueCheck) return;
         if(event.type === 'blur' || event.type === 'keypress' && event.key === 'Enter' && (this.inputValue !== undefined && this.inputValue !== null && this.inputValue.toString().trim() !== '')) {
-            this.networkService.listarPessoa(`?Texto='${this.inputValue}'&CampoOrdem=Nome&Pagina=0&Limite=1000`).subscribe(v => {
+            this.networkService.listarPessoa(`?filter='${this.inputValue}'&orderby=Nome&skip=0&top=1000`).subscribe(v => {
                 if(v.length === 1) {
                     this.valorPesquisado(v[0])
                 } else {
@@ -127,12 +127,12 @@ export class InputSearchPersonComponent implements ControlValueAccessor, OnInit 
     }
 
 
-    valorPesquisado(event: any) {
-        this.value = event
-        this.inputValue = event[this.field]
+    valorPesquisado(event: any) {        
+        this.value = event.PersonId
+        this.inputValue = event.PersonId.Nome
         this.updateInputValueCheck()
         this.valorParcialParaPesquisar = undefined
-        this.valorSelecionado.emit(event)
+        this.valorSelecionado.emit(event.PersonId)
     }
 
     openModalPesquisa() {

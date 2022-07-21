@@ -36,13 +36,15 @@ export const getUrlCad = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}ca
 // export const getUrlHunnoCont = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}hunnocont/maxus`
 export const getUrlCnpj = () => `https://api.toqweb.com.br:2004/cad/sandbox/`
 export const getUrlPro = () => `${API_AUTH_HUNNO}/pro/hunnoDEV`
-export const getUrlClient = () => `${API_AUTH}/api/client`
-export const getUrlUser = () => `${API_AUTH}/api/user`
+export const getUrlClient = () => `${URL_BASE}/api/client`
+export const getUrlUser = () => `${URL_BASE}/api/user`
 export const getUrlToken = () => `https://app.hunno.com.br/api/update/token`
 
 //Base teste
-export const URL_BASE = `http://75.119.134.38:8089`
-export const API_AUTH = `http://75.119.134.38:8089`
+export const URL_BASE = `https://api.hunno.com.br`
+export const API_AUTH = `https://api.hunno.com.br:8089`
+// export const URL_BASE = `http://75.119.134.38:8089`
+// export const API_AUTH = `http://75.119.134.38:8089`
 
 //Base Original
 // export const URL_BASE = `https://api.hunnodev.com.br:2004`

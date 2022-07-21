@@ -52,17 +52,17 @@
             <button pButton label="Trocar Conta" (click)="modalTrocarConta = true"></button>
         </div>
 
-        <div class="p-fluid p-formgrid p-grid p-col-12" style="font-weight: bold; margin-top: 5px; margin-bottom: 5px;">
+        <!-- <div class="p-fluid p-formgrid p-grid p-col-12" style="font-weight: bold; margin-top: 5px; margin-bottom: 5px;">
             <div class="p-col-3">Saldo Anterior:<span> R$ {{getTotalSaldoAnterior | virgulaPipe}}</span></div>
             <div class="p-col-3">Entradas:<span> R$ {{getTotalEntradas | virgulaPipe}}</span></div>
             <div class="p-col-3">Saídas:<span> R$ {{getTotalSaidas | virgulaPipe}}</span></div>
             <div class="p-col-3">Saldo Atual:<span> R$ {{getTotalSaldoAtual | virgulaPipe}}</span></div>
-        </div>
+        </div> -->
 
     </div>
 
 
-    <p-table [value]="lista" dataKey="Data">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="lista" dataKey="DateBalance" rowExpandMode="single" [totalRecords]="lista.length">
         <ng-template pTemplate="header">
             <tr>
                 <th style="width: 5%"></th>
@@ -73,22 +73,27 @@
                 <th style="width: 10%;">Saldo</th>
             </tr>
         </ng-template>
-        <ng-template let-expanded="expanded" let-rowData pTemplate="body">
+        <ng-template let-expanded="expanded" pTemplate="body" let-index="rowIndex" let-rowData let-columns="columns">
             <tr>
                 <td>
-                    <a [pRowToggler]="rowData" href="#">
-                        <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                    <a [pRowToggler]="rowData" href="#">                        
+                        <button (click)="tableExpand(rowData, expanded)" type="button" pButton pRipple
+                            class="p-button-text p-button-rounded p-button-plain"
+                            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                     </a>
+                    <!-- <a [pRowToggler]="rowData" href="#">
+                        <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                    </a> -->
                 </td>
-                <td>{{rowData.Data | date}}</td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData.SaldoAnterior)">{{rowData.SaldoAnterior |
+                <td>{{rowData.DateBalance | date}}</td>
+                <td appAlinharDireita [ngClass]="colorValue(rowData.InitialBalance)">{{rowData.InitialBalance |
                     virgulaPipe}}
                 </td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData.Debitos)">{{getValor(rowData.Debitos) |
+                <td appAlinharDireita [ngClass]="colorValue(rowData.Debits)">{{getValor(rowData.Debits) |
                     CommaPipeZero}}</td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData.Creditos)">{{getValor(rowData.Creditos) |
+                <td appAlinharDireita [ngClass]="colorValue(rowData.Credits)">{{getValor(rowData.Credits) |
                     CommaPipeZero}}</td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData.SaldoAtual)">{{rowData.SaldoAtual | virgulaPipe}}
+                <td appAlinharDireita [ngClass]="colorValue(rowData.CalculatedBalance)">{{rowData.CalculatedBalance | virgulaPipe}}
                 </td>
             </tr>
         </ng-template>
@@ -96,7 +101,7 @@
             <tr>
                 <td colspan="6">
                     <p-table [paginator]="true" [(rows)]="qtdLinhas" [rowsPerPageOptions]="opcoesLinhas"
-                        [totalRecords]="rowData.Lancamentos.length" [value]="rowData.Lancamentos">
+                        [totalRecords]="lista2.length" [value]="lista2">
                         <ng-template pTemplate="header">
             <tr>
                 <th style="width: 60%;">Histórico</th>
@@ -109,13 +114,13 @@
         </ng-template>
         <ng-template pTemplate="body" let-rowData2 let-columns="columns">
             <tr>
-                <td>{{rowData2.Historico}}</td>
-                <td>{{rowData2.Documento}}</td>
+                <td>{{rowData2.Historic}}</td>
+                <td>{{rowData2.Document}}</td>
                 <td appAlinharDireita [ngClass]="colorValue(rowData2.Debitos)">{{getValor(rowData2.Debitos) |
                     CommaPipeZero}}</td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData2.Creditos)">{{getValor(rowData2.Creditos) |
+                <td appAlinharDireita [ngClass]="colorValue(rowData2.Amount)">{{getValor(rowData2.Amount) |
                     CommaPipeZero}}</td>
-                <td>{{rowData2.Tipo}}</td>
+                <td>{{rowData2.Specie}}</td>
                 <td>
                     <app-opcoes-table [value]="rowData2" [opcoes]="itemsRow"></app-opcoes-table>
                 </td>

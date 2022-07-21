@@ -26,8 +26,8 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData>
                 <tr [pSelectableRow]="rowData">
-                    <td>{{rowData.Nome}}</td>
-                    <td>{{rowData.CpfCnpj}}</td>
+                    <td>{{rowData.PersonId.Nome}}</td>
+                    <td>{{rowData.PersonId.CpfCnpj}}</td>
                 </tr>
             </ng-template>
 
@@ -40,7 +40,7 @@
                     <button #pessoa pButton type="button" label="Adicionar" style="margin-right:10px"></button>
                 </div>
                 <div class="p-offset-6 p-col-2">
-                    <button pButton type="button" label="Cancelar" style="margin-right:10px" class="ui-button-danger" (click)="fecharModal()"></button>
+                    <button pButton type="button" label="Cancelar" style="margin-right:10px" class="p-button-danger" (click)="fecharModal()"></button>
                 </div>
                 <div class="p-col-2">
                     <button pButton type="button" label="Confirmar" (click)="processarFormulario()"></button>

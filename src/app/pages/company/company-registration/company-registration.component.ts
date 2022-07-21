@@ -1,10 +1,10 @@
-import { Pessoa } from './../../../model/pessoa.model';
-import { PessoaContractor } from './../../../model/pessoa-contractor.model';
-import { ContractorClient } from './../../../model/contractor-client.model';
-import { Util, hasValue } from './../../../controller/Util';
-import { SERVERLESS_URL, getUrlClient, getUrlPro } from './../../../controller/staticValues';
-import { Formulario } from './../../../controller/Formulario';
-import { Company } from './../../../model/company.model';
+import { Pessoa } from '../../../model/pessoa.model';
+import { PessoaContractor } from '../../../model/pessoa-contractor.model';
+import { ContractorClient } from '../../../model/contractor-client.model';
+import { Util, hasValue } from '../../../controller/Util';
+import { SERVERLESS_URL, getUrlClient, getUrlPro } from '../../../controller/staticValues';
+import { Formulario } from '../../../controller/Formulario';
+import { Company } from '../../../model/company.model';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,12 +18,12 @@ import { NetworkService } from 'src/app/services/network.service';
 import { Dimensions, ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
-    selector: 'app-empresas-cadastro',
-    templateUrl: './empresas-cadastro.component.html',
-    styleUrls: ['./empresas-cadastro.component.css']
+    selector: 'app-comapany-registration',
+    templateUrl: './company-registration.component.html',
+    styleUrls: ['./company-registration.component.css']
 })
 
-export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, OnDestroy {
+export class CompanyRegistrationComponent extends BaseFormPost implements OnInit, OnDestroy {
 
     $subscription1: Subscription;
     $subscription2: Subscription;
@@ -238,7 +238,7 @@ export class EmpresasCadastroComponent extends BaseFormPost implements OnInit, O
     }
 
     cancelarLocal() {
-        this.router.navigate(['empresas'])
+        this.router.navigate(['company'])
     }
 
     ngOnDestroy() {

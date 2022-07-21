@@ -1,3 +1,4 @@
+import { getUrlPro } from './../../controller/staticValues';
 import {Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Util} from "../../controller/Util";
@@ -21,7 +22,7 @@ const FIELD_VALUE_ACESSOR: any = {
 export class InputFinancialCategorySearchComponent implements ControlValueAccessor, OnInit {
 
     @Input() label: string;
-    @Input() field: string = 'Descricao';
+    @Input() field: string = 'Description';
     @Input() placeholder = '';
     @Input() id: string = Util.randomId();
     @Input() type = 'text';
@@ -110,17 +111,17 @@ export class InputFinancialCategorySearchComponent implements ControlValueAccess
 
             let v = this.inputValue;
             if(v.toString().match(/^\d+$/)) {
-                v = `CodControle eq ${v}`
+                v = `CodeControl eq ${v}`
             } else {
-                v = `contains(lower(Descricao), '${Util.lower(v)}')`
+                v = `contains(lower(Description), '${Util.lower(v)}')`
             }
 
             if(this.filtroAdicional) {
-                filtro = `naturezafinanceira?$filter=(Sintetico eq false and ${this.filtroAdicional} and ${v})`
+                filtro = `financialCategory?$filter=(Sintetic eq false and ${this.filtroAdicional} and ${v})`
             } else {
-                filtro = `naturezafinanceira?$filter=(Sintetico eq false and ${v})`
+                filtro = `financialCategory?$filter=(Sintetic eq false and ${v})`
             }
-            this.networkService.getSimples(getUrlCad(),filtro).subscribe((v: any) => {
+            this.networkService.getSimples(getUrlPro(),filtro).subscribe((v: any) => {
                 const {value} = v
                 if(value.length === 1) {
                     this.valorPesquisado(value[0])

@@ -1,10 +1,11 @@
-import { Formulario } from './../../../controller/Formulario';
-import { autoCompleteDelayTime, getUrlCad, SERVERLESS_URL } from './../../../controller/staticValues';
-import { hasValue, Util } from './../../../controller/Util';
-import { DadosDefaultService } from './../../../services/dados-default.service';
-import { NetworkService } from './../../../services/network.service';
-import { getEstados } from './../../../controller/staticValues';
-import { BaseFormPost } from './../../../controller/BaseFormPost';
+import { Util } from 'src/app/controller/Util';
+import { hasValue } from '../../../controller/Util';
+import { Formulario } from '../../../controller/Formulario';
+import { Pessoa } from '../../../model/pessoa.model';
+import { DadosDefaultService } from '../../../services/dados-default.service';
+import { NetworkService } from '../../../services/network.service';
+import { getEstados, SERVERLESS_URL, getUrlPro, autoCompleteDelayTime } from '../../../controller/staticValues';
+import { BaseFormPost } from '../../../controller/BaseFormPost';
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MessageService, SelectItem} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -12,15 +13,15 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {Endereco, ErroCep, NgxViacepService} from "@brunoc/ngx-viacep";
 import {Subscription} from "rxjs";
 import {Dimensions, ImageCroppedEvent} from "ngx-image-cropper";
-import { Company } from '../../../model/company.model';
+import { PersonClient } from 'src/app/model/person-client.model';
 
 @Component({
-    selector: 'app-usuarios-cadastro',
-    templateUrl: './usuarios-cadastro.component.html',
-    styleUrls: ['./usuarios-cadastro.component.css']
+    selector: 'app-person-registration',
+    templateUrl: './person-registration.component.html',
+    styleUrls: ['./person-registration.component.css']
 })
 
-export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, OnDestroy {
+export class PersonRegistrationComponent extends BaseFormPost implements OnInit, OnDestroy {
 
     @ViewChild('uploadImagem', {static: false}) uploadImagem
 
@@ -37,7 +38,7 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
     $subscription11: Subscription;
     $subscription12: Subscription;
 
-    entidade = 'empresas';
+    entidade = 'personclient';
     id;
     form: FormGroup;
     enderecosTable = [];
@@ -82,11 +83,11 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
     modalContato = false;
     contatoParaEdicao
     itemsRowEndereco = [
-        // {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editarEndereco(e)},
+        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editarEndereco(e)},
         // {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletarEndereco(e)},
     ]
     itemsRowContato = [
-        // {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editarContato(e)},
+        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editarContato(e)},
         // {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletarContato(e)},
     ]
     public contaContabilSugests = []
@@ -102,27 +103,11 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
     showCropper = false;
     private timeOut: any = 0
 
-
-    //Novo
-    selectIndCooperativa: SelectItem[] = [
-        {value: '0', label: '0 - Não é Cooperativa'},
-        {value: '1', label: '1 - Cooperativa de Trabalho'},
-        {value: '2', label: '2 - Cooperativa de Produção'},
-        {value: '3', label: '3 - Outras Cooperativa'},
-    ]
-
-    selectIndConstrutora: SelectItem[] = [
-        {value: '0', label: '0 - Não é Construtora'},
-        {value: '1', label: '1 - Empresa Construtora'},        
-    ]
-
-    selectTributario: SelectItem[] = []
-
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService,
                 private viaCep: NgxViacepService) {
-        super(networkService, dadosDefault, router, 'company', messageService);
-        this.form = Formulario.createForm(new Company(), this.fb);
-        // this.form.addControl("PessoaFisicaForm", Formulario.createForm(new PersonFisical(), this.fb));
+        super(networkService, dadosDefault, router, 'personClient', messageService);
+        this.form = Formulario.createForm(new PersonClient(), this.fb);
+        this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
         // this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
 
         // this.form.get('PessoaForm').get('Tipo').setValue('F');
@@ -132,62 +117,61 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
     }
 
     get imagem() {
-        const staticImg = '../../../assets/images/user.png'
-        const img = this.form.get('PessoaForm').get('CaminhoFoto').value
+        const staticImg = '../../../../../assets/images/user.png'
+        const img = null
+        // this.form.get('PessoaForm').get('CaminhoFoto').value
         return hasValue(img) ? img : staticImg
     };
 
     ngOnInit() {
-    //     // this.$subscription1 = this.dadosDefault.pessoa().subscribe(values => {
-    //     //     this.selectSituacaoPessoa = values[0];
-    //     //     this.selectOperacaoFiscal = values[1];
-    //     //     this.selectNaturezaFinanceira = values[2];
-    //     //     this.selectVendedor = values[3];
-    //     //     this.selectTipoEndereco = values[4];
-    //     //     this.selectContaContabil = values[5]
-    //     //     this.selectTabela = values[6]
-    //     //     this.selectPais = values[7]
 
-    // this.$subscription1 = this.dadosDefault.empregador().subscribe(values => {
-    //     this.selectTributario = values[0];
-    // })
+        this.$subscription5 = this.route.paramMap.subscribe(params => {
+            this.id = params.get('id')
+        })
 
+        this.$subscription1 = this.dadosDefault.pessoa().subscribe(values => {
+            // this.selectSituacaoPessoa = values[0];
+            // this.selectOperacaoFiscal = values[1];
+            // this.selectNaturezaFinanceira = values[2];
+            // this.selectVendedor = values[3];
+            // this.selectTipoEndereco = values[4];
+            // this.selectContaContabil = values[5]
+            // this.selectTabela = values[6]
+            // this.selectPais = values[7]            
             if (this.id) {
                 this.dadosDefault.exibirLoader.next(true)
-                this.$subscription2 = this.networkService.buscar('empregador', this.id, null).subscribe((value: any) => {
+                this.$subscription2 = this.networkService.buscar('PersonClient', this.id, Util.expandedQuery(PersonClient.expanded())).subscribe((value: any) => {
 
-                    this.idPessoa = value.IdPessoa.Id
-
-                    const data = Formulario.prepareValueToForm(new Company(), value, null, null, Company.checkbox());
+                    this.idPessoa = value.PersonId.Id                    
+                    
+                    const data = Formulario.prepareValueToForm(new PersonClient(), value, null, PersonClient.relacionamentos(), null);
                     Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
 
-                    // if (value.IdPessoa) {
-                    //     const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), value.IdPessoa, Pessoa.datas(), null, Pessoa.checkbox());
-                    //     Object.keys(dataPessoa).forEach(key => this.form.get('PessoaForm').get(key).setValue(dataPessoa[key]))
-                    // }
+                    if (value.PersonId) {                        
+                        const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), value.PersonId, Pessoa.datas(), Pessoa.relacionamentos(), Pessoa.checkbox());
+                        Object.keys(dataPessoa).forEach(key => this.form.get('PessoaForm').get(key).setValue(dataPessoa[key]))
+                    }
 
                     // if (value.IdPessoaFisica) {
-                    //     const dataPessoaFisica = Formulario.prepareValueToForm(new PersonFisical(), value.IdPessoaFisica, PersonFisical.datas(), PersonFisical.relacionamentos(), PersonFisical.checkbox());
+                    //     const dataPessoaFisica = Formulario.prepareValueToForm(new PessoaFisica(), value.IdPessoaFisica, PessoaFisica.datas(), PessoaFisica.relacionamentos(), PessoaFisica.checkbox());
                     //     Object.keys(dataPessoaFisica).forEach(key => this.form.get('PessoaFisicaForm').get(key).setValue(dataPessoaFisica[key]))
                     // }
 
-                    this.$subscription3 = this.networkService.getSimples(getUrlCad(), `pessoaendereco?$filter=IdPessoa eq ${value.IdPessoa.Id}`).subscribe((v: any) => {
-                        this.enderecosTable = v.value
-                    })
+                    // this.$subscription3 = this.networkService.getSimples(getUrlCad(), `pessoaendereco?$filter=IdPessoa eq ${value.IdPessoa.Id}`).subscribe((v: any) => {
+                    //     this.enderecosTable = v.value
+                    // })
 
-                    this.$subscription4 = this.networkService.getSimples(getUrlCad(), `pessoacontato?$filter=IdPessoa eq ${value.IdPessoa.Id}`).subscribe((v: any) => {
-                        this.contatosTable = v.value
-                    })
+                    // this.$subscription4 = this.networkService.getSimples(getUrlCad(), `pessoacontato?$filter=IdPessoa eq ${value.IdPessoa.Id}`).subscribe((v: any) => {
+                    //     this.contatosTable = v.value
+                    // })
 
                 }).add(() => this.dadosDefault.exibirLoader.next(false))
             } else {
                 this.form.get('DataCadastro').setValue(new Date())
             }
-        // });
+        });
 
-        this.$subscription5 = this.route.paramMap.subscribe(params => {
-            this.id = params.get('id')
-        })
+       
     }
 
     processarFormulario() {
@@ -202,86 +186,75 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
             if (inv) return
         }
 
-        const cod = this.form.get('CodContaContabil').value ? this.form.get('CodContaContabil').value.Codigo : null
+        // const cod = this.form.get('CodContaContabil').value ? this.form.get('CodContaContabil').value.Codigo : null
 
-        const {PessoaForm, PessoaFisicaForm, ...data} = Object.assign({}, this.form.value)
+        const {PessoaForm, ...data} = Object.assign({}, this.form.value)
 
-        const temp = {...data, CodContaContabil: cod}
+        // const temp = {...data, CodContaContabil: cod}
         let value: any = {
-            ...Formulario.parseForm(new Company(), temp, null, null, null, null, Company.checkbox()),
-            Ativo: true,
+            ...Formulario.parseForm(new PersonClient(), data, PersonClient.referencias(), null, null, null, null),
+            // Ativo: true,
             "$id": 1
         };
 
         
-        // value.IdPessoa = {
-        //     ...Formulario.parseForm(new Pessoa(), {
-        //         ...PessoaForm,
-        //         Email: data.Email,
-        //         DataCadastro: data.DataCadastro,
-        //         DataNascimento: data.DataNascimento,
-        //         Logradouro: data.Logradouro,
-        //         Numero: data.Numero,
-        //         Complemento: data.Complemento,
-        //         Cep: data.Cep,
-        //         Cidade: data.Cidade,
-        //         CodigoIbge: data.CodigoIbge,
-        //         UF: data.UF,     
-        //         Bairro: data.Bairro           
-        //     }, null, Pessoa.mascaras(), Pessoa.datas(), null, Pessoa.checkbox()),
-        //     Ativo: true, Fantasia: value.Fantasia, Nome: value.Nome, "$id": 2
-        // };
+        value.PersonId = {
+            ...Formulario.parseForm(new Pessoa(), {
+                ...PessoaForm    
+            }, Pessoa.referencias(), Pessoa.mascaras(), Pessoa.datas(), null, Pessoa.checkbox()),
+            Ativo: true, "$id": 2
+        };
 
         // if (this.form.get('PessoaForm').get('Tipo').value !== 'J') {
         //     value.IdPessoaFisica = {
-        //         ...Formulario.parseForm(new PersonFisical(), PessoaFisicaForm, PersonFisical.referencias(), null, PersonFisical.datas(), null, PersonFisical.checkbox()),
+        //         ...Formulario.parseForm(new PessoaFisica(), PessoaFisicaForm, PessoaFisica.referencias(), null, PessoaFisica.datas(), null, PessoaFisica.checkbox()),
         //         IdPessoa: {"$ref": 2}
         //     }
         // }
 
-        const vFinal = {           
+        // const vFinal = {           
             
-            Pessoa: value,
+        //     Pessoa: value,
             // Le: this.enderecosTable.map(x => Formulario.parseForm(new PessoaEndereco(), x, PessoaEndereco.referencias(), null, null, null, PessoaEndereco.checkbox())),
             // Lc: this.contatosTable.map(x => Formulario.parseForm(new PessoaContato(), x, PessoaContato.referencias(), null, PessoaContato.datas(), null, PessoaContato.checkbox())),
-        }
+        // };
 
         this.networkService.exibirLoader.next(true);
         if (this.imageChangedEvent) {
             this.networkService.salvarPost(SERVERLESS_URL, 'upload-imagem/pessoa', {
                 imagem: this.croppedImage,
             }).subscribe((resFoto: any) => {
-                vFinal.Pessoa.IdPessoa.CaminhoFoto = resFoto.url
-                this.$subscription6 = this.networkService.salvarPost(getUrlCad(), 'pessoas/pessoaempresa2', vFinal).subscribe((v: any) => {
-                    this.router.navigate(['/pessoa'])
+                value.PersonId.CaminhoFoto = resFoto.url
+                this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'person', value).subscribe((v: any) => {
+                    this.router.navigate(['/pessoas'])
                 }).add(() => this.networkService.exibirLoader.next(false))
             }, e => this.networkService.exibirLoader.next(false))
         } else {
-            this.$subscription6 = this.networkService.salvarPost(getUrlCad(), 'pessoas/pessoaempresa2', vFinal).subscribe((v: any) => {
-                this.router.navigate(['/pessoa'])
+            this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'person', value).subscribe((v: any) => {
+                this.router.navigate(['/pessoas'])
             }).add(() => this.networkService.exibirLoader.next(false))
         }
 
 
     }
 
-    adicionarEndereco(value) {
-        const {index, ...data} = value
-        if (typeof index !== 'undefined' && index !== null) {
-            this.enderecosTable.splice(index, 1, {...data, Principal: false})
-        } else {
-            this.enderecosTable.push(Object.assign({}, {...data, Principal: false}));
-        }
-    }
+    // adicionarEndereco(value) {
+    //     const {index, ...data} = value
+    //     if (typeof index !== 'undefined' && index !== null) {
+    //         this.enderecosTable.splice(index, 1, {...data, Principal: false})
+    //     } else {
+    //         this.enderecosTable.push(Object.assign({}, {...data, Principal: false}));
+    //     }
+    // }
 
-    adicionarContato(value) {
-        const {index, ...data} = value
-        if (typeof index !== 'undefined' && index !== null) {
-            this.contatosTable.splice(index, 1, data)
-        } else {
-            this.contatosTable.push(Object.assign({}, data));
-        }
-    }
+    // adicionarContato(value) {
+    //     const {index, ...data} = value
+    //     if (typeof index !== 'undefined' && index !== null) {
+    //         this.contatosTable.splice(index, 1, data)
+    //     } else {
+    //         this.contatosTable.push(Object.assign({}, data));
+    //     }
+    // }
 
     buscaCnpj(e) {
         if (e.type === 'keypress' && e.key !== 'Enter') return;
@@ -295,7 +268,7 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
         cnpj = cnpj.join('')
 
         if (cnpj.length === 11) {
-            this.$subscription7 = this.networkService.getSimples(getUrlCad(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
+            this.$subscription7 = this.networkService.getSimples(getUrlPro(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
                 this.form.get('PessoaForm').get('Tipo').setValue('F')
                 const vApi = v.value
                 if (vApi && vApi.length === 1) {
@@ -323,28 +296,28 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
         }
 
         if (cnpj.length === 14) {
-            this.$subscription8 = this.networkService.getSimples(getUrlCad(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
+            this.$subscription8 = this.networkService.getSimples(getUrlPro(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
                 this.form.get('PessoaForm').get('Tipo').setValue('J')
                 const vApi = v.value
                 if (vApi && vApi.length === 1) {
-                    this.form.get('Nome').setValue(vApi[0].Nome)
-                    this.form.get('Fantasia').setValue(vApi[0].Fantasia)
+                    this.form.get('PessoaForm').get('Nome').setValue(vApi[0].Nome)
+                    this.form.get('PessoaForm').get('Fantasia').setValue(vApi[0].Fantasia)
                     this.form.get('PessoaForm').get('Id').setValue(vApi[0].Id)
-                    this.form.get('Contato').setValue(vApi[0].Contato)
-                    this.form.get('Complemento').setValue(vApi[0].Complemento)
-                    this.form.get('Logradouro').setValue(vApi[0].Logradouro)
-                    this.form.get('Celular').setValue(vApi[0].Celular)
-                    this.form.get('Numero').setValue(vApi[0].Numero)
-                    this.form.get('UF').setValue(vApi[0].UF)
-                    this.form.get('Bairro').setValue(vApi[0].Bairro)
-                    this.form.get('CodigoIbge').setValue(vApi[0].CodigoIbge)
-                    this.form.get('Fone1').setValue(vApi[0].Fone1)
-                    this.form.get('Fone2').setValue(vApi[0].Fone2)
-                    this.form.get('Email').setValue(vApi[0].Email)
-                    this.form.get('Cep').setValue(vApi[0].Cep)
-                    this.form.get('Cidade').setValue(vApi[0].Cidade)
-                    this.form.get('IdCondPagamento').setValue(vApi[0].IdCondPagamento)
-                    this.form.get('PessoaForm').get('ContribuinteIcms').setValue(vApi[0].ContribuinteIcms)
+                    this.form.get('PessoaForm').get('Contato').setValue(vApi[0].Contato)
+                    this.form.get('PessoaForm').get('Complemento').setValue(vApi[0].Complemento)
+                    this.form.get('PessoaForm').get('Logradouro').setValue(vApi[0].Logradouro)
+                    this.form.get('PessoaForm').get('Celular').setValue(vApi[0].Celular)
+                    this.form.get('PessoaForm').get('Numero').setValue(vApi[0].Numero)
+                    this.form.get('PessoaForm').get('UF').setValue(vApi[0].UF)
+                    this.form.get('PessoaForm').get('Bairro').setValue(vApi[0].Bairro)
+                    this.form.get('PessoaForm').get('CodigoIbge').setValue(vApi[0].CodigoIbge)
+                    this.form.get('PessoaForm').get('Fone1').setValue(vApi[0].Fone1)
+                    this.form.get('PessoaForm').get('Fone2').setValue(vApi[0].Fone2)
+                    this.form.get('PessoaForm').get('Email').setValue(vApi[0].Email)
+                    this.form.get('PessoaForm').get('Cep').setValue(vApi[0].Cep)
+                    this.form.get('PessoaForm').get('Cidade').setValue(vApi[0].Cidade)
+                    this.form.get('PessoaForm').get('IdCondPagamento').setValue(vApi[0].IdCondPagamento)
+                    this.form.get('PessoaForm').get('PessoaForm').get('ContribuinteIcms').setValue(vApi[0].ContribuinteIcms)
                 } else if (cnpj.length === 14) {
                     this.buscarCnpjReceitaWs(cnpj)
                 }
@@ -354,40 +327,39 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
 
     buscarCnpjReceitaWs(cnpj) {
         this.$subscription9 = this.dadosDefault.buscarCnpj(cnpj).subscribe((v: any) => {
-            this.form.get('Nome').setValue(v['nome']);
-            this.form.get('Fantasia').setValue(v['fantasia']);
-            this.form.get('Cep').setValue(v['cep']);
-            this.form.get('Logradouro').setValue(v['logradouro']);
-            this.form.get('Numero').setValue(v['numero']);
-            this.form.get('Complemento').setValue(v['complemento']);
-            this.form.get('Bairro').setValue(v['bairro']);
-            this.form.get('Cidade').setValue(v['municipio']);
-            this.form.get('UF').setValue(v['uf'])
-            this.form.get('Fone1').setValue(v['telefone'])
-            this.form.get('Email').setValue(v['email'])
+            this.form.get('PessoaForm').get('Nome').setValue(v['nome']);
+            this.form.get('PessoaForm').get('Fantasia').setValue(v['fantasia']);
+            this.form.get('PessoaForm').get('Cep').setValue(v['cep']);
+            this.form.get('PessoaForm').get('Logradouro').setValue(v['logradouro']);
+            this.form.get('PessoaForm').get('Numero').setValue(v['numero']);
+            this.form.get('PessoaForm').get('Complemento').setValue(v['complemento']);
+            this.form.get('PessoaForm').get('Bairro').setValue(v['bairro']);
+            this.form.get('PessoaForm').get('Cidade').setValue(v['municipio']);
+            this.form.get('PessoaForm').get('UF').setValue(v['uf'])
+            this.form.get('PessoaForm').get('Fone1').setValue(v['telefone'])
+            this.form.get('PessoaForm').get('Email').setValue(v['email'])
             this.verificaCepValido(true)
         })
     }
 
     verificaCepValido(event) {
-        if (event === true || (event.key === 'Enter' || event.type === 'blur') && this.form.get('Cep').value !== null) {
-            let cep = this.form.get('Cep').value.toString().match(/\d/g)
+        if (event === true || (event.key === 'Enter' || event.type === 'blur') && this.form.get('PessoaForm').get('Cep').value !== null) {
+            let cep = this.form.get('PessoaForm').get('Cep').value.toString().match(/\d/g)
             if (cep === null) return
             cep = cep.join('');
             if (cep.length === 8) {
                 this.viaCep.buscarPorCep(cep)
                     .then((endereco: Endereco) => {
                         if (event === true) {
-                            this.form.get('CodigoIbge').setValue(endereco.ibge)
+                            this.form.get('PessoaForm').get('CodigoIbge').setValue(endereco.ibge)
                             return
-                        }
-                        console.log(endereco);
-                        this.form.get('Logradouro').setValue(endereco.logradouro);
-                        this.form.get('Complemento').setValue(endereco.complemento);
-                        this.form.get('Bairro').setValue(endereco.bairro);
-                        this.form.get('Cidade').setValue(endereco.localidade);
-                        this.form.get('UF').setValue(endereco.uf)
-                        this.form.get('CodigoIbge').setValue(endereco.ibge)
+                        }                        
+                        this.form.get('PessoaForm').get('Logradouro').setValue(endereco.logradouro);
+                        this.form.get('PessoaForm').get('Complemento').setValue(endereco.complemento);
+                        this.form.get('PessoaForm').get('Bairro').setValue(endereco.bairro);
+                        this.form.get('PessoaForm').get('Cidade').setValue(endereco.localidade);
+                        this.form.get('PessoaForm').get('UF').setValue(endereco.uf)
+                        this.form.get('PessoaForm').get('CodigoIbge').setValue(endereco.ibge)
                     }).catch((error: ErroCep) => {
                     this.messageService.add({severity: 'error', summary: 'Cep Nao Encontrado'})
                 })
@@ -416,44 +388,44 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
         }
     }
 
-    cepPesquisado(value) {
-        if (typeof value !== 'object') return;
-        this.modalCepVisible = false;
-        console.log(Object.assign({}, value))
-        this.form.get('Cep').setValue(value['Cep']);
-        this.form.get('UF').setValue(value['Uf']);
-        this.form.get('Cidade').setValue(value['Cidade']);
-        this.form.get('Logradouro').setValue(value['Logradouro'])
-        this.form.get('CodigoIbge').setValue(value['ibge'])
-    }
+    // cepPesquisado(value) {
+    //     if (typeof value !== 'object') return;
+    //     this.modalCepVisible = false;
+    //     console.log(Object.assign({}, value))
+    //     this.form.get('Cep').setValue(value['Cep']);
+    //     this.form.get('UF').setValue(value['Uf']);
+    //     this.form.get('Cidade').setValue(value['Cidade']);
+    //     this.form.get('Logradouro').setValue(value['Logradouro'])
+    //     this.form.get('CodigoIbge').setValue(value['ibge'])
+    // }
 
-    novoEndereco() {
-        this.modalAdicionarEndereco = true
-        this.dadosDefault.dadosAdicionarEndereco.next({index: undefined})
-    }
+    // novoEndereco() {
+    //     this.modalAdicionarEndereco = true
+    //     this.dadosDefault.dadosAdicionarEndereco.next({index: undefined})
+    // }
 
-    novoContato() {
-        this.modalContato = true
-        this.dadosDefault.dadosAdicionarContato.next({index: undefined})
-    }
+    // novoContato() {
+    //     this.modalContato = true
+    //     this.dadosDefault.dadosAdicionarContato.next({index: undefined})
+    // }
 
-    procurarContaContabil({query}) {
-        clearTimeout(this.timeOut);
-        this.timeOut = setTimeout(() => {
-            this.$subscription12 = this.networkService.listar(getUrlCad(), 'planocontas', 0, 100, 'Descricao', 'asc', {
-                col: 'Descricao',
-                value: query
-            }, null).subscribe(v => {
-                this.contaContabilSugests = v;
-                this.timeOut = 0
-            }, e => {
-                this.timeOut = 0
-            })
-        }, autoCompleteDelayTime)
-    }
+    // procurarContaContabil({query}) {
+    //     clearTimeout(this.timeOut);
+    //     this.timeOut = setTimeout(() => {
+    //         this.$subscription12 = this.networkService.listar(getUrlPro(), 'planocontas', 0, 100, 'Descricao', 'asc', {
+    //             col: 'Descricao',
+    //             value: query
+    //         }, null).subscribe(v => {
+    //             this.contaContabilSugests = v;
+    //             this.timeOut = 0
+    //         }, e => {
+    //             this.timeOut = 0
+    //         })
+    //     }, autoCompleteDelayTime)
+    // }
 
     cancelarLocal() {
-        this.router.navigate(['/pessoa'])
+        this.router.navigate(['/pessoas'])
     }
 
     ngOnDestroy() {
@@ -476,12 +448,12 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
         this.router.navigate([`/historico-pessoa/${this.idPessoa}`])
     }
 
-    atualizaPessoaSefaz() {
-        // this.networkService.getSimples(getUrlCad(), `pessoas/atualizarDadosSefaz?IdPessoa=${this.idPessoa}`).subscribe(v => {
-        //     const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), v, Pessoa.datas(), null, Pessoa.checkbox());
-        //     Object.keys(dataPessoa).forEach(key => this.form.get('PessoaForm').get(key).setValue(dataPessoa[key]))
-        // })
-    }
+    // atualizaPessoaSefaz() {
+    //     this.networkService.getSimples(getUrlCad(), `pessoas/atualizarDadosSefaz?IdPessoa=${this.idPessoa}`).subscribe(v => {
+    //         const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), v, Pessoa.datas(), null, Pessoa.checkbox());
+    //         Object.keys(dataPessoa).forEach(key => this.form.get('PessoaForm').get(key).setValue(dataPessoa[key]))
+    //     })
+    // }
 
     atualizaPessoaWeb() {
         let cnpj = this.form.get('PessoaForm').get('CpfCnpj').value
@@ -544,14 +516,14 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
         this.uploadImagem.nativeElement.click()
     }
 
-    private deletarEndereco(e: any) {
-        if (e.Id) {
-            this.$subscription10 = this.networkService.deletar(getUrlCad(), 'pessoaendereco', e.Id).subscribe(v => {
-            });
-        }
-        const index = this.enderecosTable.findIndex(v => v === e)
-        this.enderecosTable.splice(index, 1)
-    }
+    // private deletarEndereco(e: any) {
+    //     if (e.Id) {
+    //         this.$subscription10 = this.networkService.deletar(getUrlCad(), 'pessoaendereco', e.Id).subscribe(v => {
+    //         });
+    //     }
+    //     const index = this.enderecosTable.findIndex(v => v === e)
+    //     this.enderecosTable.splice(index, 1)
+    // }
 
     private editarEndereco(e: any) {
         this.modalAdicionarEndereco = true
@@ -559,14 +531,14 @@ export class UsuariosCadastroComponent extends BaseFormPost implements OnInit, O
         this.dadosDefault.dadosAdicionarEndereco.next({...e, index})
     }
 
-    private deletarContato(e: any) {
-        if (e.Id) {
-            this.$subscription11 = this.networkService.deletar(getUrlCad(), 'pessoacontato', e.Id).subscribe(v => {
-            });
-        }
-        const index = this.contatosTable.findIndex(v => v === e)
-        this.contatosTable.splice(index, 1)
-    }
+    // private deletarContato(e: any) {
+    //     if (e.Id) {
+    //         this.$subscription11 = this.networkService.deletar(getUrlCad(), 'pessoacontato', e.Id).subscribe(v => {
+    //         });
+    //     }
+    //     const index = this.contatosTable.findIndex(v => v === e)
+    //     this.contatosTable.splice(index, 1)
+    // }
 
     private editarContato(e: any) {
         this.modalContato = true
