@@ -133,6 +133,7 @@ export class UnreconciledExtractsComponent implements OnInit, OnDestroy {
     }
 
     removerItem(index) {
+        console.log('Index ---> ' + index)
         this.lista.splice(index, 1)
     }
 

@@ -1,7 +1,7 @@
-import { Formulario } from './../../../controller/Formulario';
-import { DadosDefaultService } from './../../../services/dados-default.service';
-import { NetworkService } from './../../../services/network.service';
-import { SituacaoPessoa } from './../../../model/situacao-pessoa.model';
+import { Formulario } from '../../../controller/Formulario';
+import { DadosDefaultService } from '../../../services/dados-default.service';
+import { NetworkService } from '../../../services/network.service';
+import { SituacaoPessoa } from '../../../model/situacao-pessoa.model';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -10,11 +10,11 @@ import { BaseFormPost } from 'src/app/controller/BaseFormPost';
 
 
 @Component({
-  selector: 'app-situacao-pessoa-cadastro',
-  templateUrl: './situacao-pessoa-cadastro.component.html',
-  styleUrls: ['./situacao-pessoa-cadastro.component.css']
+  selector: 'app-situation-person-registration',
+  templateUrl: './situation-person-registration.component.html',
+  styleUrls: ['./situation-person-registration.component.css']
 })
-export class SituacaoPessoaCadastroComponent extends BaseFormPost implements OnInit {
+export class SituationPersonRegistrationComponent extends BaseFormPost implements OnInit {
 
     entidade = 'situacaopessoa'
     entObj = new SituacaoPessoa()

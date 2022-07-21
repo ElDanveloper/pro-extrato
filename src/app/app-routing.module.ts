@@ -1,3 +1,5 @@
+import { CompanyRegistrationComponent } from './pages/company/company-registration/company-registration.component';
+import { CompanyListComponent } from './pages/company/company-list/company-list.component';
 import { AccountStatusComponent } from './pages/settings-page/account-status/account-status.component';
 import { ParametersComponent } from './pages/settings-page/parameters/parameters.component';
 import { InvoicesListComponent } from './pages/settings-page/invoices-list/invoices-list.component';
@@ -17,10 +19,8 @@ import { ReconciledExtractComponent } from './pages/conciliation/reconciled-extr
 import { ConciliationComponent } from './pages/conciliation/conciliation.component';
 import { NaturezaFinanceiraCadastroComponent } from './pages/natureza-financeira/natureza-financeira-cadastro/natureza-financeira-cadastro.component';
 import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
-import { PessoasCadastroComponent } from './pages/pessoas/pessoas-cadastro/pessoas-cadastro.component';
-import { PessoasListaComponent } from './pages/pessoas/pessoas-lista/pessoas-lista.component';
-import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
-import { EmpresasListaComponent } from './pages/empresas/empresas-lista/empresas-lista.component';
+import { PersonRegistrationComponent } from './pages/person/person-registration/person-registration.component';
+import { PersonListComponent } from './pages/person/person-list/person-list.component';
 import { LoginGuard } from './auth/service/login.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -39,12 +39,12 @@ const routes: Routes = [
         path: '', component: AppMainComponent, canActivate: [AuthGuard],
         children: [
             { path: 'home', component: VisaoGeralComponent },
-            { path: 'empresas', component: EmpresasListaComponent },            
-            { path: 'pessoas', component: PessoasListaComponent },
+            { path: 'company', component: CompanyListComponent },            
+            { path: 'person', component: PersonListComponent },
             { path: 'natureza-financeira', component: NaturezaFinanceiraListaComponent },            
             { path: 'users/registration/:id', component: UsersRegistrationComponent },
-            { path: 'empresas-cadastro/:id', component: EmpresasCadastroComponent },
-            { path: 'pessoas/cadastro/:id', component: PessoasCadastroComponent },
+            { path: 'company-registration/:id', component: CompanyRegistrationComponent },
+            { path: 'person/registration/:id', component: PersonRegistrationComponent },
             { path: 'natureza-financeira/cadastro/:id', component: NaturezaFinanceiraCadastroComponent },
             { path: 'account', component: AccountListComponent },
             { path: 'account-launch/:id', component: AccountLaunchComponent},

@@ -167,7 +167,8 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
 
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.atualizarPost(getUrlPro(), 'UpdateStatementItem', body).subscribe(v => {
-            Util.pushSuccessMsg('Conciliado com Sucesso!')
+            this.messageService.add(Util.pushSuccessMsg('Conciliado com Sucesso!'))
+            this.recarregarDados.emit(true)            
         }).add(this.dadosDefault.exibirLoader.next(false))
     }
 

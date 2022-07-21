@@ -1,5 +1,5 @@
 import { Util } from './../../../controller/Util';
-import { qtdLinhas, opcoesLinhas } from './../../../controller/staticValues';
+import { qtdLinhas, opcoesLinhas, getUrlPro } from './../../../controller/staticValues';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, Message, MessageService } from "primeng/api";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -18,6 +18,7 @@ export class AccountLaunchComponent implements OnInit {
     dataLabel = '';
     selectedRow = [];
     lista = [];
+    lista2 = [];
     id;
     data;
     contaCaixa;
@@ -38,13 +39,13 @@ export class AccountLaunchComponent implements OnInit {
 
     ngOnInit() {
         this.defineLabelData();
-        
+
         this.route.params.subscribe(v => {
             this.id = v.id
-        });        
-        if(this.contaCaixa === undefined){              
+        });
+        if (this.contaCaixa === undefined) {
             this.nome = sessionStorage.getItem('caixaBanco')
-        }       
+        }
 
         // this.networkService.buscar('contacaixa', this.id, null, getUrlCad()).subscribe(v => {
         //     this.contaCaixa = v
@@ -53,12 +54,12 @@ export class AccountLaunchComponent implements OnInit {
 
     }
 
-    contaTrocada(){
+    contaTrocada() {
         this.nome = sessionStorage.getItem('caixaBanco')
         this.modalTrocarConta = false
     }
 
-    defineLabelData() {        
+    defineLabelData() {
         const monthLabel = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
         this.dataLabel = `${monthLabel[this.dataInit.getMonth()]} - ${this.dataInit.getFullYear()}`
     }
@@ -85,7 +86,7 @@ export class AccountLaunchComponent implements OnInit {
         return rowDate.getTime() >= currentDate.getTime() ? 'a Vencer' : 'Vencido'
     }
 
-    calcLinhas(e: any) {        
+    calcLinhas(e: any) {
     }
 
     getTotalSelecionados() {
@@ -100,7 +101,7 @@ export class AccountLaunchComponent implements OnInit {
 
     itemsRow = [
         {
-            label: 'Editar', icon: 'fa fa-edit', command: (e) => {                
+            label: 'Editar', icon: 'fa fa-edit', command: (e) => {
                 this.router.navigate([`lancamentos-contabeis/cadastro/${e.IdLancamento}`])
             }
         }, {
@@ -109,11 +110,11 @@ export class AccountLaunchComponent implements OnInit {
                     message: `Você tem certeza que deseja deletar?`,
                     acceptLabel: `Sim`,
                     rejectLabel: `Não`,
-                //     accept: () => {
-                //         this.networkService.salvarPost(getUrlFinanceiro(), 'contabil/excluirLancamento', { IdLanc: e.IdLancamento }).subscribe(res => {
-                //             this.carregarLista()
-                //         })
-                //     }
+                    //     accept: () => {
+                    //         this.networkService.salvarPost(getUrlFinanceiro(), 'contabil/excluirLancamento', { IdLanc: e.IdLancamento }).subscribe(res => {
+                    //             this.carregarLista()
+                    //         })
+                    //     }
                 })
             }
         }, {
@@ -145,23 +146,24 @@ export class AccountLaunchComponent implements OnInit {
             }
         },
         {
-            label:'Baixar Boletos Cora', icon: 'fa fa-arrow-circle-right', command: (e) => {
+            label: 'Baixar Boletos Cora', icon: 'fa fa-arrow-circle-right', command: (e) => {
                 this.dadosDefault.exibirLoader.next(true)
                 let DataIni = Util.dataParaStringComZero(this.dataInit)
                 let DataFim = Util.dataParaStringComZero(this.dataFim)
-            //     this.networkService.getSimples(getUrlCora(), `integra/BaixarFaturaCora?DataIni=${DataIni}&DataFim=${DataFim}&IdConta=${this.id}`).subscribe(v => {
-            //         this.messageService.add(Util.pushSuccessMsgSemDelay('Processo realizado com Sucesso!'))
-            //     }).add(this.dadosDefault.exibirLoader.next(false))                
+                //     this.networkService.getSimples(getUrlCora(), `integra/BaixarFaturaCora?DataIni=${DataIni}&DataFim=${DataFim}&IdConta=${this.id}`).subscribe(v => {
+                //         this.messageService.add(Util.pushSuccessMsgSemDelay('Processo realizado com Sucesso!'))
+                //     }).add(this.dadosDefault.exibirLoader.next(false))                
             }
         },
     ];
 
     atualizar() {
-        // this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.buscar('contacaixa', this.id, null, getUrlCad()).subscribe(v => {
-        //     this.contaCaixa = v
-        //     this.carregarLista()
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+        let DataIni = Util.dataParaStringComZero(this.dataInit)
+        let DataFim = Util.dataParaStringComZero(this.dataFim)
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `StatementDiary?DateIni=${DataIni}&DateEnd=${DataFim}&AccountId=${this.id}`).subscribe((v: any) => {
+            this.lista = v.value
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     carregarLista() {
@@ -174,6 +176,22 @@ export class AccountLaunchComponent implements OnInit {
         //     this.lista = v.value;
         // }).add(() => this.networkService.exibirLoader.next(false))
 
+    }
+
+    tableExpand(v, expanded) {
+        if (expanded) return
+
+        // const filtro = `IdPlanoConta=${v.IdPlanoConta}&Limit=50&pagina=0&Data=${v.Data}`
+
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `StatementItems?DateIni=${v.DateBalance}&DateEnd=${v.DateBalance}&AccountId=${this.id}`).subscribe((v: any) => {
+            this.lista2 = v.value;
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
+
+        // this.networkService.salvarPost(getUrlRelatorio(), 'Contas/RelBoletosReceber', filtro).subscribe((v: any) => {
+        //     this.jaPesquisou = true
+        //     this.lista2 = v
+        // }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     pressionaEnter($event: KeyboardEvent) {
@@ -243,7 +261,7 @@ export class AccountLaunchComponent implements OnInit {
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    downloadCsv(){
+    downloadCsv() {
         // this.dadosDefault.exibirLoader.next(true)
         // this.networkService.visualizarPdf(getUrlRelatorio(), `contabil/RazaoCSV?DataIni=${Util.dataParaStringComZero(this.dataInit)}&DataFim=${Util.dataParaStringComZero(this.dataFim)}&IdCaixa=${this.id}`).subscribe(v => {
         //     Util.saveExcelFile(v);

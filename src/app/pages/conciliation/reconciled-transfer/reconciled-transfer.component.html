@@ -1,5 +1,5 @@
 <div class="p-fluid p-formgrid p-grid" [formGroup]="form">
-    <div class="p-col-4">
+    <div class="p-col-3">
         <p-card>
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-col-8">
@@ -24,54 +24,56 @@
                     <div class="p-col-12 p-col-nopad">
                         <p-checkbox binary="true" formControlName="selecionar"></p-checkbox>
                         <label style="margin-left: 5px; font-weight: bold;">Selecionado</label>
-                    </div>
+                    </div>                    
                 </div>               
             </div>
             &nbsp;
         </p-card>
     </div>
 
-    <div class="p-col-8" *ngIf="index == 0">
+    <div class="p-col-9" *ngIf="index == 0">
         <p-card>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-col-3 p-fluid p-col-nopad">                   
+            <div class="o-col-12 p-fluid p-formgrid p-grid">                
+                <div class="p-col-8 p-fluid p-formgrid p-grid" style="margin-right: -150px;">
+                    <div class="p-col-8">
+                        <!-- <div class="p-col-3">Pessoa</div> -->
+                        <!-- <div class="p-col-9"> -->
+                            <app-input-search-person [label]="'Pessoa'" formControlName="IdPessoa"
+                                                        (ngModelChange)="selecionouPessoa($event)"
+                                                        field="Nome"></app-input-search-person>
+                        <!-- </div> -->
+                    </div>
+                    <div class="p-col-8">
+                        <!-- <div class="p-col-4">Natureza Financeira</div> -->
+                        <!-- <div class="p-col-9"> -->
+                            <app-input-financial-category-search [label]="'Categoria Financeira'"
+                                (ngModelChange)="selecionouNaturezaFinanceira($event)" formControlName="IdNatureza"
+                                ></app-input-financial-category-search>
+                        <!-- </div> -->
+                    </div>                    
+                </div>
+                <div class="p-col-4 p-fluid p-formgrid p-grid" style="width: 450px;">                   
+                    <div class="p-col-12">
+                        <app-input  [label]="'Historico'" formControlName="Historico"></app-input>
+                        <!-- <div class="p-col-3">Historico</div>
+                        <div class="p-col-12"><input pInputText formControlName="Historico"></div> -->
+                    </div>
+                    &nbsp;
                     <div class="buttons p-col-12 center-content">
                         <button pButton type="button" label="Conciliar" class="p-button-success"
                                 (click)="reconcileSingle()"></button>
-                    </div>
-                    <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 6px;">
-                        <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
-                        <label style="margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
-                    </div>
-                    <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 6px;">
-                        <p-checkbox binary="true" formControlName="memorizarPessoa"></p-checkbox>
-                        <label style="margin-left: 5px; font-weight: bold;">Memorizar Pessoa</label>
-                    </div>
+                    </div>                    
                 </div>
-                <div class="p-col-9 p-fluid p-formgrid p-grid">
-                    <div class="p-col-12">
-                        <div class="p-col-3">Pessoa</div>
-                        <div class="p-col-9">
-                            <app-input-search-person formControlName="IdPessoa"
-                                                        (ngModelChange)="selecionouPessoa($event)"
-                                                        field="Nome"></app-input-search-person>
-                        </div>
-                    </div>
-                    <div class="p-col-12">
-                        <div class="p-col-3">Natureza Financeira</div>
-                        <div class="p-col-9">
-                            <app-input-financial-category-search
-                                (ngModelChange)="selecionouNaturezaFinanceira($event)" formControlName="IdNatureza"
-                                ></app-input-financial-category-search>
-                        </div>
-                    </div>
-                    <div class="p-col-12" style="margin-left: 5px;">
-                        <div class="p-col-3">Historico</div>
-                        <div class="p-col-9"><input pInputText formControlName="Historico"></div>
-                    </div>
+                <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 6px;">
+                    <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
+                    <label style="margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
                 </div>
-            </div>
-            &nbsp;
+                <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 20px;">
+                    <p-checkbox binary="true" formControlName="memorizarPessoa"></p-checkbox>
+                    <label style="margin-left: 5px; font-weight: bold;">Memorizar Pessoa</label>
+                </div>
+            </div>            
+            <!-- &nbsp; -->
         </p-card>
     </div>
 
@@ -100,8 +102,8 @@
                         <div class="key p-col-3">Natureza Financeira</div>
                         <div class="value p-col-9"> {{getNomeNatureza(data)}} </div>
                     </div>
-                </div>
-            </div>
+                </div>                
+            </div>           
             &nbsp;
         </p-card>
     </div>

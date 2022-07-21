@@ -1,3 +1,5 @@
+import { CompanyRegistrationComponent } from './pages/company/company-registration/company-registration.component';
+import { CompanyListComponent } from './pages/company/company-list/company-list.component';
 import { AccountStatusComponent } from './pages/settings-page/account-status/account-status.component';
 import { ParametersComponent } from './pages/settings-page/parameters/parameters.component';
 import { InvoicesListComponent } from './pages/settings-page/invoices-list/invoices-list.component';
@@ -19,11 +21,9 @@ import { ConciliationComponent } from './pages/conciliation/conciliation.compone
 import { NaturezaFinanceiraCadastroComponent } from './pages/natureza-financeira/natureza-financeira-cadastro/natureza-financeira-cadastro.component';
 import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
 import { PainelPageComponent } from './painel-page-component/painel-page.component';
-import { SituacaoPessoaCadastroComponent } from './pages/pessoas/situacao-pessoa-cadastro/situacao-pessoa-cadastro.component';
-import { PessoasCadastroComponent } from './pages/pessoas/pessoas-cadastro/pessoas-cadastro.component';
-import { PessoasListaComponent } from './pages/pessoas/pessoas-lista/pessoas-lista.component';
-import { EmpresasCadastroComponent } from './pages/empresas/empresas-cadastro/empresas-cadastro.component';
-import { EmpresasListaComponent } from './pages/empresas/empresas-lista/empresas-lista.component';
+import { SituationPersonRegistrationComponent } from './pages/person/situation-person-registration/situation-person-registration.component';
+import { PersonRegistrationComponent } from './pages/person/person-registration/person-registration.component';
+import { PersonListComponent } from './pages/person/person-list/person-list.component';
 import { VisaoGeralComponent } from './pages/dashboard/visao-geral/visao-geral.component';
 import { GeralLivroCaixaXNotasChartComponent } from './pages/dashboard/geral-livro-caixa-x-notas-chart/geral-livro-caixa-x-notas-chart.component';
 import { GeralEvolucaoSaldoLivroCaixaChartComponent } from './pages/dashboard/geral-evolucao-saldo-livro-caixa-chart/geral-evolucao-saldo-livro-caixa-chart.component';
@@ -101,13 +101,13 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         GeralEvolucaoSaldoLivroCaixaChartComponent,
         GeralLivroCaixaXNotasChartComponent,
         VisaoGeralComponent,        
-        EmpresasListaComponent,
+        CompanyListComponent,
         UsersListComponent,                
         UsersRegistrationComponent,        
-        EmpresasCadastroComponent,
-        PessoasListaComponent,
-        PessoasCadastroComponent,
-        SituacaoPessoaCadastroComponent,
+        CompanyRegistrationComponent,
+        PersonListComponent,
+        PersonRegistrationComponent,
+        SituationPersonRegistrationComponent,
         PainelPageComponent,
         NaturezaFinanceiraListaComponent,
         NaturezaFinanceiraCadastroComponent,

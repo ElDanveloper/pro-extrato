@@ -1,11 +1,11 @@
 import { Util } from 'src/app/controller/Util';
-import { hasValue } from './../../../controller/Util';
-import { Formulario } from './../../../controller/Formulario';
-import { Pessoa } from './../../../model/pessoa.model';
-import { DadosDefaultService } from './../../../services/dados-default.service';
-import { NetworkService } from './../../../services/network.service';
-import { getEstados, SERVERLESS_URL, getUrlPro, autoCompleteDelayTime } from './../../../controller/staticValues';
-import { BaseFormPost } from './../../../controller/BaseFormPost';
+import { hasValue } from '../../../controller/Util';
+import { Formulario } from '../../../controller/Formulario';
+import { Pessoa } from '../../../model/pessoa.model';
+import { DadosDefaultService } from '../../../services/dados-default.service';
+import { NetworkService } from '../../../services/network.service';
+import { getEstados, SERVERLESS_URL, getUrlPro, autoCompleteDelayTime } from '../../../controller/staticValues';
+import { BaseFormPost } from '../../../controller/BaseFormPost';
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MessageService, SelectItem} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -16,12 +16,12 @@ import {Dimensions, ImageCroppedEvent} from "ngx-image-cropper";
 import { PersonClient } from 'src/app/model/person-client.model';
 
 @Component({
-    selector: 'app-pessoas-cadastro',
-    templateUrl: './pessoas-cadastro.component.html',
-    styleUrls: ['./pessoas-cadastro.component.css']
+    selector: 'app-person-registration',
+    templateUrl: './person-registration.component.html',
+    styleUrls: ['./person-registration.component.css']
 })
 
-export class PessoasCadastroComponent extends BaseFormPost implements OnInit, OnDestroy {
+export class PersonRegistrationComponent extends BaseFormPost implements OnInit, OnDestroy {
 
     @ViewChild('uploadImagem', {static: false}) uploadImagem
 
