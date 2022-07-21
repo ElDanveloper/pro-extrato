@@ -68,7 +68,7 @@ const routes: Routes = [
                     { path: 'invoices-list', component: InvoicesListComponent },                    
                     { path: 'parameters', component: ParametersComponent },
                     { path: 'account-status', component: AccountStatusComponent },
-                    {path: '', pathMatch: 'full', redirectTo: 'reconciled-extract'},
+                    {path: '', pathMatch: 'full', redirectTo: 'main-accountant'},
                 ]
             },
 
