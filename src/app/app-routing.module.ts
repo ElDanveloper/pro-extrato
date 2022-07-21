@@ -61,7 +61,7 @@ const routes: Routes = [
             },
 
             {
-                path: 'settings/', component: SettingsComponent, children: [
+                path: 'settings', component: SettingsComponent, children: [
                     { path: 'main-accountant', component: MainAccountantComponent },
                     { path: 'users-list', component: UsersListComponent },
                     { path: 'departments-list', component: DepartmentsListComponent },
