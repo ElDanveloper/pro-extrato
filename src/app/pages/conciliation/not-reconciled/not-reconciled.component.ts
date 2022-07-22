@@ -1,5 +1,6 @@
-import { opcoesLinhas } from './../../../controller/staticValues';
-import { DadosDefaultService } from './../../../services/dados-default.service';
+import { ProStatementItem } from './../../../model/pro-statement-item.model';
+import { opcoesLinhas, getUrlPro } from '../../../controller/staticValues';
+import { DadosDefaultService } from '../../../services/dados-default.service';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NetworkService} from "../../../services/network.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -9,11 +10,11 @@ import {Util} from "../../../controller/Util";
 import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
-  selector: 'app-unreconciled-accounting',
-  templateUrl: './unreconciled-accounting.component.html',
-  styleUrls: ['./unreconciled-accounting.component.css']
+  selector: 'app-not-reconciled',
+  templateUrl: './not-reconciled.component.html',
+  styleUrls: ['./not-reconciled.component.css']
 })
-export class UnreconciledAccountingComponent implements OnInit, OnDestroy {
+export class NotReconciledComponent implements OnInit, OnDestroy {
 
     $subscription: Subscription;
     $subscriptionContabilNaoConciliado: Subscription;
@@ -26,14 +27,16 @@ export class UnreconciledAccountingComponent implements OnInit, OnDestroy {
     dataInicial
     dataFinal
 
+    lista = []
+
     itemsRowConciliacao = [
+        // {
+        //     label: 'Editar', icon: 'pi pi-pencil', command: (e) => {
+        //         // this.router.navigate([`lancamentos-contabeis/cadastro/${e.idlanccontabil}`])
+        //     }
+        // },
         {
-            label: 'Editar', icon: 'pi pi-refresh', command: (e) => {
-                this.router.navigate([`lancamentos-contabeis/cadastro/${e.idlanccontabil}`])
-            }
-        },
-        {
-            label: 'Excluir', icon: 'pi pi-refresh', command: (e) => {
+            label: 'Excluir', icon: 'pi pi-trash', command: (e) => {
                 this.confirmationService.confirm({
                     message: `Você tem certeza que deseja deletar?`,
                     acceptLabel: `Sim`,
@@ -61,6 +64,12 @@ export class UnreconciledAccountingComponent implements OnInit, OnDestroy {
     constructor(public confirmationService: ConfirmationService, private networkService: NetworkService, private route: ActivatedRoute, private router: Router, public messageService: MessageService, private dadosDefault: DadosDefaultService) { }
 
     ngOnInit() {
+        this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
+            const param = parametros.params
+            this.id = param.id
+            this.dataInicial = param.dataInicial
+            this.dataFinal = param.dataFinal
+        })
         this.carregarLista()
     }
 
@@ -84,26 +93,18 @@ export class UnreconciledAccountingComponent implements OnInit, OnDestroy {
         return Util.isNegative(v) ? {...classes, 'texto-vermelho': true} : {...classes, 'texto-verde': true}
     }
 
-    private carregarLista() {
-
-        this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
-            const param = parametros.params
-            this.id = param.id
-            this.dataInicial = param.dataInicial
-            this.dataFinal = param.dataFinal
-
-            // this.$subscriptionContabilNaoConciliado = this.networkService.getSimples(getUrlFinanceiro(), `fin/contabilNaoConciliados?IdContaCaixa=${this.id}&DataInicial=${this.dataInicial}&DataFinal=${this.dataFinal}&$orderby=Data&$orderby=Historico`).pipe(map((x: any) => x.value)).subscribe((x: any) => {
-            //     this.contabilNaoConciliados = x
-            // });
-        })
+    private carregarLista() {       
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`).pipe(map((x: any) => x.value)).subscribe(x => {                     
+                this.lista = x                
+            }).add(() => this.dadosDefault.exibirLoader.next(false));
     }
 
-    processarConciliacao() {
+    processConciliation() {
         this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.salvarPost(getUrlFinanceiro(), 'fin/processarConciliacao', {IdContaCaixa: Number(this.id), DataIni: this.dataInicial, DataFim: this.dataFinal}).subscribe(x => {
-        //     this.messageService.add(Util.pushSuccessMsgSemDelay('Conciliações Processadas!'))
-        //     this.carregarLista();
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+        this.networkService.getSimples(getUrlPro(), `ProcessConciliate?DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&AccountId=${this.id}`).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Processo Realizado com Sucesso!'))
+        }).add(this.dadosDefault.exibirLoader.next(false))        
     }
 
 }

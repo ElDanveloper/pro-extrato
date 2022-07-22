@@ -1,5 +1,5 @@
-import { opcoesLinhas, getUrlPro } from './../../../controller/staticValues';
-import { DadosDefaultService } from './../../../services/dados-default.service';
+import { opcoesLinhas, getUrlPro } from '../../../controller/staticValues';
+import { DadosDefaultService } from '../../../services/dados-default.service';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {map} from "rxjs/operators";
 import {NetworkService} from "../../../services/network.service";
@@ -9,11 +9,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
-  selector: 'app-reconciled-extract',
-  templateUrl: './reconciled-extract.component.html',
-  styleUrls: ['./reconciled-extract.component.css']
+  selector: 'app-extract',
+  templateUrl: './extract.component.html',
+  styleUrls: ['./extract.component.css']
 })
-export class ReconciledExtractComponent implements OnInit, OnDestroy {
+export class ExtractComponent implements OnInit, OnDestroy {
 
     $subscription: Subscription;
     $subscriptionExtratobanco: Subscription;
@@ -27,21 +27,11 @@ export class ReconciledExtractComponent implements OnInit, OnDestroy {
     itemsRow = [
         {
             label: 'Desconciliar', icon: 'pi pi-refresh', command: (e) => {
-                // this.networkService.salvarPost(getUrlFinanceiro(), 'fin/ConciliaDesconciliaExtrato', {
-                //     IdExtrato: e.Id,
-                //     tipo: 'N',
-                // }).subscribe(() => {
-                //     this.carregaDados()
-                // })
-            }
-        },{
-            label: 'Conciliar', icon: 'pi pi-refresh', command: (e) => {
-                // this.networkService.salvarPost(getUrlFinanceiro(), 'fin/ConciliaDesconciliaExtrato', {
-                //     IdExtrato: e.Id,
-                //     tipo: 'S',
-                // }).subscribe(() => {
-                //     this.carregaDados()
-                // })
+                this.dadosDefault.exibirLoader.next(true)
+                this.networkService.getSimples(getUrlPro(), `Desconciliate?Id=${e.Id}`).subscribe(v => {
+                    this.messageService.add(Util.pushSuccessMsg('Desconciliado com Sucesso!'))
+                    this.carregaDados()
+                }).add(this.dadosDefault.exibirLoader.next(false))
             }
         }, {
             label: 'Excluir', icon: 'fa fa-trash', command: (e) => {
@@ -50,9 +40,11 @@ export class ReconciledExtractComponent implements OnInit, OnDestroy {
                     acceptLabel: `Sim`,
                     rejectLabel: `Não`,
                     accept: () => {
-                        // this.networkService.salvarPost(getUrlFinanceiro(), 'contabil/ExcluirLancamentoExtrato', {IdExtra: e.Id}).subscribe(res => {
-                        //     this.carregaDados()
-                        // })
+                        this.dadosDefault.exibirLoader.next(true)
+                        this.networkService.getSimples(getUrlPro(), `ExcludeTransection?Id=${e.Id}`).subscribe(v => {
+                            this.messageService.add(Util.pushSuccessMsg('Item Excluido com Sucesso!'))
+                            this.carregaDados()
+                        }).add(this.dadosDefault.exibirLoader.next(false))
                     }
                 })
             }
@@ -100,20 +92,11 @@ export class ReconciledExtractComponent implements OnInit, OnDestroy {
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    processarConciliacao() {
-        // this.dadosDefault.exibirLoader.next(true)        
-        // this.networkService.salvarPost(getUrlFinanceiro(), 'fin/processarConciliacao', {IdContaCaixa: Number(this.id), DataIni: this.dataInicial, DataFim: this.dataFinal}).subscribe(x => {
-        //     this.messageService.add(Util.pushSuccessMsgSemDelay('Conciliações Processadas!'))
-        //     this.carregaDados();
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+    processConciliation() {
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `ProcessConciliate?DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&AccountId=${this.id}`).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Processo Realizado com Sucesso!'))
+        }).add(this.dadosDefault.exibirLoader.next(false))        
     }
-
-    reprocessarExtrato(){
-        // this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.getSimples(getUrlFinanceiro(), `Fin/ProcessarConciliacaoInicial?DataIni=${this.dataInicial}&DataFim=${this.dataFinal}&IdContaCaixa=${this.id}`).subscribe(v => {
-        //     this.carregaDados()
-        //     this.messageService.add(Util.pushSuccessMsg("Processo Realizado com Sucesso!"))
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
-    }
-
+    
 }

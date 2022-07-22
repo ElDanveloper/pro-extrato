@@ -3,12 +3,12 @@
         <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="downloadPdf()"></i>
     </div>
     <div class="p-col-2" style="margin-bottom: 10px;">
-        <button pButton label="Processar Conciliação" (click)="processarConciliacao()"></button>
+        <button pButton label="Processar Conciliação" (click)="processConciliation()"></button>
     </div>
-    <p-table [value]="contabilNaoConciliados" [paginator]="true" [rows]="10" [totalRecords]="contabilNaoConciliados.length" [rowsPerPageOptions]="opcoesLinhas">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="lista" [paginator]="true" [rows]="10" [totalRecords]="lista.length" [rowsPerPageOptions]="opcoesLinhas">
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th style="width: 10%;">Data</th>
+            <th style="width: 5%;">Data</th>
             <th style="width: 20%;">Histórico</th>
             <th style="width: 8%;">Documento</th>
             <th style="width: 5%;">Valor</th>
@@ -20,13 +20,13 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr [pSelectableRow]="rowData">
-            <td appAlignCenter>{{rowData.Data | date}}</td>
-            <td>{{rowData.Historico}}</td>
+            <td appAlignCenter>{{rowData.DateMovement | date}}</td>
+            <td>{{rowData.Historic}}</td>
             <td>{{''}}</td>
-            <td appAlinharDireita [ngClass]="colorValue(rowData.Valor)">{{rowData.Valor | virgulaPipe}}</td>
-            <td>{{rowData.Tipocontabil}}</td>
-            <td>{{rowData.Pessoa}}</td>
-            <td>{{rowData.Natureza}}</td>
+            <td appAlinharDireita [ngClass]="colorValue(rowData.Amount)">{{rowData.Amount | virgulaPipe}}</td>
+            <td>{{rowData.Specie}}</td>
+            <td>{{rowData.PersonId}}</td>
+            <td>{{rowData.FinancialCategoryId.Description}}</td>
             <td>
                 <app-opcoes-table [value]="rowData" [opcoes]="itemsRowConciliacao"></app-opcoes-table>
             </td>

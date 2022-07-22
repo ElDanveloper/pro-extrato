@@ -9,13 +9,13 @@ import {Formulario} from "../../controller/Formulario";
 import {Util} from "../../controller/Util";
 
 @Component({
-  selector: 'app-modal-transfer',
-  templateUrl: './modal-transfer.component.html',
-  styleUrls: ['./modal-transfer.component.css']
+  selector: 'app-modal-opening-balance',
+  templateUrl: './modal-opening-balance.component.html',
+  styleUrls: ['./modal-opening-balance.component.css']
 })
-export class ModalTransferComponent extends BaseFormPost implements OnInit {
+export class ModalOpeningBalanceComponent extends BaseFormPost implements OnInit {
 
-    entidade = 'Transferencia Entre Contas'
+    entidade = 'Saldo Inicial'
     // entObj = new TransferenciaCaixaVO()
     id;
     form: FormGroup;

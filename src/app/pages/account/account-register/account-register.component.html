@@ -1,0 +1,37 @@
+<app-page-header [urlName]="'Conta'" [secondaryUrlName]="'Editar'">        
+</app-page-header>
+<ng-container *ngTemplateOutlet="conteudo"></ng-container>
+<ng-template #conteudo>
+    <div [formGroup]="form">
+        <p-card>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-2">
+                    <app-input [label]="'Nome'" formControlName="Name"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <app-input [label]="'Digito'" formControlName="DigitNumber"></app-input>
+                </div>
+                <div class="p-field p-offset-6 p-col-2 p-md-2">
+                   <app-input [label]="'Conta'" formControlName="AccountNumber"></app-input>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-6">
+                    <app-input [label]="'Número'" formControlName="Number"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-6">
+                    <app-input [label]="'Agência'" formControlName="BankAgency"></app-input>
+                </div>
+            </div>           
+            <div class="p-fluid p-formgrid p-grid">                
+                <div class="p-field p-col-12 p-md-12" style="margin-top: 10px;">
+                    <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-2'" [tamanhoCancelar]="'p-col-2'"
+                        (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()" [labelConfirmar]="'Confirmar'">
+                    </app-footer-page>
+                </div>
+            </div>
+        </p-card>
+    </div>
+
+</ng-template>
+<p-toast position="bottom-right"></p-toast>

@@ -1,3 +1,4 @@
+import { AccountRegisterComponent } from './pages/account/account-register/account-register.component';
 import { CompanyRegistrationComponent } from './pages/company/company-registration/company-registration.component';
 import { CompanyListComponent } from './pages/company/company-list/company-list.component';
 import { AccountStatusComponent } from './pages/settings-page/account-status/account-status.component';
@@ -12,10 +13,10 @@ import { AccountLaunchComponent } from './pages/account/account-launch/account-l
 import { AccountListComponent } from './pages/account/account-list/account-list.component';
 import { ReconcileInstallmentComponent } from './pages/conciliation/reconciled-transfer/reconcile-installment/reconcile-installment.component';
 import { ReconcileAccountingComponent } from './pages/conciliation/reconciled-transfer/reconcile-accounting/reconcile-accounting.component';
-import { UnreconciledAccountingComponent } from './pages/conciliation/unreconciled-accounting/unreconciled-accounting.component';
-import { UnreconciledExtractsComponent } from './pages/conciliation/unreconciled-extracts/unreconciled-extracts.component';
+import { NotReconciledComponent } from './pages/conciliation/not-reconciled/not-reconciled.component';
+import { conciliatorComponent } from './pages/conciliation/conciliator/conciliator.component';
 import { ReconciledComponent } from './pages/conciliation/reconciled/reconciled.component';
-import { ReconciledExtractComponent } from './pages/conciliation/reconciled-extract/reconciled-extract.component';
+import { ExtractComponent } from './pages/conciliation/extract/extract.component';
 import { ConciliationComponent } from './pages/conciliation/conciliation.component';
 import { NaturezaFinanceiraCadastroComponent } from './pages/natureza-financeira/natureza-financeira-cadastro/natureza-financeira-cadastro.component';
 import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
@@ -48,15 +49,16 @@ const routes: Routes = [
             { path: 'natureza-financeira/cadastro/:id', component: NaturezaFinanceiraCadastroComponent },
             { path: 'account', component: AccountListComponent },
             { path: 'account-launch/:id', component: AccountLaunchComponent},
+            { path: 'account/register/:id', component: AccountRegisterComponent},
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
 
             {
                 path: 'conciliation/:id/:dataInicial/:dataFinal', component: ConciliationComponent, children: [
-                    { path: 'reconciled-extract', component: ReconciledExtractComponent },
+                    { path: 'extract', component: ExtractComponent },
                     { path: 'reconciled', component: ReconciledComponent },
-                    { path: 'unreconciled-extracts', component: UnreconciledExtractsComponent },
-                    { path: 'unreconciled-accounting', component: UnreconciledAccountingComponent },                    
-                    {path: '', pathMatch: 'full', redirectTo: 'reconciled-extract'},
+                    { path: 'conciliator', component: conciliatorComponent },
+                    { path: 'not-reconciled', component: NotReconciledComponent },                    
+                    {path: '', pathMatch: 'full', redirectTo: 'extract'},
                 ]
             },
 

@@ -13,8 +13,10 @@
                     <app-input-money label="Valor"></app-input-money>
                 </div>
             </div>
-            <app-footer-page *ngIf="!modal" [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelar()" labelConfirmar="Gravar"></app-footer-page>
-
+            <div style="margin-top: 50px;">
+                <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelar()"
+                    labelConfirmar="Gravar"></app-footer-page>
+            </div>
         </div>
     </app-page-divided>
 </ng-template>

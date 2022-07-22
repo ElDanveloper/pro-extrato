@@ -4,7 +4,7 @@
             <label>Conta: &nbsp; {{contaCaixa ? contaCaixa.Nome : nome}}</label><br>
             <div class="p-inputgroup">
                 <input type="text" pInputText placeholder="Filtrar" (keypress)="pressionaEnter($event)" #inputPesquisa>
-                <button style="width: 15%;" pButton type="button" icon="fa fa-search" (click)="atualizar()"></button>
+                <button style="width: 15%;" pButton type="button" icon="fa fa-search" (click)="update()"></button>
             </div>
         </div>
         <div class="p-fluid p-formgrid p-grid p-col-4" style="margin-top: 17px;">
@@ -29,7 +29,7 @@
                     (click)="abrirModalPagamentoViaConta('P')"></button>
             </div>
             <div class="p-col-4">
-                <button pButton label="Transferência" (click)="abrirModalTransferencia()"></button>
+                <button pButton label="Saldo Inicial" (click)="openModalOpeningBalance()"></button>
             </div>
         </div>
         <div class="p-field p-col-1 p-md-2" style="margin-top: 15px;">
@@ -40,10 +40,10 @@
             <app-tutorial [Classificacao]="'3.07.02'"></app-tutorial>
         </div> -->
         <div class="p-offset-2 p-col-2" style="margin-top: 10px;">
-            <button pButton label="Atualizar" (click)="atualizar()"></button>
+            <button pButton label="Atualizar" (click)="update()"></button>
         </div>
         <div class=" p-col-2" style="margin-top: 10px;">
-            <p-splitButton label="Ações" [model]="items"></p-splitButton>
+            <button pButton label="Importar OFX"></button>
         </div>
         <div class="p-col-2" style="margin-top: 10px;">
             <button pButton label="Conciliação" (click)="conciliacao()"></button>
@@ -138,15 +138,15 @@
 </div>
 
 <div style="position: fixed; top: -200%">
-    <button pButton type="button" label="" #transfer></button>
+    <button pButton type="button" label="" #openingbalance></button>
 </div>
 
 <app-modal [fundo]="true" *appModalOpenOnClick="[paymentviaaccount, '1Acd5WGj1']" [hash]="'1Acd5WGj1'">
     <app-modal-payment-via-account #content (dadosSalvos)="dadosSalvos()" [data]="data"></app-modal-payment-via-account>
 </app-modal>
 
-<app-modal [fundo]="true" *appModalOpenOnClick="[transfer, '1Acd5WGj2']" [hash]="'1Acd5WGj2'">
-    <app-modal-transfer #content (dadosSalvos)="dadosSalvos()" [data]="data"></app-modal-transfer>
+<app-modal [fundo]="true" *appModalOpenOnClick="[openingbalance, '1Acd5WGj2']" [hash]="'1Acd5WGj2'">
+    <app-modal-opening-balance #content (dadosSalvos)="dadosSalvos()" [data]="data"></app-modal-opening-balance>
 </app-modal>
 
 <app-modal-switch-account [modalVisible]="modalTrocarConta" #content (closeModal)="contaTrocada()"></app-modal-switch-account>

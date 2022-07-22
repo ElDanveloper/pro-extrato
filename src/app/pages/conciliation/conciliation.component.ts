@@ -12,10 +12,10 @@ import {NetworkService} from "../../services/network.service";
 export class ConciliationComponent implements OnInit {
 
     itemsTabMenu = [
-        {label: 'Extrato', icon: 'fa fa-fw fa-bar-chart'},
+        {label: 'Todos', icon: 'fa fa-fw fa-bar-chart'},
         {label: 'Conciliados', icon: 'fa fa-fw fa-bar-chart'},
-        {label: 'Extrato não Conciliado', icon: 'fa fa-fw fa-calendar'},
-        {label: 'Contabil não Conciliado', icon: 'fa fa-fw fa-calendar'},
+        {label: 'Conciliador', icon: 'fa fa-fw fa-calendar'},
+        {label: 'Não Conciliados', icon: 'fa fa-fw fa-calendar'},
         {label: 'Lançamentos', icon: 'fa fa-reply'},
     ];
 
@@ -54,16 +54,16 @@ export class ConciliationComponent implements OnInit {
 
     atualizaItemSelecionado(v) {
         if (typeof v === 'object') v = v.url
-        if (v.toString().match(/\/reconciled-extract$/)) {
+        if (v.toString().match(/\/extract$/)) {
             this.currentIndex = 0
             this.activeItem = this.itemsTabMenu[0];
         } else if (v.toString().match(/\/reconciled$/)) {
             this.currentIndex = 1
             this.activeItem = this.itemsTabMenu[1];
-        } else if (v.toString().match(/\/unreconciled-extracts$/)) {
+        } else if (v.toString().match(/\/conciliator$/)) {
             this.currentIndex = 2
             this.activeItem = this.itemsTabMenu[2];
-        } else if (v.toString().match(/\/unreconciled-accounting$/)) {
+        } else if (v.toString().match(/\/not-reconciled$/)) {
             this.currentIndex = 3
             this.activeItem = this.itemsTabMenu[3];
         } else if (v.toString().match(/\/account-launch$/)) {
@@ -76,10 +76,10 @@ export class ConciliationComponent implements OnInit {
         this.currentIndex = this.itemsTabMenu.findIndex(v => v === e.activeItem)
         let r = ''
         
-        if (this.currentIndex === 0) r = 'reconciled-extract'
+        if (this.currentIndex === 0) r = 'extract'
         if (this.currentIndex === 1) r = 'reconciled'
-        if (this.currentIndex === 2) r = 'unreconciled-extracts'
-        if (this.currentIndex === 3) r = 'unreconciled-accounting'
+        if (this.currentIndex === 2) r = 'conciliator'
+        if (this.currentIndex === 3) r = 'not-reconciled'
         if (this.currentIndex === 4) r = 'account-launch'
 
         if (r === 'account-launch'){

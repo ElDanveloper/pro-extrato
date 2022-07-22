@@ -1,3 +1,4 @@
+import { AccountRegisterComponent } from './pages/account/account-register/account-register.component';
 import { CompanyRegistrationComponent } from './pages/company/company-registration/company-registration.component';
 import { CompanyListComponent } from './pages/company/company-list/company-list.component';
 import { AccountStatusComponent } from './pages/settings-page/account-status/account-status.component';
@@ -13,10 +14,10 @@ import { AccountLaunchComponent } from './pages/account/account-launch/account-l
 import { ReconcileInstallmentComponent } from './pages/conciliation/reconciled-transfer/reconcile-installment/reconcile-installment.component';
 import { ReconcileAccountingComponent } from './pages/conciliation/reconciled-transfer/reconcile-accounting/reconcile-accounting.component';
 import { ReconciledTransferComponent } from './pages/conciliation/reconciled-transfer/reconciled-transfer.component';
-import { UnreconciledAccountingComponent } from './pages/conciliation/unreconciled-accounting/unreconciled-accounting.component';
-import { UnreconciledExtractsComponent } from './pages/conciliation/unreconciled-extracts/unreconciled-extracts.component';
+import { NotReconciledComponent } from './pages/conciliation/not-reconciled/not-reconciled.component';
+import { conciliatorComponent } from './pages/conciliation/conciliator/conciliator.component';
 import { ReconciledComponent } from './pages/conciliation/reconciled/reconciled.component';
-import { ReconciledExtractComponent } from './pages/conciliation/reconciled-extract/reconciled-extract.component';
+import { ExtractComponent } from './pages/conciliation/extract/extract.component';
 import { ConciliationComponent } from './pages/conciliation/conciliation.component';
 import { NaturezaFinanceiraCadastroComponent } from './pages/natureza-financeira/natureza-financeira-cadastro/natureza-financeira-cadastro.component';
 import { NaturezaFinanceiraListaComponent } from './pages/natureza-financeira/natureza-financeira-lista/natureza-financeira-lista.component';
@@ -112,10 +113,10 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         NaturezaFinanceiraListaComponent,
         NaturezaFinanceiraCadastroComponent,
         ConciliationComponent,
-        ReconciledExtractComponent,
+        ExtractComponent,
         ReconciledComponent,
-        UnreconciledExtractsComponent,
-        UnreconciledAccountingComponent,
+        conciliatorComponent,
+        NotReconciledComponent,
         ReconciledTransferComponent,
         ReconcileAccountingComponent,
         ReconcileInstallmentComponent,
@@ -127,6 +128,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         InvoicesListComponent,
         ParametersComponent,
         AccountStatusComponent,
+        AccountRegisterComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

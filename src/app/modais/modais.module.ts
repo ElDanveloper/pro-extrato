@@ -1,5 +1,5 @@
 import { ModalPaymentViaAccountComponent } from './modal-payment-via-account/modal-payment-via-account.component';
-import { ModalTransferComponent } from './modal-transfer/modal-transfer.component';
+import { ModalOpeningBalanceComponent } from './modal-opening-balance/modal-opening-balance.component';
 import { ModalSwitchAccountComponent } from './modal-switch-account/modal-switch-account.component';
 import { InputSearchPersonComponent } from './../components/input-search-person/input-search-person.component';
 import { ModalSearchPersonComponent } from './../components/input-search-person/modal-search-person/modal-search-person.component';
@@ -44,7 +44,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalSearchPersonComponent,
       InputSearchPersonComponent,
       ModalSwitchAccountComponent,
-      ModalTransferComponent,
+      ModalOpeningBalanceComponent,
       ModalPaymentViaAccountComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
@@ -77,7 +77,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalSearchPersonComponent,
         InputSearchPersonComponent,
         ModalSwitchAccountComponent,
-        ModalTransferComponent,
+        ModalOpeningBalanceComponent,
         ModalPaymentViaAccountComponent,
      
         //ModalPagamentoViaContaCorrenteComponent,

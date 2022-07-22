@@ -21,18 +21,13 @@ export class ReconciledComponent implements OnInit, OnDestroy {
     contabilConciliados = []
     opcoesLinhas = opcoesLinhas()
 
-    extratConciliados = []
+    lista = []
 
     id
     dataInicial
     dataFinal
 
-    itemsRowConciliacao = [
-        {
-            label: 'Editar', icon: 'fa fa-edit', command: (e) => {
-                this.router.navigate([`lancamentos-contabeis/cadastro/${e.Idlancamento}`])
-            }
-        },
+    itemsRowConciliacao = [       
         {
             label: 'Excluir', icon: 'fa fa-trash', command: (e) => {
                 this.confirmationService.confirm({
@@ -40,21 +35,22 @@ export class ReconciledComponent implements OnInit, OnDestroy {
                     acceptLabel: `Sim`,
                     rejectLabel: `Não`,
                     accept: () => {
-                        // this.networkService.salvarPost(getUrlFinanceiro(), 'contabil/ExcluirLancamento', {IdLanc: e.idlanccontabil}).subscribe(res => {
-                        //         this.carregarLista()
-                        //     })
+                        this.dadosDefault.exibirLoader.next(true)
+                        this.networkService.getSimples(getUrlPro(), `ExcludeTransection?Id=${e.Id}`).subscribe(v => {
+                            this.messageService.add(Util.pushSuccessMsg('Item Excluido com Sucesso!'))
+                            this.carregarLista()
+                        }).add(this.dadosDefault.exibirLoader.next(false))
                     }
                 })
             }
         },
         {
             label: 'Desconciliar', icon: 'pi pi-refresh', command: (e) => {
-                // this.networkService.salvarPost(getUrlFinanceiro(), 'fin/ConciliaDesconciliaContabil', {
-                //     IdLancContabil: e.Id,
-                //     tipo: 'N',
-                // }).subscribe(() => {
-                //     this.carregarLista()
-                // })
+                this.dadosDefault.exibirLoader.next(true)
+                this.networkService.getSimples(getUrlPro(), `Desconciliate?Id=${e.Id}`).subscribe(v => {
+                    this.messageService.add(Util.pushSuccessMsg('Desconciliado com Sucesso!'))
+                    this.carregarLista()
+                }).add(this.dadosDefault.exibirLoader.next(false))
             }
         },
     ];
@@ -75,7 +71,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
 
         this.networkService.exibirLoader.next(true)
         this.$subscriptionConciliados = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`).pipe(map((x: any) => x.value)).subscribe(x => {
-            this.extratConciliados = x
+            this.lista = x
         }).add(() => this.networkService.exibirLoader.next(false));
     }
 
@@ -85,7 +81,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
     }
 
     downloadPdf() {
-        this.dadosDefault.exibirLoader.next(true)
+        // this.dadosDefault.exibirLoader.next(true)
         // this.networkService.baixarPdf(getUrlFinanceiro(), `contabil/ExtratoPDF?DataIni=${this.dataInicial}&DataFim=${this.dataFinal}&IdConta=${Number(this.id)}&tipo=3`).subscribe(v => {
         //     Util.savePdf(v)
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -99,12 +95,11 @@ export class ReconciledComponent implements OnInit, OnDestroy {
         return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
     }
 
-    processarConciliacao() {
-        // this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.salvarPost(getUrlFinanceiro(), 'fin/processarConciliacao', {IdContaCaixa: Number(this.id), DataIni: this.dataInicial, DataFim: this.dataFinal}).subscribe(x => {
-        //     this.messageService.add(Util.pushSuccessMsgSemDelay('Conciliações Processadas!'))
-        //     this.carregarLista();
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+    processConciliation() {
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `ProcessConciliate?DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&AccountId=${this.id}`).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Processo Realizado com Sucesso!'))
+        }).add(this.dadosDefault.exibirLoader.next(false))        
     }
 
 }

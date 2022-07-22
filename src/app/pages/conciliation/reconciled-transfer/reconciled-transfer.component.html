@@ -35,33 +35,29 @@
         <p-card>
             <div class="o-col-12 p-fluid p-formgrid p-grid">                
                 <div class="p-col-8 p-fluid p-formgrid p-grid" style="margin-right: -150px;">
-                    <div class="p-col-8">
-                        <!-- <div class="p-col-3">Pessoa</div> -->
-                        <!-- <div class="p-col-9"> -->
+                    <div class="p-col-8">                      
                             <app-input-search-person [label]="'Pessoa'" formControlName="IdPessoa"
                                                         (ngModelChange)="selecionouPessoa($event)"
-                                                        field="Nome"></app-input-search-person>
-                        <!-- </div> -->
+                                                        field="Nome"></app-input-search-person>                        
                     </div>
-                    <div class="p-col-8">
-                        <!-- <div class="p-col-4">Natureza Financeira</div> -->
-                        <!-- <div class="p-col-9"> -->
+                    <div class="p-col-8">                        
                             <app-input-financial-category-search [label]="'Categoria Financeira'"
                                 (ngModelChange)="selecionouNaturezaFinanceira($event)" formControlName="IdNatureza"
-                                ></app-input-financial-category-search>
-                        <!-- </div> -->
+                                ></app-input-financial-category-search>                        
                     </div>                    
                 </div>
                 <div class="p-col-4 p-fluid p-formgrid p-grid" style="width: 450px;">                   
                     <div class="p-col-12">
-                        <app-input  [label]="'Historico'" formControlName="Historico"></app-input>
-                        <!-- <div class="p-col-3">Historico</div>
-                        <div class="p-col-12"><input pInputText formControlName="Historico"></div> -->
+                        <app-input  [label]="'Obs. Complementar'" formControlName="Historico"></app-input>                        
                     </div>
                     &nbsp;
-                    <div class="buttons p-col-12 center-content">
+                    <div class="buttons p-col-4 center-content">
                         <button pButton type="button" label="Conciliar" class="p-button-success"
                                 (click)="reconcileSingle()"></button>
+                    </div>                    
+                    <div class="buttons p-col-4 center-content">
+                        <button pButton type="button" label="Desconciliar" class="p-button"
+                                (click)="toReconcile()"></button>
                     </div>                    
                 </div>
                 <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 6px;">
@@ -72,8 +68,7 @@
                     <p-checkbox binary="true" formControlName="memorizarPessoa"></p-checkbox>
                     <label style="margin-left: 5px; font-weight: bold;">Memorizar Pessoa</label>
                 </div>
-            </div>            
-            <!-- &nbsp; -->
+            </div>                        
         </p-card>
     </div>
 

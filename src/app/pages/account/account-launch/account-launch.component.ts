@@ -30,7 +30,7 @@ export class AccountLaunchComponent implements OnInit {
     classificacao = '3.07.02'
 
     @ViewChild('paymentviaaccount') paymentviaaccount: ElementRef;
-    @ViewChild('transfer') transfer: ElementRef;
+    @ViewChild('openingbalance') openingbalance: ElementRef;
     // @ViewChild('uploadInput') uploadInput: ElementRef;
     // @ViewChild('uploadRetornoInput') uploadRetornoInput: ElementRef;
 
@@ -102,7 +102,7 @@ export class AccountLaunchComponent implements OnInit {
     itemsRow = [
         {
             label: 'Editar', icon: 'fa fa-edit', command: (e) => {
-                this.router.navigate([`lancamentos-contabeis/cadastro/${e.IdLancamento}`])
+                
             }
         }, {
             label: 'Excluir', icon: 'fa fa-trash', command: (e) => {
@@ -110,11 +110,13 @@ export class AccountLaunchComponent implements OnInit {
                     message: `Você tem certeza que deseja deletar?`,
                     acceptLabel: `Sim`,
                     rejectLabel: `Não`,
-                    //     accept: () => {
-                    //         this.networkService.salvarPost(getUrlFinanceiro(), 'contabil/excluirLancamento', { IdLanc: e.IdLancamento }).subscribe(res => {
-                    //             this.carregarLista()
-                    //         })
-                    //     }
+                    accept: () => {
+                        this.dadosDefault.exibirLoader.next(true)
+                        this.networkService.getSimples(getUrlPro(), `ExcludeTransection?Id=${e.Id}`).subscribe(v => {
+                            this.messageService.add(Util.pushSuccessMsg('Item Excluido com Sucesso!'))
+                            this.carregarLista()
+                        }).add(this.dadosDefault.exibirLoader.next(false))
+                    }
                 })
             }
         }, {
@@ -122,42 +124,8 @@ export class AccountLaunchComponent implements OnInit {
         },
     ];
 
-    items = [
-        {
-            label: 'Upload OFX', icon: 'fa fa-arrow-circle-right', command: (e) => {
-                this.choseUploadOfx()
-            }
-        },
-        {
-            label: 'Importar Retorno', icon: 'fa fa-arrow-circle-right', command: (e) => {
-                // this.uploadRetornoInput.nativeElement.click()
-            }
-        },
-        {
-            label: 'Reprocessar Conciliação', icon: 'fa fa-arrow-circle-right', command: (e) => {
-                this.dadosDefault.exibirLoader.next(true)
-                // this.networkService.salvarPost(getUrlFinanceiro(), 'fin/RemoveReprocessaConciliacao', {
-                //     IdContaCaixa: Util.toNumber(this.id),
-                //     DataIni: Formulario.dataParaString(this.dataInit),
-                //     DataFim: Formulario.dataParaString(this.dataFim),
-                // }).subscribe(v => {
-                //     this.messageService.add(Util.pushSuccessMsgSemDelay('Processo realizado com Sucesso!'))
-                // }).add(() => this.dadosDefault.exibirLoader.next(false))
-            }
-        },
-        {
-            label: 'Baixar Boletos Cora', icon: 'fa fa-arrow-circle-right', command: (e) => {
-                this.dadosDefault.exibirLoader.next(true)
-                let DataIni = Util.dataParaStringComZero(this.dataInit)
-                let DataFim = Util.dataParaStringComZero(this.dataFim)
-                //     this.networkService.getSimples(getUrlCora(), `integra/BaixarFaturaCora?DataIni=${DataIni}&DataFim=${DataFim}&IdConta=${this.id}`).subscribe(v => {
-                //         this.messageService.add(Util.pushSuccessMsgSemDelay('Processo realizado com Sucesso!'))
-                //     }).add(this.dadosDefault.exibirLoader.next(false))                
-            }
-        },
-    ];
 
-    atualizar() {
+    update() {
         let DataIni = Util.dataParaStringComZero(this.dataInit)
         let DataFim = Util.dataParaStringComZero(this.dataFim)
         this.dadosDefault.exibirLoader.next(true)
@@ -225,9 +193,8 @@ export class AccountLaunchComponent implements OnInit {
         this.paymentviaaccount.nativeElement.click();
     }
 
-    abrirModalTransferencia() {
-        // this.data = this.id;
-        this.transfer.nativeElement.click();
+    openModalOpeningBalance() {        
+        this.openingbalance.nativeElement.click();
     }
 
     conciliacao() {

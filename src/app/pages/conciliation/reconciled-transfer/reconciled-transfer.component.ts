@@ -38,30 +38,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     $buscarNaturezaSubscription: Subscription;
     index = 0;
     IdParcela = null
-
-
-    acoes = [
-        {
-            label: 'Marcar Todos', icon: 'fa fa-arrow-circle-right', command: (e) => {
-
-            }
-        }, {
-            label: 'Confirmar Selecionados', icon: 'fa fa-arrow-circle-right', command: (e) => {
-            }
-        }, {
-            label: 'Ordernar por Data', icon: 'fa fa-arrow-circle-right', command: (e) => {
-
-            }
-        }, {
-            label: 'Ordenar por Valor', icon: 'fa fa-arrow-circle-right', command: (e) => {
-
-            }
-        }, {
-            label: 'Ordenar por Histórico', icon: 'fa fa-arrow-circle-right', command: (e) => {
-
-            }
-        },
-    ];
+  
     pessoa = null;
     naturezaFinanceira = null;
 
@@ -138,19 +115,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         if (this.$memorizarSubscription) this.$memorizarSubscription.unsubscribe();
         if (this.$buscarNaturezaSubscription) this.$buscarNaturezaSubscription.unsubscribe();
     }
-
-    openModalConciliarContabil() {
-        this.router.navigate(['/conciliado/conciliar-contabil'])
-        // this.dadosDefault.conciliarContabilParams.next({data: this.data, params: this.dataPesquisa})
-
-    }
-
-    openModalConciliarParcela() {
-        this.router.navigate(['/conciliado/conciliar-parcela'])
-        // this.dadosDefault.conciliarParcelaParams.next({data: this.data, params: this.dataPesquisa})
-    }
-
-
+   
     reconcileSingle() {
 
         let nature = this.form.get('IdNatureza').value
@@ -169,6 +134,14 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         this.networkService.atualizarPost(getUrlPro(), 'UpdateStatementItem', body).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Conciliado com Sucesso!'))
             this.recarregarDados.emit(true)            
+        }).add(this.dadosDefault.exibirLoader.next(false))
+    }
+
+    toReconcile() {        
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `Desconciliate?Id=${this.data.Id}`).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Desconciliado com Sucesso!'))
+            this.recarregarDados.emit(true) 
         }).add(this.dadosDefault.exibirLoader.next(false))
     }
 

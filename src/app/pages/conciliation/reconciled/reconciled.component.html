@@ -3,9 +3,9 @@
         <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="downloadPdf()"></i>
     </div>
     <div class="p-col-2" style="margin-bottom: 10px;">
-        <button pButton label="Processar Conciliação" (click)="processarConciliacao()"></button>
+        <button pButton label="Processar Conciliação" (click)="processConciliation()"></button>
     </div>
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="contabilConciliados" [paginator]="true" [rows]="10" [totalRecords]="contabilConciliados.length" [rowsPerPageOptions]="opcoesLinhas">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="lista" [paginator]="true" [rows]="10" [totalRecords]="lista.length" [rowsPerPageOptions]="opcoesLinhas">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th style="width: 3%">&nbsp;</th>

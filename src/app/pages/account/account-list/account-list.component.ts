@@ -30,13 +30,12 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
     // @ViewChild('inputPesquisa') public inputPesquisa
     // @ViewChild('selectValue') public selectValue
     public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'Name'}, {label: 'Conta', value: 'AccountNumber'}]
-    // opcoesTable = [
-    //     {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editar(e)},
-    //     {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletar(e)},
-    //     {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
-    //             this.router.navigate([`/historico-pessoa/${e.Id}`])
-    //         }},
-    // ]
+    opcoesTable = [
+        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
+            this.router.navigate([`account/register/${e.Id}`])
+        }},
+        {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},        
+    ]
 
     
 

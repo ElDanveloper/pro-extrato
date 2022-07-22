@@ -135,8 +135,7 @@ export class AppMainComponent implements OnInit {
         event.preventDefault();
     }
 
-    onTopbarSubItemClick(event, route?) {
-        console.log('route ----> ' + route)
+    onTopbarSubItemClick(event, route?) {        
         event.preventDefault();        
         this.router.navigate([`${route}`])
     }
