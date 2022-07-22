@@ -7,7 +7,7 @@ import { DepartmentsListComponent } from './pages/settings-page/departments/depa
 import { UsersListComponent } from './pages/settings-page/users/users-list/users-list.component';
 import { UsersRegistrationComponent } from './pages/settings-page/users/users-registration/users-registration.component';
 import { MainAccountantComponent } from './pages/settings-page/main-accountant/main-accountant.component';
-import { SettingsComponent } from './pages/settings-page/Settings.component';
+import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 import { AccountListComponent } from './pages/account/account-list/account-list.component';
 import { AccountLaunchComponent } from './pages/account/account-launch/account-launch.component';
 import { ReconcileInstallmentComponent } from './pages/conciliation/reconciled-transfer/reconcile-installment/reconcile-installment.component';
@@ -121,7 +121,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         ReconcileInstallmentComponent,
         AccountLaunchComponent,
         AccountListComponent,
-        SettingsComponent,
+        SettingsPageComponent,
         MainAccountantComponent,
         DepartmentsListComponent,
         InvoicesListComponent,

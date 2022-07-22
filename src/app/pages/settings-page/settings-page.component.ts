@@ -5,11 +5,11 @@ import {Util} from "../../controller/Util";
 import {NetworkService} from "../../services/network.service";
 
 @Component({
-    selector: 'app-settings',
-    templateUrl: './settings.component.html',
-    styleUrls: ['./settings.component.css']
+    selector: 'app-settings-page',
+    templateUrl: './settings-page.component.html',
+    styleUrls: ['./settings-page.component.css']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsPageComponent implements OnInit {
 
     itemsTabMenu = [
         {label: 'Principal', icon: 'fa fa-fw fa-id-card'},

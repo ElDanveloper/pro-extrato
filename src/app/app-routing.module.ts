@@ -7,7 +7,7 @@ import { DepartmentsListComponent } from './pages/settings-page/departments/depa
 import { UsersRegistrationComponent } from './pages/settings-page/users/users-registration/users-registration.component';
 import { UsersListComponent } from './pages/settings-page/users/users-list/users-list.component';
 import { MainAccountantComponent } from './pages/settings-page/main-accountant/main-accountant.component';
-import { SettingsComponent } from './pages/settings-page/Settings.component';
+import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 import { AccountLaunchComponent } from './pages/account/account-launch/account-launch.component';
 import { AccountListComponent } from './pages/account/account-list/account-list.component';
 import { ReconcileInstallmentComponent } from './pages/conciliation/reconciled-transfer/reconcile-installment/reconcile-installment.component';
@@ -61,7 +61,7 @@ const routes: Routes = [
             },
 
             {
-                path: 'settings', component: SettingsComponent, children: [
+                path: 'settings', component: SettingsPageComponent, children: [
                     { path: 'main-accountant', component: MainAccountantComponent },
                     { path: 'users-list', component: UsersListComponent },
                     { path: 'departments-list', component: DepartmentsListComponent },
