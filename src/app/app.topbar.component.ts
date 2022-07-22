@@ -40,10 +40,10 @@ export class AppTopbarComponent {
         this.trocarEmpresa.nativeElement.click();
     }
 
-    navegar(pagina) {
+    navegar(pagina) {        
         switch(pagina){
         case 1:            
-            this.router.navigate([`usuarios`]);
+            this.router.navigate([`users-list`]);
         }
     }
 

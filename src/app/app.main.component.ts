@@ -136,8 +136,9 @@ export class AppMainComponent implements OnInit {
     }
 
     onTopbarSubItemClick(event, route?) {
-        event.preventDefault();
-        this.router.navigate(['usuarios'])
+        console.log('route ----> ' + route)
+        event.preventDefault();        
+        this.router.navigate([`${route}`])
     }
 
     onRightPanelButtonClick(event) {

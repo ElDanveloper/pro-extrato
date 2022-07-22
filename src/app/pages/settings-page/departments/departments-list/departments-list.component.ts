@@ -43,7 +43,7 @@ export class DepartmentsListComponent extends BaseListSimples implements OnInit,
     }
 
     ngOnInit() {        
-        this.carregarDados()
+        // this.carregarDados()
     }
 
     pressionaEnter(e) {

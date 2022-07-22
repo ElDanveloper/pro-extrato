@@ -43,7 +43,7 @@ export class InvoicesListComponent extends BaseListSimples implements OnInit, On
     }
 
     ngOnInit() {        
-        this.carregarDados()
+        // this.carregarDados()
     }
 
     pressionaEnter(e) {

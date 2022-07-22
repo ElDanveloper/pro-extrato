@@ -59,19 +59,19 @@
                 </a>
                 <ul class="ultima-menu animated fadeInDown">
                     <li role="menuitem">
-                        <a href="#" (click)="app.onTopbarSubItemClick($event)">
+                        <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/parameters')">
                             <i class="pi pi-cog"></i>
                             <span>Configuração</span>
                         </a>
                     </li>
                     <li role="menuitem">
-                        <a href="#" (click)="app.onTopbarSubItemClick($event)">
+                        <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings')">
                             <i class="pi pi-briefcase"></i>
                             <span>Dados da Contabilidade</span>
                         </a>
                     </li>
                     <li role="menuitem">
-                        <a href="#" (click)="app.onTopbarSubItemClick($event, 'usuarios')">
+                        <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/users-list')">
                             <i class="pi pi-users"></i>
                             <span>Usuarios</span>
                         </a>
@@ -83,7 +83,7 @@
                         </a>
                     </li>
                     <li role="menuitem">
-                        <a href="#" (click)="app.onTopbarSubItemClick($event)">
+                        <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/invoices-list')">
                             <i class="pi pi-dollar"></i>
                             <span>Faturas</span>
                         </a>
