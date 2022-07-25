@@ -1,11 +1,13 @@
 <ng-template #conteudo>
     <app-page-divided [padrao]="false">
         <div principal>
-            <div class="p-fluid p-formgrid p-grid" style="margin-bottom: 20px; margin-left: 2px;">
-                <app-select [icon]="true" [label]="'Conta Caixa - Destino'" [options]="selectContaCaixa"></app-select>
-            </div>
-
             <div class="p-fluid p-formgrid p-grid">
+                <div class="p-col-6">
+                    <app-select [icon]="true" [label]="'Conta'" [options]="selectContaCaixa"></app-select>
+                </div>
+            <!-- </div>
+
+            <div class="p-fluid p-formgrid p-grid"> -->
                 <div class="p-col-6">
                     <app-date label="Data"></app-date>
                 </div>

@@ -1,7 +1,7 @@
-import { getUrlClient } from './../../controller/staticValues';
-import { AuthService } from './../../auth/service/auth.service';
-import { BaseFormPost } from './../../controller/BaseFormPost';
-import {Component, Input, OnInit} from '@angular/core';
+import { getUrlClient } from '../../controller/staticValues';
+import { AuthService } from '../../auth/service/auth.service';
+import { BaseFormPost } from '../../controller/BaseFormPost';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {NetworkService} from "../../services/network.service";
 import {DadosDefaultService} from "../../services/dados-default.service";
@@ -12,15 +12,16 @@ import { Subscription } from 'rxjs';
 import { TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinhas, EMPRESA_STORAGE_KEY} from '../../controller/staticValues'
 
 @Component({
-  selector: 'app-modal-usuario-cadastro',
-  templateUrl: './modal-usuario-cadastro.component.html',
-  styleUrls: ['./modal-usuario-cadastro.component.css']
+  selector: 'app-modal-user-registration',
+  templateUrl: './modal-user-registration.component.html',
+  styleUrls: ['./modal-user-registration.component.css']
 })
-export class ModalUsuarioCadastroComponent extends BaseFormPost implements OnInit {
+export class ModalUserRegistrationComponent extends BaseFormPost implements OnInit {
 
-    entidade = 'Cadastro'
+    entidade = 'Usuário'
     @Input() data;
     @Input() modalVisible = false;
+    @Output() closeModal = new EventEmitter()
     lista;
     totalItens
     count = opcoesLinhas()
@@ -76,6 +77,8 @@ export class ModalUsuarioCadastroComponent extends BaseFormPost implements OnIni
         })
     }
 
+    processarFormulario(){}
+
     filtrar(count, page){
         this.http.get(`https://api.toqweb.com.br:2004/hunnocont/maxus/apura/EmpresasContador?Texto=${this.filtro}`, {headers: {
             Accept: 'application/json',
@@ -103,5 +106,11 @@ export class ModalUsuarioCadastroComponent extends BaseFormPost implements OnIni
             this.loading = false
         }
     }
+
+    cancelarLocal() {
+        this.closeModal.emit(false)
+        this.form.reset()
+        this.primeiraEtapa = true
+      }
 
 }

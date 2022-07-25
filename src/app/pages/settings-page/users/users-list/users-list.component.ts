@@ -13,9 +13,9 @@ import {Router} from "@angular/router";
 })
 export class UsersListComponent extends BaseListSimples implements OnInit, OnDestroy {
 
-    // @ViewChild('cadastrarPessoa') cadastrarPessoa: ElementRef;
+    @ViewChild('registrationUser') registrationUser: ElementRef;
 
-    // modalCadastrarPessoa = false
+    modalRegistrationUser = false
 
     // public entidade: string = 'empregador'
     jaPesquisou = false
@@ -29,13 +29,11 @@ export class UsersListComponent extends BaseListSimples implements OnInit, OnDes
     @ViewChild('inputPesquisa') public inputPesquisa
     @ViewChild('selectValue') public selectValue
     public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
-    // opcoesTable = [
-    //     {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editar(e)},
-    //     {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletar(e)},
-    //     {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
-    //             this.router.navigate([`/historico-pessoa/${e.Id}`])
-    //         }},
-    // ]
+    opcoesTable = [
+        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {}},
+        {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
+        {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {}},
+    ]
 
     
 
@@ -56,6 +54,19 @@ export class UsersListComponent extends BaseListSimples implements OnInit, OnDes
     linkPessoa(v) {
         this.router.navigate([`/historico-pessoa/${v.Id}/pedido`])
     }
+
+    getActive(active){        
+        if(active === true) {            
+            return 'S'
+        } else {            
+            return 'N'
+        }
+    }
+
+    registration(){
+        this.registrationUser.nativeElement.click();
+    }
+
 
     
 

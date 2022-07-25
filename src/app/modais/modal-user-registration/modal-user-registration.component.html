@@ -1,0 +1,37 @@
+<ng-template #conteudo>
+    <!-- <app-page-divided [formGroup]="form" [padrao]="false"> -->
+        <!-- <div > -->
+            <p-card>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-col-12" style="margin-left: -6px;">                            
+                                <app-input-cpf-cnpj primeiro [label]="'Cpf / Cnpj'" [row]="true"
+                                                    (onBlur)="buscaCnpj($event)" (onKeypress)="buscaCnpj($event)"></app-input-cpf-cnpj>                        
+                    </div>                    
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-col-6">
+                        <app-input [label]="'Nome'"></app-input>
+                    </div>
+                    <div class="p-col-6">
+                        <app-input [label]="'Nome Reduzido'"></app-input>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-col-6">
+                        <app-input [label]="'Email'"></app-input>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Perfil'"></app-select>
+                    </div>
+                </div>
+                <div style="margin-left: 1px;" class="p-fluid p-formgrid p-grid">
+                    <app-input-telefone [label]="'Celular'"></app-input-telefone>
+                </div>
+                <div style="margin-top: 50px;">
+                    <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()"
+                        labelConfirmar="Gravar"></app-footer-page>
+                </div>
+            </p-card>
+        <!-- </div> -->
+    <!-- </app-page-divided>  -->
+</ng-template>

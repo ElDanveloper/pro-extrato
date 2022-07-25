@@ -32,9 +32,9 @@ export class ModalOpeningBalanceComponent extends BaseFormPost implements OnInit
     }
 
     ngOnInit() {
-        // this.dadosDefault.modalTransferencia().subscribe(v => {
-        //     this.selectContaCaixa = v[0].filter(x => Number(x.value) !== Number(this.data))
-        // })
+        this.dadosDefault.modalOpeningbalance().subscribe(v => {
+            this.selectContaCaixa = v[0]
+        })
     }
 
     public processarFormulario(modal?) {

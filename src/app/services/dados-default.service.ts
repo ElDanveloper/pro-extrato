@@ -124,6 +124,12 @@ export class DadosDefaultService {
         return forkJoin([centroResultado, planoContas, naturezaFinGrupo, tipoDocumento, projeto, meiosPagamento])
     }
 
+    public modalOpeningbalance() {
+        let account = this.http.get(`${getUrlPro()}/proaccount`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Name), value: v.Id}))))
+
+        return forkJoin([account])
+    }
+
     // pessoa() {
     //     let situacaoPessoa = this.http.get(`${getUrlCad()}/situacaopessoa`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Nome), value: v.Id}))), catchError(this.errorHandlerDefaultValues));
     //     let operacaoFiscal = this.http.get(`${getUrlCad()}/operacaofiscal`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Descricao), value: v.Id}))), catchError(this.errorHandlerDefaultValues));

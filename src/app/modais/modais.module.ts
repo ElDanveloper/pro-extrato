@@ -11,7 +11,7 @@ import { ProjetoCadastroComponent } from './../pages/projeto-cadastro/projeto-ca
 import { ModalNaturezaFinanceiraCadastroComponent } from './modal-natureza-financeira-cadastro/modal-natureza-financeira-cadastro.component';
 import { ModalNaturezaFinanceiraComponent } from './modal-natureza-financeira/modal-natureza-financeira.component';
 import { ModalPessoaCadastroComponent } from './modal-pessoa-cadastro/modal-pessoa-cadastro.component';
-import { ModalUsuarioCadastroComponent } from './modal-usuario-cadastro/modal-usuario-cadastro.component';
+import { ModalUserRegistrationComponent } from './modal-user-registration/modal-user-registration.component';
 import { ModalEmpresaCadastroComponent } from './modal-empresa-cadastro/modal-empresa-cadastro.component';
 import { ModalTrocarEmpresaComponent } from './modal-trocar-empresa/modal-trocar-empresa.component';
 import { LayoutsModule } from './../layout/layouts.module';
@@ -32,7 +32,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalSelecionarEmpresaEscritorioComponent,      
       ModalTrocarEmpresaComponent,
       ModalEmpresaCadastroComponent,
-      ModalUsuarioCadastroComponent,
+      ModalUserRegistrationComponent,
       ModalPessoaCadastroComponent,
       ModalNaturezaFinanceiraComponent,
       ModalNaturezaFinanceiraCadastroComponent,
@@ -66,7 +66,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalSelecionarEmpresaEscritorioComponent,        
         ModalTrocarEmpresaComponent,
         ModalEmpresaCadastroComponent,
-        ModalUsuarioCadastroComponent,
+        ModalUserRegistrationComponent,
         ModalPessoaCadastroComponent,
         ModalNaturezaFinanceiraComponent,
         ModalNaturezaFinanceiraCadastroComponent,

@@ -7,29 +7,39 @@
                         ></button>
             </div>
         </div>
-        <div class="p-field p-col-12 p-md-2" style="position: relative;">
+        <!-- <div class="p-field p-col-12 p-md-2" style="position: relative;">
             <app-select #selectValue [options]="selectSort"></app-select>
-        </div>
-        <div class="p-field p-col-12 p-md-2">
-            <button pButton label="Cadastrar" ></button>
-            <!-- (click)="navegar()" -->
+        </div> -->
+        <div class="p-field p-offset-2 p-col-12 p-md-2">
+            <button pButton label="Cadastrar" (click)="registration()"></button>
+            
         </div>
     </div>
 
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista"  (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
         <ng-template pTemplate="header" let-columns>
             <tr>
-            <th [ngStyle]="{width: '40%'}"> Nome </th>            
-            <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>
-            <!-- <th [ngStyle]="{width: '8%'}"> Ações </th> -->
+            <th [ngStyle]="{width: '22%'}"> Nome </th>            
+            <th [ngStyle]="{width: '10%'}"> Departamento </th>
+            <th [ngStyle]="{width: '20%'}"> Email </th>
+            <th [ngStyle]="{width: '10%'}"> Celular </th>
+            <th [ngStyle]="{width: '10%'}"> Perfil </th>
+            <th [ngStyle]="{width: '5%'}"> Ativo </th>
+            <th [ngStyle]="{width: '13%'}"> Cpf / Cnpj </th>
+            <th [ngStyle]="{width: '5%'}"> Opções </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
             <tr>
             <td><span (click)="linkPessoa(rowData)" class="link-pessoa">{{rowData.nome}}</span></td>
+            <td>{{rowData.departamento_nome}}</td>
+            <td>{{rowData.email}}</td>
+            <td>{{rowData.phone_cell_format}}</td>
+            <td>{{rowData.perfil}}</td>
+            <td appAlignCenter>{{getActive(rowData.active)}}</td>
             <td>{{rowData.cpf_cnpj | cpfCnpj}}</td>
-            <!-- <td><app-opcoes-table [value]="rowData"
-                                  [opcoes]="opcoesTable"></app-opcoes-table></td> -->
+            <td><app-opcoes-table [value]="rowData"
+                                  [opcoes]="opcoesTable"></app-opcoes-table></td>
             </tr>
         </ng-template>
     </p-table>
@@ -40,11 +50,11 @@
 <p-toast position="bottom-right"></p-toast>
 
 <div style="position: fixed; top: -200%">
-    <button pButton type="button" label="" #cadastrarPessoa></button>
+    <button pButton type="button" label="" #registrationUser></button>
 </div>
 
-<!-- <app-modal [fundo]="true" *appModalOpenOnClick="[cadastrarPessoa, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
-    <app-modal-cadastrar-pessoa #content></app-modal-cadastrar-pessoa>
-</app-modal> -->
+<app-modal [styleScroll]="{width: '100%', height: '450px'}" [fundo]="true" *appModalOpenOnClick="[registrationUser, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
+    <app-modal-user-registration #content></app-modal-user-registration>
+</app-modal>
 
 <!-- <app-modal-cadastrar-pessoa [modalVisible]="modalCadastrarPessoa" #content (closeModal)="modalCadastrarPessoa = false"></app-modal-cadastrar-pessoa> -->
