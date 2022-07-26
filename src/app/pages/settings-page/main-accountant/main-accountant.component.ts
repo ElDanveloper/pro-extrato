@@ -1,8 +1,8 @@
+import { Contractor } from './../../../model/contractor.model';
 import { Util, hasValue } from './../../../controller/Util';
 import { Dimensions } from 'ngx-image-cropper';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { getEstados } from './../../../controller/staticValues';
-import { Contractor } from './../../../model/Contractor.model';
 import { ErroCep } from '@brunoc/ngx-viacep';
 import { Endereco } from '@brunoc/ngx-viacep';
 import { NgxViacepService } from '@brunoc/ngx-viacep';
