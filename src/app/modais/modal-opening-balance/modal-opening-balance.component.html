@@ -1,22 +1,22 @@
 <ng-template #conteudo>
     <app-page-divided [padrao]="false">
-        <div principal>
+        <div principal [formGroup]="form">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-col-6">
-                    <app-select [icon]="true" [label]="'Conta'" [options]="selectContaCaixa"></app-select>
+                    <app-select [icon]="true" [label]="'Conta'" [options]="selectContaCaixa" formControlName="AccountId"></app-select>
                 </div>
             <!-- </div>
 
             <div class="p-fluid p-formgrid p-grid"> -->
                 <div class="p-col-6">
-                    <app-date label="Data"></app-date>
+                    <app-date label="Data" formControlName="DateBalance"></app-date>
                 </div>
                 <div class="p-col-6">
-                    <app-input-money label="Valor"></app-input-money>
+                    <app-input-money label="Valor" formControlName="Balance"></app-input-money>
                 </div>
             </div>
             <div style="margin-top: 50px;">
-                <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelar()"
+                <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="fecharModal()"
                     labelConfirmar="Gravar"></app-footer-page>
             </div>
         </div>

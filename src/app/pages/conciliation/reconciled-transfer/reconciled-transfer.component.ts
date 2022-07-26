@@ -47,7 +47,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
             IdContaCaixaDestino: '',
             IdNatureza: '',
             IdNaturezaInput: '',
-            Historico: '',
+            Obs: '',
             IdPessoa: '',
             Documento: '',
             selecionar: '',
@@ -80,7 +80,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
             }
             this.form.get('IdContaCaixaDestino').setValue(this.data.AccountId.Id)
             this.form.get('IdNatureza').setValue(this.data.IdNatureza?.Id)
-            this.form.get('Historico').setValue(this.data.Historic)
+            // this.form.get('Historico').setValue(this.data.Historic)
             this.form.get('Documento').setValue(this.data.Document)
             this.IdParcela = this.data.IdParcela
 
@@ -125,7 +125,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
             Id: this.data.AccountId.Id,
             FinancialId: nature.Id,
             PersonId: person.Id,
-            Obs: this.form.get('Historico').value,
+            Obs: this.form.get('Obs').value,
             SavePerson: this.form.get('memorizarPessoa').value,
             SaveHistoric: this.form.get('memorizar').value
         }
@@ -172,8 +172,8 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     }
 
     selecionouNaturezaFinanceira(e) {
-        if (e.Historic === null) return
-        this.form.get('Historico').setValue(this.data.Historic + '  ' + e.Historic)
+        // if (e.Historic === null) return
+        // this.form.get('Historico').setValue(this.data.Historic + '  ' + e.Historic)
     }
 
     selecionouPessoa(e) {

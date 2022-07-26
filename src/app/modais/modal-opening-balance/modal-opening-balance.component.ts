@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { ProMonthlyClose } from './../../model/pro-monthly-close.model';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {BaseFormPost} from "../../controller/BaseFormPost";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {NetworkService} from "../../services/network.service";
@@ -7,6 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "primeng/api";
 import {Formulario} from "../../controller/Formulario";
 import {Util} from "../../controller/Util";
+import { getUrlPro } from 'src/app/controller/staticValues';
 
 @Component({
   selector: 'app-modal-opening-balance',
@@ -16,19 +18,19 @@ import {Util} from "../../controller/Util";
 export class ModalOpeningBalanceComponent extends BaseFormPost implements OnInit {
 
     entidade = 'Saldo Inicial'
-    // entObj = new TransferenciaCaixaVO()
+    entObj = new ProMonthlyClose()
     id;
     form: FormGroup;
     @Input() data;
+    @Output() closeModal = new EventEmitter()
     selectContaCaixa = [];
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService) {
-        super(networkService, dadosDefault, router, '/lancamento-conta-caixa', messageService);
+        super(networkService, dadosDefault, router, 'IncludeBalance', messageService);
 
-        // this.form = Formulario.createForm(this.entObj, this.fb, TransferenciaCaixaVO.validacoes())
-        this.naoBuscar = true
+        this.form = Formulario.createForm(this.entObj, this.fb)        
 
-        // this.form.get('Data').setValue(new Date());
+        this.form.get('DateBalance').setValue(new Date());
     }
 
     ngOnInit() {
@@ -38,21 +40,23 @@ export class ModalOpeningBalanceComponent extends BaseFormPost implements OnInit
     }
 
     public processarFormulario(modal?) {
-
-        let inv = false
-        if(this.form.invalid) {
-            Object.keys(this.form.controls).forEach(c => {
-                // if (this.form.get(c).invalid) {
-                //     let v = LancamentoSimplesVO.validacoes().filter(x => x.campo === c)
-                //     this.messageService.add(Util.pushErrorMsg(`O campo ${v.length && v[0].nome ? v[0].nome : c} e obrigatório`))
-                //     inv = true
-                // }
-            })
-            if (inv) return
+        if(this.form.get('Balance').value === '' || this.form.get('Balance').value === null) {
+            this.messageService.add(Util.pushErrorMsg('Favor informar o valor a ser lançado.'))
+            return
         }
 
-        // const value = Formulario.parseForm(this.entObj, Object.assign({}, {...this.form.value, IdCaixaOrigem: this.data}), null, null, TransferenciaCaixaVO.datas(), null, null)
-        // this.save('fin/transferenciacaixa', value, true, getUrlFinanceiro())
+        const value = Formulario.parseForm(this.entObj, Object.assign({}, this.form.value), ProMonthlyClose.referencias(), null, ProMonthlyClose.datas(), null, null, null)
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.salvarPost(getUrlPro(), 'IncludeBalance', value).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Valor Lançado com Sucesso!'))
+            this.fecharModal()
+        }).add(this.dadosDefault.exibirLoader.next(false))
+
     }
+
+    fecharModal() {
+        this.closeModal.emit(false)
+        this.form.reset()        
+      }
 
 }
