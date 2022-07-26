@@ -189,5 +189,5 @@
 </div>
 
 <app-modal [fundo]="true" *appModalOpenOnClick="[trocarempresa, '1Acd5WGj78']" [hash]="'1Acd5WGj78'">
-    <app-modal-trocar-empresa #content (dadosSalvos)="null" [data]="null"></app-modal-trocar-empresa>
+    <app-modal-trocar-empresa #content (closeModal)="modalFechado()" [data]="'1Acd5WGj78'" ></app-modal-trocar-empresa>
 </app-modal>

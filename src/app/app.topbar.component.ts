@@ -13,6 +13,7 @@ export class AppTopbarComponent {
     public empresa = ''
 
     public counter = ''
+    
 
     @ViewChild('trocarempresa') trocarEmpresa: ElementRef;
 
@@ -38,6 +39,10 @@ export class AppTopbarComponent {
 
     abrirModalTrocarEmpresa(){
         this.trocarEmpresa.nativeElement.click();
+    }
+
+    modalFechado(){        
+        this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
     }
 
     navegar(pagina) {        

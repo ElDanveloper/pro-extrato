@@ -3,15 +3,15 @@
         <div class="p-grid p-col-12">
             <div class="card">
                 <!-- <div>Pesquisar Empresa</div> -->
-                <div class="p-col-8">
+                <div class="p-col-12">
                     <h4 style="margin-left: 10px;">Empresas</h4>
                     <div class="p-inputgroup" style="display: flex;justify-content: flex-start;">
-                        <input #inputPesquisa placeholder="Filtrar" [(ngModel)]="filtro" (keydown.enter)="filtrar(count, page)" pInputText>
-                        <button pButton type="button" icon="fa fa-search" (click)="filtrar(count, page)" class="ui-button-warn"></button>
+                        <input #inputPesquisa placeholder="Filtrar" [(ngModel)]="filtro" pInputText>
+                        <button pButton type="button" icon="fa fa-search" class="ui-button-warn"></button>
                     </div>
                 </div>
-                <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="lista"
-                [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" dataKey="Id" [rowsPerPageOptions]="count" [lazy]="true" (onLazyLoad)="lazyLoad($event)">
+                <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="empresas"
+                [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="empresas.length" dataKey="Id" [rowsPerPageOptions]="count" [lazy]="true" (onLazyLoad)="lazyLoad($event)">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th [ngStyle]="{width: '70%'}" > Empresa</th>

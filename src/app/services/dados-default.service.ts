@@ -30,7 +30,7 @@ export class DadosDefaultService {
 
     }
 
-    closeModal(hash) {
+    closeModal(hash) {        
         this.modalSubject.next(hash)
     }
 

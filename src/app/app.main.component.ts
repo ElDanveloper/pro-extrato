@@ -1,3 +1,4 @@
+import { NetworkService } from 'src/app/services/network.service';
 import { Router } from '@angular/router';
 import { DadosDefaultService } from './services/dados-default.service';
 import {Component, OnInit} from '@angular/core';
@@ -52,9 +53,10 @@ export class AppMainComponent implements OnInit {
 
     compactMode = true;
 
-    constructor(private menuService: MenuService, private primengConfig: PrimeNGConfig, private dadosDefault: DadosDefaultService, private messageService: MessageService, private router: Router) {}
+    constructor(private menuService: MenuService, private primengConfig: PrimeNGConfig, private dadosDefault: DadosDefaultService, private messageService: MessageService, private router: Router, private networkService: NetworkService) {}
 
     exibirLoader = this.dadosDefault.exibirLoader
+    exibirLoaderNetwork = this.networkService.exibirLoader
 
     ngOnInit() {
         this.primengConfig.ripple = true;
