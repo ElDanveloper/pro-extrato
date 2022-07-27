@@ -189,7 +189,7 @@ export class AccountLaunchComponent implements OnInit {
 
     abrirModalPagamentoViaConta(value) {
         // const nomeConta = this.contaCaixa ? this.contaCaixa.Nome : this.nome
-        // this.data = { idConta: this.id, tipo: value, conta: nomeConta};
+        this.data = { idConta: this.id, tipo: value};
         this.paymentviaaccount.nativeElement.click();
     }
 

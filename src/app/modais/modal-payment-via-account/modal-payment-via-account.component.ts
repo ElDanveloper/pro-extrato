@@ -16,14 +16,15 @@ import {Util} from "../../controller/Util";
 })
 export class ModalPaymentViaAccountComponent extends BaseFormPost implements OnInit {
 
-    entidade = 'Pagamento Via Conta'
+    entidade = 'Inclusão de Transação'
     // entObj = new LancamentoCaixaVO()
     id;
     form: FormGroup;
     @Input() data;
+    @Input() hash;
     selectNaturezaFinanceira = [];
-    @ViewChild('data') public dataSelect
-    livroCaixa: boolean = false
+    @ViewChild('data') public dataSelect    
+
 
     vencimento = false
     natureza = false
@@ -46,7 +47,7 @@ export class ModalPaymentViaAccountComponent extends BaseFormPost implements OnI
 
     ngOnChanges(){
         const tipo = this.data.tipo === 'P' ? 'Pagamento' : 'Recebimento'
-        this.entidade = this.data.conta + ' - ' + tipo
+        this.entidade = this.entidade + ' - ' + tipo
     }
 
     selecionouNatureza(e){                
@@ -91,6 +92,11 @@ export class ModalPaymentViaAccountComponent extends BaseFormPost implements OnI
             
         // }
     }
+
+    fecharModal() {
+        this.dadosDefault.closeModal(this.hash)
+        this.form.reset()        
+      }
 
     pessoaSelecionada(e: any) {            
         if(e === null || e.IdNatureza === 0 || e.IdNatureza === null) return        
