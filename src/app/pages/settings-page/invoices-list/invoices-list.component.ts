@@ -12,29 +12,17 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 })
 export class InvoicesListComponent extends BaseListSimples implements OnInit, OnDestroy {
 
-    // @ViewChild('cadastrarPessoa') cadastrarPessoa: ElementRef;
-
-    // modalCadastrarPessoa = false
-
-    // public entidade: string = 'empregador'
     jaPesquisou = false
     pagina = 0;
     public first: number = 0
     public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
-    public totalItens: number
-    lista2 = []
-    // @ViewChild('inputPesquisa') public inputPesquisa
-    // @ViewChild('selectValue') public selectValue
-    public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
-    // opcoesTable = [
-    //     {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editar(e)},
-    //     {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletar(e)},
-    //     {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
-    //             this.router.navigate([`/historico-pessoa/${e.Id}`])
-    //         }},
-    // ]
+    public totalItens: number   
+    opcoesTable = [
+        {label: 'Boleto', icon: 'fa fa-edit', command: (e) => {}},
+        {label: 'Pdf', icon: 'fa fa-close', command: (e) => {}},        
+    ]
 
     
 

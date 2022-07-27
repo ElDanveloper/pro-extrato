@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NetworkService } from './../../../../services/network.service';
 import { MessageService, ConfirmationService, SelectItem } from 'primeng/api';
 import { BaseListSimples } from './../../../../controller/BaseListSimples';
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 
 @Component({
   selector: 'app-departments-list',
@@ -12,6 +12,8 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 })
 export class DepartmentsListComponent extends BaseListSimples implements OnInit, OnDestroy {
 
+    @ViewChild('registrationDepartments') registrationDepartments: ElementRef;
+   
     jaPesquisou = false
     pagina = 0;
     public first: number = 0
@@ -19,21 +21,10 @@ export class DepartmentsListComponent extends BaseListSimples implements OnInit,
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
     public totalItens: number
-    lista2 = []
-   
-   
-    // opcoesTable = [
-    //     {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editar(e)},
-    //     {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletar(e)},
-    //     {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
-    //             this.router.navigate([`/historico-pessoa/${e.Id}`])
-    //         }},
-    // ]
-
     
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'Department')
+        super(networkService, getUrlPro(), 'department')
     }
 
     ngOnInit() {        
@@ -56,6 +47,10 @@ export class DepartmentsListComponent extends BaseListSimples implements OnInit,
         } else {            
             return 'N'
         }
+    }
+
+    registration() {
+        this.registrationDepartments.nativeElement.click();
     }
 
 

@@ -1,0 +1,27 @@
+<ng-template #conteudo>
+    <!-- <app-page-divided [formGroup]="form" [padrao]="false"> -->
+    <!-- <div > -->
+    <p-card [formGroup]="form">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-col-10">
+                <app-input [label]="'Descrição do Departamento'" formControlName="Description"></app-input>
+            </div>
+            <div class="p-col-1" style="margin-top: 30px;">
+                <p-checkbox label="Interno" [value]="true" formControlName="Interno"></p-checkbox>
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-col-2" style="margin-top: 30px; margin-left: 6px;">
+                <p-checkbox label="Ativo" [value]="true" formControlName="Active"></p-checkbox>
+            </div>
+        </div>
+
+
+        <div style="margin-top: 50px;">
+            <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()"
+                labelConfirmar="Gravar"></app-footer-page>
+        </div>
+    </p-card>
+    <!-- </div> -->
+    <!-- </app-page-divided>  -->
+</ng-template>

@@ -1,3 +1,4 @@
+import { ModalDepartmentsRegistrationComponent } from './modal-departments-registration/modal-departments-registration.component';
 import { ModalPaymentViaAccountComponent } from './modal-payment-via-account/modal-payment-via-account.component';
 import { ModalOpeningBalanceComponent } from './modal-opening-balance/modal-opening-balance.component';
 import { ModalSwitchAccountComponent } from './modal-switch-account/modal-switch-account.component';
@@ -46,6 +47,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalSwitchAccountComponent,
       ModalOpeningBalanceComponent,
       ModalPaymentViaAccountComponent,
+      ModalDepartmentsRegistrationComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -79,6 +81,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalSwitchAccountComponent,
         ModalOpeningBalanceComponent,
         ModalPaymentViaAccountComponent,
+        ModalDepartmentsRegistrationComponent,
      
         //ModalPagamentoViaContaCorrenteComponent,
     ]

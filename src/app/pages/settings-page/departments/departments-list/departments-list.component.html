@@ -8,8 +8,8 @@
             </div>
         </div>        
         <div class="p-field p-offset-2 p-col-12 p-md-2">
-            <button pButton label="Cadastrar" ></button>
-            <!-- (click)="navegar()" -->
+            <button pButton label="Cadastrar" (click)="registration()"></button>
+            
         </div>
     </div>
 
@@ -39,11 +39,11 @@
 <p-toast position="bottom-right"></p-toast>
 
 <div style="position: fixed; top: -200%">
-    <button pButton type="button" label="" #cadastrarPessoa></button>
+    <button pButton type="button" label="" #registrationDepartments></button>
 </div>
 
-<!-- <app-modal [fundo]="true" *appModalOpenOnClick="[cadastrarPessoa, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
-    <app-modal-cadastrar-pessoa #content></app-modal-cadastrar-pessoa>
-</app-modal> -->
+<app-modal [fundo]="true" *appModalOpenOnClick="[registrationDepartments, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
+    <app-modal-departments-registration #content [hash]="'1Acd5WGj70'"></app-modal-departments-registration>
+</app-modal>
 
 <!-- <app-modal-cadastrar-pessoa [modalVisible]="modalCadastrarPessoa" #content (closeModal)="modalCadastrarPessoa = false"></app-modal-cadastrar-pessoa> -->
