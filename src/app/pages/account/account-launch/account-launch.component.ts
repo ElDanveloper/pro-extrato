@@ -31,7 +31,7 @@ export class AccountLaunchComponent implements OnInit {
 
     @ViewChild('paymentviaaccount') paymentviaaccount: ElementRef;
     @ViewChild('openingbalance') openingbalance: ElementRef;
-    // @ViewChild('uploadInput') uploadInput: ElementRef;
+    @ViewChild('uploadInput') uploadInput: ElementRef;
     // @ViewChild('uploadRetornoInput') uploadRetornoInput: ElementRef;
 
 
@@ -217,10 +217,6 @@ export class AccountLaunchComponent implements OnInit {
         return v
     }
 
-    choseUploadOfx() {
-        // this.uploadInput.nativeElement.click()
-    }
-
     downloadPdf() {
         // this.dadosDefault.exibirLoader.next(true)
         // this.networkService.visualizarPdf(getUrlRelatorio(), `contabil/RazaoPDF?DataIni=${Util.dataParaStringComZero(this.dataInit)}&DataFim=${Util.dataParaStringComZero(this.dataFim)}&IdCaixa=${this.id}`).subscribe(v => {
@@ -235,6 +231,10 @@ export class AccountLaunchComponent implements OnInit {
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
+    choseUploadOfx() {
+        this.uploadInput.nativeElement.click()
+    }
+
     bin2String(array) {
         let result = "";
         for (let i = 0; i < array.length; i++) {
@@ -243,14 +243,14 @@ export class AccountLaunchComponent implements OnInit {
         return result;
     }
 
-    uploadOfx(e) {
+    uploadOfx(e) {        
         const hoje = new Date()
         if (!e.target.files) return
         const reader = new FileReader();
         reader.onload = async evt => {
             this.dadosDefault.exibirLoader.next(true)
             // @ts-ignore
-            this.networkService.salvarPost(getUrlFinanceiro(), 'fin/importaOFX', { Arquivo: evt.target.result.split(',')[1], IdContaCaixa: Number(this.id) }).subscribe(v => {
+            this.networkService.salvarPost(getUrlPro(), 'importaOFX', { Arquivo: evt.target.result.split(',')[1], AccountId: Number(this.id) }).subscribe(v => {
                 this.messageService.add(Util.pushSuccessMsgSemDelay('OFX Importada!'))
             }, e3 => this.messageService.add(Util.pushErrorMsg(e3))).add(() => this.dadosDefault.exibirLoader.next(false));
         };
