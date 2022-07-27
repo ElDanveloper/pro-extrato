@@ -12,11 +12,6 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 })
 export class DepartmentsListComponent extends BaseListSimples implements OnInit, OnDestroy {
 
-    // @ViewChild('cadastrarPessoa') cadastrarPessoa: ElementRef;
-
-    // modalCadastrarPessoa = false
-
-    // public entidade: string = 'empregador'
     jaPesquisou = false
     pagina = 0;
     public first: number = 0
@@ -25,9 +20,8 @@ export class DepartmentsListComponent extends BaseListSimples implements OnInit,
     qtdLinhas = qtdLinhas()
     public totalItens: number
     lista2 = []
-    // @ViewChild('inputPesquisa') public inputPesquisa
-    // @ViewChild('selectValue') public selectValue
-    public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
+   
+   
     // opcoesTable = [
     //     {label: 'Alterar', icon: 'fa fa-edit', command: (e) => this.editar(e)},
     //     {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletar(e)},
@@ -39,11 +33,11 @@ export class DepartmentsListComponent extends BaseListSimples implements OnInit,
     
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'contractor')
+        super(networkService, getUrlPro(), 'Department')
     }
 
     ngOnInit() {        
-        // this.carregarDados()
+        this.carregarDados()
     }
 
     pressionaEnter(e) {
@@ -53,7 +47,15 @@ export class DepartmentsListComponent extends BaseListSimples implements OnInit,
     
 
     linkPessoa(v) {
-        this.router.navigate([`/historico-pessoa/${v.Id}/pedido`])
+        // this.router.navigate([`/historico-pessoa/${v.Id}/pedido`])
+    }
+
+    getActive(active){        
+        if(active === true) {            
+            return 'S'
+        } else {            
+            return 'N'
+        }
     }
 
 
