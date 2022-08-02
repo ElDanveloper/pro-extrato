@@ -119,10 +119,10 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     reconcileSingle() {
 
         let nature = this.form.get('IdNatureza').value
-        let person = this.form.get('IdPessoa').value
+        let person = this.form.get('IdPessoa').value        
 
         let body = {
-            Id: this.data.AccountId.Id,
+            Id: this.data.Id,
             FinancialId: nature.Id,
             PersonId: person.Id,
             Obs: this.form.get('Obs').value,

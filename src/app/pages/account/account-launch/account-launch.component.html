@@ -141,7 +141,7 @@
     <button pButton type="button" label="" #openingbalance></button>
 </div>
 
-<app-modal [fundo]="true" *appModalOpenOnClick="[paymentviaaccount, '1Acd5WGj1']" [hash]="'1Acd5WGj1'">
+<app-modal [styleScroll]="{width: '100%', height: '450px'}" [fundo]="true" *appModalOpenOnClick="[paymentviaaccount, '1Acd5WGj1']" [hash]="'1Acd5WGj1'">
     <app-modal-payment-via-account #content (dadosSalvos)="dadosSalvos()" [data]="data" [hash]="'1Acd5WGj1'"></app-modal-payment-via-account>
 </app-modal>
 

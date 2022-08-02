@@ -1,16 +1,52 @@
-<app-page-header [urlName]="'Situacao pessoa'"></app-page-header>
+<app-page-header></app-page-header>
 <ng-container *ngTemplateOutlet="conteudo"></ng-container>
 <ng-template #conteudo>
-<app-page-divided [formGroup]="form">
-    <div principal>
-        <p-card [header]="'Dados gerais'">
-                <app-input primeiro [label]="'Nome'" formControlName="Nome"></app-input>
-            &nbsp;
-        </p-card>
+    <app-page-divided [padrao]="false">
+        <div principal class="p-col p-fluid">
+            <form [formGroup]="form">
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    <div class="p-col-8 p-col-nopad">
+                    <app-input-cpf-cnpj segundo label="CPF/CNPJ" (onBlur)="buscaCnpj($event)"></app-input-cpf-cnpj>
+                    </div>
+                </div>
+                <app-input [label]="'Nome'"></app-input>
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    <div class="p-col-6">
+                        <app-input [label]="'Email'"></app-input>
+                    </div>
+                    <div class="p-col-6">
+                        <app-input [label]="'Celular'"></app-input>
+                    </div>
+                </div>
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    <div class="p-col-2 p-fluid" style="margin-top: 5px;">
+                        <label for="cep">Cep</label>
+                        <p-inputMask id="cep" (onBlur)="verificaCepValido($event)" primeiro mask="99999-999"></p-inputMask>
+                    </div>
+                    <div class="p-col-10">
+                    <app-input label="Logradouro"></app-input>
+                    </div>
+                </div>
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    <div class="p-col-10">
+                    <app-input label="Bairro"></app-input>
+                    </div>
+                    <div class="p-col-2">
+                    <app-input label="Número"></app-input>
+                    </div>
+                </div>
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    <div class="p-col-2">
+                    <app-input label="UF" [isReadOnly]="true"></app-input>
+                    </div>
+                    <div class="p-col-10">
+                    <app-input label="Cidade" [isReadOnly]="true"></app-input>
+                    </div>
+                </div>
+                &nbsp;
+            </form>
+            <app-footer-page *ngIf="!modal" [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelar()"></app-footer-page>
 
-        <app-footer-page (cancelar)="fechar()" (confirmar)="processarFormulario()"></app-footer-page>
-
-    </div>
-</app-page-divided>
+        </div>
+    </app-page-divided>
 </ng-template>
-<p-toast position="bottom-right"></p-toast>

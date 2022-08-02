@@ -30,7 +30,7 @@ export class AuthService {
     }
     
     public terceiraAuthenticacao() {
-        return this.http.get(`https://app.hunno.com.br/api/suport/contractor/user`).pipe(catchError(this.errorHandler))
+        return this.http.get(`https://app.hunno.com.br/api/suport/contractor`).pipe(catchError(this.errorHandler))
     }
 
     public selectAuthenticacao(contractor: {}) {
