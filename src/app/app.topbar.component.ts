@@ -41,8 +41,7 @@ export class AppTopbarComponent {
         this.trocarEmpresa.nativeElement.click();
     }
 
-    modalFechado(){ 
-        console.log('Teste --- ok ')       
+    modalFechado(){         
         localStorage.setItem('counter', 'false')
         this.counter = 'false'
         this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']

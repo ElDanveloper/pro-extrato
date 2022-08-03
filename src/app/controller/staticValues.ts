@@ -35,7 +35,8 @@ export const getUrlCad = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}ca
 // export const getUrlContabil = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}contabil/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
 // export const getUrlHunnoCont = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}hunnocont/maxus`
 export const getUrlCnpj = () => `https://api.toqweb.com.br:2004/cad/sandbox/`
-export const getUrlPro = () => `${API_AUTH_HUNNO}/pro/hunnoDEV`
+// export const getUrlPro = () => `${API_AUTH_HUNNO}/pro/hunnoDEV`
+export const getUrlPro = () => `${API_AUTH_HUNNO}/pro/hunno`
 export const getUrlClient = () => `${URL_BASE}/api/client`
 export const getUrlUser = () => `${URL_BASE}/api/user`
 export const getUrlToken = () => `https://app.hunno.com.br/api/update/token`
