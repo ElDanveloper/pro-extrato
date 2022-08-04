@@ -43,6 +43,7 @@ const routes: Routes = [
             { path: 'company', component: CompanyListComponent },            
             { path: 'person', component: PersonListComponent },
             { path: 'natureza-financeira', component: NaturezaFinanceiraListaComponent },            
+            { path: 'natureza-financeira/cadasto/:id', component: NaturezaFinanceiraCadastroComponent},
             { path: 'users/registration/:id', component: UsersRegistrationComponent },
             { path: 'company-registration/:id', component: CompanyRegistrationComponent },
             { path: 'person/registration/:id', component: PersonRegistrationComponent },

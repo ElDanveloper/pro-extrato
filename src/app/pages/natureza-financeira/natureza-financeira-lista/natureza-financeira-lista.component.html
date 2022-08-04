@@ -3,7 +3,7 @@
         <div class="p-field p-col-12 p-md-8">
             <div class="p-inputgroup">
                 <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" pInputText>
-                <button pButton type="button" icon="fa fa-search" (click)="carregarLista()"
+                <button pButton type="button" icon="fa fa-search" (click)="loadList()"
                         ></button>
             </div>
         </div>
@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" [lazy]="true" (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
         <ng-template pTemplate="header" let-columns>
             <tr>   
             <th [ngStyle]="{width: '7%'}"> Classificação </th>                          
@@ -57,4 +57,4 @@
     <app-modal-natureza-financeira-cadastro #content></app-modal-natureza-financeira-cadastro>
 </app-modal> -->
 
-<app-modal-natureza-financeira-cadastro [modalVisible]="modalCadastrarNatureza" #content (closeModal)="modalCadastrarNatureza = false"></app-modal-natureza-financeira-cadastro>
+<app-modal-natureza-financeira-cadastro [modalVisible]="modalCadastrarNatureza" #content (closeModal)="conclude()"></app-modal-natureza-financeira-cadastro>

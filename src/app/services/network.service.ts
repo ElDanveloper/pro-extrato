@@ -106,8 +106,11 @@ export class NetworkService {
         return this.http.post(`${getUrlCad()}/produtos/produtoagil`, v).pipe(catchError(this.errorHandler))
     }
 
-    public listarPost(url: string, filtro: {}): Observable<Object> {
-        return this.http.post(`${getUrlPro()}/${url}`, filtro)
+    public listarPost(url: string, filtro: {}, page: number = 1, top: number = 10): Observable<Object> {
+        let headers = new HttpHeaders()
+        headers = headers.append('page', page.toString())
+        headers = headers.append('top', top.toString())
+        return this.http.post(`${getUrlPro()}/${url}`, filtro, {headers, observe: 'response'})
             // .pipe(map((res: Response) => res['value']), catchError(this.errorHandler))
     }
 

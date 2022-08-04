@@ -42,9 +42,15 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
     onLabel = 'Sim'
     offLabel = 'Não'
 
-    empresas = []
-    segmento = []
-    responsavel = []
+    selectGrupoNatureza = []
+    selectListaNatureza = []
+    selectSpecie = [
+        {label: 'Despesa', value: 'D'},
+        {label: 'Receita', value: 'R'},
+        {label: 'Transferencia', value: 'T'},
+        {label: 'Financiamento', value: 'F'},
+        {label: 'Investimoento', value: 'I'}
+    ]
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService, private viaCep: NgxViacepService) {
         super(networkService, dadosDefault, router, 'financialCategory', messageService);
@@ -54,10 +60,9 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
     }
 
     ngOnInit() {
-        this.dadosDefault.empresa().subscribe(values => {
-            this.empresas = values[0]
-            this.segmento = values[1]
-            this.responsavel = values[2]            
+        this.dadosDefault.modalNaturezaFinanceira().subscribe(values => {
+            this.selectGrupoNatureza = values[0]
+            this.selectListaNatureza = values[1]      
           })
 
         this.$subscription5 = this.route.paramMap.subscribe(params => {
@@ -66,21 +71,11 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
 
         if (this.id) {
             this.dadosDefault.exibirLoader.next(true)
-            this.$subscription2 = this.networkService.buscar('financialcategory', this.id, Util.expandedQuery(FinancialCategory.expanded()) ).subscribe((value: any) => {
+            this.$subscription2 = this.networkService.buscar('financialCategory', this.id, Util.expandedQuery(FinancialCategory.expanded()) ).subscribe((value: any) => {
 
                 const data = Formulario.prepareValueToForm(new FinancialCategory(), value, null, FinancialCategory.relacionamentos(), FinancialCategory.checkbox());
                 Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
-
-                // if (value.PersonContractorId) {
-                //     const dataPessoaFisica = Formulario.prepareValueToForm(new PessoaContractor(), value.PersonContractorId, PessoaContractor.datas(), PessoaContractor.relacionamentos(), PessoaContractor.checkbox());
-                //     Object.keys(dataPessoaFisica).forEach(key => this.form.get('PessoaContractorForm').get(key).setValue(dataPessoaFisica[key]))
-                // }
-                
-                // if (value.PersonContractorId.PessoaId) {                    
-                //     const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), value.PersonContractorId.PessoaId, Pessoa.datas(), null, Pessoa.checkbox());
-                //     Object.keys(dataPessoa).forEach(key => this.form.get('PessoaForm').get(key).setValue(dataPessoa[key]))
-                // }
-
+               
             }).add(() => this.dadosDefault.exibirLoader.next(false))
         }
     }
@@ -101,140 +96,15 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
 
         let value = Formulario.parseForm(new FinancialCategory(), data, FinancialCategory.referencias(), null, null, null, FinancialCategory.checkbox());
 
-        // value.PersonContractorId = Formulario.parseForm(new PessoaContractor(), PessoaContractorForm, PessoaContractor.referencias(), null, PessoaContractor.datas(), null, PessoaContractor.checkbox());
-        // value.PersonContractorId.PessoaId = Formulario.parseForm(new Pessoa(), PessoaForm, Pessoa.referencias(), Pessoa.mascaras(), PessoaContractor.datas(), null, PessoaContractor.checkbox());
-
         this.networkService.exibirLoader.next(true);
-        this.$subscription6 = this.networkService.atualizarPost(getUrlPro(), 'financialcategory', value).subscribe((v: any) => {
-            this.router.navigate(['/natureza-financeira'])
+        this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'InsertCategory', value).subscribe((v: any) => {
+            this.messageService.add(Util.pushSuccessMsg('Atualização feita com sucesso!'))
+            this.router.navigate(['natureza-financeira'])
         }).add(() => this.networkService.exibirLoader.next(false))
     }
 
-    // buscaCnpj(e) {
-    //     if (e.type === 'keypress' && e.key !== 'Enter') return;
-
-    //     let cnpj = this.form.get('PessoaForm').get('CpfCnpj').value.toString().match(/\d/g);
-
-    //     if (cnpj === null || (cnpj.join('').length !== 11 && cnpj.join('').length !== 14)) {
-    //         this.messageService.add(Util.pushErrorMsg('Cpf/Cnpj Invalido'))
-    //         return;
-    //     }
-    //     cnpj = cnpj.join('')
-
-    //     if (cnpj.length === 11) {
-    //         this.$subscription7 = this.networkService.getSimples(getUrlClient(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
-    //             this.form.get('PessoaForm').get('Tipo').setValue('F')
-    //             const vApi = v.value
-    //             if (vApi && vApi.length === 1) {
-    //                 this.form.get('Nome').setValue(vApi[0].Nome)
-    //                 this.form.get('Fantasia').setValue(vApi[0].Fantasia)
-    //                 // this.form.get('PessoaForm').get('Id').setValue(vApi[0].Id)
-    //                 this.form.get('Logradouro').setValue(vApi[0].Logradouro)
-    //                 this.form.get('Complemento').setValue(vApi[0].Complemento)
-    //                 this.form.get('Contato').setValue(vApi[0].Contato)
-    //                 this.form.get('Email').setValue(vApi[0].Email)
-    //                 this.form.get('Numero').setValue(vApi[0].Numero)
-    //                 this.form.get('CodigoIbge').setValue(vApi[0].CodigoIbge)
-    //                 // this.form.get('Fone1').setValue(vApi[0].Fone1)
-    //                 // this.form.get('Fone2').setValue(vApi[0].Fone2)
-    //                 this.form.get('Celular').setValue(vApi[0].Celular)
-    //                 this.form.get('Bairro').setValue(vApi[0].Bairro)
-    //                 this.form.get('Uf').setValue(vApi[0].Uf)
-    //                 this.form.get('Cep').setValue(vApi[0].Cep)
-    //                 this.form.get('Cidade').setValue(vApi[0].Cidade)
-    //                 // this.form.get('IdCondPagamento').setValue(vApi[0].IdCondPagamento)
-    //                 // this.form.get('PessoaForm').get('ContribuinteIcms').setValue(vApi[0].ContribuinteIcms)
-    //             }
-    //             return
-    //         })
-    //     }
-
-    //     if (cnpj.length === 14) {
-    //         this.$subscription8 = this.networkService.getSimples(getUrlClient(), `pessoa?$filter=cpfcnpj eq '${cnpj}'`).subscribe((v: any) => {
-    //             this.form.get('PessoaForm').get('Tipo').setValue('J')
-    //             const vApi = v.value
-    //             if (vApi && vApi.length === 1) {
-    //                 this.form.get('Nome').setValue(vApi[0].Nome)
-    //                 this.form.get('Fantasia').setValue(vApi[0].Fantasia)
-    //                 // this.form.get('PessoaForm').get('Id').setValue(vApi[0].Id)
-    //                 this.form.get('Contato').setValue(vApi[0].Contato)
-    //                 this.form.get('Complemento').setValue(vApi[0].Complemento)
-    //                 this.form.get('Logradouro').setValue(vApi[0].Logradouro)
-    //                 this.form.get('Celular').setValue(vApi[0].Celular)
-    //                 this.form.get('Numero').setValue(vApi[0].Numero)
-    //                 this.form.get('Uf').setValue(vApi[0].UF)
-    //                 this.form.get('Bairro').setValue(vApi[0].Bairro)
-    //                 this.form.get('CodigoIbge').setValue(vApi[0].CodigoIbge)
-    //                 // this.form.get('Fone1').setValue(vApi[0].Fone1)
-    //                 // this.form.get('Fone2').setValue(vApi[0].Fone2)
-    //                 this.form.get('Email').setValue(vApi[0].Email)
-    //                 this.form.get('Cep').setValue(vApi[0].Cep)
-    //                 this.form.get('Cidade').setValue(vApi[0].Cidade)
-    //                 // this.form.get('IdCondPagamento').setValue(vApi[0].IdCondPagamento)
-    //                 // this.form.get('PessoaForm').get('ContribuinteIcms').setValue(vApi[0].ContribuinteIcms)
-    //             } else if (cnpj.length === 14) {
-    //                 this.buscarCnpjReceitaWs(cnpj)
-    //             }
-    //         })
-    //     }
-    // }
-
-    // buscarCnpjReceitaWs(cnpj) {
-    //     this.$subscription9 = this.dadosDefault.buscarCnpj(cnpj).subscribe((v: any) => {
-    //         this.form.get('Nome').setValue(v['nome']);
-    //         this.form.get('Fantasia').setValue(v['fantasia']);
-    //         this.form.get('Cep').setValue(v['cep']);
-    //         this.form.get('Logradouro').setValue(v['logradouro']);
-    //         this.form.get('Numero').setValue(v['numero']);
-    //         this.form.get('Complemento').setValue(v['complemento']);
-    //         this.form.get('Bairro').setValue(v['bairro']);
-    //         this.form.get('Cidade').setValue(v['municipio']);
-    //         this.form.get('Uf').setValue(v['uf'])
-    //         this.form.get('Celular').setValue(v['telefone'])
-    //         this.form.get('Email').setValue(v['email'])
-    //         this.verificaCepValido(true)
-    //     })
-    // }
-
-    // verificaCepValido(event) {
-    //     if (event === true || (event.key === 'Enter' || event.type === 'blur') && this.form.get('Cep').value !== null) {
-    //         let cep = this.form.get('Cep').value.toString().match(/\d/g)
-    //         if (cep === null) return
-    //         cep = cep.join('');
-    //         if (cep.length === 8) {
-    //             this.viaCep.buscarPorCep(cep)
-    //                 .then((endereco: Endereco) => {
-    //                     if (event === true) {
-    //                         this.form.get('CodigoIbge').setValue(endereco.ibge)
-    //                         return
-    //                     }
-    //                     console.log(endereco);
-    //                     this.form.get('Logradouro').setValue(endereco.logradouro);
-    //                     this.form.get('Complemento').setValue(endereco.complemento);
-    //                     this.form.get('Bairro').setValue(endereco.bairro);
-    //                     this.form.get('Cidade').setValue(endereco.localidade);
-    //                     this.form.get('Uf').setValue(endereco.uf)
-    //                     this.form.get('CodigoIbge').setValue(endereco.ibge)
-    //                 }).catch((error: ErroCep) => {
-    //                     this.messageService.add({ severity: 'error', summary: 'Cep Nao Encontrado' })
-    //                 })
-    //         }
-    //     }
-    // }
-
-    // cepPesquisado(value) {
-    //     if (typeof value !== 'object') return;
-    //     this.modalCepVisible = false;
-    //     console.log(Object.assign({}, value))
-    //     this.form.get('Cep').setValue(value['Cep']);
-    //     this.form.get('Uf').setValue(value['Uf']);
-    //     this.form.get('Cidade').setValue(value['Cidade']);
-    //     this.form.get('Logradouro').setValue(value['Logradouro'])
-    //     this.form.get('CodigoIbge').setValue(value['ibge'])
-    // }
-
-    cancelarLocal() {
-        this.router.navigate(['empresas'])
+    cancelarLocal() {        
+        this.router.navigate(['natureza-financeira'])
     }
 
     ngOnDestroy() {

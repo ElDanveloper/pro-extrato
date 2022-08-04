@@ -48,14 +48,14 @@ export class ModalNaturezaFinanceiraComponent extends BaseFormPost implements On
     }
 
     ngOnInit() {
-        this.dadosDefault.modalNaturezaFinanceira().subscribe(values => {
-            this.selectCentroCustos = values[0]
-            this.selectContaContabil = values[1]
-            this.selectNatureza = values[2]
-            this.selectTipoDocumentos = values[3]
-            this.selectProjeto = values[4]
-            this.selectMeioPagamento = values[5]
-        })
+        // this.dadosDefault.modalNaturezaFinanceira().subscribe(values => {
+        //     this.selectCentroCustos = values[0]
+        //     this.selectContaContabil = values[1]
+        //     this.selectNatureza = values[2]
+        //     this.selectTipoDocumentos = values[3]
+        //     this.selectProjeto = values[4]
+        //     this.selectMeioPagamento = values[5]
+        // })
 
             if (this.id) {
                 this.$subscriptionBuscar = this.networkService.buscar(this.entidade, this.id, Util.expandedQuery(FinancialCategory.expanded())).subscribe(value => {

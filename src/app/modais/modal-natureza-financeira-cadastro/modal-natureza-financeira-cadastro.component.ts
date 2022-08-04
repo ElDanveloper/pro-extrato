@@ -1,3 +1,4 @@
+import { Financial } from './../../model/financial.model';
 import { getUrlPro } from './../../controller/staticValues';
 import { FinancialCategory } from './../../model/financial-category.model';
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
@@ -59,6 +60,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     selectNaturezaFinanceira;
 
     selectListaNatureza;
+    selectGrupoNatureza;
     classificacao = undefined
 
     primeiraEtapa = true
@@ -78,7 +80,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     ]
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService) {
-        super(networkService, dadosDefault, router, 'FinancialCategories', messageService);
+        super(networkService, dadosDefault, router, 'InsertCategory', messageService);
         this.form = Formulario.createForm(new FinancialCategory(), this.fb);
     }
 
@@ -98,13 +100,18 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
 
     ngOnChanges() {
         if (this.modalVisible) {
-            this.dadosDefault.exibirLoader.next(true)
-            this.networkService.listarPost('financialCategories', {Level: 1}).subscribe((v: any) => {
-                this.selectListaNatureza = []
-                v.value.map(value => {
-                    this.selectListaNatureza.push({ label: value.Description, value: { Classificacao: value.Classificate, Id: value.Id } })
-                })
-            }).add(this.dadosDefault.exibirLoader.next(false))
+            this.dadosDefault.modalNaturezaFinanceira().subscribe(values => {
+                this.selectGrupoNatureza = values[0]
+                this.selectListaNatureza = values[1]
+
+            })
+            // this.dadosDefault.exibirLoader.next(true)
+            // this.networkService.listarPost('financialCategories', {Level: 1}).subscribe((v: any) => {
+            //     this.selectListaNatureza = []
+            //     v.value.map(value => {
+            //         this.selectListaNatureza.push({ label: value.Description, value: { Classificacao: value.Classificate, Id: value.Id } })
+            //     })
+            // }).add(this.dadosDefault.exibirLoader.next(false))
         }
     }
 
@@ -123,7 +130,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
 
     processarFormulario() {    
         this.dadosDefault.exibirLoader.next(true)    
-        this.networkService.salvarPost(getUrlPro(), 'FinancialCategories', Formulario.parseForm(new FinancialCategory(), Object.assign({}, this.form.value), FinancialCategory.referencias(), null, null, null, FinancialCategory.checkbox(), false)).subscribe(v => {
+        this.networkService.salvarPost(getUrlPro(), 'InsertCategory', Formulario.parseForm(new FinancialCategory(), Object.assign({}, this.form.value), FinancialCategory.referencias(), null, null, null, Financial.checkbox(), false)).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Cadastro realizado com sucesso'));
             this.fecharModal();
         }).add(this.dadosDefault.exibirLoader.next(false))
@@ -201,7 +208,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
         }
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `GenerateClassificateCategory?CategoryId=${id}`).subscribe((v: any) => {
-            this.form.get('Classificacao').setValue(v.value)
+            this.form.get('Classificate').setValue(v.value)
         }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
@@ -293,7 +300,8 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     fecharModal() {
         this.false();
         this.form.reset();
-        this.dadosDefault.closeModal(this.hash);
+        this.closeModal.emit(false)
+        // this.dadosDefault.closeModal(this.hash);
         this.modalVisible = false
     }
 }

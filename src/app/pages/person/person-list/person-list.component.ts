@@ -48,7 +48,7 @@ export class PersonListComponent extends BaseListSimples implements OnInit, OnDe
     filtro = ''
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) {
-        super(networkService, getUrlPro(), 'PersonClient', Util.expandedQuery(PersonClient.expanded()))
+        super(networkService, getUrlPro(), 'GetPersonClient',null)
     }
 
     ngOnInit() {        

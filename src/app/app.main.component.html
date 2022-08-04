@@ -16,15 +16,7 @@
             <app-inline-profile *ngIf="profileMode=='inline'&&!isHorizontal()"></app-inline-profile>
             <app-menu></app-menu>
         </div>
-
-        <div *ngIf="exibirLoader | async" style="position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
-            <p-progressSpinner></p-progressSpinner>
-        </div>
-
-        <div *ngIf="exibirLoaderNetwork | async" style="position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
-            <p-progressSpinner></p-progressSpinner>
-        </div>
-
+     
         <div class="layout-main">
             <!-- <app-breadcrumb></app-breadcrumb> -->
 
