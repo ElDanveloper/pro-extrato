@@ -1,3 +1,4 @@
+import { Users } from './../../../../model/users.model';
 import { Formulario } from '../../../../controller/Formulario';
 import { autoCompleteDelayTime, getUrlCad, SERVERLESS_URL } from '../../../../controller/staticValues';
 import { hasValue, Util } from '../../../../controller/Util';
@@ -100,28 +101,13 @@ export class UsersRegistrationComponent extends BaseFormPost implements OnInit, 
         height: 0,
     };
     showCropper = false;
-    private timeOut: any = 0
-
-
-    //Novo
-    selectIndCooperativa: SelectItem[] = [
-        {value: '0', label: '0 - Não é Cooperativa'},
-        {value: '1', label: '1 - Cooperativa de Trabalho'},
-        {value: '2', label: '2 - Cooperativa de Produção'},
-        {value: '3', label: '3 - Outras Cooperativa'},
-    ]
-
-    selectIndConstrutora: SelectItem[] = [
-        {value: '0', label: '0 - Não é Construtora'},
-        {value: '1', label: '1 - Empresa Construtora'},        
-    ]
-
-    selectTributario: SelectItem[] = []
+    private timeOut: any = 0    
+    
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService,
                 private viaCep: NgxViacepService) {
-        super(networkService, dadosDefault, router, 'company', messageService);
-        this.form = Formulario.createForm(new Company(), this.fb);
+        super(networkService, dadosDefault, router, 'Users', messageService);
+        this.form = Formulario.createForm(new Users(), this.fb);
         // this.form.addControl("PessoaFisicaForm", Formulario.createForm(new PersonFisical(), this.fb));
         // this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
 
@@ -131,26 +117,10 @@ export class UsersRegistrationComponent extends BaseFormPost implements OnInit, 
         // this.form.get('CodContaContabil').setValue(1)
     }
 
-    get imagem() {
-        const staticImg = '../../../assets/images/user.png'
-        const img = this.form.get('PessoaForm').get('CaminhoFoto').value
-        return hasValue(img) ? img : staticImg
-    };
+    
 
     ngOnInit() {
-    //     // this.$subscription1 = this.dadosDefault.pessoa().subscribe(values => {
-    //     //     this.selectSituacaoPessoa = values[0];
-    //     //     this.selectOperacaoFiscal = values[1];
-    //     //     this.selectNaturezaFinanceira = values[2];
-    //     //     this.selectVendedor = values[3];
-    //     //     this.selectTipoEndereco = values[4];
-    //     //     this.selectContaContabil = values[5]
-    //     //     this.selectTabela = values[6]
-    //     //     this.selectPais = values[7]
-
-    // this.$subscription1 = this.dadosDefault.empregador().subscribe(values => {
-    //     this.selectTributario = values[0];
-    // })
+   
 
             if (this.id) {
                 this.dadosDefault.exibirLoader.next(true)
@@ -188,6 +158,10 @@ export class UsersRegistrationComponent extends BaseFormPost implements OnInit, 
         this.$subscription5 = this.route.paramMap.subscribe(params => {
             this.id = params.get('id')
         })
+    }
+
+    get getCnpjCpf(){
+        return this.form.get('cpf_cnpj_format').value
     }
 
     processarFormulario() {

@@ -3,13 +3,16 @@
     <div [formGroup]="form">
         <p-card>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-2">
+                <div class="p-field p-col-12 p-md-6">
                     <app-input [label]="'Descrição'" formControlName="Description"></app-input>
                 </div>
                 <div class="p-field p-col-12 p-md-2">
                     <app-input [label]="'Classificação'" formControlName="Classificate"></app-input>
                 </div>
-                <div class="p-field p-offset-6 p-col-2 p-md-2">
+                <div class="p-col-2" style="margin-top: 18px;">
+                    <button pButton label="Calcular Classificação" (click)="gerarClassificacao()"></button>
+                </div>
+                <div class="p-field p-col-2 p-md-2">
                     <div>
                         <span>Ativo</span>
                     </div>
@@ -35,6 +38,26 @@
                 </div>
                 <div class="p-field p-col-12 p-md-6">
                     <app-select [label]="'Tipo'" formControlName="Specie" [options]="selectSpecie"></app-select>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-6">
+                    <app-input [label]="'Codigo de Controle'" formControlName="CodeControl"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-6">
+                    <app-input [label]="'Codigo de Integração'" formControlName="CodeIntegration"></app-input>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-2 p-md-2">
+                    <div>
+                        <span>Exibir no APP</span>
+                    </div>
+                    <div>
+                        <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
+                            formControlName="ViewOnApp">
+                        </p-toggleButton>
+                    </div>
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">

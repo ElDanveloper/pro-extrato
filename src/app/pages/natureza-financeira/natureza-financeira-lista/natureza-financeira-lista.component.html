@@ -2,7 +2,7 @@
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 p-md-8">
             <div class="p-inputgroup">
-                <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" pInputText>
+                <input #inputPesquisa appUppercaseNotForm (keypress)="loadList()" [(ngModel)]="filtro" pInputText>
                 <button pButton type="button" icon="fa fa-search" (click)="loadList()"
                         ></button>
             </div>

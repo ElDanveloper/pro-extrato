@@ -104,58 +104,93 @@ export class ModalFinancialCategorySearchComponent implements OnInit, OnChanges,
         if(this.$subscriptionLista) this.$subscriptionLista.unsubscribe()
     }
 
-    public lazyLoad(event): void {
-        this.pagina = event.first / event.rows
-        if (!this.jaPesquisou) return
-        // this.loading = true
-        if (this.lista) {
-            if (this.top !== event.rows && event.rows !== undefined) {
-                this.top = event.rows
-                event.first = 0
-            }
-            this.carregarLista()
-            // this.loading = false
-        }
-    }
-
-
-    public carregarLista(): void {
-        // this.loading = false
-        this.jaPesquisou = true
+    carregarLista(page?, top?) {  
+        
         let v;
         try {
             v = this.inputPesquisa.nativeElement.value
         } catch (e) {
             v = ''
         }
-
-        if(v.toString().match(/^\d+$/)) {
-            v = `CodeControl eq ${v}`
-        } else {
-            v = `contains(lower(Description), '${Util.lower(v)}')`
+        let body = {}
+        if (v !== '') {
+            body = {
+                Description: v
+            }
         }
-
-        let filter = ''
-
-
-
-        if(this.filtroAdicional) {
-            filter = `financialCategory?$filter=(Sintetic eq false and ${this.filtroAdicional} and ${v})`
-        } else {
-            filter = `financialCategory?$filter=(Sintetic eq false and ${v})`
-        }
-
-        this.networkService.getSimplesQtd(getUrlPro(), `${filter}&$inlinecount=allpages&$top=0`).subscribe((qtd: number) => {
-            this.totalItens = qtd
-        this.networkService.getSimples(getUrlPro(),`${filter}&$skip=${this.pagina}&$top=${this.top}`).subscribe((listaSec:any) => {
-            this.lista = listaSec.value
-        }, error1 => {
-            this.messageService.add(Util.pushErrorMsg(error1))
-        });
-        }, error2 => {
-            this.messageService.add(Util.pushErrorMsg(error2))
-        })
+        this.networkService.exibirLoader.next(true)
+        this.networkService.listarPost('FinancialCategories', body, page, top).subscribe((v: any) => {
+            this.lista = v.body['value']
+            let pagina = v.headers.get('pages')
+            this.totalItens = Util.toNumber(pagina) * this.top
+        }).add(this.networkService.exibirLoader.next(false))
     }
+
+    public lazyLoad(event): void {        
+        // if (!this.jaPesquisou) return
+        this.loading = true
+        if (this.lista) {
+            if (this.top !== event.rows && event.rows !== undefined) {
+                this.top = event.rows
+                event.first = 0
+            }
+            this.carregarLista((event.first / 10) + 1, this.top)
+            this.loading = false
+        }
+    }
+
+    // public lazyLoad(event): void {
+    //     this.pagina = event.first / event.rows
+    //     if (!this.jaPesquisou) return
+    //     // this.loading = true
+    //     if (this.lista) {
+    //         if (this.top !== event.rows && event.rows !== undefined) {
+    //             this.top = event.rows
+    //             event.first = 0
+    //         }
+    //         this.carregarLista()
+    //         // this.loading = false
+    //     }
+    // }
+
+
+    // public carregarLista(): void {
+    //     // this.loading = false
+    //     this.jaPesquisou = true
+    //     let v;
+    //     try {
+    //         v = this.inputPesquisa.nativeElement.value
+    //     } catch (e) {
+    //         v = ''
+    //     }
+
+    //     if(v.toString().match(/^\d+$/)) {
+    //         v = `CodeControl eq ${v}`
+    //     } else {
+    //         v = `contains(lower(Description), '${Util.lower(v)}')`
+    //     }
+
+    //     let filter = ''
+
+
+
+    //     if(this.filtroAdicional) {
+    //         filter = `financialCategory?$filter=(Sintetic eq false and ${this.filtroAdicional} and ${v})`
+    //     } else {
+    //         filter = `financialCategory?$filter=(Sintetic eq false and ${v})`
+    //     }
+
+    //     this.networkService.getSimplesQtd(getUrlPro(), `${filter}&$inlinecount=allpages&$top=0`).subscribe((qtd: number) => {
+    //         this.totalItens = qtd
+    //     this.networkService.getSimples(getUrlPro(),`${filter}&$skip=${this.pagina}&$top=${this.top}`).subscribe((listaSec:any) => {
+    //         this.lista = listaSec.value
+    //     }, error1 => {
+    //         this.messageService.add(Util.pushErrorMsg(error1))
+    //     });
+    //     }, error2 => {
+    //         this.messageService.add(Util.pushErrorMsg(error2))
+    //     })
+    // }
 
 
 

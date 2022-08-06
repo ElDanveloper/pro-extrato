@@ -118,6 +118,13 @@ export class NetworkService {
         return this.http.get(`${url}/${entidade}`).pipe(catchError(this.errorHandler))
     }
 
+    public getSimplesComHeaders(url: string, entidade: string, page: number = 1, top: number = 10): Observable<Object> {
+        let headers = new HttpHeaders()
+        headers = headers.append('page', page.toString())
+        headers = headers.append('top', top.toString())
+        return this.http.get(`${url}/${entidade}`, {headers, observe: 'response'}).pipe(catchError(this.errorHandler))
+    }
+
     public getSimplesFromHeader(url: string, entidade: string, count: number, page: number): Observable<Object> {
         let headers = new HttpHeaders();
         headers = headers.append('count', count.toString())

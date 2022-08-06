@@ -42,6 +42,9 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
     onLabel = 'Sim'
     offLabel = 'Não'
 
+    idNatureza = undefined;
+    classificacao = undefined
+
     selectGrupoNatureza = []
     selectListaNatureza = []
     selectSpecie = [
@@ -121,6 +124,17 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
         if (this.$subscription10) this.$subscription10.unsubscribe()
         if (this.$subscription11) this.$subscription11.unsubscribe()
         if (this.$subscription12) this.$subscription12.unsubscribe()
+    }
+
+    gerarClassificacao() {
+        let id = this.idNatureza;
+        if (id === undefined) {
+            id = this.classificacao.Id;
+        }
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `GenerateClassificateCategory?CategoryId=${id}`).subscribe((v: any) => {
+            this.form.get('Classificate').setValue(v.value)
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
 }

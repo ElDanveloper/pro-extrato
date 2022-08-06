@@ -1,3 +1,4 @@
+import { BaseListSimplesHeaders } from './../../../controller/BaseListSimplesHeaders';
 import { DadosDefaultService } from '../../../services/dados-default.service';
 import { PersonClient } from '../../../model/person-client.model';
 import { Util } from '../../../controller/Util';
@@ -15,7 +16,7 @@ import {Router} from "@angular/router";
   templateUrl: './person-list.component.html',
   styleUrls: ['./person-list.component.css']
 })
-export class PersonListComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class PersonListComponent extends BaseListSimplesHeaders implements OnInit, OnDestroy {
 
     @ViewChild('cadastrarPessoa') cadastrarPessoa: ElementRef;
 
@@ -26,7 +27,7 @@ export class PersonListComponent extends BaseListSimples implements OnInit, OnDe
     // pagina = 0;
     // public first: number = 0
     // public loading: boolean
-    public top: number = qtdLinhas()
+    // public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
     public totalItens2: number
     modalCadastrarPessoa = false
@@ -45,7 +46,7 @@ export class PersonListComponent extends BaseListSimples implements OnInit, OnDe
             }},
     ]
 
-    filtro = ''
+    // filtro = ''
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) {
         super(networkService, getUrlPro(), 'GetPersonClient',null)
@@ -60,18 +61,18 @@ export class PersonListComponent extends BaseListSimples implements OnInit, OnDe
         if (e.key === 'Enter') this.carregarLista()
     }
 
-    get pessoas () {               
-        return this.lista.filter(v => {            
-            if (v.PersonId.Nome === null) {
-                v.PersonId.Nome = ''
-            }               
-            if (v.PersonId.CpfCnpj === null) {
-                v.PersonId.CpfCnpj = ''
-            }
-            return v.PersonId.Nome.toLowerCase().includes(this.filtro.toLowerCase()) || v.PersonId.CpfCnpj.toString().includes(this.filtro)
-        })
+//     get pessoas () {               
+//         return this.lista.filter(v => {            
+//             if (v.PersonId.Nome === null) {
+//                 v.PersonId.Nome = ''
+//             }               
+//             if (v.PersonId.CpfCnpj === null) {
+//                 v.PersonId.CpfCnpj = ''
+//             }
+//             return v.PersonId.Nome.toLowerCase().includes(this.filtro.toLowerCase()) || v.PersonId.CpfCnpj.toString().includes(this.filtro)
+//         })
     
-}
+// }
 
     
 

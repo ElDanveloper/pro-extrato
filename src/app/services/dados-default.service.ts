@@ -94,9 +94,9 @@ export class DadosDefaultService {
     }
 
     public pessoa() {
-        let category = this.http.get(`${getUrlPro()}/Category`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))))
+        let natureza = this.http.post(`${getUrlPro()}/financialCategories`, {Level: 1}).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: { Classificacao: v.Classificate, Id: v.Id}}))));
 
-        return forkJoin([category])
+        return forkJoin([natureza])
     }
 
     // verificaNcmValido(value) {

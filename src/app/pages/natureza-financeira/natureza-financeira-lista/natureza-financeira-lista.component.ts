@@ -32,6 +32,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     public totalItens2: number
     modalCadastrarNatureza = false
     totalItens = 0
+    filtro = ''
     // lista2 = []
     @ViewChild('inputPesquisa') public inputPesquisa
     @ViewChild('selectValue') public selectValue
@@ -82,17 +83,22 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
         if (e.key === 'Enter') this.loadList(1, 1000)
     }
 
-    loadList(page?, top?) {
-        this.networkService.exibirLoader.next(true)        
-        this.networkService.listarPost('FinancialCategories', {}, page, top).subscribe((v: any) => {            
-            this.lista = v.body['value']            
-            let pagina = v.headers.get('pages')          
-            this.totalItens = Util.toNumber(pagina)  * this.top            
+    loadList(page?, top?) {        
+        let body = {}
+        if (this.filtro !== '') {
+            body = {
+                Description: this.filtro
+            }
+        }
+        this.networkService.exibirLoader.next(true)
+        this.networkService.listarPost('FinancialCategories', body, page, top).subscribe((v: any) => {
+            this.lista = v.body['value']
+            let pagina = v.headers.get('pages')
+            this.totalItens = Util.toNumber(pagina) * this.top
         }).add(this.networkService.exibirLoader.next(false))
     }
 
-    public lazyLoad(event): void {
-        console.log('linha ---> ' + event.first / 10)
+    public lazyLoad(event): void {        
         // if (!this.jaPesquisou) return
         this.loading = true
         if (this.lista) {
@@ -112,6 +118,30 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
 
     linkPessoa(v) {
         this.router.navigate([`/historico-pessoa/${v.Id}/pedido`])
+    }
+
+    filtrarEPesquisar(e?, page = 0) {
+        if (e && e.key !== 'Enter') return
+
+        const filtro = {}
+
+        // if (this.grupo) filtro.IdGrupo = this.grupo
+        // if (this.vendedor) filtro.IdVendedor = this.vendedor
+        // if (this.canal) filtro.IdCanal = this.canal
+        // if (this.marca) filtro.IdMarca = this.marca
+        // if (this.subcategoria) filtro.IdSubCategoria = this.subcategoria
+        // if (this.secao) filtro.IdSecao = this.secao
+        // if (this.tipoFiscal) filtro.TipoFiscal = this.tipoFiscal
+        // if (this.pessoa) filtro.IdPessoa = this.pessoa.Id
+        // if (this.textoPesquisa) filtro.Nome = "" + this.textoPesquisa
+        // filtro.DataIni = Util.dataParaStringComZero(this.dataInit)
+        // filtro.DataFim = Util.dataParaStringComZero(this.dataFim)
+        // filtro.QtdRegistro = this.qtdLinhas
+        // filtro.Pagina = page
+        // filtro.Tipo = 'V or D'
+
+        // this.filtro = filtro
+
     }
 
 

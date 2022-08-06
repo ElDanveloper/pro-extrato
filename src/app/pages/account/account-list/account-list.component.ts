@@ -35,6 +35,7 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
             this.router.navigate([`account/register/${e.Id}`])
         }},
         {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},        
+        {label: 'Atualizar Extrato', icon: 'fa fa-refresh', command: (e) => {}},  
     ]
 
     
