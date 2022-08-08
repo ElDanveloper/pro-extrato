@@ -10,6 +10,8 @@ import { MessageService } from "primeng/api";
 import { Formulario } from "../../controller/Formulario";
 import { Util } from "../../controller/Util";
 import { ProStatementItem } from 'src/app/model/pro-statement-item.model';
+import { timestamp } from 'rxjs/operators';
+import { ProAccount } from 'src/app/model/pro-account.model';
 
 @Component({
     selector: 'app-modal-payment-via-account',
@@ -36,6 +38,7 @@ export class ModalPaymentViaAccountComponent extends BaseFormPost implements OnI
         super(networkService, dadosDefault, router, 'InsertTransection', messageService);
 
         this.form = Formulario.createForm(new ProStatementItem(), this.fb)
+        this.form.addControl("Account", Formulario.createForm(new ProAccount(), this.fb))
         this.naoBuscar = true
 
         this.form.get('DateMovement').setValue(new Date());
@@ -47,9 +50,14 @@ export class ModalPaymentViaAccountComponent extends BaseFormPost implements OnI
         // })
     }
 
-    ngOnChanges() {
+    ngOnChanges() {        
         const tipo = this.data.tipo === 'P' ? 'Pagamento' : 'Recebimento'
         this.entidade = this.entidade + ' - ' + tipo
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `proaccount/${this.data.idConta}`).subscribe(v => {            
+            const account = Formulario.prepareValueToForm(new ProAccount(), v, ProAccount.datas(), null, ProAccount.checkbox());
+            Object.keys(account).forEach(key => this.form.get('Account').get(key).setValue(account[key]))
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
     selecionouNatureza(e) {
@@ -62,7 +70,14 @@ export class ModalPaymentViaAccountComponent extends BaseFormPost implements OnI
     }
 
     public processarFormulario(modal?) {
-        let value = Formulario.parseForm(new ProStatementItem(), this.form.value, ProStatementItem.referencias(), null, ProStatementItem.datas(), null, null);
+
+        const {Account, ...data} = Object.assign({}, this.form.value)
+
+        console.log("Account ---> " + Account)
+
+        let value= {...Formulario.parseForm(new ProStatementItem(), data, ProStatementItem.referencias(), null, ProStatementItem.datas(), null, null), "$id": 1};
+        value.AccountId = {...Formulario.parseForm(new ProAccount(), Account, null, null, ProAccount.datas(), null, ProAccount.checkbox()), "$id": 2}
+        
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.salvarPost(getUrlPro(), 'InsertTransection', value).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg("Salvo com Sucesso!"))

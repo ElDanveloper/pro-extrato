@@ -15,11 +15,12 @@
         </p-scrollPanel>
     </div>
 
-    <div *ngIf="exibirLoader | async" style="position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
+    <div *ngIf="exibirLoader | async" style="position: fixed; width: 45vw; height: 78vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
         <p-progressSpinner></p-progressSpinner>
     </div>
-
-    <div *ngIf="exibirLoaderNetwork | async" style="position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
+    
+    <div *ngIf="exibirLoaderNetwork | async" style="position: fixed; width: 45vw; height: 78vh; top: 0; left: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, .4);">
         <p-progressSpinner></p-progressSpinner>
     </div>
 </p-dialog>
+

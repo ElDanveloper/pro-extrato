@@ -27,6 +27,8 @@ export class AccountLaunchComponent implements OnInit {
     opcoesLinhas = opcoesLinhas()
     modalTrocarConta = false
 
+    dados = null
+
     classificacao = '3.07.02'
 
     @ViewChild('paymentviaaccount') paymentviaaccount: ElementRef;
@@ -114,7 +116,8 @@ export class AccountLaunchComponent implements OnInit {
                         this.dadosDefault.exibirLoader.next(true)
                         this.networkService.getSimples(getUrlPro(), `ExcludeTransection?Id=${e.Id}`).subscribe(v => {
                             this.messageService.add(Util.pushSuccessMsg('Item Excluido com Sucesso!'))
-                            this.carregarLista()
+                            this.update()
+                            this.tableExpand(this.dados, false)
                         }).add(this.dadosDefault.exibirLoader.next(false))
                     }
                 })
@@ -146,8 +149,12 @@ export class AccountLaunchComponent implements OnInit {
 
     }
 
-    tableExpand(v, expanded) {
+    tableExpand(v, expanded) {        
         if (expanded) return
+        if (!v) return
+        console.log("dados ---> " + this.dados)
+        console.log("v ---> " + v)
+        this.dados = v
 
         // const filtro = `IdPlanoConta=${v.IdPlanoConta}&Limit=50&pagina=0&Data=${v.Data}`
 

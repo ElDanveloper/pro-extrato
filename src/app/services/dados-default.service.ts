@@ -115,7 +115,7 @@ export class DadosDefaultService {
     // }
 
     public modalNaturezaFinanceira() {
-        let naturezaFinGrupo = this.http.get(`${getUrlPro()}/naturezafingrupo`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Nome), value: v.Id}))));
+        let naturezaFinGrupo = this.http.get(`${getUrlPro()}/naturezafingrupo`).pipe(map((res: Response) => res['value'].map(v => ({label: v.Classificacao + ' - ' + Util.up(v.Nome), value: v.Id}))));
         let natureza = this.http.post(`${getUrlPro()}/financialCategories`, {Level: 1}).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: { Classificacao: v.Classificate, Id: v.Id}}))));
 
         return forkJoin([naturezaFinGrupo, natureza])       
