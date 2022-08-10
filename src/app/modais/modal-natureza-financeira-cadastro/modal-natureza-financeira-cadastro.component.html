@@ -2,7 +2,7 @@
     [maximizable]="false" [header]="'Nova Categoria Financeira'" [(visible)]="modalVisible" (onHide)="fecharModal()">
     <p-card [formGroup]="form">
         <div *ngIf="primeiraEtapa" class="p-col p-fluid">
-            <div class="p-col-12">
+            <div class="p-fluid p-formgrid p-grid">
                 <div class="p-col-12">
                     <app-select (onValueChange)="setarClassificacao($event)" label="Natureza Superior"
                         [options]="selectListaNatureza"></app-select>
@@ -10,15 +10,17 @@
                 <div class="p-col-12">
                     <app-input [label]="'Descrição'" formControlName="Description"></app-input>
                 </div>
-                <div class="p-field p-col-2 p-md-2" style="margin-left: 6px;">
-                    <div>
-                        <span>Ativo</span>
-                    </div>
-                    <div>
-                        <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                            formControlName="Sintetic">
-                        </p-toggleButton>
-                    </div>
+                <div class="p-field p-col-2 p-md-2" style="margin-left: 6px; margin-top: 15px;">
+                    <p-checkbox label="Ativo" formControlName="Sintetic"></p-checkbox>
+                </div>
+                <div class="p-field p-col-2 p-md-2" style="margin-top: 15px;">
+                    <p-checkbox label="Requerimento" formControlName="RequireComplement"></p-checkbox>
+                </div>
+                <div class="p-col-2">
+                    <app-select [label]="'Level'" [options]="selectLevel" formControlName="Level"></app-select>
+                </div>
+                <div class="p-col-2">
+                    <app-select [label]="'Fluxo'" [options]="selectSpecieFlow" formControlName="SpecieFlow"></app-select>
                 </div>
             </div>
             <div style="display: flex;align-items: flex-end;justify-content: flex-end;" class="p-col-6 p-offset-6">
@@ -45,11 +47,11 @@
             </div>
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-col-6">
-                    <app-input [label]="'Cod. Plano de Contas'" formControlName="CodeAccountPlan"></app-input>
+                    <app-select [label]="'Tipo'" formControlName="Specie" [options]="selectSpecie"></app-select>
                 </div>
                 <div class="p-col-6">
-                    <app-select label="Grupo de Natureza"
-                        [options]="selectGrupoNatureza" formControlName="IdNaturezaFinGrupo"></app-select>
+                    <app-select label="Grupo de Natureza" [options]="selectGrupoNatureza"
+                        formControlName="IdNaturezaFinGrupo"></app-select>
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
@@ -58,8 +60,12 @@
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-col-6">
-                    <app-select [label]="'Tipo'" formControlName="Specie" [options]="selectSpecie"></app-select>
+                <div class="p-col-12">
+                    <app-select label="Centro de Custo" [options]="selectCostCenter" formControlName="CostCenterId">
+                    </app-select>
+                </div>
+                <div class="p-col-12">
+                    <app-select label="Projeto" [options]="selectProject" formControlName="ProjecId"></app-select>
                 </div>
             </div>
         </div>
@@ -68,4 +74,30 @@
             (confirmar)="processarFormulario()" (cancelar)="fecharModal()" [labelConfirmar]="'Salvar'">
         </app-footer-page>
     </p-card>
+
+
+    <!-- <p-card *ngIf="include" [formGroup]="form">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-col-12">
+                <app-select label="Centro de Custo" [options]="selectCostCenter" formControlName="CostCenterId">
+                </app-select>
+            </div>
+            <div class="p-col-12">
+                <app-select label="Projeto" [options]="selectProject" formControlName="ProjecId"></app-select>
+            </div>
+            <div class="p-col-9 p-col-nopad">
+                <app-input [label]="'Classificação'" formControlName="Classificate"></app-input>
+            </div>
+            <div class="p-col-3" style="margin-top: 18px;">                
+                <button pButton label="Calcular Classificação" (click)="gerarClassificacao()"></button>
+            </div>
+            <div class="p-col-12">
+                <app-input [label]="'Descrição'" formControlName="Description"></app-input>
+            </div>
+        </div>
+
+        <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-3'" [tamanhoCancelar]="'p-col-3'"
+            (confirmar)="processarFormulario()" (cancelar)="fecharModal()" [labelConfirmar]="'Salvar'">
+        </app-footer-page>
+    </p-card> -->
 </p-dialog>

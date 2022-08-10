@@ -61,9 +61,13 @@ export class BaseListSimplesHeaders implements OnDestroy {
         } catch (e) {
             v = ''
         }
-        console.log('Valor ---> ' + v)
-        let parametro = `?Texto=${v}`
 
+        let parametro = ''
+
+        if (v !== '') {
+            parametro = `?Texto=${v}`
+        }
+        
         if (this.expanded) {
             parametro = `?Texto=${v}&${this.expanded}`
         }
@@ -71,17 +75,17 @@ export class BaseListSimplesHeaders implements OnDestroy {
         this.carregarDados(parametro)
     }
 
-    public carregarDados(parametros = ''): void {              
+    public carregarDados(parametros = ''): void {
         this.$subscriptionListar = this.networkService.getSimplesComHeaders(this.url, `${this.entidade}${parametros}`, this.page, this.top).subscribe((listaSec: any) => {
             if (listaSec[0]) {
                 this.totalItens = listaSec[0] ? listaSec[0]['QtdReg'] : 0;
             } else {
-                
-            }                                                        
-                this.lista = listaSec.value ? listaSec.value : listaSec                
-                this.pagina = listaSec.headers.get('pages')
-                this.totalItens = Util.toNumber(this.pagina) * this.top
-            
+
+            }
+            this.lista = listaSec.value ? listaSec.value : listaSec
+            this.pagina = listaSec.headers.get('pages')
+            this.totalItens = Util.toNumber(this.pagina) * this.top
+
         })
 
     }

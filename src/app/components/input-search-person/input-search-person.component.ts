@@ -1,9 +1,9 @@
 import { NetworkService } from './../../services/network.service';
 import { defaultColSize, center } from './../../controller/staticValues';
 import { Util } from './../../controller/Util';
-import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {MessageService} from "primeng/api";
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { MessageService } from "primeng/api";
 
 
 const FIELD_VALUE_ACESSOR: any = {
@@ -13,9 +13,9 @@ const FIELD_VALUE_ACESSOR: any = {
 }
 
 @Component({
-  selector: 'app-input-search-person',
-  templateUrl: './input-search-person.component.html',
-  styleUrls: ['./input-search-person.component.css'],
+    selector: 'app-input-search-person',
+    templateUrl: './input-search-person.component.html',
+    styleUrls: ['./input-search-person.component.css'],
     providers: [FIELD_VALUE_ACESSOR]
 })
 export class InputSearchPersonComponent implements ControlValueAccessor, OnInit {
@@ -54,14 +54,14 @@ export class InputSearchPersonComponent implements ControlValueAccessor, OnInit 
     }
 
     set value(v: any) {
-        if(v !== null && typeof this.innerValue !== 'object' && typeof  v === 'object') {
+        if (v !== null && typeof this.innerValue !== 'object' && typeof v === 'object') {
             this.inputValue = v[this.field]
         }
-        if(v === null) this.inputValue = '';
+        if (v === null) this.inputValue = '';
 
         this.updateInputValueCheck()
 
-        if(v !== this.innerValue) {
+        if (v !== this.innerValue) {
             this.innerValue = v;
             this.onChange(v)
 
@@ -72,8 +72,8 @@ export class InputSearchPersonComponent implements ControlValueAccessor, OnInit 
 
     }
 
-    onChange: (_: any) => void = () => {}
-    onTouched: (_: any) => void = () => {}
+    onChange: (_: any) => void = () => { }
+    onTouched: (_: any) => void = () => { }
     //modalPesquisa = false;
     valorParcialParaPesquisar: undefined;
 
@@ -103,21 +103,26 @@ export class InputSearchPersonComponent implements ControlValueAccessor, OnInit 
     }
 
     openModal(event) {
-        if(this.inputValue === undefined || this.inputValue === null || this.inputValue.toString().trim() === ''){
+        if (this.inputValue === undefined || this.inputValue === null || this.inputValue.toString().trim() === '') {
             this.value = null
             this.updateInputValueCheck()
             this.valorParcialParaPesquisar = undefined
             this.valorSelecionado.emit(null)
             return
         }
-        if(this.inputValue === this.inputValueCheck) return;
-        if(event.type === 'blur' || event.type === 'keypress' && event.key === 'Enter' && (this.inputValue !== undefined && this.inputValue !== null && this.inputValue.toString().trim() !== '')) {
-            this.networkService.listarPessoa(`?filter='${this.inputValue}'&orderby=Nome&skip=0&top=1000`).subscribe(v => {
-                if(v.length === 1) {
+        if (this.inputValue === this.inputValueCheck) return;
+        if (event.type === 'blur' || event.type === 'keypress' && event.key === 'Enter' && (this.inputValue !== undefined && this.inputValue !== null && this.inputValue.toString().trim() !== '')) {
+            let parametro = ''
+
+            if (this.innerValue !== '') {
+                parametro = `?Texto='${this.inputValue}'`
+            }
+            this.networkService.listarPessoa(parametro).subscribe(v => {
+                if (v.length === 1) {
                     this.valorPesquisado(v[0])
                 } else {
                     this.valorParcialParaPesquisar = this.inputValue
-                    this. openModalPesquisa()
+                    this.openModalPesquisa()
                 }
             })
         }
@@ -127,7 +132,7 @@ export class InputSearchPersonComponent implements ControlValueAccessor, OnInit 
     }
 
 
-    valorPesquisado(event: any) {        
+    valorPesquisado(event: any) {
         this.value = event.PersonId
         this.inputValue = event.PersonId.Nome
         this.updateInputValueCheck()

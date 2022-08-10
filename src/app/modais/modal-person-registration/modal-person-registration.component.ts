@@ -17,11 +17,11 @@ import { Subscription } from 'rxjs';
 import { TOKEN_STORAGE_KEY, EMPRESA_COMPLETA_STORAGE_KEY, qtdLinhas, opcoesLinhas, EMPRESA_STORAGE_KEY } from '../../controller/staticValues'
 
 @Component({
-  selector: 'app-modal-pessoa-cadastro',
-  templateUrl: './modal-pessoa-cadastro.component.html',
-  styleUrls: ['./modal-pessoa-cadastro.component.css']
+  selector: 'app-modal-person-registration',
+  templateUrl: './modal-person-registration.component.html',
+  styleUrls: ['./modal-person-registration.component.css']
 })
-export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit {
+export class ModalPersonRegistrationComponent extends BaseFormPost implements OnInit {
 
   @Input() modalVisible = false
   @Output() dadosSalvos = new EventEmitter()

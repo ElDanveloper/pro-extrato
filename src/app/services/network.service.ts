@@ -93,7 +93,8 @@ export class NetworkService {
     }
 
     listarPessoa(parametros) {
-        return this.http.get(`${getUrlPro()}/PersonClient${parametros}${Util.expandedQuery(PersonClient.expanded())}`)
+        // ${Util.expandedQuery(PersonClient.expanded())}
+        return this.http.get(`${getUrlPro()}/getPersonClient${parametros}`)
             .pipe(map((res: Response) => res['value']), catchError(this.errorHandler))
     }
 
@@ -106,10 +107,11 @@ export class NetworkService {
         return this.http.post(`${getUrlCad()}/produtos/produtoagil`, v).pipe(catchError(this.errorHandler))
     }
 
-    public listarPost(url: string, filtro: {}, page: number = 1, top: number = 10): Observable<Object> {
+    public listarPost(url: string, filtro: {}, page: number = 1, top: number = 10, expanded?): Observable<Object> {
         let headers = new HttpHeaders()
         headers = headers.append('page', page.toString())
         headers = headers.append('top', top.toString())
+        if(expanded) url = url + expanded
         return this.http.post(`${getUrlPro()}/${url}`, filtro, {headers, observe: 'response'})
             // .pipe(map((res: Response) => res['value']), catchError(this.errorHandler))
     }

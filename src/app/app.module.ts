@@ -108,7 +108,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         CompanyRegistrationComponent,
         PersonListComponent,
         PersonRegistrationComponent,
-        SituationPersonRegistrationComponent,
+        // SituationPersonRegistrationComponent,
         PainelPageComponent,
         NaturezaFinanceiraListaComponent,
         NaturezaFinanceiraCadastroComponent,

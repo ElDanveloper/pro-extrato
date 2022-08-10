@@ -65,7 +65,11 @@ export class ModalSearchPersonComponent implements OnInit {
     }
 
     carregarLista() {        
-        this.networkService.listarPessoa(`?filter='${this.data}'&orderby=Nome&skip=0&top=1000`).subscribe(v => {
+        let parametro = ''
+        if(this.data !== '') {
+            parametro = `?Texto='${this.data}'`
+        }
+        this.networkService.listarPessoa(parametro).subscribe(v => {
             this.totalItens = this.lista.length
             this.lista = v
         })

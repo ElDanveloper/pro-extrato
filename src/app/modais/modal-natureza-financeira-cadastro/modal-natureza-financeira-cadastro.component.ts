@@ -25,6 +25,8 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     entidade = 'Cadastro de Natureza Financeira'
     form: FormGroup;
     @Input() modalVisible = false
+    @Input() include = false
+    @Input() data;
     @Output() dadosSalvos = new EventEmitter()
     @Output() closeModal = new EventEmitter()
 
@@ -61,6 +63,8 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
 
     selectListaNatureza;
     selectGrupoNatureza;
+    selectCostCenter;
+    selectProject;
     classificacao = undefined
 
     primeiraEtapa = true
@@ -71,6 +75,8 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     sextaEtapa = false
     setimaEtapa = false
 
+    natureza = null
+
     selectSpecie = [
         {label: 'Despesa', value: 'D'},
         {label: 'Receita', value: 'R'},
@@ -79,9 +85,22 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
         {label: 'Investimoento', value: 'I'}
     ]
 
+    selectLevel = [
+        {label: '1', value: 1},
+        {label: '2', value: 2},
+        {label: '3', value: 3},
+
+    ]
+
+    selectSpecieFlow = [
+        {label: 'Saida', value: 'S'},
+        {label: 'Entrada', value: 'E'}
+    ]
+
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService) {
         super(networkService, dadosDefault, router, 'InsertCategory', messageService);
         this.form = Formulario.createForm(new FinancialCategory(), this.fb);
+        
     }
 
     ngOnInit() {
@@ -103,8 +122,24 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
             this.dadosDefault.modalNaturezaFinanceira().subscribe(values => {
                 this.selectGrupoNatureza = values[0]
                 this.selectListaNatureza = values[1]
+                this.selectCostCenter = values[2]
+                this.selectProject = values[3]
 
             })
+
+            if(this.data) {
+                 // let natureza = {
+                //     Classificacao: this.data.Classificate,
+                //     value: this.data.Id
+                // }
+                // this.form.get('aux').get('natureza').setValue(natureza)
+                
+                this.natureza = this.selectListaNatureza.find(v => v.Classificacao === this.data.Classificate)
+                
+                
+                this.form.get('Classificate').setValue(this.data.Classificate)
+            }
+            
             // this.dadosDefault.exibirLoader.next(true)
             // this.networkService.listarPost('financialCategories', {Level: 1}).subscribe((v: any) => {
             //     this.selectListaNatureza = []
@@ -115,7 +150,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
         }
     }
 
-    setarClassificacao(event) {
+    setarClassificacao(event) {        
         this.classificacao = event
     }
 
@@ -141,48 +176,19 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     }
 
     avancarSegundaEtapa() {
+        if(!this.classificacao) {
+            this.messageService.add(Util.pushInfoMessage('Selecione a Natureza Superios'))
+            return
+        }
+        if(this.form.get('Description').value === '') {
+            this.messageService.add(Util.pushInfoMessage('Informe a descrição da natureza'))
+            return
+        }
+
+        this.gerarClassificacao()
+
         this.segundaEtapa = true
         this.primeiraEtapa = false
-        // if (this.form.get('Sintetico').value == null) {
-        //     this.messageService.add(Util.pushErrorMsg('Selecione o Sintético'))
-        //     return;
-        // }
-        // let descricao = this.form.get('Descricao').value;
-        // let sinte = this.form.get('Sintetico').value.key
-        // this.form.get('Sintetico').setValue(sinte);
-
-        // if (this.classificacao === undefined) {
-        //     this.messageService.add(Util.pushErrorMsg('Selecione a Natureza'))
-        //     return;
-        // }
-        // if (descricao === "") {
-        //     this.messageService.add(Util.pushErrorMsg('Digite a Descrição'))
-        //     return;
-        // }
-
-        // if (sinte === true) {
-        //     this.avancarOuVoltar(3);
-        //     this.terceiraEtapaSintetico = true;
-        // }
-        // if (sinte === false) {
-        //     let value = { Sintetico: true, Classificacao: `${this.classificacao.Classificacao}%`, Nivel: 2 }
-        //     this.networkService.salvarPost(getUrlCad(), 'Contas/ListaNaturezas', value).subscribe((v: any) => {
-        //         this.selectNaturezaFinanceira = [];
-        //         v.map((value) => {
-        //             this.selectNaturezaFinanceira.push({ label: value.Descricao, value: value.Id });
-        //         })
-        //         this.form.get('IndicaPermuta').setValue(true);
-        //         this.form.get('ApareceAPagar').setValue(true);
-        //         this.form.get('ApareceAReceber').setValue(true);
-        //         this.form.get('ApareceProduto').setValue(true);
-        //         this.form.get('ApareceEntrada').setValue(true);
-        //         this.form.get('ApareceTesouraria').setValue(true);
-        //         this.form.get('ApareceTesouraria').setValue(true);
-        //         this.form.get('ApareceCaixa').setValue(true);
-        //         this.form.get('LivroCaixa').setValue(true);
-        //         this.avancarOuVoltar(2);
-        //     })
-        // }
     }
 
     avancarTerceiraEtapa() {
@@ -201,8 +207,9 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
         }
     }
 
-    gerarClassificacao() {
-        let id = this.idNatureza;
+    gerarClassificacao() {        
+        let id;
+        if(this.data) id = this.data.Id
         if (id === undefined) {
             id = this.classificacao.Id;
         }
@@ -213,13 +220,9 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     }
 
     false() {
-        this.primeiraEtapa = false
-        this.segundaEtapa = false
-        this.terceiraEtapa = false
-        this.quartaEtapa = false
-        this.quintaEtapa = false
-        this.sextaEtapa = false
-        this.setimaEtapa = false
+        this.primeiraEtapa = true
+        this.segundaEtapa = false  
+        this.include = false    
     }
 
     avancarOuVoltar(value: number) {
@@ -301,7 +304,8 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
         this.false();
         this.form.reset();
         this.closeModal.emit(false)
+        this.data = null
         // this.dadosDefault.closeModal(this.hash);
-        this.modalVisible = false
+        // this.modalVisible = false
     }
 }

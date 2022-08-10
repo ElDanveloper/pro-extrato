@@ -1,3 +1,5 @@
+import { ModalPersonRegistrationComponent } from './modal-person-registration/modal-person-registration.component';
+import { SituationPersonRegistrationComponent } from './../pages/person/situation-person-registration/situation-person-registration.component';
 import { ModalDepartmentsRegistrationComponent } from './modal-departments-registration/modal-departments-registration.component';
 import { ModalPaymentViaAccountComponent } from './modal-payment-via-account/modal-payment-via-account.component';
 import { ModalOpeningBalanceComponent } from './modal-opening-balance/modal-opening-balance.component';
@@ -48,6 +50,8 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalOpeningBalanceComponent,
       ModalPaymentViaAccountComponent,
       ModalDepartmentsRegistrationComponent,
+      SituationPersonRegistrationComponent,
+      ModalPersonRegistrationComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -82,6 +86,8 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalOpeningBalanceComponent,
         ModalPaymentViaAccountComponent,
         ModalDepartmentsRegistrationComponent,
+        SituationPersonRegistrationComponent,
+        ModalPersonRegistrationComponent,
      
         //ModalPagamentoViaContaCorrenteComponent,
     ]

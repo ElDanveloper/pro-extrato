@@ -9,7 +9,7 @@ export class FinancialCategory {
     public Sintetic: boolean = false // A natureza será do tipo sintético quando nao for permitido fazer lançamento. Ou seja, trata-se de conta de Agrupamento.
     public ViewOnApp: boolean = false
     public Level: number = 0
-    public RequireComplement:	boolean = false
+    public RequireComplement: boolean = false
     public CodeAccountPlan: string = ''
     public CodeControl: number = 0
     public Excluded: boolean = false
@@ -17,6 +17,8 @@ export class FinancialCategory {
     public ProjecId: number = 0
     public CostCenterId: number = 0
     public Specie: string = '' //D = Despesa, R = Receita, T = Transferencia, F = Financiamento, I = Investimoento
+    public SpecieFlow: string = '' //S = Saida, E = Entrada
+    public FixVariable: string = '' //F = Fixo, V = Variavel, N = Nenhum
     public IdNaturezaFinGrupo: any = ''
 
     constructor() {}

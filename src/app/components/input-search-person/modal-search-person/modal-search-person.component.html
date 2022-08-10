@@ -2,7 +2,7 @@
 <ng-template #conteudo>
 
     <app-custom-modal [fundo]="false" *appModalOpenOnClick="[pessoa, '1Acd5FQj1']" [hash]="'1Acd5FQj1'">
-        <!-- <app-pessoa-simplificada #content (dadosSalvos)="changeSelect($event)"></app-pessoa-simplificada> -->
+        <app-situation-person-registration #content (dadosSalvos)="changeSelect($event)"></app-situation-person-registration>
     </app-custom-modal>
 
     <app-page-divided [padrao]="false">

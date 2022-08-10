@@ -24,6 +24,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
 
     // public entidade: string = 'empregador'
     jaPesquisou = false
+    include = false
     // pagina = 0;
     // public first: number = 0
     public loading: boolean
@@ -31,6 +32,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     qtdLinhas = qtdLinhas()
     public totalItens2: number
     modalCadastrarNatureza = false
+    natureza = null
     totalItens = 0
     filtro = ''
     // lista2 = []
@@ -39,6 +41,13 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     public selectSort: SelectItem[] = [{ label: 'ID', value: 'ID' }, { label: 'NOME', value: 'NOME' }]
     cadastrar = false
     opcoesTable = [
+        {
+            label: 'Incluir Natureza', icon: 'fa fa-plus', command: (e) => {                          
+                this.natureza = e
+                this.include = true
+                this.modalCadastrarNatureza = true
+            }
+        },
         {
             label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
                 this.router.navigate([`/natureza-financeira/cadasto/${e.Id}`])
@@ -63,6 +72,11 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
                 })
             }
         },
+        {
+            label: 'Imprimir', icon: 'fa fa-print', command: (e) => {
+
+            }
+        }
         // {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
         //         this.router.navigate([`/historico-pessoa/${e.Id}`])
         //     }},
@@ -91,11 +105,15 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
             }
         }
         this.networkService.exibirLoader.next(true)
-        this.networkService.listarPost('FinancialCategories', body, page, top).subscribe((v: any) => {
+        this.networkService.listarPost('FinancialCategories', body, page, top, Util.expandedQuery(this.expanded())).subscribe((v: any) => {
             this.lista = v.body['value']
             let pagina = v.headers.get('pages')
             this.totalItens = Util.toNumber(pagina) * this.top
         }).add(this.networkService.exibirLoader.next(false))
+    }
+
+    expanded(){
+        return ['IdNaturezaFinGrupo']
     }
 
     public lazyLoad(event): void {        
@@ -112,6 +130,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     }
 
     conclude() {
+        this.include = false
         this.modalCadastrarNatureza = false
         this.loadList(1, 1000)
     }
@@ -123,31 +142,14 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     filtrarEPesquisar(e?, page = 0) {
         if (e && e.key !== 'Enter') return
 
-        const filtro = {}
-
-        // if (this.grupo) filtro.IdGrupo = this.grupo
-        // if (this.vendedor) filtro.IdVendedor = this.vendedor
-        // if (this.canal) filtro.IdCanal = this.canal
-        // if (this.marca) filtro.IdMarca = this.marca
-        // if (this.subcategoria) filtro.IdSubCategoria = this.subcategoria
-        // if (this.secao) filtro.IdSecao = this.secao
-        // if (this.tipoFiscal) filtro.TipoFiscal = this.tipoFiscal
-        // if (this.pessoa) filtro.IdPessoa = this.pessoa.Id
-        // if (this.textoPesquisa) filtro.Nome = "" + this.textoPesquisa
-        // filtro.DataIni = Util.dataParaStringComZero(this.dataInit)
-        // filtro.DataFim = Util.dataParaStringComZero(this.dataFim)
-        // filtro.QtdRegistro = this.qtdLinhas
-        // filtro.Pagina = page
-        // filtro.Tipo = 'V or D'
-
-        // this.filtro = filtro
-
+       this.loadList(1, 10)
     }
 
 
     public navegar() {
         // this.router.navigate([`/cadastro`])
         // this.cadastrarNatureza.nativeElement.click()   
+        this.include = false
         this.modalCadastrarNatureza = true
     }
 

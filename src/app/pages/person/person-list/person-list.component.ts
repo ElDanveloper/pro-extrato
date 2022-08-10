@@ -81,7 +81,7 @@ export class PersonListComponent extends BaseListSimplesHeaders implements OnIni
     }
 
     
-    public navegar() {        
+    public navegar() {               
         // this.router.navigate([`/cadastro`])
         // this.cadastrarEmpresa.nativeElement.click()   
         this.modalCadastrarPessoa = true     
