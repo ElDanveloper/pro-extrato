@@ -30,9 +30,9 @@
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
             <tr>            
-            <td>{{rowData.PersonId.Nome}}</td>
-            <td>{{rowData.PersonId.Fantasia}}</td>
-            <td>{{rowData.PersonId.CpfCnpj | cpfCnpj}}</td>                        
+            <td>{{rowData.Nome}}</td>
+            <td>{{rowData.Fantasia}}</td>
+            <td>{{rowData.CpfCnpj | cpfCnpj}}</td>                        
             <td><app-opcoes-table [value]="rowData"
                                   [opcoes]="opcoesTable"></app-opcoes-table></td>
             </tr>

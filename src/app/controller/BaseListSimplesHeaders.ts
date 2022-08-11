@@ -82,7 +82,9 @@ export class BaseListSimplesHeaders implements OnDestroy {
             } else {
 
             }
-            this.lista = listaSec.value ? listaSec.value : listaSec
+            console.log(JSON.stringify(listaSec.body.value))
+            this.lista = listaSec.body.value
+            // listaSec.value ? listaSec.value : listaSec
             this.pagina = listaSec.headers.get('pages')
             this.totalItens = Util.toNumber(this.pagina) * this.top
 
