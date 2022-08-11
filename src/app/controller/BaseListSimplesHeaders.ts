@@ -81,8 +81,7 @@ export class BaseListSimplesHeaders implements OnDestroy {
                 this.totalItens = listaSec[0] ? listaSec[0]['QtdReg'] : 0;
             } else {
 
-            }
-            console.log(JSON.stringify(listaSec.body.value))
+            }            
             this.lista = listaSec.body.value
             // listaSec.value ? listaSec.value : listaSec
             this.pagina = listaSec.headers.get('pages')

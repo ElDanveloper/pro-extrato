@@ -176,9 +176,12 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         // this.form.get('Historico').setValue(this.data.Historic + '  ' + e.Historic)
     }
 
-    selecionouPessoa(e) {
-        const { IdNatureza } = e
-        if (IdNatureza.toString().match(/^\d+$/)) {
+    selecionouPessoa(e) {                
+        if (e.FinancialCategoryId !== null) {
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.getSimples(getUrlPro(), `FinancialCategory/${e.FinancialCategoryId}`).subscribe(v => {                
+                this.form.get('IdNatureza').setValue(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
             // this.networkService.getSimples(getUrlCad(), `naturezaFinanceira?$filter=CodControle eq ${IdNatureza}`).subscribe((v: any) => {
             //     if (v.value.length) {
             //         this.form.get('IdNatureza').setValue(v.value[0])

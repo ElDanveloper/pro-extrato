@@ -110,26 +110,43 @@ export class InputFinancialCategorySearchComponent implements ControlValueAccess
             let filtro = ''
 
             let v = this.inputValue;
-            if(v.toString().match(/^\d+$/)) {
-                v = `CodeControl eq ${v}`
-            } else {
-                v = `contains(lower(Description), '${Util.lower(v)}')`
-            }
+            // if(v.toString().match(/^\d+$/)) {
+            //     v = `CodeControl eq ${v}`
+            // } else {
+            //     v = `contains(lower(Description), '${Util.lower(v)}')`
+            // }
 
-            if(this.filtroAdicional) {
-                filtro = `financialCategory?$filter=(Sintetic eq false and ${this.filtroAdicional} and ${v})`
-            } else {
-                filtro = `financialCategory?$filter=(Sintetic eq false and ${v})`
-            }
-            this.networkService.getSimples(getUrlPro(),filtro).subscribe((v: any) => {
-                const {value} = v
-                if(value.length === 1) {
-                    this.valorPesquisado(value[0])
-                } else {
-                    this.valorParcialParaPesquisar = this.inputValue
-                    this.modalPesquisa = true
+            let body = {}            
+            if (v !== '') {
+                body = {
+                    Description: v
                 }
-            })
+            }
+            this.networkService.exibirLoader.next(true)
+            this.networkService.listarPost('FinancialCategories', body).subscribe((v: any) => {            
+                const value = v.body['value']                
+                    if(value.length === 1) {
+                        this.valorPesquisado(value[0])
+                    } else {
+                        this.valorParcialParaPesquisar = this.inputValue
+                        this.modalPesquisa = true
+                    }
+            }).add(this.networkService.exibirLoader.next(false))
+
+            // if(this.filtroAdicional) {
+            //     filtro = `financialCategory?$filter=(Sintetic eq false and ${this.filtroAdicional} and ${v})`
+            // } else {
+            //     filtro = `financialCategory?$filter=(Sintetic eq false and ${v})`
+            // }
+            // this.networkService.getSimples(getUrlPro(),filtro).subscribe((v: any) => {
+            //     const {value} = v
+            //     if(value.length === 1) {
+            //         this.valorPesquisado(value[0])
+            //     } else {
+            //         this.valorParcialParaPesquisar = this.inputValue
+            //         this.modalPesquisa = true
+            //     }
+            // })
         }
     }
 

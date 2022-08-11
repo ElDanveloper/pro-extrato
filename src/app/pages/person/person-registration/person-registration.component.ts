@@ -14,6 +14,7 @@ import {Endereco, ErroCep, NgxViacepService} from "@brunoc/ngx-viacep";
 import {Subscription} from "rxjs";
 import {Dimensions, ImageCroppedEvent} from "ngx-image-cropper";
 import { PersonClient } from 'src/app/model/person-client.model';
+import { FinancialCategory } from 'src/app/model/financial-category.model';
 
 @Component({
     selector: 'app-person-registration',
@@ -102,6 +103,7 @@ export class PersonRegistrationComponent extends BaseFormPost implements OnInit,
     };
     showCropper = false;
     private timeOut: any = 0
+    natureza = null
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService,
                 private viaCep: NgxViacepService) {
@@ -132,7 +134,7 @@ export class PersonRegistrationComponent extends BaseFormPost implements OnInit,
         this.$subscription1 = this.dadosDefault.pessoa().subscribe(values => {
             // this.selectSituacaoPessoa = values[0];
             // this.selectOperacaoFiscal = values[1];
-            // this.selectNaturezaFinanceira = values[2];
+            this.selectNaturezaFinanceira = values[0];
             // this.selectVendedor = values[3];
             // this.selectTipoEndereco = values[4];
             // this.selectContaContabil = values[5]
@@ -142,7 +144,7 @@ export class PersonRegistrationComponent extends BaseFormPost implements OnInit,
                 this.dadosDefault.exibirLoader.next(true)
                 this.$subscription2 = this.networkService.buscar('PersonClient', this.id, Util.expandedQuery(PersonClient.expanded())).subscribe((value: any) => {
 
-                    this.idPessoa = value.PersonId.Id                    
+                    this.idPessoa = value.PersonId.Id                                                              
                     
                     const data = Formulario.prepareValueToForm(new PersonClient(), value, null, PersonClient.relacionamentos(), null);
                     Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
@@ -184,7 +186,7 @@ export class PersonRegistrationComponent extends BaseFormPost implements OnInit,
                 }
             })
             if (inv) return
-        }
+        }       
 
         // const cod = this.form.get('CodContaContabil').value ? this.form.get('CodContaContabil').value.Codigo : null
 
@@ -204,6 +206,13 @@ export class PersonRegistrationComponent extends BaseFormPost implements OnInit,
             }, Pessoa.referencias(), Pessoa.mascaras(), Pessoa.datas(), null, Pessoa.checkbox()),
             Ativo: true, "$id": 2
         };
+
+        // value.NatureFinancialId = {
+        //     ...Formulario.parseForm(new FinancialCategory(), {
+        //         ...PessoaForm    
+        //     }, Pessoa.referencias(), Pessoa.mascaras(), Pessoa.datas(), null, Pessoa.checkbox()),
+        //     Ativo: true, "$id": 2
+        // }
 
         // if (this.form.get('PessoaForm').get('Tipo').value !== 'J') {
         //     value.IdPessoaFisica = {
@@ -226,16 +235,24 @@ export class PersonRegistrationComponent extends BaseFormPost implements OnInit,
             }).subscribe((resFoto: any) => {
                 value.PersonId.CaminhoFoto = resFoto.url
                 this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'person', value).subscribe((v: any) => {
-                    this.router.navigate(['/pessoas'])
+                    this.messageService.add(Util.pushSuccessMsg('Processo Realizado com Sucesso!'))
+                    this.router.navigate(['/person'])
                 }).add(() => this.networkService.exibirLoader.next(false))
             }, e => this.networkService.exibirLoader.next(false))
         } else {
             this.$subscription6 = this.networkService.salvarPost(getUrlPro(), 'person', value).subscribe((v: any) => {
-                this.router.navigate(['/pessoas'])
+                this.messageService.add(Util.pushSuccessMsg('Processo Realizado com Sucesso!'))
+                this.router.navigate(['/person'])
             }).add(() => this.networkService.exibirLoader.next(false))
         }
 
 
+    }
+
+    selecionouNatureza(e){        
+        
+        // this.form.get('NatureFinancialId').setValue(e.Id)
+        
     }
 
     // adicionarEndereco(value) {
@@ -425,7 +442,7 @@ export class PersonRegistrationComponent extends BaseFormPost implements OnInit,
     // }
 
     cancelarLocal() {
-        this.router.navigate(['/pessoas'])
+        this.router.navigate(['/person'])
     }
 
     ngOnDestroy() {

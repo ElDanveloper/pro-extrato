@@ -133,11 +133,11 @@ export class InputSearchPersonComponent implements ControlValueAccessor, OnInit 
 
 
     valorPesquisado(event: any) {
-        this.value = event.PersonId
-        this.inputValue = event.PersonId.Nome
+        this.value = event
+        this.inputValue = event.Nome
         this.updateInputValueCheck()
         this.valorParcialParaPesquisar = undefined
-        this.valorSelecionado.emit(event.PersonId)
+        this.valorSelecionado.emit(event)
     }
 
     openModalPesquisa() {

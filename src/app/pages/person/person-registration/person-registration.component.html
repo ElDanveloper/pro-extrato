@@ -184,11 +184,11 @@
                                     ></app-select>
                         </div>
 
-                        <div class="p-field p-col-12 p-md-4">
+                        <div class="p-field p-col-12 p-md-4" [formGroup]="form">
                             <div>Natureza Financeira</div>
                             <div class="p-inputgroup">
                                 <div class="p-col-10" style="padding-right: 0px;padding-left: 0px;">
-                                    <app-select [options]="selectNaturezaFinanceira" [icon]="true"></app-select>
+                                    <app-select [options]="selectNaturezaFinanceira" [icon]="true" (onValueChange)="selecionouNatureza($event)" formControlName="NatureFinancialId"></app-select>
                                 </div>
                                 <button style="margin-left: -7px;" #naturezafinanceira pButton type="button" icon="fa fa-plus"></button>
                             </div>

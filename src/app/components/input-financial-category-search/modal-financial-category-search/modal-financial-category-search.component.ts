@@ -41,7 +41,7 @@ export class ModalFinancialCategorySearchComponent implements OnInit, OnChanges,
     pagina = 0;
     public first: number = 0
     public loading: boolean
-    public top: number = qtdLinhas()
+    public top: number = 7
     qtdLinhas = qtdLinhas()
 
     $subscriptionLista: Subscription;
@@ -105,6 +105,7 @@ export class ModalFinancialCategorySearchComponent implements OnInit, OnChanges,
     }
 
     carregarLista(page?, top?) {  
+        console.log('Top ---> ' + top)
         
         let v;
         try {
@@ -119,9 +120,9 @@ export class ModalFinancialCategorySearchComponent implements OnInit, OnChanges,
             }
         }
         this.networkService.exibirLoader.next(true)
-        this.networkService.listarPost('FinancialCategories', body, page, top).subscribe((v: any) => {
+        this.networkService.listarPost('FinancialCategories', body, page, top).subscribe((v: any) => {            
             this.lista = v.body['value']
-            let pagina = v.headers.get('pages')
+            let pagina = v.headers.get('pages')            
             this.totalItens = Util.toNumber(pagina) * this.top
         }).add(this.networkService.exibirLoader.next(false))
     }
@@ -134,7 +135,8 @@ export class ModalFinancialCategorySearchComponent implements OnInit, OnChanges,
                 this.top = event.rows
                 event.first = 0
             }
-            this.carregarLista((event.first / 10) + 1, this.top)
+            
+            this.carregarLista((event.first / 10) + 1, 7)
             this.loading = false
         }
     }

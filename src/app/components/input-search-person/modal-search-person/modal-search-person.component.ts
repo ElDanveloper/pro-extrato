@@ -69,7 +69,7 @@ export class ModalSearchPersonComponent implements OnInit {
         if(this.data !== '') {
             parametro = `?Texto='${this.data}'`
         }
-        this.networkService.listarPessoa(parametro).subscribe(v => {
+        this.networkService.listarPessoa(parametro).subscribe((v: any) => {            
             this.totalItens = this.lista.length
             this.lista = v
         })
