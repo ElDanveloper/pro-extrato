@@ -117,17 +117,27 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     }
    
     reconcileSingle() {
+        
+        if(this.form.get('IdPessoa').value === ''){
+            this.messageService.add(Util.pushInfoMessage('Favor informar a Pessoa!'))
+            return
+        }
 
-        let nature = this.form.get('IdNatureza').value
-        let person = this.form.get('IdPessoa').value        
+        if(this.form.get('IdNatureza').value === undefined){
+            this.messageService.add(Util.pushInfoMessage('Favor informar a Categoria Financeira!'))
+            return
+        }
 
-        let body = {
+        let natureza = this.form.get('IdNatureza').value
+        let person = this.form.get('IdPessoa').value                
+
+        const body = {
             Id: this.data.Id,
-            FinancialId: nature.Id,
+            FinancialId: natureza.Id,
             PersonId: person.Id,
             Obs: this.form.get('Obs').value,
-            SavePerson: this.form.get('memorizarPessoa').value,
-            SaveHistoric: this.form.get('memorizar').value
+            SavePerson: this.form.get('memorizarPessoa').value == true,
+            SaveHistoric: this.form.get('memorizar').value == true
         }
 
         this.dadosDefault.exibirLoader.next(true)
