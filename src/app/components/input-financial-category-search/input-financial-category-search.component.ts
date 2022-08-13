@@ -116,12 +116,14 @@ export class InputFinancialCategorySearchComponent implements ControlValueAccess
             //     v = `contains(lower(Description), '${Util.lower(v)}')`
             // }
 
-            let body = {}            
-            if (v !== '') {
-                body = {
-                    Description: v
-                }
+            let body = {
+                Description: v,
+                Level: 3
             }
+            if (v !== '') {
+                body.Description = v                            
+            }
+            
             this.networkService.exibirLoader.next(true)
             this.networkService.listarPost('FinancialCategories', body).subscribe((v: any) => {            
                 const value = v.body['value']                

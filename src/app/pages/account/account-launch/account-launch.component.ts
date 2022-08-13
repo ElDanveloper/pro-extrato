@@ -21,11 +21,13 @@ export class AccountLaunchComponent implements OnInit {
     lista2 = [];
     id;
     data;
+    dadosEdit;
     contaCaixa;
     nome;
     qtdLinhas = qtdLinhas()
     opcoesLinhas = opcoesLinhas()
     modalTrocarConta = false
+    modalEditStatementItems = false
 
     dados = null
 
@@ -34,7 +36,7 @@ export class AccountLaunchComponent implements OnInit {
     @ViewChild('paymentviaaccount') paymentviaaccount: ElementRef;
     @ViewChild('openingbalance') openingbalance: ElementRef;
     @ViewChild('uploadInput') uploadInput: ElementRef;
-    // @ViewChild('uploadRetornoInput') uploadRetornoInput: ElementRef;
+    @ViewChild('editstatementitems') editstatementitems: ElementRef;
 
 
     constructor(public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public messageService: MessageService, private dadosDefault: DadosDefaultService, private route: ActivatedRoute) { }
@@ -104,7 +106,8 @@ export class AccountLaunchComponent implements OnInit {
     itemsRow = [
         {
             label: 'Editar', icon: 'fa fa-edit', command: (e) => {
-                
+                this.dadosEdit = e
+                this.editstatementitems.nativeElement.click();                
             }
         }, {
             label: 'Excluir', icon: 'fa fa-trash', command: (e) => {
@@ -151,9 +154,7 @@ export class AccountLaunchComponent implements OnInit {
 
     tableExpand(v, expanded) {        
         if (expanded) return
-        if (!v) return
-        console.log("dados ---> " + this.dados)
-        console.log("v ---> " + v)
+        if (!v) return       
         this.dados = v
 
         // const filtro = `IdPlanoConta=${v.IdPlanoConta}&Limit=50&pagina=0&Data=${v.Data}`

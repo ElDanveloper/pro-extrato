@@ -3,26 +3,32 @@
     <p-card [formGroup]="form">
         <div *ngIf="primeiraEtapa" class="p-col p-fluid">
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-col-12">
+                <div class="p-col-12" formGroupName="aux">
                     <app-select (onValueChange)="setarClassificacao($event)" label="Natureza Superior"
-                        [options]="selectListaNatureza"></app-select>
+                        [options]="selectListaNatureza" [(ngModel)]="natureza" formControlName="naturezaSuperior"></app-select>
                 </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid" style="margin-top: 10px;">
                 <div class="p-col-12">
                     <app-input [label]="'Descrição'" formControlName="Description"></app-input>
                 </div>
-                <div class="p-field p-col-2 p-md-2" style="margin-left: 6px; margin-top: 15px;">
-                    <p-checkbox label="Ativo" formControlName="Sintetic"></p-checkbox>
+            </div>
+            <div class="p-fluid p-formgrid p-grid" style="margin-top: 10px;">
+                <div class="p-field p-col-2 p-md-2" style="margin-left: 6px; margin-top: 25px;">
+                    <p-checkbox label="Sintético" formControlName="Sintetic"></p-checkbox>
                 </div>
-                <div class="p-field p-col-2 p-md-2" style="margin-top: 15px;">
-                    <p-checkbox label="Requerimento" formControlName="RequireComplement"></p-checkbox>
+                <div class="p-field p-col-3 p-md-3" style="margin-top: 25px; ">
+                    <p-checkbox label="Requer Complemento" formControlName="RequireComplement"></p-checkbox>
                 </div>
-                <div class="p-col-2">
-                    <app-select [label]="'Level'" [options]="selectLevel" formControlName="Level"></app-select>
+                <div class="p-col-3">
+                    <app-select [label]="'Nivel'" [options]="selectLevel" formControlName="Level"></app-select>
                 </div>
-                <div class="p-col-2">
-                    <app-select [label]="'Fluxo'" [options]="selectSpecieFlow" formControlName="SpecieFlow"></app-select>
+                <div class="p-col-3">
+                    <app-select [label]="'Tipo de Fluxo'" [options]="selectSpecieFlow" formControlName="SpecieFlow">
+                    </app-select>
                 </div>
             </div>
+            &nbsp;
             <div style="display: flex;align-items: flex-end;justify-content: flex-end;" class="p-col-6 p-offset-6">
                 <div class="p-col-4">
                     <button class="p-button-danger" pButton type="button" label="Cancelar"

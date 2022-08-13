@@ -1,3 +1,4 @@
+import { ProStatementItem } from 'src/app/model/pro-statement-item.model';
 import { opcoesLinhas, getUrlPro } from './../../../controller/staticValues';
 import { DadosDefaultService } from './../../../services/dados-default.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -70,7 +71,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
         })
 
         this.networkService.exibirLoader.next(true)
-        this.$subscriptionConciliados = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`).pipe(map((x: any) => x.value)).subscribe(x => {
+        this.$subscriptionConciliados = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'${Util.expandedQuery(ProStatementItem.expanded(), true)}`).pipe(map((x: any) => x.value)).subscribe(x => {
             this.lista = x
         }).add(() => this.networkService.exibirLoader.next(false));
     }

@@ -1,3 +1,4 @@
+import { ModalEditStatementItemsComponent } from './modal-edit-statement-items/modal-edit-statement-items.component';
 import { ModalPersonRegistrationComponent } from './modal-person-registration/modal-person-registration.component';
 import { SituationPersonRegistrationComponent } from './../pages/person/situation-person-registration/situation-person-registration.component';
 import { ModalDepartmentsRegistrationComponent } from './modal-departments-registration/modal-departments-registration.component';
@@ -52,6 +53,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalDepartmentsRegistrationComponent,
       SituationPersonRegistrationComponent,
       ModalPersonRegistrationComponent,
+      ModalEditStatementItemsComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -88,6 +90,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalDepartmentsRegistrationComponent,
         SituationPersonRegistrationComponent,
         ModalPersonRegistrationComponent,
+        ModalEditStatementItemsComponent,
      
         //ModalPagamentoViaContaCorrenteComponent,
     ]

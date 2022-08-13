@@ -134,7 +134,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         const body = {
             Id: this.data.Id,
             FinancialId: natureza.Id,
-            PersonId: person.Id,
+            PersonId: person.PersonId,
             Obs: this.form.get('Obs').value,
             SavePerson: this.form.get('memorizarPessoa').value == true,
             SaveHistoric: this.form.get('memorizar').value == true

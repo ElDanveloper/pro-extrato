@@ -12,15 +12,16 @@
                 <div class="p-col-2" style="margin-top: 18px;">
                     <button pButton label="Calcular Classificação" (click)="gerarClassificacao()"></button>
                 </div>
-                <div class="p-field p-col-2 p-md-2">
-                    <div>
+                <div class="p-field p-col-2 p-md-2" style="margin-top: 25px;">
+
+                    <!-- <div>
                         <span>Ativo</span>
                     </div>
                     <div>
                         <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
                             formControlName="Sintetic">
                         </p-toggleButton>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
@@ -49,21 +50,28 @@
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-2 p-md-2">
-                    <div>
-                        <span>Exibir no APP</span>
-                    </div>
-                    <div>
-                        <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                            formControlName="ViewOnApp">
-                        </p-toggleButton>
-                    </div>
+                <div class="p-field p-col-2 p-md-2" style="margin-top: 25px; margin-left: 5px;">
+                    <p-checkbox label="Exibir no APP" [value]="true" formControlName="ViewOnApp"></p-checkbox>
+                </div>
+                <div class="p-field p-col-2 p-md-2" style="margin-top: 25px;">
+                    <p-checkbox label="Sintético" [value]="true" formControlName="Sintetic"></p-checkbox>
+                </div>
+                <div class="p-field p-col-2 p-md-2" style="margin-top: 25px;">
+                    <p-checkbox label="Requer Complemento" formControlName="RequireComplement"></p-checkbox>
+                </div>                           
+                <div class="p-col-2" style="margin-left: -5px;">
+                    <app-select [label]="'Tipo de Fluxo'" [options]="selectSpecieFlow" formControlName="SpecieFlow">
+                    </app-select>
+                </div>
+                <div class="p-col-2">
+                    <app-select [label]="'Nivel'" [options]="selectLevel" formControlName="Level"></app-select>
                 </div>
             </div>
+            &nbsp;
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 p-md-12" style="margin-top: 10px;">
                     <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-2'" [tamanhoCancelar]="'p-col-2'"
-                        (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()" [labelConfirmar]="'Confirmar'">
+                        (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()" [labelConfirmar]="'Salvar'">
                     </app-footer-page>
                 </div>
             </div>

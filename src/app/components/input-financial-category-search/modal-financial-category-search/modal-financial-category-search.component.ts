@@ -113,11 +113,12 @@ export class ModalFinancialCategorySearchComponent implements OnInit, OnChanges,
         } catch (e) {
             v = ''
         }
-        let body = {}
+        let body = {
+            Description: v,
+            Level: 3
+        }
         if (v !== '') {
-            body = {
-                Description: v
-            }
+            body.Description = v                            
         }
         this.networkService.exibirLoader.next(true)
         this.networkService.listarPost('FinancialCategories', body, page, top).subscribe((v: any) => {            

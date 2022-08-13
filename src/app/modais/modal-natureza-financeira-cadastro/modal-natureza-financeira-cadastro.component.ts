@@ -77,30 +77,27 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
 
     natureza = null
 
-    selectSpecie = [
-        {label: 'Despesa', value: 'D'},
-        {label: 'Receita', value: 'R'},
-        {label: 'Transferencia', value: 'T'},
-        {label: 'Financiamento', value: 'F'},
-        {label: 'Investimoento', value: 'I'}
-    ]
+    selectSpecie = []
 
     selectLevel = [
-        {label: '1', value: 1},
-        {label: '2', value: 2},
-        {label: '3', value: 3},
+        { label: '1', value: 1 },
+        { label: '2', value: 2 },
+        { label: '3', value: 3 },
 
     ]
 
     selectSpecieFlow = [
-        {label: 'Saida', value: 'S'},
-        {label: 'Entrada', value: 'E'}
+        { label: 'Saida', value: 'S' },
+        { label: 'Entrada', value: 'E' }
     ]
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService) {
         super(networkService, dadosDefault, router, 'InsertCategory', messageService);
         this.form = Formulario.createForm(new FinancialCategory(), this.fb);
-        
+        this.form.addControl('aux', this.fb.group({
+            naturezaSuperior: '',
+        }))
+
     }
 
     ngOnInit() {
@@ -124,22 +121,20 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
                 this.selectListaNatureza = values[1]
                 this.selectCostCenter = values[2]
                 this.selectProject = values[3]
+                this.selectSpecie = values[4]
 
+
+
+                if (this.data) {
+                    
+                    this.natureza = this.selectListaNatureza.find(v => v.value === this.data.Id)
+                    
+                    this.form.get('aux').get('naturezaSuperior').setValue(this.natureza.value)
+                    
+                    this.form.get('Classificate').setValue(this.data.Classificacao)
+                }
             })
 
-            if(this.data) {
-                 // let natureza = {
-                //     Classificacao: this.data.Classificate,
-                //     value: this.data.Id
-                // }
-                // this.form.get('aux').get('natureza').setValue(natureza)
-                
-                this.natureza = this.selectListaNatureza.find(v => v.Classificacao === this.data.Classificate)
-                
-                
-                this.form.get('Classificate').setValue(this.data.Classificate)
-            }
-            
             // this.dadosDefault.exibirLoader.next(true)
             // this.networkService.listarPost('financialCategories', {Level: 1}).subscribe((v: any) => {
             //     this.selectListaNatureza = []
@@ -150,7 +145,8 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
         }
     }
 
-    setarClassificacao(event) {        
+    setarClassificacao(event) {
+        console.log(this.form.get('aux').get('naturezaSuperior').value)
         this.classificacao = event
     }
 
@@ -163,8 +159,9 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
         }
     }
 
-    processarFormulario() {    
-        this.dadosDefault.exibirLoader.next(true)    
+    processarFormulario() {
+        this.form.removeControl('aux')
+        this.dadosDefault.exibirLoader.next(true)
         this.networkService.salvarPost(getUrlPro(), 'InsertCategory', Formulario.parseForm(new FinancialCategory(), Object.assign({}, this.form.value), FinancialCategory.referencias(), null, null, null, Financial.checkbox(), false)).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Cadastro realizado com sucesso'));
             this.fecharModal();
@@ -176,11 +173,11 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     }
 
     avancarSegundaEtapa() {
-        if(!this.classificacao) {
+        if (!this.classificacao) {
             this.messageService.add(Util.pushInfoMessage('Selecione a Natureza Superios'))
             return
         }
-        if(this.form.get('Description').value === '') {
+        if (this.form.get('Description').value === '') {
             this.messageService.add(Util.pushInfoMessage('Informe a descrição da natureza'))
             return
         }
@@ -207,9 +204,9 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
         }
     }
 
-    gerarClassificacao() {        
+    gerarClassificacao() {
         let id;
-        if(this.data) id = this.data.Id
+        if (this.data) id = this.data.Id
         if (id === undefined) {
             id = this.classificacao.Id;
         }
@@ -221,8 +218,8 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
 
     false() {
         this.primeiraEtapa = true
-        this.segundaEtapa = false  
-        this.include = false    
+        this.segundaEtapa = false
+        this.include = false
     }
 
     avancarOuVoltar(value: number) {

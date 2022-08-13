@@ -67,7 +67,7 @@ export class AccountRegisterComponent extends BaseFormPost implements OnInit, On
         let value = Formulario.parseForm(new ProAccount(), data, null, null, ProAccount.datas(), null, ProAccount.checkbox());
 
         this.dadosDefault.exibirLoader.next(true);
-        this.$subscription3 = this.networkService.atualizarPost(getUrlPro(), 'Account', value).subscribe((v: any) => {
+        this.$subscription3 = this.networkService.salvarPost(getUrlPro(), 'Account', value).subscribe((v: any) => {
             this.router.navigate(['/account'])
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }

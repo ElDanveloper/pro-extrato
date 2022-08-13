@@ -116,11 +116,13 @@ export class DadosDefaultService {
 
     public modalNaturezaFinanceira() {
         let naturezaFinGrupo = this.http.get(`${getUrlPro()}/naturezafingrupo?filter=(nivelDfc eq 3)`).pipe(map((res: Response) => res['value'].map(v => ({label: v.Classificacao + ' - ' + Util.up(v.Nome), value: v.Id}))));
-        let natureza = this.http.post(`${getUrlPro()}/financialCategories`, {Level: 1}).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: { Classificacao: v.Classificate, Id: v.Id}}))));
+        let natureza = this.http.post(`${getUrlPro()}/financialCategories`, {Level: 1}).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))));
         let costCenter = this.http.get(`${getUrlPro()}/procostcenter`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))));
         let project = this.http.get(`${getUrlPro()}/proproject`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))));
+        let typeCategory = this.http.get(`${getUrlPro()}/ProTypeCategory`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Code}))));
+        
 
-        return forkJoin([naturezaFinGrupo, natureza, costCenter, project])       
+        return forkJoin([naturezaFinGrupo, natureza, costCenter, project, typeCategory])       
     }
 
     public modalOpeningbalance() {

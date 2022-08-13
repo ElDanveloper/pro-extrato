@@ -47,12 +47,18 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
 
     selectGrupoNatureza = []
     selectListaNatureza = []
-    selectSpecie = [
-        {label: 'Despesa', value: 'D'},
-        {label: 'Receita', value: 'R'},
-        {label: 'Transferencia', value: 'T'},
-        {label: 'Financiamento', value: 'F'},
-        {label: 'Investimoento', value: 'I'}
+    selectSpecie = []
+
+    selectSpecieFlow = [
+        {label: 'Saida', value: 'S'},
+        {label: 'Entrada', value: 'E'}
+    ]
+
+    selectLevel = [
+        {label: '1', value: 1},
+        {label: '2', value: 2},
+        {label: '3', value: 3},
+
     ]
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService, private viaCep: NgxViacepService) {
@@ -66,6 +72,7 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
         this.dadosDefault.modalNaturezaFinanceira().subscribe(values => {
             this.selectGrupoNatureza = values[0]
             this.selectListaNatureza = values[1]      
+            this.selectSpecie = values[4]
           })
 
         this.$subscription5 = this.route.paramMap.subscribe(params => {
