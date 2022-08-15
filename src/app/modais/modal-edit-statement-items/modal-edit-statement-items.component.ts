@@ -35,6 +35,11 @@ export class ModalEditStatementItemsComponent extends BaseFormPost implements On
     natureza = false
     historico = false
 
+    selectSpecie = [
+        {label: 'Débito', value: 'D'},
+        {label: 'Crédito', value: 'C'}
+    ]
+
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService) {
         super(networkService, dadosDefault, router, 'InsertTransection', messageService);
 
@@ -54,7 +59,7 @@ export class ModalEditStatementItemsComponent extends BaseFormPost implements On
         
         this.form.get('FinancialCategoryId').setValue(this.data.FinancialCategoryId)        
         this.dadosDefault.exibirLoader.next(true)
-        this.networkService.buscar('PersonClient', this.data.PersonId, Util.expandedQuery(PersonClient.expanded())).subscribe(v => {            
+        this.networkService.buscar('PersonClient', this.data.PersonId, null).subscribe(v => {            
             this.form.get('PersonId').setValue(v)
         }).add(this.dadosDefault.exibirLoader.next(false))
     }

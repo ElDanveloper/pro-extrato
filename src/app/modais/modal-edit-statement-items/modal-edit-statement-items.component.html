@@ -1,21 +1,22 @@
 <ng-template #conteudo>
     <app-page-divided [padrao]="false">
         <div principal [formGroup]="form">
-            <div >
+            <div>
                 <div class="p-col-12 p-fluid p-formgrid p-grid">
                     <div class="p-col-4">
                         <app-date #dataSelect label="Data" formControlName="DateMovement"></app-date>
                     </div>
                     <div class="p-col-8">
                         <app-input-financial-category-search [label]="'Natureza Financeira'"
-                             (valorSelecionado)="selecionouNatureza($event)" formControlName="FinancialCategoryId">
+                            (valorSelecionado)="selecionouNatureza($event)" formControlName="FinancialCategoryId">
                         </app-input-financial-category-search>
                     </div>
-                </div>                
+                </div>
                 <div class="p-col-12 p-fluid p-formgrid p-grid">
                     <div class="p-col-12">
-                        <app-input-search-person [label]="'Pessoa'" (valorSelecionado)="selecionouPerson($event)" formControlName="PersonId"></app-input-search-person>
-                    </div>                    
+                        <app-input-search-person [label]="'Pessoa'" (valorSelecionado)="selecionouPerson($event)"
+                            formControlName="PersonId"></app-input-search-person>
+                    </div>
                 </div>
                 <div class="p-col-12 p-fluid p-formgrid p-grid">
                     <div class="p-col-7">
@@ -23,7 +24,24 @@
                     </div>
                     <div class="p-col-3">
                         <app-input-money [label]="'Valor'" formControlName="Amount"></app-input-money>
-                    </div>                                        
+                    </div>
+                    <div class="p-col-2" style="margin-top: 25px;">
+                        <p-checkbox binary="true" label="Reconciliado"></p-checkbox>
+                    </div>
+                </div>
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    <div class="p-col-3">
+                        <app-select [label]="'Espécie'" [options]="selectSpecie"></app-select>
+                    </div>
+                    <div class="p-col-3">
+                        <app-select [label]="'Conta'" [options]="selectSpecie"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-input [label]="'Obs.'"></app-input>
+                    </div>
+                </div>
+                <div class="p-col-12 p-fluid p-formgrid p-grid">
+                    
                 </div>
             </div>
             <div style="margin-top: 50px;">
