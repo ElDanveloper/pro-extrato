@@ -1,32 +1,52 @@
-<app-page-header [urlName]="'Conta'" [secondaryUrlName]="'Editar'">        
+<app-page-header [urlName]="'Conta'" [secondaryUrlName]="'Editar'">
 </app-page-header>
 <ng-container *ngTemplateOutlet="conteudo"></ng-container>
 <ng-template #conteudo>
     <div [formGroup]="form">
         <p-card>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-2">
+                <div class="p-field p-col-12 p-md-3">
                     <app-input [label]="'Nome'" formControlName="Name"></app-input>
                 </div>
-                <div class="p-field p-col-12 p-md-2">
+                <div class="p-field p-col-12 p-md-3">
                     <app-input [label]="'Digito'" formControlName="DigitNumber"></app-input>
                 </div>
-                <div class="p-field p-offset-6 p-col-2 p-md-2">
-                   <app-input [label]="'Conta'" formControlName="AccountNumber"></app-input>
+                <div class="p-field p-col-2 p-md-3">
+                    <app-input [label]="'Conta'" formControlName="AccountNumber"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <app-input [label]="'Agência'" formControlName="BankAgency"></app-input>
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-6">
-                    <app-input [label]="'Número'" formControlName="Number"></app-input>
+                <div class="p-field p-col-12 p-md-4">
+                    <app-select [label]="'Banco'" [options]="selectbank" formControlName="BankCode"></app-select>
                 </div>
-                <div class="p-field p-col-12 p-md-6">
-                    <app-input [label]="'Agência'" formControlName="BankAgency"></app-input>
+                <div class="p-field p-col-12 p-md-4">
+                    <app-select [label]="'Categoria Financeira'" [options]="selectCategory" formControlName="FinancialCategoryId"></app-select>
                 </div>
-            </div>           
-            <div class="p-fluid p-formgrid p-grid">                
+                <div class="p-field p-col-12 p-md-4">
+                    <app-select [label]="'Tipo de Conta'" [options]="selectTypePro"></app-select>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-3">
+                    <app-date [label]="'Data Fechamento'" formControlName="DateRegister"></app-date>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <app-date [label]="'Data Atualização'" formControlName="DateUpdate"></app-date>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <app-input-integer [label]="'Codigo de Plano de Conta'" formControlName="CodePlanAccount"></app-input-integer>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <app-input-money [label]="'Limite de Crédito'" formControlName="CreditLimit"></app-input-money>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 p-md-12" style="margin-top: 10px;">
                     <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-2'" [tamanhoCancelar]="'p-col-2'"
-                        (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()" [labelConfirmar]="'Confirmar'">
+                        (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()" [labelConfirmar]="'Salvar'">
                     </app-footer-page>
                 </div>
             </div>

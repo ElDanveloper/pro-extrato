@@ -15,15 +15,17 @@ export class ProAccount {
     AccountNumber: string = ''
     Number: string = ''
     BankAgency: string = ''
-    SubTypePluggly: string = ''
+    SubTypePluggy: string = ''
     BankCode: number = 0
-    TypePluggly: string = ''
+    TypePluggy: string = ''
     ClosingDay: number = 0
     CreditLimit: number = 0
     CodePlanAccount: string = ''
+    Balance: number = 0
     Excluded: boolean = false
     DueDate: number = 0
     TypePro: number = 0   //1 = Conta Corrente, 2 = Poupança, 3 = Aplicacão, 4 = Garantida, 5 = Cartão Crédito, 6 = Crediario, Empréstimo, Carteira Virtual, Mutuo, 7 = Caixa Interno.
+    FinancialCategoryId: string = ''
 
 
     static datas() {
@@ -32,6 +34,18 @@ export class ProAccount {
 
     static checkbox() {
         return ['HasMfa', 'Excluded']
+    }
+
+    static relacionamentos() {
+        return ['FinancialCategoryId']
+    }
+
+    static referencias() {
+        return [{ chave: 'FinancialCategoryId', referencia: 'FinancialCategory' }]
+    }
+
+    static expanded() {
+        return ['FinancialCategoryId']
     }
 
 }

@@ -73,8 +73,6 @@ export class ModalPaymentViaAccountComponent extends BaseFormPost implements OnI
 
         const {Account, ...data} = Object.assign({}, this.form.value)
 
-        console.log("Account ---> " + Account)
-
         let value= {...Formulario.parseForm(new ProStatementItem(), data, ProStatementItem.referencias(), null, ProStatementItem.datas(), null, null), "$id": 1};
         value.AccountId = {...Formulario.parseForm(new ProAccount(), Account, null, null, ProAccount.datas(), null, ProAccount.checkbox()), "$id": 2}
         

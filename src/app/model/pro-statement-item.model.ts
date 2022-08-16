@@ -35,6 +35,10 @@ export class ProStatementItem {
         return ['DateMovement', 'DateAccounting']
     }
 
+    static checkboxAntigo() {
+        return ['Reconciled']
+    }
+
     static mascaras() {
         return ['CpfCnpj']
     }

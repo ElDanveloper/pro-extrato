@@ -106,10 +106,12 @@
                         <div class="p-field p-col-12 p-md-4">
                             <app-input-telefone label="Telefone celular" formControlName="Celular"></app-input-telefone>
                         </div>
+                        <div class="p-field p-col-4 p-md-4" >
+                            <app-select [options]="selectNaturezaFinanceira" [icon]="true" (onValueChange)="selecionouNatureza($event)" formControlName="NatureFinancialId"></app-select>
+                        </div>
                     </div>
                     &nbsp;
-                    <app-painel title="Dados adicionais">
-                        <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'F'"  -->
+                    <!-- <app-painel title="Dados adicionais">                        
                             <div class="p-fluid p-formgrid p-grid" >
                                 <div class="p-field p-col-12 p-md-4">
                                     <app-input [label]="'Registro geral'" ></app-input>
@@ -120,8 +122,7 @@
                                 <div class="p-field p-col-12 p-md-4">
                                     <app-date [label]="'Data de Emissao'" ></app-date>
                                 </div>
-                            </div>
-                            <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'E'" -->
+                            </div>                            
                             <div class="p-fluid p-formgrid p-grid"  >
                                 <div class="p-field p-col-12 p-md-4">
                                     <app-input [label]="'Documento de identificacao'" ></app-input>
@@ -129,8 +130,7 @@
                                 <div class="p-field p-col-12 p-md-4">
                                     <app-select label="País"  [options]="selectPais"></app-select>
                                 </div>
-                            </div>
-                            <!-- *ngIf="form.get('PessoaForm').get('Tipo').value !== 'E'" -->
+                            </div>                            
                             <div class="p-fluid p-formgrid p-grid"  >
                                 <div class="p-field p-col-12 p-md-4">
                                     <app-input [label]="'Inscricao estadual'" formControlName="InscricaoEstadual"
@@ -139,30 +139,25 @@
                                 <div class="p-field p-col-12 p-md-4">
                                     <app-input [label]="'Inscricao municipal'" formControlName="InscricaoMunicipal"
                                         ></app-input>
-                                </div>
-                                <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'F'" -->
+                                </div>                                
                                 <div class="p-field p-col-12 p-md-4">
                                     <app-date  [label]="'Data de nascimento'"
                                         ></app-date>
-                                </div>
-                                <!-- *ngIf="form.get('PessoaForm').get('Tipo').value === 'J'" -->
+                                </div>                                
                                 <div class="p-field p-col-12 p-md-4">
                                     <app-input  [label]="'Suframa'"
                                         ></app-input>
                                 </div>
                             </div>
-
                             <div class="p-fluid p-formgrid p-grid">
                                 <div class="p-field p-col-12 p-md-4">
                                     <app-input-integer primeiro label="Codigo Controle" ></app-input-integer>
                                 </div>
-                            </div>
-                        
+                            </div>                        
                         &nbsp;
                     </app-painel>
                     &nbsp;
                 
-
                 <app-painel title="Informacoes contabeis">
                     <div class="p-fluid p-formgrid p-grid">
                         <div class="p-field p-col-12 p-md-4">
@@ -266,10 +261,8 @@
                 </app-painel>
                 &nbsp;
 
-                <app-painel title="Informacoes adicionais">
-                    <!-- {{formatDate(this.form.get('DataCadastro').value)}} -->
-                    <h3>Data de cadastro: </h3>
-                    <!-- *ngIf="form.get('PessoaForm').get('Tipo').value !== 'J'" -->
+                <app-painel title="Informacoes adicionais">                
+                    <h3>Data de cadastro: </h3>                
                     <div class="p-fluid p-formgrid p-grid" >
                         <div class="p-field p-col-12 p-md-4">
                             <app-select [label]="'Estado civil'" [options]="selectEstadoCivil"></app-select>
@@ -326,7 +319,7 @@
                         </div>
                     </div>
                     &nbsp;
-                </app-painel>
+                </app-painel> -->
                 &nbsp;
             </p-card>
 
@@ -336,8 +329,7 @@
             </div>
 
             <div secundario formGroupName="PessoaForm">
-
-                <p-card [header]="'Tipo Pessoa'" [style]="{paddingBottom: '110px'}">
+                <p-card [header]="'Tipo Pessoa'">
                     <div class="p-fluid p-formgrid p-grid" >
                         <div class="p-field p-col-12 p-md-6"> <!-- style="display:flex;flex-direction: row;" -->
                             <div>
@@ -347,98 +339,6 @@
                                 <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="Ativo"
                                                 ></p-toggleButton>
                             </div>
-                        </div>
-                        <div class="p-field p-col-12 p-md-6">
-                            <div>
-                                <span>Cliente</span>
-                            </div>
-                            <div>
-                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                                                ></p-toggleButton>
-                            </div>
-                        </div>
-                        <div class="p-field p-col-12 p-md-6">
-                            <div>
-                                <span>Fornecedor</span>
-                            </div>
-                            <div>
-                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                                                ></p-toggleButton>
-                            </div>
-                        </div>
-                        <div class="p-field p-col-12 p-md-6">
-                            <div>
-                                <span>Transportador</span>
-                            </div>
-                            <div>
-                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                                                ></p-toggleButton>
-                            </div>
-                        </div>
-                        <div class="p-field p-col-12 p-md-6">
-                            <div>
-                                <span>Colaborador</span>
-                            </div>
-                            <div>
-                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                                                ></p-toggleButton>
-                            </div>
-                        </div>
-                        <div class="p-field p-col-12 p-md-6">
-                            <div>
-                                <span>Vendedor</span>
-                            </div>
-                            <div>
-                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                                                ></p-toggleButton>
-                            </div>
-                        </div>                    
-                        <div class="p-field p-col-12 p-md-6">
-                            <div>
-                                <span>Tributar Semelhante</span>
-                            </div>
-                            <div>
-                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                                                ></p-toggleButton>
-                            </div>
-                        </div>
-                        <div class="p-field p-col-12 p-md-6">
-                            <div>
-                                <span>Tributo</span>
-                            </div>
-                            <div>
-                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                                                ></p-toggleButton>
-                            </div>
-                        </div>
-                        <div class="p-field p-col-12 p-md-6">
-                            <div>
-                                <span>Conta Corrente</span>
-                            </div>
-                            <div>
-                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                                                ></p-toggleButton>
-                            </div>
-                        </div>
-                        <div class="p-field p-col-12 p-md-6">
-                            <div>
-                                <span>Informar Pedido</span>
-                            </div>
-                            <div>
-                                <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                                                ></p-toggleButton>
-                            </div>
-                        </div>
-                        <div style="margin-top: 10px;" class="p-field p-col-12 p-md-12">
-                            <!-- <div>
-                                <span></span>
-                            </div> -->
-                            <!-- <div class="ui-g-10"> -->
-                                <!-- <app-select primeiro [label]="'Contribuinte do ICMS'" [options]="selectICMS"
-                                ></app-select> -->
-                                <!-- <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                                                formControlName="ContribuinteIcms"></p-toggleButton> -->
-                            <!-- </div> -->
                         </div>
                     </div>
                     &nbsp;

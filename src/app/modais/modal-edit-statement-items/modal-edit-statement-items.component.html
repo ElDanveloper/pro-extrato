@@ -26,18 +26,18 @@
                         <app-input-money [label]="'Valor'" formControlName="Amount"></app-input-money>
                     </div>
                     <div class="p-col-2" style="margin-top: 25px;">
-                        <p-checkbox binary="true" label="Reconciliado"></p-checkbox>
+                        <p-checkbox binary="true" label="Reconciliado" formControlName="Reconciled"></p-checkbox>
                     </div>
                 </div>
                 <div class="p-col-12 p-fluid p-formgrid p-grid">
                     <div class="p-col-3">
-                        <app-select [label]="'Espécie'" [options]="selectSpecie"></app-select>
+                        <app-select [label]="'Espécie'" [options]="selectSpecie" formControlName="Specie"></app-select>
                     </div>
                     <div class="p-col-3">
-                        <app-select [label]="'Conta'" [options]="selectSpecie"></app-select>
+                        <app-select [label]="'Conta'" [options]="selecAccount" formControlName="AccountId"></app-select>
                     </div>
                     <div class="p-col-6">
-                        <app-input [label]="'Obs.'"></app-input>
+                        <app-input [label]="'Obs.'" formControlName="Obs"></app-input>
                     </div>
                 </div>
                 <div class="p-col-12 p-fluid p-formgrid p-grid">

@@ -28,6 +28,21 @@ export class AccountRegisterComponent extends BaseFormPost implements OnInit, On
 
     id;
 
+    selectbank = []
+    selectCategory = []
+    selectTypePro = [
+        {label: 'Conta Corrente', value: 1},
+        {label: 'Poupança', value: 2},
+        {label: 'Aplicação', value: 3},
+        {label: 'Garantida', value: 4},
+        {label: 'Cartão de Crédito', value: 5},
+        {label: 'Crediario', value: 6},
+        {label: 'Empréstimo', value: 7},
+        {label: 'Carteira Virtual', value: 8},
+        {label: 'Mutuo', value: 9},
+        {label: 'Caixa Interno', value: 10},
+    ]
+
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService) {
         super(networkService, dadosDefault, router, 'Account', messageService); 
         this.form = Formulario.createForm(new ProAccount(), this.fb); this.form = Formulario.createForm(new ProAccount(), this.fb);       

@@ -160,7 +160,7 @@ export class AccountLaunchComponent implements OnInit {
         // const filtro = `IdPlanoConta=${v.IdPlanoConta}&Limit=50&pagina=0&Data=${v.Data}`
 
         this.dadosDefault.exibirLoader.next(true)
-        this.networkService.getSimples(getUrlPro(), `StatementItems?DateIni=${v.DateBalance}&DateEnd=${v.DateBalance}&AccountId=${this.id}`).subscribe((v: any) => {
+        this.networkService.getSimples(getUrlPro(), `StatementItems?DateIni=${v.DateBalance}&DateEnd=${v.DateBalance}&AccountId=${this.id}${Util.expandedQuery(['FinancialCategoryId'], true)}`).subscribe((v: any) => {
             this.lista2 = v.value;
         }).add(() => this.dadosDefault.exibirLoader.next(false))
 
