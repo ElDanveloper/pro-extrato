@@ -110,7 +110,8 @@ export class CompanyRegistrationComponent extends BaseFormPost implements OnInit
 
         this.networkService.exibirLoader.next(true);
         this.$subscription6 = this.networkService.atualizarPost(getUrlPro(), 'Company', value).subscribe((v: any) => {
-            this.router.navigate(['/empresas'])
+            this.messageService.add(Util.pushSuccessMsgSemDelay('Atualização Realizada com Sucesso!'))
+            this.router.navigate(['/company'])
         }).add(() => this.networkService.exibirLoader.next(false))
     }
 

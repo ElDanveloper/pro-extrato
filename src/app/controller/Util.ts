@@ -47,25 +47,26 @@ export class Util {
 
     static pushErrorMsg(error: any): any {
         try {
-            return [{severity: 'error', summary: error, sticky: true}]
+            return [{severity: 'error', summary: error, life: 2000}]
+            // return [{severity: 'error', summary: error, sticky: true}]
         } catch (e) {
-            return [{severity: 'error', summary: JSON.stringify(error), life: 1000}]
+            return [{severity: 'error', summary: JSON.stringify(error), life: 2000}]
         }
     }
 
     static pushSuccessMsg(msg: any): any {
         try {
-            return [{severity: 'success', summary: msg, sticky: true}]
+            return [{severity: 'success', summary: msg, life: 2000}]
         } catch (e) {
-            return [{severity: 'success', summary: JSON.stringify(msg), sticky: true}]
+            return [{severity: 'success', summary: JSON.stringify(msg), life: 2000}]
         }
     }
 
     static pushSuccessMsgSemDelay(msg = 'Operação concluída!'): any {
         try {
-            return [{severity: 'success', summary: msg, life: 1000}]
+            return [{severity: 'success', summary: msg, life: 2000}]
         } catch (e) {
-            return [{severity: 'success', summary: JSON.stringify(msg), life: 1000}]
+            return [{severity: 'success', summary: JSON.stringify(msg), life: 2000}]
         }
     }
 
@@ -81,9 +82,9 @@ export class Util {
 
     static pushInfoMessage(msg: any): any {
         try {
-            return [{severity: 'info', summary: msg}]
+            return [{severity: 'info', summary: msg, life: 2000}]
         } catch (e) {
-            return [{severity: 'info', summary: JSON.stringify(msg)}]
+            return [{severity: 'info', summary: JSON.stringify(msg), life: 2000}]
         }
     }
 
@@ -210,6 +211,10 @@ export class Util {
 
     static dataParaStringComZero(date: Date) {
         return `${date.getFullYear()}-${Util.addZero(date.getMonth() + 1)}-${Util.addZero(date.getDate())}`
+    }
+
+    static dataParaStringComZeroEHora(date: Date){
+        return `${date.getFullYear()}-${Util.addZero(date.getMonth() + 1)}-${Util.addZero(date.getDate())}T${Util.addZero(date.getHours())}:${Util.addZero(date.getMinutes())}`
     }
 
     static saveCsvFromRelatorio(v) {

@@ -18,25 +18,50 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Empresas', icon: 'fa fa-building', routerLink: ['company']
-                // items: []
-            },
-            {
-                label: 'Pessoas', icon: 'fa fa-users', routerLink: ['person']
-                // items: []
-            },
-            {
                 label: 'Contas', icon: 'fa fa-university', routerLink: ['account']
                 // items: []
             },
             {
-                label: 'Categoria Financeira', icon: 'fa fa-building-o', routerLink: ['natureza-financeira']
+                label: 'Relatórios', icon: 'fa fa-print', routerLink: ['development']
                 // items: []
             },
             {
-                label: 'Relatórios', icon: 'fa fa-print', routerLink: ['']
+               label: 'Cadastros', icon: 'fa fa-cog',
+               items: [
+                {
+                    label: 'Categoria Financeira', icon: 'fa fa-building-o', routerLink: ['natureza-financeira']
+                    // items: []
+                },   
+                {
+                    label: 'Pessoas', icon: 'fa fa-users', routerLink: ['person']
+                    // items: []
+                },
+                {
+                    label: 'Historicos Memorizados', icon: 'fa fa-history', routerLink: ['development']
+                },
+                {
+                    label: 'Palavras Chaves', icon: 'fa fa-key', routerLink: ['development']
+                },
+                {
+                    label: 'Parametros', icon: 'fa fa-cogs', routerLink: ['/settings/parameters']
+                },
+                {
+                    label: 'Usuarios', icon: 'fa fa-user', routerLink: ['/settings/users-list']
+                }
+               ]
+            },
+            {
+                label: 'Empresas', icon: 'fa fa-building', routerLink: ['company']
                 // items: []
-            },            
+            },
+            {
+                label: 'Relatório - Contador', icon: 'fa fa-print', routerLink: ['development']
+            }
+
+           
+            
+            
+            
         ]
     }    
 

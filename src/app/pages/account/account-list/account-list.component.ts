@@ -1,8 +1,9 @@
+import { BaseListSimplesHeaders } from './../../../controller/BaseListSimplesHeaders';
 import { getUrlPro } from './../../../controller/staticValues';
 import { BaseListSimples } from '../../../controller/BaseListSimples';
 import { NetworkService } from '../../../services/network.service';
 import { qtdLinhas, } from '../../../controller/staticValues';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import { Router } from "@angular/router";
 
@@ -14,7 +15,7 @@ import { Router } from "@angular/router";
 })
 export class AccountListComponent extends BaseListSimples implements OnInit, OnDestroy {
 
-    // @ViewChild('cadastrarPessoa') cadastrarPessoa: ElementRef;
+    @ViewChild('registrationAccount') registrationAccount: ElementRef;
 
     // modalCadastrarPessoa = false
 
@@ -43,7 +44,8 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
     filtro = ''
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'proaccount')
+        super(networkService, getUrlPro(), 'proaccount', null, 'Name')
+        
     }
 
     ngOnInit() {
@@ -61,15 +63,15 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
     }
 
 
-    get account() {
-        return this.lista.filter(v => {
-            if (v.Name === null) {
-                v.Name = ''
-            }
-            return v.Name.toLowerCase().includes(this.filtro.toLowerCase()) || v.Name.toString().includes(this.filtro)
-        })
+    // get account() {
+    //     return this.lista.filter(v => {
+    //         if (v.Name === null) {
+    //             v.Name = ''
+    //         }
+    //         return v.Name.toLowerCase().includes(this.filtro.toLowerCase()) || v.Name.toString().includes(this.filtro)
+    //     })
 
-    }
+    // }
 
 
 
@@ -90,9 +92,9 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
     //     this.router.navigate([`/${this.entidade}/${Util.cadastroRoute()}/${rowData.IdPessoaEmpresa}`])
     // }
 
-    // public navegar() {
-    //     this.cadastrarPessoa.nativeElement.click()        
-    // }
+    public newAccount() {        
+        this.registrationAccount.nativeElement.click()
+    }
 
     ngOnDestroy(): void {
         // if(this.$subscriptionListar) this.$subscriptionListar.unsubscribe()

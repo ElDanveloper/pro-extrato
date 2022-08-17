@@ -125,12 +125,11 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
 
 
 
-                if (this.data) {
-                    
+                if (this.data) {                    
                     this.natureza = this.selectListaNatureza.find(v => v.value === this.data.Id)
                     
                     this.form.get('aux').get('naturezaSuperior').setValue(this.natureza.value)
-                    
+
                     this.form.get('Classificate').setValue(this.data.Classificacao)
                 }
             })
@@ -145,8 +144,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
         }
     }
 
-    setarClassificacao(event) {
-        console.log(this.form.get('aux').get('naturezaSuperior').value)
+    setarClassificacao(event) {        
         this.classificacao = event
     }
 
@@ -206,9 +204,14 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
 
     gerarClassificacao() {
         let id;
-        if (this.data) id = this.data.Id
+        console.log(this.data)
+        if (this.data) {
+            console.log('Data')
+            id = this.data.Id
+        }
         if (id === undefined) {
-            id = this.classificacao.Id;
+            console.log('Id')
+            id = this.classificacao;
         }
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `GenerateClassificateCategory?CategoryId=${id}`).subscribe((v: any) => {

@@ -34,7 +34,7 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
     $subscription11: Subscription;
     $subscription12: Subscription;
 
-    entidade = 'empresas';
+    entidade = 'financialCategory';
     id;
     form: FormGroup;
     selectEstado = getEstados();
@@ -81,9 +81,8 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
 
         if (this.id) {
             this.dadosDefault.exibirLoader.next(true)
-            this.$subscription2 = this.networkService.buscar('financialCategory', this.id, Util.expandedQuery(FinancialCategory.expanded()) ).subscribe((value: any) => {
-
-                const data = Formulario.prepareValueToForm(new FinancialCategory(), value, null, FinancialCategory.relacionamentos(), FinancialCategory.checkbox());
+            this.$subscription2 = this.networkService.buscar('financialCategory', this.id, Util.expandedQuery(FinancialCategory.expanded()) ).subscribe((value: any) => {                
+                const data = Formulario.prepareValueToForm(new FinancialCategory(), value, null, FinancialCategory.relacionamentos(), null);                
                 Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
                
             }).add(() => this.dadosDefault.exibirLoader.next(false))

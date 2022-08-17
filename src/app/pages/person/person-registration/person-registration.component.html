@@ -332,13 +332,14 @@
                 <p-card [header]="'Tipo Pessoa'">
                     <div class="p-fluid p-formgrid p-grid" >
                         <div class="p-field p-col-12 p-md-6"> <!-- style="display:flex;flex-direction: row;" -->
-                            <div>
+                            <p-checkbox binary="true" formControlName="Ativo" label="Ativo"></p-checkbox>
+                            <!-- <div>
                                 <span>Ativo</span>
                             </div>
                             <div>
                                 <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel" formControlName="Ativo"
                                                 ></p-toggleButton>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     &nbsp;

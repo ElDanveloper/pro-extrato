@@ -1,3 +1,5 @@
+import { DatePipe } from './../../../pipes/date.pipe';
+import { Util } from 'src/app/controller/Util';
 import { getUrlPro } from './../../../controller/staticValues';
 import { BaseFormPost } from './../../../controller/BaseFormPost';
 import { ProAccount } from './../../../model/pro-account.model';
@@ -49,19 +51,24 @@ export class AccountRegisterComponent extends BaseFormPost implements OnInit, On
     }
 
     ngOnInit() {
+        this.dadosDefault.account().subscribe(values => {
+            this.selectbank = values[0]
+            this.selectCategory = values[1]
+        })
         this.$subscription1 = this.route.paramMap.subscribe(params => {
             this.id = params.get('id')
         })
 
         if (this.id) {
             this.dadosDefault.exibirLoader.next(true)
-            this.$subscription2 = this.networkService.buscar('ProAccount', this.id).subscribe((value: any) => {
+            this.$subscription2 = this.networkService.buscar('ProAccount', this.id, Util.expandedQuery(ProAccount.expanded())).subscribe((value: any) => {
 
-                const data = Formulario.prepareValueToForm(new ProAccount(), value, ProAccount.datas, null, ProAccount.checkbox());
+                const data = Formulario.prepareValueToForm(new ProAccount(), value, ProAccount.datas(), ProAccount.relacionamentos(), ProAccount.checkbox());
                 Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
                 
-
             }).add(() => this.dadosDefault.exibirLoader.next(false))
+
+            
         }
     }
 
@@ -79,14 +86,14 @@ export class AccountRegisterComponent extends BaseFormPost implements OnInit, On
 
         const { PessoaForm, PessoaContractorForm, ...data } = this.form.getRawValue()
 
-        let value = Formulario.parseForm(new ProAccount(), data, null, null, ProAccount.datas(), null, ProAccount.checkbox());
+        let value = Formulario.parseForm(new ProAccount(), data, ProAccount.referencias(), null, ProAccount.datas(), null, ProAccount.checkbox());
 
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.salvarPost(getUrlPro(), 'Account', value).subscribe((v: any) => {
             this.router.navigate(['/account'])
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
-   
+    
     cancelarLocal() {
         this.router.navigate(['account'])
     }

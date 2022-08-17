@@ -1,3 +1,4 @@
+import { AppNotfoundComponent } from './pages/not-found/app.notfound.component';
 import { AccountRegisterComponent } from './pages/account/account-register/account-register.component';
 import { CompanyRegistrationComponent } from './pages/company/company-registration/company-registration.component';
 import { CompanyListComponent } from './pages/company/company-list/company-list.component';
@@ -129,6 +130,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         ParametersComponent,
         AccountStatusComponent,
         AccountRegisterComponent,
+        AppNotfoundComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

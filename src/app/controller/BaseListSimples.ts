@@ -8,7 +8,7 @@ import { OnDestroy, ViewChild } from '@angular/core';
 export class BaseListSimples implements OnDestroy {
 
     entidade
-    pagina = 0
+    pagina = 1
     jaPesquisou = false
     loading = false
     public lista: any[] = []
@@ -24,14 +24,16 @@ export class BaseListSimples implements OnDestroy {
         // {label: 'Excluir', icon: 'fa fa-close', command: (e) => this.deletar(e)},
     ]
     private expanded;
+    private ordeBy;
 
     subscriptionQtd: Subscription;
     subscriptionLista: Subscription;
     subscriptionDeletar: Subscription;
 
-    constructor(public networkService: NetworkService, public url = getUrlPro(), entidad, expanded = null) {
+    constructor(public networkService: NetworkService, public url = getUrlPro(), entidad, expanded = null, ordeBy = 'Nome') {
         this.expanded = expanded
         this.entidade = entidad
+        this.ordeBy = ordeBy
     }
 
     public lazyLoad(event): void {
@@ -58,10 +60,10 @@ export class BaseListSimples implements OnDestroy {
             v = ''
         }
 
-        let parametro = `?Texto=${v}&CampoOrdem=Nome&Limite=${this.top}&Pagina=${this.pagina}`
+        let parametro = `?$filter=(Name eq ${v})&orderby=${this.ordeBy}&top=${this.top}&skip=${this.pagina}`
 
         if (this.expanded) {
-            parametro = `?Texto=${v}&CampoOrdem=Nome&Limite=${this.top}&Pagina=${this.pagina}&${this.expanded}`
+            parametro = `?filter=${v}&orderby=${this.ordeBy}&top=${this.top}&skip=${this.pagina}&${this.expanded}`
         }
 
         this.carregarDados(parametro)

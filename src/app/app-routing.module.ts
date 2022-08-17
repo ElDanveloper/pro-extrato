@@ -1,3 +1,4 @@
+import { AppNotfoundComponent } from './pages/not-found/app.notfound.component';
 import { AccountRegisterComponent } from './pages/account/account-register/account-register.component';
 import { CompanyRegistrationComponent } from './pages/company/company-registration/company-registration.component';
 import { CompanyListComponent } from './pages/company/company-list/company-list.component';
@@ -35,6 +36,7 @@ import { ProjetoCadastroComponent } from './pages/projeto-cadastro/projeto-cadas
 const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
     { path: 'selecao-empresa/:value', component: SelecaoEmpresaComponent },
+    { path: 'development', component: AppNotfoundComponent},
 
     {
         path: '', component: AppMainComponent, canActivate: [AuthGuard],

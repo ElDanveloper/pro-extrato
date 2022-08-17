@@ -1,3 +1,4 @@
+import { BrowseEnvironmentComponent } from './browse-environment/browse-environment.component';
 import { InputMoneyComponent } from './input-money/input-money.component';
 import { CustomModalComponent } from './custom-modal/custom-modal.component';
 import { InputFinancialCategorySearchComponent } from './input-financial-category-search/input-financial-category-search.component';
@@ -38,6 +39,7 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         RadioButtonComponent,
         SelectIconContainerComponent,
         InputMoneyComponent,
+        BrowseEnvironmentComponent,
         // InputFinancialCategorySearchComponent,        
         // InputMoneyComponent,
         // InputPesquisarPessoaComponent,
@@ -66,6 +68,7 @@ import { DiretivasModule } from '../diretivas/diretivas.module'
         RadioButtonComponent,
         SelectIconContainerComponent,
         InputMoneyComponent,
+        BrowseEnvironmentComponent,
         // InputFinancialCategorySearchComponent,
         // InputMoneyComponent,
         // InputPesquisarPessoaComponent,
