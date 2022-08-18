@@ -50,6 +50,7 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
                 this.$listarEmpresaSubscribe = this.authService.segundaAuthenticacao().subscribe((res: any) => {
                     this.lista = res
                     this.totalItens = res.length
+                    localStorage.setItem('counter', 'false')
                 }).add(() => this.dadosDefaultService.exibirLoader.next(false))
             }
             if (this.value === 2) {
@@ -59,7 +60,6 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
                     this.totalItens = res.length
                     // this.dadosDefaultService.counterEnvironment.next(true)    
                     localStorage.setItem('counter', 'true')
-                    console.log('Seleção empresa ----> ' + localStorage.getItem('couter'))
                 }).add(() => this.dadosDefaultService.exibirLoader.next(false))
             }
         })
