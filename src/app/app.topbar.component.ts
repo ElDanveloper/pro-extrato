@@ -24,7 +24,7 @@ export class AppTopbarComponent {
 
         console.log('Toqbar ---> ' + this.counter)
         
-        if(!this.counter) {
+        if(this.counter === 'false') {
             this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
             console.log('Empresa ---> ' + this.empresa)
         }
