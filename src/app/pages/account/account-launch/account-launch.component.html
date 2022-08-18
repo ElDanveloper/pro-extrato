@@ -89,11 +89,11 @@
                 <td appAlinharDireita [ngClass]="colorValue(rowData.InitialBalance)">{{rowData.InitialBalance |
                     virgulaPipe}}
                 </td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData.Debits)">{{getValor(rowData.Debits) |
-                    CommaPipeZero}}</td>
                 <td appAlinharDireita [ngClass]="colorValue(rowData.Credits)">{{getValor(rowData.Credits) |
                     CommaPipeZero}}</td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData.CalculatedBalance)">{{rowData.CalculatedBalance | virgulaPipe}}
+                <td appAlinharDireita [ngClass]="colorValue(rowData.Debits)">{{getValor(rowData.Debits) |
+                    CommaPipeZero}}</td>
+                <td appAlinharDireita [ngClass]="colorValue(rowData.FinalBalance)">{{rowData.FinalBalance | virgulaPipe}}
                 </td>
             </tr>
         </ng-template>

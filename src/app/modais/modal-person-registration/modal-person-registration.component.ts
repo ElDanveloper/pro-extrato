@@ -53,7 +53,9 @@ export class ModalPersonRegistrationComponent extends BaseFormPost implements On
   ngOnChanges() {
     if (this.modalVisible) {
       this.dadosDefault.pessoa().subscribe(values => {
+        const defaultValue = {label: '-', value: null}
         this.categoria = values[0]
+        this.categoria.unshift(defaultValue)
       })      
     }    
   }

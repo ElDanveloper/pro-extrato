@@ -25,15 +25,17 @@ export class BaseListSimples implements OnDestroy {
     ]
     private expanded;
     private ordeBy;
+    private campoPesquisa;
 
     subscriptionQtd: Subscription;
     subscriptionLista: Subscription;
     subscriptionDeletar: Subscription;
 
-    constructor(public networkService: NetworkService, public url = getUrlPro(), entidad, expanded = null, ordeBy = 'Nome') {
+    constructor(public networkService: NetworkService, public url = getUrlPro(), entidad, expanded = null, ordeBy = 'Nome', campoPesquisa = 'Name') {
         this.expanded = expanded
         this.entidade = entidad
         this.ordeBy = ordeBy
+        this.campoPesquisa = campoPesquisa
     }
 
     public lazyLoad(event): void {
@@ -60,10 +62,10 @@ export class BaseListSimples implements OnDestroy {
             v = ''
         }
 
-        let parametro = `?$filter=(Name eq ${v})&orderby=${this.ordeBy}&top=${this.top}&skip=${this.pagina}`
+        let parametro = `?$filter=(${this.campoPesquisa} eq ${v})&$orderby=${this.ordeBy}&$top=${this.top}&$skip=${this.pagina}`
 
         if (this.expanded) {
-            parametro = `?filter=${v}&orderby=${this.ordeBy}&top=${this.top}&skip=${this.pagina}&${this.expanded}`
+            parametro = `?$filter=(${this.campoPesquisa} eq ${v}&$orderby=${this.ordeBy}&$top=${this.top}&$skip=${this.pagina}&${this.expanded}`
         }
 
         this.carregarDados(parametro)

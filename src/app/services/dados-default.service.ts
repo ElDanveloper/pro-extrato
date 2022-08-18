@@ -115,8 +115,10 @@ export class DadosDefaultService {
     // }
 
     public modalNaturezaFinanceira() {
+        
         let naturezaFinGrupo = this.http.get(`${getUrlPro()}/naturezafingrupo?filter=(nivelDfc eq 3)`).pipe(map((res: Response) => res['value'].map(v => ({label: v.Classificacao + ' - ' + Util.up(v.Nome), value: v.Id}))));
-        let natureza = this.http.post(`${getUrlPro()}/financialCategories`, {Level: 3}).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))));
+        let natureza = this.http.get(`${getUrlPro()}/financialCategory?$filter=level lt 3&$orderby=classificate`).pipe(map((res: Response) => res['value'].map(v => ({label: v.Classificate + ' - ' + Util.up(v.Description), value: v.Id}))))
+        // let natureza = this.http.post(`${getUrlPro()}/financialCategories`, {Level: 3}).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))));
         let costCenter = this.http.get(`${getUrlPro()}/procostcenter`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))));
         let project = this.http.get(`${getUrlPro()}/proproject`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))));
         let typeCategory = this.http.get(`${getUrlPro()}/ProTypeCategory`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Code}))));
@@ -124,7 +126,7 @@ export class DadosDefaultService {
 
         return forkJoin([naturezaFinGrupo, natureza, costCenter, project, typeCategory])       
     }
-
+  
     public modalOpeningbalance() {
         let account = this.http.get(`${getUrlPro()}/proaccount`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Name), value: v.Id}))))
 
@@ -133,7 +135,7 @@ export class DadosDefaultService {
 
     public account() {
         let bank = this.http.get(`${getUrlPro()}/bank`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Name), value: Util.toNumber(v.Code)}))))
-        let natureza = this.http.post(`${getUrlPro()}/financialCategories`, {Level: 1}).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))));
+        let natureza = this.http.post(`${getUrlPro()}/financialCategories`, {Level: 3}).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))));
 
         return forkJoin([bank, natureza])
     }

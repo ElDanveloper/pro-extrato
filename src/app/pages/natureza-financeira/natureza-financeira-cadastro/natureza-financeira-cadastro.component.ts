@@ -50,11 +50,13 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
     selectSpecie = []
 
     selectSpecieFlow = [
+        {label: '', value: null},
         {label: 'Saida', value: 'S'},
         {label: 'Entrada', value: 'E'}
     ]
 
     selectLevel = [
+        {label: '', value: null},
         {label: '1', value: 1},
         {label: '2', value: 2},
         {label: '3', value: 3},
@@ -70,9 +72,13 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
 
     ngOnInit() {
         this.dadosDefault.modalNaturezaFinanceira().subscribe(values => {
+            const defaultValue = {label: '-', value: null}
             this.selectGrupoNatureza = values[0]
+            this.selectGrupoNatureza.unshift(defaultValue)
             this.selectListaNatureza = values[1]      
+            this.selectListaNatureza.unshift(defaultValue)
             this.selectSpecie = values[4]
+            this.selectSpecie.unshift(defaultValue)
           })
 
         this.$subscription5 = this.route.paramMap.subscribe(params => {

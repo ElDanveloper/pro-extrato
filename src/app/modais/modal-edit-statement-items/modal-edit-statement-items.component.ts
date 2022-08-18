@@ -36,6 +36,7 @@ export class ModalEditStatementItemsComponent extends BaseFormPost implements On
     historico = false
 
     selectSpecie = [
+        {label: '', value: null},
         {label: 'Débito', value: 'D'},
         {label: 'Crédito', value: 'C'}
     ]
@@ -58,7 +59,9 @@ export class ModalEditStatementItemsComponent extends BaseFormPost implements On
 
     ngOnChanges() {                        
         this.dadosDefault.modalOpeningbalance().subscribe(v => {
+            const defaultValue = {label: '-', value: null}
             this.selecAccount = v[0]
+            this.selecAccount.unshift(defaultValue)
         })
 
         const value = Formulario.prepareValueToForm(new ProStatementItem(), this.data, ProStatementItem.datas(), ProStatementItem.relacionamentos(), ProStatementItem.checkboxAntigo());

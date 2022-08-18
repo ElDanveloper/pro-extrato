@@ -59,6 +59,7 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
                     this.totalItens = res.length
                     // this.dadosDefaultService.counterEnvironment.next(true)    
                     localStorage.setItem('counter', 'true')
+                    console.log('Seleção empresa ----> ' + localStorage.getItem('couter'))
                 }).add(() => this.dadosDefaultService.exibirLoader.next(false))
             }
         })

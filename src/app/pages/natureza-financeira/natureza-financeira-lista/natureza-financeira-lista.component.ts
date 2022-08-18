@@ -1,7 +1,7 @@
 import { Util } from './../../../controller/Util';
 import { DadosDefaultService } from 'src/app/services/dados-default.service';
 import { NetworkService } from './../../../services/network.service';
-import { qtdLinhas, getUrlClient, getUrlPro } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlClient, getUrlPro, getUrlReport } from './../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, Message, MessageService, SelectItem } from "primeng/api";
@@ -173,6 +173,13 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     // public editar(rowData) {
     //     this.router.navigate([`/${this.entidade}/${Util.cadastroRoute()}/${rowData.IdPessoaEmpresa}`])
     // }
+
+    pdf(){
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.salvarEBaixarArquivo(getUrlReport(), 'listCategoryFinance', { type: "pdf" }).subscribe(v => {
+            Util.savePdf(v)
+        }).add(this.dadosDefault.exibirLoader.next(false))
+    }
 
 
 

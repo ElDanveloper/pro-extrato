@@ -76,13 +76,13 @@ export class BaseListSimplesHeaders implements OnDestroy {
     }
 
     public carregarDados(parametros = ''): void {
-        this.$subscriptionListar = this.networkService.getSimplesComHeaders(this.url, `${this.entidade}${parametros}`, this.page, this.top).subscribe((listaSec: any) => {
+        this.$subscriptionListar = this.networkService.getSimplesComHeaders(this.url, `${this.entidade}${parametros}`, this.page, this.top).subscribe((listaSec: any) => {            
             if (listaSec[0]) {
                 this.totalItens = listaSec[0] ? listaSec[0]['QtdReg'] : 0;
             } else {
 
             }            
-            this.lista = listaSec.body.value
+            this.lista = listaSec.body.value ? listaSec.body.value : listaSec.body
             // listaSec.value ? listaSec.value : listaSec
             this.pagina = listaSec.headers.get('pages')
             this.totalItens = Util.toNumber(this.pagina) * this.top

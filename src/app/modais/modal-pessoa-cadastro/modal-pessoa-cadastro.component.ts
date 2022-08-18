@@ -53,7 +53,9 @@ export class ModalPessoaCadastroComponent extends BaseFormPost implements OnInit
   ngOnChanges() {
     if (this.modalVisible) {
       this.dadosDefault.pessoa().subscribe(values => {
+        const defaultValue = {label: '-', value: null}
         this.categoria = values[0]
+        this.categoria.unshift(defaultValue)
       })      
     }    
   }

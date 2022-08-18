@@ -35,6 +35,7 @@ export class ModalSelecionarEmpresaEscritorioComponent implements OnInit {
             this.router.navigate(['selecao-empresa/1']);
         }
         if(event.value === 2){
+            console.log('Seleção de empressão ---> ')
             this.router.navigate(['selecao-empresa/2']);
         }
     }

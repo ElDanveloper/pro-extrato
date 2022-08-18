@@ -40,7 +40,7 @@ export class AppMenuComponent implements OnInit {
                     label: 'Historicos Memorizados', icon: 'fa fa-history', routerLink: ['development']
                 },
                 {
-                    label: 'Palavras Chaves', icon: 'fa fa-key', routerLink: ['development']
+                    label: 'Palavras Chaves', icon: 'fa fa-key', routerLink: ['key-word']
                 },
                 {
                     label: 'Parametros', icon: 'fa fa-cogs', routerLink: ['/settings/parameters']

@@ -1,3 +1,4 @@
+import { ModalKeyWordRegistrationComponent } from './modal-key-word-registration/modal-key-word-registration.component';
 import { ModalAccountRegistrationComponent } from './modal-account-registration/modal-account-registration.component';
 import { ModalEditStatementItemsComponent } from './modal-edit-statement-items/modal-edit-statement-items.component';
 import { ModalPersonRegistrationComponent } from './modal-person-registration/modal-person-registration.component';
@@ -56,6 +57,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalPersonRegistrationComponent,
       ModalEditStatementItemsComponent,
       ModalAccountRegistrationComponent,
+      ModalKeyWordRegistrationComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -94,6 +96,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalPersonRegistrationComponent,
         ModalEditStatementItemsComponent,
         ModalAccountRegistrationComponent,
+        ModalKeyWordRegistrationComponent,
      
         //ModalPagamentoViaContaCorrenteComponent,
     ]

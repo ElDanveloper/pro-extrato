@@ -1,3 +1,4 @@
+import { BaseListSimplesHeaders } from './../../../../controller/BaseListSimplesHeaders';
 import { getUrlPro, qtdLinhas } from './../../../../controller/staticValues';
 import { Router } from '@angular/router';
 import { NetworkService } from './../../../../services/network.service';
@@ -24,7 +25,8 @@ export class DepartmentsListComponent extends BaseListSimples implements OnInit,
     
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'department')
+        super(networkService, getUrlPro(), 'department', null, 'Description', 'Description')
+        
     }
 
     ngOnInit() {        

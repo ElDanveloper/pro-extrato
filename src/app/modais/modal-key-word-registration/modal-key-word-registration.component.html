@@ -1,0 +1,24 @@
+<ng-template #conteudo>
+    <app-page-divided [padrao]="false">
+        <div principal [formGroup]="form">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-col-3">
+                    <app-input [label]="'Primeira Chave'" formControlName="FirstWord"></app-input>
+                </div>
+                <div class="p-col-3">
+                    <app-input [label]="'Segunda Chave'" formControlName="SecondWord"></app-input>
+                </div>            
+                <div class="p-col-2">
+                    <app-input-integer [label]="'Codigo Controle'" formControlName="CodeControl"></app-input-integer>
+                </div>
+                <div class="p-col-3">
+                    <app-select [label]="'Categoria Financeira'" [options]="selectCategory" formControlName="FinancialCategoryId"></app-select>
+                </div>
+            </div>
+            <div style="margin-top: 50px;">
+                <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="fecharModal()"
+                    labelConfirmar="Salvar"></app-footer-page>
+            </div>
+        </div>
+    </app-page-divided>
+</ng-template>

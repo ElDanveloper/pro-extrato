@@ -59,9 +59,13 @@ export class CompanyRegistrationComponent extends BaseFormPost implements OnInit
 
     ngOnInit() {
         this.dadosDefault.empresa().subscribe(values => {
+            const defaultValue = {label: '-', value: null}
             this.empresas = values[0]
+            this.empresas.unshift(defaultValue)
             this.segmento = values[1]
-            this.responsavel = values[2]            
+            this.segmento.unshift(defaultValue)
+            this.responsavel = values[2]      
+            this.responsavel.unshift(defaultValue)      
           })
 
         this.$subscription5 = this.route.paramMap.subscribe(params => {

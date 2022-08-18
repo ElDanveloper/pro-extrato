@@ -19,7 +19,7 @@ export class InvoicesListComponent extends BaseListSimples implements OnInit, On
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
     public totalItens: number   
-    opcoesTable = [
+    opcoesTable = [        
         {label: 'Boleto', icon: 'fa fa-edit', command: (e) => {}},
         {label: 'Pdf', icon: 'fa fa-close', command: (e) => {}},        
     ]

@@ -1,0 +1,36 @@
+<app-page-header [urlName]="'Conta'" [secondaryUrlName]="'Editar'">
+</app-page-header>
+<ng-container *ngTemplateOutlet="conteudo"></ng-container>
+<ng-template #conteudo>
+    <div [formGroup]="form">
+        <app-page-divided>
+            <p-card principal>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-2">
+                        <app-input [label]="'Primeira Chave'" formControlName="FirstWord"></app-input>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <app-input [label]="'Segunda Chave'" formControlName="SecondWord"></app-input>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <app-input-integer [label]="'Codigo de Controle'" formControlName="CodeControl"></app-input-integer>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <app-input [label]="'Categoria Financeira'" formControlName="FinancialCategoryId"></app-input>
+                    </div>
+                </div>              
+                
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-12" style="margin-top: 10px;">
+                        <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-2'" [tamanhoCancelar]="'p-col-2'"
+                            (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()"
+                            [labelConfirmar]="'Salvar'">
+                        </app-footer-page>
+                    </div>
+                </div>
+            </p-card>
+        </app-page-divided>
+    </div>
+
+</ng-template>
+<p-toast position="bottom-right"></p-toast>

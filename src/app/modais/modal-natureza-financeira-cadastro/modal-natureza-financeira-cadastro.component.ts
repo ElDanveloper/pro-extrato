@@ -80,6 +80,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     selectSpecie = []
 
     selectLevel = [
+        { label: '', value: null},
         { label: '1', value: 1 },
         { label: '2', value: 2 },
         { label: '3', value: 3 },
@@ -87,6 +88,7 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     ]
 
     selectSpecieFlow = [
+        { label: '', value: null},
         { label: 'Saida', value: 'S' },
         { label: 'Entrada', value: 'E' }
     ]
@@ -117,11 +119,17 @@ export class ModalNaturezaFinanceiraCadastroComponent extends BaseFormPost imple
     ngOnChanges() {
         if (this.modalVisible) {
             this.dadosDefault.modalNaturezaFinanceira().subscribe(values => {
+                const defaultValue = {label: '-', value: null}
                 this.selectGrupoNatureza = values[0]
+                this.selectGrupoNatureza.unshift(defaultValue)
                 this.selectListaNatureza = values[1]
+                this.selectListaNatureza.unshift(defaultValue)
                 this.selectCostCenter = values[2]
+                this.selectCostCenter.unshift(defaultValue)
                 this.selectProject = values[3]
+                this.selectProject.unshift(defaultValue)
                 this.selectSpecie = values[4]
+                this.selectSpecie.unshift(defaultValue)
 
 
 

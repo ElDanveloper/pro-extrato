@@ -33,6 +33,7 @@ export class AccountRegisterComponent extends BaseFormPost implements OnInit, On
     selectbank = []
     selectCategory = []
     selectTypePro = [
+        {label: '', value: null},
         {label: 'Conta Corrente', value: 1},
         {label: 'Poupança', value: 2},
         {label: 'Aplicação', value: 3},
@@ -52,8 +53,11 @@ export class AccountRegisterComponent extends BaseFormPost implements OnInit, On
 
     ngOnInit() {
         this.dadosDefault.account().subscribe(values => {
+            const defaltValue = {label: '-', value: null}
             this.selectbank = values[0]
+            this.selectbank.unshift(defaltValue)
             this.selectCategory = values[1]
+            this.selectCategory.unshift(defaltValue)
         })
         this.$subscription1 = this.route.paramMap.subscribe(params => {
             this.id = params.get('id')

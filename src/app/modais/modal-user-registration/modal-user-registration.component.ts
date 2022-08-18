@@ -22,6 +22,7 @@ export class ModalUserRegistrationComponent extends BaseFormPost implements OnIn
     @Input() data;
     @Input() modalVisible = false;
     @Output() closeModal = new EventEmitter()
+    @Input() hash = ''
     lista;
     totalItens
     count = opcoesLinhas()
@@ -107,9 +108,10 @@ export class ModalUserRegistrationComponent extends BaseFormPost implements OnIn
         }
     }
 
-    cancelarLocal() {
+    cancelarLocal() {        
         this.closeModal.emit(false)
-        this.form.reset()
+        // this.form.reset()
+        this.dadosDefault.closeModal(this.hash)
         this.primeiraEtapa = true
       }
 

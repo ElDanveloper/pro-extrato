@@ -1,3 +1,5 @@
+import { KeyWordRegistrationComponent } from './pages/key-word/key-word-registration/key-word-registration.component';
+import { KeyWordListComponent } from './pages/key-word/key-word-list/key-word-list.component';
 import { AppNotfoundComponent } from './pages/not-found/app.notfound.component';
 import { AccountRegisterComponent } from './pages/account/account-register/account-register.component';
 import { CompanyRegistrationComponent } from './pages/company/company-registration/company-registration.component';
@@ -53,6 +55,9 @@ const routes: Routes = [
             { path: 'account', component: AccountListComponent },
             { path: 'account-launch/:id', component: AccountLaunchComponent},
             { path: 'account/register/:id', component: AccountRegisterComponent},
+            { path: 'key-word', component: KeyWordListComponent},
+            { path: 'key-word/registration/:id', component: KeyWordRegistrationComponent},
+            
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
 
             {

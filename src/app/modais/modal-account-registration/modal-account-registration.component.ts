@@ -53,8 +53,11 @@ export class ModalAccountRegistrationComponent extends BaseFormPost implements O
 
     ngOnChanges() {          
         this.dadosDefault.account().subscribe(value => {
+            const defaultValue = {label: '-', value: null}
             this.selectbank = value[0]
-            this.selectCategory = value[1]            
+            this.selectbank.unshift(defaultValue)
+            this.selectCategory = value[1]      
+            this.selectCategory.unshift(defaultValue)      
         })
         
     }

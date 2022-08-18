@@ -51,9 +51,13 @@ export class ModalEmpresaCadastroComponent extends BaseFormPost implements OnIni
   ngOnChanges() {
     if (this.modalVisible) {
       this.dadosDefault.empresa().subscribe(values => {
+        const defaultValue = {label: '-', value: null}
         this.empresas = values[0]
+        this.empresas.unshift(defaultValue)
         this.segmento = values[1]
+        this.segmento.unshift(defaultValue)
         this.responsavel = values[2]
+        this.responsavel.unshift(defaultValue)
 
       })
     }

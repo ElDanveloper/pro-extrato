@@ -1,3 +1,4 @@
+import { BaseListSimplesHeaders } from './../../../controller/BaseListSimplesHeaders';
 import { NetworkService } from '../../../services/network.service';
 import { qtdLinhas, getUrlClient } from '../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
@@ -11,7 +12,7 @@ import { Router } from "@angular/router";
     templateUrl: './company-list.component.html',
     styleUrls: ['./company-list.component.css']
 })
-export class CompanyListComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class CompanyListComponent extends BaseListSimplesHeaders implements OnInit, OnDestroy {
 
     @ViewChild('cadastrarEmpresa') cadastrarEmpresa: ElementRef;
 
@@ -57,20 +58,8 @@ export class CompanyListComponent extends BaseListSimples implements OnInit, OnD
 
     }
 
-    // pressionaEnter(e?) {
-    get empresas() {
-        // if (e.key === 'Enter') {
-        return this.lista.filter(v => {
-
-            if (v.nome === null) {
-                v.nome = ''
-            }
-            if (v.cpf_cnpj === null) {
-                v.cpf_cnpj = ''
-            }
-            return v.nome.toLowerCase().includes(this.filtro.toLowerCase()) || v.cpf_cnpj.toString().includes(this.filtro)
-        })
-        // }
+    pressionaEnter(e?) {    
+        if (e.key === 'Enter') this.carregarLista()
     }
 
 

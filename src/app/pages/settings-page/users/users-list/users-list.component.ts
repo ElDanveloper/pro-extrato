@@ -1,3 +1,4 @@
+import { BaseListSimplesHeaders } from './../../../../controller/BaseListSimplesHeaders';
 import { NetworkService } from '../../../../services/network.service';
 import { qtdLinhas, getUrlClient, getUrlUser } from '../../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
@@ -11,7 +12,7 @@ import {Router} from "@angular/router";
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.css']
 })
-export class UsersListComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class UsersListComponent extends BaseListSimplesHeaders implements OnInit, OnDestroy {
 
     @ViewChild('registrationUser') registrationUser: ElementRef;
 

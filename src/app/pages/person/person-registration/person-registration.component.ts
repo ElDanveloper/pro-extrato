@@ -132,9 +132,11 @@ export class PersonRegistrationComponent extends BaseFormPost implements OnInit,
         })
 
         this.$subscription1 = this.dadosDefault.pessoa().subscribe(values => {
+            const defaultValue = {label: '-', value: null}
             // this.selectSituacaoPessoa = values[0];
             // this.selectOperacaoFiscal = values[1];
             this.selectNaturezaFinanceira = values[0];
+            this.selectNaturezaFinanceira.unshift(defaultValue)
             // this.selectVendedor = values[3];
             // this.selectTipoEndereco = values[4];
             // this.selectContaContabil = values[5]
