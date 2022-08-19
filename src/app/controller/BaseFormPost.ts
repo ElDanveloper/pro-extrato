@@ -47,8 +47,8 @@ export class BaseFormPost implements OnDestroy {
 
     }
 
-    public cancelar() {
-        this.sair()
+    public cancelar(value?) {
+        this.sair(value)
     }
 
     public validaFormulario(form) {
@@ -64,17 +64,17 @@ export class BaseFormPost implements OnDestroy {
     }
 
     private sair(value?) {
-        if (this.modal) {
-            if(this.naoBuscar) {
+        if (this.modal) {            
+            if(this.naoBuscar) {                
                 this.dadosSalvos.emit({type: this.entidade, payload: value});
                 this.dadosDefault.closeModal(this.hash);
-            } else {
+            } else {                
                 this.$subscriptionProcurar = this.networkService.buscar(this.entidade, value).subscribe(v => {
                     this.dadosSalvos.emit({type: this.entidade, payload: v});
                     this.dadosDefault.closeModal(this.hash);
                 })
             }
-        } else {
+        } else {            
             this.router.navigate([`/${this.urlCadastro !== undefined ? this.urlCadastro : this.entidade}`])
         }
     }

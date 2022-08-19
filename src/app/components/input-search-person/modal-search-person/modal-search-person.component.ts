@@ -24,6 +24,7 @@ export class ModalSearchPersonComponent implements OnInit {
     value;
     lista = []
     totalItens = 0
+    person;
 
     public hash
     public modal = true;
@@ -92,10 +93,10 @@ export class ModalSearchPersonComponent implements OnInit {
         if(event.key === 'Enter') this.carregarLista();
     }
 
-    changeSelect(e: any) {
+    changeSelect(e: any) {        
         switch (e.type) {
-            case 'pessoa':
-                this.value = e.payload
+            case 'Person':
+                this.value = e.payload[0]                
                 this.processarFormulario()
                 break
         }
