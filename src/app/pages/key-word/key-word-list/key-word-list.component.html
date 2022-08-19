@@ -16,9 +16,10 @@
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista"  (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
         <ng-template pTemplate="header" let-columns>
             <tr>
-            <th [ngStyle]="{width: '40%'}"> Primeira Chave </th>            
+            <th [ngStyle]="{width: '15%'}"> Primeira Chave </th>            
             <th [ngStyle]="{width: '10%'}"> Segunda Chave </th>
             <th [ngStyle]="{width: '10%'}"> Codigo Controle </th>
+            <th [ngStyle]="{width: '20%'}"> Categoria Financeira </th>
             <th [ngStyle]="{width: '5%'}"> Ações </th>
             </tr>
         </ng-template>
@@ -27,6 +28,7 @@
             <td>{{rowData.FirstWord}}</td>
             <td>{{rowData.SecondWord}}</td>
             <td>{{rowData.CodeControl}}</td>
+            <td>{{rowData.FinancialCategoryId.Description}}</td>
             <td><app-opcoes-table [value]="rowData"
                                   [opcoes]="opcoesTable"></app-opcoes-table></td>
             </tr>

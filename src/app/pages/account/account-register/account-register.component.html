@@ -3,8 +3,8 @@
 <ng-container *ngTemplateOutlet="conteudo"></ng-container>
 <ng-template #conteudo>
     <div [formGroup]="form">
-        <app-page-divided>
-            <p-card principal>
+        <!-- <app-page-divided> -->
+            <p-card>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
                         <app-date [label]="'Data Fechamento'" formControlName="DateRegister"></app-date>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </p-card>
-        </app-page-divided>
+        <!-- </app-page-divided> -->
     </div>
 
 </ng-template>

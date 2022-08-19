@@ -22,11 +22,8 @@ export class AppTopbarComponent {
     ngOnInit(): void {     
         this.counter = localStorage.getItem('counter')
 
-        console.log('Toqbar ---> ' + this.counter)
-        
         if(this.counter === 'false') {
-            this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
-            console.log('Empresa ---> ' + this.empresa)
+            this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']            
         }
         // if(JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome'])
         //     this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome']

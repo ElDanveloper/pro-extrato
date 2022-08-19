@@ -118,10 +118,10 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
    
     reconcileSingle() {
         
-        if(this.form.get('IdPessoa').value === ''){
-            this.messageService.add(Util.pushInfoMessage('Favor informar a Pessoa!'))
-            return
-        }
+        // if(this.form.get('IdPessoa').value === ''){
+        //     this.messageService.add(Util.pushInfoMessage('Favor informar a Pessoa!'))
+        //     return
+        // }
 
         if(this.form.get('IdNatureza').value === undefined){
             this.messageService.add(Util.pushInfoMessage('Favor informar a Categoria Financeira!'))
