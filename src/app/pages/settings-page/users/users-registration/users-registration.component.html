@@ -1,49 +1,39 @@
 <ng-container *ngTemplateOutlet="conteudo"></ng-container>
 <ng-template #conteudo>
-    <div [formGroup]="form">      
+    <div [formGroup]="form">
         <p-card>
-            <div class="p-fluid p-formgrid p-grid">                
-                <div class="p-col-3">CPF / CNPJ:<span> {{getCnpjCpf}}</span></div>
-                <div class="p-field p-col-12 p-md-2">
-                    <app-input [label]="'Nome'" formControlName="nome"></app-input>
-                </div>
-                <div class="p-field p-col-12 p-md-2" style="margin-left: 100px;">
-                    <div>
-                        <span>Ativo</span>
-                    </div>
-                    <div>
-                        <p-toggleButton [style]="{'width':'100px'}" [onLabel]="onLabel" [offLabel]="offLabel"
-                            formControlName="active"></p-toggleButton>
-                    </div>
+            <div class="p-fluid p-formgrid p-grid" formGroupName="PessoaForm">
+                <div class="p-col-4">
+                    <app-input-cpf-cnpj [label]="'Cpf'" formControlName="CpfCnpj"></app-input-cpf-cnpj>
                 </div>
             </div>
-            <div class="p-fluid p-formgrid p-grid">               
-                <div class="p-field p-col-12 p-md-6">
-                    <app-input [label]="'Email'" formControlName="email"></app-input>
+            <div class="p-fluid p-formgrid p-grid" formGroupName="PessoaForm">
+                <div class="p-col-8">
+                    <app-input [label]="'Nome'" formControlName="Nome"></app-input>
                 </div>
-                <div class="p-field p-col-12 p-md-6">
-                    <app-input-telefone [label]="'Celular'" formControlName="phone_cell_format"></app-input-telefone>
-                </div>                
+                <div class="p-col-4">
+                    <app-input [label]="'Nome Reduzido'" formControlName="SimpleName"></app-input>
+                </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-4">
-                    <app-input [label]="'Departamento'" formControlName="departamento_nome"></app-input>
+                <div class="p-col-8">
+                    <app-input [label]="'Email'" formControlName="Email"></app-input>
                 </div>
-                <div class="p-field p-col-12 p-md-3">
-                    <app-input [label]="'Perfil'" formControlName="perfil"></app-input>
-                </div>                
-            </div>           
-            &nbsp;            
-                <p-card>                    
-                    <div class="p-fluid p-formgrid p-grid">                        
-                        <div class="p-field p-col-12 p-md-2 p-offset-4">
-                            <button pButton type="button" [label]="'Cancelar'" class="p-button-danger"></button>
-                        </div>
-                        <div class="p-field p-col-12 p-md-2">
-                            <button pButton type="button" [label]="'Salvar'"></button>
-                        </div>
-                    </div>
-                </p-card>            
+                <div class="p-col-4">
+                    <app-select [label]="'Perfil'" formControlName="PerfilUser"></app-select>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-col-4">
+                    <app-input-telefone [label]="'Celular'" formControlName="PhoneCell"></app-input-telefone>
+                </div>
+            </div>
+            <div class="p-offset-7 p-col-5">
+                <app-footer-page *ngIf="!modal" (cancelar)="cancelarLocal()" (confirmar)="processarFormulario()">
+                </app-footer-page>
+            </div>
+            &nbsp;
+
         </p-card>
     </div>
     <!-- </app-page-divided>

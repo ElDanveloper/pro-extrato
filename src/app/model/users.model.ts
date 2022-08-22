@@ -21,7 +21,7 @@ export class Users {
     }
 
     static referencias() {
-        return [{chave: 'DepartmentId', referencia: 'Department'}, {chave: 'PersonId', referencia: 'Person'}, {chave: 'UserIdSupervisor', referencia: 'Users'}]
+        return [{chave: 'DepartmentId', referencia: 'Department'}, {chave: 'PersonId', referencia: 'Pessoa'}, {chave: 'UserIdSupervisor', referencia: 'Users'}]
     }
 
     static expanded() {

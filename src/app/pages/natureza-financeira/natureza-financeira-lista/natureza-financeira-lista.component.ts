@@ -107,8 +107,8 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
         this.networkService.exibirLoader.next(true)
         this.networkService.listarPost('FinancialCategories', body, page, top, Util.expandedQuery(this.expanded())).subscribe((v: any) => {
             this.lista = v.body['value']
-            let pagina = v.headers.get('pages')
-            this.totalItens = Util.toNumber(pagina) * this.top
+            let pagina = v.headers.get('total')
+            this.totalItens = Util.toNumber(pagina)
         }).add(this.networkService.exibirLoader.next(false))
     }
 
@@ -124,6 +124,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
                 this.top = event.rows
                 event.first = 0
             }
+            
             this.loadList((event.first / 10) + 1, this.top)
             this.loading = false
         }

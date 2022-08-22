@@ -31,7 +31,10 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     @ViewChild('selectValue') public selectValue
     public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
     opcoesTable = [
-        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {}},
+        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
+            console.log(JSON.stringify(e))
+            this.router.navigate([`settings/users-registration/${e.id}`])
+        }},
         {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
         {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {}},
     ]

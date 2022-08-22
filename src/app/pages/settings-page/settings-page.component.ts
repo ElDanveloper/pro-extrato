@@ -12,7 +12,7 @@ import {NetworkService} from "../../services/network.service";
 export class SettingsPageComponent implements OnInit {
 
     itemsTabMenu = [
-        {label: 'Principal', icon: 'fa fa-fw fa-id-card'},
+        {label: 'Dados da Contabilidade', icon: 'fa fa-fw fa-id-card'},
         {label: 'Usuarios', icon: 'fa fa-fw fa-users'},
         {label: 'Departamento', icon: 'fa fa-fw fa-bars'},
         {label: 'Faturas', icon: 'fa fa-fw fa-university'},

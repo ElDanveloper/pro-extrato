@@ -74,6 +74,7 @@ const routes: Routes = [
                 path: 'settings', component: SettingsPageComponent, children: [
                     { path: 'main-accountant', component: MainAccountantComponent },
                     { path: 'users-list', component: UsersListComponent },
+                    { path: 'users-registration/:id', component: UsersRegistrationComponent},
                     { path: 'departments-list', component: DepartmentsListComponent },
                     { path: 'invoices-list', component: InvoicesListComponent },                    
                     { path: 'parameters', component: ParametersComponent },

@@ -35,11 +35,13 @@ export class BaseListSimplesHeaders implements OnDestroy {
         this.expanded = expanded
         this.entidade = entidad
         this.top = top
-        this.page
+        this.pagina = page
     }
 
     public lazyLoad(event): void {
-        this.pagina = event.first / event.rows
+        console.log('Event ---> ' )
+        this.pagina = event.first / event.rows + 1
+        
         if (!this.jaPesquisou) return
         this.loading = true
         if (this.lista) {
@@ -47,12 +49,14 @@ export class BaseListSimplesHeaders implements OnDestroy {
                 this.top = event.rows
                 event.first = 0
             }
+            console.log('Pagina ---> ' + this.pagina)
             this.carregarLista()
             this.loading = false
         }
     }
 
-    public carregarLista(): void {
+    public carregarLista(page?): void {
+        console.log('teste carregar ---> ')
         this.loading = false
         this.jaPesquisou = true
         let v;
@@ -65,10 +69,12 @@ export class BaseListSimplesHeaders implements OnDestroy {
         let parametro = ''
 
         if (v !== '') {
+            this.totalItens = null
             parametro = `?Texto=${v}`
         }
-        
+
         if (this.expanded) {
+            this.totalItens = null
             parametro = `?Texto=${v}&${this.expanded}`
         }
 
@@ -76,16 +82,20 @@ export class BaseListSimplesHeaders implements OnDestroy {
     }
 
     public carregarDados(parametros = ''): void {
-        this.$subscriptionListar = this.networkService.getSimplesComHeaders(this.url, `${this.entidade}${parametros}`, this.page, this.top).subscribe((listaSec: any) => {            
+        console.log('Pagina ---> ' + this.pagina)
+        this.$subscriptionListar = this.networkService.getSimplesComHeaders(this.url, `${this.entidade}${parametros}`, this.pagina, this.top).subscribe((listaSec: any) => {            
             if (listaSec[0]) {
                 this.totalItens = listaSec[0] ? listaSec[0]['QtdReg'] : 0;
             } else {
 
-            }            
+            }
             this.lista = listaSec.body.value ? listaSec.body.value : listaSec.body
             // listaSec.value ? listaSec.value : listaSec
-            this.pagina = listaSec.headers.get('pages')
-            this.totalItens = Util.toNumber(this.pagina) * this.top
+            
+                console.log('Teste')
+                this.pagina = listaSec.headers.get('total')
+                this.totalItens = Util.toNumber(this.pagina)
+            
 
         })
 
