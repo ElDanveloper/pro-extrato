@@ -1,36 +1,44 @@
 <ng-template #conteudo>
     <!-- <app-page-divided [formGroup]="form" [padrao]="false"> -->
-        <!-- <div > -->
-            <p-card [formGroup]="form">
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-col-6" style="margin-left: -6px;">                            
-                                <app-input-cpf-cnpj primeiro [label]="'Cpf'" formControlName="CpfCnpj"></app-input-cpf-cnpj>                        
-                    </div>                    
-                </div>
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-col-6">
-                        <app-input [label]="'Nome'" formControlName="Nome"></app-input>
-                    </div>
-                    <div class="p-col-6">
-                        <app-input [label]="'Nome Reduzido'" formControlName="SimpleName"></app-input>
-                    </div>
-                </div>
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-col-6">
-                        <app-input [label]="'Email'" formControlName="Email"></app-input>
-                    </div>
-                    <div class="p-col-6">
-                        <app-select [label]="'Perfil'" [options]="selectType" formControlName="Perfil"></app-select>
-                    </div>
-                </div>
-                <div style="margin-left: 1px;" class="p-fluid p-formgrid p-grid">
-                    <app-input-telefone [label]="'Celular'" formControlName="Celular"></app-input-telefone>
-                </div>
-                <div style="margin-top: 50px;">
-                    <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()"
-                        labelConfirmar="Salvar"></app-footer-page>
-                </div>
-            </p-card>
-        <!-- </div> -->
+    <!-- <div > -->
+    <p-card [formGroup]="form">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-col-6">
+                <app-input-cpf-cnpj [label]="'Cpf'" formControlName="CpfCnpj"></app-input-cpf-cnpj>
+            </div>
+            <div class="p-col-6">
+                <app-input [label]="'Contato'" formControlName="Contato"></app-input>
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-col-6">
+                <app-input [label]="'Nome'" formControlName="Nome"></app-input>
+            </div>
+            <div class="p-col-6" formGroupName="aux">
+                <app-input [label]="'Nome Reduzido'" formControlName="SimpleName"></app-input>
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-col-6">
+                <app-input [label]="'Email'" formControlName="Email"></app-input>
+            </div>
+            <div class="p-col-6" formGroupName="aux">
+                <app-select [label]="'Tipo de Usuário'" [options]="selectType" formControlName="TypeUser" (onValueChange)="selectedType($event)"></app-select>
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-col-6">
+                <app-input-telefone [label]="'Celular'" formControlName="Celular"></app-input-telefone>
+            </div>
+            <div *ngIf="typeAccounting === 'C'" class="p-col-6" formGroupName="aux">
+                <app-select [label]="'Perfil'" [options]="selectPerfil" formControlName="Perfil"></app-select>
+            </div>
+        </div>
+        <div style="margin-top: 50px;">
+            <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()"
+                labelConfirmar="Salvar"></app-footer-page>
+        </div>
+    </p-card>
+    <!-- </div> -->
     <!-- </app-page-divided>  -->
 </ng-template>

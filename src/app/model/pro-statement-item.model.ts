@@ -52,7 +52,8 @@ export class ProStatementItem {
     }
 
     static expanded() {
-        return ['FinancialCategoryId', 'AccountId', 'StatementId', 'StatementItemPartyId', 'StatementId/AccountId', 'StatementId/StatementList']
+        return ['FinancialCategoryId']
+        // , 'AccountId', 'StatementId', 'StatementItemPartyId', 'StatementId/AccountId', 'StatementId/StatementList'
     }
 
 }

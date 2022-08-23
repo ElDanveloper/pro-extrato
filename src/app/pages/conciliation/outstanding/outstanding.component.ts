@@ -11,11 +11,11 @@ import { Util } from "../../../controller/Util";
 import { ConfirmationService, MessageService } from "primeng/api";
 
 @Component({
-    selector: 'app-not-reconciled',
-    templateUrl: './not-reconciled.component.html',
-    styleUrls: ['./not-reconciled.component.css']
+    selector: 'app-outstanding',
+    templateUrl: './outstanding.component.html',
+    styleUrls: ['./outstanding.component.css']
 })
-export class NotReconciledComponent implements OnInit, OnDestroy {
+export class OutstandingComponent implements OnInit, OnDestroy {
 
     $subscription: Subscription;
     $subscriptionContabilNaoConciliado: Subscription;
@@ -103,16 +103,11 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
     private carregarLista(page = 1, top = 10) {
         this.dadosDefault.exibirLoader.next(true)
         // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
-        this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {            
+        this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='P'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {            
             this.totalItens = x.headers.get('total')
             this.lista = x.body['value']
             // this.lista = x
         }).add(() => this.dadosDefault.exibirLoader.next(false));
-    }
-
-    selectedCategory($event){
-        
-
     }
 
     public lazyLoad(event): void {        

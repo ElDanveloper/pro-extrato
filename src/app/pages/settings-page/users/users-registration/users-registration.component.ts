@@ -1,3 +1,4 @@
+import { PessoaContractor } from './../../../../model/pessoa-contractor.model';
 import { Pessoa } from './../../../../model/pessoa.model';
 import { getUrlPro } from './../../../../controller/staticValues';
 import { Contractor } from './../../../../model/contractor.model';
@@ -34,6 +35,18 @@ export class UsersRegistrationComponent extends BaseFormPost implements OnInit, 
     id;
     form: FormGroup;
 
+    selectType = [
+        { label: 'Usuário Empresa', value: 'E' },
+        { label: 'Usuário Contabilidade', value: 'C' },
+      ]
+      selectPerfil = [
+        { label: 'Analista', value: 'A' },
+        { label: 'Supervisor', value: 'S' },
+        { label: 'Gerente', value: 'G' },
+        { label: 'Diretor', value: 'D' },
+      ]
+
+      typeAccounting = 'E'  
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService,
         private viaCep: NgxViacepService) {
@@ -51,10 +64,12 @@ export class UsersRegistrationComponent extends BaseFormPost implements OnInit, 
 
         if (this.id) {
             this.dadosDefault.exibirLoader.next(true)
-            this.$subscription1 = this.networkService.buscar('contractor', this.id, null).subscribe((value: any) => {
-                console.log('Objeto --> ' + JSON.stringify(value))
-                const data = Formulario.prepareValueToForm(new Contractor(), value, Contractor.datas(), Util.expandedQuery(Contractor.expanded()));
+            this.$subscription1 = this.networkService.buscar('Users', this.id, Util.expandedQuery(Users.expanded())).subscribe((value: any) => {                
+                const data = Formulario.prepareValueToForm(new Users(), value, null, Users.relacionamentos(), Users.checkbox());
                 Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
+
+                const dataPessoa = Formulario.prepareValueToForm(new Pessoa(), value.PersonId, Pessoa.datas(), Pessoa.relacionamentos(), Pessoa.checkbox());
+                Object.keys(dataPessoa).forEach(key => this.form.get('PessoaForm').get(key).setValue(dataPessoa[key]))
 
             }).add(() => this.dadosDefault.exibirLoader.next(false))
         } else {
@@ -63,6 +78,10 @@ export class UsersRegistrationComponent extends BaseFormPost implements OnInit, 
 
 
     }
+
+    selectedType(event){
+        this.typeAccounting = event
+      }
 
     processarFormulario() {
         let inv = false
@@ -78,10 +97,11 @@ export class UsersRegistrationComponent extends BaseFormPost implements OnInit, 
 
         const data = Object.assign({}, this.form.value)
 
-        let value: any = { ...Formulario.parseForm(new Contractor(), data, Contractor.referencias(), null, Contractor.datas(), null, Contractor.checkbox()) };
+        let value: any = { ...Formulario.parseForm(new Users(), data, Users.referencias(), null, null, null, Contractor.checkbox()) };
 
         this.dadosDefault.exibirLoader.next(true);
-        this.$subscription3 = this.networkService.salvarPost(getUrlPro(), 'pessoas/pessoaempresa2', value).subscribe((v: any) => {
+        this.$subscription3 = this.networkService.salvarPost(getUrlPro(), 'user', value).subscribe((v: any) => {
+            this.messageService.add(Util.pushSuccessMsg('Usuário alterado com Sucesso!'))
             this.router.navigate(['settings/users-list'])
         }).add(() => this.networkService.exibirLoader.next(false))
 
@@ -97,7 +117,7 @@ export class UsersRegistrationComponent extends BaseFormPost implements OnInit, 
         super.ngOnDestroy()
         if (this.$subscription1) this.$subscription1.unsubscribe()
         if (this.$subscription2) this.$subscription2.unsubscribe()
-        if (this.$subscription3) this.$subscription3.unsubscribe()        
+        if (this.$subscription3) this.$subscription3.unsubscribe()
     }
 
 }

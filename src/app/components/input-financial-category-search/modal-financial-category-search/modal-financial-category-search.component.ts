@@ -105,8 +105,6 @@ export class ModalFinancialCategorySearchComponent implements OnInit, OnChanges,
     }
 
     carregarLista(page?, top?) {  
-        console.log('Top ---> ' + top)
-        
         let v;
         try {
             v = this.inputPesquisa.nativeElement.value

@@ -9,14 +9,22 @@
     </div>
 </div>
 <div class="p-col p-fluid">
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" [rows]="10" [totalRecords]="extratoContaBanco.length" [value]="extratoContaBanco"
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="extratoContaBanco" (onLazyLoad)="lazyLoad($event)" [lazy]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">    
         [rowsPerPageOptions]="opcoesLinhas">
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 15%;">Data do Movemto</th>
-                <th style="width: 50%;">Histórico</th>
-                <th style="width: 10%;">Valor</th>
-                <th style="width: 10%;">Conciliado</th>
+                <th style="width: 12%;" pSortableColumn="DateMovement">Data do Movemto
+                    <p-sortIcon field="DateMovement"></p-sortIcon>
+                </th>
+                <th style="width: 50%;" pSortableColumn="Historic">Histórico
+                    <p-sortIcon field="Historic"></p-sortIcon>
+                </th>
+                <th style="width: 10%;" pSortableColumn="Amount">Valor
+                    <p-sortIcon field="Amount"></p-sortIcon>
+                </th>
+                <th style="width: 10%;" pSortableColumn="Reconciled">Conciliado
+                    <p-sortIcon field="Reconciled"></p-sortIcon>
+                </th>
                 <th style="width: 5%;"></th>
             </tr>
         </ng-template>

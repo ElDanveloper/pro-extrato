@@ -39,9 +39,8 @@ export class BaseListSimplesHeaders implements OnDestroy {
     }
 
     public lazyLoad(event): void {
-        console.log('Event ---> ' )
         this.pagina = event.first / event.rows + 1
-        
+
         if (!this.jaPesquisou) return
         this.loading = true
         if (this.lista) {
@@ -49,14 +48,12 @@ export class BaseListSimplesHeaders implements OnDestroy {
                 this.top = event.rows
                 event.first = 0
             }
-            console.log('Pagina ---> ' + this.pagina)
             this.carregarLista()
             this.loading = false
         }
     }
 
     public carregarLista(page?): void {
-        console.log('teste carregar ---> ')
         this.loading = false
         this.jaPesquisou = true
         let v;
@@ -82,20 +79,21 @@ export class BaseListSimplesHeaders implements OnDestroy {
     }
 
     public carregarDados(parametros = ''): void {
-        console.log('Pagina ---> ' + this.pagina)
-        this.$subscriptionListar = this.networkService.getSimplesComHeaders(this.url, `${this.entidade}${parametros}`, this.pagina, this.top).subscribe((listaSec: any) => {            
+        this.$subscriptionListar = this.networkService.getSimplesComHeaders(this.url, `${this.entidade}${parametros}`, this.pagina, this.top).subscribe((listaSec: any) => {
             if (listaSec[0]) {
                 this.totalItens = listaSec[0] ? listaSec[0]['QtdReg'] : 0;
             } else {
 
             }
             this.lista = listaSec.body.value ? listaSec.body.value : listaSec.body
-            // listaSec.value ? listaSec.value : listaSec
-            
-                console.log('Teste')
-                this.pagina = listaSec.headers.get('total')
+            // listaSec.value ? listaSec.value : listaSec                            
+            this.pagina = listaSec.headers.get('total')            
+            if (this.pagina === null && this.totalItens === 0) {
+                this.totalItens = this.lista.length
+            } else {
                 this.totalItens = Util.toNumber(this.pagina)
-            
+            }
+
 
         })
 

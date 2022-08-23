@@ -1,3 +1,4 @@
+import { Util } from './../../../controller/Util';
 import { BaseListSimplesHeaders } from './../../../controller/BaseListSimplesHeaders';
 import { getUrlPro } from './../../../controller/staticValues';
 import { BaseListSimples } from '../../../controller/BaseListSimples';
@@ -38,7 +39,17 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
             }
         },
         { label: 'Excluir', icon: 'fa fa-close', command: (e) => { } },
-        { label: 'Atualizar Extrato', icon: 'fa fa-refresh', command: (e) => { } },
+        { label: 'Atualizar Extrato', icon: 'fa fa-refresh', command: (e) => {
+            if(e.ItemId === null) {
+                this.messageService.add(Util.pushErrorMsg('O ID do Item está NULO... Verifique com o suporte.'))
+                return
+            }            
+            this.networkService.exibirLoader.next(true)
+            this.networkService.getSimples(getUrlPro(), `GetTransactions?ItemId=${e.ItemId}`).subscribe(v => {
+                this.messageService.add(Util.pushSuccessMsg('Extrato Atualizado com Sucesso!'))
+                this.carregarLista()
+            }).add(this.networkService.exibirLoader.next(false))
+         } },
     ]
 
     filtro = ''
@@ -49,7 +60,7 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
     }
 
     ngOnInit() {
-        this.carregarDados()
+        this.carregarLista()
     }
 
     pressionaEnter(e) {

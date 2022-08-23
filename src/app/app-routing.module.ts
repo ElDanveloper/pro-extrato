@@ -1,3 +1,4 @@
+import { OutstandingComponent } from './pages/conciliation/outstanding/outstanding.component';
 import { KeyWordRegistrationComponent } from './pages/key-word/key-word-registration/key-word-registration.component';
 import { KeyWordListComponent } from './pages/key-word/key-word-list/key-word-list.component';
 import { AppNotfoundComponent } from './pages/not-found/app.notfound.component';
@@ -65,7 +66,8 @@ const routes: Routes = [
                     { path: 'extract', component: ExtractComponent },
                     { path: 'reconciled', component: ReconciledComponent },
                     { path: 'conciliator', component: conciliatorComponent },
-                    { path: 'not-reconciled', component: NotReconciledComponent },                    
+                    { path: 'not-reconciled', component: NotReconciledComponent }, 
+                    { path: 'outstanding', component: OutstandingComponent},                   
                     {path: '', pathMatch: 'full', redirectTo: 'extract'},
                 ]
             },

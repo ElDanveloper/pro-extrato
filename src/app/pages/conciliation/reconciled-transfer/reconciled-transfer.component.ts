@@ -86,13 +86,16 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
 
             this.pessoa = this.data.PersonId
             if (this.pessoa) {
-                this.form.get('IdNatureza').setValue(this.pessoa.CodNatFinanceira)
-                this.form.get('IdPessoa').setValue(this.data.IdPessoa)
+                // this.networkService.buscar('getPersonClient',`?Texto=Id eq '${this.pessoa}'`).subscribe(v => {
+                //     this.form.get('IdPessoa').setValue(v)
+                // })
+                // this.form.get('IdNatureza').setValue(this.pessoa.CodNatFinanceira)
+                // this.form.get('IdPessoa').setValue(this.data.IdPessoa)
             }
 
             if (this.data.FinancialCategoryId) {
                 const index = this.selectNaturezaFinanceira.findIndex(x => x.value == this.data.FinancialCategoryId.Id)
-                this.form.get('IdNatureza').setValue(this.data.FinancialCategoryId.Id)
+                this.form.get('IdNatureza').setValue(this.data.FinancialCategoryId)
                 if (index > 0) {
                     this.naturezaFinanceira = this.data.FinancialCategoryId
                     this.form.get('IdNaturezaInput').setValue(this.form.get('IdNatureza').value + this.naturezaFinanceira.Historico)

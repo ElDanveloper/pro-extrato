@@ -1,3 +1,4 @@
+import { OutstandingComponent } from './pages/conciliation/outstanding/outstanding.component';
 import { KeyWordRegistrationComponent } from './pages/key-word/key-word-registration/key-word-registration.component';
 import { KeyWordListComponent } from './pages/key-word/key-word-list/key-word-list.component';
 import { AppNotfoundComponent } from './pages/not-found/app.notfound.component';
@@ -135,6 +136,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         AppNotfoundComponent,
         KeyWordListComponent,
         KeyWordRegistrationComponent,
+        OutstandingComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

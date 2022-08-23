@@ -1,3 +1,4 @@
+import { qtdLinhas } from './../../../controller/staticValues';
 import { opcoesLinhas, getUrlPro } from '../../../controller/staticValues';
 import { DadosDefaultService } from '../../../services/dados-default.service';
 import {Component, OnDestroy, OnInit} from '@angular/core';
@@ -19,10 +20,16 @@ export class ExtractComponent implements OnInit, OnDestroy {
     $subscriptionExtratobanco: Subscription;
     extratoContaBanco = []
     opcoesLinhas = opcoesLinhas()
+    qtdLinhas = qtdLinhas()
 
     id
     dataInicial
     dataFinal
+
+    public loading: boolean
+    public top: number = 7
+
+    totalItens;
 
     itemsRow = [
         {
@@ -65,12 +72,27 @@ export class ExtractComponent implements OnInit, OnDestroy {
     },500)
   }
 
-  carregaDados() {
+  carregaDados(page = 1, top = 10) {
       this.networkService.exibirLoader.next(true)
-      this.$subscriptionExtratobanco = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}`).pipe(map((x: any) => x.value)).subscribe(x => {
-          this.extratoContaBanco = x
+      this.$subscriptionExtratobanco = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}`, page, top).subscribe((x: any) => {        
+          this.totalItens = x.headers.get('total')          
+          this.extratoContaBanco = x.body['value']
       }).add(() => this.networkService.exibirLoader.next(false));
   }
+
+  public lazyLoad(event): void {        
+    // if (!this.jaPesquisou) return
+    this.loading = true
+    if (this.extratoContaBanco) {
+        if (this.top !== event.rows && event.rows !== undefined) {
+            this.top = event.rows
+            event.first = 0
+        }
+        
+        this.carregaDados((event.first / 10) + 1, 7)
+        this.loading = false
+    }
+}
 
     ngOnDestroy(): void {
         if(this.$subscription) this.$subscription.unsubscribe();

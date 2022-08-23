@@ -46,7 +46,7 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     }
 
     ngOnInit() {        
-        this.carregarDados()
+        this.carregarLista()
     }
 
     pressionaEnter(e) {

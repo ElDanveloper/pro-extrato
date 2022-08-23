@@ -7,25 +7,28 @@
                     <app-input-cpf-cnpj [label]="'Cpf'" formControlName="CpfCnpj"></app-input-cpf-cnpj>
                 </div>
             </div>
-            <div class="p-fluid p-formgrid p-grid" formGroupName="PessoaForm">
-                <div class="p-col-8">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-col-6" formGroupName="PessoaForm">
                     <app-input [label]="'Nome'" formControlName="Nome"></app-input>
                 </div>
-                <div class="p-col-4">
+                <div class="p-col-6">
                     <app-input [label]="'Nome Reduzido'" formControlName="SimpleName"></app-input>
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-col-8">
+                <div class="p-col-6">
                     <app-input [label]="'Email'" formControlName="Email"></app-input>
                 </div>
-                <div class="p-col-4">
-                    <app-select [label]="'Perfil'" formControlName="PerfilUser"></app-select>
+                <div class="p-col-6">
+                    <app-select [label]="'Tipo de Usuário'" [options]="selectType" formControlName="TypeUser" (onValueChange)="selectedType($event)"></app-select>
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-col-4">
-                    <app-input-telefone [label]="'Celular'" formControlName="PhoneCell"></app-input-telefone>
+                <div class="p-col-6">
+                    <app-input-telefone [label]="'Celular'" formControlName="Celular"></app-input-telefone>
+                </div>
+                <div *ngIf="typeAccounting === 'C'" class="p-col-6" formGroupName="aux">
+                    <app-select [label]="'Perfil'" [options]="selectPerfil" formControlName="Perfil"></app-select>
                 </div>
             </div>
             <div class="p-offset-7 p-col-5">

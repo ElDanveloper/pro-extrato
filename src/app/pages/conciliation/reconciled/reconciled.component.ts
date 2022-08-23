@@ -23,6 +23,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
     opcoesLinhas = opcoesLinhas()
 
     lista = []
+    selected = [];
 
     id
     dataInicial
@@ -62,7 +63,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
         this.carregarLista()
     }
 
-    carregarLista() {
+    carregarLista(page = 1, top = 10) {
         this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
             const param = parametros.params
             this.id = param.id
@@ -71,7 +72,8 @@ export class ReconciledComponent implements OnInit, OnDestroy {
         })
 
         this.networkService.exibirLoader.next(true)
-        this.$subscriptionConciliados = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'${Util.expandedQuery(ProStatementItem.expanded(), true)}`).pipe(map((x: any) => x.value)).subscribe(x => {
+        // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
+        this.$subscriptionConciliados = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`, page, top).pipe(map((x: any) => x.value)).subscribe(x => {
             this.lista = x
         }).add(() => this.networkService.exibirLoader.next(false));
     }

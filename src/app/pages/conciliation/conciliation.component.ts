@@ -16,6 +16,7 @@ export class ConciliationComponent implements OnInit {
         {label: 'Conciliados', icon: 'fa fa-fw fa-bar-chart'},
         {label: 'Conciliador', icon: 'fa fa-fw fa-calendar'},
         {label: 'Não Conciliados', icon: 'fa fa-fw fa-calendar'},
+        {label: 'Pendentes', icon: 'fa fa-fw fa-exclamation'},
         {label: 'Lançamentos', icon: 'fa fa-reply'},
     ];
 
@@ -66,9 +67,12 @@ export class ConciliationComponent implements OnInit {
         } else if (v.toString().match(/\/not-reconciled$/)) {
             this.currentIndex = 3
             this.activeItem = this.itemsTabMenu[3];
-        } else if (v.toString().match(/\/account-launch$/)) {
+        } else if (v.toString().match(/\/outstanding$/)) {
             this.currentIndex = 4
             this.activeItem = this.itemsTabMenu[4];
+        } else if (v.toString().match(/\/account-launch$/)) {
+            this.currentIndex = 5
+            this.activeItem = this.itemsTabMenu[5];
         }
     }
 
@@ -80,7 +84,8 @@ export class ConciliationComponent implements OnInit {
         if (this.currentIndex === 1) r = 'reconciled'
         if (this.currentIndex === 2) r = 'conciliator'
         if (this.currentIndex === 3) r = 'not-reconciled'
-        if (this.currentIndex === 4) r = 'account-launch'
+        if (this.currentIndex === 4) r = 'outstanding'
+        if (this.currentIndex === 5) r = 'account-launch'
 
         if (r === 'account-launch'){
              this.router.navigate([`${r}/${this.id}`])

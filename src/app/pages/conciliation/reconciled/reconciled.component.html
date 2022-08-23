@@ -5,31 +5,49 @@
     <div class="p-col-2" style="margin-bottom: 10px;">
         <button pButton label="Processar Conciliação" (click)="processConciliation()"></button>
     </div>
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="lista" [paginator]="true" [rows]="10" [totalRecords]="lista.length" [rowsPerPageOptions]="opcoesLinhas">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
+        [(selection)]="selected" [value]="lista" [paginator]="true" [rows]="10" [totalRecords]="lista.length"
+        [rowsPerPageOptions]="opcoesLinhas">
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th style="width: 3%">&nbsp;</th>
-                <th style="width: 10%;">Data</th>
-                <th style="width: 20%;">Histórico</th>
-                <th style="width: 8%;">Documento</th>
-                <th style="width: 5%;">Valor</th>
-                <th style="width: 3%;">Tipo</th>
-                <th style="width: 14%;">Pessoa</th>
-                <th style="width: 10%;">Natureza</th>
-                <th style="width: 4%;"></th>
+                <th style="width: 2%">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th style="width: 6%;" pSortableColumn="DateMovement">Data
+                    <p-sortIcon field="DateMovement"></p-sortIcon>
+                </th>
+                <th style="width: 15%;" pSortableColumn="Historic">Histórico
+                    <p-sortIcon field="Historic"></p-sortIcon>
+                </th>
+                <th style="width: 8%;" pSortableColumn="Document">Documento
+                    <p-sortIcon field="Document"></p-sortIcon>
+                </th>
+                <th style="width: 6%;" pSortableColumn="Amount">Valor
+                    <p-sortIcon field="Amount"></p-sortIcon>
+                </th>
+                <th style="width: 4%;" pSortableColumn="ReconciledType">Tipo
+                    <p-sortIcon field="ReconciledType"></p-sortIcon>
+                </th>
+                <th style="width: 14%;" pSortableColumn="PersonName">Pessoa
+                    <p-sortIcon field="PersonName"></p-sortIcon>
+                </th>
+                <th style="width: 14%;" pSortableColumn="Category">Natureza
+                    <p-sortIcon field="Category"></p-sortIcon>
+                </th>
+                <th style="width: 2%;"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr [pSelectableRow]="rowData">
                 <td>
-                    <p-tableCheckbox></p-tableCheckbox>
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
                 </td>
                 <td appAlignCenter>{{rowData.DateMovement | date}}</td>
                 <td>{{rowData.Historic}}</td>
-                <td>{{''}}</td>
+                <td>{{rowData.Document}}</td>
                 <td appAlinharDireita [ngClass]="colorValue(rowData.Amount)">{{rowData.Amount | virgulaPipe}}</td>
                 <td>{{rowData.ReconciledType}}</td>
-                <td>{{rowData.PersonId}}</td>
+                <td>{{rowData.PersonName}}</td>
                 <td>{{rowData.Category}}</td>
                 <td>
                     <app-opcoes-table [value]="rowData" [opcoes]="itemsRowConciliacao"></app-opcoes-table>
