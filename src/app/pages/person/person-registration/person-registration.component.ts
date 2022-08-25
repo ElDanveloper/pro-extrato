@@ -368,8 +368,8 @@ export class PersonRegistrationComponent extends BaseFormPost implements OnInit,
             cep = cep.join('');
             if (cep.length === 8) {
                 this.viaCep.buscarPorCep(cep)
-                    .then((endereco: Endereco) => {
-                        if (event === true) {
+                    .then((endereco: Endereco) => {                        
+                        if (event === true) {                            
                             this.form.get('PessoaForm').get('CodigoIbge').setValue(endereco.ibge)
                             return
                         }                        
@@ -377,9 +377,10 @@ export class PersonRegistrationComponent extends BaseFormPost implements OnInit,
                         this.form.get('PessoaForm').get('Complemento').setValue(endereco.complemento);
                         this.form.get('PessoaForm').get('Bairro').setValue(endereco.bairro);
                         this.form.get('PessoaForm').get('Cidade').setValue(endereco.localidade);
-                        this.form.get('PessoaForm').get('UF').setValue(endereco.uf)
+                        this.form.get('PessoaForm').get('Uf').setValue(endereco.uf)
                         this.form.get('PessoaForm').get('CodigoIbge').setValue(endereco.ibge)
-                    }).catch((error: ErroCep) => {
+                        
+                    }).catch((error: ErroCep) => {                        
                     this.messageService.add({severity: 'error', summary: 'Cep Nao Encontrado'})
                 })
             }

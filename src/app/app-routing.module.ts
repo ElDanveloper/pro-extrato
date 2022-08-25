@@ -1,3 +1,4 @@
+import { MemorizedHistoriesListComponent } from './pages/memorized-histories/memorized-histories-list/memorized-histories-list.component';
 import { OutstandingComponent } from './pages/conciliation/outstanding/outstanding.component';
 import { KeyWordRegistrationComponent } from './pages/key-word/key-word-registration/key-word-registration.component';
 import { KeyWordListComponent } from './pages/key-word/key-word-list/key-word-list.component';
@@ -58,6 +59,8 @@ const routes: Routes = [
             { path: 'account/register/:id', component: AccountRegisterComponent},
             { path: 'key-word', component: KeyWordListComponent},
             { path: 'key-word/registration/:id', component: KeyWordRegistrationComponent},
+            { path: 'memorized-histories', component: MemorizedHistoriesListComponent},
+            
             
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
 

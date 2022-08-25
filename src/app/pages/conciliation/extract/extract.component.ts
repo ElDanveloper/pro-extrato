@@ -25,7 +25,7 @@ export class ExtractComponent implements OnInit, OnDestroy {
     id
     dataInicial
     dataFinal
-
+    jaPesquisou = false
     public loading: boolean
     public top: number = 7
 
@@ -61,15 +61,16 @@ export class ExtractComponent implements OnInit, OnDestroy {
   constructor(private networkService: NetworkService, private route: ActivatedRoute, private router: Router, private messageService: MessageService, public confirmationService: ConfirmationService, private dadosDefault: DadosDefaultService) { }
 
   ngOnInit() {
-    setTimeout(() => {
+   
       this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
           const param = parametros.params
           this.id = param.id
           this.dataInicial = param.dataInicial
-          this.dataFinal = param.dataFinal
-            this.carregaDados()
+          this.dataFinal = param.dataFinal            
       })
-    },500)
+    //   setTimeout(() => {
+        this.carregaDados()
+    // },500)
   }
 
   carregaDados(page = 1, top = 10) {
@@ -77,11 +78,12 @@ export class ExtractComponent implements OnInit, OnDestroy {
       this.$subscriptionExtratobanco = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}`, page, top).subscribe((x: any) => {        
           this.totalItens = x.headers.get('total')          
           this.extratoContaBanco = x.body['value']
+          this.jaPesquisou = true
       }).add(() => this.networkService.exibirLoader.next(false));
   }
 
   public lazyLoad(event): void {        
-    // if (!this.jaPesquisou) return
+    if (!this.jaPesquisou) return;
     this.loading = true
     if (this.extratoContaBanco) {
         if (this.top !== event.rows && event.rows !== undefined) {

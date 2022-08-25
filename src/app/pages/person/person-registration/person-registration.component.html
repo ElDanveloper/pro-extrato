@@ -54,7 +54,7 @@
                         &nbsp;
     
                         <!-- endereco -->
-                        <div class="p-field p-col-12 p-md-4">
+                        <div class="p-field p-col-12 p-md-4" style="margin-left: 5px;">
                             <div>Cep</div>
                             <div style="display: flex;justify-content: flex-start;">
                                 <div class="p-col-10" style="padding-right: 0px;padding-left: 0px;">
@@ -106,8 +106,9 @@
                         <div class="p-field p-col-12 p-md-4">
                             <app-input-telefone label="Telefone celular" formControlName="Celular"></app-input-telefone>
                         </div>
-                        <div class="p-field p-col-4 p-md-4" >
-                            <app-select [options]="selectNaturezaFinanceira" [icon]="true" (onValueChange)="selecionouNatureza($event)" formControlName="NatureFinancialId"></app-select>
+                        <div class="p-field p-col-8 p-md-8" >
+                            <app-input-financial-category-search [label]="'Categoria Financeira'" formControlName="NatureFinancialId"></app-input-financial-category-search>
+                            <!-- <app-select [options]="selectNaturezaFinanceira" [icon]="true" (onValueChange)="selecionouNatureza($event)" formControlName="NatureFinancialId"></app-select> -->
                         </div>
                     </div>
                     &nbsp;

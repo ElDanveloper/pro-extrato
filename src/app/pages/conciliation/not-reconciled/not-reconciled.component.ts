@@ -1,3 +1,4 @@
+import { Category } from './../../../model/category.model';
 import { qtdLinhas } from './../../../controller/staticValues';
 import { ProStatementItem } from './../../../model/pro-statement-item.model';
 import { opcoesLinhas, getUrlPro } from '../../../controller/staticValues';
@@ -35,6 +36,9 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
     totalItens;
 
     lista = []
+    selected = [];
+    filterCategory = false
+    category: any;
 
     itemsRowConciliacao = [
         // {
@@ -101,21 +105,30 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
     }
 
     private carregarLista(page = 1, top = 10) {
-        this.dadosDefault.exibirLoader.next(true)
-        // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
-        this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {            
-            this.totalItens = x.headers.get('total')
-            this.lista = x.body['value']
-            // this.lista = x
-        }).add(() => this.dadosDefault.exibirLoader.next(false));
+        if (this.filterCategory) {
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'&FinancialId=${this.category.Id}${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
+                this.totalItens = x.headers.get('total')
+                this.lista = x.body['value']
+            }).add(() => this.dadosDefault.exibirLoader.next(false));
+        } else {
+            this.dadosDefault.exibirLoader.next(true)
+            // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
+            this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
+                this.totalItens = x.headers.get('total')
+                this.lista = x.body['value']
+                // this.lista = x
+            }).add(() => this.dadosDefault.exibirLoader.next(false));
+        }
     }
 
-    selectedCategory($event){
-        
-
+    selectedCategory(event) {
+        this.category = event
+        this.filterCategory = true
+        this.carregarLista()
     }
 
-    public lazyLoad(event): void {        
+    public lazyLoad(event): void {
         // if (!this.jaPesquisou) return
         this.loading = true
         if (this.lista) {
@@ -123,7 +136,7 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
                 this.top = event.rows
                 event.first = 0
             }
-            
+
             this.carregarLista((event.first / 10) + 1, 7)
             this.loading = false
         }

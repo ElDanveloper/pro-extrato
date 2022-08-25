@@ -1,3 +1,6 @@
+import { Formulario } from 'src/app/controller/Formulario';
+import { ProParameter } from './../../../model/pro-parameter.model';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DadosDefaultService } from './../../../services/dados-default.service';
 import { NetworkService } from './../../../services/network.service';
@@ -14,13 +17,21 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 
 export class ParametersComponent extends BaseFormPost implements OnInit, OnDestroy {
 
+    selectNatureza = []
+    form: FormGroup;
     
 
-    constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, public messageService: MessageService,) {
-        super(networkService, dadosDefault, router, 'company', messageService);        
+    constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, public messageService: MessageService,private fb: FormBuilder) {
+        super(networkService, dadosDefault, router, 'ProParameter', messageService);     
+        this.form = Formulario.createForm(new ProParameter(), this.fb);   
     }
 
     ngOnInit() {
+        this.dadosDefault.parameter().subscribe(value => {
+            const defaultValue = {label: '-', value: null}
+            this.selectNatureza = value[0]
+            this.selectNatureza.unshift(defaultValue)
+        })
 
     }
 

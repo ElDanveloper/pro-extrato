@@ -1,8 +1,8 @@
 <ng-container *ngTemplateOutlet="conteudo"></ng-container>
 <ng-template #conteudo>
-    <div>      
-        <p-card>
-            <div class="p-fluid p-formgrid p-grid">  
+    <div>
+        <p-card [formGroup]="form">
+            <div class="p-fluid p-formgrid p-grid">
                 <div class="p-col-4">
                     <app-input [label]="'Ultimo Disparo WhatsApp'"></app-input>
                 </div>
@@ -10,12 +10,115 @@
                     <app-input [label]="'Ultimo Disparo E-mail'"></app-input>
                 </div>
             </div>
-
+            &nbsp;
+            <app-painel title="Despesas Financeira">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-col-6">
+                        <app-select [label]="'Tarifa Bancaria'" [options]="selectNatureza" formControlName="CodeCatTaxBank"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Despesas de Juros'" [options]="selectNatureza" formControlName="CodeCatInterestExpense"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Emprestimos'" [options]="selectNatureza" formControlName="CodeCatLoan"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Despesa de Cobrança'" [options]="selectNatureza" formControlName="CodeCatChargeExpense"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Saque'" [options]="selectNatureza" formControlName="CodeCatWithdraw"></app-select>
+                    </div>
+                </div>
+            </app-painel>
+            &nbsp;
+            <app-painel title="Despesas Administrativas">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-col-6">
+                        <app-select [label]="'Energia'" [options]="selectNatureza" formControlName="CodeCatEnergy"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Comunicação'" [options]="selectNatureza" formControlName="CodeCatCommunication"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Conta de Água'" [options]="selectNatureza" formControlName="CodeCatWaterBill"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Publicidade'" [options]="selectNatureza" formControlName="CodeCatPublicity"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Consórcio'" [options]="selectNatureza" formControlName="CodeCatConsortium"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Combustivel'" [options]="selectNatureza" formControlName="CodeCatFuel"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Doações'" [options]="selectNatureza" formControlName="CodeCatDonation"></app-select>
+                    </div>
+                </div>
+            </app-painel>
+            &nbsp;
+            <app-painel title="Despesas Tributarias">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-col-6">
+                        <app-select [label]="'Simples Nacional'" [options]="selectNatureza" formControlName="CodeCatSimplesNacional"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Tributos Federais'" [options]="selectNatureza" formControlName="CodeCatDARF"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'ICMS'" [options]="selectNatureza" formControlName="CodeCatICMS"></app-select>
+                    </div>                  
+                </div>
+            </app-painel>
+            &nbsp;
+            <app-painel title="Despesas de Pessoal">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-col-6">
+                        <app-select [label]="'Categoria para Salarios'" [options]="selectNatureza" formControlName="CodeCatSalary"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'INSS'" [options]="selectNatureza" formControlName="CodeCatINSS"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'FGTS'" [options]="selectNatureza" formControlName="CodeCatFGTS"></app-select>
+                    </div>                  
+                </div>
+            </app-painel>
+            &nbsp;
+            <app-painel title="Receitas">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-col-6">
+                        <app-select [label]="'PIX'" [options]="selectNatureza" formControlName="CodeCatIncomePix"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Boleto'" [options]="selectNatureza" formControlName="CodeCatIncome"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Seguro'" [options]="selectNatureza" formControlName="CodeCatSafeExpense"></app-select>
+                    </div>                  
+                    <div class="p-col-6">
+                        <app-select [label]="'Cartão de Crédito'" [options]="selectNatureza" formControlName="CodeCatIncomeCreditCard"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Cartão de Debito'" [options]="selectNatureza" formControlName="CodeCatIncomeDebitCard"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Cartão Alimentação'" [options]="selectNatureza" formControlName="CodeCatIncomeFoodCard"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Recebimento - Receita Dinheiro'" [options]="selectNatureza" formControlName="CodeCatIncome"></app-select>
+                    </div>
+                    <div class="p-col-6">
+                        <app-select [label]="'Receita de Juros'" [options]="selectNatureza" formControlName="CodeCatInteresIncome"></app-select>
+                    </div>
+                </div>
+            </app-painel>
+            &nbsp;
             <div style="margin-top: 50px;">
                 <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()"
                     labelConfirmar="Gravar"></app-footer-page>
             </div>
-            
+
         </p-card>
     </div>
 </ng-template>

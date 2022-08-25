@@ -1,6 +1,6 @@
 <div class="p-fluid p-formgrid p-grid">
     <div class="p-col-4" style="margin-bottom: 10px;">
-        <app-input-financial-category-search [label]="'Categoria'" (onValueChange)="selectedCategory($event)"></app-input-financial-category-search>
+        <app-input-financial-category-search [label]="'Categoria'" (valorSelecionado)="selectedCategory($event)"></app-input-financial-category-search>
     </div>
     <div class="p-col-2" style="margin-top: 20px;">
         <button pButton label="Conciliar os Selecionados"></button>
@@ -11,9 +11,12 @@
     <div class="p-col-2" style="margin-top: 20px;">
         <button pButton label="Processar Conciliação" (click)="processConciliation()"></button>
     </div>
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="lista" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" (onLazyLoad)="lazyLoad($event)" [lazy]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"  [(selection)]="selected" [value]="lista" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" (onLazyLoad)="lazyLoad($event)" [lazy]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
     <ng-template pTemplate="header" let-columns>
         <tr>
+            <th style="width: 2%">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
             <th style="width: 5%;" pSortableColumn="DateMovement">Data
                 <p-sortIcon field="DateMovement"></p-sortIcon>
             </th>
@@ -40,6 +43,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr [pSelectableRow]="rowData">
+            <td>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
             <td appAlignCenter>{{rowData.DateMovement | date}}</td>
             <td>{{rowData.Historic}}</td>
             <td>{{rowData.Document}}</td>

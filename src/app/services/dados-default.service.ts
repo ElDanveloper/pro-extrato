@@ -140,6 +140,11 @@ export class DadosDefaultService {
 
         return forkJoin([bank, natureza])
     }
+
+    public parameter() {
+        let natureza = this.http.get(`${getUrlPro()}/financialCategory?$filter=level lt 3&$orderby=classificate`).pipe(map((res: Response) => res['value'].map(v => ({label: v.Classificate + ' - ' + Util.up(v.Description), value: v.CodeControl}))))
+        return forkJoin([natureza])
+    }
     
 
     private errorHandlerDefaultValues(error: HttpErrorResponse) {

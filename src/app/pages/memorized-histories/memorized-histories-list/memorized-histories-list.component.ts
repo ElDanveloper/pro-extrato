@@ -1,20 +1,20 @@
-import { ProKeyWord } from './../../../model/pro-key-word.model';
+import { ProKeyWord } from '../../../model/pro-key-word.model';
 import { Util } from 'src/app/controller/Util';
-import { NetworkService } from './../../../services/network.service';
-import { qtdLinhas, getUrlPro } from './../../../controller/staticValues';
+import { NetworkService } from '../../../services/network.service';
+import { qtdLinhas, getUrlPro } from '../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import { Router } from '@angular/router';
 import { MessageService, ConfirmationService, SelectItem } from 'primeng/api';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 
 @Component({
-  selector: 'app-key-word-list',
-  templateUrl: './key-word-list.component.html',
-  styleUrls: ['./key-word-list.component.css']
+  selector: 'app-memorized-histories-list',
+  templateUrl: './memorized-histories-list.component.html',
+  styleUrls: ['./memorized-histories-list.component.css']
 })
-export class KeyWordListComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class MemorizedHistoriesListComponent extends BaseListSimples implements OnInit, OnDestroy {
 
-    @ViewChild('registrationKeyWord') registrationKeyWord: ElementRef;
+    @ViewChild('registrationMemorize') registrationMemorize: ElementRef;
    
     jaPesquisou = false
     pagina = 0;
@@ -24,22 +24,19 @@ export class KeyWordListComponent extends BaseListSimples implements OnInit, OnD
     qtdLinhas = qtdLinhas()
     public totalItens: number
 
-    opcoesTable = [
-        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {            
-            this.router.navigate([`/key-word/registration/${e.Id}`])
-        }},
+    opcoesTable = [        
         {
             label: 'Excluir', icon: 'fa fa-close', command: (e) => {}
         }
     ]    
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'ProKeyWord', Util.expandedQuery(ProKeyWord.expanded(), '&'), 'FirstWord', 'FirstWord')
+        super(networkService, getUrlPro(), '', Util.expandedQuery(ProKeyWord.expanded(), '&'), 'FirstWord', 'FirstWord')
         
     }
 
     ngOnInit() {        
-        this.carregarLista()
+        // this.carregarLista()
     }
 
     pressionaEnter(e) {
@@ -47,7 +44,7 @@ export class KeyWordListComponent extends BaseListSimples implements OnInit, OnD
     }
    
     registration() {
-        this.registrationKeyWord.nativeElement.click();
+        this.registrationMemorize.nativeElement.click();
     }
 
 
