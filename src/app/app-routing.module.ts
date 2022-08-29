@@ -1,3 +1,4 @@
+import { AuthRoutesGuard } from './guards/auth-routes.guard';
 import { MemorizedHistoriesListComponent } from './pages/memorized-histories/memorized-histories-list/memorized-histories-list.component';
 import { OutstandingComponent } from './pages/conciliation/outstanding/outstanding.component';
 import { KeyWordRegistrationComponent } from './pages/key-word/key-word-registration/key-word-registration.component';
@@ -43,7 +44,7 @@ const routes: Routes = [
     { path: 'development', component: AppNotfoundComponent},
 
     {
-        path: '', component: AppMainComponent, canActivate: [AuthGuard],
+        path: '', component: AppMainComponent, canActivate: [AuthGuard, AuthRoutesGuard],
         children: [
             { path: 'home', component: VisaoGeralComponent },
             { path: 'company', component: CompanyListComponent },            

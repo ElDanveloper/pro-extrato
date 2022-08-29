@@ -15,38 +15,46 @@ export class AuthRoutesGuard implements CanActivate {
         state: RouterStateSnapshot
     ) : Observable<boolean> | boolean{
         let rotaAtual = state.url
-        let posicao = array.findIndex(e => e.rotas.some(v => new RegExp(`\^/${v}`, 'i').test(rotaAtual)))
-        let permissao = localStorage.getItem('count');
+        // array.findIndex(e => e.rotas.some(v => new RegExp(`\^/${v}`, 'i').test(rotaAtual)))                
+        let permissao = localStorage.getItem('counter');    
+        let posicao = (permissao = 'true') ? 1 : 0        
         return  array[posicao].couter === permissao;
     }
 }
 
 let array = [
     {
-        label: "menu cliente",
+        label: "menu empresa",
         couter: 'false',
         rotas: [
+            "home",
             "account",
             "account-launch",
             "conciliation",
             "natureza-financeira",
             "person",
+            "memorized-histories",
             "key-word",
-              
+            "parameters",
+            "users-list",
+            "users-registration",              
         ]
     },
     {
         label: "menu contador",
-        position: 'true',
+        couter: 'true',
         rotas: [
+            "home",
             "account",
             "account-launch",
             "conciliation",
             "natureza-financeira",
             "person",
+            "memorized-histories",
             "key-word",
-            "company",
-              
+            "parameters",
+            "users-list",
+            "users-registration",              
         ]
     },
     // {
