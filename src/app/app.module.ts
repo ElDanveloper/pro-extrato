@@ -1,3 +1,4 @@
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import { MemorizedHistoriesListComponent } from './pages/memorized-histories/memorized-histories-list/memorized-histories-list.component';
 import { OutstandingComponent } from './pages/conciliation/outstanding/outstanding.component';
 import { KeyWordRegistrationComponent } from './pages/key-word/key-word-registration/key-word-registration.component';
@@ -70,7 +71,8 @@ import {MenuService} from './app.menu.service';
 import {TemaModule} from './tema.module';
 import { LayoutsModule } from './layout/layouts.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { NgxViacepModule } from '@brunoc/ngx-viacep';
+
+
 
 
 @NgModule({
@@ -88,7 +90,8 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
         ModaisModule,   
         LayoutsModule, 
         ImageCropperModule,  
-        NgxViacepModule,        
+        NgxViacepModule,      
+        
         
     ],
     declarations: [
