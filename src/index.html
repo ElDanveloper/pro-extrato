@@ -13,20 +13,7 @@
   <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
 
   <link id="theme-css" rel="stylesheet" type="text/css" href="assets/theme/theme-dark-green.css">
-  <link id="layout-css" rel="stylesheet" type="text/css" href="assets/layout/css/layout-dark-green.css">
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb",
-        safari_web_id: "web.onesignal.auto.257d0569-0e14-4d06-8d17-3d55d768ff68",
-        notifyButton: {
-          enable: true,
-        },
-      });
-    });
-  </script>
+  <link id="layout-css" rel="stylesheet" type="text/css" href="assets/layout/css/layout-dark-green.css">  
 </head>
 <body>
     <app-root>
@@ -38,7 +25,19 @@
             </div>
         </div>
     </app-root>
-   
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb",
+          safari_web_id: "web.onesignal.auto.257d0569-0e14-4d06-8d17-3d55d768ff68",
+          notifyButton: {
+            enable: true,
+          },
+        });
+      });
+    </script>
 </body>
 </html>
 
