@@ -26,7 +26,7 @@ export class BaseListSimples implements OnDestroy {
     private expanded;
     private ordeBy;
     private campoPesquisa;
- 
+
 
     subscriptionQtd: Subscription;
     subscriptionLista: Subscription;
@@ -64,24 +64,28 @@ export class BaseListSimples implements OnDestroy {
             v = ''
         }
 
-        let parametro = `?filter=${this.campoPesquisa} eq ${v}&orderby=${this.ordeBy}&top=${this.top}&skip=${this.pagina}`
+        let parametro = ''
+
+        if (v !== '') {            
+            parametro = `?filter=${this.campoPesquisa} eq ${v}&orderby=${this.ordeBy}&top=${this.top}&skip=${this.pagina}`
+        }
 
         if (this.expanded) {
-            parametro = `?filter=${this.campoPesquisa} eq ${v}&orderby=${this.ordeBy}&top=${this.top}&skip=${this.pagina}${this.expanded}`
+            parametro = parametro + `${this.expanded}`
         }
 
         this.carregarDados(parametro)
     }
 
-    public carregarDados(parametros = ''): void {              
+    public carregarDados(parametros = ''): void {
         this.$subscriptionListar = this.networkService.getSimples(this.url, `${this.entidade}${parametros}`).subscribe((listaSec: any) => {
             if (listaSec[0]) {
                 this.totalItens = listaSec[0] ? listaSec[0]['QtdReg'] : 0;
             } else {
                 this.totalItens = listaSec.length
-            }                                                        
-                this.lista = listaSec.value ? listaSec.value : listaSec                
-            
+            }
+            this.lista = listaSec.value ? listaSec.value : listaSec
+
         })
 
     }

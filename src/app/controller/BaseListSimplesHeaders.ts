@@ -53,7 +53,7 @@ export class BaseListSimplesHeaders implements OnDestroy {
         }
     }
 
-    public carregarLista(page?): void {
+    public carregarLista(page?, id = null): void {
         this.loading = false
         this.jaPesquisou = true
         let v;
@@ -63,7 +63,7 @@ export class BaseListSimplesHeaders implements OnDestroy {
             v = ''
         }
 
-        let parametro = ''
+        let parametro = id ? id : ''
 
         if (v !== '') {
             this.totalItens = null
@@ -72,7 +72,7 @@ export class BaseListSimplesHeaders implements OnDestroy {
 
         if (this.expanded) {
             this.totalItens = null
-            parametro = `?Texto=${v}&${this.expanded}`
+            parametro = parametro + `${this.expanded}`
         }
 
         this.carregarDados(parametro)

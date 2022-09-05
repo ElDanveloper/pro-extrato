@@ -1,3 +1,5 @@
+import { UserCompanyListComponent } from './pages/user-company/user-company-list/user-company-list.component';
+import { ParametersCompanyComponent } from './pages/parameters-company/parameters-company.component';
 import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import { MemorizedHistoriesListComponent } from './pages/memorized-histories/memorized-histories-list/memorized-histories-list.component';
 import { OutstandingComponent } from './pages/conciliation/outstanding/outstanding.component';
@@ -8,7 +10,6 @@ import { AccountRegisterComponent } from './pages/account/account-register/accou
 import { CompanyRegistrationComponent } from './pages/company/company-registration/company-registration.component';
 import { CompanyListComponent } from './pages/company/company-list/company-list.component';
 import { AccountStatusComponent } from './pages/settings-page/account-status/account-status.component';
-import { ParametersComponent } from './pages/settings-page/parameters/parameters.component';
 import { InvoicesListComponent } from './pages/settings-page/invoices-list/invoices-list.component';
 import { DepartmentsListComponent } from './pages/settings-page/departments/departments-list/departments-list.component';
 import { UsersListComponent } from './pages/settings-page/users/users-list/users-list.component';
@@ -134,7 +135,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         MainAccountantComponent,
         DepartmentsListComponent,
         InvoicesListComponent,
-        ParametersComponent,
+        ParametersCompanyComponent,
         AccountStatusComponent,
         AccountRegisterComponent,
         AppNotfoundComponent,
@@ -142,6 +143,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         KeyWordRegistrationComponent,
         OutstandingComponent,
         MemorizedHistoriesListComponent,
+        UserCompanyListComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

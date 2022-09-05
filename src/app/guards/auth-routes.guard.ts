@@ -35,9 +35,9 @@ let array = [
             "person",
             "memorized-histories",
             "key-word",
-            "parameters",
-            "users-list",
-            "users-registration",              
+            "parameters-company",
+            "user-company-list",
+            "user-company-registration",              
         ]
     },
     {

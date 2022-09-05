@@ -45,10 +45,10 @@ export class AppMenuComponent implements OnInit {
                     label: 'Palavras Chaves', icon: 'fa fa-key', routerLink: ['key-word']
                 },
                 {
-                    label: 'Parametros', icon: 'fa fa-cogs', routerLink: ['/settings/parameters']
+                    label: 'Parametros', icon: 'fa fa-cogs', routerLink: ['parameters-company']
                 },
                 {
-                    label: 'Usuarios', icon: 'fa fa-user', routerLink: ['/settings/users-list']
+                    label: 'Usuarios', icon: 'fa fa-user', routerLink: ['user-company-list']
                 }
             ]
         },

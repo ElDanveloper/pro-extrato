@@ -1,21 +1,21 @@
 import { Formulario } from 'src/app/controller/Formulario';
-import { ProParameter } from './../../../model/pro-parameter.model';
+import { DadosDefaultService } from 'src/app/services/dados-default.service';
+import { NetworkService } from 'src/app/services/network.service';
+import { BaseFormPost } from 'src/app/controller/BaseFormPost';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DadosDefaultService } from './../../../services/dados-default.service';
-import { NetworkService } from './../../../services/network.service';
 import { SelectItem, MessageService } from 'primeng/api';
 import { FormGroup } from '@angular/forms';
-import { BaseFormPost } from './../../../controller/BaseFormPost';
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ProParameter } from '../../model/pro-parameter.model';
 
 @Component({
-    selector: 'app-parameters',
-    templateUrl: './parameters.component.html',
-    styleUrls: ['./parameters.component.css']
+    selector: 'app-parameters-company',
+    templateUrl: './parameters-company.component.html',
+    styleUrls: ['./parameters-company.component.css']
 })
 
-export class ParametersComponent extends BaseFormPost implements OnInit, OnDestroy {
+export class ParametersCompanyComponent extends BaseFormPost implements OnInit, OnDestroy {
 
     selectNatureza = []
     form: FormGroup;
@@ -23,7 +23,7 @@ export class ParametersComponent extends BaseFormPost implements OnInit, OnDestr
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, public messageService: MessageService,private fb: FormBuilder) {
         super(networkService, dadosDefault, router, 'ProParameter', messageService);     
-        this.form = Formulario.createForm(new ProParameter(), this.fb);   
+        this.form = Formulario.createForm( new ProParameter(), this.fb);   
     }
 
     ngOnInit() {

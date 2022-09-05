@@ -37,11 +37,11 @@ export class AppComponent implements OnInit {
             }
         }]);
         oneSignal.push(function () {
-            // oneSignal.on('subscriptionChange', function (isSubscribed) {
-            //     oneSignal.getUserId().then(function (userId) {
+            oneSignal.on('subscriptionChange', function (isSubscribed) {
+                oneSignal.getUserId().then(function (userId) {
 
-            //     })
-            // })
+                })
+            })
         })
     }
 

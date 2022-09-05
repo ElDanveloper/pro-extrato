@@ -60,7 +60,7 @@ export class SettingsPageComponent implements OnInit {
         } else if (v.toString().match(/\/invoices-list$/)) {
             this.currentIndex = 3
             this.activeItem = this.itemsTabMenu[3];
-        } else if (v.toString().match(/\/parameters$/)) {
+        } else if (v.toString().match(/\/$/)) {
             this.currentIndex = 4
             this.activeItem = this.itemsTabMenu[4];
         } else if (v.toString().match(/\/account-status$/)) {
@@ -77,7 +77,7 @@ export class SettingsPageComponent implements OnInit {
         if (this.currentIndex === 1) r = 'users-list'
         if (this.currentIndex === 2) r = 'departments-list'
         if (this.currentIndex === 3) r = 'invoices-list'
-        if (this.currentIndex === 4) r = 'parameters'
+        if (this.currentIndex === 4) r = ''
         if (this.currentIndex === 5) r = 'account-status'
        
         this.router.navigate([`settings/${r}`])

@@ -1,3 +1,5 @@
+import { UserCompanyListComponent } from './pages/user-company/user-company-list/user-company-list.component';
+import { ParametersCompanyComponent } from './pages/parameters-company/parameters-company.component';
 import { AuthRoutesGuard } from './guards/auth-routes.guard';
 import { MemorizedHistoriesListComponent } from './pages/memorized-histories/memorized-histories-list/memorized-histories-list.component';
 import { OutstandingComponent } from './pages/conciliation/outstanding/outstanding.component';
@@ -8,7 +10,6 @@ import { AccountRegisterComponent } from './pages/account/account-register/accou
 import { CompanyRegistrationComponent } from './pages/company/company-registration/company-registration.component';
 import { CompanyListComponent } from './pages/company/company-list/company-list.component';
 import { AccountStatusComponent } from './pages/settings-page/account-status/account-status.component';
-import { ParametersComponent } from './pages/settings-page/parameters/parameters.component';
 import { InvoicesListComponent } from './pages/settings-page/invoices-list/invoices-list.component';
 import { DepartmentsListComponent } from './pages/settings-page/departments/departments-list/departments-list.component';
 import { UsersRegistrationComponent } from './pages/settings-page/users/users-registration/users-registration.component';
@@ -61,6 +62,8 @@ const routes: Routes = [
             { path: 'key-word', component: KeyWordListComponent},
             { path: 'key-word/registration/:id', component: KeyWordRegistrationComponent},
             { path: 'memorized-histories', component: MemorizedHistoriesListComponent},
+            { path: 'parameters-company', component: ParametersCompanyComponent },
+            { path: 'user-company-list', component: UserCompanyListComponent },
             
             
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
@@ -83,7 +86,7 @@ const routes: Routes = [
                     { path: 'users-registration/:id', component: UsersRegistrationComponent},
                     { path: 'departments-list', component: DepartmentsListComponent },
                     { path: 'invoices-list', component: InvoicesListComponent },                    
-                    { path: 'parameters', component: ParametersComponent },
+                    
                     { path: 'account-status', component: AccountStatusComponent },
                     {path: '', pathMatch: 'full', redirectTo: 'main-accountant'},
                 ]

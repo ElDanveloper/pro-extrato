@@ -6,6 +6,7 @@ import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import { Router } from '@angular/router';
 import { MessageService, ConfirmationService, SelectItem } from 'primeng/api';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { BaseListSimplesHeaders } from 'src/app/controller/BaseListSimplesHeaders';
 
 @Component({
   selector: 'app-memorized-histories-list',
@@ -31,12 +32,12 @@ export class MemorizedHistoriesListComponent extends BaseListSimples implements 
     ]    
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), '', Util.expandedQuery(ProKeyWord.expanded(), '&'), 'FirstWord', 'FirstWord')
+        super(networkService, getUrlPro(), 'ProBankHistoric', Util.expandedQuery(ProKeyWord.expanded(), ''))
         
     }
 
     ngOnInit() {        
-        // this.carregarLista()
+        this.carregarLista()
     }
 
     pressionaEnter(e) {

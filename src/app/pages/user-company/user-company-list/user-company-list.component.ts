@@ -1,18 +1,17 @@
-import { BaseListSimplesHeaders } from './../../../../controller/BaseListSimplesHeaders';
-import { NetworkService } from '../../../../services/network.service';
-import { qtdLinhas, getUrlClient, getUrlUser } from '../../../../controller/staticValues';
-import { BaseListSimples } from 'src/app/controller/BaseListSimples';
+import { NetworkService } from 'src/app/services/network.service';
+import { BaseListSimplesHeaders } from 'src/app/controller/BaseListSimplesHeaders';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ConfirmationService, Message, MessageService, SelectItem} from "primeng/api";
 import {Router} from "@angular/router";
+import { EMPRESA_STORAGE_KEY, getUrlUser, qtdLinhas } from 'src/app/controller/staticValues';
 
 
 @Component({
-  selector: 'app-users-list',
-  templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.css']
+  selector: 'app-user-company-list',
+  templateUrl: './user-company-list.component.html',
+  styleUrls: ['./user-company-list.component.css']
 })
-export class UsersListComponent extends BaseListSimplesHeaders implements OnInit, OnDestroy {
+export class UserCompanyListComponent extends BaseListSimplesHeaders implements OnInit, OnDestroy {
 
     @ViewChild('registrationUser') registrationUser: ElementRef;
 
@@ -31,9 +30,7 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     @ViewChild('selectValue') public selectValue
     public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
     opcoesTable = [
-        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {            
-            this.router.navigate([`settings/users-registration/${e.id}`])
-        }},
+        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {}},
         {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
         {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {}},
     ]
@@ -44,8 +41,11 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
         super(networkService, getUrlUser(), 'contractor')
     }
 
-    ngOnInit() {        
-        this.carregarLista()
+    ngOnInit() {     
+        let empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['id']        
+        this.networkService.getSimples(getUrlUser(), `client/${empresa}`).subscribe((v: any) => {
+            this.lista = v
+        })
     }
 
     pressionaEnter(e) {
