@@ -54,10 +54,8 @@ export class AppMainComponent implements OnInit {
 
     compactMode = true;
 
-    constructor(private menuService: MenuService, private primengConfig: PrimeNGConfig, private dadosDefault: DadosDefaultService, private messageService: MessageService, private router: Router, private networkService: NetworkService, private oneSignal: OneSignal) {
-        this.oneSignal.init({
-            appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb"
-        })     
+    constructor(private menuService: MenuService, private primengConfig: PrimeNGConfig, private dadosDefault: DadosDefaultService, private messageService: MessageService, private router: Router, private networkService: NetworkService) {
+          
     }
 
     exibirLoader = this.dadosDefault.exibirLoader
