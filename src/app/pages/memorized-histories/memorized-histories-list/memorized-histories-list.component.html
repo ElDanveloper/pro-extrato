@@ -16,18 +16,18 @@
         <ng-template pTemplate="header" let-columns>
             <tr>
             <th [ngStyle]="{width: '10%'}"> Código do Banco </th>            
-            <th [ngStyle]="{width: '40%'}"> Historico </th>
-            <th [ngStyle]="{width: '15%'}"> Natureza </th>
+            <th [ngStyle]="{width: '30%'}"> Historico </th>
+            <th [ngStyle]="{width: '20%'}"> Natureza </th>
             <th [ngStyle]="{width: '20%'}"> Pessoa </th>
             <th [ngStyle]="{width: '3%'}"> Ações </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
             <tr>
-            <td>{{rowData.FirstWord}}</td>
-            <td>{{rowData.SecondWord}}</td>
-            <td>{{rowData.CodeControl}}</td>
+            <td>{{rowData.BankCode}}</td>
+            <td>{{rowData.Historic}}</td>
             <td>{{rowData.FinancialCategoryId.Description}}</td>
+            <td>{{rowData.PersonId.Nome}}</td>
             <td><app-opcoes-table [value]="rowData"
                                   [opcoes]="opcoesTable"></app-opcoes-table></td>
             </tr>

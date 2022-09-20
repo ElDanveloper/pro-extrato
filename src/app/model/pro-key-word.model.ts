@@ -16,7 +16,7 @@ export class ProKeyWord {
     }
 
     static expanded() {
-        return ['FinancialCategoryId']
+        return ['FinancialCategoryId', 'PersonId']
     }
 
 }

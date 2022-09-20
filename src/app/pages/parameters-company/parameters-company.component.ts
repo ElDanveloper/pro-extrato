@@ -1,3 +1,5 @@
+import { Util } from 'src/app/controller/Util';
+import { getUrlPro } from 'src/app/controller/staticValues';
 import { Formulario } from 'src/app/controller/Formulario';
 import { DadosDefaultService } from 'src/app/services/dados-default.service';
 import { NetworkService } from 'src/app/services/network.service';
@@ -37,9 +39,19 @@ export class ParametersCompanyComponent extends BaseFormPost implements OnInit, 
 
     processarFormulario() {
 
+        let value: any = {...Formulario.parseForm(new ProParameter(), this.form.value, ProParameter.referencias(), null, ProParameter.datas(), null, null)};
+
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.salvarPost(getUrlPro(), 'Parameter', value).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Configurações salvas com sucesso!'))
+            this.router.navigate(['home'])
+        }).add(this.dadosDefault.exibirLoader.next(false))        
+
     }
 
-
+    cancelarLocal() {
+        this.router.navigate(['home'])
+    }
 
     ngOnDestroy() {
         super.ngOnDestroy()
