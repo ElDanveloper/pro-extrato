@@ -86,7 +86,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
 
             this.pessoa = this.data.PersonId
             if (this.pessoa) {
-                this.networkService.buscar('getPersonClient',`?PersonId='${this.pessoa}'`).subscribe(v => {
+                this.networkService.getSimples(getUrlPro(), `getPersonClient?PersonId=${this.pessoa}`).subscribe(v => {
                     this.form.get('IdPessoa').setValue(v)
                 })
                 // this.form.get('IdNatureza').setValue(this.pessoa.CodNatFinanceira)
@@ -190,7 +190,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     }
 
     selecionouPessoa(e) {                
-        if (e.FinancialCategoryId !== null) {
+        if (e.FinancialCategoryId !== null && e.FinancialCategoryId !== undefined) {
             this.dadosDefault.exibirLoader.next(true)
             this.networkService.getSimples(getUrlPro(), `FinancialCategory/${e.FinancialCategoryId}`).subscribe(v => {                
                 this.form.get('IdNatureza').setValue(v)
