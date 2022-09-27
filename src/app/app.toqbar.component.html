@@ -25,8 +25,9 @@
                     vertical-align: middle;
                     margin-left: 8em;
                     font-weight: bold;
-                    margin-right: 200px;">
-            <app-browse-environment></app-browse-environment>
+                    margin-right: 200px;
+                    margin-top: 10px">
+           <span class="mes-label">{{labelEnvironment}}</span>
         </div>
             <!-- <li #profile class="profile-item" *ngIf="app.profileMode==='top'||app.isHorizontal()"
                 [ngClass]="{'active-top-menu':app.activeTopbarItem === profile}">
@@ -63,37 +64,37 @@
                     </li>
                 </ul>
             </li> -->
-            <li #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}">
+            <li nfI #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}">
                 <a href="#" (click)="app.onTopbarItemClick($event,settings)">
                     <i class="topbar-icon pi pi-cog"></i>
                     <span class="topbar-item-name">Settings</span>
                 </a>
                 <ul class="ultima-menu animated fadeInDown">
-                    <li role="menuitem">
+                    <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/parameters')">
                             <i class="pi pi-cog"></i>
                             <span>Configuração</span>
                         </a>
                     </li>
-                    <li role="menuitem">
+                    <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings')">
                             <i class="pi pi-briefcase"></i>
                             <span>Dados da Contabilidade</span>
                         </a>
                     </li>
-                    <li role="menuitem">
+                    <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/users-list')">
                             <i class="pi pi-users"></i>
                             <span>Usuarios</span>
                         </a>
                     </li>
-                    <li role="menuitem">
+                    <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event)">
                             <i class="pi pi-upload"></i>
                             <span>Exportação</span>
                         </a>
                     </li>
-                    <li role="menuitem">
+                    <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/invoices-list')">
                             <i class="pi pi-dollar"></i>
                             <span>Faturas</span>

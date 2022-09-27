@@ -39,7 +39,10 @@
         <!-- <div class="ui-g-1">
             <app-tutorial [Classificacao]="'3.07.02'"></app-tutorial>
         </div> -->
-        <div class="p-offset-2 p-col-2" style="margin-top: 10px;">
+        <div class="p-col-2" style="margin-top: 10px;">
+            <p-splitButton label="Relatórios" [model]="itemsReport"></p-splitButton>
+        </div>
+        <div class="p-col-2" style="margin-top: 10px;">
             <button pButton label="Atualizar" (click)="update()"></button>
         </div>
         <div class=" p-col-2" style="margin-top: 10px;">

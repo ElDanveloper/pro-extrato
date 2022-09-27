@@ -33,7 +33,7 @@
                 <td appAlignCenter>{{rowData.DateMovement | date}}</td>
                 <td>{{rowData.Historic}}</td>
                 <td appAlinharDireita [ngClass]="colorValue(rowData.Amount)">{{rowData.Amount | virgulaPipe}}</td>
-                <td>{{rowData.Reconciled === 'N' ? 'Não' : 'Sim'}}</td>
+                <td>{{status(rowData.Reconciled)}}</td>
                 <td>
                     <app-opcoes-table [value]="rowData" [opcoes]="itemsRow"></app-opcoes-table>
                 </td>

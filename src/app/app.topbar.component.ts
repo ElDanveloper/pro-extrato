@@ -13,6 +13,8 @@ export class AppTopbarComponent {
     public empresa = ''
 
     public counter = ''
+
+    public labelEnvironment = ''
     
 
     @ViewChild('trocarempresa') trocarEmpresa: ElementRef;
@@ -23,14 +25,16 @@ export class AppTopbarComponent {
         this.counter = localStorage.getItem('counter')
 
         if(this.counter === 'false') {
+            this.labelEnvironment = 'Ambiente Empresa'
             this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']            
+        }else {
+            this.labelEnvironment = 'Ambiente Contador'
         }
         // if(JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome'])
         //     this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome']
     }
 
-    deslogar() {
-        
+    deslogar() {        
         sessionStorage.clear()
         localStorage.clear()
         this.dadosDefault.counterEnvironment.next(false)
@@ -45,6 +49,8 @@ export class AppTopbarComponent {
         localStorage.setItem('counter', 'false')
         this.counter = 'false'
         this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
+        this.labelEnvironment = 'Ambiente Empresa'
+        window.location.reload()
     }
 
     navegar(pagina) {        

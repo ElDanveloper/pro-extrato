@@ -21,11 +21,14 @@ export class BrowseEnvironmentComponent implements OnInit {
     dataLabel = 'Escolha o Ambiente'
     private cont = new BehaviorSubject(null)
 
+    couter
+
     constructor(private dadosDefault: DadosDefaultService, public router: Router) {
 
     }
 
     ngOnInit(): void {
+        
         // this.dadosDefault.dashBoard().subscribe(v => {
         //     this.dashBoard = v[0]
         //     this.cont.next(Number(sessionStorage.getItem(ID_DASHBOARD)));

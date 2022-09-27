@@ -1,5 +1,5 @@
 import { Util } from 'src/app/controller/Util';
-import { getUrlPro } from 'src/app/controller/staticValues';
+import { EMPRESA_STORAGE_KEY, getUrlPro } from 'src/app/controller/staticValues';
 import { Formulario } from 'src/app/controller/Formulario';
 import { DadosDefaultService } from 'src/app/services/dados-default.service';
 import { NetworkService } from 'src/app/services/network.service';
@@ -34,6 +34,13 @@ export class ParametersCompanyComponent extends BaseFormPost implements OnInit, 
             this.selectNatureza = value[0]
             this.selectNatureza.unshift(defaultValue)
         })
+
+        console.log('Empresa ---> ' + sessionStorage.getItem(EMPRESA_STORAGE_KEY))
+        // this.dadosDefault.exibirLoader.next(true)
+                // this.networkService.buscar('ProParameter', '348', null).subscribe((value: any) => {
+                    // const data = Formulario.prepareValueToForm(new PersonClient(), value, null, PersonClient.relacionamentos(), null);
+                    // Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
+                // }).add(this.dadosDefault.exibirLoader.next(false))
 
     }
 

@@ -73,7 +73,8 @@ export class ReconciledComponent implements OnInit, OnDestroy {
 
         this.networkService.exibirLoader.next(true)
         // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
-        this.$subscriptionConciliados = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`, page, top).pipe(map((x: any) => x.value)).subscribe(x => {
+        this.$subscriptionConciliados = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`, page, top).pipe(map((x: any) => x['body'].value)).subscribe(x => {
+            console.log(JSON.stringify(x))
             this.lista = x
         }).add(() => this.networkService.exibirLoader.next(false));
     }

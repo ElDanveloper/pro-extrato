@@ -38,6 +38,10 @@ export class AccountLaunchComponent implements OnInit {
     @ViewChild('uploadInput') uploadInput: ElementRef;
     @ViewChild('editstatementitems') editstatementitems: ElementRef;
 
+    itemsReport = [
+        {}
+    ];
+
 
     constructor(public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public messageService: MessageService, private dadosDefault: DadosDefaultService, private route: ActivatedRoute) { }
 

@@ -63,6 +63,15 @@ export class NaturezaFinanceiraCadastroComponent extends BaseFormPost implements
 
     ]
 
+    selectFixVariable = [
+        {label: '', value: null},
+        {label: 'Fixo', value: 'F'},
+        {label: 'Variavel', value: 'V'},
+        {label: 'Eventual', value: 'E'},
+        {label: 'Nenhum', value: 'N'},
+        
+    ]
+
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router, public messageService: MessageService, private viaCep: NgxViacepService) {
         super(networkService, dadosDefault, router, 'financialCategory', messageService);
         this.form = Formulario.createForm(new FinancialCategory(), this.fb);        
