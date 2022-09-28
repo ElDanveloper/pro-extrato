@@ -6,13 +6,10 @@
         <button pButton label="Processar Conciliação" (click)="processConciliation()"></button>
     </div>
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
-        [(selection)]="selected" [value]="lista" [paginator]="true" [rows]="10" [totalRecords]="lista.length"
+         [value]="lista" [paginator]="true" [rows]="10" [totalRecords]="lista.length"
         [rowsPerPageOptions]="opcoesLinhas">
         <ng-template pTemplate="header" let-columns>
-            <tr>
-                <th style="width: 2%">
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                </th>
+            <tr>                
                 <th style="width: 6%;" pSortableColumn="DateMovement">Data
                     <p-sortIcon field="DateMovement"></p-sortIcon>
                 </th>
@@ -38,10 +35,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr [pSelectableRow]="rowData">
-                <td>
-                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
-                </td>
+            <tr>               
                 <td appAlignCenter>{{rowData.DateMovement | date}}</td>
                 <td>{{rowData.Historic}}</td>
                 <td>{{rowData.Document}}</td>

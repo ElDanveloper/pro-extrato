@@ -25,6 +25,9 @@
                         <p-checkbox binary="true" formControlName="selecionar"></p-checkbox>
                         <label style="margin-left: 5px; font-weight: bold;">Selecionado</label>
                     </div>                    
+                    <div class="p-col-12 p-col-nopad" style="margin-top: 5px;">
+                        <button pButton type="button" label="Transferência" (click)="transfer()"></button>
+                    </div>
                 </div>               
             </div>
             &nbsp;
@@ -50,12 +53,15 @@
                     <div class="p-col-12">
                         <app-input  [label]="'Obs. Complementar'" formControlName="Obs"></app-input>                        
                     </div>
+                    <div class="p-col-12" style="margin-top: 5px;">
+                        <app-select [label]="'Conta de Destino'" [options]="selectAccount" formControlName="AccountDestinyId"></app-select>
+                    </div>                    
                     &nbsp;
-                    <div class="buttons p-col-4 center-content">
+                    <div class="buttons p-col-4 center-content" style="margin-top: 5px;">
                         <button pButton type="button" label="Conciliar" class="p-button-success"
                                 (click)="reconcileSingle()"></button>
                     </div>                    
-                    <div class="buttons p-col-4 center-content">
+                    <div class="buttons p-col-4 center-content" style="margin-top: 5px;">
                         <button pButton type="button" label="Desconciliar" class="p-button"
                                 (click)="toReconcile()"></button>
                     </div>                    

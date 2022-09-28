@@ -33,14 +33,16 @@ export class ParametersCompanyComponent extends BaseFormPost implements OnInit, 
             const defaultValue = {label: '-', value: null}
             this.selectNatureza = value[0]
             this.selectNatureza.unshift(defaultValue)
-        })
+        })        
+        this.dadosDefault.exibirLoader.next(true)
+                this.networkService.buscar('ProParameter', '').subscribe((value: any) => {
+                    console.log('ProParameter ----> ' + JSON.stringify(value.value))
+                    const data = Formulario.prepareValueToForm(new ProParameter(), value.value, null, ProParameter.relacionamentos(), null);
+                    console.log('Data ----> ' + JSON.stringify(data))
+                    Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
 
-        console.log('Empresa ---> ' + sessionStorage.getItem(EMPRESA_STORAGE_KEY))
-        // this.dadosDefault.exibirLoader.next(true)
-                // this.networkService.buscar('ProParameter', '348', null).subscribe((value: any) => {
-                    // const data = Formulario.prepareValueToForm(new PersonClient(), value, null, PersonClient.relacionamentos(), null);
-                    // Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
-                // }).add(this.dadosDefault.exibirLoader.next(false))
+                    console.log('CodeCatTaxBank ---> ' + this.form.get('CodeCatTaxBank').value)
+                }).add(this.dadosDefault.exibirLoader.next(false))
 
     }
 

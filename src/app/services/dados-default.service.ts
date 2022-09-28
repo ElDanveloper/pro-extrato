@@ -133,6 +133,11 @@ export class DadosDefaultService {
         return forkJoin([account])
     }
 
+    public conciliator() {
+        let account = this.http.get(`${getUrlPro()}/proaccount`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Name), value: v.Id}))))
+        return forkJoin([account])
+    }
+
     public account() {
         let bank = this.http.get(`${getUrlPro()}/bank`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Name), value: Util.toNumber(v.Code)}))))
         let natureza = this.http.get(`${getUrlPro()}/financialCategory?$filter=level eq 3&$orderby=classificate`).pipe(map((res: Response) => res['value'].map(v => ({label: v.Classificate + ' - ' + Util.up(v.Description), value: v.Id}))))

@@ -50,6 +50,7 @@ export class AppTopbarComponent {
         this.counter = 'false'
         this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
         this.labelEnvironment = 'Ambiente Empresa'
+        this.router.navigate(['/home']);
         window.location.reload()
     }
 

@@ -41,6 +41,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
   
     pessoa = null;
     naturezaFinanceira = null;
+    selectAccount = []
 
     constructor(private fb: FormBuilder, private networkService: NetworkService, private router: Router, private dadosDefault: DadosDefaultService, private messageService: MessageService) {
         this.form = fb.group({
@@ -48,6 +49,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
             IdNatureza: '',
             IdNaturezaInput: '',
             Obs: '',
+            AccountDestinyId: '',
             IdPessoa: '',
             Documento: '',
             selecionar: '',
@@ -74,6 +76,10 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     }
 
     ngOnInit() {
+        this.dadosDefault.conciliator().subscribe(value => {
+            this.selectAccount = value[0]
+        })
+
         if (this.data) {
             if (this.data.Reconciled === "P") {
                 this.index = 1
@@ -117,6 +123,10 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         if (this.$conciliarParaUnicoSubscription) this.$conciliarParaUnicoSubscription.unsubscribe();
         if (this.$memorizarSubscription) this.$memorizarSubscription.unsubscribe();
         if (this.$buscarNaturezaSubscription) this.$buscarNaturezaSubscription.unsubscribe();
+    }
+
+    transfer(){
+
     }
    
     reconcileSingle() {

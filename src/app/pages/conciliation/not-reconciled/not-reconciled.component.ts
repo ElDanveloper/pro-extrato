@@ -31,7 +31,7 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
     dataFinal
 
     public loading: boolean
-    public top: number = 7
+    public top: number = 10
 
     totalItens;
 
@@ -105,13 +105,13 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
     }
 
     private carregarLista(page = 1, top = 10) {
-        if (this.filterCategory) {
-            this.dadosDefault.exibirLoader.next(true)
-            this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'&FinancialId=${this.category.Id}${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
-                this.totalItens = x.headers.get('total')
-                this.lista = x.body['value']
-            }).add(() => this.dadosDefault.exibirLoader.next(false));
-        } else {
+        // if (this.filterCategory) {
+        //     this.dadosDefault.exibirLoader.next(true)
+        //     this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
+        //         this.totalItens = x.headers.get('total')
+        //         this.lista = x.body['value']
+        //     }).add(() => this.dadosDefault.exibirLoader.next(false));
+        // } else {
             this.dadosDefault.exibirLoader.next(true)
             // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
             this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
@@ -119,13 +119,13 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
                 this.lista = x.body['value']
                 // this.lista = x
             }).add(() => this.dadosDefault.exibirLoader.next(false));
-        }
+        // }
     }
 
     selectedCategory(event) {
-        this.category = event
+        this.category = event        
         this.filterCategory = true
-        this.carregarLista()
+        // this.carregarLista()
     }
 
     public lazyLoad(event): void {
@@ -137,9 +137,30 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
                 event.first = 0
             }
 
-            this.carregarLista((event.first / 10) + 1, 7)
+            this.carregarLista((event.first / 10) + 1, this.top)
             this.loading = false
         }
+    }
+
+    reconcileSelected() {
+        if (this.selected.length < 1) {
+            this.messageService.add(Util.pushInfoMessage('Favor selecionar uma conta para conciliação!'))
+            return
+        }
+
+        let listIds = this.selected.map(v => v.Id.toString())
+
+        let body = {
+            ListIds: listIds,
+            FinancialId: this.category.Id
+        }
+
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.salvarPost(getUrlPro(), 'UpdateStatementItems', body).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Conciliação feita com sucesso!'))
+            this.carregarLista()
+        }).add(this.dadosDefault.exibirLoader.next(false))
+                
     }
 
     processConciliation() {
