@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
             serviceWorkerParam: {
                 scope: "/OneSignalSDKWorker.js"
               },
-              serviceWorkerPath: 'app.proextrato.com.br/OneSignalSDKWorker.js'
+              serviceWorkerPath: '/OneSignalSDKWorker.js'
           });
     }
 
