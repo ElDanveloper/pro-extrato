@@ -26,6 +26,9 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit(){
+        this.oneSignal.on('subscriptionChange', function(isSubscribed) {
+            console.log("The user's subscription state is now:", isSubscribed);
+          });
 
     }
 
