@@ -7,7 +7,7 @@
     </div>
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
          [value]="lista" [paginator]="true" [rows]="10" [totalRecords]="lista.length"
-        [rowsPerPageOptions]="opcoesLinhas">
+        [rowsPerPageOptions]="opcoesLinhas" (onLazyLoad)="lazyLoad($event)" [lazy]="true">
         <ng-template pTemplate="header" let-columns>
             <tr>                
                 <th style="width: 6%;" pSortableColumn="DateMovement">Data

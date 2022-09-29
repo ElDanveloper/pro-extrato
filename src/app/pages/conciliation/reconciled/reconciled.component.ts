@@ -28,6 +28,9 @@ export class ReconciledComponent implements OnInit, OnDestroy {
     id
     dataInicial
     dataFinal
+    jaPesquisou = false
+    public loading: boolean
+    public top: number = 10
 
     itemsRowConciliacao = [       
         {
@@ -73,8 +76,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
 
         this.networkService.exibirLoader.next(true)
         // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
-        this.$subscriptionConciliados = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`, page, top).pipe(map((x: any) => x['body'].value)).subscribe(x => {
-            console.log(JSON.stringify(x))
+        this.$subscriptionConciliados = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`, page, top).pipe(map((x: any) => x['body'].value)).subscribe(x => {            
             this.lista = x
         }).add(() => this.networkService.exibirLoader.next(false));
     }
@@ -104,6 +106,20 @@ export class ReconciledComponent implements OnInit, OnDestroy {
         this.networkService.getSimples(getUrlPro(), `ProcessConciliate?DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&AccountId=${this.id}`).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Processo Realizado com Sucesso!'))
         }).add(this.dadosDefault.exibirLoader.next(false))        
+    }
+
+    public lazyLoad(event): void {
+        if (!this.jaPesquisou) return;
+        this.loading = true
+        if (this.lista) {
+            if (this.top !== event.rows && event.rows !== undefined) {
+                this.top = event.rows
+                event.first = 0
+            }
+
+            this.carregarLista((event.first / 10) + 1, this.top)
+            this.loading = false
+        }
     }
 
 }

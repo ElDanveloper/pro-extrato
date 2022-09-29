@@ -69,9 +69,9 @@ export class AppMainComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.oneSignal.init({
-            appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb"
-        })    
+        // this.oneSignal.init({
+        //     appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb"
+        // })    
         // var oneSignal = window['OneSignal'] || [];
         // oneSignal.push(["init", {
         //     appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb",
@@ -82,12 +82,12 @@ export class AppMainComponent implements OnInit {
         //     }
         // }]);
         // oneSignal.push(function () {
-            this.oneSignal.on('subscriptionChange', function (isSubscribed) {
-                console.log('Teste ----> ' + isSubscribed)
-                this.oneSignal.getUserId().then(function (userId) {
+            // this.oneSignal.on('subscriptionChange', function (isSubscribed) {
+            //     console.log('Teste ----> ' + isSubscribed)
+            //     this.oneSignal.getUserId().then(function (userId) {
 
-                })
-            })
+            //     })
+            // })
         // })
 
         this.primengConfig.ripple = true;

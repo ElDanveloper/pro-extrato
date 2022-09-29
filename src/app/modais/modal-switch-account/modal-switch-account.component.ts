@@ -37,9 +37,9 @@ export class ModalSwitchAccountComponent implements OnInit {
     }
 
     ngOnInit() {       
-    //    this.dadosDefault.modalTransferencia().subscribe(v => {
-    //        this.selectContaCaixa = v[0]
-    //    })
+       this.dadosDefault.conciliator().subscribe(v => {
+           this.selectContaCaixa = v[0]
+       })
     }
 
     OnChanges() {
@@ -59,7 +59,7 @@ export class ModalSwitchAccountComponent implements OnInit {
         // let contaCaixa = this.selectContaCaixa.find(x => x.value === this.IdContaCaixa);
         // console.log("Conta Caixa ----> " + contaCaixa.label)
         // sessionStorage.setItem('caixaBanco', contaCaixa.label)
-        this.router.navigate([`/lancamento-conta-caixa/${this.IdContaCaixa}`])
+        this.router.navigate([`/account-launch/${this.IdContaCaixa}`])        
         this.fecharModal()
     }
 }

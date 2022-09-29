@@ -27,7 +27,7 @@ export class ExtractComponent implements OnInit, OnDestroy {
     dataFinal
     jaPesquisou = false
     public loading: boolean
-    public top: number = 7
+    public top: number = 10
 
     totalItens;
 
@@ -91,7 +91,7 @@ export class ExtractComponent implements OnInit, OnDestroy {
                 event.first = 0
             }
 
-            this.carregaDados((event.first / 10) + 1, 7)
+            this.carregaDados((event.first / 10) + 1, this.top)
             this.loading = false
         }
     }

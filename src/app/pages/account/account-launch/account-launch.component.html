@@ -1,7 +1,7 @@
 <div class="content">
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-col-2">
-            <label>Conta: &nbsp; {{contaCaixa ? contaCaixa.Nome : nome}}</label><br>
+            <label style="font-weight: bold;">Conta: &nbsp; {{contaCaixa ? contaCaixa.Name : nome}}</label><br>
             <div class="p-inputgroup">
                 <input type="text" pInputText placeholder="Filtrar" (keypress)="pressionaEnter($event)" #inputPesquisa>
                 <button style="width: 15%;" pButton type="button" icon="fa fa-search" (click)="update()"></button>

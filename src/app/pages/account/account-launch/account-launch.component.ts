@@ -55,15 +55,18 @@ export class AccountLaunchComponent implements OnInit {
             this.nome = sessionStorage.getItem('caixaBanco')
         }
 
-        // this.networkService.buscar('contacaixa', this.id, null, getUrlCad()).subscribe(v => {
-        //     this.contaCaixa = v
-        //     this.carregarLista()
-        // })
+        this.networkService.buscar('ProAccount', this.id, null, getUrlPro()).subscribe(v => {
+            this.contaCaixa = v
+            // this.carregarLista()
+        })
 
     }
 
     contaTrocada() {
-        this.nome = sessionStorage.getItem('caixaBanco')
+        this.networkService.buscar('ProAccount', this.id, null, getUrlPro()).subscribe(v => {
+            this.contaCaixa = v
+            // this.carregarLista()
+        })
         this.modalTrocarConta = false
     }
 

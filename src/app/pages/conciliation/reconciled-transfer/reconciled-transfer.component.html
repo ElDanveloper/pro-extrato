@@ -1,5 +1,5 @@
 <div class="p-fluid p-formgrid p-grid" [formGroup]="form">
-    <div class="p-col-3">
+    <div class="p-col-4">
         <p-card>
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-col-8">
@@ -24,19 +24,25 @@
                     <div class="p-col-12 p-col-nopad">
                         <p-checkbox binary="true" formControlName="selecionar"></p-checkbox>
                         <label style="margin-left: 5px; font-weight: bold;">Selecionado</label>
-                    </div>                    
-                    <div class="p-col-12 p-col-nopad" style="margin-top: 5px;">
-                        <button pButton type="button" label="Transferência" (click)="transfer()"></button>
+                    </div>                                        
+                </div>   
+                <div class="p-col-4 p-g-nopad">
+                    <div class="p-col-12">
+                        <button pButton type="button" label="Novo" (click)="transfer(0)"></button>
                     </div>
-                </div>               
+                    &nbsp;        
+                    <div class="p-col-12">
+                        <button pButton type="button" label="Transferência" (click)="transfer(2)"></button>
+                    </div>                    
+                </div>            
             </div>
             &nbsp;
         </p-card>
     </div>
 
-    <div class="p-col-9" *ngIf="index == 0">
+    <div class="p-col-8" *ngIf="index == 0">
         <p-card>
-            <div class="o-col-12 p-fluid p-formgrid p-grid">                
+            <div class="p-col-12 p-fluid p-formgrid p-grid">                
                 <div class="p-col-8 p-fluid p-formgrid p-grid" style="margin-right: -150px;">
                     <div class="p-col-8">                      
                             <app-input-search-person [label]="'Pessoa'" formControlName="IdPessoa"
@@ -52,9 +58,6 @@
                 <div class="p-col-4 p-fluid p-formgrid p-grid" style="width: 450px;">                   
                     <div class="p-col-12">
                         <app-input  [label]="'Obs. Complementar'" formControlName="Obs"></app-input>                        
-                    </div>
-                    <div class="p-col-12" style="margin-top: 5px;">
-                        <app-select [label]="'Conta de Destino'" [options]="selectAccount" formControlName="AccountDestinyId"></app-select>
                     </div>                    
                     &nbsp;
                     <div class="buttons p-col-4 center-content" style="margin-top: 5px;">
@@ -112,16 +115,16 @@
     <div class="p-col-8" *ngIf="index == 2">
         <p-card>
             <div class="p-col-12 p-fluid">
-
                 <div class="p-col-12">
-                    <app-select label="Conta de Destino" [options]="selectContaDestino"
-                                formControlName="IdContaCaixaDestino"></app-select>
+                    <app-select [label]="'Conta de Destino'" [options]="selectAccount" formControlName="AccountDestinyId"></app-select>
                 </div>
+                &nbsp;
                 <div class="p-col-3">
                     <button pButton type="button" label="Conciliar" class="p-button-success"
-                            (click)="conciliarParaUnico('2')"></button>
+                            (click)="reconcileSingle()"></button>
                 </div>
-                <div class="p-col-6" style="margin-top: 5px;">
+                &nbsp;
+                <div class="p-col-6">
                     <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
                     <label style="margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
                 </div>
