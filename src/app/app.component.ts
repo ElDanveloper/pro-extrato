@@ -17,9 +17,9 @@ export class AppComponent implements OnInit {
         this.oneSignal.init({
             appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb",
             serviceWorkerParam: {
-                scope: "1/OneSignalSDKWorker.js"
+                scope: ""
               },
-              serviceWorkerPath: '2app.proextrato.com.br/OneSignalSDKWorker.js'
+              serviceWorkerPath: 'OneSignalSDKWorker.js'
           });
     }
 
