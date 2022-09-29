@@ -57,7 +57,7 @@ export class ModalOpeningBalanceComponent extends BaseFormPost implements OnInit
     }
 
     fecharModal() {
-        this.closeModal.emit(false)
+        this.dadosDefault.closeModal(this.hash)
         this.form.reset()        
       }
 

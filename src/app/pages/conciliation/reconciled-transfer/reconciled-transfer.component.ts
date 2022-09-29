@@ -125,8 +125,8 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         if (this.$buscarNaturezaSubscription) this.$buscarNaturezaSubscription.unsubscribe();
     }
 
-    transfer(){
-
+    transfer(n){
+        this.index = n
     }
    
     reconcileSingle() {
