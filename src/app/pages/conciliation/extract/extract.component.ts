@@ -1,4 +1,4 @@
-import { qtdLinhas } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlReport } from './../../../controller/staticValues';
 import { opcoesLinhas, getUrlPro } from '../../../controller/staticValues';
 import { DadosDefaultService } from '../../../services/dados-default.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -27,7 +27,7 @@ export class ExtractComponent implements OnInit, OnDestroy {
     dataFinal
     jaPesquisou = false
     public loading: boolean
-    public top: number = 10
+    public top: number = 7
 
     totalItens;
 
@@ -73,7 +73,7 @@ export class ExtractComponent implements OnInit, OnDestroy {
         // },500)
     }
 
-    carregaDados(page = 1, top = 10) {
+    carregaDados(page = 1, top = 7) {
         this.networkService.exibirLoader.next(true)
         this.$subscriptionExtratobanco = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}`, page, top).subscribe((x: any) => {
             this.totalItens = x.headers.get('total')
@@ -123,11 +123,19 @@ export class ExtractComponent implements OnInit, OnDestroy {
         return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
     }
 
-    downloadPdf() {
-        // this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.baixarPdf(getUrlFinanceiro(), `contabil/ExtratoPDF?DataIni=${this.dataInicial}&DataFim=${this.dataFinal}&IdConta=${Number(this.id)}&tipo=2`).subscribe(v => {
-        //     Util.savePdf(v)
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+    report(type) {             
+        let body = {
+            type: type,
+            date_ini: this.dataInicial,
+            date_end: this.dataFinal,
+            account_id: this.id,            
+        }
+
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+            if(type === 'pdf') Util.savePdf(v)
+            if(type === 'xls') Util.saveExcelFile(v)
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
     processConciliation() {

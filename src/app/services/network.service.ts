@@ -155,6 +155,12 @@ export class NetworkService {
         return this.http.post(`${url}/${entidade}`, data, {headers, responseType: 'arraybuffer', observe: 'response' })
     }
 
+    public baixarXls(url: string, entidade: string, data): Observable<any> {
+        let headers = new HttpHeaders();
+        headers = headers.set('Accept', 'application/excel;charset=UTF-8');
+        return this.http.post(`${url}/${entidade}`, data, {headers: headers, responseType: 'blob' as 'json', observe: 'response'})
+    }
+
     uploadCsvAndDownloadCsv(url, endpoint, file) {
         let headers = new HttpHeaders();
         headers = headers.set('Accept', 'text/csv;charset=UTF-8');

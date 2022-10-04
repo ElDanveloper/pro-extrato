@@ -247,6 +247,13 @@ export class Util {
         saveAs(file, fileName)
     }
 
+    static saveXls(v) {
+        let decoded = String.fromCharCode(...new Uint8Array(v.body));
+        const filename = v.headers.get('file-name')
+        const file = new Blob([decoded], {type: 'application/excel;charset=UTF-8'});
+        saveAs(file, filename)
+    }
+
     static saveExcelFile(v) {
         // @ts-ignore
         let fileName = v.headers.get('file-name')

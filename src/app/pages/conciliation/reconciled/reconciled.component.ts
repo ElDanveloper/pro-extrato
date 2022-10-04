@@ -1,5 +1,5 @@
 import { ProStatementItem } from 'src/app/model/pro-statement-item.model';
-import { opcoesLinhas, getUrlPro } from './../../../controller/staticValues';
+import { opcoesLinhas, getUrlPro, getUrlReport } from './../../../controller/staticValues';
 import { DadosDefaultService } from './../../../services/dados-default.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs";
@@ -30,9 +30,9 @@ export class ReconciledComponent implements OnInit, OnDestroy {
     dataFinal
     jaPesquisou = false
     public loading: boolean
-    public top: number = 10
+    public top: number = 7
 
-    itemsRowConciliacao = [       
+    itemsRowConciliacao = [
         {
             label: 'Excluir', icon: 'fa fa-trash', command: (e) => {
                 this.confirmationService.confirm({
@@ -66,17 +66,17 @@ export class ReconciledComponent implements OnInit, OnDestroy {
         this.carregarLista()
     }
 
-    carregarLista(page = 1, top = 10) {
+    carregarLista(page = 1, top = 7) {
         this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
             const param = parametros.params
             this.id = param.id
             this.dataInicial = param.dataInicial
-            this.dataFinal = param.dataFinal           
+            this.dataFinal = param.dataFinal
         })
 
         this.networkService.exibirLoader.next(true)
         // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
-        this.$subscriptionConciliados = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`, page, top).pipe(map((x: any) => x['body'].value)).subscribe(x => {            
+        this.$subscriptionConciliados = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`, page, top).pipe(map((x: any) => x['body'].value)).subscribe(x => {
             this.lista = x
         }).add(() => this.networkService.exibirLoader.next(false));
     }
@@ -86,11 +86,29 @@ export class ReconciledComponent implements OnInit, OnDestroy {
         if (this.$subscriptionConciliados) this.$subscriptionConciliados.unsubscribe();
     }
 
-    downloadPdf() {
-        // this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.baixarPdf(getUrlFinanceiro(), `contabil/ExtratoPDF?DataIni=${this.dataInicial}&DataFim=${this.dataFinal}&IdConta=${Number(this.id)}&tipo=3`).subscribe(v => {
-        //     Util.savePdf(v)
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+    descriptionSpecie(v) {
+        switch (v) {
+            case 'C':
+                return 'Crédito'
+            case 'D':
+                return 'Débito'
+        }
+    }
+
+    report(type) {
+        let body = {
+            type: type,
+            date_ini: this.dataInicial,
+            date_end: this.dataFinal,
+            account_id: this.id,
+            reconcilied: "S"
+        }
+
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+            if (type === 'pdf') Util.savePdf(v)
+            if (type === 'xls') Util.saveExcelFile(v)
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
     colorValue(v) {
@@ -105,7 +123,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `ProcessConciliate?DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&AccountId=${this.id}`).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Processo Realizado com Sucesso!'))
-        }).add(this.dadosDefault.exibirLoader.next(false))        
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
     public lazyLoad(event): void {

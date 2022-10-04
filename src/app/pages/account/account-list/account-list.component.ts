@@ -66,8 +66,32 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
     pressionaEnter(e) {
         if (e.key === 'Enter') this.carregarLista()
     }
+  
+    typeAccount(value) {
+        switch (value) {
+            case 1:
+                return 'Conta Corrente'                
+            case 2:
+                return 'Poupança'
+            case 3:
+                return 'Aplicação'
+            case 4:
+                return 'Garantia'
+            case 5:
+                return 'Cartão de Crédito'
+            case 6:
+                return 'Crediario'
+            case 7:
+                return 'Empréstimo'
+            case 8:
+                return 'Carteira Virtual'
+            case 9:
+                return 'Mutuo'
+            case 10:
+                return 'Caixa Interno'
+        }
 
-
+    }
 
     linkLaunch(v) {
         this.router.navigate([`/account-launch/${v.Id}`])

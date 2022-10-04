@@ -1,5 +1,5 @@
 import { Category } from './../../../model/category.model';
-import { qtdLinhas } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlReport } from './../../../controller/staticValues';
 import { ProStatementItem } from './../../../model/pro-statement-item.model';
 import { opcoesLinhas, getUrlPro } from '../../../controller/staticValues';
 import { DadosDefaultService } from '../../../services/dados-default.service';
@@ -31,7 +31,7 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
     dataFinal
 
     public loading: boolean
-    public top: number = 10
+    public top: number = 7
 
     totalItens;
 
@@ -89,11 +89,20 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
         if (this.$subscriptionContabilNaoConciliado) this.$subscriptionContabilNaoConciliado.unsubscribe();
     }
 
-    downloadPdf() {
+    report(type) {             
+        let body = {
+            type: type,
+            date_ini: this.dataInicial,
+            date_end: this.dataFinal,
+            account_id: this.id,
+            reconcilied: "N"
+        }
+
         this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.baixarPdf(getUrlFinanceiro(), `contabil/ExtratoPDF?DataIni=${this.dataInicial}&DataFim=${this.dataFinal}&IdConta=${Number(this.id)}&tipo=1`).subscribe(v => {
-        //     Util.savePdf(v)
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+        this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+            if(type === 'pdf') Util.savePdf(v)
+            if(type === 'xls') Util.saveExcelFile(v)
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
     colorValue(v) {
@@ -104,7 +113,7 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
         return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
     }
 
-    private carregarLista(page = 1, top = 10) {
+    private carregarLista(page = 1, top = 7) {
         // if (this.filterCategory) {
         //     this.dadosDefault.exibirLoader.next(true)
         //     this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
@@ -159,6 +168,10 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
         this.networkService.salvarPost(getUrlPro(), 'UpdateStatementItems', body).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Conciliação feita com sucesso!'))
             this.carregarLista()
+            listIds = []
+            body.FinancialId = 0
+            body.ListIds = []
+            this.selected = []
         }).add(this.dadosDefault.exibirLoader.next(false))
                 
     }

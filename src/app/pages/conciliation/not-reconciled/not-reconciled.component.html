@@ -5,8 +5,9 @@
     <div class="p-col-2" style="margin-top: 20px;">
         <button pButton label="Conciliar os Selecionados" (click)="reconcileSelected()"></button>
     </div>
-    <div class="p-col-1 p-offset-3" style="font-size: 18px; margin-right: -50px; margin-top: 25px;">
-        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="downloadPdf()"></i>
+    <div class="p-col-1 p-offset-2" style="font-size: 18px; margin-top: 25px; margin-right: -20px;">
+        <i class="pi pi-file-excel" style="font-size: 2rem; cursor: pointer; margin-right: 20px;" (click)="report('xls')"></i>
+        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="report('pdf')"></i>        
     </div>
     <div class="p-col-2" style="margin-top: 20px;">
         <button pButton label="Processar Conciliação" (click)="processConciliation()"></button>

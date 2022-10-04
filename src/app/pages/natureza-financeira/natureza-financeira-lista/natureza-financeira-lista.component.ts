@@ -42,7 +42,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     cadastrar = false
     opcoesTable = [
         {
-            label: 'Incluir Natureza', icon: 'fa fa-plus', command: (e) => {                          
+            label: 'Incluir Natureza', icon: 'fa fa-plus', command: (e) => {
                 this.natureza = e
                 this.include = true
                 this.modalCadastrarNatureza = true
@@ -97,7 +97,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
         if (e.key === 'Enter') this.loadList(1, 1000)
     }
 
-    loadList(page?, top?) {        
+    loadList(page?, top?) {
         let body = {}
         if (this.filtro !== '') {
             body = {
@@ -112,11 +112,29 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
         }).add(this.networkService.exibirLoader.next(false))
     }
 
-    expanded(){
+    expanded() {
         return ['IdNaturezaFinGrupo']
     }
 
-    public lazyLoad(event): void {        
+    report(type) {
+        let body = {
+            type: type,
+        }
+
+        this.dadosDefault.exibirLoader.next(true)
+        if (type === 'pdf') {
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'listCategoryFinance', body).subscribe(v => {                
+                Util.savePdf(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+        if (type === 'xls') {
+            this.networkService.baixarXls(getUrlReport(), 'listCategoryFinance', body).subscribe(v => {                
+                Util.saveXls(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+    }
+
+    public lazyLoad(event): void {
         // if (!this.jaPesquisou) return
         this.loading = true
         if (this.lista) {
@@ -124,7 +142,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
                 this.top = event.rows
                 event.first = 0
             }
-            
+
             this.loadList((event.first / 10) + 1, this.top)
             this.loading = false
         }
@@ -143,7 +161,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     filtrarEPesquisar(e?, page = 0) {
         if (e && e.key !== 'Enter') return
 
-       this.loadList(1, 10)
+        this.loadList(1, 10)
     }
 
 
@@ -175,7 +193,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     //     this.router.navigate([`/${this.entidade}/${Util.cadastroRoute()}/${rowData.IdPessoaEmpresa}`])
     // }
 
-    pdf(){
+    pdf() {
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.salvarEBaixarArquivo(getUrlReport(), 'listCategoryFinance', { type: "pdf" }).subscribe(v => {
             Util.savePdf(v)

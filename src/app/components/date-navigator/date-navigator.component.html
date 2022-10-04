@@ -12,7 +12,7 @@
 
     <div class="meses-options" [class.exibir-opcoes-mes]="exibirOpcoesMes" (clickOutside)="clickOutside()">
         <div style="width: 80px; margin-bottom: 10px;">
-        <!-- <p-dropdown [options]="anosOptions" [ngModel]="yearValueToDropdown" (onChange)="setYear($event)"></p-dropdown> -->
+        <p-dropdown [options]="anosOptions" [ngModel]="yearValueToDropdown" (onChange)="setYear($event)"></p-dropdown>
         </div>
         <div class="meses-options-itens">
             <div class="mes-item" (click)="setMonth(0)" [class.mes-item-selected]="dataInit.getMonth() === 0">Jan</div>

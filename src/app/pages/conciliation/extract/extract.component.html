@@ -1,9 +1,10 @@
 <div class="p-fluid p-formgrid p-grid">
     <div class="p-col-1">       
     </div>
-    <div class="p-col-1 p-offset-8" style="font-size: 18px; margin-right: -50px;">
-        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="downloadPdf()"></i>
-    </div>   
+    <div class="p-col-1 p-offset-8" style="font-size: 18px; margin-top: 5px; margin-right: -20px;">
+        <i class="pi pi-file-excel" style="font-size: 2rem; cursor: pointer; margin-right: 20px;" (click)="report('xls')"></i>
+        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="report('pdf')"></i>        
+    </div>
     <div class="p-col-2">
         <button pButton label="Processar Conciliação" (click)="processConciliation()"></button>
     </div>

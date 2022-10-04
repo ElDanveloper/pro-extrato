@@ -21,10 +21,10 @@
                         <div class="p-col-12"> {{data ? data.Historic : ''}} </div>
                     </div>
                      <br>
-                    <div class="p-col-12 p-col-nopad">
+                    <!-- <div class="p-col-12 p-col-nopad">
                         <p-checkbox binary="true" formControlName="selecionar"></p-checkbox>
                         <label style="margin-left: 5px; font-weight: bold;">Selecionado</label>
-                    </div>                                        
+                    </div>                                         -->
                 </div>   
                 <div class="p-col-4 p-g-nopad">
                     <div class="p-col-12">
@@ -55,11 +55,19 @@
                                 ></app-input-financial-category-search>                        
                     </div>                    
                 </div>
-                <div class="p-col-4 p-fluid p-formgrid p-grid" style="width: 450px;">                   
+                <div class="p-col-4 p-fluid p-formgrid p-grid" style="width: 400px;">                   
                     <div class="p-col-12">
                         <app-input  [label]="'Obs. Complementar'" formControlName="Obs"></app-input>                        
-                    </div>                    
-                    &nbsp;
+                    </div>               
+                    <br>
+                    <div class="p-fluid p-formgrid p-grid" style="margin-top: 5px; margin-left: 15px;">
+                        <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
+                        <label style="margin-left: 5px; margin-top: 5px; font-weight: bold;">Memorizar Procedimento</label>
+                    </div>
+                    <div class="p-fluid p-formgrid p-grid" style="margin-left: 20px; margin-top: 5px;">
+                        <p-checkbox binary="true" formControlName="memorizarPessoa"></p-checkbox>
+                        <label style="margin-left: 5px; margin-top: 5px; font-weight: bold;">Memorizar Pessoa</label>
+                    </div>
                     <div class="buttons p-col-4 center-content" style="margin-top: 5px;">
                         <button pButton type="button" label="Conciliar" class="p-button-success"
                                 (click)="reconcileSingle()"></button>
@@ -68,15 +76,7 @@
                         <button pButton type="button" label="Desconciliar" class="p-button"
                                 (click)="toReconcile()"></button>
                     </div>                    
-                </div>
-                <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 6px;">
-                    <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
-                    <label style="margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
-                </div>
-                <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 20px;">
-                    <p-checkbox binary="true" formControlName="memorizarPessoa"></p-checkbox>
-                    <label style="margin-left: 5px; font-weight: bold;">Memorizar Pessoa</label>
-                </div>
+                </div>                
             </div>                        
         </p-card>
     </div>
@@ -114,19 +114,18 @@
 
     <div class="p-col-8" *ngIf="index == 2">
         <p-card>
-            <div class="p-col-12 p-fluid">
+            <div class="p-col-12 p-fluid p-formgrid p-grid">
                 <div class="p-col-12">
-                    <app-select [label]="'Conta de Destino'" [options]="selectAccount" formControlName="AccountDestinyId"></app-select>
+                    <app-select [label]="'Conta de Destino'" [options]="optionsConta" formControlName="AccountDestinyId"></app-select>
                 </div>
                 &nbsp;
-                <div class="p-col-3">
+                <div class="buttons p-col-3 center-content" style="margin-top: 15px; margin-left: 3px;">
                     <button pButton type="button" label="Conciliar" class="p-button-success"
                             (click)="reconcileSingle()"></button>
-                </div>
-                &nbsp;
-                <div class="p-col-6">
+                </div>                
+                <div class="p-fluid p-formgrid p-grid" style="margin-left: 20px;">
                     <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
-                    <label style="margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
+                    <label style="margin-top: 18px; margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
                 </div>
             </div>
             &nbsp;

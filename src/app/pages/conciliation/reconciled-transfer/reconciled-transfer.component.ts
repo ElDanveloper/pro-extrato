@@ -38,10 +38,9 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     $buscarNaturezaSubscription: Subscription;
     index = 0;
     IdParcela = null
-  
+
     pessoa = null;
-    naturezaFinanceira = null;
-    selectAccount = []
+    naturezaFinanceira = null;    
 
     constructor(private fb: FormBuilder, private networkService: NetworkService, private router: Router, private dadosDefault: DadosDefaultService, private messageService: MessageService) {
         this.form = fb.group({
@@ -75,11 +74,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         return this.data.Amount
     }
 
-    ngOnInit() {
-        this.dadosDefault.conciliator().subscribe(value => {
-            this.selectAccount = value[0]
-        })
-
+    ngOnInit() {            
         if (this.data) {
             if (this.data.Reconciled === "P") {
                 this.index = 1
@@ -113,7 +108,9 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     }
 
     ngOnChanges(changes: SimpleChanges): void {
+        console.log(this.optionsConta.length)
         if (this.optionsConta) this.selectContaDestino = this.optionsConta
+        console.log(this.selectContaDestino.length)
         if (this.optionsNaturezaFinanceira) this.selectNaturezaFinanceira = this.optionsNaturezaFinanceira
     }
 
@@ -125,24 +122,24 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         if (this.$buscarNaturezaSubscription) this.$buscarNaturezaSubscription.unsubscribe();
     }
 
-    transfer(n){
+    transfer(n) {
         this.index = n
     }
-   
+
     reconcileSingle() {
-        
+
         // if(this.form.get('IdPessoa').value === ''){
         //     this.messageService.add(Util.pushInfoMessage('Favor informar a Pessoa!'))
         //     return
         // }
 
-        if(this.form.get('IdNatureza').value === undefined){
+        if (this.form.get('IdNatureza').value === undefined) {
             this.messageService.add(Util.pushInfoMessage('Favor informar a Categoria Financeira!'))
             return
         }
 
         let natureza = this.form.get('IdNatureza').value
-        let person = this.form.get('IdPessoa').value                
+        let person = this.form.get('IdPessoa').value
 
         const body = {
             Id: this.data.Id,
@@ -156,15 +153,15 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.atualizarPost(getUrlPro(), 'UpdateStatementItem', body).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Conciliado com Sucesso!'))
-            this.recarregarDados.emit(true)            
+            this.recarregarDados.emit(true)
         }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
-    toReconcile() {        
+    toReconcile() {
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `Desconciliate?Id=${this.data.Id}`).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Desconciliado com Sucesso!'))
-            this.recarregarDados.emit(true) 
+            this.recarregarDados.emit(true)
         }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
@@ -199,10 +196,10 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         // this.form.get('Historico').setValue(this.data.Historic + '  ' + e.Historic)
     }
 
-    selecionouPessoa(e) {                
+    selecionouPessoa(e) {
         if (e.FinancialCategoryId !== null && e.FinancialCategoryId !== undefined) {
             this.dadosDefault.exibirLoader.next(true)
-            this.networkService.getSimples(getUrlPro(), `FinancialCategory/${e.FinancialCategoryId}`).subscribe(v => {                
+            this.networkService.getSimples(getUrlPro(), `FinancialCategory/${e.FinancialCategoryId}`).subscribe(v => {
                 this.form.get('IdNatureza').setValue(v)
             }).add(this.dadosDefault.exibirLoader.next(false))
             // this.networkService.getSimples(getUrlCad(), `naturezaFinanceira?$filter=CodControle eq ${IdNatureza}`).subscribe((v: any) => {

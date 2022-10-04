@@ -10,13 +10,15 @@
         <!-- <div class="p-field p-col-12 p-md-2" style="position: relative;">
             <app-select #selectValue [options]="selectSort"></app-select>
         </div> -->
-        <div class="p-field p-col-12 p-md-2" style="margin-top: 10px;">
-            <!-- <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 25px; cursor: pointer;"></i> -->
-            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 95px; cursor: pointer" (click)="pdf()"></i>
+        <div class="p-field p-col-12 p-md-2" style="margin-top: 5px;">
+            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 95px; cursor: pointer;" (click)="report('xls')"></i>
+            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 25px; cursor: pointer" (click)="report('pdf')"></i>
         </div>
+        <!-- <div class="p-field p-col-12 p-md-2">
+            <button pButton label="Implantar Categoria" (click)="navegar()"></button>            
+        </div> -->
         <div class="p-field p-col-12 p-md-2">
-            <button pButton label="Nova Categoria" (click)="navegar()"></button>
-            
+            <button pButton label="Nova Categoria" (click)="navegar()"></button>            
         </div>
     </div>
 

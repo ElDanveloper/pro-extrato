@@ -1,3 +1,4 @@
+import { getUrlReport } from './../../../controller/staticValues';
 import { ProStatementItem } from '../../../model/pro-statement-item.model';
 import { getUrlPro } from '../../../controller/staticValues';
 import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
@@ -23,8 +24,8 @@ export class conciliatorComponent implements OnInit, OnDestroy {
     $subscriptionPreConciliadoNaoConciliadoQTD: Subscription;
     lista = []
 
-    selectContaCaixa = []
     selectNaturezaFinanceira = []
+    selectAccount = []
 
     dataPesquisa
 
@@ -42,6 +43,9 @@ export class conciliatorComponent implements OnInit, OnDestroy {
 
     
     ngOnInit() {
+        this.dadosDefault.conciliator().subscribe(value => {
+            this.selectAccount = value[0]
+        })
         setTimeout(() => {
 
             this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
@@ -69,11 +73,20 @@ export class conciliatorComponent implements OnInit, OnDestroy {
         if (this.$subscriptionPreConciliadoNaoConciliadoQTD) this.$subscriptionPreConciliadoNaoConciliadoQTD.unsubscribe();
     }
 
-    downloadPdf() {
-        // this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.baixarPdf(getUrlFinanceiro(), `contabil/ExtratoPDF?DataIni=${this.dataIni}&DataFim=${this.dataFim}&IdConta=${Number(this.id)}&tipo=0`).subscribe(v => {
-        //     Util.savePdf(v)
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+    report(type) {             
+        let body = {
+            type: type,
+            date_ini: this.dataIni,
+            date_end: this.dataFim,
+            account_id: this.id,
+            reconcilied: "N"
+        }
+
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+            if(type === 'pdf') Util.savePdf(v)
+            if(type === 'xls') Util.saveExcelFile(v)
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
     loadData() {
@@ -82,7 +95,7 @@ export class conciliatorComponent implements OnInit, OnDestroy {
         // this.$subscriptionPreConciliadoNaoConciliadoQTD = this.networkService.getSimplesQtd(getUrlFinanceiro(),
         //     `LancamentoPreConciliado?$filter=(IdContaCaixa eq ${this.dataPesquisa.idContaCaixa} and DataExtrato ge ${this.dataPesquisa.dataInicial} and DataExtrato le ${this.dataPesquisa.dataFinal} and (Conciliado eq 'N' or Conciliado eq 'P'))&$inlinecount=allpages&$top=0${Util.expandedQuery(LancamentoPreConciliado.expanded(), true)}`).subscribe(qtd => {
         //         this.totalItens = qtd
-        this.$subscriptionPreConciliadoNaoConciliado = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.dataPesquisa.idContaCaixa}&DateIni=${this.dataPesquisa.dataInicial}&DateEnd=${this.dataPesquisa.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`).pipe(map((x: any) => x.value)).subscribe(x => {                     
+        this.$subscriptionPreConciliadoNaoConciliado = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.dataPesquisa.idContaCaixa}&DateIni=${this.dataPesquisa.dataInicial}&DateEnd=${this.dataPesquisa.dataFinal}&Reconciled='N'&Pendentes=true${Util.expandedQuery(ProStatementItem.expanded(), true)}`).pipe(map((x: any) => x.value)).subscribe(x => {                     
             this.lista = x
             this.skip = this.skip + this.top
         }).add(() => this.dadosDefault.exibirLoader.next(false));

@@ -15,7 +15,10 @@
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista"  (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
         <ng-template pTemplate="header" let-columns>
             <tr>
-            <th [ngStyle]="{width: '40%'}"> Nome </th>            
+            <th [ngStyle]="{width: '20%'}"> Nome </th>
+            <th [ngStyle]="{width: '10%'}"> Saida </th>
+            <th [ngStyle]="{width: '10%'}"> Atualizado em</th>
+            <th [ngStyle]="{width: '10%'}"> Tipo </th>
             <th [ngStyle]="{width: '10%'}"> Conta </th>
             <th [ngStyle]="{width: '10%'}"> Agência </th>
             <th [ngStyle]="{width: '3%'}"> Ações </th>
@@ -24,6 +27,9 @@
         <ng-template pTemplate="body" let-rowData>
             <tr>
             <td><span (click)="linkLaunch(rowData)" class="link-pessoa">{{rowData.Name}}</span></td>
+            <td>{{rowData.DateRegister | date}}</td>
+            <td>{{rowData.DateUpdate | date}}</td>
+            <td>{{typeAccount(rowData.TypePro)}}</td>
             <td>{{rowData.AccountNumber}}</td>
             <td>{{rowData.BankAgency}}</td>
             <td><app-opcoes-table [value]="rowData"

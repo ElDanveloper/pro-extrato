@@ -1,4 +1,4 @@
-import { qtdLinhas } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlReport } from './../../../controller/staticValues';
 import { ProStatementItem } from './../../../model/pro-statement-item.model';
 import { opcoesLinhas, getUrlPro } from '../../../controller/staticValues';
 import { DadosDefaultService } from '../../../services/dados-default.service';
@@ -28,6 +28,7 @@ export class OutstandingComponent implements OnInit, OnDestroy {
     id
     dataInicial
     dataFinal
+    selected = [];
 
     public loading: boolean
     public top: number = 7
@@ -85,11 +86,34 @@ export class OutstandingComponent implements OnInit, OnDestroy {
         if (this.$subscriptionContabilNaoConciliado) this.$subscriptionContabilNaoConciliado.unsubscribe();
     }
 
-    downloadPdf() {
+    report(type) {             
+        let body = {
+            type: type,
+            date_ini: this.dataInicial,
+            date_end: this.dataFinal,
+            account_id: this.id,
+            reconcilied: "P"
+        }
+
         this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.baixarPdf(getUrlFinanceiro(), `contabil/ExtratoPDF?DataIni=${this.dataInicial}&DataFim=${this.dataFinal}&IdConta=${Number(this.id)}&tipo=1`).subscribe(v => {
-        //     Util.savePdf(v)
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+        this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+            Util.savePdf(v)
+        }).add(this.dadosDefault.exibirLoader.next(false))
+    }
+
+    processConciliationAll() {
+        this.confirmationService.confirm({
+            message: `Você tem certeza que deseja Processar Todos?`,
+            acceptLabel: `Sim`,
+            rejectLabel: `Não`,
+            accept: () => {
+                this.dadosDefault.exibirLoader.next(true)
+                this.networkService.getSimples(getUrlPro(), `UpdateStatementItemsPendingAll?DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&AccountId=${this.id}`).subscribe(v => {
+                    this.messageService.add(Util.pushSuccessMsg('Processado com Sucesso!'))
+                    this.carregarLista()
+                }).add(this.dadosDefault.exibirLoader.next(false))
+            }
+        })
     }
 
     colorValue(v) {
@@ -100,17 +124,17 @@ export class OutstandingComponent implements OnInit, OnDestroy {
         return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
     }
 
-    private carregarLista(page = 1, top = 10) {
+    private carregarLista(page = 1, top = 7) {
         this.dadosDefault.exibirLoader.next(true)
         // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
-        this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='P'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {            
+        this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='P'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
             this.totalItens = x.headers.get('total')
             this.lista = x.body['value']
             // this.lista = x
         }).add(() => this.dadosDefault.exibirLoader.next(false));
     }
 
-    public lazyLoad(event): void {        
+    public lazyLoad(event): void {
         // if (!this.jaPesquisou) return
         this.loading = true
         if (this.lista) {
@@ -118,16 +142,26 @@ export class OutstandingComponent implements OnInit, OnDestroy {
                 this.top = event.rows
                 event.first = 0
             }
-            
-            this.carregarLista((event.first / 10) + 1, 7)
+
+            this.carregarLista((event.first / 10) + 1, this.top)
             this.loading = false
         }
     }
 
-    processConciliation() {
+    processSelected() {
+        if (this.selected.length < 1) {
+            this.messageService.add(Util.pushInfoMessage("Selecione pelo menos um item."))
+            return
+        }
+
+        let listIds = this.selected.map(v => v.Id.toString())
+
         this.dadosDefault.exibirLoader.next(true)
-        this.networkService.getSimples(getUrlPro(), `ProcessConciliate?DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&AccountId=${this.id}`).subscribe(v => {
+        this.networkService.atualizarPost(getUrlPro(), `UpdateStatementItemsPending`, listIds).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Processo Realizado com Sucesso!'))
+            this.carregarLista()
+            listIds = []
+            this.selected = []
         }).add(this.dadosDefault.exibirLoader.next(false))
     }
 

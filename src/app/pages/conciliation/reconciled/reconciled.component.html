@@ -1,6 +1,7 @@
 <div class="p-fluid p-formgrid p-grid">
-    <div class="p-col-1 p-offset-9" style="font-size: 18px; margin-right: -50px;">
-        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="downloadPdf()"></i>
+    <div class="p-col-1 p-offset-8" style="font-size: 18px; margin-top: 5px; margin-right: -20px;">
+        <i class="pi pi-file-excel" style="font-size: 2rem; cursor: pointer; margin-right: 20px;" (click)="report('xls')"></i>
+        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="report('pdf')"></i>        
     </div>
     <div class="p-col-2" style="margin-bottom: 10px;">
         <button pButton label="Processar Conciliação" (click)="processConciliation()"></button>
@@ -22,8 +23,8 @@
                 <th style="width: 6%;" pSortableColumn="Amount">Valor
                     <p-sortIcon field="Amount"></p-sortIcon>
                 </th>
-                <th style="width: 4%;" pSortableColumn="ReconciledType">Tipo
-                    <p-sortIcon field="ReconciledType"></p-sortIcon>
+                <th style="width: 4%;" pSortableColumn="Specie">Tipo
+                    <p-sortIcon field="Specie"></p-sortIcon>
                 </th>
                 <th style="width: 14%;" pSortableColumn="PersonName">Pessoa
                     <p-sortIcon field="PersonName"></p-sortIcon>
@@ -40,7 +41,7 @@
                 <td>{{rowData.Historic}}</td>
                 <td>{{rowData.Document}}</td>
                 <td appAlinharDireita [ngClass]="colorValue(rowData.Amount)">{{rowData.Amount | virgulaPipe}}</td>
-                <td>{{rowData.ReconciledType}}</td>
+                <td>{{descriptionSpecie(rowData.Specie)}}</td>
                 <td>{{rowData.PersonName}}</td>
                 <td>{{rowData.Category}}</td>
                 <td>

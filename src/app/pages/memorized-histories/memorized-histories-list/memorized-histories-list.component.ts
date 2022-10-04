@@ -27,7 +27,23 @@ export class MemorizedHistoriesListComponent extends BaseListSimples implements 
 
     opcoesTable = [        
         {
-            label: 'Excluir', icon: 'fa fa-close', command: (e) => {}
+            label: 'Excluir', icon: 'fa fa-close', command: (e) => {
+                this.confirmationService.confirm({
+                    message: `Você tem certeza que deseja deletar?`,
+                    acceptLabel: `Sim`,
+                    rejectLabel: `Não`,
+                    accept: () => {
+                        // this.dadosDefault.exibirLoader.next(true)
+                        this.networkService.getSimples(getUrlPro(), `DeleteCategory?CategoryId=${e.Id}`).subscribe(v => {
+                            this.messageService.add(Util.pushSuccessMsg("Exclusão realizada com Sucesso!"))
+                            this.lista = []
+                            this.carregarLista()
+                            // window.location.reload()
+                        })
+                        // .add(this.dadosDefault.exibirLoader.next(false))
+                    }
+                })
+            }
         }
     ]    
 

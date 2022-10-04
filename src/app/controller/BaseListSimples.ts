@@ -79,6 +79,7 @@ export class BaseListSimples implements OnDestroy {
 
     public carregarDados(parametros = ''): void {
         this.$subscriptionListar = this.networkService.getSimples(this.url, `${this.entidade}${parametros}`).subscribe((listaSec: any) => {
+            console.log(listaSec)
             if (listaSec[0]) {
                 this.totalItens = listaSec[0] ? listaSec[0]['QtdReg'] : 0;
             } else {

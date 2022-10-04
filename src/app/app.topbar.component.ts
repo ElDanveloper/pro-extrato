@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { DadosDefaultService } from './services/dados-default.service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import {AppMainComponent} from './app.main.component';
+import { AppMainComponent } from './app.main.component';
 import { EMPRESA_STORAGE_KEY } from './controller/staticValues';
 
 @Component({
@@ -15,49 +15,50 @@ export class AppTopbarComponent {
     public counter = ''
 
     public labelEnvironment = ''
-    
+
 
     @ViewChild('trocarempresa') trocarEmpresa: ElementRef;
 
-    constructor(public app: AppMainComponent, public dadosDefault: DadosDefaultService, public router: Router) {}
+    constructor(public app: AppMainComponent, public dadosDefault: DadosDefaultService, public router: Router) { }
 
-    ngOnInit(): void {     
+    ngOnInit(): void {
         this.counter = localStorage.getItem('counter')
 
-        if(this.counter === 'false') {
+        if (this.counter === 'false') {
             this.labelEnvironment = 'Ambiente Empresa'
-            this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']            
-        }else {
+            this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
+        } else {
             this.labelEnvironment = 'Ambiente Contador'
         }
         // if(JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome'])
         //     this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome']
     }
 
-    deslogar() {        
+    deslogar() {
         sessionStorage.clear()
         localStorage.clear()
         this.dadosDefault.counterEnvironment.next(false)
         this.router.navigate(['/login']);
     }
 
-    abrirModalTrocarEmpresa(){
+    abrirModalTrocarEmpresa() {
         this.trocarEmpresa.nativeElement.click();
     }
 
-    modalFechado(){         
+    modalFechado() {
+        // this.router.navigate(['/home'])
         localStorage.setItem('counter', 'false')
         this.counter = 'false'
         this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
         this.labelEnvironment = 'Ambiente Empresa'
-        this.router.navigate(['/home']);
-        window.location.reload()
+        
+
     }
 
-    navegar(pagina) {        
-        switch(pagina){
-        case 1:            
-            this.router.navigate([`users-list`]);
+    navegar(pagina) {
+        switch (pagina) {
+            case 1:
+                this.router.navigate([`users-list`]);
         }
     }
 

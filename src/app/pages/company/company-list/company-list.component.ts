@@ -1,3 +1,5 @@
+import { Util } from './../../../controller/Util';
+import { getUrlPro } from './../../../controller/staticValues';
 import { BaseListSimplesHeaders } from './../../../controller/BaseListSimplesHeaders';
 import { NetworkService } from '../../../services/network.service';
 import { qtdLinhas, getUrlClient } from '../../../controller/staticValues';
@@ -38,7 +40,22 @@ export class CompanyListComponent extends BaseListSimplesHeaders implements OnIn
                 this.router.navigate([`/company-registration/${e.id}`])
             }
         },
-        { label: 'Excluir', icon: 'fa fa-close', command: (e) => { } },
+        { label: 'Excluir', icon: 'fa fa-close', command: (e) => {
+            this.confirmationService.confirm({
+                message: `Você tem certeza que deseja deletar?`,
+                acceptLabel: `Sim`,
+                rejectLabel: `Não`,
+                accept: () => {
+                    this.networkService.exibirLoader.next(true)
+                    this.networkService.getSimples(getUrlPro(), `DeleteCompany?ContractorClientId=${e.Id}`).subscribe(v => {
+                        this.messageService.add(Util.pushSuccessMsg("Exclusão realizada com Sucesso!"))
+                        this.lista = []
+                        this.carregarDados()
+                        // window.location.reload()
+                    }).add(this.networkService.exibirLoader.next(false))
+                }
+            })
+         } },
         {
             label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {
                 this.router.navigate([`/historico-pessoa/${e.Id}`])
