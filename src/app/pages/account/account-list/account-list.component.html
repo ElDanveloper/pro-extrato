@@ -5,35 +5,38 @@
                 <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" pInputText>
                 <button pButton type="button" icon="fa fa-search" (click)="carregarLista()"></button>
             </div>
-        </div>        
+        </div>
         <div class="p-field p-offset-2 p-col-12 p-md-2">
             <button pButton label="Nova Conta" (click)="newAccount()"></button>
             <!-- (click)="navegar()" -->
         </div>
     </div>
 
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista"  (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
+        [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista"
+        (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="[7,10,20,30,40,50,60,70,80,90,100]">
         <ng-template pTemplate="header" let-columns>
             <tr>
-            <th [ngStyle]="{width: '20%'}"> Nome </th>
-            <th [ngStyle]="{width: '10%'}"> Saida </th>
-            <th [ngStyle]="{width: '10%'}"> Atualizado em</th>
-            <th [ngStyle]="{width: '10%'}"> Tipo </th>
-            <th [ngStyle]="{width: '10%'}"> Conta </th>
-            <th [ngStyle]="{width: '10%'}"> Agência </th>
-            <th [ngStyle]="{width: '3%'}"> Ações </th>
+                <th [ngStyle]="{width: '20%'}"> Nome </th>
+                <th [ngStyle]="{width: '10%'}"> Saida </th>
+                <th [ngStyle]="{width: '10%'}"> Atualizado em</th>
+                <th [ngStyle]="{width: '10%'}"> Tipo </th>
+                <th [ngStyle]="{width: '10%'}"> Conta </th>
+                <th [ngStyle]="{width: '10%'}"> Agência </th>
+                <th [ngStyle]="{width: '3%'}"> Ações </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
             <tr>
-            <td><span (click)="linkLaunch(rowData)" class="link-pessoa">{{rowData.Name}}</span></td>
-            <td>{{rowData.DateRegister | date}}</td>
-            <td>{{rowData.DateUpdate | date}}</td>
-            <td>{{typeAccount(rowData.TypePro)}}</td>
-            <td>{{rowData.AccountNumber}}</td>
-            <td>{{rowData.BankAgency}}</td>
-            <td><app-opcoes-table [value]="rowData"
-                                  [opcoes]="opcoesTable"></app-opcoes-table></td>
+                <td><span (click)="linkLaunch(rowData)" class="link-pessoa">{{rowData.Name}}</span></td>
+                <td>{{rowData.DateRegister | date}}</td>
+                <td>{{rowData.DateUpdate | date}}</td>
+                <td>{{typeAccount(rowData.TypePro)}}</td>
+                <td>{{rowData.AccountNumber}}</td>
+                <td>{{rowData.BankAgency}}</td>
+                <td>
+                    <app-opcoes-table [value]="rowData" [opcoes]="opcoesTable"></app-opcoes-table>
+                </td>
             </tr>
         </ng-template>
     </p-table>
@@ -48,8 +51,10 @@
     <app-modal-account-registration #content [hash]="'1Acd5WGj70'"></app-modal-account-registration>
 </app-modal> -->
 
-<app-modal [styleScroll]="{width: '100%', height: '500px'}" [fundo]="true" *appModalOpenOnClick="[registrationAccount, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
-    <app-modal-account-registration #content (closeModal)="carregarLista()" [hash]="'1Acd5WGj70'"></app-modal-account-registration>
+<app-modal [styleScroll]="{width: '100%', height: '500px'}" [fundo]="true"
+    *appModalOpenOnClick="[registrationAccount, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
+    <app-modal-account-registration #content (closeModal)="carregarLista()" [hash]="'1Acd5WGj70'">
+    </app-modal-account-registration>
 </app-modal>
 
 <p-confirmDialog header="Confirmacao" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>

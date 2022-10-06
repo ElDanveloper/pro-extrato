@@ -82,7 +82,7 @@ export class ExtractComponent implements OnInit, OnDestroy {
         }).add(() => this.networkService.exibirLoader.next(false));
     }
 
-    public lazyLoad(event): void {
+    public lazyLoad(event): void {        
         if (!this.jaPesquisou) return;
         this.loading = true
         if (this.extratoContaBanco) {
@@ -91,7 +91,7 @@ export class ExtractComponent implements OnInit, OnDestroy {
                 event.first = 0
             }
 
-            this.carregaDados((event.first / 10) + 1, this.top)
+            this.carregaDados((event.first / this.top) + 1, this.top)
             this.loading = false
         }
     }
@@ -132,10 +132,17 @@ export class ExtractComponent implements OnInit, OnDestroy {
         }
 
         this.dadosDefault.exibirLoader.next(true)
-        this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
-            if(type === 'pdf') Util.savePdf(v)
-            if(type === 'xls') Util.saveExcelFile(v)
-        }).add(this.dadosDefault.exibirLoader.next(false))
+        if (type === 'pdf') {
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
+                Util.savePdf(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+        if (type === 'xls') {
+            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
+                Util.saveXls(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+       
     }
 
     processConciliation() {

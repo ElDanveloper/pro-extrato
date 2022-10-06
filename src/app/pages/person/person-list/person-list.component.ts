@@ -1,3 +1,4 @@
+import { opcoesLinhas } from './../../../controller/staticValues';
 import { BaseListSimplesHeaders } from './../../../controller/BaseListSimplesHeaders';
 import { DadosDefaultService } from '../../../services/dados-default.service';
 import { PersonClient } from '../../../model/person-client.model';
@@ -21,6 +22,7 @@ export class PersonListComponent extends BaseListSimplesHeaders implements OnIni
     @ViewChild('cadastrarPessoa') cadastrarPessoa: ElementRef;
     
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     modalCadastrarPessoa = false
     totalItens2: number = 0
     // lista2 = []

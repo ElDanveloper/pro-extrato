@@ -83,10 +83,16 @@ export class conciliatorComponent implements OnInit, OnDestroy {
         }
 
         this.dadosDefault.exibirLoader.next(true)
-        this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
-            if(type === 'pdf') Util.savePdf(v)
-            if(type === 'xls') Util.saveExcelFile(v)
-        }).add(this.dadosDefault.exibirLoader.next(false))
+        if (type === 'pdf') {
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
+                Util.savePdf(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+        if (type === 'xls') {
+            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
+                Util.saveXls(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
     }
 
     loadData() {

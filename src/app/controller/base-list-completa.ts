@@ -168,9 +168,14 @@ export class BaseListCompleta implements OnDestroy {
         const dataIni = dataInicial.getFullYear() + '-' + this.addZero(dataInicial.getMonth() + 1) + '-' + this.addZero(dataInicial.getDate()) + 'T00:00:00'
         const dataFim = dataFinal.getFullYear() + '-' + this.addZero(dataFinal.getMonth() + 1) + '-' + this.addZero(dataFinal.getDate()) + 'T23:59:59'
 
-             
-       let filter = `$filter=(${this.atributoFiltroComData} ge ${dataIni} and ${this.atributoFiltroComData} le ${dataFim}`
-        
+        let filter = ''
+
+        if(v && this.atributoFiltroComData === undefined) filter = '$filter=('
+
+        if (this.atributoFiltroComData) {
+           filter = `$filter=(${this.atributoFiltroComData} ge ${dataIni} and ${this.atributoFiltroComData} le ${dataFim}`
+        }
+
         if (this.filtroFixo) filter = filter + this.filtroFixo
 
         // @ts-ignore
@@ -193,16 +198,16 @@ export class BaseListCompleta implements OnDestroy {
                     //filter = filter + ' and '
                 }
                 if (campo.tipo === 'string' && v !== '') {
-                    if (!notFirst) filter = filter + ' and('
+                    if (!notFirst && this.atributoFiltroComData) filter = filter + ' and('
                     filter = filter + `contains(lower(${campo.campo}), '${Util.lower(v)}')`
-                    console.log(filter);
+                    // console.log(filter);
                     notFirst = true
                 } else if (campo.tipo === 'number' && v !== '' && v.toString().match(/^\d+$/)) {
                     if (!notFirst) filter = filter + ' and('
                     filter = filter + `(${campo.campo} eq ${Number(v)})`
                     notFirst = true
                 }
-                if (notFirst && i2 === this.camposFiltro.length - 1) {
+                if (notFirst && i2 === this.camposFiltro.length - 1 && this.atributoFiltroComData) {
                     filter = filter + ')'
                 }
 

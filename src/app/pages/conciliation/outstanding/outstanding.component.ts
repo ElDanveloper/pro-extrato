@@ -33,6 +33,8 @@ export class OutstandingComponent implements OnInit, OnDestroy {
     public loading: boolean
     public top: number = 7
 
+    jaPesquisou = false
+
     totalItens;
 
     lista = []
@@ -96,9 +98,17 @@ export class OutstandingComponent implements OnInit, OnDestroy {
         }
 
         this.dadosDefault.exibirLoader.next(true)
-        this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
-            Util.savePdf(v)
-        }).add(this.dadosDefault.exibirLoader.next(false))
+        if (type === 'pdf') {
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
+                Util.savePdf(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+        if (type === 'xls') {
+            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
+                Util.saveXls(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+        
     }
 
     processConciliationAll() {
@@ -130,12 +140,13 @@ export class OutstandingComponent implements OnInit, OnDestroy {
         this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='P'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
             this.totalItens = x.headers.get('total')
             this.lista = x.body['value']
+            this.jaPesquisou = true
             // this.lista = x
         }).add(() => this.dadosDefault.exibirLoader.next(false));
     }
 
     public lazyLoad(event): void {
-        // if (!this.jaPesquisou) return
+        if (!this.jaPesquisou) return
         this.loading = true
         if (this.lista) {
             if (this.top !== event.rows && event.rows !== undefined) {
@@ -143,7 +154,7 @@ export class OutstandingComponent implements OnInit, OnDestroy {
                 event.first = 0
             }
 
-            this.carregarLista((event.first / 10) + 1, this.top)
+            this.carregarLista((event.first / this.top) + 1, this.top)
             this.loading = false
         }
     }

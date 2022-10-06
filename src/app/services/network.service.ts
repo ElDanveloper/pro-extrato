@@ -163,7 +163,7 @@ export class NetworkService {
 
     uploadCsvAndDownloadCsv(url, endpoint, file) {
         let headers = new HttpHeaders();
-        headers = headers.set('Accept', 'text/csv;charset=UTF-8');
+        headers = headers.set('Accept', 'application/octet-stream;charset=UTF-8');
         return this.http.post(`${url}/${endpoint}`, file, {headers, responseType: 'arraybuffer', observe: 'response' })
     }
 

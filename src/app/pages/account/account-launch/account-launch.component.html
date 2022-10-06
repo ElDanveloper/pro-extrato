@@ -104,13 +104,12 @@
             <tr>
                 <td colspan="6">
                     <p-table [paginator]="true" [(rows)]="qtdLinhas" [rowsPerPageOptions]="opcoesLinhas"
-                        [totalRecords]="lista2.length" [value]="lista2">
-                        <ng-template pTemplate="header">
+                        [totalRecords]="quantityItems" [value]="lista2" (onLazyLoad)="lazyLoad($event)" [lazy]="true">
+                        <ng-template pTemplate="header" let-columns>
             <tr>
                 <th style="width: 60%;">Histórico</th>
-                <th style="width: 10%;">Documento</th>
-                <th style="width: 10%;">Entrada</th>
-                <th style="width: 10%;">Saída</th>
+                <th style="width: 10%;">Documento</th>                
+                <th style="width: 10%;">Valor</th>
                 <th style="width: 10%;">Tipo</th>
                 <th style="width: 45px;"></th>
             </tr>
@@ -118,10 +117,8 @@
         <ng-template pTemplate="body" let-rowData2 let-columns="columns">
             <tr>
                 <td>{{rowData2.Historic}}</td>
-                <td>{{rowData2.Document}}</td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData2.Debitos)">{{getValor(rowData2.Debitos) |
-                    CommaPipeZero}}</td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData2.Amount)">{{getValor(rowData2.Amount) |
+                <td>{{rowData2.Document}}</td>                
+                <td appAlignRight [ngClass]="colorValue(rowData2.Amount)">{{getValor(rowData2.Amount) |
                     CommaPipeZero}}</td>
                 <td>{{rowData2.Specie}}</td>
                 <td>

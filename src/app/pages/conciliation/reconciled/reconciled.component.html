@@ -7,7 +7,7 @@
         <button pButton label="Processar Conciliação" (click)="processConciliation()"></button>
     </div>
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
-         [value]="lista" [paginator]="true" [rows]="10" [totalRecords]="lista.length"
+         [value]="lista" [paginator]="true" [rows]="qtdLinhas" [totalRecords]="quantityItems"
         [rowsPerPageOptions]="opcoesLinhas" (onLazyLoad)="lazyLoad($event)" [lazy]="true">
         <ng-template pTemplate="header" let-columns>
             <tr>                

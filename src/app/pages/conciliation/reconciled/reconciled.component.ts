@@ -1,5 +1,5 @@
 import { ProStatementItem } from 'src/app/model/pro-statement-item.model';
-import { opcoesLinhas, getUrlPro, getUrlReport } from './../../../controller/staticValues';
+import { opcoesLinhas, getUrlPro, getUrlReport, qtdLinhas } from './../../../controller/staticValues';
 import { DadosDefaultService } from './../../../services/dados-default.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs";
@@ -21,6 +21,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
     $subscriptionConciliados: Subscription;
     contabilConciliados = []
     opcoesLinhas = opcoesLinhas()
+    qtdLinhas = qtdLinhas()
 
     lista = []
     selected = [];
@@ -31,6 +32,8 @@ export class ReconciledComponent implements OnInit, OnDestroy {
     jaPesquisou = false
     public loading: boolean
     public top: number = 7
+
+    quantityItems = 0
 
     itemsRowConciliacao = [
         {
@@ -76,8 +79,10 @@ export class ReconciledComponent implements OnInit, OnDestroy {
 
         this.networkService.exibirLoader.next(true)
         // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
-        this.$subscriptionConciliados = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`, page, top).pipe(map((x: any) => x['body'].value)).subscribe(x => {
-            this.lista = x
+        this.$subscriptionConciliados = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='S'`, page, top).pipe(map((x: any) => x)).subscribe(x => {
+            this.lista = x['body'].value
+            this.quantityItems = Util.toNumber(x.headers.get('total'))
+            this.jaPesquisou = true
         }).add(() => this.networkService.exibirLoader.next(false));
     }
 
@@ -105,10 +110,17 @@ export class ReconciledComponent implements OnInit, OnDestroy {
         }
 
         this.dadosDefault.exibirLoader.next(true)
-        this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
-            if (type === 'pdf') Util.savePdf(v)
-            if (type === 'xls') Util.saveExcelFile(v)
-        }).add(this.dadosDefault.exibirLoader.next(false))
+        if (type === 'pdf') {
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
+                Util.savePdf(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+        if (type === 'xls') {
+            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
+                Util.saveXls(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+        
     }
 
     colorValue(v) {
@@ -135,7 +147,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
                 event.first = 0
             }
 
-            this.carregarLista((event.first / 10) + 1, this.top)
+            this.carregarLista((event.first / this.top) + 1, this.top)
             this.loading = false
         }
     }

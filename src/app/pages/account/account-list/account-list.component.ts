@@ -7,6 +7,7 @@ import { qtdLinhas, } from '../../../controller/staticValues';
 import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import { Router } from "@angular/router";
+import { BaseListCompleta } from 'src/app/controller/base-list-completa';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Router } from "@angular/router";
     templateUrl: './account-list.component.html',
     styleUrls: ['./account-list.component.css']
 })
-export class AccountListComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class AccountListComponent extends BaseListCompleta implements OnInit, OnDestroy {
 
     @ViewChild('registrationAccount') registrationAccount: ElementRef;
 
@@ -55,7 +56,11 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
     filtro = ''
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'proaccount', null, 'Name')
+        super(messageService, confirmationService, networkService, router, 'proaccount', getUrlPro(), null, [{ campo: 'Name', tipo: 'string' },])        
+        this.sortField = 'Name'
+        this.sortOrder = 'desc'
+        // this.atributoFiltroComData = 'Datacadastro'
+        // this.filtroCampo = 'Status'
         
     }
 

@@ -248,9 +248,9 @@ export class Util {
     }
 
     static saveXls(v) {
-        let decoded = String.fromCharCode(...new Uint8Array(v.body));
+        // let decoded = String.fromCharCode(...new Uint8Array(v.body));
         const filename = v.headers.get('file-name')
-        const file = new Blob([decoded], {type: 'application/excel;charset=UTF-8'});
+        const file = new Blob([v.body], {type: 'application/octet-stream'});
         saveAs(file, filename)
     }
 

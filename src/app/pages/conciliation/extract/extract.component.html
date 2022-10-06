@@ -10,8 +10,7 @@
     </div>
 </div>
 <div class="p-col p-fluid">
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="extratoContaBanco" (onLazyLoad)="lazyLoad($event)" [lazy]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">    
-        [rowsPerPageOptions]="opcoesLinhas">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="extratoContaBanco" (onLazyLoad)="lazyLoad($event)" [lazy]="true" [rowsPerPageOptions]="[7,10,20,30,40,50,60,70,80,90,100]">
         <ng-template pTemplate="header">
             <tr>
                 <th style="width: 12%;" pSortableColumn="DateMovement">Data do Movemto
@@ -29,7 +28,7 @@
                 <th style="width: 5%;"></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <ng-template pTemplate="body" let-rowData>
             <tr>
                 <td appAlignCenter>{{rowData.DateMovement | date}}</td>
                 <td>{{rowData.Historic}}</td>

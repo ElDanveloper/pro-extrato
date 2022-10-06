@@ -1,7 +1,7 @@
 import { Util } from './../../../controller/Util';
 import { DadosDefaultService } from 'src/app/services/dados-default.service';
 import { NetworkService } from './../../../services/network.service';
-import { qtdLinhas, getUrlClient, getUrlPro, getUrlReport } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlClient, getUrlPro, getUrlReport, opcoesLinhas } from './../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, Message, MessageService, SelectItem } from "primeng/api";
@@ -30,6 +30,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     public totalItens2: number
     modalCadastrarNatureza = false
     natureza = null
@@ -89,7 +90,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) { }
 
     ngOnInit() {
-        this.loadList(1, 10)
+        this.loadList(1, 7)
         // this.totalItens2 = this.lista.length
     }
 
@@ -109,6 +110,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
             this.lista = v.body['value']
             let pagina = v.headers.get('total')
             this.totalItens = Util.toNumber(pagina)
+            this.jaPesquisou = true
         }).add(this.networkService.exibirLoader.next(false))
     }
 
@@ -135,7 +137,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     }
 
     public lazyLoad(event): void {
-        // if (!this.jaPesquisou) return
+        if (!this.jaPesquisou) return
         this.loading = true
         if (this.lista) {
             if (this.top !== event.rows && event.rows !== undefined) {
@@ -143,7 +145,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
                 event.first = 0
             }
 
-            this.loadList((event.first / 10) + 1, this.top)
+            this.loadList((event.first / this.top) + 1, this.top)
             this.loading = false
         }
     }

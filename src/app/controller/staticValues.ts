@@ -20,8 +20,8 @@ export const URL_API_STORAGE_KEY = 'url_api'
 export const PERMISSOES = 'permissoes'
 export const VERSAO_SISTEMA = 'versao_sistema'
 
-export const qtdLinhas = () => 10
-export const opcoesLinhas = () => [10,20,30,40,50,60,70,80,90,100, 500, 1000]
+export const qtdLinhas = () => 7
+export const opcoesLinhas = () => [7,10,20,30,40,50,60,70,80,90,100, 500, 1000]
 
 export const getUrlCad = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}cad/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
 // export const getUrlVenda = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}venda/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`

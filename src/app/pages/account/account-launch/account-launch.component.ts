@@ -28,6 +28,12 @@ export class AccountLaunchComponent implements OnInit {
     opcoesLinhas = opcoesLinhas()
     modalTrocarConta = false
     modalEditStatementItems = false
+    public top: number = qtdLinhas()
+
+    jaPesquisou = false
+    public loading: boolean
+
+    quantityItems = 0
 
     dados = null
 
@@ -159,22 +165,39 @@ export class AccountLaunchComponent implements OnInit {
 
     }
 
-    tableExpand(v, expanded) {        
+    tableExpand(v, expanded, pag = 1, top = 7) {             
         if (expanded) return
         if (!v) return       
         this.dados = v
 
+        console.log('--> ' + v + ' - ' + expanded + ' - ' + pag + ' - ' + top)
+
         // const filtro = `IdPlanoConta=${v.IdPlanoConta}&Limit=50&pagina=0&Data=${v.Data}`
 
         this.dadosDefault.exibirLoader.next(true)
-        this.networkService.getSimples(getUrlPro(), `StatementItems?DateIni=${v.DateBalance}&DateEnd=${v.DateBalance}&AccountId=${this.id}${Util.expandedQuery(['FinancialCategoryId'], true)}`).subscribe((v: any) => {
-            this.lista2 = v.value;
+        this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?DateIni=${v.DateBalance}&DateEnd=${v.DateBalance}&AccountId=${this.id}${Util.expandedQuery(['FinancialCategoryId'], true)}`, pag, top).subscribe((v: any) => {
+            this.lista2 = v['body'].value; 
+            this.quantityItems = Util.toNumber(v.headers.get('total'))            
+            this.jaPesquisou = true
         }).add(() => this.dadosDefault.exibirLoader.next(false))
 
         // this.networkService.salvarPost(getUrlRelatorio(), 'Contas/RelBoletosReceber', filtro).subscribe((v: any) => {
         //     this.jaPesquisou = true
         //     this.lista2 = v
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
+    public lazyLoad(event): void {               
+        if (!this.jaPesquisou) return;        
+        this.loading = true
+        if (this.lista2) {            
+            if (this.top !== event.rows && event.rows !== undefined) {
+                this.top = event.rows
+                event.first = 0
+            }
+            this.tableExpand(this.dados, false, (event.first / this.top) + 1, this.top)
+            this.loading = false
+        }
     }
 
     pressionaEnter($event: KeyboardEvent) {
