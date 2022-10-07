@@ -3,7 +3,7 @@
         <div class="p-col-2">
             <label style="font-weight: bold;">Conta: &nbsp; {{contaCaixa ? contaCaixa.Name : nome}}</label><br>
             <div class="p-inputgroup">
-                <input type="text" pInputText placeholder="Filtrar" (keypress)="pressionaEnter($event)" #inputPesquisa>
+                <input type="text" pInputText placeholder="Filtrar" (keypress)="pressionaEnter($event)" [(ngModel)]="filtro" #inputPesquisa>
                 <button style="width: 15%;" pButton type="button" icon="fa fa-search" (click)="update()"></button>
             </div>
         </div>
@@ -19,7 +19,7 @@
             <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
         </div>
 
-        <div class="p-fluid p-formgrid p-grid p-col-4" style="margin-top: 20px;">
+        <div class="p-fluid p-formgrid p-grid p-col-4" style="margin-top: 20px; margin-left: 80px;">
             <div class="p-col-4">
                 <button pButton class="p-button-success" label="Recebimento"
                     (click)="abrirModalPagamentoViaConta('R')"></button>
@@ -33,8 +33,8 @@
             </div>
         </div>
         <div class="p-field p-col-1 p-md-2" style="margin-top: 15px;">
-            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 25px; cursor: pointer;"></i>
-            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 35px; cursor: pointer"></i>
+            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 25px; cursor: pointer;" (click)="report('xls')"></i>
+            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 35px; cursor: pointer" (click)="report('pdf')"></i>
         </div>
         <!-- <div class="ui-g-1">
             <app-tutorial [Classificacao]="'3.07.02'"></app-tutorial>

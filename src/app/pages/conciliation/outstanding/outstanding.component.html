@@ -1,61 +1,64 @@
 <div class="p-fluid p-formgrid p-grid">
     <div class="p-col-1 p-offset-7" style="font-size: 18px; margin-top: 5px; margin-right: -20px;">
-        <i class="pi pi-file-excel" style="font-size: 2rem; cursor: pointer; margin-right: 20px;" (click)="report('xls')"></i>
-        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="report('pdf')"></i>        
+        <i class="pi pi-file-excel" style="font-size: 2rem; cursor: pointer; margin-right: 20px;"
+            (click)="report('xls')"></i>
+        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="report('pdf')"></i>
     </div>
     <div class="p-col-2" style="margin-bottom: 10px;">
-        <button pButton label="Processar Todos" (click)="processConciliationAll()"></button>
+        <button pButton label="Conciliar Todos" (click)="processConciliationAll()"></button>
     </div>
     <div class="p-col-2" style="margin-bottom: 10px;">
-        <button pButton label="Processar Selecionados" (click)="processSelected()"></button>
+        <button pButton label="Conciliar Selecionados" (click)="processSelected()"></button>
     </div>
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="lista" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" (onLazyLoad)="lazyLoad($event)" [lazy]="true" [rowsPerPageOptions]="opcoesLinhas" [(selection)]="selected">
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th style="width: 2%">
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
-            <th style="width: 6%;" pSortableColumn="DateMovement">Data
-                <p-sortIcon field="DateMovement"></p-sortIcon>
-            </th>
-            <th style="width: 20%;" pSortableColumn="Historic">Histórico
-                <p-sortIcon field="Historic"></p-sortIcon>
-            </th>
-            <th style="width: 10%;" pSortableColumn="Document">Documento
-                <p-sortIcon field="Document"></p-sortIcon>
-            </th>
-            <th style="width: 6%;" pSortableColumn="Amount">Valor
-                <p-sortIcon field="Amount"></p-sortIcon>
-            </th>
-            <th style="width: 4%;" pSortableColumn="Specie">Tipo
-                <p-sortIcon field="Specie"></p-sortIcon>
-            </th>
-            <th style="width: 14%;" pSortableColumn="PersonName">Pessoa
-                <p-sortIcon field="PersonName"></p-sortIcon>
-            </th>
-            <th style="width: 10%;" pSortableColumn="Category">Natureza
-                <p-sortIcon field="Category"></p-sortIcon>
-            </th>
-            <th style="width: 3%;"></th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr [pSelectableRow]="rowData">
-            <td>
-                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
-            </td>
-            <td appAlignCenter>{{rowData.DateMovement | date}}</td>
-            <td>{{rowData.Historic}}</td>
-            <td>{{rowData.Document}}</td>
-            <td appAlinharDireita [ngClass]="colorValue(rowData.Amount)">{{rowData.Amount | virgulaPipe}}</td>
-            <td>{{rowData.Specie}}</td>
-            <td>{{rowData.PersonName}}</td>
-            <td>{{rowData.Category}}</td>
-            <td>
-                <app-opcoes-table [value]="rowData" [opcoes]="itemsRowConciliacao"></app-opcoes-table>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="lista"
+        [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" (onLazyLoad)="lazyLoad($event)"
+        [lazy]="true" [rowsPerPageOptions]="opcoesLinhas" [(selection)]="selected">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 2%">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th style="width: 6%;" pSortableColumn="DateMovement">Data
+                    <p-sortIcon field="DateMovement"></p-sortIcon>
+                </th>
+                <th style="width: 20%;" pSortableColumn="Historic">Histórico
+                    <p-sortIcon field="Historic"></p-sortIcon>
+                </th>
+                <th style="width: 10%;" pSortableColumn="Document">Documento
+                    <p-sortIcon field="Document"></p-sortIcon>
+                </th>
+                <th style="width: 6%;" pSortableColumn="Amount">Valor
+                    <p-sortIcon field="Amount"></p-sortIcon>
+                </th>
+                <th style="width: 4%;" pSortableColumn="Specie">Tipo
+                    <p-sortIcon field="Specie"></p-sortIcon>
+                </th>
+                <th style="width: 14%;" pSortableColumn="PersonName">Pessoa
+                    <p-sortIcon field="PersonName"></p-sortIcon>
+                </th>
+                <th style="width: 10%;" pSortableColumn="Category">Natureza
+                    <p-sortIcon field="Category"></p-sortIcon>
+                </th>
+                <th style="width: 3%;"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+                <td>
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                </td>
+                <td appAlignCenter>{{rowData.DateMovement | date}}</td>
+                <td>{{rowData.Historic}}</td>
+                <td>{{rowData.Document}}</td>
+                <td appAlinharDireita [ngClass]="colorValue(rowData.Amount)">{{rowData.Amount | virgulaPipe}}</td>
+                <td>{{descriptionSpecie(rowData.Specie)}}</td>
+                <td>{{rowData.PersonName}}</td>
+                <td>{{rowData.Category}}</td>
+                <td>
+                    <app-opcoes-table [value]="rowData" [opcoes]="itemsRowConciliacao"></app-opcoes-table>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
 <p-confirmDialog header="Confirmacao" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>

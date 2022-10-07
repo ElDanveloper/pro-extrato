@@ -2,46 +2,51 @@
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 p-md-8">
             <div class="p-inputgroup">
-                <input #inputPesquisa appUppercaseNotForm (keypress)="filtrarEPesquisar($event)" [(ngModel)]="filtro" pInputText>
-                <button pButton type="button" icon="fa fa-search" (click)="loadList()"
-                        ></button>
+                <input #inputPesquisa appUppercaseNotForm (keypress)="filtrarEPesquisar($event)" [(ngModel)]="filtro"
+                    pInputText>
+                <button pButton type="button" icon="fa fa-search" (click)="loadList()"></button>
             </div>
         </div>
         <!-- <div class="p-field p-col-12 p-md-2" style="position: relative;">
             <app-select #selectValue [options]="selectSort"></app-select>
         </div> -->
         <div class="p-field p-col-12 p-md-2" style="margin-top: 5px;">
-            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 95px; cursor: pointer;" (click)="report('xls')"></i>
-            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 25px; cursor: pointer" (click)="report('pdf')"></i>
+            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 95px; cursor: pointer;"
+                (click)="report('xls')"></i>
+            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 25px; cursor: pointer"
+                (click)="report('pdf')"></i>
         </div>
         <!-- <div class="p-field p-col-12 p-md-2">
             <button pButton label="Implantar Categoria" (click)="navegar()"></button>            
         </div> -->
         <div class="p-field p-col-12 p-md-2">
-            <button pButton label="Nova Categoria" (click)="navegar()"></button>            
+            <button pButton label="Nova Categoria" (click)="navegar()"></button>
         </div>
     </div>
 
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" [lazy]="true" (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="opcoesLinhas">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
+        [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" [lazy]="true"
+        (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="opcoesLinhas">
         <ng-template pTemplate="header" let-columns>
-            <tr>   
-            <th [ngStyle]="{width: '7%'}"> Classificação </th>                          
-            <th [ngStyle]="{width: '40%'}"> Descrição </th>      
-            <th [ngStyle]="{width: '10%'}"> Cod. Controle </th>      
-            <th [ngStyle]="{width: '7%'}"> Sintético </th> 
-            <th [ngStyle]="{width: '10%'}"> Conta Contábil</th> 
-            <th [ngStyle]="{width: '5%'}"> Ações </th>
+            <tr>
+                <th [ngStyle]="{width: '7%'}"> Classificação </th>
+                <th [ngStyle]="{width: '40%'}"> Descrição </th>
+                <th [ngStyle]="{width: '10%'}"> Cod. Controle </th>
+                <th [ngStyle]="{width: '7%'}"> Sintético </th>
+                <th [ngStyle]="{width: '10%'}"> Conta Contábil</th>
+                <th [ngStyle]="{width: '5%'}"> Ações </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
-            <tr>   
-            <td>{{rowData.Classificate}}</td>         
-            <td>{{rowData.Description}}</td>
-            <td>{{rowData.CodeControl}}</td>
-            <td>{{rowData.Sintetic}}</td>   
-            <td>{{rowData.CostCenterId}}</td>                     
-            <td><app-opcoes-table [value]="rowData"
-                                  [opcoes]="opcoesTable"></app-opcoes-table></td>
+            <tr>
+                <td>{{rowData.Classificate}}</td>
+                <td>{{rowData.Description}}</td>
+                <td>{{rowData.CodeControl}}</td>
+                <td>{{rowData.Sintetic}}</td>
+                <td>{{rowData.CostCenterId}}</td>
+                <td>
+                    <app-opcoes-table [value]="rowData" [opcoes]="opcoesTable"></app-opcoes-table>
+                </td>
             </tr>
         </ng-template>
     </p-table>
@@ -59,4 +64,5 @@
     <app-modal-natureza-financeira-cadastro #content></app-modal-natureza-financeira-cadastro>
 </app-modal> -->
 
-<app-modal-natureza-financeira-cadastro [data]="natureza" [include]="include" [modalVisible]="modalCadastrarNatureza" #content (closeModal)="conclude()"></app-modal-natureza-financeira-cadastro>
+<app-modal-natureza-financeira-cadastro [data]="natureza" [include]="include" [modalVisible]="modalCadastrarNatureza"
+    #content (closeModal)="conclude()"></app-modal-natureza-financeira-cadastro>

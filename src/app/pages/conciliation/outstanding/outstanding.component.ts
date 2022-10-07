@@ -111,6 +111,15 @@ export class OutstandingComponent implements OnInit, OnDestroy {
         
     }
 
+    descriptionSpecie(v) {
+        switch (v) {
+            case 'C':
+                return 'Crédito'
+            case 'D':
+                return 'Débito'
+        }
+    }
+
     processConciliationAll() {
         this.confirmationService.confirm({
             message: `Você tem certeza que deseja Processar Todos?`,

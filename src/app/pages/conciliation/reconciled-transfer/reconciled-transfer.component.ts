@@ -76,9 +76,9 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
 
     ngOnInit() {            
         if (this.data) {
-            if (this.data.Reconciled === "P") {
-                this.index = 1
-            }
+            // if (this.data.Reconciled === "P") {
+            //     this.index = 1
+            // }
             this.form.get('IdContaCaixaDestino').setValue(this.data.AccountId.Id)
             this.form.get('IdNatureza').setValue(this.data.IdNatureza?.Id)
             // this.form.get('Historico').setValue(this.data.Historic)
@@ -133,7 +133,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         //     return
         // }
 
-        if (this.form.get('IdNatureza').value === undefined) {
+        if (this.form.get('IdNatureza').value === undefined && this.index === 0) {
             this.messageService.add(Util.pushInfoMessage('Favor informar a Categoria Financeira!'))
             return
         }

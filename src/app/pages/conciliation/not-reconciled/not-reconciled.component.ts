@@ -113,6 +113,15 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
        
     }
 
+    descriptionSpecie(v) {
+        switch (v) {
+            case 'C':
+                return 'Crédito'
+            case 'D':
+                return 'Débito'
+        }
+    }
+
     colorValue(v) {
         const classes = {
             'texto-verde': false,
