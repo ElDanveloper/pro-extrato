@@ -39,12 +39,7 @@ export class OutstandingComponent implements OnInit, OnDestroy {
 
     lista = []
 
-    itemsRowConciliacao = [
-        // {
-        //     label: 'Editar', icon: 'pi pi-pencil', command: (e) => {
-        //         // this.router.navigate([`lancamentos-contabeis/cadastro/${e.idlanccontabil}`])
-        //     }
-        // },
+    itemsRowConciliacao = [       
         {
             label: 'Excluir', icon: 'pi pi-trash', command: (e) => {
                 this.confirmationService.confirm({
@@ -60,13 +55,22 @@ export class OutstandingComponent implements OnInit, OnDestroy {
             }
         },
         {
-            label: 'Conciliar', icon: 'pi pi-refresh', command: (e) => {
+            label: 'Conciliar', icon: 'fa fa-check', command: (e) => {
                 // this.networkService.salvarPost(getUrlFinanceiro(), 'fin/ConciliaDesconciliaContabil', {
                 //     IdLancContabil: e.Id,
                 //     tipo: 'S',
                 // }).subscribe(() => {
                 //     this.carregarLista()
                 // })
+            }
+        },
+         {
+            label: 'Desconciliar', icon: 'pi pi-refresh', command: (e) => {
+                this.dadosDefault.exibirLoader.next(true)
+                this.networkService.getSimples(getUrlPro(), `Desconciliate?Id=${e.Id}`).subscribe(v => {
+                    this.messageService.add(Util.pushSuccessMsg('Desconciliado com Sucesso!'))
+                    this.carregarLista()
+                }).add(this.dadosDefault.exibirLoader.next(false))
             }
         },
     ];
