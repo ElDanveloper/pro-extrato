@@ -1,5 +1,5 @@
 import { Util } from './../../../controller/Util';
-import { getUrlPro } from './../../../controller/staticValues';
+import { getUrlPro, opcoesLinhas } from './../../../controller/staticValues';
 import { BaseListSimplesHeaders } from './../../../controller/BaseListSimplesHeaders';
 import { NetworkService } from '../../../services/network.service';
 import { qtdLinhas, getUrlClient } from '../../../controller/staticValues';
@@ -27,6 +27,7 @@ export class CompanyListComponent extends BaseListSimplesHeaders implements OnIn
     // public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     public totalItens2: number
     modalCadastrarEmpresa = false
     // lista2 = []
@@ -71,8 +72,6 @@ export class CompanyListComponent extends BaseListSimplesHeaders implements OnIn
 
     ngOnInit() {
         this.carregarDados()
-        this.totalItens2 = this.lista.length
-
     }
 
     pressionaEnter(e?) {    

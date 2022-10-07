@@ -1,3 +1,4 @@
+import { opcoesLinhas } from './../../../../controller/staticValues';
 import { BaseListSimplesHeaders } from './../../../../controller/BaseListSimplesHeaders';
 import { NetworkService } from '../../../../services/network.service';
 import { qtdLinhas, getUrlClient, getUrlUser } from '../../../../controller/staticValues';
@@ -25,6 +26,7 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     public totalItens: number
     lista2 = []
     @ViewChild('inputPesquisa') public inputPesquisa

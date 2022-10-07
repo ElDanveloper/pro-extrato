@@ -1,7 +1,8 @@
+import { ProBankHistoric } from './../../../model/pro-bank-historic.model';
 import { ProKeyWord } from '../../../model/pro-key-word.model';
 import { Util } from 'src/app/controller/Util';
 import { NetworkService } from '../../../services/network.service';
-import { qtdLinhas, getUrlPro } from '../../../controller/staticValues';
+import { qtdLinhas, getUrlPro, opcoesLinhas } from '../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import { Router } from '@angular/router';
 import { MessageService, ConfirmationService, SelectItem } from 'primeng/api';
@@ -13,7 +14,7 @@ import { BaseListSimplesHeaders } from 'src/app/controller/BaseListSimplesHeader
   templateUrl: './memorized-histories-list.component.html',
   styleUrls: ['./memorized-histories-list.component.css']
 })
-export class MemorizedHistoriesListComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class MemorizedHistoriesListComponent extends BaseListSimplesHeaders implements OnInit, OnDestroy {
 
     @ViewChild('registrationMemorize') registrationMemorize: ElementRef;
    
@@ -23,6 +24,7 @@ export class MemorizedHistoriesListComponent extends BaseListSimples implements 
     public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     public totalItens: number
 
     opcoesTable = [        
@@ -48,7 +50,7 @@ export class MemorizedHistoriesListComponent extends BaseListSimples implements 
     ]    
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'ProBankHistoric', Util.expandedQuery(ProKeyWord.expanded(), ''))
+        super(networkService, getUrlPro(), 'ProBankHistoric', Util.expandedQuery(ProBankHistoric.expanded(), ''))
         
     }
 

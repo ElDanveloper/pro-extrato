@@ -31,7 +31,7 @@ export class BaseListSimplesHeaders implements OnDestroy {
     subscriptionLista: Subscription;
     subscriptionDeletar: Subscription;
 
-    constructor(public networkService: NetworkService, public url = getUrlPro(), entidad, expanded = null, top = 10, page = 1) {
+    constructor(public networkService: NetworkService, public url = getUrlPro(), entidad, expanded = null, top = 7, page = 1) {
         this.expanded = expanded
         this.entidade = entidad
         this.top = top
@@ -55,7 +55,7 @@ export class BaseListSimplesHeaders implements OnDestroy {
 
     public carregarLista(page?, id = null): void {
         this.loading = false
-        this.jaPesquisou = true
+        // this.jaPesquisou = true
         let v;
         try {
             v = this.inputPesquisa.nativeElement.value || ''
@@ -80,7 +80,7 @@ export class BaseListSimplesHeaders implements OnDestroy {
 
     public carregarDados(parametros = ''): void {
         this.$subscriptionListar = this.networkService.getSimplesComHeaders(this.url, `${this.entidade}${parametros}`, this.pagina, this.top).subscribe((listaSec: any) => {
-            if (listaSec[0]) {
+            if (listaSec[0]) {                
                 this.totalItens = listaSec[0] ? listaSec[0]['QtdReg'] : 0;
             } else {
 
@@ -89,11 +89,11 @@ export class BaseListSimplesHeaders implements OnDestroy {
             // listaSec.value ? listaSec.value : listaSec                            
             this.pagina = listaSec.headers.get('total')            
             if (this.pagina === null && this.totalItens === 0) {
-                this.totalItens = this.lista.length
+                this.totalItens = this.lista.length                
             } else {
                 this.totalItens = Util.toNumber(this.pagina)
             }
-
+            this.jaPesquisou = true           
 
         })
 

@@ -1,3 +1,5 @@
+import { DadosDefaultService } from 'src/app/services/dados-default.service';
+import { opcoesLinhas } from './../../../controller/staticValues';
 import { NetworkService } from 'src/app/services/network.service';
 import { BaseListSimplesHeaders } from 'src/app/controller/BaseListSimplesHeaders';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
@@ -24,6 +26,7 @@ export class UserCompanyListComponent extends BaseListSimplesHeaders implements 
     public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     public totalItens: number
     lista2 = []
     @ViewChild('inputPesquisa') public inputPesquisa
@@ -37,15 +40,17 @@ export class UserCompanyListComponent extends BaseListSimplesHeaders implements 
 
     
 
-    constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
+    constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, private dadosDefault: DadosDefaultService) {
         super(networkService, getUrlUser(), 'contractor')
     }
 
     ngOnInit() {     
-        let empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['id']        
+        let empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['id'] 
+        this.dadosDefault.exibirLoader.next(true)
         this.networkService.getSimples(getUrlUser(), `client/${empresa}`).subscribe((v: any) => {
             this.lista = v
-        })
+            this.totalItens = v.length
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
     pressionaEnter(e) {

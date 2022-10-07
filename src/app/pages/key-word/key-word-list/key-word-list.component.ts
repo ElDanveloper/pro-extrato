@@ -1,7 +1,8 @@
+import { BaseListSimplesHeaders } from 'src/app/controller/BaseListSimplesHeaders';
 import { ProKeyWord } from './../../../model/pro-key-word.model';
 import { Util } from 'src/app/controller/Util';
 import { NetworkService } from './../../../services/network.service';
-import { qtdLinhas, getUrlPro } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlPro, opcoesLinhas } from './../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import { Router } from '@angular/router';
 import { MessageService, ConfirmationService, SelectItem } from 'primeng/api';
@@ -12,7 +13,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/co
   templateUrl: './key-word-list.component.html',
   styleUrls: ['./key-word-list.component.css']
 })
-export class KeyWordListComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class KeyWordListComponent extends BaseListSimplesHeaders implements OnInit, OnDestroy {
 
     @ViewChild('registrationKeyWord') registrationKeyWord: ElementRef;
    
@@ -22,6 +23,7 @@ export class KeyWordListComponent extends BaseListSimples implements OnInit, OnD
     public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     public totalItens: number
 
     opcoesTable = [
@@ -34,7 +36,7 @@ export class KeyWordListComponent extends BaseListSimples implements OnInit, OnD
     ]    
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'ProKeyWord', Util.expandedQuery(ProKeyWord.expanded(), '&'), 'FirstWord', 'FirstWord')
+        super(networkService, getUrlPro(), 'ProKeyWord', Util.expandedQuery(ProKeyWord.expanded()))
         
     }
 

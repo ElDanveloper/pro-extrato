@@ -35,13 +35,9 @@ export class ParametersCompanyComponent extends BaseFormPost implements OnInit, 
             this.selectNatureza.unshift(defaultValue)
         })        
         this.dadosDefault.exibirLoader.next(true)
-                this.networkService.buscar('ProParameter', '').subscribe((value: any) => {
-                    console.log('ProParameter ----> ' + JSON.stringify(value.value))
-                    const data = Formulario.prepareValueToForm(new ProParameter(), value.value, null, ProParameter.relacionamentos(), null);
-                    console.log('Data ----> ' + JSON.stringify(data))
+                this.networkService.buscar('ProParameter', '').subscribe((value: any) => {                    
+                    const data = Formulario.prepareValueToForm(new ProParameter(), value.value[0], null, ProParameter.relacionamentos(), null);                    
                     Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
-
-                    console.log('CodeCatTaxBank ---> ' + this.form.get('CodeCatTaxBank').value)
                 }).add(this.dadosDefault.exibirLoader.next(false))
 
     }
