@@ -37,7 +37,9 @@ export class AccountLaunchComponent implements OnInit {
 
     dados = null
 
-    filtro = '  '
+    filtro = ''
+
+    first = false
 
     classificacao = '3.07.02'
 
@@ -167,7 +169,7 @@ export class AccountLaunchComponent implements OnInit {
 
     }
 
-    tableExpand(v, expanded, pag = 1, top = 7) {             
+    tableExpand(v, expanded, pag = 1, top = 7) {                
         if (expanded) return
         if (!v) return       
         this.dados = v
@@ -194,8 +196,12 @@ export class AccountLaunchComponent implements OnInit {
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    public lazyLoad(event): void {               
-        if (!this.jaPesquisou) return;        
+    public lazyLoad(event): void {     
+        console.log('evento ---> ' + JSON.stringify(event))
+        if (!this.jaPesquisou && !this.first){
+            this.first = true
+            return;        
+        } 
         this.loading = true
         if (this.lista2) {            
             if (this.top !== event.rows && event.rows !== undefined) {

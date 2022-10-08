@@ -36,7 +36,7 @@ export class conciliatorComponent implements OnInit, OnDestroy {
 
     top = 7
     skip = 0
-    lastPage = 0
+    lastPage = 1
 
 
     totalItens;
@@ -44,8 +44,7 @@ export class conciliatorComponent implements OnInit, OnDestroy {
     constructor(private networkService: NetworkService, private dadosDefault: DadosDefaultService, private route: ActivatedRoute, private messageService: MessageService, private router: Router) { }
 
 
-    ngOnInit() {
-        this.lastPage = 0
+    ngOnInit() {        
         this.dadosDefault.conciliator().subscribe(value => {
             this.selectAccount = value[0]
         })
@@ -100,16 +99,22 @@ export class conciliatorComponent implements OnInit, OnDestroy {
 
     loadData(next?) {
         let pag = 1
-
+        console.log('lastPage ---> ' + this.lastPage)
+        console.log('next ---> ' + next)
+        
         if (next) {
+            console.log('Entrei ---- > ')
             this.lastPage = this.lastPage + next
             pag = this.lastPage
         }
+
+        console.log('Pag ---> ' + pag)
+
         this.dadosDefault.exibirLoader.next(true)        
         // this.$subscriptionPreConciliadoNaoConciliadoQTD = this.networkService.getSimplesQtd(getUrlFinanceiro(),
         //     `LancamentoPreConciliado?$filter=(IdContaCaixa eq ${this.dataPesquisa.idContaCaixa} and DataExtrato ge ${this.dataPesquisa.dataInicial} and DataExtrato le ${this.dataPesquisa.dataFinal} and (Conciliado eq 'N' or Conciliado eq 'P'))&$inlinecount=allpages&$top=0${Util.expandedQuery(LancamentoPreConciliado.expanded(), true)}`).subscribe(qtd => {
         //         this.totalItens = qtd
-        this.$subscriptionPreConciliadoNaoConciliado = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.dataPesquisa.idContaCaixa}&DateIni=${this.dataPesquisa.dataInicial}&DateEnd=${this.dataPesquisa.dataFinal}&Reconciled='N'&Pendentes=true${Util.expandedQuery(ProStatementItem.expanded(), true)}`, this.lastPage, this.top).pipe(map((x: any) => x)).subscribe(x => {
+        this.$subscriptionPreConciliadoNaoConciliado = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.dataPesquisa.idContaCaixa}&DateIni=${this.dataPesquisa.dataInicial}&DateEnd=${this.dataPesquisa.dataFinal}&Reconciled='N'&Pendentes=true${Util.expandedQuery(ProStatementItem.expanded(), true)}`, pag, this.top).pipe(map((x: any) => x)).subscribe(x => {
             this.lista = [...this.lista, ...x['body'].value]
             this.skip = this.skip + this.top
             this.totalItens = Util.toNumber(x.headers.get('total'))

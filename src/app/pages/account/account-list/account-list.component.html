@@ -18,7 +18,7 @@
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th [ngStyle]="{width: '20%'}"> Nome </th>
-                <th [ngStyle]="{width: '10%'}"> Saida </th>
+                <th [ngStyle]="{width: '10%'}"> Saldo </th>
                 <th [ngStyle]="{width: '10%'}"> Atualizado em</th>
                 <th [ngStyle]="{width: '10%'}"> Tipo </th>
                 <th [ngStyle]="{width: '10%'}"> Conta </th>
@@ -29,7 +29,7 @@
         <ng-template pTemplate="body" let-rowData>
             <tr>
                 <td><span (click)="linkLaunch(rowData)" class="link-pessoa">{{rowData.Name}}</span></td>
-                <td>{{rowData.DateRegister | date}}</td>
+                <td appAlignRight>{{rowData.Balance}}</td>                
                 <td>{{rowData.DateUpdate | date}}</td>
                 <td>{{typeAccount(rowData.TypePro)}}</td>
                 <td>{{rowData.AccountNumber}}</td>

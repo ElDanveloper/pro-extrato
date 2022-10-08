@@ -126,28 +126,29 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         this.index = n
     }
 
-    reconcileSingle() {
-
-        // if(this.form.get('IdPessoa').value === ''){
-        //     this.messageService.add(Util.pushInfoMessage('Favor informar a Pessoa!'))
-        //     return
-        // }
+    reconcileSingle() {        
+        if(this.form.get('AccountDestinyId').value === '' && this.index === 2){
+            this.messageService.add(Util.pushInfoMessage('Favor informar a conta de destino!'))
+            return
+        }
 
         if (this.form.get('IdNatureza').value === undefined && this.index === 0) {
             this.messageService.add(Util.pushInfoMessage('Favor informar a Categoria Financeira!'))
             return
         }
-
-        let natureza = this.form.get('IdNatureza').value
-        let person = this.form.get('IdPessoa').value
-
+        
+        let natureza = this.form.get('IdNatureza').value ? this.form.get('IdNatureza').value : 0
+        let person = this.form.get('IdPessoa').value ? this.form.get('IdPessoa').value : 0
+        let conta = this.form.get('AccountDestinyId').value ? this.form.get('AccountDestinyId').value : 0
+        
         const body = {
             Id: this.data.Id,
-            FinancialId: natureza.Id,
-            PersonId: person.PersonId,
+            FinancialId: natureza.Id ? natureza.Id : 0,
+            PersonId: person.PersonId ? person.PersonId : 0,
             Obs: this.form.get('Obs').value,
             SavePerson: this.form.get('memorizarPessoa').value == true,
-            SaveHistoric: this.form.get('memorizar').value == true
+            SaveHistoric: this.form.get('memorizar').value == true,
+            AccountDestinyId: conta
         }
 
         this.dadosDefault.exibirLoader.next(true)

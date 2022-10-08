@@ -14,12 +14,12 @@
         <app-reconciled-transfer [data]="item" [optionsConta]="selectAccount"
                                       [optionsNaturezaFinanceira]="selectNaturezaFinanceira"
                                       type="extratoNaoConciliado" [dataPesquisa]="dataPesquisa"
-                                      (recarregarDados)="loadData()"></app-reconciled-transfer>
+                                      (recarregarDados)="removeItem(i)"></app-reconciled-transfer>
     </div>    
 </div>
 
 <div style="min-width: 90vw; display: flex; justify-content: center;">
     <div class="p-col-2" style="margin: 30px 0;">
-        <button *ngIf="lista.length < totalItens" pButton label="Carregar Mais" (click)="loadData()"></button>
+        <button *ngIf="lista.length < totalItens" pButton label="Carregar Mais" (click)="loadData(1)"></button>
     </div>
 </div>
