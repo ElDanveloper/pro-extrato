@@ -34,6 +34,8 @@ export class ReconciledComponent implements OnInit, OnDestroy {
     public top: number = 7
 
     quantityItems = 0
+    currentPage = 1
+
 
     itemsRowConciliacao = [
         {
@@ -57,7 +59,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
                 this.dadosDefault.exibirLoader.next(true)
                 this.networkService.getSimples(getUrlPro(), `Desconciliate?Id=${e.Id}`).subscribe(v => {
                     this.messageService.add(Util.pushSuccessMsg('Desconciliado com Sucesso!'))
-                    this.carregarLista()
+                    this.carregarLista(this.currentPage, this.top)
                 }).add(this.dadosDefault.exibirLoader.next(false))
             }
         },
@@ -146,7 +148,7 @@ export class ReconciledComponent implements OnInit, OnDestroy {
                 this.top = event.rows
                 event.first = 0
             }
-
+            this.currentPage = (event.first / this.top) + 1
             this.carregarLista((event.first / this.top) + 1, this.top)
             this.loading = false
         }

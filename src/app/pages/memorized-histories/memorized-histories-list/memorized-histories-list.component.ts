@@ -10,14 +10,14 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/co
 import { BaseListSimplesHeaders } from 'src/app/controller/BaseListSimplesHeaders';
 
 @Component({
-  selector: 'app-memorized-histories-list',
-  templateUrl: './memorized-histories-list.component.html',
-  styleUrls: ['./memorized-histories-list.component.css']
+    selector: 'app-memorized-histories-list',
+    templateUrl: './memorized-histories-list.component.html',
+    styleUrls: ['./memorized-histories-list.component.css']
 })
 export class MemorizedHistoriesListComponent extends BaseListSimplesHeaders implements OnInit, OnDestroy {
 
     @ViewChild('registrationMemorize') registrationMemorize: ElementRef;
-   
+
     jaPesquisou = false
     pagina = 0;
     public first: number = 0
@@ -27,7 +27,7 @@ export class MemorizedHistoriesListComponent extends BaseListSimplesHeaders impl
     opcoesLinhas = opcoesLinhas()
     public totalItens: number
 
-    opcoesTable = [        
+    opcoesTable = [
         {
             label: 'Excluir', icon: 'fa fa-close', command: (e) => {
                 this.confirmationService.confirm({
@@ -47,21 +47,21 @@ export class MemorizedHistoriesListComponent extends BaseListSimplesHeaders impl
                 })
             }
         }
-    ]    
+    ]
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
         super(networkService, getUrlPro(), 'ProBankHistoric', Util.expandedQuery(ProBankHistoric.expanded(), ''))
-        
+
     }
 
-    ngOnInit() {        
-        this.carregarLista()
+    ngOnInit() {
+        this.carregarLista()        
     }
 
     pressionaEnter(e) {
         if (e.key === 'Enter') this.carregarLista()
     }
-   
+
     registration() {
         this.registrationMemorize.nativeElement.click();
     }
