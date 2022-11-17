@@ -43,19 +43,19 @@
     <div class="p-col-8" *ngIf="index == 0">
         <p-card>
             <div class="p-col-12 p-fluid p-formgrid p-grid">                
-                <div class="p-col-8 p-fluid p-formgrid p-grid" style="margin-right: -150px;">
-                    <div class="p-col-8">                      
+                <div class="p-col-6 p-fluid p-formgrid p-grid">
+                    <div class="p-col-12">                      
                             <app-input-search-person [label]="'Pessoa'" formControlName="IdPessoa"
                                                         (ngModelChange)="selecionouPessoa($event)"
                                                         field="Nome"></app-input-search-person>                        
                     </div>
-                    <div class="p-col-8">                        
+                    <div class="p-col-12">                        
                             <app-input-financial-category-search [label]="'Categoria Financeira'"
                                 (ngModelChange)="selecionouNaturezaFinanceira($event)" formControlName="IdNatureza"
                                 ></app-input-financial-category-search>                        
                     </div>                    
                 </div>
-                <div class="p-col-4 p-fluid p-formgrid p-grid" style="width: 450px;">                   
+                <div class="p-col-6 p-fluid p-formgrid p-grid">                   
                     <div class="p-col-12">
                         <app-input  [label]="'Obs. Complementar'" formControlName="Obs"></app-input>                        
                     </div>                    
