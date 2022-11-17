@@ -19,12 +19,35 @@ h1 {
 }
 
 .login-body-imagem {
-    // position: relative;
+    position: relative;
     height: 90vh;
-    width: 70vw;
+    width: 60vw;
     background-image: url("../../../assets/images/login.svg");
     background-size: 100% 100%;
+    margin-left: 130px;
     // box-sizing: border-box;
+}
+
+.image-google {
+    position: relative;
+    height: 12vh;
+    width: 12vw;
+    background-image: url("../../../assets/images/google.svg");
+    background-size: 100% 100%;
+    text-align: center;
+    margin-left: 65px;
+    margin-top: 10px;
+}
+
+.image-apple {
+    position: relative;
+    height: 12vh;
+    width: 12vw;
+    background-image: url("../../../assets/images/apple.svg");
+    background-size: 100% 100%;
+    text-align: center;
+    margin-left: 60px;
+    margin-top: -5px;
 }
 
 .login-panel {
@@ -37,14 +60,27 @@ h1 {
 
 .login-panel-fixo {
     text-align: center;
-    width: 340px;
+    width: 400px;
     height: 595px;
     min-height: 440px;
-    padding: 50px 50px;
+    padding: 50px 90px 0 40px; 
     background-color: white;
     // margin-bottom: -10px;
     // margin: auto auto auto auto;
     
+}
+
+.link-esqueci-senha {
+    color: black;
+    margin-left: 11px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.link-esqueci-senha:hover {
+    color: #3B4CC0;
+    transition: all .3s;
+    text-decoration: underline;
 }
 
 .button-fixo {
