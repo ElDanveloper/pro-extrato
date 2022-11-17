@@ -1,9 +1,48 @@
-<app-page-divided>
-    <div principal class="login-body-imagem">
-
+<div class="p-grid p-col-12 p-fluid">
+    <div class="p-col-3">
+        <div secundario class="p-card login-panel-fixo">
+            <!-- <div class="p-grid"> -->
+            <div class="p-col-12" style="margin-left: 20px;">
+                <img src="../../../assets/images/logo.png">
+                <h1>Bem vindo</h1>
+            </div>
+            <form [formGroup]="form" (submit)="logarUsuario()">
+                <div style="margin-left: 20px;" class="p-col-12">
+                    <span class="p-float-label">
+                        <input type="text" autocomplete="off" formControlName="email" pInputText>
+                        <label for="user">Username</label>
+                    </span>
+                </div>
+                <div style="margin-left: 20px;" class="p-col-12">
+                    <span class="p-float-label">
+                        <input type="password" autocomplete="off" formControlName="password" pInputText>
+                        <label for="password">Password</label>
+                    </span>
+                </div>
+                <div style="margin-left: 20px;" class="p-col-12">
+                    <button class="button-fixo" pButton type="submit" label="Acessar" style="width: 100%;"
+                        icon="pi pi-user"></button>
+                    <!-- <button class="button-fixo" pButton type="button" label="Contratar" style="width: 100%" icon="pi pi-question-circle"></button> -->
+                </div>
+                <div class="p-offset-7">
+                    <span class="link-esqueci-senha">Esqueci a senha</span>
+                </div>                    
+                    <div class="p-col-6 image-google"></div>
+                    <div class="p-col-6 image-apple"></div>                
+            </form>
+            <!-- </div> -->
+        </div>
     </div>
-    <div secundario class="p-card login-panel-fixo">
-        <!-- <div class="p-grid"> -->
+    <div class="p-col-9">
+        <div class="login-body-imagem"></div>
+    </div>
+</div>
+
+<!-- <app-page-divided> -->
+<!-- <div principal class="login-body-imagem">
+
+    </div> -->
+<!-- <div secundario class="p-card login-panel-fixo">        
         <div class="p-col-12">
             <img src="../../../assets/images/logo.png">
             <h1>Bem vindo</h1>
@@ -24,12 +63,10 @@
             <div style="margin-left: 20px;" class="p-col-12">
                 <button class="button-fixo" pButton type="submit" label="Acessar" style="width: 100%;"
                     icon="pi pi-user"></button>
-                <!-- <button class="button-fixo" pButton type="button" label="Contratar" style="width: 100%" icon="pi pi-question-circle"></button> -->
             </div>
         </form>
-        <!-- </div> -->
-    </div>
+    </div> -->
 
-    <app-modal-selecionar-empresa-escritorio [modalVisible]="modalEmpresa" (closeModal)="modalEmpresa = false"
-        app-modal-selecionar-empresa-escritorio></app-modal-selecionar-empresa-escritorio>
-</app-page-divided>
+<app-modal-selecionar-empresa-escritorio [modalVisible]="modalEmpresa" (closeModal)="modalEmpresa = false"
+    app-modal-selecionar-empresa-escritorio></app-modal-selecionar-empresa-escritorio>
+<!-- </app-page-divided> -->
