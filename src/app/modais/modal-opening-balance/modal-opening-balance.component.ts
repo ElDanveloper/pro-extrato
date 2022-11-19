@@ -31,14 +31,16 @@ export class ModalOpeningBalanceComponent extends BaseFormPost implements OnInit
         this.form = Formulario.createForm(this.entObj, this.fb)        
 
         this.form.get('DateBalance').setValue(new Date());
+        // this.form.get('AccountId').setValue(this.data.Id)
     }
 
     ngOnInit() {
-        this.dadosDefault.modalOpeningbalance().subscribe(v => {
-            const defaultValue = {label: '-', value: null}
-            this.selectContaCaixa = v[0]
-            this.selectContaCaixa.unshift(defaultValue)
-        })
+        // this.dadosDefault.modalOpeningbalance().subscribe(v => {
+        //     const defaultValue = {label: '-', value: null}
+        //     this.selectContaCaixa = v[0]
+        //     this.selectContaCaixa.unshift(defaultValue)
+        // })
+        
     }
 
     public processarFormulario(modal?) {

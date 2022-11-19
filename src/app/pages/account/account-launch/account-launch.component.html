@@ -24,12 +24,12 @@
                 <button pButton class="p-button-success" label="Recebimento"
                     (click)="abrirModalPagamentoViaConta('R')"></button>
             </div>
-            <div class="p-col-4">
+            <div class="p-col-3">
                 <button pButton class="ui-button-danger" label="Pagamento"
                     (click)="abrirModalPagamentoViaConta('P')"></button>
             </div>
-            <div class="p-col-4">
-                <button pButton label="Saldo Inicial" (click)="openModalOpeningBalance()"></button>
+            <div class="p-col-5">
+                <button pButton label="Fechamento Parcial" (click)="Partialclosure()"></button>
             </div>
         </div>
         <div class="p-field p-col-1 p-md-2" style="margin-top: 15px;">
@@ -138,10 +138,6 @@
 </div>
 
 <div style="position: fixed; top: -200%">
-    <button pButton type="button" label="" #openingbalance></button>
-</div>
-
-<div style="position: fixed; top: -200%">
     <button pButton type="button" label="" #editstatementitems></button>
 </div>
 
@@ -151,10 +147,6 @@
 
 <app-modal [styleScroll]="{width: '100%', height: '500px'}" [fundo]="true" *appModalOpenOnClick="[editstatementitems, '1Acd5WGj3']" [hash]="'1Acd5WGj3'">
     <app-modal-edit-statement-items #content (dadosSalvos)="dadosSalvos()" [data]="dadosEdit" [hash]="'1Acd5WGj3'"></app-modal-edit-statement-items>
-</app-modal>
-
-<app-modal [styleScroll]="{width: '100%', height: '450px'}" [fundo]="true" *appModalOpenOnClick="[openingbalance, '1Acd5WGj2']" [hash]="'1Acd5WGj2'">
-    <app-modal-opening-balance  #content (dadosSalvos)="dadosSalvos()" [data]="data"></app-modal-opening-balance>
 </app-modal>
 
 <app-modal-switch-account [modalVisible]="modalTrocarConta" #content (closeModal)="contaTrocada()"></app-modal-switch-account>

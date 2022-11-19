@@ -47,6 +47,10 @@
     <button pButton type="button" label="" #registrationAccount></button>
 </div>
 
+<div style="position: fixed; top: -200%">
+    <button pButton type="button" label="" #openingbalance></button>
+</div>
+
 <!-- <app-modal [fundo]="true" *appModalOpenOnClick="[registrationAccount, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
     <app-modal-account-registration #content [hash]="'1Acd5WGj70'"></app-modal-account-registration>
 </app-modal> -->
@@ -55,6 +59,10 @@
     *appModalOpenOnClick="[registrationAccount, '1Acd5WGj70']" [hash]="'1Acd5WGj70'">
     <app-modal-account-registration #content (closeModal)="carregarLista()" [hash]="'1Acd5WGj70'">
     </app-modal-account-registration>
+</app-modal>
+
+<app-modal [styleScroll]="{width: '100%', height: '250px'}" [fundo]="true" *appModalOpenOnClick="[openingbalance, '1Acd5WGj2']" [hash]="'1Acd5WGj2'">
+    <app-modal-opening-balance  #content (dadosSalvos)="dadosSalvos()" [data]="data"></app-modal-opening-balance>
 </app-modal>
 
 <p-confirmDialog header="Confirmacao" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>

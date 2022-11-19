@@ -19,6 +19,8 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
 
     @ViewChild('registrationAccount') registrationAccount: ElementRef;
 
+    @ViewChild('openingbalance') openingbalance: ElementRef;
+
     // modalCadastrarPessoa = false
 
     // public entidade: string = 'empregador'
@@ -28,6 +30,7 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
     // public loading: boolean
     // public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    data;
     // public totalItens: number
     // lista2 = []
     // @ViewChild('inputPesquisa') public inputPesquisa
@@ -51,6 +54,12 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
                 this.carregarLista()
             }).add(this.networkService.exibirLoader.next(false))
          } },
+         {
+            label: 'Saldo Inicial', icon: 'fa fa-money', command: (e) => {
+                this.data = e
+                this.openingbalance.nativeElement.click();
+            }
+         }
     ]
 
     filtro = ''
@@ -96,6 +105,10 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
                 return 'Caixa Interno'
         }
 
+    }
+
+    dadosSalvos() {
+        this.carregarLista()
     }
 
     linkLaunch(v) {

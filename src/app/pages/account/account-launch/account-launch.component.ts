@@ -44,7 +44,6 @@ export class AccountLaunchComponent implements OnInit {
     classificacao = '3.07.02'
 
     @ViewChild('paymentviaaccount') paymentviaaccount: ElementRef;
-    @ViewChild('openingbalance') openingbalance: ElementRef;
     @ViewChild('uploadInput') uploadInput: ElementRef;
     @ViewChild('editstatementitems') editstatementitems: ElementRef;
 
@@ -243,8 +242,13 @@ export class AccountLaunchComponent implements OnInit {
         this.paymentviaaccount.nativeElement.click();
     }
 
-    openModalOpeningBalance() {
-        this.openingbalance.nativeElement.click();
+    Partialclosure() {
+        let dataInicial = Util.dataParaStringComZero(this.dataInit)
+        let dataFim = Util.dataParaStringComZero(this.dataFim)
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `ProcessCloseMonthlyPartial?DateIni=${dataInicial}&DateEnd=${dataFim}`).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Fechamento Parcial realizado com sucesso!'))
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     conciliacao() {

@@ -2,10 +2,13 @@
     <app-page-divided [padrao]="false">
         <div principal [formGroup]="form">
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-col-6">
-                    <app-select [icon]="true" [label]="'Conta'" [options]="selectContaCaixa" formControlName="AccountId"></app-select>
+                <div class="p-col-12" style="font-weight: bold; font-size: 18px;">
+                    <label>Conta: </label>
+                    <span>{{data.Name}}</span>
+                    <!-- <app-select [icon]="true" [label]="'Conta'" [options]="selectContaCaixa" formControlName="AccountId"></app-select> -->
                 </div>
-            <!-- </div>
+                <br><br>
+                <!-- </div>
 
             <div class="p-fluid p-formgrid p-grid"> -->
                 <div class="p-col-6">
