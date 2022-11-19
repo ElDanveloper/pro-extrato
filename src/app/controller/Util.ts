@@ -233,8 +233,8 @@ export class Util {
         saveAs(blob, fileName)
     }
 
-    static savePdf(v) {
-        const fileName = v.headers.get('file-name')
+    static savePdf(v, name?) {
+        const fileName = v.headers.get('file-name') ? v.headers.get('file-name') : name
         const file = new Blob([v.body], {type: 'application/pdf'});
         const fileURL = window.URL.createObjectURL(file);
         window.open(fileURL, '_blank');
@@ -247,10 +247,11 @@ export class Util {
         saveAs(file, fileName)
     }
 
-    static saveXls(v) {
+    static  saveXls(v, name?) {
         // let decoded = String.fromCharCode(...new Uint8Array(v.body));
-        const filename = v.headers.get('file-name')
+        const filename = v.headers.get('file-name') ? v.headers.get('file-name') : name
         const file = new Blob([v.body], {type: 'application/octet-stream'});
+
         saveAs(file, filename)
     }
 

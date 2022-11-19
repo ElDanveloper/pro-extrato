@@ -92,27 +92,28 @@ export class OutstandingComponent implements OnInit, OnDestroy {
         if (this.$subscriptionContabilNaoConciliado) this.$subscriptionContabilNaoConciliado.unsubscribe();
     }
 
-    report(type) {             
+    report(type) {
         let body = {
             type: type,
             date_ini: this.dataInicial,
             date_end: this.dataFinal,
             account_id: this.id,
-            reconcilied: "P"
+            Reconcilied: 'P',
         }
 
-        this.dadosDefault.exibirLoader.next(true)
         if (type === 'pdf') {
-            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
-                Util.savePdf(v)
-            }).add(this.dadosDefault.exibirLoader.next(false))
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtractNature', body).subscribe(v => {
+                Util.savePdf(v, 'Extrato Pendentes')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
         }
         if (type === 'xls') {
-            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
-                Util.saveXls(v)
-            }).add(this.dadosDefault.exibirLoader.next(false))
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.baixarXls(getUrlReport(), 'DetailExtractNature', body).subscribe(v => {
+                Util.saveXls(v, 'Extrato Pendentes.xls')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
         }
-        
+
     }
 
     descriptionSpecie(v) {

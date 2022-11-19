@@ -96,6 +96,30 @@ export class ExtractComponent implements OnInit, OnDestroy {
         }
     }
 
+    report(type) {
+        let body = {
+            type: type,
+            date_ini: this.dataInicial,
+            date_end: this.dataFinal,
+            account_id: this.id,
+        }
+
+        if (type === 'pdf') {
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+                Util.savePdf(v, 'Extrato Detalhado')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
+        }
+        if (type === 'xls') {
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+                console.log('teste')
+                Util.saveXls(v, 'Extrato Detalhado.xls')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
+        }
+
+    }
+
     ngOnDestroy(): void {
         if (this.$subscription) this.$subscription.unsubscribe();
         if (this.$subscriptionExtratobanco) this.$subscriptionExtratobanco.unsubscribe();
@@ -121,28 +145,6 @@ export class ExtractComponent implements OnInit, OnDestroy {
             'texto-vermelho': false,
         }
         return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
-    }
-
-    report(type) {             
-        let body = {
-            type: type,
-            date_ini: this.dataInicial,
-            date_end: this.dataFinal,
-            account_id: this.id,            
-        }
-
-        this.dadosDefault.exibirLoader.next(true)
-        if (type === 'pdf') {
-            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
-                Util.savePdf(v)
-            }).add(this.dadosDefault.exibirLoader.next(false))
-        }
-        if (type === 'xls') {
-            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
-                Util.saveXls(v)
-            }).add(this.dadosDefault.exibirLoader.next(false))
-        }
-       
     }
 
     processConciliation() {

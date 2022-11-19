@@ -108,21 +108,22 @@ export class ReconciledComponent implements OnInit, OnDestroy {
             date_ini: this.dataInicial,
             date_end: this.dataFinal,
             account_id: this.id,
-            reconcilied: "S"
+            Reconcilied: 'S',
         }
 
-        this.dadosDefault.exibirLoader.next(true)
         if (type === 'pdf') {
-            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
-                Util.savePdf(v)
-            }).add(this.dadosDefault.exibirLoader.next(false))
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtractNature', body).subscribe(v => {
+                Util.savePdf(v, 'Extrato Conciliado')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
         }
         if (type === 'xls') {
-            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
-                Util.saveXls(v)
-            }).add(this.dadosDefault.exibirLoader.next(false))
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.baixarXls(getUrlReport(), 'DetailExtractNature', body).subscribe(v => {
+                Util.saveXls(v, 'Extrato Conciliado.xls')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
         }
-        
+
     }
 
     colorValue(v) {

@@ -124,7 +124,7 @@ export class AccountLaunchComponent implements OnInit {
         {
             label: 'Editar', icon: 'fa fa-edit', command: (e) => {
                 this.dadosEdit = e
-                this.editstatementitems.nativeElement.click();                
+                this.editstatementitems.nativeElement.click();
             }
         }, {
             label: 'Excluir', icon: 'fa fa-trash', command: (e) => {
@@ -169,24 +169,24 @@ export class AccountLaunchComponent implements OnInit {
 
     }
 
-    tableExpand(v, expanded, pag = 1, top = 7) {                
+    tableExpand(v, expanded, pag = 1, top = 7) {
         if (expanded) return
-        if (!v) return       
+        if (!v) return
         this.dados = v
-                
+
         let parametro = ''
 
-        if(this.filtro === ''){
+        if (this.filtro === '') {
             parametro = `?DateIni=${v.DateBalance}&DateEnd=${v.DateBalance}&AccountId=${this.id}${Util.expandedQuery(['FinancialCategoryId'], true)}`
         }
-        if(this.filtro !== ''){
+        if (this.filtro !== '') {
             parametro = `?DateIni=${v.DateBalance}&DateEnd=${v.DateBalance}&Text=${this.filtro}&AccountId=${this.id}${Util.expandedQuery(['FinancialCategoryId'], true)}`
         }
-        
+
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems${parametro}`, pag, top).subscribe((v: any) => {
-            this.lista2 = v['body'].value; 
-            this.quantityItems = Util.toNumber(v.headers.get('total'))            
+            this.lista2 = v['body'].value;
+            this.quantityItems = Util.toNumber(v.headers.get('total'))
             this.jaPesquisou = true
         }).add(() => this.dadosDefault.exibirLoader.next(false))
 
@@ -196,14 +196,13 @@ export class AccountLaunchComponent implements OnInit {
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    public lazyLoad(event): void {     
-        console.log('evento ---> ' + JSON.stringify(event))
-        if (!this.jaPesquisou && !this.first){
+    public lazyLoad(event): void {
+        if (!this.jaPesquisou && !this.first) {
             this.first = true
-            return;        
-        } 
+            return;
+        }
         this.loading = true
-        if (this.lista2) {            
+        if (this.lista2) {
             if (this.top !== event.rows && event.rows !== undefined) {
                 this.top = event.rows
                 event.first = 0
@@ -240,11 +239,11 @@ export class AccountLaunchComponent implements OnInit {
 
     abrirModalPagamentoViaConta(value) {
         // const nomeConta = this.contaCaixa ? this.contaCaixa.Nome : this.nome
-        this.data = { idConta: this.id, tipo: value};
+        this.data = { idConta: this.id, tipo: value };
         this.paymentviaaccount.nativeElement.click();
     }
 
-    openModalOpeningBalance() {        
+    openModalOpeningBalance() {
         this.openingbalance.nativeElement.click();
     }
 
@@ -268,26 +267,28 @@ export class AccountLaunchComponent implements OnInit {
         return v
     }
 
-    report(type) {             
+    report(type) {
         let body = {
             type: type,
             date_ini: this.dataInit,
             date_end: this.dataFim,
-            account_id: this.id,            
+            account_id: this.id,
         }
 
-        this.dadosDefault.exibirLoader.next(true)
         if (type === 'pdf') {
-            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
-                Util.savePdf(v)
-            }).add(this.dadosDefault.exibirLoader.next(false))
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+                Util.savePdf(v, 'Extrato Detalhado')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
         }
         if (type === 'xls') {
-            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {                
-                Util.saveXls(v)
-            }).add(this.dadosDefault.exibirLoader.next(false))
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+                console.log('teste')
+                Util.saveXls(v, 'Extrato Detalhado.xls')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
         }
-        
+
     }
 
     choseUploadOfx() {
@@ -302,7 +303,7 @@ export class AccountLaunchComponent implements OnInit {
         return result;
     }
 
-    uploadOfx(e) {        
+    uploadOfx(e) {
         const hoje = new Date()
         if (!e.target.files) return
         const reader = new FileReader();
