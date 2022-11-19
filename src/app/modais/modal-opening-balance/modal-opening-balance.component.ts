@@ -44,10 +44,10 @@ export class ModalOpeningBalanceComponent extends BaseFormPost implements OnInit
     }
 
     public processarFormulario(modal?) {
-        if(this.form.get('Balance').value === '' || this.form.get('Balance').value === null) {
-            this.messageService.add(Util.pushErrorMsg('Favor informar o valor a ser lançado.'))
-            return
-        }
+        // if(this.form.get('Balance').value === '' || this.form.get('Balance').value === null) {
+        //     this.messageService.add(Util.pushErrorMsg('Favor informar o valor a ser lançado.'))
+        //     return
+        // }
 
         const value = Formulario.parseForm(this.entObj, Object.assign({}, this.form.value), ProMonthlyClose.referencias(), null, ProMonthlyClose.datas(), null, null, null)
         this.dadosDefault.exibirLoader.next(true)
