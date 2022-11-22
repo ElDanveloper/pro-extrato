@@ -151,6 +151,10 @@ export class DadosDefaultService {
         return forkJoin([natureza])
     }
     
+    public registrationNatureza() {
+        let natureza = this.http.get(`${getUrlPro()}/financialCategory?$filter=level eq 2&$orderby=classificate`).pipe(map((res: Response) => res['value'].map(v => ({label: v.Classificate + ' - ' + Util.up(v.Description), value: v.Id}))))
+        return forkJoin([natureza])
+    }
 
     private errorHandlerDefaultValues(error: HttpErrorResponse) {
         console.log(error)

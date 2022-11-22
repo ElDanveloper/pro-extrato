@@ -1,0 +1,21 @@
+<ng-template #conteudo>
+    <app-page-divided [padrao]="false">
+        <div principal [formGroup]="form">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-col-12">
+                    <app-select [icon]="true" [label]="'CategoriaFinanceira Pai'" [options]="selectNatureza" formControlName="FinancialId">
+                    </app-select>
+                </div>
+            
+                <div class="p-col-8" style="margin-top: 10px;">
+                    <app-input [label]="'Descrição'" formControlName="Description"></app-input>
+                </div>
+
+            </div>
+            <div style="margin-top: 50px;">
+                <app-footer-page [end]="true" (confirmar)="processarFormulario()" (cancelar)="fecharModal()"
+                    labelConfirmar="Gravar"></app-footer-page>
+            </div>
+        </div>
+    </app-page-divided>
+</ng-template>

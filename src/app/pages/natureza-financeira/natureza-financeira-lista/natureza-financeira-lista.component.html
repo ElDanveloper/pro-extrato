@@ -1,6 +1,6 @@
 <p-card [header]="'Listagem de Categoria Financeira'">
     <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12 p-md-8">
+        <div class="p-field p-col-12 p-md-6">
             <div class="p-inputgroup">
                 <input #inputPesquisa appUppercaseNotForm (keypress)="filtrarEPesquisar($event)" [(ngModel)]="filtro"
                     pInputText>
@@ -16,9 +16,9 @@
             <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 25px; cursor: pointer"
                 (click)="report('pdf')"></i>
         </div>
-        <!-- <div class="p-field p-col-12 p-md-2">
-            <button pButton label="Implantar Categoria" (click)="navegar()"></button>            
-        </div> -->
+        <div class="p-field p-col-12 p-md-2">
+            <button pButton label="Cadastro Simples" (click)="openModalSimpleRegistration()"></button>            
+        </div>
         <div class="p-field p-col-12 p-md-2">
             <button pButton label="Nova Categoria" (click)="navegar()"></button>
         </div>
@@ -57,12 +57,16 @@
 <p-toast position="bottom-right"></p-toast>
 
 <div style="position: fixed; top: -200%">
-    <button pButton type="button" label="" #cadastrarNatureza></button>
+    <button pButton type="button" label="" #simpleRegistration></button>
 </div>
 
 <!-- <app-modal [fundo]="true" *appModalOpenOnClick="[cadastrarNatureza, '1Acd5WGj70']" [hash]="'1Acd5WGj70'" [autoOverflow]="true">
     <app-modal-natureza-financeira-cadastro #content></app-modal-natureza-financeira-cadastro>
 </app-modal> -->
+
+<app-modal [styleScroll]="{width: '100%', height: '250px'}" [fundo]="true" *appModalOpenOnClick="[simpleRegistration, '1Acd5WGj40']" [hash]="'1Acd5WGj40'">
+    <app-modal-simple-registration  #content></app-modal-simple-registration>
+</app-modal>
 
 <app-modal-natureza-financeira-cadastro [data]="natureza" [include]="include" [modalVisible]="modalCadastrarNatureza"
     #content (closeModal)="conclude()"></app-modal-natureza-financeira-cadastro>

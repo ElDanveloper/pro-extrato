@@ -16,6 +16,7 @@ import { Router } from "@angular/router";
 export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
 
     @ViewChild('cadastrarNatureza') cadastrarNatureza: ElementRef;
+    @ViewChild('simpleRegistration') simpleRegistration: ElementRef;
 
     exibirLoader = this.dadosDefault.exibirLoader
     exibirLoaderNetwork = this.networkService.exibirLoader
@@ -134,6 +135,10 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
                 Util.saveXls(v)
             }).add(this.dadosDefault.exibirLoader.next(false))
         }
+    }
+
+    openModalSimpleRegistration(){
+        this.simpleRegistration.nativeElement.click();
     }
 
     public lazyLoad(event): void {
