@@ -1,0 +1,226 @@
+<p-card [header]="'Demostrativo do Resultado do Exercicio'">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-formgrid p-grid p-col-4">
+            <div class="p-col-5">
+                <app-date #dataInicial [(ngModel)]="dataInit"></app-date>
+            </div>
+            <div class="p-col-5">
+                <app-date #dataFinal [(ngModel)]="dataFim"></app-date>
+            </div>
+        </div>
+        <div class="p-col-2" style="margin-top: 5px; margin-left: -65px;">
+            <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+        </div>
+        <!-- <div class="p-field p-col-12 p-md-2" style="position: relative;">
+            <app-select #selectValue [options]="selectSort"></app-select>
+        </div> -->
+        <div class="p-field p-col-12 p-md-2" style="margin-top: 5px;">
+            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 95px; cursor: pointer;"
+                (click)="report('xls')"></i>
+            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 25px; cursor: pointer"
+                (click)="report('pdf')"></i>
+        </div>
+        <div class="p-offset-2 p-field p-col-12 p-md-2">
+            <p-splitButton label="Relatórios" [model]="itemsReport"></p-splitButton>
+        </div>
+    </div>
+</p-card>
+
+<p-confirmDialog header="Confirmacao" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+<p-toast position="bottom-right"></p-toast>
+
+<div style="position: fixed; top: -200%">
+    <button pButton type="button" label="" #simpleRegistration></button>
+</div>
+&nbsp;
+<div class="p-col-12">
+    <div class="p-offset-2 p-col-6">
+        <p-card>
+            <!-- <div class="vertical">
+                
+            </div> -->
+            <div class="p-col-12">
+                <div class="card-resumo-item">
+                    <div class="p-col-8"></div>
+                    <div class="p-col-2">
+                        <span>M2</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>%</span>
+                    </div>
+                </div>
+
+                <div class="card-resumo-item">
+                    <div class="p-col-8">
+                        <span>Receitas Recebidas</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>12.000</span>
+                    </div>
+                    <div class="p-col-2"></div>                    
+                </div>
+
+                <div class="card-item">
+                    <div class="p-col-8">
+                        <span> (-) Dedução da Receita</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>1.200</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>10%</span>
+                    </div>                    
+                </div>
+
+                <hr />
+
+                <div class="card-resumo-item">
+                    <div class="p-col-8">
+                        <span>=Receita Liquida</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>10.800</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>90%</span>
+                    </div>                    
+                </div>
+
+                <div class="card-item">
+                    <div class="p-col-8">
+                        <span> (-) Custo das Vendas</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>4.500</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>38%</span>
+                    </div>                    
+                </div>
+
+                <div class="card-item">
+                    <div class="p-col-8">
+                        <span> (-) Despesas Variáveis de venda</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>1.800</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>15%</span>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="card-resumo-item">
+                    <div class="p-col-8">
+                        <span>=Lucro Bruto</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>4.500</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>38%</span>
+                    </div>                    
+                </div>
+
+                <div class="card-item">
+                    <div class="p-col-8">
+                        <span> (-) Despesas Operacionais</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>2.100</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>18%</span>
+                    </div>                    
+                </div>
+
+                <div class="card-item">
+                    <div class="p-col-8">
+                        <span> (-) Despesas com Sócios</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>1.500</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>13%</span>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="card-resumo-item">
+                    <div class="p-col-8">
+                        <span>=Lucro Liquido</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>900</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>8%</span>
+                    </div>                    
+                </div>
+
+                <div class="card-item">
+                    <div class="p-col-8">
+                        <span> Ponto de Equilibrio</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>8.000</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>67%</span>
+                    </div>                    
+                </div>
+
+                <div class="card-item">
+                    <div class="p-col-8">
+                        <span> Ebitda</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>1.150</span>
+                    </div>
+                    <div class="p-col-2">
+                        <span>10%</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- <div class="card-resumo-item">
+                <span>Saldo Anterior </span><span>R$ {{0 | virgulaPipe}}</span>
+            </div>
+            <div class="card-resumo-item">
+                <span>Pagamentos </span><span>R$ {{0 | virgulaPipe}}</span>
+            </div>
+            <div class="card-resumo-item">
+                <span>Recebimento </span><span>R$ {{0 | virgulaPipe}}</span>
+            </div>
+            <hr />
+            <div class="card-resumo-item item-azul">
+                <span>Saldo Atual </span><span>R$ {{0 | virgulaPipe}}</span>
+            </div>
+            <div class="card-resumo-item item-vermelho">
+                <span>Previsto no Mês </span><span>R$ {{0 |
+                    virgulaPipe}}</span>
+            </div>
+            <hr />
+            <div class="card-resumo-item item-verde">
+                <span>Saldo Projetado </span><span>R$ {{0 | virgulaPipe}}</span>
+            </div> -->
+        </p-card>
+    </div>
+</div>
+
+<!-- <app-modal [fundo]="true" *appModalOpenOnClick="[cadastrarNatureza, '1Acd5WGj70']" [hash]="'1Acd5WGj70'" [autoOverflow]="true">
+    <app-modal-natureza-financeira-cadastro #content></app-modal-natureza-financeira-cadastro>
+</app-modal> -->
+
+<app-modal [styleScroll]="{width: '100%', height: '250px'}" [fundo]="true"
+    *appModalOpenOnClick="[simpleRegistration, '1Acd5WGj40']" [hash]="'1Acd5WGj40'">
+    <app-modal-simple-registration #content></app-modal-simple-registration>
+</app-modal>
+
+<app-modal-natureza-financeira-cadastro [data]="natureza" [include]="include" [modalVisible]="modalCadastrarNatureza"
+    #content (closeModal)="conclude()"></app-modal-natureza-financeira-cadastro>

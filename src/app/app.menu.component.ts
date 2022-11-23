@@ -32,7 +32,13 @@ export class AppMenuComponent implements OnInit {
                     label: 'Contas', icon: 'fa fa-university', routerLink: ['account']
                 },
                 {
-                    label: 'Relatórios', icon: 'fa fa-print', routerLink: ['development']
+                    label: 'Relatórios', icon: 'fa fa-print',
+                    items: [
+                        {
+                            label: 'D.R.E', icon: 'fa fa-line-chart', routerLink: ['report-dre']
+                            // routerLink: ['development']
+                        }
+                    ]
                 },
                 {
                     label: 'Cadastros', icon: 'fa fa-cog',

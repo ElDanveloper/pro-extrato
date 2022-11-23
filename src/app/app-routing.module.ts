@@ -1,3 +1,4 @@
+import { ReportDreComponent } from './pages/report/report-DRE/report-dre.component';
 import { UserCompanyListComponent } from './pages/user-company/user-company-list/user-company-list.component';
 import { ParametersCompanyComponent } from './pages/parameters-company/parameters-company.component';
 import { AuthRoutesGuard } from './guards/auth-routes.guard';
@@ -64,6 +65,7 @@ const routes: Routes = [
             { path: 'memorized-histories', component: MemorizedHistoriesListComponent},
             { path: 'parameters-company', component: ParametersCompanyComponent },
             { path: 'user-company-list', component: UserCompanyListComponent },
+            { path: 'report-dre', component: ReportDreComponent},
             
             
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
