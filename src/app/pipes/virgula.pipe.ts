@@ -7,17 +7,18 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class VirgulaPipe implements PipeTransform {
 
-    transform(value: any, args?: any): any {
+    transform(value: any, args?: any): any {          
+        console.log(value)      
         //TODO verificar se os valores sao somente numeros
         if (value === undefined || value === null || value === '') {
             return '0,00'
         } else {
             let data: any = '' + Util.toNumber(value)
-            data = data.replace('.', ',');
+            data = data.replace('.', ',');            
             data = data.match(/,\d{1}$/g) ? data + '0' : data.match(/,\d{2}/g) ? data : data + ',00'
-            let index = data.indexOf(',')
+            let index = data.indexOf(',')            
 
-            while (index > 3) {
+            while (index > 3) {                
                 let temp = data.split('')
                 temp.splice(index - 3, 0, '.')
                 data = temp.join('')

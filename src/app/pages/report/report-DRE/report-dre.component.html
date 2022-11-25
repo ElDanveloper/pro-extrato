@@ -41,148 +41,148 @@
             </div> -->
             <div class="p-col-12">
                 <div class="card-resumo-item">
-                    <div class="p-col-8"></div>
-                    <div class="p-col-2">
+                    <div class="p-col-6"></div>
+                    <div appAlignCenter class="p-col-3">
                         <span>M2</span>
                     </div>
-                    <div class="p-col-2">
+                    <div appAlignCenter class="p-col-3">
                         <span>%</span>
                     </div>
                 </div>
 
                 <div class="card-resumo-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span>Receitas Recebidas</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>12.000</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{data.Revenue | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2"></div>                    
+                    <div class="p-col-3"></div>                    
                 </div>
 
                 <div class="card-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span> (-) Dedução da Receita</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>1.200</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{data.Deductions | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>10%</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{PercentageDeductions}} %</span>
                     </div>                    
                 </div>
 
                 <hr />
 
                 <div class="card-resumo-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span>=Receita Liquida</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>10.800</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{this.data.NetRevenue | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>90%</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{PercentageNetRevenue}} %</span>
                     </div>                    
                 </div>
 
                 <div class="card-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span> (-) Custo das Vendas</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>4.500</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{this.data.CostOfSold | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>38%</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{PercentageCostOfSold}} %</span>
                     </div>                    
                 </div>
 
                 <div class="card-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span> (-) Despesas Variáveis de venda</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>1.800</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{this.data.VariableExpense | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>15%</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{PercentageVariableExpense}} %</span>
                     </div>
                 </div>
 
                 <hr />
 
                 <div class="card-resumo-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span>=Lucro Bruto</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>4.500</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{this.data.GrossProfit | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>38%</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{PercentageGrossProfit}} %</span>
                     </div>                    
                 </div>
 
                 <div class="card-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span> (-) Despesas Operacionais</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>2.100</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{this.data.OperationalExpense | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>18%</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{PercentageOperationalExpense}} %</span>
                     </div>                    
                 </div>
 
                 <div class="card-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span> (-) Despesas com Sócios</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>1.500</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{this.data.PartnerExpense | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>13%</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{PercentagePartnerExpense}} %</span>
                     </div>
                 </div>
 
                 <hr />
 
                 <div class="card-resumo-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span>=Lucro Liquido</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>900</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{this.data.NetProfit | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>8%</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{PercentageNetProfit}} %</span>
                     </div>                    
                 </div>
 
                 <div class="card-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span> Ponto de Equilibrio</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>8.000</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{this.data.BreakEven | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>67%</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{PercentageBreakEven}} %</span>
                     </div>                    
                 </div>
 
                 <div class="card-item">
-                    <div class="p-col-8">
+                    <div class="p-col-6">
                         <span> Ebitda</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>1.150</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{this.data.Ebitda | virgulaPipe}}</span>
                     </div>
-                    <div class="p-col-2">
-                        <span>10%</span>
+                    <div appAlignRight class="p-col-3">
+                        <span>{{PercentageEbitda}} %</span>
                     </div>
                 </div>
 
@@ -212,15 +212,3 @@
         </p-card>
     </div>
 </div>
-
-<!-- <app-modal [fundo]="true" *appModalOpenOnClick="[cadastrarNatureza, '1Acd5WGj70']" [hash]="'1Acd5WGj70'" [autoOverflow]="true">
-    <app-modal-natureza-financeira-cadastro #content></app-modal-natureza-financeira-cadastro>
-</app-modal> -->
-
-<app-modal [styleScroll]="{width: '100%', height: '250px'}" [fundo]="true"
-    *appModalOpenOnClick="[simpleRegistration, '1Acd5WGj40']" [hash]="'1Acd5WGj40'">
-    <app-modal-simple-registration #content></app-modal-simple-registration>
-</app-modal>
-
-<app-modal-natureza-financeira-cadastro [data]="natureza" [include]="include" [modalVisible]="modalCadastrarNatureza"
-    #content (closeModal)="conclude()"></app-modal-natureza-financeira-cadastro>
