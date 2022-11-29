@@ -1,3 +1,4 @@
+import { ReportCashFlowComponent } from './pages/report/report-cash-flow/report-cash-flow.component';
 import { ReportDreComponent } from './pages/report/report-DRE/report-dre.component';
 import { UserCompanyListComponent } from './pages/user-company/user-company-list/user-company-list.component';
 import { ParametersCompanyComponent } from './pages/parameters-company/parameters-company.component';
@@ -146,6 +147,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         MemorizedHistoriesListComponent,
         UserCompanyListComponent,
         ReportDreComponent,
+        ReportCashFlowComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

@@ -1,3 +1,4 @@
+import { ReportCashFlowComponent } from './pages/report/report-cash-flow/report-cash-flow.component';
 import { ReportDreComponent } from './pages/report/report-DRE/report-dre.component';
 import { UserCompanyListComponent } from './pages/user-company/user-company-list/user-company-list.component';
 import { ParametersCompanyComponent } from './pages/parameters-company/parameters-company.component';
@@ -66,6 +67,7 @@ const routes: Routes = [
             { path: 'parameters-company', component: ParametersCompanyComponent },
             { path: 'user-company-list', component: UserCompanyListComponent },
             { path: 'report-dre', component: ReportDreComponent},
+            { path: 'report-cash-flow', component: ReportCashFlowComponent},
             
             
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},

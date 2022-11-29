@@ -7,8 +7,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class VirgulaPipe implements PipeTransform {
 
-    transform(value: any, args?: any): any {          
-        console.log(value)      
+    transform(value: any, args?: any): any {                  
         //TODO verificar se os valores sao somente numeros
         if (value === undefined || value === null || value === '') {
             return '0,00'

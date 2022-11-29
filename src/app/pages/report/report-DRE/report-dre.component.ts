@@ -35,22 +35,80 @@ export class ReportDreComponent implements OnInit, OnDestroy {
     }
 
     alterouData(e) {
+        this.data = {}
         this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
         this.dataFim = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
         this.loaddata()
     }
 
     loaddata() {
+        this.dadosDefault.exibirLoader.next(true)
         let dataIni = Util.dataParaStringComZero(this.dataInit)
         let dataFim = Util.dataParaStringComZero(this.dataFim)
-        this.dadosDefault.exibirLoader.next(true)
+        console.log('Consulta ---> ' + dataIni + ' <----> ' + dataFim)
         this.networkService.getSimples(getUrlPro(), `SumaryDRE?DateIni=${dataIni}&DateEnd=${dataFim}`).subscribe(v => {
             this.data = v['value'][0]
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
+    get Revenue(){
+        console.log('Valor ---> ' + this.data.Revenue)
+        if(!this.data.Revenue) return 0
+        return this.data.Revenue
+    }
+
+    get Deductions() {
+        if(!this.data.Deductions) return 0
+        return this.data.Deductions
+    }
+
+    get NetRevenue() {
+        if(!this.data.NetRevenue) return 0
+        return this.data.NetRevenue
+    }
+
+    get CostOfSold() {
+        if(!this.data.CostOfSold) return 0
+        return this.data.CostOfSold
+    }
+
+    get VariableExpense() {
+        if(!this.data.VariableExpense) return 0
+        return this.data.VariableExpense
+    }
+
+    get GrossProfit(){
+        if(!this.data.GrossProfit) return 0
+        return this.data.GrossProfit
+    }
+
+    get OperationalExpense(){
+        if(!this.data.OperationalExpense) return 0
+        return this.data.OperationalExpense
+    }
+
+    get PartnerExpense(){
+        if(!this.data.PartnerExpense) return 0
+        return this.data.PartnerExpense
+    }
+
+    get NetProfit(){
+        if(!this.data.NetProfit) return 0
+        return this.data.NetProfit
+    }
+
+    get BreakEven() {
+        if(!this.data.BreakEven) return 0
+        return this.data.BreakEven
+    }
+
+    get Ebitda(){
+        if(!this.data.Ebitda) return 0
+        return this.data.Ebitda
+    }
+
     get PercentageDeductions() {
-        if (this.data.Deductions === 0){
+        if (!this.data.Deductions){
             return 0
         }
         // return mul6(sub6(this.data.Revenue, Util.toNumber2('160.217,55')), 100)
@@ -58,63 +116,63 @@ export class ReportDreComponent implements OnInit, OnDestroy {
     }
 
     get PercentageNetRevenue(){
-        if (this.data.NetRevenue === 0){
+        if (!this.data.NetRevenue){
             return 0
         }        
         return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.NetRevenue)) * 100).toFixed(2);
     }
 
     get PercentageCostOfSold(){
-        if (this.data.CostOfSold === 0){
+        if (!this.data.CostOfSold){
             return 0
         }        
         return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.CostOfSold)) * 100).toFixed(2);
     }
 
     get PercentageVariableExpense() {
-        if (this.data.VariableExpense === 0){
+        if (!this.data.VariableExpense){
             return 0
         }        
         return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.VariableExpense)) * 100).toFixed(2);
     }
 
     get PercentageGrossProfit() {
-        if (this.data.GrossProfit === 0){
+        if (!this.data.GrossProfit){
             return 0
         }        
         return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.GrossProfit)) * 100).toFixed(2);
     }
 
     get PercentageOperationalExpense() {
-        if (this.data.OperationalExpense === 0){
+        if (!this.data.OperationalExpense){
             return 0
         }        
         return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.OperationalExpense)) * 100).toFixed(2);
     }
 
     get PercentagePartnerExpense() {
-        if (this.data.PartnerExpense === 0){
+        if (!this.data.PartnerExpense){
             return 0
         }        
         return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.PartnerExpense)) * 100).toFixed(2);
     }
 
     get PercentageNetProfit() {
-        if (this.data.NetProfit === 0){
+        if (!this.data.NetProfit){
             return 0
         }        
         return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.NetProfit)) * 100).toFixed(2);
     }
 
     get PercentageBreakEven(){
-        if (this.data.BreakEven === 0){
+        if (!this.data.BreakEven){
             return 0
         }        
         return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.BreakEven)) * 100).toFixed(2);
     }
 
     get PercentageEbitda(){
-        if (this.data.Ebitda === 0){
+        if (!this.data.Ebitda){
             return 0
         }        
         return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.Ebitda)) * 100).toFixed(2);

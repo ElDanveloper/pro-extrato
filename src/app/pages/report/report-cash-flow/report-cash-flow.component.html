@@ -1,4 +1,4 @@
-<p-card [header]="'Demostrativo do Resultado do Exercicio'">
+<p-card [header]="'Demostrativo do Fluxo de Caixa'">
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-formgrid p-grid p-col-4">
             <div class="p-col-5">
@@ -40,111 +40,83 @@
                 
             </div> -->
             <div class="p-col-12">
-                <div class="card-resumo-item">
-                    <div class="p-col-6"></div>
-                    <div appAlignCenter class="p-col-3">
-                        <span>M2</span>
-                    </div>
-                    <div appAlignCenter class="p-col-3">
-                        <span>%</span>
-                    </div>
-                </div>
+                <hr />
 
                 <div class="card-resumo-item">
-                    <div class="p-col-6">
-                        <span>Receitas Recebidas</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{Revenue | virgulaPipe}}</span>
-                    </div>
-                    <div class="p-col-3"></div>                    
-                </div>
-
-                 <div class="card-item">
-                    <div class="p-col-6">
-                        <span> (-) Dedução da Receita</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{Deductions | virgulaPipe}}</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PercentageDeductions}} %</span>
-                    </div>                    
+                    <div appAlignCenter class="p-col-6">
+                        <span>Atividades Operacionais</span>
+                    </div>                                    
                 </div>
 
                 <hr />
 
+                 <div class="card-resumo-item">
+                    <div class="p-col-6">
+                        <span>Recebimentos</span>
+                    </div>                    
+                </div>
+
+                
+
+                <div class="card-item">
+                    <div appAlignCenter class="p-col-6">
+                        <span>Receitas</span>
+                    </div>
+                    <div *ngIf="this.data" appAlignRight class="p-col-3">
+                        <span>R$: {{Income | virgulaPipe}}</span>
+                    </div>                                  
+                </div>
+
                 <div class="card-resumo-item">
                     <div class="p-col-6">
-                        <span>=Receita Liquida</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{NetRevenue | virgulaPipe}}</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PercentageNetRevenue}} %</span>
+                        <span>Pagamentos</span>
                     </div>                    
                 </div>
 
                 <div class="card-item">
-                    <div class="p-col-6">
-                        <span> (-) Custo das Vendas</span>
+                    <div appAlignCenter class="p-col-6">
+                        <span>Deduções da Receita</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{CostOfSold | virgulaPipe}}</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PercentageCostOfSold}} %</span>
-                    </div>                    
-                </div>
-
-                <div class="card-item">
-                    <div class="p-col-6">
-                        <span> (-) Despesas Variáveis de venda</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{VariableExpense | virgulaPipe}}</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PercentageVariableExpense}} %</span>
-                    </div>
+                        <span>R$: {{Deduction | virgulaPipe}}</span>
+                    </div>                   
                 </div>
 
                 <hr />
 
-                <div class="card-resumo-item">
-                    <div class="p-col-6">
-                        <span>=Lucro Bruto</span>
+                <div class="card-item">
+                    <div appAlignCenter class="p-col-6">
+                        <span>Custos e Estoques</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{GrossProfit | virgulaPipe}}</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PercentageGrossProfit}} %</span>
-                    </div>                    
+                        <span>R$: {{CostOfSold | virgulaPipe}}</span>
+                    </div>               
                 </div>
 
                 <div class="card-item">
-                    <div class="p-col-6">
-                        <span> (-) Despesas Operacionais</span>
+                    <div appAlignCenter class="p-col-6">
+                        <span>Despesas Variaveis Venda</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{OperationalExpense | virgulaPipe}}</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PercentageOperationalExpense}} %</span>
-                    </div>                    
+                        <span>R$: {{VariableExpense | virgulaPipe}}</span>
+                    </div>                
                 </div>
 
                 <div class="card-item">
-                    <div class="p-col-6">
-                        <span> (-) Despesas com Sócios</span>
+                    <div appAlignCenter class="p-col-6">
+                        <span>Despesas Operacionais</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PartnerExpense | virgulaPipe}}</span>
+                        <span>R$: {{OperationalExpense | virgulaPipe}}</span>
+                    </div>
+                </div>
+
+                <div class="card-item">
+                    <div appAlignCenter class="p-col-6">
+                        <span>Despesas com Sócios</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PercentagePartnerExpense}} %</span>
+                        <span>R$: {{ParthnerExpense | virgulaPipe}}</span>
                     </div>
                 </div>
 
@@ -152,40 +124,77 @@
 
                 <div class="card-resumo-item">
                     <div class="p-col-6">
-                        <span>=Lucro Liquido</span>
+                        <span>Geração de Caixa Operacional</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{NetProfit | virgulaPipe}}</span>
+                        <span>R$: {{OperationalFlow | virgulaPipe}}</span>
+                    </div>                   
+                </div>
+
+                <hr />
+                &nbsp;
+
+                <div class="card-resumo-item">
+                    <div appAlignCenter class="p-col-6">
+                        <span>Atividades de Investimento</span>
+                    </div>                    
+                </div>
+
+                <div class="card-resumo-item">
+                    <div appAlignCenter class="p-col-6">
+                        <span>Saldo dos Investimentos</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PercentageNetProfit}} %</span>
+                        <span>R$: {{InvestmentFlow | virgulaPipe}}</span>
+                    </div>                    
+                </div>
+
+                &nbsp;
+
+                <div class="card-resumo-item">
+                    <div appAlignCenter class="p-col-6">
+                        <span>Atividades de Financiamento</span>
+                    </div>                    
+                </div>
+
+                <div class="card-resumo-item">
+                    <div appAlignCenter class="p-col-6">
+                        <span>Saldo dos Financiamentos</span>
+                    </div>
+                    <div *ngIf="this.data" appAlignRight class="p-col-3">
+                        <span>R$: {{FinancingFlow | virgulaPipe}}</span>
                     </div>                    
                 </div>
 
                 <hr />
 
-                <div class="card-item">
+                <div class="card-resumo-item">
                     <div class="p-col-6">
-                        <span> Ponto de Equilibrio</span>
+                        <span>Variação de Caixa</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{BreakEven | virgulaPipe}}</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PercentageBreakEven}} %</span>
+                        <span>R$: {{TotalCashFlow | virgulaPipe}}</span>
                     </div>                    
                 </div>
 
-                <div class="card-item">
+                <div class="card-resumo-item">
+                    <div appAlignCenter class="p-col-6">
+                        <span>Saldo Inicial</span>
+                    </div>
+                    <div *ngIf="this.data" appAlignRight class="p-col-3">
+                        <span>R$: {{InicialBalance | virgulaPipe}}</span>
+                    </div>                    
+                </div>
+
+                <hr />
+
+                <div class="card-resumo-item">
                     <div class="p-col-6">
-                        <span> Ebitda</span>
+                        <span>Saldo Final de Caixa</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{Ebitda | virgulaPipe}}</span>
-                    </div>
-                    <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PercentageEbitda}} %</span>
-                    </div>
+                        <span>R$: {{FinalBalance | virgulaPipe}}</span>
+                    </div>                    
                 </div>
 
                 <hr />

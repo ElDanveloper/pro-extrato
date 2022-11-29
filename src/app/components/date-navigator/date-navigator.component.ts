@@ -58,6 +58,7 @@ export class DateNavigatorComponent implements OnInit, AfterViewInit {
     defineLabelData() {        
         const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
         this.dataLabel = `${monthLabel[this.dataInit.getMonth()]} - ${this.dataInit.getFullYear()}`
+        console.log('Label ---> ' + this.dataLabel)
     }
 
     nextDate() {
