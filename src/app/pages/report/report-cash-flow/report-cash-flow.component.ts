@@ -45,7 +45,6 @@ export class ReportCashFlowComponent implements OnInit, OnDestroy {
         this.dadosDefault.exibirLoader.next(true)
         let dataIni = Util.dataParaStringComZero(this.dataInit)
         let dataFim = Util.dataParaStringComZero(this.dataFim)
-        console.log('Consulta ---> ' + dataIni + ' <----> ' + dataFim)
         this.networkService.getSimples(getUrlPro(), `MonthlyCloseCash?DateIni=${dataIni}&DateEnd=${dataFim}`).subscribe(v => {
             this.data = v['value'][0]
         }).add(() => this.dadosDefault.exibirLoader.next(false))

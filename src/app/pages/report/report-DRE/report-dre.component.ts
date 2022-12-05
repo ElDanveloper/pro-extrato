@@ -51,8 +51,7 @@ export class ReportDreComponent implements OnInit, OnDestroy {
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    get Revenue(){
-        console.log('Valor ---> ' + this.data.Revenue)
+    get Revenue(){        
         if(!this.data.Revenue) return 0
         return this.data.Revenue
     }
@@ -108,74 +107,74 @@ export class ReportDreComponent implements OnInit, OnDestroy {
     }
 
     get PercentageDeductions() {
-        if (!this.data.Deductions){
+        if (!this.data.Deductions || this.data.Revenue <= 0){
             return 0
-        }
-        // return mul6(sub6(this.data.Revenue, Util.toNumber2('160.217,55')), 100)
-        return (Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.Deductions)) * 100;
+        }        
+        return (Util.toNumber(this.data.Deductions) / Util.toNumber(this.data.Revenue)) * 100;
     }
 
     get PercentageNetRevenue(){
-        if (!this.data.NetRevenue){
+        if (!this.data.NetRevenue || this.data.Revenue <= 0){
             return 0
         }        
-        return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.NetRevenue)) * 100).toFixed(2);
+        return ((Util.toNumber(this.data.NetRevenue) / Util.toNumber(this.data.Revenue)) * 100).toFixed(2);
     }
 
     get PercentageCostOfSold(){
-        if (!this.data.CostOfSold){
+        if (!this.data.CostOfSold || this.data.Revenue <= 0){
             return 0
         }        
-        return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.CostOfSold)) * 100).toFixed(2);
+        return ((Util.toNumber(this.data.CostOfSold) / Util.toNumber(this.data.Revenue)) * 100).toFixed(2);
     }
 
     get PercentageVariableExpense() {
-        if (!this.data.VariableExpense){
+        if (!this.data.VariableExpense || this.data.Revenue <= 0){
             return 0
         }        
-        return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.VariableExpense)) * 100).toFixed(2);
+        return ((Util.toNumber(this.data.VariableExpense) / Util.toNumber(this.data.Revenue)) * 100).toFixed(2);
     }
 
     get PercentageGrossProfit() {
-        if (!this.data.GrossProfit){
+        if (!this.data.GrossProfit || this.data.Revenue <= 0){
             return 0
         }        
-        return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.GrossProfit)) * 100).toFixed(2);
+        return ((Util.toNumber(this.data.GrossProfit) / Util.toNumber(this.data.Revenue)) * 100).toFixed(2);
     }
 
     get PercentageOperationalExpense() {
-        if (!this.data.OperationalExpense){
+        if (!this.data.OperationalExpense || this.data.Revenue <= 0){
             return 0
         }        
-        return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.OperationalExpense)) * 100).toFixed(2);
+        return ((Util.toNumber(this.data.OperationalExpense) / Util.toNumber(this.data.Revenue)) * 100).toFixed(2);
     }
 
     get PercentagePartnerExpense() {
-        if (!this.data.PartnerExpense){
+        if (!this.data.PartnerExpense || this.data.Revenue <= 0){
             return 0
         }        
-        return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.PartnerExpense)) * 100).toFixed(2);
+        return ((Util.toNumber(this.data.PartnerExpense) / Util.toNumber(this.data.Revenue)) * 100).toFixed(2);
     }
 
     get PercentageNetProfit() {
-        if (!this.data.NetProfit){
+        if (!this.data.NetProfit || this.data.Revenue <= 0){
             return 0
-        }        
-        return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.NetProfit)) * 100).toFixed(2);
+        }   
+                
+        return ((Util.toNumber(this.data.NetProfit) / Util.toNumber(this.data.Revenue)) * 100).toFixed(2);
     }
 
     get PercentageBreakEven(){
-        if (!this.data.BreakEven){
+        if (!this.data.BreakEven || this.data.Revenue <= 0){
             return 0
         }        
-        return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.BreakEven)) * 100).toFixed(2);
+        return ((Util.toNumber(this.data.BreakEven) / Util.toNumber(this.data.Revenue)) * 100).toFixed(2);
     }
 
     get PercentageEbitda(){
-        if (!this.data.Ebitda){
+        if (!this.data.Ebitda || this.data.Revenue <= 0){
             return 0
         }        
-        return ((Util.toNumber(this.data.Revenue) / Util.toNumber(this.data.Ebitda)) * 100).toFixed(2);
+        return ((Util.toNumber(this.data.Ebitda) / Util.toNumber(this.data.Revenue)) * 100).toFixed(2);
     }
         
     report(type) {
