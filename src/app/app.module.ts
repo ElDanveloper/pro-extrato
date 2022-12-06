@@ -1,3 +1,4 @@
+import { UpdateCodeListComponent } from './pages/report/update-code/update-code-list.component';
 import { ReportCashFlowComponent } from './pages/report/report-cash-flow/report-cash-flow.component';
 import { ReportDreComponent } from './pages/report/report-DRE/report-dre.component';
 import { UserCompanyListComponent } from './pages/user-company/user-company-list/user-company-list.component';
@@ -148,6 +149,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         UserCompanyListComponent,
         ReportDreComponent,
         ReportCashFlowComponent,
+        UpdateCodeListComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

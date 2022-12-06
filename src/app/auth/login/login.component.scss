@@ -58,18 +58,6 @@ h1 {
     margin: 100px auto 0 auto;    
 }
 
-.login-panel-fixo {
-    text-align: center;
-    width: 400px;
-    height: 595px;
-    min-height: 440px;
-    padding: 50px 90px 0 40px; 
-    background-color: white;
-    // margin-bottom: -10px;
-    // margin: auto auto auto auto;
-    
-}
-
 .link-esqueci-senha {
     color: black;
     margin-left: 11px;
@@ -108,5 +96,33 @@ h1 {
             outline: 0 none;
             background-color: lighten(#1ab394, 10%);
         }
+    }
+}
+
+@media (max-width: 1920px) {
+    .login-panel-fixo {
+        text-align: center;
+        width: 500px;
+        height: 905px;
+        min-height: 440px;
+        padding: 50px 90px 0 40px; 
+        background-color: white;
+        // margin-bottom: -10px;
+        // margin: auto auto auto auto;
+        
+    }
+}
+
+@media (max-width: 1367px) {
+    .login-panel-fixo {
+        text-align: center;
+        width: 400px;
+        height: 595px;
+        min-height: 440px;
+        padding: 50px 90px 0 40px; 
+        background-color: white;
+        // margin-bottom: -10px;
+        // margin: auto auto auto auto;
+        
     }
 }

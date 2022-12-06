@@ -40,7 +40,14 @@ export class AppMenuComponent implements OnInit {
                         },
                         {
                             label: 'Fluxo de Caixa', icon: 'fa fa-line-chart', routerLink: ['report-cash-flow']
+                        },
+                        {
+                            label: 'Atualizar Código', icon: 'fa fa-pencil', routerLink: ['update-code']
+                        },
+                        {
+                            label: 'Exportação Contabil', icon: 'fa fa-upload', routerLink: ['development']
                         }
+
                     ]
                 },
                 {
