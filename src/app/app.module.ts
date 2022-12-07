@@ -75,6 +75,7 @@ import {MenuService} from './app.menu.service';
 import {TemaModule} from './tema.module';
 import { LayoutsModule } from './layout/layouts.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { DashboardHomeComponent } from './pages/dashboard/dashboard-home/dashboard-home.component';
 
 
 
@@ -150,6 +151,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         ReportDreComponent,
         ReportCashFlowComponent,
         UpdateCodeListComponent,
+        DashboardHomeComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

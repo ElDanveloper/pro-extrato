@@ -42,6 +42,8 @@ import { AuthGuard } from './auth/service/auth-guard';
 import { VisaoGeralComponent } from './pages/dashboard/visao-geral/visao-geral.component';
 import { ProjetoCadastroComponent } from './pages/projeto-cadastro/projeto-cadastro.component';
 
+import { DashboardHomeComponent } from '../app/pages/dashboard/dashboard-home/dashboard-home.component'
+
 const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
     { path: 'selecao-empresa/:value', component: SelecaoEmpresaComponent },
@@ -70,6 +72,7 @@ const routes: Routes = [
             { path: 'report-dre', component: ReportDreComponent},
             { path: 'report-cash-flow', component: ReportCashFlowComponent},
             { path: 'update-code', component: UpdateCodeListComponent},
+            { path: 'dashboard-home', component: DashboardHomeComponent },
             
             
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
