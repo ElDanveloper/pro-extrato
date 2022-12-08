@@ -25,21 +25,22 @@
     align-items: flex-start;
     padding: 0px;
     isolation: isolate;
-
     width: 248px;
     height: 6px;
 
     /* material/blue-gray/blue-gray-50 */
-
     background: #ECEFF1;
     border-radius: 10px;
 
     /* Inside auto layout */
-
     flex: none;
     order: 1;
     align-self: stretch;
     flex-grow: 0;
-
     margin-bottom: 10px;
+}
+
+.container .card {
+    height: 22rem;
+    width: 30rem;
 }
