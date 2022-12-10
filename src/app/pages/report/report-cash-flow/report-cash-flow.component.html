@@ -201,29 +201,16 @@
                 <hr />
                 
 
-            </div>
-
-            <!-- <div class="card-resumo-item">
-                <span>Saldo Anterior </span><span>R$ {{0 | virgulaPipe}}</span>
-            </div>
-            <div class="card-resumo-item">
-                <span>Pagamentos </span><span>R$ {{0 | virgulaPipe}}</span>
-            </div>
-            <div class="card-resumo-item">
-                <span>Recebimento </span><span>R$ {{0 | virgulaPipe}}</span>
-            </div>
-            <hr />
-            <div class="card-resumo-item item-azul">
-                <span>Saldo Atual </span><span>R$ {{0 | virgulaPipe}}</span>
-            </div>
-            <div class="card-resumo-item item-vermelho">
-                <span>Previsto no Mês </span><span>R$ {{0 |
-                    virgulaPipe}}</span>
-            </div>
-            <hr />
-            <div class="card-resumo-item item-verde">
-                <span>Saldo Projetado </span><span>R$ {{0 | virgulaPipe}}</span>
-            </div> -->
+            </div>            
         </p-card>
     </div>
 </div>
+
+<div style="position: fixed; top: -200%">
+    <button pButton type="button" label="" #modalreportfluxo></button>
+</div>
+
+
+<app-modal [styleScroll]="{width: '100%', height: '150px'}" [fundo]="true" *appModalOpenOnClick="[modalreportfluxo, '1Acd5WGj5']" [hash]="'1Acd5WGj5'">
+    <app-modal-report-cash-flow #content [dateStart]="dateStart" [dateEnd]="dateEnd" [endpoint]="endpoint" [nameFile]="nameFile" [title]="title" [hash]="'1Acd5WGj5'"></app-modal-report-cash-flow>
+</app-modal>
