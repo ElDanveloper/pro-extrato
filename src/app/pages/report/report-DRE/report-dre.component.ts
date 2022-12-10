@@ -15,15 +15,95 @@ import { Router } from "@angular/router";
 })
 export class ReportDreComponent implements OnInit, OnDestroy {
 
+    @ViewChild('modalreportdre') modalreportdre: ElementRef;
+
     exibirLoader = this.dadosDefault.exibirLoader
     exibirLoaderNetwork = this.networkService.exibirLoader
 
     dataInit = Util.getDateComUmMesAntes();
     dataFim = Util.getLastDayDate();
 
-    itemsReport = []
+    dateStart;
+    dateEnd;
+    endpoint: string;
+    nameFile: string;
+    title: string;
 
     data;
+
+    itemsReport = [
+        {
+            label: 'Mês Anterior', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.dateStart = Util.getDateFromMonthprevious()
+                this.dateEnd = Util.getLastDateFrom3Month();
+                this.endpoint = 'ConsolidedDre',
+                this.nameFile = 'mes anterior'
+                this.title = 'Mês Anterior'
+                this.modalreportdre.nativeElement.click()
+                
+            }
+        },
+        {
+            label: 'Ano Atual', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.dateStart = Util.getDateFromYearCurrent()
+                this.dateEnd = Util.getLastDayDate();
+                this.endpoint = 'TwelveMonthDre',
+                this.nameFile = 'ano atual'
+                this.title = 'Ano Atual'
+                this.modalreportdre.nativeElement.click()
+            }
+        },
+        {
+            label: 'Ano Anterior', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.dateStart = Util.getDateFromYearPrevious()
+                this.dateEnd = Util.getDateFromLastYearPrevious();
+                this.endpoint = 'TwelveMonthDre',
+                this.nameFile = 'ano anterior'
+                this.title = 'Ano Anterior'
+                this.modalreportdre.nativeElement.click()
+            }
+        },
+        {
+            label: 'Ultimos 3 Meses', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.dateStart = Util.getDatefrom3Month()
+                this.dateEnd = Util.getLastDateFrom3Month();
+                this.endpoint = 'ThreeMonthDre',
+                this.nameFile = '3 meses'
+                this.title = '3 Meses'
+                this.modalreportdre.nativeElement.click()
+            }
+        },
+        {
+            label: 'Ultimos 6 Meses', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.dateStart = Util.getDatefrom6Month()
+                this.dateEnd = Util.getLastDateFrom6Month();
+                this.endpoint = 'SixMonthDre',
+                this.nameFile = '6 meses'
+                this.title = '6 Meses'
+                this.modalreportdre.nativeElement.click()
+            }
+        },
+        {
+            label: 'Ultimo 12 Meses', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.dateStart = Util.getDateFromYearCurrent()
+                this.dateEnd = Util.getLastDayDate();
+                this.endpoint = 'TwelveMonthDre',
+                this.nameFile = '12 mes'
+                this.title = 'Ultimos 12 Meses'
+                this.modalreportdre.nativeElement.click()
+            }
+        },
+        {
+            label: 'Consolidado por Périodo', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.dateStart = Util.getDateComUmMesAntes()
+                this.dateEnd = Util.getLastDayDate();
+                this.endpoint = 'ConsolidedDre',
+                this.nameFile = 'consolidado'
+                this.title = 'Consolidado por Périodo'
+                this.modalreportdre.nativeElement.click()
+            }
+        }
+    ]
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) { }
 

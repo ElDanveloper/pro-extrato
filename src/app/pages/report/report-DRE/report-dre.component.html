@@ -216,3 +216,12 @@
         </p-card>
     </div>
 </div>
+
+<div style="position: fixed; top: -200%">
+    <button pButton type="button" label="" #modalreportdre></button>
+</div>
+
+
+<app-modal [styleScroll]="{width: '100%', height: '150px'}" [fundo]="true" *appModalOpenOnClick="[modalreportdre, '1Acd5WGj8']" [hash]="'1Acd5WGj8'">
+    <app-modal-report-dre #content [dateStart]="dateStart" [dateEnd]="dateEnd" [endpoint]="endpoint" [nameFile]="nameFile" [title]="title" [hash]="'1Acd5WGj8'"></app-modal-report-dre>
+</app-modal>

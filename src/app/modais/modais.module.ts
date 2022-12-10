@@ -1,3 +1,4 @@
+import { ModalReportDreComponent } from './modal-report-dre/modal-report-dre.component';
 import { ModalSimpleRegistrationComponent } from './modal-simple-registration/modal-simple-registration.component';
 import { ModalKeyWordRegistrationComponent } from './modal-key-word-registration/modal-key-word-registration.component';
 import { ModalAccountRegistrationComponent } from './modal-account-registration/modal-account-registration.component';
@@ -59,7 +60,8 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalEditStatementItemsComponent,
       ModalAccountRegistrationComponent,
       ModalKeyWordRegistrationComponent,
-      ModalSimpleRegistrationComponent
+      ModalSimpleRegistrationComponent,
+      ModalReportDreComponent,
       //ModalPagamentoViaContaCorrenteComponent,
   ],
     imports: [
@@ -100,6 +102,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalAccountRegistrationComponent,
         ModalKeyWordRegistrationComponent,
         ModalSimpleRegistrationComponent,
+        ModalReportDreComponent,
         //ModalPagamentoViaContaCorrenteComponent,
     ]
 })

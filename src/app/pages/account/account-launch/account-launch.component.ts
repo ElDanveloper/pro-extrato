@@ -48,7 +48,16 @@ export class AccountLaunchComponent implements OnInit {
     @ViewChild('editstatementitems') editstatementitems: ElementRef;
 
     itemsReport = [
-        {}
+        {
+            label: 'Detalhado por Natureza', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.report('pdf', 'DetailExtractNature', 'Detalhado por Natureza');
+            }
+        },
+        {
+            label: 'Resumo por Categoria', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.report('pdf', 'ResumeNature', 'Resumo por Categoria')
+            }
+        }
     ];
 
 
@@ -271,7 +280,7 @@ export class AccountLaunchComponent implements OnInit {
         return v
     }
 
-    report(type) {
+    report(type, endpoint = 'DetailExtract', name = 'Extrato Detalhado') {
         let body = {
             type: type,
             date_ini: this.dataInit,
@@ -281,15 +290,14 @@ export class AccountLaunchComponent implements OnInit {
 
         if (type === 'pdf') {
             this.dadosDefault.exibirLoader.next(true)
-            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
-                Util.savePdf(v, 'Extrato Detalhado')
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), endpoint, body).subscribe(v => {
+                Util.savePdf(v, name)
             }).add(() => this.dadosDefault.exibirLoader.next(false))
         }
         if (type === 'xls') {
             this.dadosDefault.exibirLoader.next(true)
-            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {
-                console.log('teste')
-                Util.saveXls(v, 'Extrato Detalhado.xls')
+            this.networkService.baixarXls(getUrlReport(), endpoint, body).subscribe(v => {
+                Util.saveXls(v, name + '.xls')
             }).add(() => this.dadosDefault.exibirLoader.next(false))
         }
 
