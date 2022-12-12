@@ -2,7 +2,7 @@ import { Contractor } from './../../../model/contractor.model';
 import { Util, hasValue } from './../../../controller/Util';
 import { Dimensions } from 'ngx-image-cropper';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { getEstados } from './../../../controller/staticValues';
+import { getCnpj, getEstados, getUrlCnpj } from './../../../controller/staticValues';
 import { ErroCep } from '@brunoc/ngx-viacep';
 import { Endereco } from '@brunoc/ngx-viacep';
 import { NgxViacepService } from '@brunoc/ngx-viacep';
@@ -15,6 +15,8 @@ import { NetworkService } from './../../../services/network.service';
 import { MessageService } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from "@angular/core";
+
+import { Subscription } from "rxjs";
 
 @Component({
     selector: 'app-main-accountant',
@@ -37,14 +39,25 @@ export class MainAccountantComponent extends BaseFormPost implements OnInit {
     showCropper = false;
     imageChangedEvent: any = '';
 
-    
+    $subscription3: Subscription;
+
+
     constructor(public router: Router, private route: ActivatedRoute, public messageService: MessageService, public networkService: NetworkService, public dadosDefault: DadosDefaultService,private fb: FormBuilder, private viaCep: NgxViacepService) {
         super(networkService, dadosDefault, router, 'contractor', messageService);
         this.form = Formulario.createForm(new Contractor(), this.fb);
-     }
+    }
 
-    ngOnInit() {        
-      
+    ngOnInit() {
+
+    }
+
+    pegarCnpj() {
+        // 20367555000183 - para teste
+        this.dadosDefault.exibirLoader.next(true);
+        this.$subscription3 = this.networkService.getSimples(getCnpj(), 'cnpj').subscribe((v: any) => {
+            this.messageService.add(Util.pushSuccessMsg('Usuário alterado com Sucesso!'))
+            this.router.navigate(['settings/main-accountant'])
+        }).add(() => this.networkService.exibirLoader.next(false))
     }
 
     verificaCepValido(event) {
@@ -58,7 +71,7 @@ export class MainAccountantComponent extends BaseFormPost implements OnInit {
                         if (event === true) {
                             this.form.get('PessoaForm').get('CodigoIbge').setValue(endereco.ibge)
                             return
-                        }                        
+                        }
                         this.form.get('PessoaForm').get('Logradouro').setValue(endereco.logradouro);
                         this.form.get('PessoaForm').get('Complemento').setValue(endereco.complemento);
                         this.form.get('PessoaForm').get('Bairro').setValue(endereco.bairro);
@@ -125,9 +138,9 @@ export class MainAccountantComponent extends BaseFormPost implements OnInit {
 
     get imagem() {
         const staticImg = '../../../../../assets/images/user.png'
-        const img = null        
+        const img = null
         return hasValue(img) ? img : staticImg
     };
-     
+
 
 }

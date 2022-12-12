@@ -33,20 +33,20 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     @ViewChild('selectValue') public selectValue
     public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
     opcoesTable = [
-        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {            
+        {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
             this.router.navigate([`settings/users-registration/${e.id}`])
         }},
         {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
         {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {}},
     ]
 
-    
+
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
         super(networkService, getUrlUser(), 'contractor')
     }
 
-    ngOnInit() {        
+    ngOnInit() {
         this.carregarLista()
     }
 
@@ -54,16 +54,16 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
         if (e.key === 'Enter') this.carregarLista()
     }
 
-    
+
 
     linkPessoa(v) {
         this.router.navigate([`/historico-pessoa/${v.Id}/pedido`])
     }
 
-    getActive(active){        
-        if(active === true) {            
+    getActive(active){
+        if(active === true) {
             return 'S'
-        } else {            
+        } else {
             return 'N'
         }
     }
@@ -73,9 +73,9 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     }
 
 
-    
 
-    
+
+
 
 
     // public deletar(rowData) {
@@ -96,7 +96,7 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     // }
 
     // public navegar() {
-    //     this.cadastrarPessoa.nativeElement.click()        
+    //     this.cadastrarPessoa.nativeElement.click()
     // }
 
     ngOnDestroy(): void {

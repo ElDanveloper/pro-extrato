@@ -42,6 +42,8 @@ export const getUrlUser = () => `${URL_BASE}/api/user`
 export const getUrlToken = () => `https://app.hunno.com.br/api/update/token`
 export const getUrlReport = () => `https://app.hunno.com.br/api/proextrato/report`
 
+export const getCnpj = () => `https://bpoymh2e3b.execute-api.us-east-1.amazonaws.com/prod/consulta-cnpj`
+
 //Base teste
 export const URL_BASE = `https://api.hunno.com.br`
 export const API_AUTH = `https://api.hunno.com.br:8089`
