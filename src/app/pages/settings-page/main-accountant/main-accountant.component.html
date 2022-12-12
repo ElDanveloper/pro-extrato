@@ -5,11 +5,11 @@
             <div style="margin-left:15px;" class="p-fluid p-formgrid p-grid">
                 <h1 style="font-size: 18px;margin-right:10px;">Dados da Contabilidade</h1>
                 <div class="p-field p-col-4 p-md-3">
-                    <app-input [label]="'CNPJ'" formControlName="cnpj"></app-input>
+                    <app-input-cpf-cnpj [label]="'CNPJ'" formControlName="Cnpj"></app-input-cpf-cnpj>
                 </div>
                 <!-- class="p-field p-col-4 p-md-3" -->
                 <div class="p-field p-col-4 p-md-3" style="margin-top: 1rem;">
-                    <button pButton label="Buscar CNPJ" (click)="pegarCnpj()"></button>
+                    <button pButton label="Buscar CNPJ" (click)="takeCnpj()"></button>
                 </div>
             </div>
 

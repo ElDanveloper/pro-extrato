@@ -51,13 +51,19 @@ export class MainAccountantComponent extends BaseFormPost implements OnInit {
 
     }
 
-    pegarCnpj() {
-        // 20367555000183 - para teste
+    takeCnpj() {
+        // 20367555000183 - para teste        
+        if(!this.form.get('Cnpj').value){
+            this.messageService.add(Util.pushErrorMsg('Favor informar o CNPJ!'))
+            return
+        } 
+        const cnpj = this.form.get('Cnpj').value.toString().match(/\d/g);
         this.dadosDefault.exibirLoader.next(true);
-        this.$subscription3 = this.networkService.getSimples(getCnpj(), 'cnpj').subscribe((v: any) => {
-            this.messageService.add(Util.pushSuccessMsg('Usuário alterado com Sucesso!'))
-            this.router.navigate(['settings/main-accountant'])
-        }).add(() => this.networkService.exibirLoader.next(false))
+        this.$subscription3 = this.networkService.getSimples(getCnpj(), cnpj.join('')).subscribe((v: any) => {            
+           console.log(JSON.stringify(v)) 
+        }, e => {
+            this.messageService.add(Util.pushErrorMsg(e))
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     verificaCepValido(event) {
