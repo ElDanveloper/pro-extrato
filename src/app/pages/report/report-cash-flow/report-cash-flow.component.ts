@@ -209,6 +209,14 @@ export class ReportCashFlowComponent implements OnInit, OnDestroy {
         }
     }
 
+    colorValue(v) {        
+        const classes = {
+            'texto-verde': false,
+            'texto-vermelho': false,
+        }        
+        return Util.isNegative(v) ? {...classes, 'texto-vermelho': true} : {...classes, 'texto-verde': true}
+    }
+
     filtrarEPesquisar(e?, page = 0) {
         if (e && e.key !== 'Enter') return
     }

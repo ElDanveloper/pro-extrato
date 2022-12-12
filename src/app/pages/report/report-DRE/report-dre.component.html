@@ -55,7 +55,7 @@
                         <span>Receitas Recebidas</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{Revenue | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(Revenue)">{{Revenue | virgulaPipe}}</span>
                     </div>
                     <div class="p-col-3"></div>                    
                 </div>
@@ -65,7 +65,7 @@
                         <span> (-) Dedução da Receita</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{Deductions | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(Deductions)">{{Deductions | virgulaPipe}}</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span>{{PercentageDeductions}} %</span>
@@ -79,7 +79,7 @@
                         <span>=Receita Liquida</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{NetRevenue | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(NetRevenue)">{{NetRevenue | virgulaPipe}}</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span>{{PercentageNetRevenue}} %</span>
@@ -91,7 +91,7 @@
                         <span> (-) Custo das Vendas</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{CostOfSold | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(CostOfSold)">{{CostOfSold | virgulaPipe}}</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span>{{PercentageCostOfSold}} %</span>
@@ -103,7 +103,7 @@
                         <span> (-) Despesas Variáveis de venda</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{VariableExpense | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(VariableExpense)">{{VariableExpense | virgulaPipe}}</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span>{{PercentageVariableExpense}} %</span>
@@ -117,7 +117,7 @@
                         <span>=Lucro Bruto</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{GrossProfit | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(GrossProfit)">{{GrossProfit | virgulaPipe}}</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span>{{PercentageGrossProfit}} %</span>
@@ -129,7 +129,7 @@
                         <span> (-) Despesas Operacionais</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{OperationalExpense | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(OperationalExpense)">{{OperationalExpense | virgulaPipe}}</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span>{{PercentageOperationalExpense}} %</span>
@@ -141,7 +141,7 @@
                         <span> (-) Despesas com Sócios</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{PartnerExpense | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(PartnerExpense)">{{PartnerExpense | virgulaPipe}}</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span>{{PercentagePartnerExpense}} %</span>
@@ -155,7 +155,7 @@
                         <span>=Lucro Liquido</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{NetProfit | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(NetProfit)">{{NetProfit | virgulaPipe}}</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span>{{PercentageNetProfit}} %</span>
@@ -169,7 +169,7 @@
                         <span> Ponto de Equilibrio</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{BreakEven | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(BreakEven)">{{BreakEven | virgulaPipe}}</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span>{{PercentageBreakEven}} %</span>
@@ -181,7 +181,7 @@
                         <span> Ebitda</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>{{Ebitda | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(Ebitda)">{{Ebitda | virgulaPipe}}</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span>{{PercentageEbitda}} %</span>

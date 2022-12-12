@@ -63,7 +63,7 @@
                         <span>Receitas</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{Income | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(Income)">R$: {{Income | virgulaPipe}}</span>
                     </div>                                  
                 </div>
 
@@ -78,7 +78,7 @@
                         <span>Deduções da Receita</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{Deduction | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(Deduction)">R$: {{Deduction | virgulaPipe}}</span>
                     </div>                   
                 </div>
 
@@ -89,7 +89,7 @@
                         <span>Custos e Estoques</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{CostOfSold | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(CostOfSold)">R$: {{CostOfSold | virgulaPipe}}</span>
                     </div>               
                 </div>
 
@@ -98,7 +98,7 @@
                         <span>Despesas Variaveis Venda</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{VariableExpense | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(VariableExpense)">R$: {{VariableExpense | virgulaPipe}}</span>
                     </div>                
                 </div>
 
@@ -107,7 +107,7 @@
                         <span>Despesas Operacionais</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{OperationalExpense | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(OperationalExpense)">R$: {{OperationalExpense | virgulaPipe}}</span>
                     </div>
                 </div>
 
@@ -116,7 +116,7 @@
                         <span>Despesas com Sócios</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{ParthnerExpense | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(ParthnerExpense)">R$: {{ParthnerExpense | virgulaPipe}}</span>
                     </div>
                 </div>
 
@@ -127,7 +127,7 @@
                         <span>Geração de Caixa Operacional</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{OperationalFlow | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(OperationalFlow)">R$: {{OperationalFlow | virgulaPipe}}</span>
                     </div>                   
                 </div>
 
@@ -145,7 +145,7 @@
                         <span>Saldo dos Investimentos</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{InvestmentFlow | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(InvestmentFlow)">R$: {{InvestmentFlow | virgulaPipe}}</span>
                     </div>                    
                 </div>
 
@@ -163,7 +163,7 @@
                         <span>Saldo dos Financiamentos</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{FinancingFlow | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(FinancingFlow)">R$: {{FinancingFlow | virgulaPipe}}</span>
                     </div>                    
                 </div>
 
@@ -174,7 +174,7 @@
                         <span>Variação de Caixa</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{TotalCashFlow | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(TotalCashFlow)">R$: {{TotalCashFlow | virgulaPipe}}</span>
                     </div>                    
                 </div>
 
@@ -183,7 +183,7 @@
                         <span>Saldo Inicial</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{InicialBalance | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(InicialBalance)">R$: {{InicialBalance | virgulaPipe}}</span>
                     </div>                    
                 </div>
 
@@ -194,7 +194,7 @@
                         <span>Saldo Final de Caixa</span>
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
-                        <span>R$: {{FinalBalance | virgulaPipe}}</span>
+                        <span [ngClass]="colorValue(FinalBalance)">R$: {{FinalBalance | virgulaPipe}}</span>
                     </div>                    
                 </div>
 

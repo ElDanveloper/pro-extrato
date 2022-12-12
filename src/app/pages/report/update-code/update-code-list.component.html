@@ -11,8 +11,11 @@
         <div class="p-col-2" style="margin-top: 5px; margin-left: -65px;">
             <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
         </div>
-        <div class="p-offset-4 p-field p-col-12 p-md-2" style="position: relative;">
-            <button pButton label="Pesquisar"></button>
+        <div class="p-col-2">
+            <button pButton type="button" label="Atualizar Código"></button>
+        </div>
+        <div class="p-offset-2 p-field p-col-12 p-md-2" style="position: relative;">
+            <button pButton label="Pesquisar" (click)="loadList()"></button>
         </div>
     </div>
     &nbsp;
@@ -23,9 +26,10 @@
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th [ngStyle]="{width: '25%'}"> Descrição </th>
-                <th [ngStyle]="{width: '20%'}"> Classificação </th>
-                <th [ngStyle]="{width: '25%'}"> Histórico </th>
-                <th [ngStyle]="{width: '4%'}"> Nivel </th>
+                <th [ngStyle]="{width: '10%'}"> Classificação </th>
+                <th [ngStyle]="{width: '15%'}"> Código Plano Contas</th>
+                <th [ngStyle]="{width: '20%'}"> Histórico </th>
+                <th [ngStyle]="{width: '15%'}"> Código de Integração </th>
                 <th [ngStyle]="{width: '10%'}"> Código Control </th>
                 <th [ngStyle]="{width: '4%'}"> Ações </th>
             </tr>
@@ -34,8 +38,9 @@
             <tr>
                 <td>{{rowData.Description}}</td>
                 <td>{{rowData.Classificate}}</td>
+                <td>{{rowData.CodeAccountPlan}}</td>
                 <td>{{rowData.Historic}}</td>
-                <td appAlignCenter>{{rowData.Level}}</td>
+                <td>{{rowData.CodeIntegration}}</td>
                 <td appAlignRight>{{rowData.CodeControl}}</td>
                 <td appAlignCenter>
                     <app-opcoes-table [value]="rowData" [opcoes]="opcoesTable"></app-opcoes-table>
