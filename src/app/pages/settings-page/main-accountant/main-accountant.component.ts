@@ -60,10 +60,50 @@ export class MainAccountantComponent extends BaseFormPost implements OnInit {
         const cnpj = this.form.get('Cnpj').value.toString().match(/\d/g);
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.getSimples(getCnpj(), cnpj.join('')).subscribe((v: any) => {
-            this.form.get('Nome').setValue(v.nome)            
+            this.form.get('Nome').setValue(v.nome)
+            this.form.get('Fantasia').setValue(v.fantasia)
+            this.form.get('Phone1').setValue(v.telefone)
+            // this.form.get('Cel').setValue(v.telefone)
+            this.form.get('Contato').setValue(v.email) // email usado como contato
+            this.form.get('Cep').setValue(v.cep)
+            this.form.get('Numero').setValue(v.numero)
+            this.form.get('Logradouro').setValue(v.logradouro)
+            this.form.get('Bairro').setValue(v.bairro)
+            this.form.get('Complemento').setValue(v.complemento)
+            this.form.get('Uf').setValue(v.uf)
+            // this.form.get('Cidade').setValue(v.)
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
+    // processarFormulario() {
+    //     let inv = false
+    //     if (this.form.invalid) {
+    //         Object.keys(this.form.controls).forEach(c => {
+    //             if (this.form.get(c).invalid) {
+    //                 this.messageService.add({ severity: 'error', summary: `O campo ${c} e obrigatorio` })
+    //                 inv = true
+    //             }
+    //         })
+    //         if (inv) return
+    //     }
+
+    //     const {Cnpj, ...data} = Object.assign({}, this.form.value)
+
+    //     let value: any = { ...Formulario.parseForm(new Contractor(), data, Contractor.referencias(), null, null, null, null) };
+
+    //     const cnpj = this.form.get('Cnpj').value.toString().match(/\d/g);
+    //     this.dadosDefault.exibirLoader.next(true);
+    //     this.$subscription3 = this.networkService.salvarPost(getCnpj(), 'InsertContractor', value).subscribe((v: any) => {
+    //         this.messageService.add(Util.pushSuccessMsg('Alteração salva!'))
+    //         this.router.navigate(['settings/main-accountant'])
+    //     }).add(() => this.dadosDefault.exibirLoader.next(false))
+
+    // }
+
+    cancelarLocal() {
+        this.router.navigate(['/settings/main-accountant'])
     }
 
     verificaCepValido(event) {
