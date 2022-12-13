@@ -60,17 +60,7 @@ export class MainAccountantComponent extends BaseFormPost implements OnInit {
         const cnpj = this.form.get('Cnpj').value.toString().match(/\d/g);
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.getSimples(getCnpj(), cnpj.join('')).subscribe((v: any) => {
-            console.log(JSON.stringify(v))
-
-            const Nome = JSON.stringify(v.nome)
-            const Fantasia = JSON.stringify(v.fantasia)
-            const Phone1 = JSON.stringify(v.telefone)
-            const Contato = JSON.stringify(v.email)
-
-            console.log('setando valor: ' + this.form.get('Cnpj').get('nome').setValue(v.Nome))
-
-            // this.form.get('PessoaForm').get('Nome').setValue(vApi[0].Nome)
-            // this.form.get('PessoaForm').get('Fantasia').setValue(vApi[0].Fantasia)
+            this.form.get('Nome').setValue(v.nome)            
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
