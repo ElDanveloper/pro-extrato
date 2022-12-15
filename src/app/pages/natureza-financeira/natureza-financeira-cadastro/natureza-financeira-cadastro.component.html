@@ -25,8 +25,11 @@
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-6">
+                <div class="p-field p-col-12 p-md-3">
                     <app-input [label]="'Cod. Plano de Contas'" formControlName="CodeAccountPlan"></app-input>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <app-input [label]="'Descrição Reduzida'" formControlName="ShortDescription"></app-input>
                 </div>
                 <div class="p-field p-col-12 p-md-6">
                     <app-select label="Grupo de Natureza" [options]="selectGrupoNatureza"
