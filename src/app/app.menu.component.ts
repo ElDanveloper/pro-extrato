@@ -39,6 +39,9 @@ export class AppMenuComponent implements OnInit {
                             // routerLink: ['development']
                         },
                         {
+                            label: 'Dashboard Cliente', icon: 'fa fa-line-chart', routerLink: ['dashboard-company']
+                        },
+                        {
                             label: 'Fluxo de Caixa', icon: 'fa fa-line-chart', routerLink: ['report-cash-flow']
                         },
                         {

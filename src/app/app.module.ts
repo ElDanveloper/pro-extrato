@@ -76,6 +76,7 @@ import {TemaModule} from './tema.module';
 import { LayoutsModule } from './layout/layouts.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { DashboardHomeComponent } from './pages/dashboard/dashboard-home/dashboard-home.component';
+import { DashboardCompanyComponent } from './pages/report/dashboard-company/dashboard-company.component';
 
 
 
@@ -92,12 +93,12 @@ import { DashboardHomeComponent } from './pages/dashboard/dashboard-home/dashboa
         DiretivasModule,
         ComponentsModule,
         PipesModule,
-        ModaisModule,   
-        LayoutsModule, 
-        ImageCropperModule,  
-        NgxViacepModule,      
-        
-        
+        ModaisModule,
+        LayoutsModule,
+        ImageCropperModule,
+        NgxViacepModule,
+
+
     ],
     declarations: [
         AppComponent,
@@ -114,10 +115,10 @@ import { DashboardHomeComponent } from './pages/dashboard/dashboard-home/dashboa
         SelecaoEmpresaComponent,
         GeralEvolucaoSaldoLivroCaixaChartComponent,
         GeralLivroCaixaXNotasChartComponent,
-        VisaoGeralComponent,        
+        VisaoGeralComponent,
         CompanyListComponent,
-        UsersListComponent,                
-        UsersRegistrationComponent,        
+        UsersListComponent,
+        UsersRegistrationComponent,
         CompanyRegistrationComponent,
         PersonListComponent,
         PersonRegistrationComponent,
@@ -151,7 +152,10 @@ import { DashboardHomeComponent } from './pages/dashboard/dashboard-home/dashboa
         ReportDreComponent,
         ReportCashFlowComponent,
         UpdateCodeListComponent,
-        DashboardHomeComponent
+        DashboardHomeComponent,
+        DashboardCompanyComponent,
+
+
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

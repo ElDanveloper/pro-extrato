@@ -44,6 +44,8 @@ import { ProjetoCadastroComponent } from './pages/projeto-cadastro/projeto-cadas
 
 import { DashboardHomeComponent } from '../app/pages/dashboard/dashboard-home/dashboard-home.component'
 
+import { DashboardCompanyComponent } from './pages/report/dashboard-company/dashboard-company.component'
+
 const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
     { path: 'selecao-empresa/:value', component: SelecaoEmpresaComponent },
@@ -53,9 +55,9 @@ const routes: Routes = [
         path: '', component: AppMainComponent, canActivate: [AuthGuard, AuthRoutesGuard],
         children: [
             { path: 'home', component: VisaoGeralComponent },
-            { path: 'company', component: CompanyListComponent },            
+            { path: 'company', component: CompanyListComponent },
             { path: 'person', component: PersonListComponent },
-            { path: 'natureza-financeira', component: NaturezaFinanceiraListaComponent },            
+            { path: 'natureza-financeira', component: NaturezaFinanceiraListaComponent },
             { path: 'natureza-financeira/cadasto/:id', component: NaturezaFinanceiraCadastroComponent},
             { path: 'users/registration/:id', component: UsersRegistrationComponent },
             { path: 'company-registration/:id', component: CompanyRegistrationComponent },
@@ -73,8 +75,9 @@ const routes: Routes = [
             { path: 'report-cash-flow', component: ReportCashFlowComponent},
             { path: 'update-code', component: UpdateCodeListComponent},
             { path: 'dashboard-home', component: DashboardHomeComponent },
-            
-            
+            { path: 'dashboard-company', component: DashboardCompanyComponent },
+
+
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
 
             {
@@ -82,8 +85,8 @@ const routes: Routes = [
                     { path: 'extract', component: ExtractComponent },
                     { path: 'reconciled', component: ReconciledComponent },
                     { path: 'conciliator', component: conciliatorComponent },
-                    { path: 'not-reconciled', component: NotReconciledComponent }, 
-                    { path: 'outstanding', component: OutstandingComponent},                   
+                    { path: 'not-reconciled', component: NotReconciledComponent },
+                    { path: 'outstanding', component: OutstandingComponent},
                     {path: '', pathMatch: 'full', redirectTo: 'extract'},
                 ]
             },
@@ -94,8 +97,8 @@ const routes: Routes = [
                     { path: 'users-list', component: UsersListComponent },
                     { path: 'users-registration/:id', component: UsersRegistrationComponent},
                     { path: 'departments-list', component: DepartmentsListComponent },
-                    { path: 'invoices-list', component: InvoicesListComponent },                    
-                    
+                    { path: 'invoices-list', component: InvoicesListComponent },
+
                     { path: 'account-status', component: AccountStatusComponent },
                     {path: '', pathMatch: 'full', redirectTo: 'main-accountant'},
                 ]
