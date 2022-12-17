@@ -1,10 +1,13 @@
 <p-card [header]="'Contas'">
     <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12 p-md-8">
+        <div class="p-field p-col-12 p-md-6">
             <div class="p-inputgroup">
                 <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" pInputText>
                 <button pButton type="button" icon="fa fa-search" (click)="carregarLista()"></button>
             </div>
+        </div>
+        <div class="p-field p-col-12 p-md-2">
+            <button pButton label="Buscar Extratos" type="button" (click)="updateItens()"></button>
         </div>
         <div class="p-field p-offset-2 p-col-12 p-md-2">
             <button pButton label="Nova Conta" (click)="newAccount()"></button>

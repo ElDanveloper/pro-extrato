@@ -1,6 +1,7 @@
+import { DadosDefaultService } from './../../../services/dados-default.service';
 import { Util } from './../../../controller/Util';
 import { BaseListSimplesHeaders } from './../../../controller/BaseListSimplesHeaders';
-import { getUrlPro } from './../../../controller/staticValues';
+import { getUrlPro, getUrlClient, getUrlApiPro } from './../../../controller/staticValues';
 import { BaseListSimples } from '../../../controller/BaseListSimples';
 import { NetworkService } from '../../../services/network.service';
 import { qtdLinhas, } from '../../../controller/staticValues';
@@ -64,7 +65,7 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
 
     filtro = ''
 
-    constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
+    constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) {
         super(messageService, confirmationService, networkService, router, 'proaccount', getUrlPro(), null, [{ campo: 'Name', tipo: 'string' },])        
         this.sortField = 'Name'
         this.sortOrder = 'desc'
@@ -105,6 +106,14 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
                 return 'Caixa Interno'
         }
 
+    }
+
+    updateItens(){
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlApiPro(), 'update/items').subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Extrato Atualizado com Sucesso!'))
+            this.carregarLista()
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     dadosSalvos() {
