@@ -33,7 +33,7 @@ export class SettingsPageComponent implements OnInit {
 
     constructor(private router: Router, private route: ActivatedRoute, private messageService: MessageService, private networkService: NetworkService) { }
 
-    ngOnInit() {        
+    ngOnInit() {
         this.atualizaItemSelecionado(window.location.href)
         this.router.events.subscribe((v: any) => {
             if (v instanceof NavigationEnd) {
@@ -60,7 +60,7 @@ export class SettingsPageComponent implements OnInit {
         } else if (v.toString().match(/\/invoices-list$/)) {
             this.currentIndex = 3
             this.activeItem = this.itemsTabMenu[3];
-        } else if (v.toString().match(/\/$/)) {
+        } else if (v.toString().match(/\/accounting-parameters$/)) {
             this.currentIndex = 4
             this.activeItem = this.itemsTabMenu[4];
         } else if (v.toString().match(/\/account-status$/)) {
@@ -72,15 +72,15 @@ export class SettingsPageComponent implements OnInit {
     setActiveItem(e) {
         this.currentIndex = this.itemsTabMenu.findIndex(v => v === e.activeItem)
         let r = ''
-        
+
         if (this.currentIndex === 0) r = 'main-accountant'
         if (this.currentIndex === 1) r = 'users-list'
         if (this.currentIndex === 2) r = 'departments-list'
         if (this.currentIndex === 3) r = 'invoices-list'
-        if (this.currentIndex === 4) r = ''
+        if (this.currentIndex === 4) r = 'accounting-parameters'
         if (this.currentIndex === 5) r = 'account-status'
-       
+
         this.router.navigate([`settings/${r}`])
     }
-    
+
 }

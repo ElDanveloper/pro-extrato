@@ -1,0 +1,82 @@
+<!--
+    ESSA PAGINA PRECISA DOS ENDPOINT DOS INPUTS
+-->
+
+<ng-container *ngTemplateOutlet="conteudo"></ng-container>
+<ng-template #conteudo>
+    <div [formGroup]="form">
+        <p-card>
+            <div style="margin-left:15px;" class="p-fluid p-formgrid p-grid">
+                <h1 style="font-size: 18px;margin-right:10px;">Parametros da Contabilidade</h1>
+            </div>
+            <div principal class="p-fluid">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-4 p-md-4">
+                        <!-- DeparmentConciliateId -->
+                        <app-select [label]="'Departamento Conciliação'" [options]="selectEstado" formControlName="DeparmentConciliateId"></app-select>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4">
+                        <!-- DeparmentAccountingId -->
+                        <app-select [label]="'Departamento Contabil'" [options]="selectEstado" formControlName="DeparmentAccountingId"></app-select>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-4 p-md-4">
+                        <!-- DeparmentFiscalId -->
+                        <app-select [label]="'Departamento Fiscal'" [options]="selectEstado" formControlName="DeparmentFiscalId"></app-select>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4">
+                        <!-- DeparmentRhId -->
+                        <app-select [label]="'Departamento Pessoal - (RH)'" [options]="selectEstado" formControlName="DeparmentRhId"></app-select>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-4 p-md-4">
+                        <!-- DeparmentCorpoateId -->
+                        <app-select [label]="'Departamento Societário'" [options]="selectEstado" formControlName="DeparmentCorpoateId"></app-select>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4">
+                        <!-- DeparmentCommercialId -->
+                        <app-select [label]="'Departamento Comercial'" [options]="selectEstado" formControlName="DeparmentCommercialId"></app-select>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-4 p-md-4">
+                        <!-- DeparmentAdmId -->
+                        <app-select [label]="'Departamento Adm'" [options]="selectEstado" formControlName="DeparmentAdmId"></app-select>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4">
+                        <!-- DeparmentBPOId -->
+                        <app-select [label]="'Departamento BPO'" [options]="selectEstado" formControlName="DeparmentBPOId"></app-select>
+                    </div>
+                </div>
+            </div>
+
+            <app-page-divided>
+                <div principal class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-4 p-md-4" style="margin-right: 40px;">
+                        <app-input [label]="'Último Email'" [(ngModel)]="DateLastZap" formControlName="DateLastZap"></app-input>
+                        <!-- [(ngModel)]="DateLastZap"
+                        formControlName="DateLastZap" -->
+                    </div>
+                    <div class="p-field p-col-6 p-md-6">
+                        <app-input [label]="'Última Mensagem Whatsapp'" [(ngModel)]="DateLastEmailDoc" formControlName="DateLastEmailDoc"></app-input>
+                        <!-- formControlName="DateLastEmailDoc"
+                        [(ngModel)]="DateLastEmailDoc" -->
+                    </div>
+                </div>
+            </app-page-divided>
+
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-8 p-md-8" style="margin-top: 10px;">
+                    <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-2'" [tamanhoCancelar]="'p-col-2'"
+                        (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()"
+                        [labelConfirmar]="'Salvar'">
+                    </app-footer-page>
+                </div>
+            </div>
+        </p-card>
+    </div>
+
+</ng-template>
+<p-toast position="bottom-right"></p-toast>

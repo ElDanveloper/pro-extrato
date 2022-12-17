@@ -45,6 +45,7 @@ import { ProjetoCadastroComponent } from './pages/projeto-cadastro/projeto-cadas
 import { DashboardHomeComponent } from '../app/pages/dashboard/dashboard-home/dashboard-home.component'
 
 import { DashboardCompanyComponent } from './pages/report/dashboard-company/dashboard-company.component'
+import { AccountingParametersComponent } from './pages/settings-page/accounting-parameters/accounting-parameters.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
@@ -98,6 +99,7 @@ const routes: Routes = [
                     { path: 'users-registration/:id', component: UsersRegistrationComponent},
                     { path: 'departments-list', component: DepartmentsListComponent },
                     { path: 'invoices-list', component: InvoicesListComponent },
+                    { path: 'accounting-parameters', component: AccountingParametersComponent },
 
                     { path: 'account-status', component: AccountStatusComponent },
                     {path: '', pathMatch: 'full', redirectTo: 'main-accountant'},

@@ -8,6 +8,17 @@ export class Department {
     ContractorClientId: number = 0
     UserIdResp: string = ''
 
+    DateLastZap: any = ''
+    DateLastEmailDoc: any = ''
+    DeparmentAccountingId: number = 0
+    DeparmentCorpoateId: number = 0
+    DeparmentConciliateId: number = 0
+    DeparmentCommercialId: number = 0
+    DeparmentRhId: number = 0
+    DeparmentFiscalId: number = 0
+    DeparmentAdmId: number = 0
+    DeparmentBPOId: number = 0
+
     static checkbox() {
         return ['Active', 'Interno']
     }
