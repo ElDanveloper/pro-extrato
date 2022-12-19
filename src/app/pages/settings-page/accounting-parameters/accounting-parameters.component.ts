@@ -49,6 +49,8 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
             this.form.get('DeparmentCommercialId').setValue(v.DeparmentCommercialId)
             this.form.get('DeparmentAdmId').setValue(v.DeparmentAdmId)
             this.form.get('DeparmentBPOId').setValue(v.DeparmentBPOId)
+            this.form.get('DateLastEmailDoc').setValue(v.DateLastEmailDoc)
+            this.form.get('DateLastZap').setValue(v.DateLastZap)
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))

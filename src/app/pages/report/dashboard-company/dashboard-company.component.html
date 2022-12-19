@@ -3,8 +3,8 @@
 
         <div class="p-col-3">
             <div class="p-col-3">
-                <p-card header="Saldo total" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <p>R$ 73.538,69</p>
+                <p-card *ngIf="this.data" header="Saldo total" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                    <span [ngClass]="colorValue(Balance)">R$ {{ Balance | virgulaPipe }}</span>
                 </p-card>
             </div>
 
@@ -18,9 +18,8 @@
                         <p>Despesas</p>
                         <div class="proccess-bar"></div>
                     </div>
-
-                    <div>
-                        <p>Margem -22%</p>
+                    <div *ngIf="this.data">
+                        <span>Margem {{ Margin }}</span>
                     </div>
                 </p-card>
             </div>

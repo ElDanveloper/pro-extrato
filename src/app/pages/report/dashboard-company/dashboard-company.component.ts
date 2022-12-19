@@ -1,6 +1,7 @@
 
 import { Subscription } from 'rxjs';
 import {Component, OnInit} from '@angular/core';
+import { Util } from 'src/app/controller/Util';
 
 @Component({
     selector: 'app-dashboard-company',
@@ -9,7 +10,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class DashboardCompanyComponent implements OnInit {
 
-    data: any;
+    data
 
     chartOptions: any;
 
@@ -30,6 +31,19 @@ export class DashboardCompanyComponent implements OnInit {
     basicOptions: any;
 
     constructor() {}
+
+    get Balance(){
+        if(!this.data.Balance) return 0
+        return this.data.Balance
+    }
+
+    colorValue(v) {
+        const classes = {
+            'texto-verde': false,
+            'texto-vermelho': false,
+        }
+        return Util.isNegative(v) ? {...classes, 'texto-vermelho': true} : {...classes, 'texto-verde': true}
+    }
 
     ngOnInit() {
         // grafico de barra
