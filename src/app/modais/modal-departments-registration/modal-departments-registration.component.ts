@@ -47,7 +47,7 @@ export class ModalDepartmentsRegistrationComponent extends BaseFormPost implemen
     constructor(public http: HttpClient, public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService, private authService: AuthService) {
         super(networkService, dadosDefault, router, 'Department', messageService)
         this.form = Formulario.createForm(new Department(), this.fb);
-        // this.form.addControl("PessoaFisicaForm", Formulario.createForm(new PersonFisical(), this.fb));
+        // this.form.ontrol("PessoaFisicaForm", Formulario.createForm(new PersonFisical(), this.fb));
         // this.form.addControl("PessoaForm", Formulario.createForm(new Pessoa(), this.fb));
 
         // this.form.get('PessoaForm').get('Tipo').setValue('F');

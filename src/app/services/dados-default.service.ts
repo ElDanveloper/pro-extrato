@@ -156,6 +156,11 @@ export class DadosDefaultService {
         return forkJoin([natureza])
     }
 
+    public typeDepartment() {
+        let department = this.http.get(`${getUrlPro()}/Department`).pipe(map((res: Response) => res['value'].map(v => ({label: Util.up(v.Description), value: v.Id}))))
+        return forkJoin([department])
+    }
+
     private errorHandlerDefaultValues(error: HttpErrorResponse) {
         console.log(error)
         if(error instanceof HttpErrorResponse) {

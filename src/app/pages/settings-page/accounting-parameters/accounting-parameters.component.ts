@@ -1,6 +1,7 @@
+import { SelectItem } from 'primeng/api';
 import { Department } from './../../../model/department.model';
 import { Util } from './../../../controller/Util';
-import { API_AUTH_HUNNO } from './../../../controller/staticValues';
+import { API_AUTH_HUNNO, getUrlPro } from './../../../controller/staticValues';
 import { Formulario } from './../../../controller/Formulario';
 import { FormBuilder } from '@angular/forms';
 import { DadosDefaultService } from './../../../services/dados-default.service';
@@ -23,34 +24,39 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
     form: FormGroup;
     $subscription3: Subscription;
 
-    constructor(public router: Router, private route: ActivatedRoute, public messageService: MessageService, public networkService: NetworkService, public dadosDefault: DadosDefaultService,private fb: FormBuilder) {
-        super(networkService, dadosDefault, router, 'departament', messageService);
-        this.form = Formulario.createForm(new Department, this.fb);
+    public selectDepartament: SelectItem[] = []
+    // [
+    //     {label: 'Administrativo', value: 'A'},
+    //     {label: 'Contabil', value: 'C'},
+    //     {label: 'Fiscal', value: 'F'},
+    //     {label: 'Pessoal', value: 'P'},
+    //     {label: 'Marketing', value: 'M'},
+    //     {label: 'Societario', value: 'S'},
+    //     {label: 'ProExtrato', value: 'X'},
+    //     {label: 'Consultoria Financeira', value: 'N'},
+
+    // ]
+
+    constructor(public router: Router, private route: ActivatedRoute, public messageService: MessageService, public networkService: NetworkService, public dadosDefault: DadosDefaultService, private fb: FormBuilder) {
+        super(networkService, dadosDefault, router, 'ParamsAccounting', messageService);
+        this.form = Formulario.createForm(new ParamsAccounting, this.fb);
+
     }
 
     ngOnInit() {
-
+        this.dadosDefault.typeDepartment().subscribe(value => {
+            this.selectDepartament = value[0]
+        })
+        this.takeParameters()
     }
 
     // para os dados dos selects
     takeParameters() {
-        if(!this.form.get('Departament').value){
-            this.messageService.add(Util.pushErrorMsg('Favor informar o Departamento!'))
-            return
-        }
         // const departament = this.form.get('Departament').value
         this.dadosDefault.exibirLoader.next(true);
-        this.$subscription3 = this.networkService.getSimples(API_AUTH_HUNNO, 'ContactorParams').subscribe((v: any) => {
-            this.form.get('DeparmentConciliateId').setValue(v.DeparmentConciliateId)
-            this.form.get('DeparmentAccountingId').setValue(v.DeparmentAccountingId)
-            this.form.get('DeparmentFiscalId').setValue(v.DeparmentFiscalId)
-            this.form.get('DeparmentRhId').setValue(v.DeparmentRhId)
-            this.form.get('DeparmentCorpoateId').setValue(v.DeparmentCorpoateId)
-            this.form.get('DeparmentCommercialId').setValue(v.DeparmentCommercialId)
-            this.form.get('DeparmentAdmId').setValue(v.DeparmentAdmId)
-            this.form.get('DeparmentBPOId').setValue(v.DeparmentBPOId)
-            this.form.get('DateLastEmailDoc').setValue(v.DateLastEmailDoc)
-            this.form.get('DateLastZap').setValue(v.DateLastZap)
+        this.$subscription3 = this.networkService.getSimples(getUrlPro(), 'ContractorParams').subscribe((v: any) => {            
+            const data = Formulario.prepareValueToForm(new ParamsAccounting(), v.value[0], ParamsAccounting.datas(), null, null);            
+            Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -68,7 +74,7 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
             if (inv) return
         }
 
-        const {Department, ...data} = Object.assign({}, this.form.value)
+        const { Department, ...data } = Object.assign({}, this.form.value)
 
         let value: any = { ...Formulario.parseForm(new Department(), data, Department.referencias(), null, data, null, null) };
 
@@ -82,4 +88,24 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
     cancelarLocal() {
         this.router.navigate(['/settings/accounting-parameters'])
     }
+}
+
+class ParamsAccounting {
+    Id: number = 0
+    ContractorId: number = 0
+    DateLastZap: any = ''
+    DateLastEmailDoc: any = ''
+    DeparmentAccountingId: number = 0
+    DeparmentCorpoateId: number = 0
+    DeparmentConciliateId: number = 0
+    DeparmentCommercialId: number = 0
+    DeparmentRhId: number = 0
+    DeparmentFiscalId: number = 0
+    DeparmentAdmId: number = 0
+    DeparmentBPOId: number = 0
+
+    static datas() {
+        return ['DateLastZap', 'DateLastEmailDoc']
+    }
+
 }
