@@ -7,7 +7,6 @@ export class Department {
     ContractorId: number = 0
     ContractorClientId: number = 0
     UserIdResp: string = ''
-
     DateLastZap: any = ''
     DateLastEmailDoc: any = ''
     DeparmentAccountingId: number = 0
