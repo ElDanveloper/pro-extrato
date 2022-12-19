@@ -7,7 +7,6 @@
                 <div class="p-field p-col-4 p-md-3">
                     <app-input-cpf-cnpj [label]="'CNPJ'" formControlName="Cnpj"></app-input-cpf-cnpj>
                 </div>
-                <!-- class="p-field p-col-4 p-md-3" -->
                 <div class="p-field p-col-4 p-md-3" style="margin-top: 1rem;">
                     <button pButton label="Buscar CNPJ" (click)="takeCnpj()"></button>
                 </div>
@@ -16,20 +15,20 @@
             <app-page-divided>
                 <div principal class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-6 p-md-6">
-                        <app-input [(ngModel)]="nome" [label]="'Razão Social'" formControlName="Nome"></app-input>
+                        <app-input [label]="'Razão Social'" formControlName="Nome"></app-input>
                     </div>
                     <div class="p-field p-col-6 p-md-6">
-                        <app-input [(ngModel)]="Fantasia" [label]="'Nome fantasia'" formControlName="Fantasia"></app-input>
+                        <app-input [label]="'Nome fantasia'" formControlName="Fantasia"></app-input>
                     </div>
                     <!-- <div class="p-fluid p-formgrid p-grid"> -->
                         <div class="p-field p-col-4 p-md-4">
-                            <app-input-telefone [(ngModel)]="Phone1" [label]="'Telefone'" formControlName="Phone1"></app-input-telefone>
+                            <app-input-telefone [label]="'Telefone'" formControlName="Phone1"></app-input-telefone>
                         </div>
                         <div class="p-field p-col-4 p-md-4">
                             <app-input-telefone [label]="'Celular'" formControlName="Cel"></app-input-telefone>
                         </div>
                         <div class="p-field p-col-4 p-md-4">
-                            <app-input [(ngModel)]="Contato" [label]="'Contato'" formControlName="Contato"></app-input>
+                            <app-input [label]="'Contato'" formControlName="Contato"></app-input>
                         </div>
                     <!-- </div> -->
                 </div>
