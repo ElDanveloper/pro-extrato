@@ -40,6 +40,7 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
     constructor(public router: Router, private route: ActivatedRoute, public messageService: MessageService, public networkService: NetworkService, public dadosDefault: DadosDefaultService, private fb: FormBuilder) {
         super(networkService, dadosDefault, router, 'ParamsAccounting', messageService);
         this.form = Formulario.createForm(new ParamsAccounting, this.fb);
+        // this.form.addControl("Department", Formulario.createForm(new ParamsAccounting(), this.fb));
 
     }
 
@@ -54,14 +55,15 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
     takeParameters() {
         // const departament = this.form.get('Departament').value
         this.dadosDefault.exibirLoader.next(true);
-        this.$subscription3 = this.networkService.getSimples(getUrlPro(), 'ContractorParams').subscribe((v: any) => {            
-            const data = Formulario.prepareValueToForm(new ParamsAccounting(), v.value[0], ParamsAccounting.datas(), null, null);            
+        this.$subscription3 = this.networkService.getSimples(getUrlPro(), 'ContractorParams').subscribe((v: any) => {
+            const data = Formulario.prepareValueToForm(new ParamsAccounting(), v.value[0], ParamsAccounting.datas(), null, null);
             Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
+    // ESSA FUNÇÃO NN ESTÁ SENDO EXECUTADA QUANDO É CLICADO O BOTÃO
     processarFormulario() {
         let inv = false
         if (this.form.invalid) {
@@ -76,12 +78,16 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
 
         const { Department, ...data } = Object.assign({}, this.form.value)
 
-        let value: any = { ...Formulario.parseForm(new Department(), data, Department.referencias(), null, data, null, null) };
+        let value: any = { ...Formulario.parseForm(new Department(), data, Department.referencias(), null, null, null, null) };
+
+        console.log(value)
 
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.salvarPost(API_AUTH_HUNNO, 'ParamsAccounting', value).subscribe((v: any) => {
             this.messageService.add(Util.pushSuccessMsg('Alteração salva!'))
             this.router.navigate(['settings/accounting-parameters'])
+            console.log('----------------')
+            console.log(v.value[0])
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
