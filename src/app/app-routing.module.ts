@@ -44,7 +44,7 @@ import { ProjetoCadastroComponent } from './pages/projeto-cadastro/projeto-cadas
 
 import { DashboardHomeComponent } from '../app/pages/dashboard/dashboard-home/dashboard-home.component'
 
-import { DashboardCompanyComponent } from './pages/report/dashboard-company/dashboard-company.component'
+import { DashboardCompanyComponent } from './pages/dashboard/dashboard-company/dashboard-company.component'
 import { AccountingParametersComponent } from './pages/settings-page/accounting-parameters/accounting-parameters.component';
 
 const routes: Routes = [

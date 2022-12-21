@@ -1,7 +1,8 @@
+import { Util } from 'src/app/controller/Util';
 
 import { Subscription } from 'rxjs';
 import {Component, OnInit} from '@angular/core';
-import { Util } from 'src/app/controller/Util';
+
 
 @Component({
     selector: 'app-dashboard-company',
