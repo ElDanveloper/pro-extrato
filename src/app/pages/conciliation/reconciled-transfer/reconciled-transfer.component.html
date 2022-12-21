@@ -21,6 +21,9 @@
                         <div class="p-col-12"> {{data ? data.Historic : ''}} </div>
                     </div>
                      <br>
+                     <div class="p-offset-9 p-col-9">
+                        <button pButton type="button" label="Quero Ajuda do Cliente" (click)="helpClient(data)"></button>
+                     </div>
                     <!-- <div class="p-col-12 p-col-nopad">
                         <p-checkbox binary="true" formControlName="selecionar"></p-checkbox>
                         <label style="margin-left: 5px; font-weight: bold;">Selecionado</label>

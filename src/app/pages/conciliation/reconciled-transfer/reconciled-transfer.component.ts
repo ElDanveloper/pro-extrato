@@ -1,3 +1,4 @@
+import { hasValue } from './../../../controller/Util';
 import { getUrlPro } from './../../../controller/staticValues';
 import { map } from 'rxjs/operators';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
@@ -108,9 +109,8 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        console.log(this.optionsConta.length)
         if (this.optionsConta) this.selectContaDestino = this.optionsConta
-        console.log(this.selectContaDestino.length)
+        
         if (this.optionsNaturezaFinanceira) this.selectNaturezaFinanceira = this.optionsNaturezaFinanceira
     }
 
@@ -125,6 +125,14 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     transfer(n) {
         this.index = n
     }
+
+    helpClient(value) {
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `HelpForCostumer?Id=${value.Id}`).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Processo Realizado!'))
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+    
 
     reconcileSingle() {        
         if(this.form.get('AccountDestinyId').value === '' && this.index === 2){
