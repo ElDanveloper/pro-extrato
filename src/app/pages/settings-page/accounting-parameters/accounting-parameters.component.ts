@@ -76,9 +76,9 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
             if (inv) return
         }
 
-        const { Department, ...data } = Object.assign({}, this.form.value)
+        const { ...data } = Object.assign({}, this.form.value)
 
-        let value: any = { ...Formulario.parseForm(new Department(), data, Department.referencias(), null, data, null, null) };
+        let value: any = { ...Formulario.parseForm(new ParamsAccounting(), data, null, null, ParamsAccounting.datas(), null, null) };
 
         console.log(value)
 
