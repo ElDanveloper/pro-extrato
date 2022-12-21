@@ -78,16 +78,15 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
 
         const { Department, ...data } = Object.assign({}, this.form.value)
 
-        let value: any = { ...Formulario.parseForm(new Department(), data, Department.referencias(), null, null, null, null) };
+        let value: any = { ...Formulario.parseForm(new Department(), data, Department.referencias(), null, data, null, null) };
 
         console.log(value)
 
         this.dadosDefault.exibirLoader.next(true);
-        this.$subscription3 = this.networkService.salvarPost(API_AUTH_HUNNO, 'ParamsAccounting', value).subscribe((v: any) => {
+        this.$subscription3 = this.networkService.salvarPost(getUrlPro(), 'ParamsAccounting', value).subscribe((v: any) => {
             this.messageService.add(Util.pushSuccessMsg('Alteração salva!'))
             this.router.navigate(['settings/accounting-parameters'])
-            console.log('----------------')
-            console.log(v.value[0])
+            console.log(v)
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
