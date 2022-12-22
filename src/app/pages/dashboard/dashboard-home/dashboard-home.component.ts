@@ -1,6 +1,11 @@
 
 import { Subscription } from 'rxjs';
 import {Component, OnInit} from '@angular/core';
+import { NetworkService } from 'src/app/services/network.service';
+import { getUrlPro } from 'src/app/controller/staticValues';
+import { DadosDefaultService } from 'src/app/services/dados-default.service';
+import { Util } from 'src/app/controller/Util';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-dashboard-home',
@@ -9,13 +14,15 @@ import {Component, OnInit} from '@angular/core';
 })
 export class DashboardHomeComponent implements OnInit {
 
+    $subscription3: Subscription;
+
     data: any;
 
     chartOptions: any;
 
     subscription: Subscription;
 
-    // config: AppConfig; // - nao tem 
+    // config: AppConfig; // - nao tem
 
     // private configService: AppConfigService // -  nao tem
 
@@ -29,9 +36,57 @@ export class DashboardHomeComponent implements OnInit {
 
     basicOptions: any;
 
-    constructor() {}
+    // dataInit = Util.getDateComUmMesAntes();
+    // dataFim = Util.getLastDayDate();
+    dataLabel = ''
+
+    constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService ) {}
+
+
+    mudouData() {
+        // this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
+        // this.dataFim = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
+
+        this.dadosDefault.exibirLoader.next(true);
+            this.$subscription3 = this.networkService.getSimples(getUrlPro(), 'UpdatePanel').subscribe((v: any) => {
+                // const data = Formulario.prepareValueToForm(new ParamsAccounting(), v.value[0], ParamsAccounting.datas(), null, null);
+                // Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
+                console.log('MES/ANO')
+                console.log(v)
+            }, e => {
+                this.messageService.add(Util.pushErrorMsg(e))
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
+    // loadBarChart() {
+    //     this.dadosDefault.exibirLoader.next(true);
+    //         this.$subscription3 = this.networkService.getSimples(getUrlPro(), 'DashAccountGraphic12Month').subscribe((v: any) => {
+    //             // const data = Formulario.prepareValueToForm(new ParamsAccounting(), v.value[0], ParamsAccounting.datas(), null, null);
+    //             // Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
+    //             console.log('dados do grafico')
+    //             console.log(v)
+    //         }, e => {
+    //             this.messageService.add(Util.pushErrorMsg(e))
+    //         }).add(() => this.dadosDefault.exibirLoader.next(false))
+    // }
+
+    // labelData() {
+    //     this.dadosDefault.exibirLoader.next(true);
+    //         this.$subscription3 = this.networkService.getSimples(getUrlPro(), 'DashAccountLabel').subscribe((v: any) => {
+    //             // const data = Formulario.prepareValueToForm(new ParamsAccounting(), v.value[0], ParamsAccounting.datas(), null, null);
+    //             // Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
+    //             console.log('dados da label')
+    //             console.log(v)
+    //         }, e => {
+    //             this.messageService.add(Util.pushErrorMsg(e))
+    //         }).add(() => this.dadosDefault.exibirLoader.next(false))
+    // }
 
     ngOnInit() {
+        // this.loadBarChart()
+        // this.labelData()
+        this.mudouData()
+
         // grafico de barra
         this.data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -129,7 +184,7 @@ export class DashboardHomeComponent implements OnInit {
             ]
         };
 
-        // o grafico de barra e ciclo e onda usam isso 
+        // o grafico de barra e ciclo e onda usam isso
         /*
         this.config = this.configService.config;
         this.updateChartOptions();
@@ -208,7 +263,7 @@ export class DashboardHomeComponent implements OnInit {
                 }
             }
         }
-    }    
+    }
 
     // do grafico de ciclo
     /*
@@ -362,7 +417,7 @@ export class DashboardHomeComponent implements OnInit {
         else
             this.applyLightTheme();
     }
-    
+
     applyLightTheme() {
         this.basicOptions = {
             plugins: {
@@ -391,7 +446,7 @@ export class DashboardHomeComponent implements OnInit {
                 }
             }
         };
-    
+
         this.multiAxisOptions = {
             stacked: false,
             plugins: {
@@ -437,7 +492,7 @@ export class DashboardHomeComponent implements OnInit {
         };
     }
     */
-    
+
     /*
     applyDarkTheme() {
         this.basicOptions = {
@@ -468,7 +523,7 @@ export class DashboardHomeComponent implements OnInit {
             }
         };
         */
-    
+
         /*
         this.multiAxisOptions = {
             stacked: false,

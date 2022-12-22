@@ -1,7 +1,7 @@
 import { SelectItem } from 'primeng/api';
-import { Department } from './../../../model/department.model';
+// import { Department } from './../../../model/department.model';
 import { Util } from './../../../controller/Util';
-import { API_AUTH_HUNNO, getUrlPro } from './../../../controller/staticValues';
+import { getUrlPro } from './../../../controller/staticValues';
 import { Formulario } from './../../../controller/Formulario';
 import { FormBuilder } from '@angular/forms';
 import { DadosDefaultService } from './../../../services/dados-default.service';
