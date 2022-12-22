@@ -1,6 +1,19 @@
 <div class="p-fluid">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-offset-3  p-fluid p-formgrid p-grid p-col-4">
+            <div class="p-col-5">
+                <app-date [(ngModel)]="dateStart"></app-date>
+            </div>
+            <div class="p-col-5">
+                <app-date [(ngModel)]="dateEnd"></app-date>
+            </div>
+        </div>
+        <div class="p-col-4" style="margin-top: 5px; margin-left: -65px;">
+            <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+        </div>
+    </div>
+    &nbsp;
     <div class="p-col-12 p-grid p-fluid">
-
         <div class="p-col-3">
             <div class="p-col-3">
                 <p-card *ngIf="this.data" header="Saldo total" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
@@ -47,7 +60,8 @@
             <!-- <p-card header="Nova Conta" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
             </p-card> -->
         </div>
-        <div class="p-col-9 p-grid p-fluid" style="width:85%; display: flex; justify-content: flex-end; margin-top: -400px;">
+        <div class="p-col-9 p-grid p-fluid"
+            style="width:85%; display: flex; justify-content: flex-end; margin-top: -400px;">
             <div class="p-col-4 container">
                 <div class="card">
                     <h5 class="centerText">Relatório de Receitas</h5>

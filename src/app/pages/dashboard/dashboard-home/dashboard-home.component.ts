@@ -36,27 +36,12 @@ export class DashboardHomeComponent implements OnInit {
 
     basicOptions: any;
 
-    // dataInit = Util.getDateComUmMesAntes();
-    // dataFim = Util.getLastDayDate();
+    dataInit = Util.getDateComUmMesAntes();
+    dataFim = Util.getLastDayDate();
     dataLabel = ''
 
     constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService ) {}
 
-
-    mudouData() {
-        // this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
-        // this.dataFim = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
-
-        this.dadosDefault.exibirLoader.next(true);
-            this.$subscription3 = this.networkService.getSimples(getUrlPro(), 'UpdatePanel').subscribe((v: any) => {
-                // const data = Formulario.prepareValueToForm(new ParamsAccounting(), v.value[0], ParamsAccounting.datas(), null, null);
-                // Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
-                console.log('MES/ANO')
-                console.log(v)
-            }, e => {
-                this.messageService.add(Util.pushErrorMsg(e))
-            }).add(() => this.dadosDefault.exibirLoader.next(false))
-    }
 
     // loadBarChart() {
     //     this.dadosDefault.exibirLoader.next(true);
@@ -83,11 +68,44 @@ export class DashboardHomeComponent implements OnInit {
     // }
 
     ngOnInit() {
+        this.loadData()
         // this.loadBarChart()
-        // this.labelData()
-        this.mudouData()
+        // this.labelData()        
 
         // grafico de barra
+        
+
+        // o grafico de barra e ciclo e onda usam isso
+        /*
+        this.config = this.configService.config;
+        this.updateChartOptions();
+        this.subscription = this.configService.configUpdate$.subscribe(config => {
+            this.config = config;
+            this.updateChartOptions();
+        });
+        */
+    }
+
+    alterouData(e) {
+        this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
+        this.dataFim = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
+        this.loadData()
+    }
+
+    loadData(){
+
+        let Month = this.dataFim.getMonth() + 1
+        let Year = this.dataFim.getFullYear()
+
+        this.dadosDefault.exibirLoader.next(true);
+        this.$subscription3 = this.networkService.getSimples(getUrlPro(), `UpdatePanel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {            
+            console.log(v['value'][0])            
+        }, e => {
+            this.messageService.add(Util.pushErrorMsg(e))
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
+    valueGrafic() {
         this.data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
@@ -183,17 +201,9 @@ export class DashboardHomeComponent implements OnInit {
                 }
             ]
         };
-
-        // o grafico de barra e ciclo e onda usam isso
-        /*
-        this.config = this.configService.config;
-        this.updateChartOptions();
-        this.subscription = this.configService.configUpdate$.subscribe(config => {
-            this.config = config;
-            this.updateChartOptions();
-        });
-        */
     }
+
+    
 
     /*
     updateChartOptions() {

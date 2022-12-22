@@ -31,6 +31,9 @@ export class DashboardCompanyComponent implements OnInit {
 
     basicOptions: any;
 
+    dateStart = Util.getDateComUmMesAntes()
+    dateEnd = Util.getLastDayDate()
+
     constructor() {}
 
     get Balance(){
@@ -47,7 +50,37 @@ export class DashboardCompanyComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.valueGrafic()
         // grafico de barra
+        
+        
+
+        // grafico de ciclo
+       
+        
+
+        // o grafico de barra e ciclo e onda usam isso
+        /*
+        this.config = this.configService.config;
+        this.updateChartOptions();
+        this.subscription = this.configService.configUpdate$.subscribe(config => {
+            this.config = config;
+            this.updateChartOptions();
+        });
+        */
+    }
+
+    /*
+    updateChartOptions() {
+        if (this.config.themeColor) {
+            this.applyDarkTheme();
+        }else{
+            this.applyLightTheme();
+        }
+    }
+    */
+
+    valueGrafic(){
         this.data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
@@ -124,7 +157,6 @@ export class DashboardCompanyComponent implements OnInit {
             }
         };
 
-        // grafico de ciclo
         this.data = {
             labels: ['A','B','C'],
             datasets: [
@@ -143,27 +175,13 @@ export class DashboardCompanyComponent implements OnInit {
                 }
             ]
         };
-
-        // o grafico de barra e ciclo e onda usam isso
-        /*
-        this.config = this.configService.config;
-        this.updateChartOptions();
-        this.subscription = this.configService.configUpdate$.subscribe(config => {
-            this.config = config;
-            this.updateChartOptions();
-        });
-        */
     }
 
-    /*
-    updateChartOptions() {
-        if (this.config.themeColor) {
-            this.applyDarkTheme();
-        }else{
-            this.applyLightTheme();
-        }
+    alterouData(e) {
+        this.dateStart = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
+        this.dateEnd = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
+        // this.carregarLista()
     }
-    */
 
     applyLightTheme() {
         this.chartOptions = {

@@ -3,7 +3,7 @@
 
         <div class="p-col-3">
             <div class="p-col-6" style="width: 200px;">
-                <app-date-navigator (alterouData)="mudouData()"></app-date-navigator>
+                <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
             </div>
             <div class="p-col-3">
                 <p-card header="Total de Transações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
