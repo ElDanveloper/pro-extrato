@@ -1,62 +1,65 @@
 <div class="p-fluid">
     <div class="p-col-12 p-grid p-fluid">
 
-        <div class="p-col-3">
-            <div class="p-col-6" style="width: 200px;">
-                <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
-            </div>
-            <div class="p-col-3">
-                <p-card header="Total de Transações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <p>Transações</p>
-                </p-card>
-            </div>
-            <div class="p-col-3">
-                <p-card header="Pendecias com analistas" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <p>620 Lançamentos</p>
-                    <p>52 Empresas</p>
-                </p-card>
-            </div>
-            <div class="p-col-3">
-                <p-card header="Pendecias com clientes" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-
-                    <p>180 Lançamentos</p>
-                    <p>32 Empresas</p>
-                </p-card>
-            </div>
-
+        <div class="p-col-3"></div>
+        <div class="p-col-6" style="width: 200px; margin-right: 10px;">
+            <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+        </div>
+        <div class="p-col-2" >
+            <button pButton type="button" label="Atualizar"></button>
         </div>
 
-        <div class="p-col-5">
-            <div class="card">
-                <h5 class="centerText">Lançamento</h5>
-                <p-chart type="bar" [data]="data" [options]="chartOptions"></p-chart>
+        <div class="p-col-12 p-grid p-fluid" >
+            <div class="p-col-3">
+                <div class="p-col-3">
+                    <p-card header="Total de Transações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                        <p *ngIf="this.data.Amount">Transações: {{ this.data.Amount }} </p>
+                    </p-card>
+                </div>
+                <div class="p-col-3">
+                    <p-card header="Pendecias com analistas" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                        <p *ngIf="this.data.AnalistPending"> {{ this.data.AnalistPending }}  Lançamentos</p>
+                        <p *ngIf="this.data.CompanyPendingAnalist"> {{ this.data.CompanyPendingAnalist }}  Empresas</p>
+                    </p-card>
+                </div>
+                <div class="p-col-3">
+                    <p-card header="Pendecias com clientes" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                        <p *ngIf="this.data.CostomerPending"> {{ this.data.CostomerPending }} Lançamentos</p>
+                        <p *ngIf="this.data.CompanyPendingCostomer"> {{ this.data.CompanyPendingCostomer }} Empresas</p>
+                    </p-card>
+                </div>
+            </div>
+
+            <div class="p-col-5">
+                <div class="card">
+                    <h5 class="centerText">Lançamento</h5>
+                    <p-chart type="bar" [data]="data" [options]="chartOptions"></p-chart>
+                </div>
+            </div>
+            <div class="p-col-4">
+                <div class="card">
+                    <h5 class="centerText">Analista</h5>
+                    <p-chart type="doughnut" [data]="data" [options]="chartOptions"></p-chart>
+                </div>
             </div>
         </div>
-
-        <div class="p-col-4">
-            <div class="card">
-                <h5 class="centerText">Analista</h5>
-                <p-chart type="doughnut" [data]="data" [options]="chartOptions"></p-chart>
-            </div>
-        </div>
-
     </div>
     <div class="p-col-12 p-grid p-fluid">
         <div class="p-col-3">
-            <p-card header="Processos com nomes" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+            <p-card *ngIf="this.data.AmountReconciled" header="Transações Conciliadas: {{ this.data.AmountReconciled }}"  [style]="{'width': '20rem', 'margin-bottom': '1em'}">
                 <ng-template pTemplate="header">
                 </ng-template>
                 <div>
                     <p>Inteligência Artificial</p>
-                    <div class="proccess-bar"></div>
+                    <div *ngIf="this.data.IaReconciled" class="proccess-bar"></div>
                 </div>
                 <div>
                     <p>Analistas</p>
-                    <div class="proccess-bar"></div>
+                    <div *ngIf="this.data.AnalistReconciled" class="proccess-bar"></div>
                 </div>
                 <div>
                     <p>Clientes</p>
-                    <div class="proccess-bar"></div>
+                    <div *ngIf="this.data.CostomerReconciled" class="proccess-bar"></div>
                 </div>
             </p-card>
         </div>
@@ -99,13 +102,13 @@
         <div class="p-col-2">
             <div class="card" style="margin-bottom:1rem;">
                 <h5 class="centerText">Conta Ativa</h5>
-                <p-chart type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
+                <p-chart *ngIf="this.data.ActiveAccount" type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
             </div>
         </div>
         <div class="p-col-2">
             <div class="card">
                 <h5 class="centerText">Empresas Ativas</h5>
-                <p-chart type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
+                <p-chart *ngIf="this.data.ActiveCompany" type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
             </div>
         </div>
 

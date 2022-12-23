@@ -1,6 +1,5 @@
 <ng-container *ngTemplateOutlet="conteudo"></ng-container>
 <ng-template #conteudo>
-
     <div [formGroup]="form">
         <p-card>
             <div style="margin-left:15px;" class="p-fluid p-formgrid p-grid">
@@ -9,45 +8,36 @@
             <div principal class="p-fluid">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-4 p-md-4">
-                        <!-- DeparmentConciliateId -->
                         <app-select [label]="'Departamento Conciliação'" [options]="selectDepartament" formControlName="DeparmentConciliateId"></app-select>
                     </div>
                     <div class="p-field p-col-4 p-md-4">
-                        <!-- DeparmentAccountingId -->
                         <app-select [label]="'Departamento Contabil'" [options]="selectDepartament"  formControlName="DeparmentAccountingId"></app-select>
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-4 p-md-4">
-                        <!-- DeparmentFiscalId -->
                         <app-select [label]="'Departamento Fiscal'" [options]="selectDepartament"  formControlName="DeparmentFiscalId"></app-select>
                     </div>
                     <div class="p-field p-col-4 p-md-4">
-                        <!-- DeparmentRhId -->
                         <app-select [label]="'Departamento Pessoal - (RH)'" [options]="selectDepartament"  formControlName="DeparmentRhId"></app-select>
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-4 p-md-4">
-                        <!-- DeparmentCorpoateId -->
                         <app-select [label]="'Departamento Societário'" [options]="selectDepartament"  formControlName="DeparmentCorpoateId"></app-select>
                     </div>
                     <div class="p-field p-col-4 p-md-4">
-                        <!-- DeparmentCommercialId -->
                         <app-select [label]="'Departamento Comercial'" [options]="selectDepartament"  formControlName="DeparmentCommercialId"></app-select>
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-4 p-md-4">
-                        <!-- DeparmentAdmId -->
                         <app-select [label]="'Departamento Adm'" [options]="selectDepartament"  formControlName="DeparmentAdmId"></app-select>
                     </div>
                     <div class="p-field p-col-4 p-md-4">
-                        <!-- DeparmentBPOId -->
                         <app-select [label]="'Departamento BPO'" [options]="selectDepartament"  formControlName="DeparmentBPOId"></app-select>
                     </div>
                 </div>
-
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-4 p-md-4">
                         <app-date [label]="'Último Email'" formControlName="DateLastEmailDoc"></app-date>
@@ -64,10 +54,6 @@
                 </div>
             </div>
         </p-card>
-
-        <!-- <app-page-divided formGroupName="Department">
-        </app-page-divided> -->
     </div>
-
 </ng-template>
 <p-toast position="bottom-right"></p-toast>

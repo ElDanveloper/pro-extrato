@@ -1,5 +1,4 @@
 import { SelectItem } from 'primeng/api';
-// import { Department } from './../../../model/department.model';
 import { Util } from './../../../controller/Util';
 import { getUrlPro } from './../../../controller/staticValues';
 import { Formulario } from './../../../controller/Formulario';
@@ -51,9 +50,7 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
         this.takeParameters()
     }
 
-    // para os dados dos selects
     takeParameters() {
-        // const departament = this.form.get('Departament').value
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.getSimples(getUrlPro(), 'ContractorParams').subscribe((v: any) => {
             const data = Formulario.prepareValueToForm(new ParamsAccounting(), v.value[0], ParamsAccounting.datas(), null, null);
@@ -63,7 +60,6 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    // ESSA FUNÇÃO NN ESTÁ SENDO EXECUTADA QUANDO É CLICADO O BOTÃO
     processarFormulario() {
         let inv = false
         if (this.form.invalid) {
@@ -80,13 +76,10 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
 
         let value: any = { ...Formulario.parseForm(new ParamsAccounting(), data, null, null, ParamsAccounting.datas(), null, null) };
 
-        console.log(value)
-
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.salvarPost(getUrlPro(), 'ParamsAccounting', value).subscribe((v: any) => {
             this.messageService.add(Util.pushSuccessMsg('Alteração salva!'))
             this.router.navigate(['settings/accounting-parameters'])
-            console.log(v)
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
