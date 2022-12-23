@@ -6,6 +6,12 @@ import { getUrlPro } from 'src/app/controller/staticValues';
 import { DadosDefaultService } from 'src/app/services/dados-default.service';
 import { Util } from 'src/app/controller/Util';
 import { MessageService } from 'primeng/api';
+// import {TableModule} from 'primeng/table';
+
+import { HttpClient } from '@angular/common/http';
+// import { Injectable } from '@angular/core';
+
+// import { Car } from '../domain/car';
 
 @Component({
     selector: 'app-dashboard-home',
@@ -39,10 +45,12 @@ export class DashboardHomeComponent implements OnInit {
     dataInit = Util.getDateComUmMesAntes();
     dataFim = Util.getLastDayDate();
 
-    constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService ) {}
+    cars: Car[];
+
+    constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {}
+    // private carService: CarService
 
     loadBarChart() {
-
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
 
@@ -51,21 +59,19 @@ export class DashboardHomeComponent implements OnInit {
                 // const data = Formulario.prepareValueToForm(new ParamsAccounting(), v.value[0], ParamsAccounting.datas(), null, null);
                 // Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
                 // console.log('dados do grafico')
-                // console.log(v)
+                // console.log(v['value'][0])
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     labelData() {
-
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
 
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountLabel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {
                 this.data = v['value'][0]
-                console.log(this.data)
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -75,6 +81,8 @@ export class DashboardHomeComponent implements OnInit {
         this.updateData()
         this.loadBarChart()
         this.labelData()
+
+        // this.carService.getCarsSmall().then(cars => this.cars = cars);
 
         // grafico de barra
 
@@ -97,7 +105,6 @@ export class DashboardHomeComponent implements OnInit {
     }
 
     updateData(){
-
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
 
@@ -109,10 +116,72 @@ export class DashboardHomeComponent implements OnInit {
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    // CostomerPending(v) {
-    //     if(!this.data.CostomerPending) return 0
-    //     return this.data.CostomerPending
-    // }
+    get Amount(){
+        if (!this.data.Amount || this.data.Amount <= 0) return 0
+        return Util.toNumber(this.data.Amount);
+    }
+
+    get AnalistPending() {
+        if (!this.data.AnalistPending || this.data.AnalistPending <= 0) return 0
+        return Util.toNumber(this.data.AnalistPending);
+    }
+
+    get CompanyPendingAnalist() {
+        if (!this.data.CompanyPendingAnalist || this.data.CompanyPendingAnalist <= 0) return 0
+        return Util.toNumber(this.data.CompanyPendingAnalist);
+    }
+
+    get CostomerPending() {
+        if (!this.data.CostomerPending || this.data.CostomerPending <= 0) return 0
+        return Util.toNumber(this.data.CostomerPending);
+    }
+
+    get CompanyPendingCostomer() {
+        if (!this.data.CompanyPendingCostomer || this.data.CompanyPendingCostomer <= 0) return 0
+        return Util.toNumber(this.data.CompanyPendingCostomer);
+    }
+
+    get AmountReconciled() {
+        if (!this.data.AmountReconciled || this.data.AmountReconciled <= 0) return 0
+        return Util.toNumber(this.data.AmountReconciled);
+    }
+
+    get IaReconciled() {
+        if (!this.data.IaReconciled || this.data.IaReconciled <= 0) return 0
+        return Util.toNumber(this.data.IaReconciled);
+    }
+
+    get AnalistReconciled() {
+        if (!this.data.AnalistReconciled || this.data.AnalistReconciled <= 0) return 0
+        return Util.toNumber(this.data.AnalistReconciled);
+    }
+
+    get CostomerReconciled() {
+        if (!this.data.CostomerReconciled || this.data.CostomerReconciled <= 0) return 0
+        return Util.toNumber(this.data.CostomerReconciled);
+    }
+
+
+    get ActiveAccount() {
+        if (!this.data.ActiveAccount || this.data.ActiveAccount <= 0) return 0
+        return Util.toNumber(this.data.ActiveAccount);
+    }
+
+    get ActiveCompany() {
+        if (!this.data.ActiveCompany || this.data.ActiveCompany <= 0) return 0
+        return Util.toNumber(this.data.ActiveCompany);
+    }
+
+
+    // COMPONENTE TABLE DE ANALISTA
+    getCarsSmall() {
+        return this.http.get('/showcase/resources/data/cars-small.json')
+                    .toPromise()
+                    // .then(res => <Car[]> res.data)
+                    .then(data => { return data; });
+    }
+
+
 
     valueGrafic() {
         this.data = {
@@ -588,4 +657,11 @@ export class DashboardHomeComponent implements OnInit {
             }
         };
         */
+}
+
+export interface Car {
+    vin;
+    year;
+    brand;
+    color;
 }
