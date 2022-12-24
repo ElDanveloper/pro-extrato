@@ -32,28 +32,29 @@
                 </div>
                 <!-- <div class="p-col-2">
                     <div class="card" style="margin-bottom:1rem;">
-
                         <p >  </p>
                         <p-chart *ngIf="this.data.ActiveAccount" type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
                     </div>
                 </div> -->
             </div>
-
         </div>
 
         <!-- <div class="p-col-2 p-grid p-fluid"></div> -->
-        <div class="p-col-2" style="width: 200px; margin-right: 10px;">
-            <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
-        </div>
-        <div class="p-col-2" style="width: 100px;" >
-            <button pButton type="button" label="Atualizar"></button>
-        </div>
-
 
     </div>
     <div class="p-col-12 p-grid p-fluid">
-
         <div class="p-col-3">
+
+            <div style="display: flex; justify-content: center;">
+                <div class="p-col-2" style="width: 200px; margin-right: 10px;">
+                    <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+                </div>
+                <div class="p-col-2" style="width: 100px;" >
+                    <!-- <button pButton type="button" label="Atualizar"></button> -->
+                    <button pButton type="button" icon="pi pi-sync" iconPos="left" label="Atualizar"></button>
+                </div>
+            </div>
+
             <p-card *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '20rem', 'margin-bottom': '1em'}">
                 <ng-template pTemplate="header">
                 </ng-template>
@@ -104,7 +105,7 @@
         </div>
 
         <div class="p-col-12 p-grid p-fluid">
-            <div class="p-col-5">
+            <div class="p-col-6">
                 <div class="card">
                     <h5 class="centerText">Por tempo de atraso</h5>
                     <!--
@@ -139,7 +140,7 @@
                 </div>
             </div>
 
-            <div class="p-col-3"></div>
+            <!-- <div class="p-col-3"></div> -->
 
             <div class="p-col-5">
                 <div class="card">
