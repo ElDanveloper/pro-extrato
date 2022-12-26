@@ -38,9 +38,6 @@
                 </div> -->
             </div>
         </div>
-
-        <!-- <div class="p-col-2 p-grid p-fluid"></div> -->
-
     </div>
     <div class="p-col-12 p-grid p-fluid">
         <div class="p-col-3">
@@ -49,9 +46,13 @@
                 <div class="p-col-2" style="width: 200px; margin-right: 10px;">
                     <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
                 </div>
+                <!-- Adicionar icon no botao -->
                 <div class="p-col-2" style="width: 100px;" >
                     <!-- <button pButton type="button" label="Atualizar"></button> -->
-                    <button pButton type="button" icon="pi pi-sync" iconPos="left" label="Atualizar"></button>
+                    <button pButton type="button" icon="pi pi-sync" iconPos="left" >
+                        <span class="pi pi-sync"></span>
+                    </button>
+                    <!-- <button pButton type="button" icon="pi pi-sync" iconPos="left" label="Atualizar"></button> -->
                 </div>
             </div>
 
