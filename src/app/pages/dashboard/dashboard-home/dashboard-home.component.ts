@@ -47,8 +47,13 @@ export class DashboardHomeComponent implements OnInit {
 
     cars: Car[];
 
-    val: number;
+    // val: number;
+    value1: number;
+    value2: number;
+    value3: number;
 
+    total: number
+    
     constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {}
     // private carService: CarService
 
@@ -72,7 +77,13 @@ export class DashboardHomeComponent implements OnInit {
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountLabel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {
                 this.data = v['value'][0]
-                // console.log(this.data)
+
+                this.total = this.data.AmountReconciled
+
+                this.value1 = (this.total  ) // this.data.IaReconciled 
+                this.value2 = (this.total  ) // this.data.AnalistReconciled 
+                this.value3 = (this.total  ) //  this.data.CostomerReconciled
+
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))

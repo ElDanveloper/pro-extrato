@@ -40,26 +40,28 @@
                 <!-- Adicionar icon no botao -->
                 <div class="p-col-2" style="width: 100px;" >
                     <!-- <button pButton type="button" label="Atualizar"></button> -->
-                    <button pButton type="button" icon="pi pi-sync" iconPos="left" >
-                        <span class="pi pi-sync"></span>
-                    </button>
-                    <!-- <button pButton type="button" icon="pi pi-sync" iconPos="left" label="Atualizar"></button> -->
+                    <button pButton type="button" icon="pi pi-sync" iconPos="left" ></button>
                 </div>
             </div>
             <p-card *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '21rem', 'margin-bottom': '1em'}">
                 <div>
                     <p>Inteligência Artificial</p> 
-                    <div *ngIf="IaReconciled" class="proccess-bar">
-                        <!-- <p-slider></p-slider> -->
+                    <p-progressBar [value]="value1"></p-progressBar> 
+                    <!--
+                    <div *ngIf="IaReconciled" class="proccess-bar" >
+                         <p-slider></p-slider> 
                     </div>
+                    -->
                 </div>
                 <div>
                     <p>Analista</p>
-                    <div *ngIf="AnalistReconciled" class="proccess-bar"></div>
+                    <p-progressBar [value]="value2"></p-progressBar>
+                    <!-- <div *ngIf="AnalistReconciled" class="proccess-bar"></div> -->
                 </div>
                 <div>
                     <p>Cliente</p>
-                    <div *ngIf="CostomerReconciled" class="proccess-bar"></div>
+                    <p-progressBar [value]="value3"></p-progressBar>
+                    <!-- <div *ngIf="CostomerReconciled" class="proccess-bar"></div> -->
                 </div>
             </p-card>
         </div>
