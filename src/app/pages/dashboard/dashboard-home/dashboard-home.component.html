@@ -22,26 +22,17 @@
 
             <div class=" p-col-3">
                 <div class="4">
-                    <div class="card">
+                    <div class="card" style="height: 131px;">
                         <h5 *ngIf="this.data" class="centerText">Empresas Ativas {{ ActiveCompany }}</h5>
-                        <span></span>
                         <h5 *ngIf="this.data" class="centerText">Conta Ativa {{ ActiveAccount }}</h5>
-                        <!-- <p >  </p> -->
                         <!-- <p-chart *ngIf="this.data.ActiveCompany" type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart> -->
                     </div>
                 </div>
-                <!-- <div class="p-col-2">
-                    <div class="card" style="margin-bottom:1rem;">
-                        <p >  </p>
-                        <p-chart *ngIf="this.data.ActiveAccount" type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
     <div class="p-col-12 p-grid p-fluid">
         <div class="p-col-3">
-
             <div style="display: flex; justify-content: center;">
                 <div class="p-col-2" style="width: 200px; margin-right: 10px;">
                     <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
@@ -55,13 +46,12 @@
                     <!-- <button pButton type="button" icon="pi pi-sync" iconPos="left" label="Atualizar"></button> -->
                 </div>
             </div>
-
-            <p-card *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                <ng-template pTemplate="header">
-                </ng-template>
+            <p-card *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '21rem', 'margin-bottom': '1em'}">
                 <div>
-                    <p>Inteligência Artificial</p>
-                    <div *ngIf="IaReconciled" class="proccess-bar"></div>
+                    <p>Inteligência Artificial</p> 
+                    <div *ngIf="IaReconciled" class="proccess-bar">
+                        <!-- <p-slider></p-slider> -->
+                    </div>
                 </div>
                 <div>
                     <p>Analista</p>
@@ -140,8 +130,6 @@
                     </p-table>
                 </div>
             </div>
-
-            <!-- <div class="p-col-3"></div> -->
 
             <div class="p-col-5">
                 <div class="card">

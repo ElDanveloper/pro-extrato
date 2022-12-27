@@ -47,6 +47,8 @@ export class DashboardHomeComponent implements OnInit {
 
     cars: Car[];
 
+    val: number;
+
     constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {}
     // private carService: CarService
 
@@ -56,8 +58,6 @@ export class DashboardHomeComponent implements OnInit {
 
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountGraphic12Month?MonthEnd=${Month}&YearEnd=${Year}`).subscribe((v: any) => {
-                // const data = Formulario.prepareValueToForm(new ParamsAccounting(), v.value[0], ParamsAccounting.datas(), null, null);
-                // Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
                 // console.log('dados do grafico')
                 // console.log(v['value'][0])
             }, e => {
@@ -72,7 +72,7 @@ export class DashboardHomeComponent implements OnInit {
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountLabel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {
                 this.data = v['value'][0]
-                console.log(this.data)
+                // console.log(this.data)
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
