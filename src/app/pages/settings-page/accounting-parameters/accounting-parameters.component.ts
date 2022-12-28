@@ -33,7 +33,6 @@ export class AccountingParametersComponent extends BaseFormPost implements OnIni
     //     {label: 'Societario', value: 'S'},
     //     {label: 'ProExtrato', value: 'X'},
     //     {label: 'Consultoria Financeira', value: 'N'},
-
     // ]
 
     constructor(public router: Router, private route: ActivatedRoute, public messageService: MessageService, public networkService: NetworkService, public dadosDefault: DadosDefaultService, private fb: FormBuilder) {
