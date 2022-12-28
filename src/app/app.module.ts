@@ -99,9 +99,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
         ImageCropperModule,
         NgxViacepModule,
         ProgressBarModule
-
         // SliderModule
-
 
     ],
     declarations: [

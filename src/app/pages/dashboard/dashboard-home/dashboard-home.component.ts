@@ -45,11 +45,9 @@ export class DashboardHomeComponent implements OnInit {
 
     cars: Car[];
 
-    // val: number;
     value1: number;
     value2: number;
     value3: number;
-
     total: number
     
     constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {}
@@ -170,7 +168,6 @@ export class DashboardHomeComponent implements OnInit {
         if (!this.data.CostomerReconciled || this.data.CostomerReconciled <= 0) return 0
         return Util.toNumber(this.data.CostomerReconciled);
     }
-
 
     get ActiveAccount() {
         if (!this.data.ActiveAccount || this.data.ActiveAccount <= 0) return 0
