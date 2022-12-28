@@ -7,10 +7,8 @@ import { DadosDefaultService } from 'src/app/services/dados-default.service';
 import { Util } from 'src/app/controller/Util';
 import { MessageService } from 'primeng/api';
 // import {TableModule} from 'primeng/table';
-
 import { HttpClient } from '@angular/common/http';
 // import { Injectable } from '@angular/core';
-
 // import { Car } from '../domain/car';
 
 @Component({
@@ -63,8 +61,8 @@ export class DashboardHomeComponent implements OnInit {
 
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountGraphic12Month?MonthEnd=${Month}&YearEnd=${Year}`).subscribe((v: any) => {
-                // console.log('dados do grafico')
-                // console.log(v['value'][0])
+                console.log('dados do grafico')
+                console.log(v['value'][0])
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -77,13 +75,14 @@ export class DashboardHomeComponent implements OnInit {
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountLabel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {
                 this.data = v['value'][0]
+                console.log('dados da label')
+                console.log(this.data)
 
                 this.total = this.data.AmountReconciled
 
                 this.value1 = (this.total  ) // this.data.IaReconciled 
                 this.value2 = (this.total  ) // this.data.AnalistReconciled 
                 this.value3 = (this.total  ) //  this.data.CostomerReconciled
-
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -97,7 +96,6 @@ export class DashboardHomeComponent implements OnInit {
         // this.carService.getCarsSmall().then(cars => this.cars = cars);
 
         // grafico de barra
-
 
         // o grafico de barra e ciclo e onda usam isso
         /*
@@ -192,8 +190,6 @@ export class DashboardHomeComponent implements OnInit {
                     // .then(res => <Car[]> res.data)
                     .then(data => { return data; });
     }
-
-
 
     valueGrafic() {
         this.data = {
@@ -292,7 +288,6 @@ export class DashboardHomeComponent implements OnInit {
             ]
         };
     }
-
 
 
     /*
@@ -671,6 +666,7 @@ export class DashboardHomeComponent implements OnInit {
         */
 }
 
+// exportando classe da tabela de analista
 export interface Car {
     vin;
     year;

@@ -38,27 +38,27 @@
                     <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
                 </div>
                 <!-- Adicionar icon no botao -->
-                <div class="p-col-2" style="width: 100px;" >
+                <div class="p-col-4">
                     <!-- <button pButton type="button" label="Atualizar"></button> -->
-                    <button pButton type="button" icon="pi pi-sync" iconPos="left" ></button>
+                    <button pButton type="button" icon="pi pi-sync"></button> <!-- iconPos="left" -->
                 </div>
             </div>
-            <p-card *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '21rem', 'margin-bottom': '1em'}">
+            <p-card *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '21rem'}">
                 <div>
                     <p>Inteligência Artificial</p> 
                     <p-progressBar [value]="value1"></p-progressBar> 
                     <!--
                     <div *ngIf="IaReconciled" class="proccess-bar" >
-                         <p-slider></p-slider> 
+                        <p-slider></p-slider> 
                     </div>
                     -->
                 </div>
-                <div>
+                <div style="margin-top: 10px;">
                     <p>Analista</p>
                     <p-progressBar [value]="value2"></p-progressBar>
                     <!-- <div *ngIf="AnalistReconciled" class="proccess-bar"></div> -->
                 </div>
-                <div>
+                <div style="margin-top: 10px;">
                     <p>Cliente</p>
                     <p-progressBar [value]="value3"></p-progressBar>
                     <!-- <div *ngIf="CostomerReconciled" class="proccess-bar"></div> -->
@@ -79,12 +79,13 @@
                 <p-table [value]="cars">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>Vin</th>
-                            <th>Year</th>
-                            <th>Brand</th>
-                            <th>Color</th>
+                            <th>Nome</th>
+                            <th>Estado</th>
+                            <th>Data</th>
+                            <th>Empresa</th>
                         </tr>
                     </ng-template>
+                    <!--
                     <ng-template pTemplate="body" let-car>
                         <tr>
                             <td>{{car.vin}}</td>
@@ -93,6 +94,7 @@
                             <td>{{car.color}}</td>
                         </tr>
                     </ng-template>
+                    -->
                 </p-table>
             </div>
         </div>
