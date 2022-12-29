@@ -1,7 +1,9 @@
+import { getUrlPro } from './../../../controller/staticValues';
+import { NetworkService } from './../../../services/network.service';
 import { Util } from 'src/app/controller/Util';
 
 import { Subscription } from 'rxjs';
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -13,7 +15,15 @@ export class DashboardCompanyComponent implements OnInit {
 
     data
 
+    dataDoughnut
+
+    dataBar
+
     chartOptions: any;
+
+    optionsBar: any;
+
+    optionsDoughnut: any;
 
     subscription: Subscription;
 
@@ -34,10 +44,10 @@ export class DashboardCompanyComponent implements OnInit {
     dateStart = Util.getDateComUmMesAntes()
     dateEnd = Util.getLastDayDate()
 
-    constructor() {}
+    constructor(private networkService: NetworkService) { }
 
-    get Balance(){
-        if(!this.data.Balance) return 0
+    get Balance() {
+        if (!this.data.Balance) return 0
         return this.data.Balance
     }
 
@@ -46,18 +56,21 @@ export class DashboardCompanyComponent implements OnInit {
             'texto-verde': false,
             'texto-vermelho': false,
         }
-        return Util.isNegative(v) ? {...classes, 'texto-vermelho': true} : {...classes, 'texto-verde': true}
+        return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
     }
 
     ngOnInit() {
         this.valueGrafic()
+        this.loadDonutChart()
+        this.loadBarChart()
+
         // grafico de barra
-        
-        
+
+
 
         // grafico de ciclo
-       
-        
+
+
 
         // o grafico de barra e ciclo e onda usam isso
         /*
@@ -70,6 +83,167 @@ export class DashboardCompanyComponent implements OnInit {
         */
     }
 
+    loadDonutChart() {
+        console.log('Load Donut Chart ---> ')
+        let dataStart = Util.dataParaStringComZero(this.dateStart)
+        let dataEnd = Util.dataParaStringComZero(this.dateEnd)
+        this.networkService.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=C`).subscribe(v => {
+            console.log('Resposta ---> ')
+            this.donutChart(v['value'])
+        }).add(() => this.networkService.exibirLoader.next(false))
+    }
+
+    loadBarChart() {
+        let dataStart = Util.dataParaStringComZero(this.dateStart)
+        let dataEnd = Util.dataParaStringComZero(this.dateEnd)
+        this.networkService.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `MonthlyEvolution?DateIni=${dataStart}&DateEnd=${dataEnd}`).subscribe(v => {
+            this.barChart(v['value'])
+        }).add(() => this.networkService.exibirLoader.next(false))
+    }
+
+    donutChart(value) {
+        console.log('donut chart ---> ' + JSON.stringify(value))
+        let labels = value.map(v => v.Description)
+        let data = value.map(v => v.Amount)
+        console.log('Grafico Labels ---> ' + labels)
+
+        this.optionsDoughnut = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
+            }
+        };
+
+        this.dataDoughnut = {
+            labels: labels,
+            datasets: [
+                {
+                    label: '1',
+                    data: data,
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#66BB6A",
+                        "#00bb7e",
+                        "#191970",
+                        "#87CEFA",
+                        "#ADFF2F",
+                        "#6B8E23",
+                        "#FFFF00",
+                        "#8B4513",
+                        "#F4A460",
+                        "#B22222",
+                        "#FF0000",
+                        "#FF00FF",
+                        "#9400D3",
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#66BB6A",
+                        "#00bb7e",
+                        "#191970",
+                        "#87CEFA",
+                        "#ADFF2F",
+                        "#6B8E23",
+                        "#FFFF00",
+                        "#8B4513",
+                        "#F4A460",
+                        "#B22222",
+                        "#FF0000",
+                        "#FF00FF",
+                        "#9400D3",
+                    ]
+                }
+            ]
+        };
+
+    }
+
+    barChart(value){
+
+        let credits = value.map(v => v.Credits)
+        let debits = value.map(v => v.Debits)
+
+        this.optionsBar = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
+            }
+        }
+
+        const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+        let label = value.map(v => `${monthLabel[v.Month]}`)
+        console.log('Teste ---> ' + label + ' - ' + value.Month)
+        this.dataBar = {
+            labels: [label],
+            datasets: [
+                {
+                    label: 'Receita',
+                    data: [10, 20],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",                        
+                    ],                    
+                },        
+                {
+                    label: 'teste',
+                    data: [60, 30],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",                        
+                    ],                    
+                },                
+            ]
+        };
+    }
+
     /*
     updateChartOptions() {
         if (this.config.themeColor) {
@@ -80,7 +254,7 @@ export class DashboardCompanyComponent implements OnInit {
     }
     */
 
-    valueGrafic(){
+    valueGrafic() {
         this.data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
@@ -129,36 +303,8 @@ export class DashboardCompanyComponent implements OnInit {
             }]
         };
 
-        this.chartOptions =  {
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#495057'
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        color: '#495057'
-                    },
-                    grid: {
-                        color: '#ebedef'
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: '#495057'
-                    },
-                    grid: {
-                        color: '#ebedef'
-                    }
-                }
-            }
-        };
-
         this.data = {
-            labels: ['A','B','C'],
+            labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [300, 50, 100],
@@ -175,11 +321,16 @@ export class DashboardCompanyComponent implements OnInit {
                 }
             ]
         };
+
+
+
+
     }
 
     alterouData(e) {
         this.dateStart = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
         this.dateEnd = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
+        this.loadDonutChart()
         // this.carregarLista()
     }
 
@@ -502,49 +653,49 @@ export class DashboardCompanyComponent implements OnInit {
         };
         */
 
-        /*
-        this.multiAxisOptions = {
-            stacked: false,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#ebedef'
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        color: '#ebedef'
-                    },
-                    grid: {
-                        color: 'rgba(255,255,255,0.2)'
-                    }
-                },
-                y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    ticks: {
-                        color: '#ebedef'
-                    },
-                    grid: {
-                        color: 'rgba(255,255,255,0.2)'
-                    }
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    ticks: {
-                        color: '#ebedef'
-                    },
-                    grid: {
-                        drawOnChartArea: false,
-                        color: 'rgba(255,255,255,0.2)'
-                    }
+    /*
+    this.multiAxisOptions = {
+        stacked: false,
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#ebedef'
                 }
             }
-        };
-        */
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: '#ebedef'
+                },
+                grid: {
+                    color: 'rgba(255,255,255,0.2)'
+                }
+            },
+            y: {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                ticks: {
+                    color: '#ebedef'
+                },
+                grid: {
+                    color: 'rgba(255,255,255,0.2)'
+                }
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                ticks: {
+                    color: '#ebedef'
+                },
+                grid: {
+                    drawOnChartArea: false,
+                    color: 'rgba(255,255,255,0.2)'
+                }
+            }
+        }
+    };
+    */
 }
