@@ -44,14 +44,14 @@
             <div class="card" style="margin-top: 10px; height: 18em;"> <!-- *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '21rem'}" -->
                 <h5 *ngIf="this.data" class="centerText">Transações Conciliadas: {{ AmountReconciled }}</h5>
                 <p>Inteligência Artificial</p> 
-                <p-progressBar [value]="value1"></p-progressBar> 
-                <!-- <div *ngIf="IaReconciled" class="proccess-bar" > <p-slider></p-slider> </div> -->
+                <p-progressBar [value]="value1" [style]="{'height': '15px'}"></p-progressBar> 
+              
                 <p style="margin-top: 10px;">Analista</p>
-                <p-progressBar [value]="value2"></p-progressBar>
-                <!-- <div *ngIf="AnalistReconciled" class="proccess-bar"></div> -->
+                <p-progressBar [value]="value2" [style]="{'height': '15px'}"></p-progressBar>
+                
                 <p style="margin-top: 10px;">Cliente</p>
-                <p-progressBar [value]="value3"></p-progressBar>
-                <!-- <div *ngIf="CostomerReconciled" class="proccess-bar"></div> -->
+                <p-progressBar [value]="value3" [style]="{'height': '15px'}"></p-progressBar>
+    
             </div>
         </div>
 
