@@ -1,24 +1,6 @@
 
+
 /*
-.AutoLayout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 14px 0px;
-    gap: 7px;
-
-    width: 248px;
-    height: 77.5px;
-
-    border-bottom: 1px solid #E4E4E4;
-
-    flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
-}
-*/
-
 .proccess-bar {
     display: flex;
     flex-direction: column;
@@ -28,17 +10,16 @@
     width: 248px;
     height: 6px;
 
-    /* material/blue-gray/blue-gray-50 */
     background: #ECEFF1;
     border-radius: 10px;
 
-    /* Inside auto layout */
     flex: none;
     order: 1;
     align-self: stretch;
     flex-grow: 0;
     margin-bottom: 10px;
 }
+*/
 
 .container .card {
     height: 22rem;
