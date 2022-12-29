@@ -20,7 +20,9 @@ export class DashboardHomeComponent implements OnInit {
 
     $subscription3: Subscription;
 
-    data: any;
+    data
+
+    dataBarChart
 
     chartOptions: any;
 
@@ -48,10 +50,30 @@ export class DashboardHomeComponent implements OnInit {
     value1: number;
     value2: number;
     value3: number;
-    total: number
+    total: number;
     
     constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {}
     // private carService: CarService
+
+    ngOnInit() {
+        this.updateData()
+        this.loadBarChart()
+        this.labelData()
+
+        // this.carService.getCarsSmall().then(cars => this.cars = cars);
+
+        // grafico de barra
+
+        // o grafico de barra e ciclo e onda usam isso
+        /*
+        this.config = this.configService.config;
+        this.updateChartOptions();
+        this.subscription = this.configService.configUpdate$.subscribe(config => {
+            this.config = config;
+            this.updateChartOptions();
+        });
+        */
+    }
 
     loadBarChart() {
         let Month = this.dataFim.getMonth() + 1
@@ -59,8 +81,9 @@ export class DashboardHomeComponent implements OnInit {
 
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountGraphic12Month?MonthEnd=${Month}&YearEnd=${Year}`).subscribe((v: any) => {
-                console.log('dados do grafico')
+                console.log('respota da api')
                 console.log(v['value'][0])
+                this.barChart(v['value'][0])
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -84,25 +107,39 @@ export class DashboardHomeComponent implements OnInit {
             }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    ngOnInit() {
-        this.updateData()
-        this.loadBarChart()
-        this.labelData()
+    barChart(value) {
+        console.log('bar chart ---> ' + JSON.stringify(value))
 
-        // this.carService.getCarsSmall().then(cars => this.cars = cars);
-
-        // grafico de barra
-
-        // o grafico de barra e ciclo e onda usam isso
+        const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+        let label = value.map(v => `${monthLabel[v.Month]}`)
         /*
-        this.config = this.configService.config;
-        this.updateChartOptions();
-        this.subscription = this.configService.configUpdate$.subscribe(config => {
-            this.config = config;
-            this.updateChartOptions();
-        });
+        let Amount = value.map(v => v.Amount )
+        let Analist = value.map(v => v.Analist)
+        let Costomer = value.map(v => v.Costomer )
+        let Ia = value.map(v => v.Ia )
+        let Pending = value.map(v => v.Pending )
         */
+        let data = value.map(v => v.Amount)
+
+
+        this.dataBarChart = {
+            labels: [label],
+            data: data,
+            datasets: [
+                {
+                    label: '1',
+                    backgroundColor: '#42A5F5',
+                    data: data
+                },
+                {
+                    label: 'teste',
+                    backgroundColor: '#FFA726',
+                    data: [28, 48, 40, 19, 86, 27, 90]
+                }
+            ]
+        };
     }
+
 
     alterouData(e) {
         this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
@@ -408,7 +445,7 @@ export class DashboardHomeComponent implements OnInit {
             }
         ]
     };
-
+    
     this.multiAxisData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
