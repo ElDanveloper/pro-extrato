@@ -80,6 +80,7 @@ import { DashboardCompanyComponent } from './pages/dashboard/dashboard-company/d
 import { AccountingParametersComponent } from './pages/settings-page/accounting-parameters/accounting-parameters.component'
 // import {SliderModule} from 'primeng/slider';
 import {ProgressBarModule} from 'primeng/progressbar';
+import {ButtonModule} from 'primeng/button';
 
 
 @NgModule({
@@ -98,7 +99,8 @@ import {ProgressBarModule} from 'primeng/progressbar';
         LayoutsModule,
         ImageCropperModule,
         NgxViacepModule,
-        ProgressBarModule
+        ProgressBarModule,
+        ButtonModule
         // SliderModule
 
     ],

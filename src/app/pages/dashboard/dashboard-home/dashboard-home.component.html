@@ -37,33 +37,22 @@
                 <div class="p-col-2" style="width: 200px; margin-right: 10px;">
                     <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
                 </div>
-                <!-- Adicionar icon no botao -->
                 <div class="p-col-4">
-                    <!-- <button pButton type="button" label="Atualizar"></button> -->
-                    <button pButton type="button" icon="pi pi-sync"></button> <!-- iconPos="left" -->
+                    <button pButton type="button" class="p-button-raised p-button-rounded" icon="pi pi-refresh"></button>
                 </div>
             </div>
-            <p-card *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '21rem'}">
-                <div>
-                    <p>Inteligência Artificial</p> 
-                    <p-progressBar [value]="value1"></p-progressBar> 
-                    <!--
-                    <div *ngIf="IaReconciled" class="proccess-bar" >
-                        <p-slider></p-slider> 
-                    </div>
-                    -->
-                </div>
-                <div style="margin-top: 10px;">
-                    <p>Analista</p>
-                    <p-progressBar [value]="value2"></p-progressBar>
-                    <!-- <div *ngIf="AnalistReconciled" class="proccess-bar"></div> -->
-                </div>
-                <div style="margin-top: 10px;">
-                    <p>Cliente</p>
-                    <p-progressBar [value]="value3"></p-progressBar>
-                    <!-- <div *ngIf="CostomerReconciled" class="proccess-bar"></div> -->
-                </div>
-            </p-card>
+            <div class="card" style="margin-top: 10px; height: 18em;"> <!-- *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '21rem'}" -->
+                <h5 *ngIf="this.data" class="centerText">Transações Conciliadas: {{ AmountReconciled }}</h5>
+                <p>Inteligência Artificial</p> 
+                <p-progressBar [value]="value1"></p-progressBar> 
+                <!-- <div *ngIf="IaReconciled" class="proccess-bar" > <p-slider></p-slider> </div> -->
+                <p style="margin-top: 10px;">Analista</p>
+                <p-progressBar [value]="value2"></p-progressBar>
+                <!-- <div *ngIf="AnalistReconciled" class="proccess-bar"></div> -->
+                <p style="margin-top: 10px;">Cliente</p>
+                <p-progressBar [value]="value3"></p-progressBar>
+                <!-- <div *ngIf="CostomerReconciled" class="proccess-bar"></div> -->
+            </div>
         </div>
 
         <div class="p-col-5">
