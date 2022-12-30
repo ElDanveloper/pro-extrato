@@ -3,29 +3,27 @@
         <div class="p-col-12 p-grid p-fluid" >
             <div class="p-col-3">
                 <p-card header="Total de Transações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <p *ngIf="this.data" [ngClass]="colorValue(Amount)" appAlignRight style="font-size: larger;"> {{ Amount | virgulaPipe}} </p>
+                    <p *ngIf="this.data" [ngClass]="colorValue(Amount)" appAlignRight style="font-size: large;"> {{ Amount | virgulaPipe}} </p>
                     <br>
                 </p-card>
             </div>
             <div class="p-col-3">
                 <p-card header="Pendências com analistas" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <p *ngIf="this.data" [ngClass]="colorValue(AnalistPending)" appAlignRight style="font-size: larger;"> {{ AnalistPending }}  Lançamentos</p>
+                    <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ AnalistPending }}  Lançamentos</p>
                     <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ CompanyPendingAnalist }}  Empresas</p>
                 </p-card>
             </div>
             <div class="p-col-3">
                 <p-card header="Pendências com clientes" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <p *ngIf="this.data" [ngClass]="colorValue(CostomerPending)" appAlignRight style="font-size: larger;"> {{ CostomerPending }} Lançamentos</p>
+                    <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ CostomerPending }} Lançamentos</p>
                     <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ CompanyPendingCostomer }} Empresas</p>
                 </p-card>
             </div>
-
             <div class=" p-col-3">
                 <div class="4">
                     <div class="card" style="height: 131px;">
                         <h5 *ngIf="this.data" class="centerText">Empresas Ativas {{ ActiveCompany }}</h5>
                         <h5 *ngIf="this.data" class="centerText">Conta Ativa {{ ActiveAccount }}</h5>
-                        <!-- <p-chart *ngIf="this.data.ActiveCompany" type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart> -->
                     </div>
                 </div>
             </div>
@@ -44,27 +42,24 @@
             <div class="card" style="margin-top: 10px; height: 257px;"> <!-- *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '21rem'}" -->
                 <h5 *ngIf="this.data" class="centerText">Transações Conciliadas: {{ AmountReconciled }}</h5>
                 <p>Inteligência Artificial</p>       
-                <p-progressBar [value]="value1" [style]="{'height': '15px'}"></p-progressBar> <!-- [style]="{'height': '15px', 'display': 'flex', 'align-items': 'center', 'justify-content': 'center'}" -->
-              
+                <p-progressBar [value]="value1" [style]="{'height': '15px'}"></p-progressBar> 
+
                 <p style="margin-top: 10px;">Analista</p>
                 <p-progressBar [value]="value2" [style]="{'height': '15px'}"></p-progressBar>
-                
+
                 <p style="margin-top: 10px;">Cliente</p>
                 <p-progressBar [value]="value3" [style]="{'height': '15px'}"></p-progressBar>
-    
             </div>
         </div>
-
         <div class="p-col-5">
             <div class="card">
                 <h5 class="centerText">Transações</h5>
-                <p-chart type="bar" [data]="dataBar" [options]="optionsBar"></p-chart>
+                <p-chart type="bar" [data]="barChartData" [options]="barChartOptions"></p-chart>
             </div>
         </div>
         <div class="p-col-4">
             <div class="card">
                 <h5 class="centerText">Analistas</h5>
-                <!-- <p-chart type="doughnut" [data]="data" [options]="chartOptions"></p-chart> -->
                 <p-table [value]="cars">
                     <ng-template pTemplate="header">
                         <tr>
@@ -92,10 +87,6 @@
             <div class="p-col-6">
                 <div class="card">
                     <h5 class="centerText">Por tempo de atraso</h5>
-                    <!--
-                        [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista"
-                        (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="opcoesLinhas"
-                    -->
                     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm">
                         <ng-template pTemplate="header" let-columns>
                             <tr>
@@ -123,14 +114,9 @@
                     </p-table>
                 </div>
             </div>
-
             <div class="p-col-5">
                 <div class="card">
                     <h5 class="centerText">Pendências por Empresas</h5>
-                    <!--
-                        [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista"
-                        (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="opcoesLinhas"
-                    -->
                     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm">
                         <ng-template pTemplate="header" let-columns>
                             <tr>

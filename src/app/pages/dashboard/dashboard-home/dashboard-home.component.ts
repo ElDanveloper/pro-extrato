@@ -22,15 +22,14 @@ export class DashboardHomeComponent implements OnInit {
 
     data
 
-    dataBar
-    optionsBar: any;
+    barChartData
+    barChartOptions: any; 
 
     chartOptions: any;
 
     subscription: Subscription;
 
     // config: AppConfig; // - nao tem
-
     // private configService: AppConfigService // -  nao tem
 
     basicData: any;
@@ -88,30 +87,28 @@ export class DashboardHomeComponent implements OnInit {
     labelData() {
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
-
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountLabel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {
                 this.data = v['value'][0]
 
                 this.total = this.data.AmountReconciled
-
-                this.value1 = ( this.IaReconciled * 100 ) / this.total // this.data.IaReconciled 
-                this.value2 = ( this.data.AnalistReconciled * 100 ) / this.total // this.data.AnalistReconciled 
-                this.value3 = ( this.data.CostomerReconciled * 100 ) / this.total //  this.data.CostomerReconciled
+                this.value1 = ( this.IaReconciled * 100 ) / this.total 
+                this.value2 = ( this.data.AnalistReconciled * 100 ) / this.total 
+                this.value3 = ( this.data.CostomerReconciled * 100 ) / this.total 
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     barChart(value){
-        console.log('bar chart ---> ' + JSON.stringify(value))
+        //console.log('bar chart ---> ' + JSON.stringify(value))
         let Amount = value.map(v => v.Amount)
         let Pending = value.map(v => v.Pending)
         let Analist = value.map(v => v.Analist)
         let Ia = value.map(v => v.Ia)
         let Costomer = value.map(v => v.Costomer)
 
-        this.optionsBar = {
+        this.barChartOptions = {
             plugins: {
                 legend: {
                     labels: {
@@ -140,9 +137,8 @@ export class DashboardHomeComponent implements OnInit {
         }
 
         const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-        let label = value.map(v => `${monthLabel[v.Month-1]}`) // no ultimo mes aparece underfined
-        console.log(label)
-        this.dataBar = {
+        let label = value.map(v => `${monthLabel[v.Month-1]}`) 
+        this.barChartData = {
             labels: label,
             datasets: [
                 {
@@ -203,7 +199,6 @@ export class DashboardHomeComponent implements OnInit {
     updateData(){
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
-
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.getSimples(getUrlPro(), `UpdatePanel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {
             // console.log(v['value'][0])
