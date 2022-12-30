@@ -3,20 +3,20 @@
         <div class="p-col-12 p-grid p-fluid" >
             <div class="p-col-3">
                 <p-card header="Total de Transações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <p *ngIf="this.data"> {{ Amount }} </p>
+                    <p *ngIf="this.data" [ngClass]="colorValue(Amount)" appAlignRight style="font-size: larger;"> {{ Amount | virgulaPipe}} </p>
                     <br>
                 </p-card>
             </div>
             <div class="p-col-3">
                 <p-card header="Pendências com analistas" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <p *ngIf="this.data"> {{ AnalistPending }}  Lançamentos</p>
-                    <p *ngIf="this.data"> {{ CompanyPendingAnalist }}  Empresas</p>
+                    <p *ngIf="this.data" [ngClass]="colorValue(AnalistPending)" appAlignRight style="font-size: larger;"> {{ AnalistPending }}  Lançamentos</p>
+                    <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ CompanyPendingAnalist }}  Empresas</p>
                 </p-card>
             </div>
             <div class="p-col-3">
                 <p-card header="Pendências com clientes" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <p *ngIf="this.data"> {{ CostomerPending }} Lançamentos</p>
-                    <p *ngIf="this.data"> {{ CompanyPendingCostomer }} Empresas</p>
+                    <p *ngIf="this.data" [ngClass]="colorValue(CostomerPending)" appAlignRight style="font-size: larger;"> {{ CostomerPending }} Lançamentos</p>
+                    <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ CompanyPendingCostomer }} Empresas</p>
                 </p-card>
             </div>
 
@@ -157,13 +157,6 @@
                         </ng-template>
                     </p-table>
                 </div>
-            </div>
-        </div>
-
-        <div class="p-col-12">
-            <div class="card">
-                <h5 class="centerText">Transações</h5>
-                <p-chart type="bar" [data]="dataBar" [options]="optionsBar"></p-chart>
             </div>
         </div>
     </div>

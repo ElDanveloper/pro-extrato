@@ -139,15 +139,14 @@ export class DashboardHomeComponent implements OnInit {
             }
         }
 
-        //const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-        //let label = value.map(v => `${monthLabel[v.Month]}`) // esse label só está pegando os 3 ultimos meses
-        let labels = value.map(v => v.Month)
-        console.log(labels)
+        const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+        let label = value.map(v => `${monthLabel[v.Month-1]}`) // no ultimo mes aparece underfined
+        console.log(label)
         this.dataBar = {
-            labels: labels,
+            labels: label,
             datasets: [
                 {
-                    label: 'Amount',
+                    label: 'Montante',
                     data: Amount,
                     backgroundColor: [
                         "#FF6384",                      
@@ -156,7 +155,7 @@ export class DashboardHomeComponent implements OnInit {
                     ],                    
                 },        
                 {
-                    label: 'Pending',
+                    label: 'Pendente',
                     data: Pending,
                     backgroundColor: [
                         "#FFCE56",
@@ -165,7 +164,7 @@ export class DashboardHomeComponent implements OnInit {
                     ],                    
                 },   
                 {
-                    label: 'Analist',
+                    label: 'Analista',
                     data: Analist,
                     backgroundColor: [
                         "#36A2EB",
@@ -173,24 +172,24 @@ export class DashboardHomeComponent implements OnInit {
                         "#36A2EB",
                     ],                    
                 }, 
-
-                
-                /* 
                 {
-                    label: 'Ia',
+                    label: 'IA',
                     data: Ia,
                     backgroundColor: [
-                        "#00bb7e"                        
+                        "#00bb7e",
+                        "#00bb7e",
+                        "#00bb7e",                        
                     ],                    
                 },  
                 {
-                    label: 'Costomer',
+                    label: 'Cliente',
                     data: Costomer,
                     backgroundColor: [
-                        "#191970"                        
+                        "#191970",
+                        "#191970",
+                        "#191970",                       
                     ],                    
-                }, 
-                */              
+                },             
             ]
         };
     }
@@ -211,6 +210,14 @@ export class DashboardHomeComponent implements OnInit {
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
+    colorValue(v) {
+        const classes = {
+            'texto-verde': false,
+            'texto-vermelho': false,
+        }
+        return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
     }
 
     get Amount(){
