@@ -150,23 +150,31 @@ export class DashboardHomeComponent implements OnInit {
                     label: 'Amount',
                     data: Amount,
                     backgroundColor: [
-                        "#FF6384"                      
+                        "#FF6384",                      
+                        "#FF6384",
+                        "#FF6384",
                     ],                    
                 },        
                 {
                     label: 'Pending',
                     data: Pending,
                     backgroundColor: [
-                        "#FFCE56"                   
+                        "#FFCE56",
+                        "#FFCE56",
+                        "#FFCE56",
                     ],                    
                 },   
                 {
                     label: 'Analist',
                     data: Analist,
                     backgroundColor: [
-                        "#36A2EB"                       
+                        "#36A2EB",
+                        "#36A2EB",
+                        "#36A2EB",
                     ],                    
                 }, 
+
+                
                 /* 
                 {
                     label: 'Ia',

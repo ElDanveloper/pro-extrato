@@ -1,6 +1,4 @@
 
-
-/*
 .proccess-bar {
     display: flex;
     flex-direction: column;
@@ -19,7 +17,6 @@
     flex-grow: 0;
     margin-bottom: 10px;
 }
-*/
 
 .container .card {
     height: 22rem;
@@ -31,4 +28,5 @@
     align-items: center;
     justify-content: center;
     height: 15px;
+
 }

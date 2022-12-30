@@ -4472,8 +4472,9 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   background: #2f4050;
 }
 .p-progressbar .p-progressbar-label {
-  color: #000001;
-  line-height: 4px;
+  /* color: #000001; */
+  color: #2196F3;
+  /* line-height: 4px; */
 }
 
 .p-terminal {
