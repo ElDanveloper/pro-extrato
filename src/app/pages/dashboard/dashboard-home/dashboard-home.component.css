@@ -25,3 +25,10 @@
     height: 22rem;
     width: 30rem;
 }
+
+.p-progressbar-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+}

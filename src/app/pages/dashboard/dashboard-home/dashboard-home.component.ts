@@ -22,7 +22,8 @@ export class DashboardHomeComponent implements OnInit {
 
     data
 
-    dataBarChart
+    dataBar
+    optionsBar: any;
 
     chartOptions: any;
 
@@ -62,8 +63,6 @@ export class DashboardHomeComponent implements OnInit {
 
         // this.carService.getCarsSmall().then(cars => this.cars = cars);
 
-        // grafico de barra
-
         // o grafico de barra e ciclo e onda usam isso
         /*
         this.config = this.configService.config;
@@ -78,12 +77,9 @@ export class DashboardHomeComponent implements OnInit {
     loadBarChart() {
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
-
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountGraphic12Month?MonthEnd=${Month}&YearEnd=${Year}`).subscribe((v: any) => {
-                console.log('respota da api')
-                console.log(v['value'][0])
-                this.barChart(v['value'][0])
+                this.barChart(v['value'])
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -107,39 +103,89 @@ export class DashboardHomeComponent implements OnInit {
             }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    barChart(value) {
+    barChart(value){
         console.log('bar chart ---> ' + JSON.stringify(value))
-
-        const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-        let label = value.map(v => `${monthLabel[v.Month]}`)
-        /*
-        let Amount = value.map(v => v.Amount )
+        let Amount = value.map(v => v.Amount)
+        let Pending = value.map(v => v.Pending)
         let Analist = value.map(v => v.Analist)
-        let Costomer = value.map(v => v.Costomer )
-        let Ia = value.map(v => v.Ia )
-        let Pending = value.map(v => v.Pending )
-        */
-        let data = value.map(v => v.Amount)
+        let Ia = value.map(v => v.Ia)
+        let Costomer = value.map(v => v.Costomer)
 
+        this.optionsBar = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
+            }
+        }
 
-        this.dataBarChart = {
-            labels: [label],
-            data: data,
+        //const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+        //let label = value.map(v => `${monthLabel[v.Month]}`) // esse label só está pegando os 3 ultimos meses
+        let labels = value.map(v => v.Month)
+        console.log(labels)
+        this.dataBar = {
+            labels: labels,
             datasets: [
                 {
-                    label: '1',
-                    backgroundColor: '#42A5F5',
-                    data: data
-                },
+                    label: 'Amount',
+                    data: Amount,
+                    backgroundColor: [
+                        "#FF6384"                      
+                    ],                    
+                },        
                 {
-                    label: 'teste',
-                    backgroundColor: '#FFA726',
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                }
+                    label: 'Pending',
+                    data: Pending,
+                    backgroundColor: [
+                        "#FFCE56"                   
+                    ],                    
+                },   
+                {
+                    label: 'Analist',
+                    data: Analist,
+                    backgroundColor: [
+                        "#36A2EB"                       
+                    ],                    
+                }, 
+                /* 
+                {
+                    label: 'Ia',
+                    data: Ia,
+                    backgroundColor: [
+                        "#00bb7e"                        
+                    ],                    
+                },  
+                {
+                    label: 'Costomer',
+                    data: Costomer,
+                    backgroundColor: [
+                        "#191970"                        
+                    ],                    
+                }, 
+                */              
             ]
         };
     }
-
 
     alterouData(e) {
         this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
