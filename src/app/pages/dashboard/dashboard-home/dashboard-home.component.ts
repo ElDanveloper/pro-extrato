@@ -58,7 +58,7 @@ export class DashboardHomeComponent implements OnInit {
     ngOnInit() {
         this.updateData()
         this.loadBarChart()
-        this.labelData()
+        //this.labelData()
 
         // this.carService.getCarsSmall().then(cars => this.cars = cars);
 
@@ -84,14 +84,14 @@ export class DashboardHomeComponent implements OnInit {
             }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    labelData() {
-        let Month = this.dataFim.getMonth() + 1
-        let Year = this.dataFim.getFullYear()
+    labelData(Month, Year) {
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountLabel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {
-                this.data = v['value'][0]
+                //console.log(v['value'])
+                this.data = v['value'][v['value'].length - 1]
+                // console.log(this.data[this.data.length - 1])
 
-                this.total = this.data.AmountReconciled
+                this.total = this.data.AmountReconciled 
                 this.value1 = ( this.IaReconciled * 100 ) / this.total 
                 this.value2 = ( this.data.AnalistReconciled * 100 ) / this.total 
                 this.value3 = ( this.data.CostomerReconciled * 100 ) / this.total 
@@ -201,7 +201,8 @@ export class DashboardHomeComponent implements OnInit {
         let Year = this.dataFim.getFullYear()
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.getSimples(getUrlPro(), `UpdatePanel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {
-            // console.log(v['value'][0])
+            //console.log(v['value'])
+            this.labelData(Month, Year)
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -270,8 +271,8 @@ export class DashboardHomeComponent implements OnInit {
         return Util.toNumber(this.data.ActiveCompany);
     }
 
-
     // COMPONENTE TABLE DE ANALISTA
+    /*
     getCarsSmall() {
         return this.http.get('/showcase/resources/data/cars-small.json')
                     .toPromise()
@@ -376,7 +377,7 @@ export class DashboardHomeComponent implements OnInit {
             ]
         };
     }
-
+    */
 
     /*
     updateChartOptions() {
@@ -456,6 +457,7 @@ export class DashboardHomeComponent implements OnInit {
     */
 
     // grafico de ciclo
+    /*
     getLightTheme() {
         return {
             plugins: {
@@ -479,6 +481,7 @@ export class DashboardHomeComponent implements OnInit {
             }
         }
     }
+    */
 
     // grafico de onda
     /*

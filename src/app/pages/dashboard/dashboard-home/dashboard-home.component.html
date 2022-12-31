@@ -2,9 +2,8 @@
     <div class="p-col-12 p-grid p-fluid">
         <div class="p-col-12 p-grid p-fluid" >
             <div class="p-col-3">
-                <p-card header="Total de Transações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <p *ngIf="this.data" [ngClass]="colorValue(Amount)" appAlignRight style="font-size: large;"> {{ Amount | virgulaPipe}} </p>
-                    <br>
+                <p-card header="Total de Transações" [style]="{'width': '20rem', 'height': '137px'}">
+                    <p *ngIf="this.data" [ngClass]="colorValue(Amount)" appAlignRight style="font-size: large; font-weight: bold;"> {{ Amount | virgulaPipe}} </p>
                 </p-card>
             </div>
             <div class="p-col-3">
@@ -19,9 +18,9 @@
                     <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ CompanyPendingCostomer }} Empresas</p>
                 </p-card>
             </div>
-            <div class=" p-col-3">
+            <div class="p-col-3">
                 <div class="4">
-                    <div class="card" style="height: 131px;">
+                    <div class="card" style="height: 138px;">
                         <h5 *ngIf="this.data" class="centerText">Empresas Ativas {{ ActiveCompany }}</h5>
                         <h5 *ngIf="this.data" class="centerText">Conta Ativa {{ ActiveAccount }}</h5>
                     </div>
@@ -36,19 +35,17 @@
                     <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
                 </div>
                 <div class="p-col-4">
-                    <button pButton type="button" class="p-button-raised p-button-rounded" icon="pi pi-refresh"></button>
+                    <button pButton type="button" class="p-button-raised p-button-rounded" icon="pi pi-refresh" (click)="updateData()"></button>
                 </div>
             </div>
-            <div class="card" style="margin-top: 10px; height: 257px;"> <!-- *ngIf="this.data" header="Transações Conciliadas: {{ AmountReconciled }}"  [style]="{'width': '21rem'}" -->
+            <div class="card" style="margin-top: 10px; height: 257px;">
                 <h5 *ngIf="this.data" class="centerText">Transações Conciliadas: {{ AmountReconciled }}</h5>
                 <p>Inteligência Artificial</p>       
-                <p-progressBar [value]="value1" [style]="{'height': '15px'}"></p-progressBar> 
-
+                <p-progressBar [value]="value1.toFixed(2)" [style]="{'height': '15px'}"></p-progressBar> 
                 <p style="margin-top: 10px;">Analista</p>
-                <p-progressBar [value]="value2" [style]="{'height': '15px'}"></p-progressBar>
-
+                <p-progressBar [value]="value2.toFixed(2)" [style]="{'height': '15px'}"></p-progressBar>
                 <p style="margin-top: 10px;">Cliente</p>
-                <p-progressBar [value]="value3" [style]="{'height': '15px'}"></p-progressBar>
+                <p-progressBar [value]="value3.toFixed(2)" [style]="{'height': '15px'}"></p-progressBar>
             </div>
         </div>
         <div class="p-col-5">
@@ -82,7 +79,6 @@
                 </p-table>
             </div>
         </div>
-
         <div class="p-col-12 p-grid p-fluid">
             <div class="p-col-6">
                 <div class="card">
