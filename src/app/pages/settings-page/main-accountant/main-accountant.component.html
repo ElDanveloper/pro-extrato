@@ -7,7 +7,7 @@
                 <div class="p-field p-col-4 p-md-3">
                     <app-input-cpf-cnpj [label]="'CNPJ'" formControlName="Cnpj"></app-input-cpf-cnpj>
                 </div>
-                <div class="p-field p-col-4 p-md-3" style="margin-top: 1rem;">
+                <div class="p-field p-col-4 p-md-3" style="margin-top: 1.5rem;">
                     <button pButton label="Buscar CNPJ" (click)="takeCnpj()"></button>
                 </div>
             </div>
@@ -20,17 +20,15 @@
                     <div class="p-field p-col-6 p-md-6">
                         <app-input [label]="'Nome fantasia'" formControlName="Fantasia"></app-input>
                     </div>
-                    <!-- <div class="p-fluid p-formgrid p-grid"> -->
-                        <div class="p-field p-col-4 p-md-4">
-                            <app-input-telefone [label]="'Telefone'" formControlName="Phone1"></app-input-telefone>
-                        </div>
-                        <div class="p-field p-col-4 p-md-4">
-                            <app-input-telefone [label]="'Celular'" formControlName="Cel"></app-input-telefone>
-                        </div>
-                        <div class="p-field p-col-4 p-md-4">
-                            <app-input [label]="'Contato'" formControlName="Contato"></app-input>
-                        </div>
-                    <!-- </div> -->
+                    <div class="p-field p-col-4 p-md-4">
+                        <app-input-telefone [label]="'Telefone'" formControlName="Phone1"></app-input-telefone>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4">
+                        <app-input-telefone [label]="'Celular'" formControlName="Cel"></app-input-telefone>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4">
+                        <app-input [label]="'Contato'" formControlName="Contato"></app-input>
+                    </div>
                 </div>
                 <div secundario class="p-col-12" style="margin-left: 70px;">
                     <p-card (click)="clickUploadImagem()" [style]="{marginTop: '10px', width: '150px', height: '120px', cursor: 'pointer'}">

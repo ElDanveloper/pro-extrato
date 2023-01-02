@@ -94,7 +94,7 @@ export class DashboardHomeComponent implements OnInit {
                 this.total = this.data.AmountReconciled 
                 this.value1 = ( this.IaReconciled * 100 ) / this.total 
                 this.value2 = ( this.data.AnalistReconciled * 100 ) / this.total 
-                this.value3 = ( this.data.CostomerReconciled * 100 ) / this.total 
+                this.value3 = ( this.data.CostomerReconciled * 100 ) / this.total
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
