@@ -11,8 +11,8 @@
         <div class="p-col-2" style="margin-top: 5px; margin-left: -65px;">
             <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
         </div>
-        <div class="p-col-2">
-            <button pButton type="button" label="Atualizar Código"></button>
+        <div class="p-col-2" style="margin-left: 65px;">
+            <button pButton type="button" label="Atualizar Código" (click)="updateCode()" ></button>
         </div>
         <div class="p-offset-2 p-field p-col-12 p-md-2" style="position: relative;">
             <button pButton label="Pesquisar" (click)="loadList()"></button>
@@ -38,9 +38,15 @@
             <tr>
                 <td>{{rowData.Description}}</td>
                 <td>{{rowData.Classificate}}</td>
-                <td>{{rowData.CodeAccountPlan}}</td>
+                <td>
+                    <!-- CodeAccountPlan -->
+                    <input type="text" [value]="this.lista.CodeAccountPlan" >
+                </td>
                 <td>{{rowData.Historic}}</td>
-                <td>{{rowData.CodeIntegration}}</td>
+                <td>
+                    <!-- CodeIntegration -->
+                    <input type="text" [value]="this.lista.CodeIntegration" >
+                </td>
                 <td appAlignRight>{{rowData.CodeControl}}</td>
                 <td appAlignCenter>
                     <app-opcoes-table [value]="rowData" [opcoes]="opcoesTable"></app-opcoes-table>

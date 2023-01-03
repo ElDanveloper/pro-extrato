@@ -48,6 +48,10 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
         this.loadList()
     }
 
+    updateCode() {
+        console.log('update code')
+    }
+
     alterouData(e) {
         this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
         this.dataFim = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
@@ -63,6 +67,9 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
             this.lista = v.value           
             this.totalItens = this.lista.length
             this.jaPesquisou = true
+        
+            console.log(this.lista)
+            //this.updateCode()
         }).add(this.networkService.exibirLoader.next(false))
     }
 
