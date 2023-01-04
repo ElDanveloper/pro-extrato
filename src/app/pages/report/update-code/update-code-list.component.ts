@@ -6,6 +6,7 @@ import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, Message, MessageService, SelectItem } from "primeng/api";
 import { Router } from "@angular/router";
+import { ComponentsModule } from 'src/app/components/components.module';
 
 
 @Component({
@@ -42,34 +43,63 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
         },
     ]
 
+    clonedProducts: { [s: string]: []; } = {};
+
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) { }
 
     ngOnInit() {
         this.loadList()
+
+        let dateIni = Util.dataParaStringComZero(this.dataInit)
+        let dateEnd = Util.dataParaStringComZero(this.dataFim)
+
+        this.networkService.getSimples(getUrlPro(), `GetCategoriesMoviment?DateIni=${dateIni}&DateEnd=${dateEnd}`).subscribe((v: any) => {
+            this.lista = v.value
+            this.totalItens = this.lista.length
+            this.jaPesquisou = true
+
+        }).add(this.networkService.exibirLoader.next(false))
+
+        //then(data => this.products1 = data);
     }
 
-    updateCode() {
-        console.log('update code')
+    onRowEditSave(lista: []) {
+        console.log(lista)
+        /*
+        if (product > 0) {
+            delete this.clonedProducts[product.id];
+            this.messageService.add({severity:'success', summary: 'Success', detail:'Product is updated'});
+        }
+        else {
+            this.messageService.add({severity:'error', summary: 'Error', detail:'Invalid Price'});
+        }
+        */
     }
 
     alterouData(e) {
         this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
         this.dataFim = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
-    
+
     }
 
-    loadList(page?, top?) {       
+    loadList(page?, top?) {
         let dateIni = Util.dataParaStringComZero(this.dataInit)
         let dateEnd = Util.dataParaStringComZero(this.dataFim)
 
         this.networkService.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `GetCategoriesMoviment?DateIni=${dateIni}&DateEnd=${dateEnd}`).subscribe((v: any) => {
-            this.lista = v.value           
+            this.lista = v.value
             this.totalItens = this.lista.length
             this.jaPesquisou = true
-        
+
+            for(let i = 0; i < this.totalItens; i++) {
+                let CodeAccountPlan: string[] = this.lista[i].CodeAccountPlan
+                let CodeIntegration: string[] = this.lista[i].CodeIntegration
+
+                console.log(this.lista[i].Description, '-', CodeAccountPlan, '-', CodeIntegration)
+            }
             console.log(this.lista)
-            //this.updateCode()
+
         }).add(this.networkService.exibirLoader.next(false))
     }
 
