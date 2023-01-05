@@ -44,7 +44,8 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
     ]
 
     //clonedProducts: { [s: string]: []; } = {};
-    selectedLista: string[] = [];
+    //selectedLista: string[] = [];
+    selectedLista: any[] = [];
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) { }
 
@@ -73,13 +74,6 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
         }).add(this.networkService.exibirLoader.next(false))
     }
 
-
-    /*
-    onRowEditSave(lista: []) {
-        console.log(lista)
-    }
-    */
-
     alterouData(e) {
         this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
         this.dataFim = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
@@ -96,15 +90,11 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
             this.totalItens = this.lista.length
             this.jaPesquisou = true
 
-            /*
-            for(let i = 0; i < this.totalItens; i++) {
-                let CodeAccountPlan: string[] = this.lista[i].CodeAccountPlan
-                let CodeIntegration: string[] = this.lista[i].CodeIntegration
-                //console.log(this.lista[i].Description, '-', CodeAccountPlan, '-', CodeIntegration)
-            }
-            //console.log(this.lista)
-            */
-
+            console.log('lista')
+            console.log(this.lista)
+            this.selectedLista = this.lista.slice(0,this.totalItens);
+            console.log('selected lista')
+            console.log(this.selectedLista)
         }).add(this.networkService.exibirLoader.next(false))
     }
 

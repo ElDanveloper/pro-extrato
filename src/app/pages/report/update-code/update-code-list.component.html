@@ -47,13 +47,14 @@
         <!-- let-editing="editing" -->
         <ng-template pTemplate="body" let-rowData>
             <tr>
-                <td> <p-checkbox [ngStyle]="{width: '4%'}" name="groupname" value="val1" [(ngModel)]="selectedLista"></p-checkbox> </td>
+                <td> <p-checkbox name="lista" value="lista" [value]="lista"  [(ngModel)]="selectedLista" [inputId]="lista.Id"></p-checkbox> </td>
                 <td>{{rowData.Description}}</td>
                 <td>{{rowData.Classificate}}</td>
-                <td pEditableColumn appAlignRight>
+                <td pEditableColumn="rowData.CodeAccountPlan" pEditableColumnField="CodeAccountPlan" appAlignRight>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <app-input-money [(ngModel)]="rowData.CodeAccountPlan"></app-input-money>
+                            <!-- <app-input-money [(ngModel)]="rowData.CodeAccountPlan"></app-input-money> -->
+                            <input pInputText type="text" [value]="CodeAccountPlan" [(ngModel)]="rowData.CodeAccountPlan">
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{rowData.CodeAccountPlan}}
@@ -82,8 +83,6 @@
                             {{rowData.CodeIntegration}}
                         </ng-template>
                     </p-cellEditor>
-                    <!-- CodeIntegration -->
-                    <!-- <input type="text" [(ngModel)]="rowData.CodeIntegration"> -->
                 </td>
                 <td appAlignRight>{{rowData.CodeControl}}</td>
                 <td appAlignCenter>
