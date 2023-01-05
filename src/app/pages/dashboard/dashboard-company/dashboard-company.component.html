@@ -25,7 +25,7 @@
                 <p-card header="" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
                     <div>
                         <p>Receitas</p>
-                        <div class="proccess-bar"></div>
+                        <p-progressBar [value]="Expenses" [style]="{'height': '15px'}"></p-progressBar>
                     </div>
                     <div>
                         <p>Despesas</p>
@@ -39,23 +39,22 @@
 
             <div class="p-col-3">
                 <p-card header="Conciliações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <button pButton label="Conciliações" type="button" badge="8">
-                    </button>
+                   <span>Conciliações Pendêntes: {{pendentes}}</span>
                 </p-card>
             </div>
         </div>
 
-        <div class="p-col-3" style="height: 50px;">
+        <div class="p-col-3" >
             <button pButton type="button" label="Atualizar" icon="pi pi-check" class="p-button-lg"></button>
             <!-- <p-card header="Atualizar" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
             </p-card> -->
         </div>
-        <div class="p-col-3" style="height: 50px;">
+        <div class="p-col-3">
             <button pButton type="button" label="Extrato" icon="pi pi-check" class="p-button-lg"></button>
             <!-- <p-card header="Extrato" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
             </p-card> -->
         </div>
-        <div class="p-col-3" style="height: 50px;">
+        <div class="p-col-3">
             <button pButton type="button" label="Nova Conta" icon="pi pi-check" class="p-button-lg"></button>
             <!-- <p-card header="Nova Conta" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
             </p-card> -->
@@ -72,7 +71,7 @@
             <div class="p-col-4 container">
                 <div class="card">
                     <h5 class="centerText">Principais Despesas</h5>
-                    <p-chart type="pie" [data]="data" [options]="chartOptions"></p-chart>
+                    <p-chart type="pie" [data]="dataDoughnut2" [options]="chartOptions"></p-chart>
                 </div>
             </div>
 

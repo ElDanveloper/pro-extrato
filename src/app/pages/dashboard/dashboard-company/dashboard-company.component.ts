@@ -1,3 +1,4 @@
+import { mul6, div6 } from './../../../controller/Util';
 import { getUrlPro } from './../../../controller/staticValues';
 import { NetworkService } from './../../../services/network.service';
 import { Util } from 'src/app/controller/Util';
@@ -16,6 +17,8 @@ export class DashboardCompanyComponent implements OnInit {
     data
 
     dataDoughnut
+
+    dataDoughnut2
 
     dataBar
 
@@ -44,25 +47,31 @@ export class DashboardCompanyComponent implements OnInit {
     dateStart = Util.getDateComUmMesAntes()
     dateEnd = Util.getLastDayDate()
 
+    pendentes = 0
+    Expenses = 0
+
     constructor(private networkService: NetworkService) { }
 
-    get Balance() {
-        if (!this.data.Balance) return 0
-        return this.data.Balance
-    }
-
-    colorValue(v) {
-        const classes = {
-            'texto-verde': false,
-            'texto-vermelho': false,
-        }
-        return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
-    }
+    
 
     ngOnInit() {
         this.valueGrafic()
         this.loadDonutChart()
         this.loadBarChart()
+
+        let month = this.dateStart.getMonth()
+        let year = this.dateEnd.getFullYear()
+
+        this.networkService.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${month}&Year=${year}`).subscribe((v: any) => {
+            console.log(JSON.stringify(v))
+            this.data = v       
+                 
+            if (v.Expenses) this.Expenses = Util.toNumber(div6(mul6(v.Balance, v.Expenses),100).toFixed(2))
+
+            
+            console.log('Expenses ---> ' + v.Expenses + ' - ' + ' * 100' + ' / ' + v.Balance + ' = ' + this.Expenses)
+        }).add(() => this.networkService.exibirLoader.next(false))
 
         // grafico de barra
 
@@ -83,31 +92,27 @@ export class DashboardCompanyComponent implements OnInit {
         */
     }
 
-    loadDonutChart() {
-        console.log('Load Donut Chart ---> ')
+    loadDonutChart() {        
         let dataStart = Util.dataParaStringComZero(this.dateStart)
         let dataEnd = Util.dataParaStringComZero(this.dateEnd)
         this.networkService.exibirLoader.next(true)
-        this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=C`).subscribe(v => {
-            console.log('Resposta ---> ')
+        this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=C`).subscribe(v => {            
             this.donutChart(v['value'])
         }).add(() => this.networkService.exibirLoader.next(false))
     }
 
     loadBarChart() {
-        let dataStart = Util.dataParaStringComZero(this.dateStart)
-        let dataEnd = Util.dataParaStringComZero(this.dateEnd)
+        let dataStart = Util.dataParaStringComZero(Util.getDatefrom6Month())
+        let dataEnd = Util.dataParaStringComZero(Util.getLastDateFrom6Month())
         this.networkService.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `MonthlyEvolution?DateIni=${dataStart}&DateEnd=${dataEnd}`).subscribe(v => {
             this.barChart(v['value'])
         }).add(() => this.networkService.exibirLoader.next(false))
     }
 
-    donutChart(value) {
-        console.log('donut chart ---> ' + JSON.stringify(value))
+    donutChart(value) {        
         let labels = value.map(v => v.Description)
-        let data = value.map(v => v.Amount)
-        console.log('Grafico Labels ---> ' + labels)
+        let data = value.map(v => v.Amount)        
 
         this.optionsDoughnut = {
             plugins: {
@@ -219,25 +224,32 @@ export class DashboardCompanyComponent implements OnInit {
         }
 
         const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-        let label = value.map(v => `${monthLabel[v.Month]}`)
-        console.log('Teste ---> ' + label + ' - ' + value.Month)
+        let label = value.map(v => `${monthLabel[v.Month - 1]}`)        
         this.dataBar = {
-            labels: [label],
+            labels: label,
             datasets: [
                 {
                     label: 'Receita',
-                    data: [10, 20],
+                    data: credits,
                     backgroundColor: [
                         "#FF6384",
-                        "#36A2EB",                        
+                        "#FF6384",
+                        "#FF6384",
+                        "#FF6384",
+                        "#FF6384",
+                        "#FF6384",
                     ],                    
                 },        
                 {
-                    label: 'teste',
-                    data: [60, 30],
-                    backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",                        
+                    label: 'Despesas',
+                    data: debits,
+                    backgroundColor: [                        
+                        "#36A2EB",
+                        "#36A2EB",
+                        "#36A2EB",
+                        "#36A2EB",
+                        "#36A2EB",
+                        "#36A2EB",
                     ],                    
                 },                
             ]
@@ -255,55 +267,55 @@ export class DashboardCompanyComponent implements OnInit {
     */
 
     valueGrafic() {
-        this.data = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                type: 'line',
-                label: 'Dataset 1',
-                borderColor: '#42A5F5',
-                borderWidth: 2,
-                fill: false,
-                data: [
-                    50,
-                    25,
-                    12,
-                    48,
-                    56,
-                    76,
-                    42
-                ]
-            }, {
-                type: 'bar',
-                label: 'Dataset 2',
-                backgroundColor: '#66BB6A',
-                data: [
-                    21,
-                    84,
-                    24,
-                    75,
-                    37,
-                    65,
-                    34
-                ],
-                borderColor: 'white',
-                borderWidth: 2
-            }, {
-                type: 'bar',
-                label: 'Dataset 3',
-                backgroundColor: '#FFA726',
-                data: [
-                    41,
-                    52,
-                    24,
-                    74,
-                    23,
-                    21,
-                    32
-                ]
-            }]
-        };
+        // this.data = {
+        //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        //     datasets: [{
+        //         type: 'line',
+        //         label: 'Dataset 1',
+        //         borderColor: '#42A5F5',
+        //         borderWidth: 2,
+        //         fill: false,
+        //         data: [
+        //             50,
+        //             25,
+        //             12,
+        //             48,
+        //             56,
+        //             76,
+        //             42
+        //         ]
+        //     }, {
+        //         type: 'bar',
+        //         label: 'Dataset 2',
+        //         backgroundColor: '#66BB6A',
+        //         data: [
+        //             21,
+        //             84,
+        //             24,
+        //             75,
+        //             37,
+        //             65,
+        //             34
+        //         ],
+        //         borderColor: 'white',
+        //         borderWidth: 2
+        //     }, {
+        //         type: 'bar',
+        //         label: 'Dataset 3',
+        //         backgroundColor: '#FFA726',
+        //         data: [
+        //             41,
+        //             52,
+        //             24,
+        //             74,
+        //             23,
+        //             21,
+        //             32
+        //         ]
+        //     }]
+        // };
 
-        this.data = {
+        this.dataDoughnut2 = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
@@ -424,6 +436,19 @@ export class DashboardCompanyComponent implements OnInit {
                 }
             }
         }
+    }
+
+    get Balance() {
+        if (!this.data.Balance) return 0
+        return this.data.Balance
+    }
+
+    colorValue(v) {
+        const classes = {
+            'texto-verde': false,
+            'texto-vermelho': false,
+        }
+        return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
     }
 
     // grafico de onda

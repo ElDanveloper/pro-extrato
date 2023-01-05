@@ -20,7 +20,7 @@
         </div>
         -->
         <div class="p-col-2" style="margin-left: 65px;">
-            <button pButton type="button" label="Atualizar Código" (click)="onRowEditInit(lista)"></button>
+            <button pButton type="button" label="Atualizar Código" (click)="updateCode()"></button>
         </div>
         <div class="p-offset-2 p-field p-col-12 p-md-2" style="position: relative;">
             <button pButton label="Pesquisar" (click)="loadList()"></button>
@@ -50,18 +50,28 @@
                 <td> <p-checkbox [ngStyle]="{width: '4%'}" name="groupname" value="val1" [(ngModel)]="selectedLista"></p-checkbox> </td>
                 <td>{{rowData.Description}}</td>
                 <td>{{rowData.Classificate}}</td>
-                <td [pEditableColumn]="rowData.CodeAccountPlan" pEditableColumnField="CodeAccountPlan">
+                <td pEditableColumn appAlignRight>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <app-input-money [(ngModel)]="rowData.CodeAccountPlan"></app-input-money>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{rowData.CodeAccountPlan}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <!-- <td [pEditableColumn]="rowData.CodeAccountPlan" pEditableColumnField="CodeAccountPlan">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [value]="CodeAccountPlan" [(ngModel)]="rowData.CodeAccountPlan">
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{rowData.CodeAccountPlan}}
-                        </ng-template>
+                        </ng-template> -->
                         <!-- CodeAccountPlan -->
                         <!-- <input type="text" [(ngModel)]="rowData.CodeAccountPlan"> -->
-                    </p-cellEditor>
-                </td>
+                    <!-- </p-cellEditor>
+                </td> -->
                 <td>{{rowData.Historic}}</td>
                 <td [pEditableColumn]="rowData.CodeIntegration" pEditableColumnField="CodeIntegration">
                     <p-cellEditor>

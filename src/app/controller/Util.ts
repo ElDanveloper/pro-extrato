@@ -150,21 +150,25 @@ export class Util {
         return new Date(currentDate.getFullYear(), currentDate.getMonth() - 3, 1 )
     }
 
+    //ultimo dia do mês a 3 meses atras
     static getLastDateFrom3Month() {
         const currentDate = new Date()
         return new Date(currentDate.getFullYear(), currentDate.getMonth(), 0)
     }
 
+    //Primeiro dia do mês passado
     static getDateFromMonthprevious(){
         const currentDate = new Date()        
         return new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1 )
     }
 
+    //Data do inicio do mês seguindo sendo um ano atras
     static getDateFromYearPrevious() {
         const currentDate = new Date()        
         return new Date(currentDate.getFullYear() - 1, currentDate.getMonth() - 11, 1 )
     }
 
+    //Data do final do mês do ano anterios
     static getDateFromLastYearPrevious() {
         const currentDate = new Date()        
         return new Date(currentDate.getFullYear() - 1, currentDate.getMonth() + 1, 0 )

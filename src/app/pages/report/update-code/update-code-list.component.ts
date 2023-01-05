@@ -51,31 +51,25 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.loadList()
 
-        let dateIni = Util.dataParaStringComZero(this.dataInit)
-        let dateEnd = Util.dataParaStringComZero(this.dataFim)
+        // let dateIni = Util.dataParaStringComZero(this.dataInit)
+        // let dateEnd = Util.dataParaStringComZero(this.dataFim)
 
-        this.networkService.getSimples(getUrlPro(), `GetCategoriesMoviment?DateIni=${dateIni}&DateEnd=${dateEnd}`).subscribe((v: any) => {
-            this.lista = v.value
-            this.totalItens = this.lista.length
-            this.jaPesquisou = true
+        // this.networkService.getSimples(getUrlPro(), `GetCategoriesMoviment?DateIni=${dateIni}&DateEnd=${dateEnd}`).subscribe((v: any) => {
+        //     this.lista = v.value
+        //     this.totalItens = this.lista.length
+        //     this.jaPesquisou = true
 
-        }).add(this.networkService.exibirLoader.next(false))
+        // }).add(this.networkService.exibirLoader.next(false))
 
         // aqui precisa usar o Observable
         //then(data => this.products1 = data);
     }
 
-    onRowEditInit(lista) {
-        console.log('lista atualizada')
-        console.log(lista)
-        //this.lista[lista.Id] = {...lista};
-
+    updateCode() {
         this.networkService.exibirLoader.next(true)
-        this.networkService.salvarPost(getUrlPro(), 'UpdateCategories' , lista).subscribe((v: any) => {
-            this.lista = v.value
-            this.totalItens = this.lista.length
-            this.jaPesquisou = true
-
+        this.networkService.salvarPost(getUrlPro(), 'UpdateCategories' , this.lista).subscribe((v: any) => {
+            this.messageService.add(Util.pushSuccessMsg('Atualização feita com sucesso!'))
+            this.loadList()
         }).add(this.networkService.exibirLoader.next(false))
     }
 
@@ -89,7 +83,7 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
     alterouData(e) {
         this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
         this.dataFim = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
-
+        this.loadList()
     }
 
     loadList(page?, top?) {
@@ -101,8 +95,6 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
             this.lista = v.value
             this.totalItens = this.lista.length
             this.jaPesquisou = true
-
-            console.log(this.lista)
 
             /*
             for(let i = 0; i < this.totalItens; i++) {
