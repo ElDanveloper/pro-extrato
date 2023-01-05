@@ -82,6 +82,8 @@ import { AccountingParametersComponent } from './pages/settings-page/accounting-
 import {ProgressBarModule} from 'primeng/progressbar';
 import {ButtonModule} from 'primeng/button';
 
+import {CheckboxModule} from 'primeng/checkbox';
+
 
 @NgModule({
     imports: [BrowserModule,
@@ -100,8 +102,10 @@ import {ButtonModule} from 'primeng/button';
         ImageCropperModule,
         NgxViacepModule,
         ProgressBarModule,
-        ButtonModule
-        // SliderModule
+        ButtonModule,
+        // SliderModule,
+        CheckboxModule,
+
 
     ],
     declarations: [

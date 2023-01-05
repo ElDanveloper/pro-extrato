@@ -43,7 +43,8 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
         },
     ]
 
-    clonedProducts: { [s: string]: []; } = {};
+    //clonedProducts: { [s: string]: []; } = {};
+    selectedLista: string[] = [];
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) { }
 
@@ -60,21 +61,30 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
 
         }).add(this.networkService.exibirLoader.next(false))
 
+        // aqui precisa usar o Observable
         //then(data => this.products1 = data);
     }
 
+    onRowEditInit(lista) {
+        console.log('lista atualizada')
+        console.log(lista)
+        //this.lista[lista.Id] = {...lista};
+
+        this.networkService.exibirLoader.next(true)
+        this.networkService.salvarPost(getUrlPro(), 'UpdateCategories' , lista).subscribe((v: any) => {
+            this.lista = v.value
+            this.totalItens = this.lista.length
+            this.jaPesquisou = true
+
+        }).add(this.networkService.exibirLoader.next(false))
+    }
+
+
+    /*
     onRowEditSave(lista: []) {
         console.log(lista)
-        /*
-        if (product > 0) {
-            delete this.clonedProducts[product.id];
-            this.messageService.add({severity:'success', summary: 'Success', detail:'Product is updated'});
-        }
-        else {
-            this.messageService.add({severity:'error', summary: 'Error', detail:'Invalid Price'});
-        }
-        */
     }
+    */
 
     alterouData(e) {
         this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
@@ -92,13 +102,16 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
             this.totalItens = this.lista.length
             this.jaPesquisou = true
 
+            console.log(this.lista)
+
+            /*
             for(let i = 0; i < this.totalItens; i++) {
                 let CodeAccountPlan: string[] = this.lista[i].CodeAccountPlan
                 let CodeIntegration: string[] = this.lista[i].CodeIntegration
-
-                console.log(this.lista[i].Description, '-', CodeAccountPlan, '-', CodeIntegration)
+                //console.log(this.lista[i].Description, '-', CodeAccountPlan, '-', CodeIntegration)
             }
-            console.log(this.lista)
+            //console.log(this.lista)
+            */
 
         }).add(this.networkService.exibirLoader.next(false))
     }
