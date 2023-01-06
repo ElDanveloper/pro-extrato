@@ -48,10 +48,10 @@
                 <td> <p-checkbox name="lista" value="lista" [value]="lista"  [(ngModel)]="selectedLista" [inputId]="lista.Id"></p-checkbox> </td>
                 <td>{{rowData.Description}}</td>
                 <td>{{rowData.Classificate}}</td>
-                <td pEditableColumn="rowData.CodeAccountPlan" pEditableColumnField="CodeAccountPlan" appAlignRight>
+                <td pEditableColumn appAlignRight>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [value]="CodeAccountPlan" [(ngModel)]="rowData.CodeAccountPlan">
+                            <input pInputText type="text" [(ngModel)]="rowData.CodeAccountPlan">
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{rowData.CodeAccountPlan}}
@@ -59,10 +59,10 @@
                     </p-cellEditor>
                 </td>
                 <td>{{rowData.Historic}}</td>
-                <td [pEditableColumn]="rowData.CodeIntegration" pEditableColumnField="CodeIntegration">
+                <td pEditableColumn appAlignRight>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [value]="CodeIntegration" [(ngModel)]="rowData.CodeIntegration">
+                            <input pInputText type="text" [(ngModel)]="rowData.CodeIntegration">
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{rowData.CodeIntegration}}

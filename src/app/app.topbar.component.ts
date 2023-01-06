@@ -46,13 +46,14 @@ export class AppTopbarComponent {
     }
 
     modalFechado() {
-        // this.router.navigate(['/home'])
+        // this.router.navigate(['/'])
         localStorage.setItem('counter', 'false')
         this.counter = 'false'
         this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
         this.labelEnvironment = 'Ambiente Empresa'
         window.location.reload()
-        this.router.navigate(['/home'])       
+        this.router.navigate(['/dashboard-company'])
+        // this.router.navigate(['/home'])       
 
     }
 
