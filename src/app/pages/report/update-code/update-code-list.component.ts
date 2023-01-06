@@ -31,6 +31,7 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
     loading = false
     top = qtdLinhas()
     opcoesLinhas = opcoesLinhas()
+    //selectedLista: any[] = [];
 
     opcoesTable = [
         {
@@ -42,8 +43,6 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
             }
         },
     ]
-
-    //selectedLista: any[] = [];
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) { }
 
@@ -74,7 +73,6 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
             this.lista = v.value
             this.totalItens = this.lista.length
             this.jaPesquisou = true
-
             //this.selectedLista = this.lista.slice(0,this.totalItens);
         }).add(this.networkService.exibirLoader.next(false))
     }

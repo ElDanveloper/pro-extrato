@@ -27,7 +27,6 @@
         </div>
     </div>
     &nbsp;
-
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
         [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" dataKey="Id"
         (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="opcoesLinhas">
@@ -52,7 +51,6 @@
                 <td pEditableColumn="rowData.CodeAccountPlan" pEditableColumnField="CodeAccountPlan" appAlignRight>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <!-- <app-input-money [(ngModel)]="rowData.CodeAccountPlan"></app-input-money> -->
                             <input pInputText type="text" [value]="CodeAccountPlan" [(ngModel)]="rowData.CodeAccountPlan">
                         </ng-template>
                         <ng-template pTemplate="output">
@@ -60,18 +58,6 @@
                         </ng-template>
                     </p-cellEditor>
                 </td>
-                <!-- <td [pEditableColumn]="rowData.CodeAccountPlan" pEditableColumnField="CodeAccountPlan">
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [value]="CodeAccountPlan" [(ngModel)]="rowData.CodeAccountPlan">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{rowData.CodeAccountPlan}}
-                        </ng-template> -->
-                        <!-- CodeAccountPlan -->
-                        <!-- <input type="text" [(ngModel)]="rowData.CodeAccountPlan"> -->
-                    <!-- </p-cellEditor>
-                </td> -->
                 <td>{{rowData.Historic}}</td>
                 <td [pEditableColumn]="rowData.CodeIntegration" pEditableColumnField="CodeIntegration">
                     <p-cellEditor>
