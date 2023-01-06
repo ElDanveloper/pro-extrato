@@ -11,10 +11,10 @@
         <div class="p-col-2" style="margin-top: 5px; margin-left: -65px;">
             <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
         </div>
-        <div class="p-field p-col-12 p-md-2" style="position: relative;">
+        <div class="p-field p-col-12 p-md-2" style="position: relative; margin-left: 50px;">
             <button pButton label="Atualizar" (click)="loaddata()"></button>
         </div>
-        <div class="p-field p-col-12 p-md-2" style="margin-top: 5px;">
+        <div class="p-field p-col-12 p-md-2">
             <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 95px; cursor: pointer;"
                 (click)="report('xls')"></i>
             <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 25px; cursor: pointer"
@@ -37,7 +37,7 @@
     <div class="p-offset-2 p-col-6">
         <p-card>
             <!-- <div class="vertical">
-                
+
             </div> -->
             <div class="p-col-12">
                 <hr />
@@ -45,7 +45,7 @@
                 <div class="card-resumo-item">
                     <div appAlignCenter class="p-col-6">
                         <span>Atividades Operacionais</span>
-                    </div>                                    
+                    </div>
                 </div>
 
                 <hr />
@@ -53,10 +53,10 @@
                  <div class="card-resumo-item">
                     <div class="p-col-6">
                         <span>Recebimentos</span>
-                    </div>                    
+                    </div>
                 </div>
 
-                
+
 
                 <div class="card-item">
                     <div appAlignCenter class="p-col-6">
@@ -64,13 +64,13 @@
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span [ngClass]="colorValue(Income)">R$: {{Income | virgulaPipe}}</span>
-                    </div>                                  
+                    </div>
                 </div>
 
                 <div class="card-resumo-item">
                     <div class="p-col-6">
                         <span>Pagamentos</span>
-                    </div>                    
+                    </div>
                 </div>
 
                 <div class="card-item">
@@ -79,7 +79,7 @@
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span [ngClass]="colorValue(Deduction)">R$: {{Deduction | virgulaPipe}}</span>
-                    </div>                   
+                    </div>
                 </div>
 
                 <hr />
@@ -90,7 +90,7 @@
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span [ngClass]="colorValue(CostOfSold)">R$: {{CostOfSold | virgulaPipe}}</span>
-                    </div>               
+                    </div>
                 </div>
 
                 <div class="card-item">
@@ -99,7 +99,7 @@
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span [ngClass]="colorValue(VariableExpense)">R$: {{VariableExpense | virgulaPipe}}</span>
-                    </div>                
+                    </div>
                 </div>
 
                 <div class="card-item">
@@ -128,7 +128,7 @@
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span [ngClass]="colorValue(OperationalFlow)">R$: {{OperationalFlow | virgulaPipe}}</span>
-                    </div>                   
+                    </div>
                 </div>
 
                 <hr />
@@ -137,7 +137,7 @@
                 <div class="card-resumo-item">
                     <div appAlignLeft class="p-col-6">
                         <span>Atividades de Investimento</span>
-                    </div>                    
+                    </div>
                 </div>
 
                 <div class="card-item">
@@ -146,7 +146,7 @@
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span [ngClass]="colorValue(InvestmentFlow)">R$: {{InvestmentFlow | virgulaPipe}}</span>
-                    </div>                    
+                    </div>
                 </div>
 
                 <hr />
@@ -155,7 +155,7 @@
                 <div class="card-resumo-item">
                     <div appAlignLeft class="p-col-6">
                         <span>Atividades de Financiamento</span>
-                    </div>                    
+                    </div>
                 </div>
 
                 <div class="card-item">
@@ -164,7 +164,7 @@
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span [ngClass]="colorValue(FinancingFlow)">R$: {{FinancingFlow | virgulaPipe}}</span>
-                    </div>                    
+                    </div>
                 </div>
 
                 <hr />
@@ -175,7 +175,7 @@
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span [ngClass]="colorValue(TotalCashFlow)">R$: {{TotalCashFlow | virgulaPipe}}</span>
-                    </div>                    
+                    </div>
                 </div>
 
                 <div class="card-item">
@@ -184,7 +184,7 @@
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span [ngClass]="colorValue(InicialBalance)">R$: {{InicialBalance | virgulaPipe}}</span>
-                    </div>                    
+                    </div>
                 </div>
 
                 <hr />
@@ -195,13 +195,13 @@
                     </div>
                     <div *ngIf="this.data" appAlignRight class="p-col-3">
                         <span [ngClass]="colorValue(FinalBalance)">R$: {{FinalBalance | virgulaPipe}}</span>
-                    </div>                    
+                    </div>
                 </div>
 
                 <hr />
-                
 
-            </div>            
+
+            </div>
         </p-card>
     </div>
 </div>

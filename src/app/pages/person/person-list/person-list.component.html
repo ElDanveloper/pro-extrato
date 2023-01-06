@@ -9,30 +9,30 @@
         <!-- <div class="p-field p-col-12 p-md-2" style="position: relative;">
             <app-select #selectValue [options]="selectSort"></app-select>
         </div> -->
-        <div class="p-field p-col-12 p-md-2" style="margin-top: 15px;">
+        <div class="p-field p-col-12 p-md-2" style="margin-top: 5px;">
             <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 25px; cursor: pointer;"></i>
             <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 35px; cursor: pointer"></i>
         </div>
         <div class="p-field p-col-12 p-md-2">
             <button pButton label="Novo Cadastro" (click)="navegar()"></button>
-            
+
         </div>
     </div>
 
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" (onLazyLoad)="lazyLoad($event)" [lazy]="true" [rowsPerPageOptions]="opcoesLinhas" >
         <ng-template pTemplate="header" let-columns>
-            <tr>                             
-            <th [ngStyle]="{width: '40%'}"> Nome </th>      
-            <th [ngStyle]="{width: '30%'}"> Fantasia </th>      
-            <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>  
+            <tr>
+            <th [ngStyle]="{width: '40%'}"> Nome </th>
+            <th [ngStyle]="{width: '30%'}"> Fantasia </th>
+            <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>
             <th [ngStyle]="{width: '5%'}"> Ações </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
-            <tr>            
+            <tr>
             <td>{{rowData.Nome}}</td>
             <td>{{rowData.Fantasia}}</td>
-            <td>{{rowData.CpfCnpj | cpfCnpj}}</td>                        
+            <td>{{rowData.CpfCnpj | cpfCnpj}}</td>
             <td><app-opcoes-table [value]="rowData"
                                   [opcoes]="opcoesTable"></app-opcoes-table></td>
             </tr>
