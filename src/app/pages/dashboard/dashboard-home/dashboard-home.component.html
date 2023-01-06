@@ -40,18 +40,21 @@
             </div>
             <div class="card" style="margin-top: 10px; height: 257px;">
                 <h5 *ngIf="this.data" class="centerText">Transações Conciliadas: {{ AmountReconciled }}</h5>
-                <p>Inteligência Artificial</p>       
-                <p-progressBar [value]="value1.toFixed(2)" [style]="{'height': '15px'}"></p-progressBar> 
+                <p>Inteligência Artificial</p>
+                <!-- value1.toFixed(2) -->
+                <p-progressBar [value]="Value1" [style]="{'height': '15px'}"></p-progressBar>
                 <p style="margin-top: 10px;">Analista</p>
-                <p-progressBar [value]="value2.toFixed(2)" [style]="{'height': '15px'}"></p-progressBar>
+                <!-- value2.toFixed(2) -->
+                <p-progressBar [value]="Value2" [style]="{'height': '15px'}"></p-progressBar>
                 <p style="margin-top: 10px;">Cliente</p>
-                <p-progressBar [value]="value3.toFixed(2)" [style]="{'height': '15px'}"></p-progressBar>
+                <!-- value3.toFixed(2) -->
+                <p-progressBar [value]="Value3" [style]="{'height': '15px'}"></p-progressBar>
             </div>
         </div>
         <div class="p-col-5">
             <div class="card">
                 <h5 class="centerText">Transações</h5>
-                <p-chart type="bar" [data]="barChartData" [options]="barChartOptions"></p-chart>
+                <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
             </div>
         </div>
         <div class="p-col-4">

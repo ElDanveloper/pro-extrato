@@ -43,27 +43,12 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
         },
     ]
 
-    //clonedProducts: { [s: string]: []; } = {};
-    //selectedLista: string[] = [];
-    selectedLista: any[] = [];
+    //selectedLista: any[] = [];
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) { }
 
     ngOnInit() {
         this.loadList()
-
-        // let dateIni = Util.dataParaStringComZero(this.dataInit)
-        // let dateEnd = Util.dataParaStringComZero(this.dataFim)
-
-        // this.networkService.getSimples(getUrlPro(), `GetCategoriesMoviment?DateIni=${dateIni}&DateEnd=${dateEnd}`).subscribe((v: any) => {
-        //     this.lista = v.value
-        //     this.totalItens = this.lista.length
-        //     this.jaPesquisou = true
-
-        // }).add(this.networkService.exibirLoader.next(false))
-
-        // aqui precisa usar o Observable
-        //then(data => this.products1 = data);
     }
 
     updateCode() {
@@ -90,11 +75,7 @@ export class UpdateCodeListComponent implements OnInit, OnDestroy {
             this.totalItens = this.lista.length
             this.jaPesquisou = true
 
-            console.log('lista')
-            console.log(this.lista)
-            this.selectedLista = this.lista.slice(0,this.totalItens);
-            console.log('selected lista')
-            console.log(this.selectedLista)
+            //this.selectedLista = this.lista.slice(0,this.totalItens);
         }).add(this.networkService.exibirLoader.next(false))
     }
 

@@ -22,8 +22,11 @@ export class DashboardHomeComponent implements OnInit {
 
     data
 
-    barChartData
-    barChartOptions: any; 
+    //barChartData
+    //barChartOptions: any;
+
+    stackedData: any;
+    stackedOptions: any;
 
     chartOptions: any;
 
@@ -51,13 +54,13 @@ export class DashboardHomeComponent implements OnInit {
     value2: number;
     value3: number;
     total: number;
-    
+
     constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {}
     // private carService: CarService
 
     ngOnInit() {
         this.updateData()
-        this.loadBarChart()
+        this.loadStacked()
         //this.labelData()
 
         // this.carService.getCarsSmall().then(cars => this.cars = cars);
@@ -73,12 +76,12 @@ export class DashboardHomeComponent implements OnInit {
         */
     }
 
-    loadBarChart() {
+    loadStacked() {
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountGraphic12Month?MonthEnd=${Month}&YearEnd=${Year}`).subscribe((v: any) => {
-                this.barChart(v['value'])
+                this.stacked(v['value'])
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -90,24 +93,24 @@ export class DashboardHomeComponent implements OnInit {
                 //console.log(v['value'])
                 this.data = v['value'][v['value'].length - 1]
                 // console.log(this.data[this.data.length - 1])
-
-                this.total = this.data.AmountReconciled 
-                this.value1 = ( this.IaReconciled * 100 ) / this.total 
-                this.value2 = ( this.data.AnalistReconciled * 100 ) / this.total 
+                this.total = this.data.AmountReconciled
+                this.value1 = ( this.IaReconciled * 100 ) / this.total
+                this.value2 = ( this.data.AnalistReconciled * 100 ) / this.total
                 this.value3 = ( this.data.CostomerReconciled * 100 ) / this.total
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    barChart(value){
-        //console.log('bar chart ---> ' + JSON.stringify(value))
+    stacked(value){
+        console.log('stacked ---> ' + JSON.stringify(value))
         let Amount = value.map(v => v.Amount)
         let Pending = value.map(v => v.Pending)
         let Analist = value.map(v => v.Analist)
         let Ia = value.map(v => v.Ia)
         let Costomer = value.map(v => v.Costomer)
 
+        /*
         this.barChartOptions = {
             plugins: {
                 legend: {
@@ -135,9 +138,57 @@ export class DashboardHomeComponent implements OnInit {
                 }
             }
         }
+        */
 
         const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-        let label = value.map(v => `${monthLabel[v.Month-1]}`) 
+        let label = value.map(v => `${monthLabel[v.Month-1]}`)
+        this.stackedData = {
+            labels: label,
+            datasets: [{
+                type: 'bar',
+                label: 'Montante',
+                backgroundColor: '#FF6384',
+                data: Amount
+            }, {
+                type: 'bar',
+                label: 'Pendente',
+                backgroundColor: '#FFCE56',
+                data: Pending
+            }, {
+                type: 'bar',
+                label: 'Analista',
+                backgroundColor: '#36A2EB',
+                data: Analist
+            }, {
+                type: 'bar',
+                label: 'IA',
+                backgroundColor: '#00bb7e',
+                data: Ia
+            }, {
+                type: 'bar',
+                label: 'Cliente',
+                backgroundColor: '#191970',
+                data: Costomer
+            }]
+        };
+
+        this.stackedOptions = {
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            responsive: true,
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        };
+
+        /*
         this.barChartData = {
             labels: label,
             datasets: [
@@ -145,11 +196,11 @@ export class DashboardHomeComponent implements OnInit {
                     label: 'Montante',
                     data: Amount,
                     backgroundColor: [
-                        "#FF6384",                      
                         "#FF6384",
                         "#FF6384",
-                    ],                    
-                },        
+                        "#FF6384",
+                    ],
+                },
                 {
                     label: 'Pendente',
                     data: Pending,
@@ -157,8 +208,8 @@ export class DashboardHomeComponent implements OnInit {
                         "#FFCE56",
                         "#FFCE56",
                         "#FFCE56",
-                    ],                    
-                },   
+                    ],
+                },
                 {
                     label: 'Analista',
                     data: Analist,
@@ -166,28 +217,29 @@ export class DashboardHomeComponent implements OnInit {
                         "#36A2EB",
                         "#36A2EB",
                         "#36A2EB",
-                    ],                    
-                }, 
+                    ],
+                },
                 {
                     label: 'IA',
                     data: Ia,
                     backgroundColor: [
                         "#00bb7e",
                         "#00bb7e",
-                        "#00bb7e",                        
-                    ],                    
-                },  
+                        "#00bb7e",
+                    ],
+                },
                 {
                     label: 'Cliente',
                     data: Costomer,
                     backgroundColor: [
                         "#191970",
                         "#191970",
-                        "#191970",                       
-                    ],                    
-                },             
+                        "#191970",
+                    ],
+                },
             ]
         };
+        */
     }
 
     alterouData(e) {
@@ -214,6 +266,21 @@ export class DashboardHomeComponent implements OnInit {
             'texto-vermelho': false,
         }
         return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
+    }
+
+    get Value1(){
+        if (!this.value1 || this.value1 <= 0) return 0
+        return Util.toNumber(this.value1);
+    }
+
+    get Value2(){
+        if (!this.value2 || this.value2 <= 0) return 0
+        return Util.toNumber(this.value2);
+    }
+
+    get Value3(){
+        if (!this.value3 || this.value3 <= 0) return 0
+        return Util.toNumber(this.value3);
     }
 
     get Amount(){
@@ -504,7 +571,7 @@ export class DashboardHomeComponent implements OnInit {
             }
         ]
     };
-    
+
     this.multiAxisData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
