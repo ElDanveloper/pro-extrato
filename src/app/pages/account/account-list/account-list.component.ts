@@ -62,12 +62,12 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
             }
          },
          {
-            label: 'Copiar ItemId', icon: 'pi pi-copy', command: (e) => {
-                if(e.ItemId) {
-                    navigator.clipboard.writeText(e.ItemId);
-                    this.messageService.add(Util.pushSuccessMsg('Texto copiado para área de transferência! Use Ctrl+V para colar'))
+            label: 'Copiar ID', icon: 'pi pi-copy', command: (e) => {
+                if(e.AccountId) {
+                    navigator.clipboard.writeText(e.AccountId);
+                    this.messageService.add(Util.pushSuccessMsg('ID copiado para área de transferência! Use Ctrl+V para colar'))
                 } else {
-                    this.messageService.add(Util.pushErrorMsg('Texto não foi copiado para área de transferência! Veja com o suporte a falta do ID'))
+                    this.messageService.add(Util.pushErrorMsg('ID não foi copiado para área de transferência! Veja com o suporte a falta do ID'))
                 }
             }
          }
