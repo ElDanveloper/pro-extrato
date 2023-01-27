@@ -1,10 +1,11 @@
-import { mul6, div6 } from './../../../controller/Util';
+import { mul6, div6, sum6, sub6 } from './../../../controller/Util';
 import { getUrlPro } from './../../../controller/staticValues';
 import { NetworkService } from './../../../services/network.service';
 import { Util } from 'src/app/controller/Util';
 
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { AppBreadcrumbService } from 'src/app/app.breadcrumb.service';
 
 
 @Component({
@@ -49,30 +50,18 @@ export class DashboardCompanyComponent implements OnInit {
 
     pendentes = 0
     Expenses = 0
+    Revenues = 0
 
-    constructor(private networkService: NetworkService) { }
+    constructor(private networkService: NetworkService,private breadcrumbService: AppBreadcrumbService) {
+        this.breadcrumbService.setItems([
+            { label: 'Dashboard', routerLink: ['home'] }
+        ]);
+    }
 
     
 
     ngOnInit() {
-        this.valueGrafic()
-        this.loadDonutChart()
-        this.loadBarChart()
-
-        let month = this.dateStart.getMonth()
-        let year = this.dateEnd.getFullYear()
-
-        this.networkService.exibirLoader.next(true)
-        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${month}&Year=${year}`).subscribe((v: any) => {
-            console.log(JSON.stringify(v))
-            this.data = v       
-                 
-            if (v.Expenses) this.Expenses = Util.toNumber(div6(mul6(v.Balance, v.Expenses),100).toFixed(2))
-
-            
-            console.log('Expenses ---> ' + v.Expenses + ' - ' + ' * 100' + ' / ' + v.Balance + ' = ' + this.Expenses)
-        }).add(() => this.networkService.exibirLoader.next(false))
-
+        this.loadAll()
         // grafico de barra
 
 
@@ -92,6 +81,13 @@ export class DashboardCompanyComponent implements OnInit {
         */
     }
 
+    loadAll(){
+        this.valueGrafic()
+        this.loadDonutChart()
+        this.loadBarChart()
+        this.loadPorcentageBar()
+    }
+
     loadDonutChart() {        
         let dataStart = Util.dataParaStringComZero(this.dateStart)
         let dataEnd = Util.dataParaStringComZero(this.dateEnd)
@@ -107,6 +103,21 @@ export class DashboardCompanyComponent implements OnInit {
         this.networkService.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `MonthlyEvolution?DateIni=${dataStart}&DateEnd=${dataEnd}`).subscribe(v => {
             this.barChart(v['value'])
+        }).add(() => this.networkService.exibirLoader.next(false))
+    }
+
+    loadPorcentageBar(){
+        let month = this.dateStart.getMonth() + 1
+        let year = this.dateEnd.getFullYear()
+
+        this.networkService.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${month}&Year=${year}`).subscribe((v: any) => {
+            this.data = v       
+            let porcentage = sum6(v.Expenses,v.Revenues).toFixed(2)
+                 
+            if (v.Expenses) this.Expenses = Util.toNumber(div6(porcentage, mul6(v.Expenses, 100)),2)
+            if (v.Revenues) this.Revenues = Util.toNumber(div6(porcentage, mul6(v.Revenues, 100)),2)
+            // Util.toNumber(div6(sub6(v.Expenses, porcentage), 100), 2)
         }).add(() => this.networkService.exibirLoader.next(false))
     }
 
@@ -342,7 +353,7 @@ export class DashboardCompanyComponent implements OnInit {
     alterouData(e) {
         this.dateStart = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
         this.dateEnd = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
-        this.loadDonutChart()
+        this.loadAll()
         // this.carregarLista()
     }
 

@@ -25,14 +25,14 @@
                 <p-card header="" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
                     <div>
                         <p>Receitas</p>
-                        <p-progressBar [value]="Expenses" [style]="{'height': '15px'}"></p-progressBar>
+                        <p-progressBar [value]="Revenues" [style]="{'height': '15px'}"></p-progressBar>
                     </div>
                     <div>
                         <p>Despesas</p>
-                        <div class="proccess-bar"></div>
+                        <p-progressBar [value]="Expenses" [style]="{'height': '15px'}"></p-progressBar>
                     </div>
                     <div *ngIf="this.data">
-                        <span>Margem {{ Margin }}</span>
+                        <span>Margem {{ Margin }} </span>
                     </div>
                 </p-card>
             </div>
