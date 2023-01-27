@@ -58,7 +58,7 @@ export class DashboardCompanyComponent implements OnInit {
         ]);
     }
 
-    
+
 
     ngOnInit() {
         this.loadAll()
@@ -88,11 +88,11 @@ export class DashboardCompanyComponent implements OnInit {
         this.loadPorcentageBar()
     }
 
-    loadDonutChart() {        
+    loadDonutChart() {
         let dataStart = Util.dataParaStringComZero(this.dateStart)
         let dataEnd = Util.dataParaStringComZero(this.dateEnd)
         this.networkService.exibirLoader.next(true)
-        this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=C`).subscribe(v => {            
+        this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=C`).subscribe(v => {
             this.donutChart(v['value'])
         }).add(() => this.networkService.exibirLoader.next(false))
     }
@@ -112,18 +112,18 @@ export class DashboardCompanyComponent implements OnInit {
 
         this.networkService.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `Dash1?Month=${month}&Year=${year}`).subscribe((v: any) => {
-            this.data = v       
+            this.data = v
             let porcentage = sum6(v.Expenses,v.Revenues).toFixed(2)
-                 
+
             if (v.Expenses) this.Expenses = Util.toNumber(div6(porcentage, mul6(v.Expenses, 100)),2)
             if (v.Revenues) this.Revenues = Util.toNumber(div6(porcentage, mul6(v.Revenues, 100)),2)
             // Util.toNumber(div6(sub6(v.Expenses, porcentage), 100), 2)
         }).add(() => this.networkService.exibirLoader.next(false))
     }
 
-    donutChart(value) {        
+    donutChart(value) {
         let labels = value.map(v => v.Description)
-        let data = value.map(v => v.Amount)        
+        let data = value.map(v => v.Amount)
 
         this.optionsDoughnut = {
             plugins: {
@@ -203,8 +203,14 @@ export class DashboardCompanyComponent implements OnInit {
 
     barChart(value){
 
+        console.log(value);
+
         let credits = value.map(v => v.Credits)
         let debits = value.map(v => v.Debits)
+
+        let inicialBalance = value.map(v => v.InicialBalance)
+
+        console.log(inicialBalance)
 
         this.optionsBar = {
             plugins: {
@@ -235,7 +241,7 @@ export class DashboardCompanyComponent implements OnInit {
         }
 
         const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-        let label = value.map(v => `${monthLabel[v.Month - 1]}`)        
+        let label = value.map(v => `${monthLabel[v.Month - 1]}`)
         this.dataBar = {
             labels: label,
             datasets: [
@@ -249,20 +255,32 @@ export class DashboardCompanyComponent implements OnInit {
                         "#FF6384",
                         "#FF6384",
                         "#FF6384",
-                    ],                    
-                },        
+                    ],
+                },
                 {
                     label: 'Despesas',
                     data: debits,
-                    backgroundColor: [                        
+                    backgroundColor: [
                         "#36A2EB",
                         "#36A2EB",
                         "#36A2EB",
                         "#36A2EB",
                         "#36A2EB",
                         "#36A2EB",
-                    ],                    
-                },                
+                    ],
+                },
+                {
+                    label: 'Saldo',
+                    data: inicialBalance,
+                    backgroundColor: [
+                        "#00bb7e",
+                        "#00bb7e",
+                        "#00bb7e",
+                        "#00bb7e",
+                        "#00bb7e",
+                        "#00bb7e",
+                    ],
+                }
             ]
         };
     }

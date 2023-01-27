@@ -1,66 +1,60 @@
 <div class="p-fluid">
     <div class="p-fluid p-formgrid p-grid">
-        <div class="p-offset-3  p-fluid p-formgrid p-grid p-col-4">
-            <div class="p-col-5">
+        <div class="p-col-4 p-grid p-offset-3">
+            <div class="p-col-4" style="margin-top: 10px;">
+                <button pButton type="button" label="Atualizar" icon="pi pi-check" class="p-button-lg"></button>
+                <!-- <p-card header="Atualizar" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                </p-card> -->
+            </div>
+            <div class="p-col-4" style="margin-top: 10px;">
                 <app-date [(ngModel)]="dateStart"></app-date>
             </div>
-            <div class="p-col-5">
+            <div class="p-col-4" style="margin-top: 10px;">
                 <app-date [(ngModel)]="dateEnd"></app-date>
             </div>
         </div>
-        <div class="p-col-4" style="margin-top: 5px; margin-left: -65px;">
+        <div class="p-col-4" style="margin-top: 10px; margin-right: -155px;">
             <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
         </div>
     </div>
     &nbsp;
+
     <div class="p-col-12 p-grid p-fluid">
+
         <div class="p-col-3">
             <div class="p-col-3">
                 <p-card *ngIf="this.data" header="Saldo total" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
                     <span [ngClass]="colorValue(Balance)">R$ {{ Balance | virgulaPipe }}</span>
                 </p-card>
             </div>
+        </div>
 
-            <div class="p-col-3">
-                <p-card header="" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                    <div>
-                        <p>Receitas</p>
-                        <p-progressBar [value]="Revenues" [style]="{'height': '15px'}"></p-progressBar>
-                    </div>
-                    <div>
-                        <p>Despesas</p>
-                        <p-progressBar [value]="Expenses" [style]="{'height': '15px'}"></p-progressBar>
-                    </div>
-                    <div *ngIf="this.data">
-                        <span>Margem {{ Margin }} </span>
-                    </div>
-                </p-card>
+        <div class="p-col-9 p-grid p-fluid" style="width:85%; display: flex; justify-content: flex-end; margin-top: -130px;">
+
+            <div class="p-col-9 p-grid p-fluid" >
+                <div class="p-col-3" style="margin-left: 120px;">
+                    <p-card header="" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                        <div>
+                            <p>Receitas</p>
+                            <p-progressBar [value]="Revenues" [style]="{'height': '15px'}"></p-progressBar>
+                        </div>
+                        <div>
+                            <p>Despesas</p>
+                            <p-progressBar [value]="Expenses" [style]="{'height': '15px'}"></p-progressBar>
+                        </div>
+                        <div *ngIf="this.data">
+                            <span>Margem {{ Margin }} </span>
+                        </div>
+                    </p-card>
+                </div>
+
+                <div class="p-col-3">
+                    <p-card header="Conciliações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                       <span>Conciliações Pendêntes: {{pendentes}}</span>
+                    </p-card>
+                </div>
             </div>
 
-            <div class="p-col-3">
-                <p-card header="Conciliações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-                   <span>Conciliações Pendêntes: {{pendentes}}</span>
-                </p-card>
-            </div>
-        </div>
-
-        <div class="p-col-3" >
-            <button pButton type="button" label="Atualizar" icon="pi pi-check" class="p-button-lg"></button>
-            <!-- <p-card header="Atualizar" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-            </p-card> -->
-        </div>
-        <div class="p-col-3">
-            <button pButton type="button" label="Extrato" icon="pi pi-check" class="p-button-lg"></button>
-            <!-- <p-card header="Extrato" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-            </p-card> -->
-        </div>
-        <div class="p-col-3">
-            <button pButton type="button" label="Nova Conta" icon="pi pi-check" class="p-button-lg"></button>
-            <!-- <p-card header="Nova Conta" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
-            </p-card> -->
-        </div>
-        <div class="p-col-9 p-grid p-fluid"
-            style="width:85%; display: flex; justify-content: flex-end; margin-top: -400px;">
             <div class="p-col-4 container">
                 <div class="card">
                     <h5 class="centerText">Relatório de Receitas</h5>
