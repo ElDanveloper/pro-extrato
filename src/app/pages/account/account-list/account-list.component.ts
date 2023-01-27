@@ -48,7 +48,7 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
             if(e.ItemId === null) {
                 this.messageService.add(Util.pushErrorMsg('O ID do Item está NULO... Verifique com o suporte.'))
                 return
-            }            
+            }
             this.networkService.exibirLoader.next(true)
             this.networkService.getSimples(getUrlPro(), `GetTransactions?ItemId=${e.ItemId}`).subscribe(v => {
                 this.messageService.add(Util.pushSuccessMsg('Extrato Atualizado com Sucesso!'))
@@ -60,18 +60,28 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
                 this.data = e
                 this.openingbalance.nativeElement.click();
             }
+         },
+         {
+            label: 'Copiar ItemId', icon: 'pi pi-copy', command: (e) => {
+                if(e.ItemId) {
+                    navigator.clipboard.writeText(e.ItemId);
+                    this.messageService.add(Util.pushSuccessMsg('Texto copiado para área de transferência! Use Ctrl+V para colar'))
+                } else {
+                    this.messageService.add(Util.pushErrorMsg('Texto não foi copiado para área de transferência! Veja com o suporte a falta do ID'))
+                }
+            }
          }
     ]
 
     filtro = ''
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) {
-        super(messageService, confirmationService, networkService, router, 'proaccount', getUrlPro(), null, [{ campo: 'Name', tipo: 'string' },])        
+        super(messageService, confirmationService, networkService, router, 'proaccount', getUrlPro(), null, [{ campo: 'Name', tipo: 'string' },])
         this.sortField = 'Name'
         this.sortOrder = 'desc'
         // this.atributoFiltroComData = 'Datacadastro'
         // this.filtroCampo = 'Status'
-        
+
     }
 
     ngOnInit() {
@@ -81,11 +91,11 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
     pressionaEnter(e) {
         if (e.key === 'Enter') this.carregarLista()
     }
-  
+
     typeAccount(value) {
         switch (value) {
             case 1:
-                return 'Conta Corrente'                
+                return 'Conta Corrente'
             case 2:
                 return 'Poupança'
             case 3:
@@ -154,7 +164,7 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
     //     this.router.navigate([`/${this.entidade}/${Util.cadastroRoute()}/${rowData.IdPessoaEmpresa}`])
     // }
 
-    public newAccount() {        
+    public newAccount() {
         this.registrationAccount.nativeElement.click()
     }
 
