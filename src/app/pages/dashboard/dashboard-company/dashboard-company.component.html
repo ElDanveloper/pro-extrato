@@ -33,7 +33,22 @@
 
             <div class="p-col-9 p-grid p-fluid" >
                 <div class="p-col-3" style="margin-left: 120px;">
-                    <p-card header="" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+
+                    <div class="card" style="height: 12rem;">
+                        <div>
+                            <p>Receitas</p>
+                            <p-progressBar [value]="Revenues" [style]="{'height': '15px'}"></p-progressBar>
+                        </div>
+                        <div>
+                            <p>Despesas</p>
+                            <p-progressBar [value]="Expenses" [style]="{'height': '15px'}"></p-progressBar>
+                        </div>
+                        <div *ngIf="this.data">
+                            <p>Margem {{ Margin }} </p>
+                        </div>
+                    </div>
+
+                    <!-- <p-card header="" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
                         <div>
                             <p>Receitas</p>
                             <p-progressBar [value]="Revenues" [style]="{'height': '15px'}"></p-progressBar>
@@ -45,13 +60,17 @@
                         <div *ngIf="this.data">
                             <span>Margem {{ Margin }} </span>
                         </div>
-                    </p-card>
+                    </p-card> -->
                 </div>
 
                 <div class="p-col-3">
-                    <p-card header="Conciliações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                    <div class="card" style="height: 12rem;">
+                        <h5 class="centerText">Conciliações</h5>
+                        <span>Conciliações Pendentes: {{ pendentes }} </span>
+                    </div>
+                    <!-- <p-card header="Conciliações" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
                        <span>Conciliações Pendêntes: {{pendentes}}</span>
-                    </p-card>
+                    </p-card> -->
                 </div>
             </div>
 
@@ -65,7 +84,7 @@
             <div class="p-col-4 container">
                 <div class="card">
                     <h5 class="centerText">Principais Despesas</h5>
-                    <p-chart type="pie" [data]="dataDoughnut2" [options]="chartOptions"></p-chart>
+                    <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
                 </div>
             </div>
 
@@ -77,6 +96,14 @@
                     <!-- </p-card> -->
                 </div>
             </div>
+
+            <div class="p-col-8">
+                <div class="card">
+                    <h5>Horizontal</h5>
+                    <p-chart type="horizontalBar" [data]="basicData" [options]="horizontalOptions"></p-chart>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="card">
