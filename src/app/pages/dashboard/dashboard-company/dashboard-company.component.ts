@@ -207,6 +207,7 @@ export class DashboardCompanyComponent implements OnInit {
         let debits = value.map(v => v.Debits)
 
         this.optionsBar = {
+            indexAxis: 'y',
             plugins: {
                 legend: {
                     labels: {
