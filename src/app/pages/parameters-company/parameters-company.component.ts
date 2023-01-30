@@ -21,11 +21,11 @@ export class ParametersCompanyComponent extends BaseFormPost implements OnInit, 
 
     selectNatureza = []
     form: FormGroup;
-    
+
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, public messageService: MessageService,private fb: FormBuilder) {
-        super(networkService, dadosDefault, router, 'ProParameter', messageService);     
-        this.form = Formulario.createForm( new ProParameter(), this.fb);   
+        super(networkService, dadosDefault, router, 'ProParameter', messageService);
+        this.form = Formulario.createForm( new ProParameter(), this.fb);
     }
 
     ngOnInit() {
@@ -33,10 +33,10 @@ export class ParametersCompanyComponent extends BaseFormPost implements OnInit, 
             const defaultValue = {label: '-', value: null}
             this.selectNatureza = value[0]
             this.selectNatureza.unshift(defaultValue)
-        })        
+        })
         this.dadosDefault.exibirLoader.next(true)
-                this.networkService.buscar('ProParameter', '').subscribe((value: any) => {                    
-                    const data = Formulario.prepareValueToForm(new ProParameter(), value.value[0], null, ProParameter.relacionamentos(), null);                    
+                this.networkService.buscar('ProParameter', '').subscribe((value: any) => {
+                    const data = Formulario.prepareValueToForm(new ProParameter(), value.value[0], null, ProParameter.relacionamentos(), null);
                     Object.keys(data).forEach(key => this.form.controls[key].setValue(data[key]));
                 }).add(this.dadosDefault.exibirLoader.next(false))
 
@@ -50,7 +50,7 @@ export class ParametersCompanyComponent extends BaseFormPost implements OnInit, 
         this.networkService.salvarPost(getUrlPro(), 'Parameter', value).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Configurações salvas com sucesso!'))
             this.router.navigate(['home'])
-        }).add(this.dadosDefault.exibirLoader.next(false))        
+        }).add(this.dadosDefault.exibirLoader.next(false))
 
     }
 
@@ -60,6 +60,6 @@ export class ParametersCompanyComponent extends BaseFormPost implements OnInit, 
 
     ngOnDestroy() {
         super.ngOnDestroy()
-    }    
+    }
 
 }

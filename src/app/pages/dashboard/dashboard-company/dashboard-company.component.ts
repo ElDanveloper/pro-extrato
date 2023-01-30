@@ -19,7 +19,8 @@ export class DashboardCompanyComponent implements OnInit {
 
     dataDoughnut
 
-    dataDoughnut2
+    donutChartExpenseData
+    optionsDoughnutExpense: any
 
     dataBar
 
@@ -45,6 +46,8 @@ export class DashboardCompanyComponent implements OnInit {
 
     basicOptions: any;
 
+    horizontalOptions: any;
+
     dateStart = Util.getDateComUmMesAntes()
     dateEnd = Util.getLastDayDate()
 
@@ -58,7 +61,7 @@ export class DashboardCompanyComponent implements OnInit {
         ]);
     }
 
-    
+
 
     ngOnInit() {
         this.loadAll()
@@ -84,16 +87,27 @@ export class DashboardCompanyComponent implements OnInit {
     loadAll(){
         this.valueGrafic()
         this.loadDonutChart()
+        this.loadExpensesDonutChart() // DESPESAS
         this.loadBarChart()
         this.loadPorcentageBar()
+        this.loadhorizontalChart()
     }
 
-    loadDonutChart() {        
+    loadDonutChart() {
         let dataStart = Util.dataParaStringComZero(this.dateStart)
         let dataEnd = Util.dataParaStringComZero(this.dateEnd)
         this.networkService.exibirLoader.next(true)
-        this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=C`).subscribe(v => {            
+        this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=R`).subscribe(v => {
             this.donutChart(v['value'])
+        }).add(() => this.networkService.exibirLoader.next(false))
+    }
+
+    loadExpensesDonutChart() {
+        let dataStart = Util.dataParaStringComZero(this.dateStart)
+        let dataEnd = Util.dataParaStringComZero(this.dateEnd)
+        this.networkService.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=D`).subscribe(v => {
+            this.expenseDonutChart(v['value'])
         }).add(() => this.networkService.exibirLoader.next(false))
     }
 
@@ -112,18 +126,72 @@ export class DashboardCompanyComponent implements OnInit {
 
         this.networkService.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `Dash1?Month=${month}&Year=${year}`).subscribe((v: any) => {
-            this.data = v       
+            this.data = v
             let porcentage = sum6(v.Expenses,v.Revenues).toFixed(2)
-                 
+
             if (v.Expenses) this.Expenses = Util.toNumber(div6(porcentage, mul6(v.Expenses, 100)),2)
             if (v.Revenues) this.Revenues = Util.toNumber(div6(porcentage, mul6(v.Revenues, 100)),2)
             // Util.toNumber(div6(sub6(v.Expenses, porcentage), 100), 2)
         }).add(() => this.networkService.exibirLoader.next(false))
     }
 
-    donutChart(value) {        
+    loadhorizontalChart() {
+        this.horizontalChart()
+    }
+
+    horizontalChart() {
+        this.basicData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [
+                {
+                    label: 'My First dataset',
+                    backgroundColor: '#42A5F5',
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                },
+                {
+                    label: 'My Second dataset',
+                    backgroundColor: '#FFA726',
+                    data: [28, 48, 40, 19, 86, 27, 90]
+                }
+            ]
+        };
+
+        this.horizontalOptions = {
+            indexAxis: 'y',
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
+            }
+        };
+    }
+
+    donutChart(value) {
         let labels = value.map(v => v.Description)
-        let data = value.map(v => v.Amount)        
+        let data = value.map(v => v.Amount)
+
+        console.log('receita')
+        console.log(value)
 
         this.optionsDoughnut = {
             plugins: {
@@ -201,10 +269,93 @@ export class DashboardCompanyComponent implements OnInit {
 
     }
 
-    barChart(value){
+    expenseDonutChart(value) {
+        let labels = value.map(v => v.Description).slice(3)
+        let data = value.map(v => v.Amount).slice(3)
 
+        console.log('despesas')
+        console.log(value.slice(3))
+
+        this.optionsDoughnutExpense = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
+            }
+        };
+
+        this.donutChartExpenseData = {
+            labels: labels,
+            datasets: [
+                {
+                    label: '1',
+                    data: data,
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#66BB6A",
+                        "#00bb7e",
+                        "#191970",
+                        "#87CEFA",
+                        "#ADFF2F",
+                        "#6B8E23",
+                        "#FFFF00",
+                        "#8B4513",
+                        "#F4A460",
+                        "#B22222",
+                        "#FF0000",
+                        "#FF00FF",
+                        "#9400D3",
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#66BB6A",
+                        "#00bb7e",
+                        "#191970",
+                        "#87CEFA",
+                        "#ADFF2F",
+                        "#6B8E23",
+                        "#FFFF00",
+                        "#8B4513",
+                        "#F4A460",
+                        "#B22222",
+                        "#FF0000",
+                        "#FF00FF",
+                        "#9400D3",
+                    ]
+                }
+            ]
+        };
+
+    }
+
+    barChart(value){
         let credits = value.map(v => v.Credits)
         let debits = value.map(v => v.Debits)
+        let inicialBalance = value.map(v => v.InicialBalance)
 
         this.optionsBar = {
             indexAxis: 'y',
@@ -236,7 +387,7 @@ export class DashboardCompanyComponent implements OnInit {
         }
 
         const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-        let label = value.map(v => `${monthLabel[v.Month - 1]}`)        
+        let label = value.map(v => `${monthLabel[v.Month - 1]}`)
         this.dataBar = {
             labels: label,
             datasets: [
@@ -250,20 +401,32 @@ export class DashboardCompanyComponent implements OnInit {
                         "#FF6384",
                         "#FF6384",
                         "#FF6384",
-                    ],                    
-                },        
+                    ],
+                },
                 {
                     label: 'Despesas',
                     data: debits,
-                    backgroundColor: [                        
+                    backgroundColor: [
                         "#36A2EB",
                         "#36A2EB",
                         "#36A2EB",
                         "#36A2EB",
                         "#36A2EB",
                         "#36A2EB",
-                    ],                    
-                },                
+                    ],
+                },
+                {
+                    label: 'Saldo',
+                    data: inicialBalance,
+                    backgroundColor: [
+                        "#00bb7e",
+                        "#00bb7e",
+                        "#00bb7e",
+                        "#00bb7e",
+                        "#00bb7e",
+                        "#00bb7e",
+                    ],
+                }
             ]
         };
     }
@@ -327,7 +490,9 @@ export class DashboardCompanyComponent implements OnInit {
         //     }]
         // };
 
-        this.dataDoughnut2 = {
+        /* this.donutChartExpenseData = {
+
+
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
@@ -344,7 +509,7 @@ export class DashboardCompanyComponent implements OnInit {
                     ]
                 }
             ]
-        };
+        }; */
 
 
 
