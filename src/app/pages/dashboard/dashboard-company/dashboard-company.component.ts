@@ -358,6 +358,7 @@ export class DashboardCompanyComponent implements OnInit {
         let inicialBalance = value.map(v => v.InicialBalance)
 
         this.optionsBar = {
+            indexAxis: 'y',
             plugins: {
                 legend: {
                     labels: {
