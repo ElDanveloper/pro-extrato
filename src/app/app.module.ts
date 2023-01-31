@@ -78,6 +78,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { DashboardHomeComponent } from './pages/dashboard/dashboard-home/dashboard-home.component';
 import { DashboardCompanyComponent } from './pages/dashboard/dashboard-company/dashboard-company.component';
 import { AccountingParametersComponent } from './pages/settings-page/accounting-parameters/accounting-parameters.component'
+import { SupportComponent } from './pages/settings-page/support/support.component'
 
 // import {SliderModule} from 'primeng/slider';
 import {ProgressBarModule} from 'primeng/progressbar';
@@ -163,7 +164,7 @@ import {CheckboxModule} from 'primeng/checkbox';
         DashboardHomeComponent,
         DashboardCompanyComponent,
         AccountingParametersComponent,
-
+        SupportComponent,
 
     ],
     providers: [

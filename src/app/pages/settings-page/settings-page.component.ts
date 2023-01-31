@@ -17,6 +17,7 @@ export class SettingsPageComponent implements OnInit {
         {label: 'Departamento', icon: 'fa fa-fw fa-bars'},
         {label: 'Faturas', icon: 'fa fa-fw fa-university'},
         {label: 'Parametros', icon: 'fa fa-cogs'},
+        //{label: 'Suporte', icon: 'fa fa-cogs'},
         {label: 'Status Conta', icon: 'fa fa-bars'},
     ];
 
@@ -63,10 +64,13 @@ export class SettingsPageComponent implements OnInit {
         } else if (v.toString().match(/\/accounting-parameters$/)) {
             this.currentIndex = 4
             this.activeItem = this.itemsTabMenu[4];
-        } else if (v.toString().match(/\/account-status$/)) {
+        }  else if (v.toString().match(/\/account-status$/)) {
             this.currentIndex = 5
             this.activeItem = this.itemsTabMenu[5];
         }
+        /* else if (v.toString().match(/\/support$/)) {
+            this.currentIndex = 5
+            this.activeItem = this.itemsTabMenu[5]; */
     }
 
     setActiveItem(e) {
@@ -78,6 +82,7 @@ export class SettingsPageComponent implements OnInit {
         if (this.currentIndex === 2) r = 'departments-list'
         if (this.currentIndex === 3) r = 'invoices-list'
         if (this.currentIndex === 4) r = 'accounting-parameters'
+        /* if (this.currentIndex === 5) r = 'support' */
         if (this.currentIndex === 5) r = 'account-status'
 
         this.router.navigate([`settings/${r}`])

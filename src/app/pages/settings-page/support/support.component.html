@@ -1,0 +1,48 @@
+<ng-container *ngTemplateOutlet="conteudo"></ng-container>
+<ng-template #conteudo>
+    <div>
+        <p-card>
+            <div style="margin-left:15px;" class="p-fluid p-formgrid p-grid">
+                <h1 style="font-size: 18px;margin-right:10px;">Suporte</h1>
+            </div>
+
+            <app-page-divided>
+                <div principal style="text-align: center;">
+                    <h1 style="text-align: center; color: #FB5A55">Atenção</h1>
+
+                    <!-- <p style="text-align: center;">Esta página é de uso exclusivo da equipe de suporte da Toqsys, pois suas funções tem impacto comprometedor da integridade das informações</p> -->
+
+                    <div style="display: flex; justify-content: center;" class="p-grid">
+                        <div class="p-col-4 p-md-3" style="margin-top: 1.5rem; margin-right: 100px;">
+                            <button pButton label=" Limpar Dados" (click)="clearData()"></button>
+                        </div>
+                        <div class="p-col-4 p-md-3" style="margin-top: 1.5rem;">
+                            <button pButton label=" Limpar Dados" (click)="clearData()"></button>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;" class="p-grid">
+                        <div class="p-col-4 p-md-3" style="margin-top: 1.5rem; margin-right: 100px;">
+                            <button pButton label=" Limpar Dados" (click)="clearData()"></button>
+                        </div>
+                        <div class="p-col-4 p-md-3" style="margin-top: 1.5rem;">
+                            <button pButton label=" Limpar Dados" (click)="clearData()"></button>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;" class="p-grid">
+                        <div class="p-col-4 p-md-3" style="margin-top: 1.5rem; margin-right: 100px;">
+                            <button pButton label=" Limpar Dados" (click)="clearData()"></button>
+                        </div>
+                        <div class="p-col-4 p-md-3" style="margin-top: 1.5rem;">
+                            <button pButton label=" Limpar Dados" (click)="clearData()"></button>
+                        </div>
+                    </div>
+
+                </div>
+            </app-page-divided>
+
+        </p-card>
+    </div>
+
+</ng-template>
+
+<app-modal-support [modalVisible]="modalSupport" (closeModal)="modalSupport = false"></app-modal-support>

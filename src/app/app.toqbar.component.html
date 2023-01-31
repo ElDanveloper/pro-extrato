@@ -87,7 +87,7 @@
                             <i class="pi pi-user-plus"></i>
                             <span>Incluir Contratante</span>
                         </a>
-                    </li>                    
+                    </li>
                     <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/users-list')">
                             <i class="pi pi-users"></i>
@@ -104,6 +104,12 @@
                         <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/invoices-list')">
                             <i class="pi pi-dollar"></i>
                             <span>Faturas</span>
+                        </a>
+                    </li>
+                    <li *ngIf="counter === 'true'" role="menuitem">
+                        <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/support')">
+                            <i class="pi pi-user-edit"></i>
+                            <span>Suporte</span>
                         </a>
                     </li>
                     <li role="menuitem">

@@ -1,0 +1,38 @@
+<p-dialog [modal]="true" [responsive]="true" [contentStyle]="{'min-width':'900px', 'overflow':'visible'}"
+          [maximizable]="true" (onHide)="fecharModal()"
+          [header]="'Suporte'" [(visible)]="modalVisible">
+    <div class="p-col-12 p-fluid">
+
+        <div class="p-fluid p-formgrid p-grid" style="margin-top: 10px;">
+            <div class="p-col-12">
+                <!-- [options]="selectSpecieFlow" formControlName="SpecieFlow" -->
+                <app-select [label]="'Empresa'"></app-select>
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid" style="margin-top: 10px;">
+            <div class="p-field p-col-3 p-md-3" style="margin-left: 6px; margin-top: 25px;">
+                <p-checkbox label="Apagar contas" ></p-checkbox>
+            </div>
+            <div class="p-field p-col-3 p-md-3" style="margin-top: 25px; ">
+                <p-checkbox label="Apagar Itens" ></p-checkbox>
+            </div>
+            <div class="p-field p-col-3 p-md-3" style="margin-top: 25px; ">
+                <p-checkbox label="Apagar Categorias" ></p-checkbox>
+            </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid" style="margin-top: 10px;">
+            <div class="p-col-12">
+                <!-- formControlName="Description" -->
+                <app-input [label]="'Estou ciente'"></app-input>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 50px;">
+        <app-footer-page [end]="true" (confirmar)="confirmar()" (cancelar)="fecharModal()"
+            labelConfirmar="Gravar"></app-footer-page>
+    </div>
+
+</p-dialog>
+

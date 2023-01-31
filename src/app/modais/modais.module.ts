@@ -35,10 +35,11 @@ import {PipesModule} from '../pipes/pipes.module';
 import {DiretivasModule} from '../diretivas/diretivas.module';
 import {ComponentsModule} from '../components/components.module';
 import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecionar-empresa-escritorio/modal-selecionar-empresa-escritorio.component';
+import { ModalSupportComponent } from '../modais/modal-support/modal-support.component'
 
 @NgModule({
   declarations: [
-      ModalSelecionarEmpresaEscritorioComponent,      
+      ModalSelecionarEmpresaEscritorioComponent,
       ModalTrocarEmpresaComponent,
       ModalEmpresaCadastroComponent,
       ModalUserRegistrationComponent,
@@ -65,6 +66,8 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalReportDreComponent,
       ModalReportCashFlowComponent,
       //ModalPagamentoViaContaCorrenteComponent,
+      ModalSupportComponent,
+
   ],
     imports: [
         CommonModule,
@@ -78,10 +81,10 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         DiretivasModule,
         ComponentsModule,
         LayoutsModule,
-        
+
     ],
     exports: [
-        ModalSelecionarEmpresaEscritorioComponent,        
+        ModalSelecionarEmpresaEscritorioComponent,
         ModalTrocarEmpresaComponent,
         ModalEmpresaCadastroComponent,
         ModalUserRegistrationComponent,
@@ -107,6 +110,7 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalReportDreComponent,
         ModalReportCashFlowComponent,
         //ModalPagamentoViaContaCorrenteComponent,
+        ModalSupportComponent,
     ]
 })
 export class ModaisModule { }

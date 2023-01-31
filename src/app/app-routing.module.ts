@@ -41,11 +41,10 @@ import { SelecaoEmpresaComponent } from './auth/selecao-empresa/selecao-empresa.
 import { AuthGuard } from './auth/service/auth-guard';
 import { VisaoGeralComponent } from './pages/dashboard/visao-geral/visao-geral.component';
 import { ProjetoCadastroComponent } from './pages/projeto-cadastro/projeto-cadastro.component';
-
 import { DashboardHomeComponent } from '../app/pages/dashboard/dashboard-home/dashboard-home.component'
-
 import { DashboardCompanyComponent } from './pages/dashboard/dashboard-company/dashboard-company.component'
 import { AccountingParametersComponent } from './pages/settings-page/accounting-parameters/accounting-parameters.component';
+import { SupportComponent } from './pages/settings-page/support/support.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
@@ -100,6 +99,7 @@ const routes: Routes = [
                     { path: 'departments-list', component: DepartmentsListComponent },
                     { path: 'invoices-list', component: InvoicesListComponent },
                     { path: 'accounting-parameters', component: AccountingParametersComponent },
+                    { path: 'support', component: SupportComponent },
 
                     { path: 'account-status', component: AccountStatusComponent },
                     {path: '', pathMatch: 'full', redirectTo: 'main-accountant'},
