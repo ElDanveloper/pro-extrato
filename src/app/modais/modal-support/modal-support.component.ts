@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { Formulario } from "../../controller/Formulario";
 import { Util } from "../../controller/Util";
+import { getUrlPro } from 'src/app/controller/staticValues';
 
 @Component({
     selector: 'app-modal-support',
@@ -33,6 +34,13 @@ export class ModalSupportComponent implements OnInit {
             this.selectNatureza = value[0]
         }) */
 
+    }
+
+    ngOnChanges() {
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), 'ClearProExtrato?Items=true&Accounts=true').subscribe(v => {
+            console.log(v);
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     confirmar() {}
