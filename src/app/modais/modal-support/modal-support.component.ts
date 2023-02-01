@@ -21,8 +21,7 @@ export class ModalSupportComponent implements OnInit {
     @Input() data = '';
     @Output() dadosSalvos = new EventEmitter()
     @Output() closeModal = new EventEmitter()
-    /* selectNatureza = [];
-    nature; */
+    //selectNatureza = [];
 
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService) {
         //super(networkService, dadosDefault, router, 'IncludeBalance', messageService);

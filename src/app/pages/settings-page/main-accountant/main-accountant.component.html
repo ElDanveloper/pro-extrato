@@ -1,9 +1,9 @@
 <ng-container *ngTemplateOutlet="conteudo"></ng-container>
 <ng-template #conteudo>
     <div [formGroup]="form">
-        <p-card>
-            <div style="margin-left:15px;" class="p-fluid p-formgrid p-grid">
-                <h1 style="font-size: 18px;margin-right:10px;">Dados da Contabilidade</h1>
+        <p-card [header]="'Dados da Contabilidade'">
+            <div style="margin-left: 5px;" class="p-fluid p-formgrid p-grid">
+                <!-- <h1 style="font-size: 18px;margin-right:10px;">Dados da Contabilidade</h1> -->
                 <div class="p-field p-col-4 p-md-3">
                     <app-input-cpf-cnpj [label]="'CNPJ'" formControlName="Cnpj"></app-input-cpf-cnpj>
                 </div>
