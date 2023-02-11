@@ -45,6 +45,7 @@ import { DashboardHomeComponent } from '../app/pages/dashboard/dashboard-home/da
 import { DashboardCompanyComponent } from './pages/dashboard/dashboard-company/dashboard-company.component'
 import { AccountingParametersComponent } from './pages/settings-page/accounting-parameters/accounting-parameters.component';
 import { SupportComponent } from './pages/settings-page/support/support.component';
+import { DashboardTesteComponent } from './pages/dashboard/dashboard-teste/dashboard-teste.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
@@ -76,6 +77,7 @@ const routes: Routes = [
             { path: 'update-code', component: UpdateCodeListComponent},
             { path: 'dashboard-home', component: DashboardHomeComponent },
             { path: 'dashboard-company', component: DashboardCompanyComponent },
+            { path: 'dashboard-teste', component: DashboardTesteComponent },
 
 
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},

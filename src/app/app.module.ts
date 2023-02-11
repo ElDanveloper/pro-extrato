@@ -79,6 +79,7 @@ import { DashboardHomeComponent } from './pages/dashboard/dashboard-home/dashboa
 import { DashboardCompanyComponent } from './pages/dashboard/dashboard-company/dashboard-company.component';
 import { AccountingParametersComponent } from './pages/settings-page/accounting-parameters/accounting-parameters.component'
 import { SupportComponent } from './pages/settings-page/support/support.component'
+import { DashboardTesteComponent } from './pages/dashboard/dashboard-teste/dashboard-teste.component';
 
 // import {SliderModule} from 'primeng/slider';
 import {ProgressBarModule} from 'primeng/progressbar';
@@ -165,6 +166,8 @@ import {CheckboxModule} from 'primeng/checkbox';
         DashboardCompanyComponent,
         AccountingParametersComponent,
         SupportComponent,
+        DashboardTesteComponent
+
 
     ],
     providers: [
