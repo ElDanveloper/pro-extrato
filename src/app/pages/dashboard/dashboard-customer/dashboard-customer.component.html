@@ -1,0 +1,258 @@
+<div class="p-fluid">
+    <div class="p-col-12 p-grid p-fluid">
+        <div class="p-col-3">
+            <div class="card cards">
+                <div style="display: flex; justify-content: center;">
+                    <div class="p-col-8">
+                        <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+                    </div>
+                </div>
+
+                <div class="p-col-8">
+                    <div>
+                        <app-date [(ngModel)]="dateStart"></app-date>
+                    </div>
+                    <div>
+                        <app-date [(ngModel)]="dateEnd"></app-date>
+                    </div>
+                </div>
+
+                <div class="p-col-3" class="card-1-update-button">
+                    <!-- class="p-button-raised p-button-rounded" -->
+                    <p>Atualizar</p>
+                    <button pButton type="button" icon="pi pi-refresh" (click)="updateData()"></button>
+                </div>
+
+                <div class="p-col-3">
+
+                    <div class="card card-1-transaction-card">
+                        <div class="card-1-balance">
+                            <h4>Saldo</h4>
+                            <i class="pi pi-eye"></i>
+                        </div>
+                        <div class="card-1-amount-balance">
+                            <p>R$</p>
+                            <span *ngIf="this.data" appAlignLeft> {{ Balance | virgulaPipe }} </span>
+                        </div>
+                    </div>
+
+                    <!-- <p-card header="Total de Transações" [style]="{'width': '18rem', 'height': '137px'}">
+                    </p-card> -->
+                </div>
+
+            </div>
+
+
+            <div class="p-col-3">
+
+                <button class="reconciliations-button">
+                    <p>você tem novas </p>
+                    <span>Conciliações</span>
+                </button>
+
+                <!-- <div class="card reconciliations-card">
+                    <p>você tem novas </p>
+                    <span>Conciliações</span>
+                </div> -->
+
+                <!-- <p-card header="Pendências com analistas" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                    <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ AnalistPending }}  Lançamentos</p>
+                    <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ CompanyPendingAnalist }}  Empresas</p>
+                </p-card> -->
+            </div>
+            <!-- <div class="p-col-3">
+            </div> -->
+
+        </div>
+
+        <div class="p-col-9 p-grid p-fluid">
+            <div class="p-col-5">
+                <div class="card main-expenses-card">
+                    <h3 class="centerText">Principais Despesas</h3>
+                    <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
+                </div>
+            </div>
+
+            <div class="p-col-6">
+                <div class="card bar-chart-card">
+                    <h3 class="centerText">Receitas Vs Despesas</h3>
+                    <p-chart type="bar" [data]="dataBar" [options]="optionsBar"></p-chart>
+                </div>
+            </div>
+        </div>
+
+
+        <h3 style="margin-left: 3rem;">Gerenciamento de contas</h3>
+
+        <div class="p-col-12 p-grid p-fluid">
+            <div class="p-col-3">
+                <div class="card account-card">
+                    <h3>Banco X</h3>
+                    <p>Conta: 01</p>
+                    <div class="balance">
+                        <h4>Saldo atual:</h4>
+                        <span>R$ 650,00</span>
+                    </div>
+
+                    <div class="summary">
+                        <h5>Resumo</h5>
+                    </div>
+
+
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <button>ver mais</button>
+                </div>
+
+            </div>
+            <div class="p-col-3">
+                <div class="card account-card">
+                    <h3>Banco X</h3>
+                    <p>Conta: 01</p>
+                    <div class="balance">
+                        <h4>Saldo atual:</h4>
+                        <span>R$ 650,00</span>
+                    </div>
+
+                    <div class="summary">
+                        <h5>Resumo</h5>
+                    </div>
+
+
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <button>ver mais</button>
+                </div>
+
+            </div>
+            <div class="p-col-3">
+                <div class="card account-card">
+                    <h3>Banco X</h3>
+                    <p>Conta: 01</p>
+                    <div class="balance">
+                        <h4>Saldo atual:</h4>
+                        <span>R$ 650,00</span>
+                    </div>
+
+                    <div class="summary">
+                        <h5>Resumo</h5>
+                    </div>
+
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+
+                    <button>ver mais</button>
+                </div>
+
+            </div>
+            <div class="p-col-3">
+                <div class="card account-card">
+                    <h3>Banco X</h3>
+                    <p>Conta: 01</p>
+                    <div class="balance">
+                        <h4>Saldo atual:</h4>
+                        <span>R$ 650,00</span>
+                    </div>
+
+                    <div class="summary">
+                        <h5>Resumo</h5>
+                    </div>
+
+
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <div class="summary-data">
+                        <p>S boulevard</p>
+                        <span>-R$ 10,99</span>
+                    </div>
+                    <button>ver mais</button>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <!-- <div class="p-col-4">
+            <div class="card" style="height: 30rem;">
+                <h3 class="centerText">Transações Conciliadas</h3>
+                <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
+            </div>
+        </div> -->
+
+        <!-- <div class="p-col-12 p-grid p-fluid">
+            <div class="p-col-3">
+
+            </div>
+            <div class="p-col-9" style="margin-top: -30rem;">
+                <div class="card table-card">
+                    <h3 class="centerText">Pendências por Empresas</h3>
+                    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th [ngStyle]="{width: '20%'}"> EMPRESAS </th>
+                                <th [ngStyle]="{width: '20%'}"> CONTAS </th>
+                                <th [ngStyle]="{width: '20%'}"> RESPONSÁVEL </th>
+                                <th [ngStyle]="{width: '20%'}"> DIAS </th>
+                                <th [ngStyle]="{width: '20%'}"> TOTAL </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData>
+                            <tr>
+
+                                <td>{{rowData.Historic}}</td>
+                                <td appAlignCenter>{{rowData.Level}}</td>
+                                <td appAlignRight>{{rowData.CodeControl}}</td>
+
+                                <td appAlignCenter>
+                                    <app-opcoes-table [value]="rowData" [opcoes]="opcoesTable"></app-opcoes-table>
+                                </td>
+
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div> -->
+
+
+    </div>
+</div>
+

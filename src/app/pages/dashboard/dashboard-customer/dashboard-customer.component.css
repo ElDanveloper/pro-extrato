@@ -1,0 +1,299 @@
+/* 1 CARD */
+.cards {
+    width: 28rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-1-update-button {
+    margin-left: 18rem;
+    margin-top: -7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 6rem;
+
+    background: #FFFFFF;
+    box-shadow: 1px 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+
+    padding: 15px;
+
+    margin-top: -7.5rem;
+}
+
+.card-1-update-button p {
+    font-style: normal;
+    font-size: 13px;
+    line-height: 16px;
+    color: #9C9C9C;
+}
+
+.card-1-update-button button {
+    background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
+}
+
+.card-1-transaction-card {
+    background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
+    width: 24rem;
+    color: #fff;
+    border-radius: 25px;
+
+    margin-top: 1rem;
+}
+
+.card-1-balance {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-1-balance i {
+    font-size: 1.5rem;
+}
+
+.card-1-amount-balance {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.card-1-amount-balance p {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.card-1-amount-balance span {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+/* .card-1-active-securities {
+    width: 15rem;
+    margin-top: 10px;
+}
+
+.card-1-active-securities p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #3B5CBF;
+    margin-bottom: 1px;
+    margin-top: 10px;
+}
+
+.card-1-active-securities span {
+    font-weight: bold;
+    font-size: 1.5rem;
+} */
+
+
+
+
+/* CARD DE PENDECIAS */
+.reconciliations-button {
+    width: 27rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    padding: 1rem;
+    background: #3B4CC0;
+    border-radius: 25px;
+    color: #fff;
+}
+
+/* .reconciliations-button h5 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+} */
+
+.reconciliations-button p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.reconciliations-button span {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+
+/* CARD DE PRINCIPAIS DESPESAS */
+.main-expenses-card {
+    height: 32.7rem;
+
+}
+
+/* CARD GRAFICO DE BARRAS */
+.bar-chart-card {
+    height: 32.7rem;
+    width: 56rem;
+
+}
+
+/* CARD CONTAS */
+.account-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account-card h3 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height, or 133% */
+    color: #3B4CC0;
+
+    margin-bottom: 1px;
+}
+
+.account-card p {
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+
+    color: #828282;
+}
+
+.account-card h5 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 24px;
+    /* identical to box height, or 160% */
+    color: #3B4CC0;
+
+    display: flex;
+    justify-content: flex-start;
+}
+
+.balance {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.balance h4 {
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height, or 133% */
+
+
+    color: #4D4D4D;
+
+    margin-bottom: 5px;
+}
+
+.balance span {
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height, or 133% */
+
+
+    /* color: #4D4D4D; */
+    color: #12D90B;
+
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.summary h5 {
+    margin-bottom: 2px;
+}
+
+.summary-data {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.summary-data p {
+
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+    /* identical to box height, or 200% */
+
+
+
+    color: #828282;
+
+    margin-bottom: 2px;
+}
+
+.summary-data span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+    /* identical to box height, or 200% */
+
+
+    color: #FF1414;
+}
+
+.account-card button {
+    background: linear-gradient(293.01deg, #04B6EB -1.68%, #0AC684 88.05%);
+    border-radius: 8px;
+
+    border: none;
+    padding: 1rem;
+    width: 65%;
+
+    cursor: pointer;
+
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height, or 133% */
+
+
+    color: #FFFFFF;
+}
+
+/* CARD DE TABELA */
+.table-card th {
+    background: #E6E6E6;
+    border: 1px solid #FFFFFF;
+}

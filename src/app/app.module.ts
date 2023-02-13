@@ -85,6 +85,7 @@ import { DashboardTesteComponent } from './pages/dashboard/dashboard-teste/dashb
 import {ProgressBarModule} from 'primeng/progressbar';
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
+import { DashboardCustomerComponent } from './pages/dashboard/dashboard-customer/dashboard-customer.component';
 
 
 @NgModule({
@@ -166,7 +167,8 @@ import {CheckboxModule} from 'primeng/checkbox';
         DashboardCompanyComponent,
         AccountingParametersComponent,
         SupportComponent,
-        DashboardTesteComponent
+        DashboardTesteComponent,
+        DashboardCustomerComponent
 
 
     ],

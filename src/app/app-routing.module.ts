@@ -47,6 +47,8 @@ import { AccountingParametersComponent } from './pages/settings-page/accounting-
 import { SupportComponent } from './pages/settings-page/support/support.component';
 import { DashboardTesteComponent } from './pages/dashboard/dashboard-teste/dashboard-teste.component';
 
+import { DashboardCustomerComponent } from './pages/dashboard/dashboard-customer/dashboard-customer.component';
+
 const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
     { path: 'selecao-empresa/:value', component: SelecaoEmpresaComponent },
@@ -78,6 +80,7 @@ const routes: Routes = [
             { path: 'dashboard-home', component: DashboardHomeComponent },
             { path: 'dashboard-company', component: DashboardCompanyComponent },
             { path: 'dashboard-teste', component: DashboardTesteComponent },
+            { path: 'dashboard-customer', component: DashboardCustomerComponent },
 
 
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
