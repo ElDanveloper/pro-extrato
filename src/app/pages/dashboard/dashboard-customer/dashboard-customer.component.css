@@ -31,6 +31,10 @@
     background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
 }
 
+.card-1-update-button button:hover {
+    background: linear-gradient(293.01deg, #4ac8ee -1.68%, #53e4b1 88.05%);
+}
+
 .card-1-transaction-card {
     background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
     width: 24rem;
