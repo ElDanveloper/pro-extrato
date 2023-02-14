@@ -105,6 +105,15 @@
 /* CARD DE PRINCIPAIS DESPESAS */
 .main-expenses-card {
     height: 32.7rem;
+    margin-left: -3rem;
+
+    /* font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D; */
 }
 
 /* CARD GRAFICO DE BARRAS */
