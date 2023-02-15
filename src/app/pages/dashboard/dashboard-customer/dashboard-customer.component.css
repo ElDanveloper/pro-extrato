@@ -1,13 +1,28 @@
+
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap'); */
+
+@font-face {
+    font-family: 'Poppins', sans-serif;
+    src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap')
+}
+
+/* * {
+    background-color: #D9D9D9;
+} */
+
 /* 1 CARD */
 .cards {
     width: 28rem;
     display: flex;
     flex-direction: column;
+
+    margin-bottom: 0;
+    border-radius: 25px;
 }
 
 .card-1-update-button {
     margin-left: 18rem;
-    margin-top: -7rem;
+    /* margin-top: -2rem; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,23 +31,26 @@
     background: #FFFFFF;
     box-shadow: 1px 4px 16px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
-    padding: 15px;
-    margin-top: -7.5rem;
+    padding: 10px;
+    margin-top: -8rem;
 }
 
 .card-1-update-button p {
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-size: 13px;
     line-height: 16px;
     color: #9C9C9C;
 }
 
-.card-1-update-button button {
+/* .card-1-update-button button {
     background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
-}
+} */
 
-.card-1-update-button button:hover {
-    background: linear-gradient(293.01deg, #4ac8ee -1.68%, #53e4b1 88.05%);
+.card-1-update-button:hover {
+    cursor: pointer;
+    opacity: 80%;
+    box-shadow: 0 2px 2px #5a5a5a;
 }
 
 .card-1-transaction-card {
@@ -49,6 +67,15 @@
     justify-content: space-between;
 }
 
+.card-1-balance h4 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
 .card-1-balance i {
     font-size: 1.5rem;
 }
@@ -62,8 +89,13 @@
 
 .card-1-amount-balance p {
     margin-bottom: 0;
-    font-weight: bold;
     font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    /* line-height: 20px; */
+    text-transform: uppercase;
+    color: #FFFFFF;
 }
 
 .card-1-amount-balance span {
@@ -82,9 +114,12 @@
     background: #3B4CC0;
     border-radius: 25px;
     color: #fff;
+
+    margin-top: 1rem;
 }
 
 .reconciliations-button p {
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -94,6 +129,7 @@
 }
 
 .reconciliations-button span {
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -104,8 +140,11 @@
 
 /* CARD DE PRINCIPAIS DESPESAS */
 .main-expenses-card {
-    height: 32.7rem;
+    height: 31.5rem;
     margin-left: -3rem;
+    margin-right: 1rem;
+
+    border-radius: 25px;
 
     /* font-family: 'Poppins';
     font-style: normal;
@@ -116,10 +155,43 @@
     color: #4D4D4D; */
 }
 
+.main-expenses-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+}
+
 /* CARD GRAFICO DE BARRAS */
 .bar-chart-card {
-    height: 32.7rem;
+    height: 31.5rem;
     width: 56rem;
+
+    border-radius: 25px;
+}
+
+.bar-chart-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+}
+
+.account-management {
+    margin: 1rem 3rem;
+
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #4D4D4D;
 }
 
 /* CARD CONTAS */
@@ -127,6 +199,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    border-radius: 25px;
 }
 
 .account-card h3 {
