@@ -8,17 +8,13 @@
                     </div>
                 </div>
                 <div class="p-col-8">
-                    <div>
+                    <div class="date">
                         <app-date [(ngModel)]="dateStart"></app-date>
                     </div>
-                    <div>
+                    <div class="date">
                         <app-date [(ngModel)]="dateEnd"></app-date>
                     </div>
                 </div>
-                <!-- <div class="p-col-3" class="card-1-update-button">
-                    <p>Atualizar</p>
-                    <button pButton type="button" class="p-button-raised p-button-rounded" icon="pi pi-refresh" (click)="()"></button>
-                </div> -->
 
                 <div class="p-col-3 card-1-update-button" (click)="updateData()">
                     <p>Atualizar</p>
@@ -63,8 +59,13 @@
         <div class="p-col-12 p-grid p-fluid">
             <div class="p-col-3">
                 <div class="card account-card">
-                    <h3>Banco X</h3>
-                    <p>Conta: 01</p>
+                    <div class="bank-info">
+                        <img src="../../../../assets/images/image banco cora.svg" alt="Icone do banco Cora">
+                        <div class="bank-account-info">
+                            <h3>Banco Cora</h3>
+                            <p>Conta: 01</p>
+                        </div>
+                    </div>
                     <div class="balance">
                         <h4>Saldo atual:</h4>
                         <span>R$ 650,00</span>
@@ -89,8 +90,13 @@
             </div>
             <div class="p-col-3">
                 <div class="card account-card">
-                    <h3>Banco X</h3>
-                    <p>Conta: 01</p>
+                    <div class="bank-info">
+                        <img src="../../../../assets/images/image banco bradesco.svg" alt="Icone do banco Bradesco">
+                        <div class="bank-account-info">
+                            <h3>Banco Bradesco</h3>
+                            <p>Conta: 01</p>
+                        </div>
+                    </div>
                     <div class="balance">
                         <h4>Saldo atual:</h4>
                         <span>R$ 650,00</span>
@@ -115,8 +121,13 @@
             </div>
             <div class="p-col-3">
                 <div class="card account-card">
-                    <h3>Banco X</h3>
-                    <p>Conta: 01</p>
+                    <div class="bank-info">
+                        <img src="../../../../assets/images/image banco mastercard.svg" alt="Icone do Master Card">
+                        <div class="bank-account-info">
+                            <h3>Banco Master Card</h3>
+                            <p>Conta: 01</p>
+                        </div>
+                    </div>
                     <div class="balance">
                         <h4>Saldo atual:</h4>
                         <span>R$ 650,00</span>
@@ -140,9 +151,14 @@
                 </div>
             </div>
             <div class="p-col-3">
-                <div class="card account-card">
-                    <h3>Banco X</h3>
-                    <p>Conta: 01</p>
+                <div class="card account-card" style="margin-right: 0;">
+                    <div class="bank-info">
+                        <img src="../../../../assets/images/image banco santader.svg" alt="Icone do banco Santader">
+                        <div class="bank-account-info">
+                            <h3>Banco Santader</h3>
+                            <p>Conta: 01</p>
+                        </div>
+                    </div>
                     <div class="balance">
                         <h4>Saldo atual:</h4>
                         <span>R$ 650,00</span>

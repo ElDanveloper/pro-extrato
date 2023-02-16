@@ -1,8 +1,21 @@
+@font-face {
+    font-family: 'Poppins', sans-serif;
+    src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap')
+}
+
+/* TODOS OS CARDS */
+.cards-container {
+    background: #FFFFFF;
+    border-radius: 25px;
+}
+
 /* 1 CARD */
 .cards {
     width: 28rem;
     display: flex;
     flex-direction: column;
+
+    border-radius: 25px;
 }
 
 .card-1-transaction-card {
@@ -12,12 +25,22 @@
     border-radius: 25px;
 }
 
+.card-1-transaction-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    text-transform: capitalize;
+    color: #fff;
+}
+
 .card-1-active-securities {
     width: 15rem;
     margin-top: 10px;
 }
 
 .card-1-active-securities p {
+    /* font-family: 'Poppins', sans-serif; */
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -28,8 +51,12 @@
 }
 
 .card-1-active-securities span {
-    font-weight: bold;
     font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #4D4D4D;
 }
 
 .card-1-update-button {
@@ -47,24 +74,41 @@
     margin-top: -7.5rem;
 }
 
+.card-1-update-button:hover {
+    cursor: pointer;
+    opacity: 60%;
+    text-shadow: rgba(0, 0, 0, 0.6);
+}
+
 .card-1-update-button p {
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-size: 13px;
     line-height: 16px;
     color: #9C9C9C;
 }
 
-.card-1-update-button button {
+/* .card-1-update-button button {
     background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
-    /* height: 5rem;
-    width: 5rem; */
-}
+} */
 
 .card-1-update-button button:hover {
-    background: linear-gradient(293.01deg, #4ac8ee -1.68%, #53e4b1 88.05%);
+    /* background: linear-gradient(293.01deg, #4ac8ee -1.68%, #53e4b1 88.05%); */
+    opacity: 60%;
+    text-shadow: rgba(0, 0, 0, 0.5);
 }
 
 /* CARD DE PENDECIAS */
+.pending-card-title {
+    font-family: 'Poppins',sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+}
+
 .pending-card {
     width: 24rem;
     background: #3B4CC0;
@@ -100,8 +144,51 @@
 }
 
 /* CARD GRAFICO DE BARRAS */
+.bar-chart-card {
+    margin-left: -3rem;
+}
+
+.bar-chart-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+}
+
+/* CARD DO GRAFICO DE ROSCA */
+.donut-chart-card {
+    margin-left: 1rem;
+}
+
+.donut-chart-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+}
 
 /* CARD DE TABELA */
+.table-card {
+    margin-left: -3rem;
+    margin-top: 1rem;
+}
+
+.table-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+}
+
 .table-card th {
     background: #E6E6E6;
     border: 1px solid #FFFFFF;

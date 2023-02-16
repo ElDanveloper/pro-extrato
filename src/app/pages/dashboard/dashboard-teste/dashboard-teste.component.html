@@ -8,7 +8,7 @@
                     </div>
                 </div>
                 <div class="p-col-3">
-                    <div class="card card-1-transaction-card">
+                    <div class="card card-1-transaction-card cards-container">
                         <h3>Total de Transações</h3>
                         <span *ngIf="this.data" appAlignLeft style="font-size: 3rem; font-weight: bold;"> {{ Amount }} </span>
                     </div>
@@ -22,14 +22,19 @@
                             <span *ngIf="this.data">{{ ActiveAccount }}</span>
                         </div>
                     </div>
-                    <div class="p-col-3" class="card-1-update-button">
+
+                    <div class="p-col-3 card-1-update-button" (click)="updateData()">
+                        <p>Atualizar</p>
+                        <img src="../../../../assets/images/Vector.png" alt="Vetor de Atualizar">
+                    </div>
+                    <!-- <div class="p-col-3" class="card-1-update-button">
                         <p>Atualizar</p>
                         <button pButton type="button" icon="pi pi-refresh" (click)="updateData()"></button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div class="card cards">
-                <h3>Pendências</h3>
+            <div class="card cards cards-container">
+                <h3 class="pending-card-title">Pendências</h3>
                 <div class="p-col-3">
                     <div class="card pending-card">
                         <h5>COM ANALISTAS</h5>
@@ -51,13 +56,13 @@
             </div>
         </div>
         <div class="p-col-5">
-            <div class="card">
+            <div class="card cards-container bar-chart-card">
                 <h3 class="centerText">Lançamentos</h3>
                 <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
             </div>
         </div>
         <div class="p-col-4">
-            <div class="card" style="height: 30rem;">
+            <div class="card cards-container donut-chart-card" style="height: 30rem;">
                 <h3 class="centerText">Transações Conciliadas</h3>
                 <!-- <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart> -->
             </div>
@@ -66,7 +71,7 @@
             <div class="p-col-3">
             </div>
             <div class="p-col-9" style="margin-top: -30rem;">
-                <div class="card table-card">
+                <div class="card table-card cards-container">
                     <h3 class="centerText">Pendências por Empresas</h3>
                     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm">
                         <ng-template pTemplate="header" let-columns>
