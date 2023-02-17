@@ -117,6 +117,7 @@
 }
 
 .pending-card h5 {
+    font-family: 'Popins',sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -126,6 +127,7 @@
 }
 
 .pending-card p {
+    font-family: 'Popins',sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -136,6 +138,7 @@
 }
 
 .pending-card span {
+    font-family: 'Popins',sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 30px;
@@ -176,7 +179,7 @@
 /* CARD DE TABELA */
 .table-card {
     margin-left: -3rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
 .table-card h3 {

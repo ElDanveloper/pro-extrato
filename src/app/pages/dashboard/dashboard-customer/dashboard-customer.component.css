@@ -328,14 +328,34 @@
 }
 
 @media (max-width: 1440px) {
+    .cards {
+        width: 23rem;
+    }
     .date {
-        width: 15rem;
+        width: 12rem;
+    }
+    .card-1-update-button {
+        margin-left: 14rem;
+    }
+    .card-1-transaction-card {
+        width: 19.5rem;
+    }
+    .reconciliations-button {
+        width: 22rem;
     }
     .main-expenses-card {
-        margin-left: 5rem;
+        margin-left: 0;
+        height: 30.5rem;
     }
     .bar-chart-card {
         width: 43rem;
+        height: 30.5rem;
+    }
+    .account-management {
+        margin-top: 0.3rem;
+    }
+    .account-card {
+        width: 23rem;
     }
     .account-card:last-child(4) {
         margin-right: 0;
