@@ -25,7 +25,9 @@
                     <div class="card card-1-transaction-card">
                         <div class="card-1-balance">
                             <h4>Saldo</h4>
-                            <i class="pi pi-eye"></i>
+                            <button class="card-1-button">
+                                <img src="../../../../assets/images/olhinho-aberto.svg" alt="Olho">
+                            </button>
                         </div>
                         <div class="card-1-amount-balance">
                             <p>R$</p>
@@ -35,7 +37,7 @@
                 </div>
             </div>
             <div class="p-col-3">
-                <button class="reconciliations-button">
+                <button class="reconciliations-button" (click)="reconciliations()">
                     <p>você tem novas</p>
                     <span>Conciliações</span>
                 </button>

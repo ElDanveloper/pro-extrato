@@ -85,6 +85,10 @@ export class DashboardCustomerComponent implements OnInit {
         */
     }
 
+    reconciliations() {
+        console.log('reconciliations')
+    }
+
     labelData(Month, Year) {
         this.dadosDefault.exibirLoader.next(true);
             this.$subscription3 = this.networkService.getSimples(getUrlPro(), `DashAccountLabel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {

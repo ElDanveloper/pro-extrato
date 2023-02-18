@@ -70,6 +70,14 @@
     font-size: 1.5rem;
 }
 
+.card-1-button {
+    background: #ffffff00;
+    border: none;
+    cursor: pointer;
+
+    margin-bottom: 1rem;
+}
+
 .card-1-amount-balance {
     display: flex;
     flex-direction: row;
@@ -106,6 +114,7 @@
     color: #fff;
 
     margin-top: 1rem;
+    cursor: pointer;
 }
 
 .reconciliations-button p {
@@ -126,6 +135,11 @@
     line-height: 30px;
     text-align: center;
     color: #FFFFFF;
+}
+
+.reconciliations-button:hover {
+    opacity: 60%;
+    text-shadow: rgba(0, 0, 0, 0.5);
 }
 
 /* CARD DE PRINCIPAIS DESPESAS */
