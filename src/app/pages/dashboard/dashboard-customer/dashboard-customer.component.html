@@ -3,7 +3,7 @@
         <div class="p-col-3">
             <div class="card cards">
                 <div style="display: flex; justify-content: center;">
-                    <div class="p-col-8">
+                    <div class="date-mes-ano">
                         <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
                     </div>
                 </div>
@@ -43,14 +43,14 @@
                 </button>
             </div>
         </div>
-        <div class="p-col-9 p-grid p-fluid">
-            <div class="p-col-5">
+        <div class="p-grid p-fluid">
+            <div>
                 <div class="card main-expenses-card">
                     <h3 class="centerText">Principais Despesas</h3>
                     <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
                 </div>
             </div>
-            <div class="p-col-5">
+            <div class="col-bar-chart-card">
                 <div class="card bar-chart-card">
                     <h3 class="centerText">Receitas Vs Despesas</h3>
                     <p-chart type="bar" [data]="dataBar" [options]="optionsBar"></p-chart>

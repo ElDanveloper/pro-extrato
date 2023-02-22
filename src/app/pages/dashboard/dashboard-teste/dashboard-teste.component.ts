@@ -32,6 +32,9 @@ export class DashboardTesteComponent implements OnInit {
 
     subscription: Subscription;
 
+    donutChartExpenseData
+    optionsDoughnutExpense: any
+
     // config: AppConfig; // - nao tem
     // private configService: AppConfigService // -  nao tem
 
@@ -62,6 +65,7 @@ export class DashboardTesteComponent implements OnInit {
         this.updateData()
         this.loadStacked()
         //this.labelData()
+        this.loadExpensesDonutChart()
 
         // this.carService.getCarsSmall().then(cars => this.cars = cars);
 
@@ -85,6 +89,15 @@ export class DashboardTesteComponent implements OnInit {
             }, e => {
                 this.messageService.add(Util.pushErrorMsg(e))
             }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
+    loadExpensesDonutChart() {
+        let dataStart = Util.dataParaStringComZero(this.dataInit)
+        let dataEnd = Util.dataParaStringComZero(this.dataFim)
+        this.networkService.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=D`).subscribe(v => {
+            this.expenseDonutChart(v['value'])
+        }).add(() => this.networkService.exibirLoader.next(false))
     }
 
     labelData(Month, Year) {
@@ -144,7 +157,7 @@ export class DashboardTesteComponent implements OnInit {
         let label = value.map(v => `${monthLabel[v.Month-1]}`)
         this.stackedData = {
             labels: label,
-            datasets: [{
+            datasets: [/* {
                 type: 'bar',
                 label: 'Montante',
                 backgroundColor: '#FF6384',
@@ -154,20 +167,20 @@ export class DashboardTesteComponent implements OnInit {
                 label: 'Pendente',
                 backgroundColor: '#FFCE56',
                 data: Pending
-            }, {
+            }, */ {
                 type: 'bar',
                 label: 'Analista',
-                backgroundColor: '#36A2EB',
+                backgroundColor: '#3B4CC0',
                 data: Analist
             }, {
                 type: 'bar',
                 label: 'IA',
-                backgroundColor: '#00bb7e',
+                backgroundColor: '#07DB0A',
                 data: Ia
             }, {
                 type: 'bar',
                 label: 'Cliente',
-                backgroundColor: '#191970',
+                backgroundColor: '#04B6EB',
                 data: Costomer
             }]
         };
@@ -240,6 +253,89 @@ export class DashboardTesteComponent implements OnInit {
             ]
         };
         */
+    }
+
+    expenseDonutChart(value) {
+        let labels = value.map(v => v.Description).slice(3)
+        let data = value.map(v => v.Amount).slice(3)
+
+        console.log('despesas')
+        console.log(value.slice(3))
+
+        this.optionsDoughnutExpense = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
+            }
+        };
+
+        this.donutChartExpenseData = {
+            labels: labels,
+            datasets: [
+                {
+                    label: '1',
+                    data: data,
+                    backgroundColor: [
+                        "#09C395",
+                        "#04B6EB",
+                        "#3B4CC0",
+                        "#66BB6A",
+                        "#00bb7e",
+                        "#191970",
+                        "#87CEFA",
+                        "#ADFF2F",
+                        "#6B8E23",
+                        "#FFFF00",
+                        "#8B4513",
+                        "#F4A460",
+                        "#B22222",
+                        "#FF0000",
+                        "#FF00FF",
+                        "#9400D3",
+                    ],
+                    hoverBackgroundColor: [
+                        "#09C395",
+                        "#04B6EB",
+                        "#3B4CC0",
+                        "#66BB6A",
+                        "#00bb7e",
+                        "#191970",
+                        "#87CEFA",
+                        "#ADFF2F",
+                        "#6B8E23",
+                        "#FFFF00",
+                        "#8B4513",
+                        "#F4A460",
+                        "#B22222",
+                        "#FF0000",
+                        "#FF00FF",
+                        "#9400D3",
+                    ]
+                }
+            ]
+        };
+
     }
 
     alterouData(e) {
