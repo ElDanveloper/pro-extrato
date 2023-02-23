@@ -348,6 +348,27 @@
     text-shadow: rgba(0, 0, 0, 0.5);
 }
 
+@media (max-width: 1920px) {
+    .cards {
+        height: 23.7rem;
+    }
+    .card-1-transaction-card {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        height: 9rem;
+
+    }
+    .reconciliations-button {
+        margin-top: 1rem;
+    }
+    .main-expenses-card {
+        height: 32rem;
+    }
+    .bar-chart-card {
+        height: 32rem;
+    }
+}
+
 @media (max-width: 1440px) {
     .cards {
         width: 23rem;
