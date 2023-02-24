@@ -1,4 +1,3 @@
-
 import { Subscription } from 'rxjs';
 import {Component, OnInit} from '@angular/core';
 import { NetworkService } from 'src/app/services/network.service';
@@ -63,18 +62,14 @@ export class DashboardCustomerComponent implements OnInit {
     value3: number;
     total: number;
 
+    revenues: any = null
+    expenses: any = null
+
     constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {}
     // private carService: CarService
 
     ngOnInit() {
-        this.updateData()
-
-        this.labelData()
-
-        // dos cards
-        this.loadBarChart()
-        this.loadExpensesDonutChart()
-
+        this.loadAll()
 
         //this.labelData()
 
@@ -91,39 +86,49 @@ export class DashboardCustomerComponent implements OnInit {
         */
     }
 
+    loadAll() {
+        this.updateData()
+        this.labelData()
+        this.loadBarChart()
+        this.loadExpensesDonutChart()
+    }
+
+    labelData() {
+
+        let Month = this.dataFim.getMonth() + 1
+        let Year = this.dataFim.getFullYear()
+        this.dadosDefault.exibirLoader.next(true);
+        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${Month}&Year=${Year}`).subscribe(v => { 
+            this.data = v
+
+            console.log('dados de LABEL')
+            console.log(this.data)
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
     reconciliations() {
         console.log('reconciliations')
     }
 
-    labelData() {
-        let Month = this.dataFim.getMonth() + 1
-        let Year = this.dataFim.getFullYear()
-        this.dadosDefault.exibirLoader.next(true);
-        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${Month}&Year=${Year}`).subscribe(v => {
-            console.log('dados do label')
-            console.log(v)  
-            
-            this.data = v
-
-            /* if (!this.data.Balance) return 0
-            return this.data.Balance */
-
-        }).add(() => this.dadosDefault.exibirLoader.next(false))
-    }
-
     // Carregar dados do card do grafico de barras 
     loadBarChart() {
-        let Month = this.dataFim.getMonth() + 1
-        let Year = this.dataFim.getFullYear()
+        let dataStart = Util.dataParaStringComZero(this.dateStart)
+        let dataEnd = Util.dataParaStringComZero(this.dateEnd)
+        this.dadosDefault.exibirLoader.next(true);
+        this.$subscription3 = this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=R`).subscribe((v: any) => {
+            this.revenues = v['value']  
+        }, e => {
+            this.messageService.add(Util.pushErrorMsg(e))
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
 
         this.dadosDefault.exibirLoader.next(true);
-        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${Month}&Year=${Year}`).subscribe(v => {
-            this.barChart(v)
-
-            console.log('VEJA AQUI')
-            console.log(v)
+        this.$subscription3 = this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=D`).subscribe((v: any) => {
+            this.expenses = v['value']
+            this.barChart(this.revenues, this.expenses)    
+        }, e => {
+            this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
-    } 
+    }
 
     // Carregar dados do card de Principais Despesas
     loadExpensesDonutChart() {
@@ -138,9 +143,9 @@ export class DashboardCustomerComponent implements OnInit {
     }
 
     // Card do grafico de barras
-    barChart(value){
-        let revenues = value.map(v => v.Revenues)
-        let expenses = value.map(v => v.Expenses)
+    barChart(revenues, expenses){
+        let r = revenues.map(v => v.Amount)
+        let d = expenses.map(v => v.Amount)
 
         this.optionsBar = {
             indexAxis: 'y',
@@ -172,34 +177,46 @@ export class DashboardCustomerComponent implements OnInit {
         }
 
         const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-        let label = value.map(v => `${monthLabel[v.Month - 1]}`)
+        let label = monthLabel.map(m => `${m}`)
         this.dataBar = {
             labels: label,
             datasets: [
                 {
-                    label: 'Receita',
-                    data: revenues,
+                    label: 'Receitas',
+                    data: r,
                     backgroundColor: [
-                        "#FF6384",
-                        "#FF6384",
-                        "#FF6384",
-                        "#FF6384",
-                        "#FF6384",
-                        "#FF6384",
+                        "#12D90B",
+                        "#12D90B",
+                        "#12D90B",
+                        "#12D90B",
+                        "#12D90B",
+                        "#12D90B",
+                        "#12D90B",
+                        "#12D90B",
+                        "#12D90B",
+                        "#12D90B",
+                        "#12D90B",
+                        "#12D90B",
                     ],
                 },
                 {
                     label: 'Despesas',
-                    data: expenses,
+                    data: d,
                     backgroundColor: [
-                        "#36A2EB",
-                        "#36A2EB",
-                        "#36A2EB",
-                        "#36A2EB",
-                        "#36A2EB",
-                        "#36A2EB",
+                        "#282FF0",
+                        "#282FF0",
+                        "#282FF0",
+                        "#282FF0",
+                        "#282FF0",
+                        "#282FF0",
+                        "#282FF0",
+                        "#282FF0",
+                        "#282FF0",
+                        "#282FF0",
+                        "#282FF0",
+                        "#282FF0",
                     ],
-                }
+                } 
             ]
         };
     }
@@ -286,21 +303,20 @@ export class DashboardCustomerComponent implements OnInit {
     }
 
     alterouData(e) {
-        this.dataInit = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
-        this.dataFim = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
-        //this.updateData()
+        this.dateStart = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
+        this.dateEnd = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
+        this.loadAll()
+        this.updateData()
     }
 
     updateData(){
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
-        /* this.dadosDefault.exibirLoader.next(true);
-        this.$subscription3 = this.networkService.getSimples(getUrlPro(), `UpdatePanel?MonthEnd=${Month}&YearEnd=${Year}`).subscribe(v => {
-            //console.log(v['value'])
-            this.labelData(Month, Year)
-        }, e => {
-            this.messageService.add(Util.pushErrorMsg(e))
-        }).add(() => this.dadosDefault.exibirLoader.next(false)) */
+        this.dadosDefault.exibirLoader.next(true);
+        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${Month}&Year=${Year}`).subscribe(v => { 
+            console.log('DADOS DOS DASH EM JANEIRO')
+            console.log(v)
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
     } 
 
     colorValue(v) {
