@@ -94,15 +94,11 @@ export class DashboardCustomerComponent implements OnInit {
     }
 
     labelData() {
-
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
         this.dadosDefault.exibirLoader.next(true);
-        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${Month}&Year=${Year}`).subscribe(v => { 
+        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${Month}&Year=${Year}`).subscribe(v => {
             this.data = v
-
-            console.log('dados de LABEL')
-            console.log(this.data)
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
@@ -110,13 +106,13 @@ export class DashboardCustomerComponent implements OnInit {
         console.log('reconciliations')
     }
 
-    // Carregar dados do card do grafico de barras 
+    // Carregar dados do card do grafico de barras
     loadBarChart() {
         let dataStart = Util.dataParaStringComZero(this.dateStart)
         let dataEnd = Util.dataParaStringComZero(this.dateEnd)
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=R`).subscribe((v: any) => {
-            this.revenues = v['value']  
+            this.revenues = v['value']
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -124,7 +120,7 @@ export class DashboardCustomerComponent implements OnInit {
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.getSimples(getUrlPro(), `SumaryByCategory?DateIni=${dataStart}&DateEnd=${dataEnd}&Specie=D`).subscribe((v: any) => {
             this.expenses = v['value']
-            this.barChart(this.revenues, this.expenses)    
+            this.barChart(this.revenues, this.expenses)
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -216,15 +212,15 @@ export class DashboardCustomerComponent implements OnInit {
                         "#282FF0",
                         "#282FF0",
                     ],
-                } 
+                }
             ]
         };
     }
 
     // Card de Principais Despesas
     expenseDonutChart(value) {
-        let labels = value.map(v => v.Description) //.slice(3)
-        let data = value.map(v => v.Amount) //.slice(3)
+        let labels = value.map(v => v.Description).slice(3)
+        let data = value.map(v => v.Amount).slice(3)
 
         this.optionsDoughnutExpense = {
             plugins: {
@@ -264,11 +260,11 @@ export class DashboardCustomerComponent implements OnInit {
                         "#09C395",
                         "#04B6EB",
                         "#3B4CC0",
-                        "#66BB6A",
+                        "#12D90B",
                         "#00bb7e",
                         "#191970",
                         "#87CEFA",
-                        "#ADFF2F",
+                        "#282FF0",
                         "#6B8E23",
                         "#FFFF00",
                         "#8B4513",
@@ -282,11 +278,11 @@ export class DashboardCustomerComponent implements OnInit {
                         "#09C395",
                         "#04B6EB",
                         "#3B4CC0",
-                        "#66BB6A",
+                        "#12D90B",
                         "#00bb7e",
                         "#191970",
                         "#87CEFA",
-                        "#ADFF2F",
+                        "#282FF0",
                         "#6B8E23",
                         "#FFFF00",
                         "#8B4513",
@@ -313,11 +309,11 @@ export class DashboardCustomerComponent implements OnInit {
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
         this.dadosDefault.exibirLoader.next(true);
-        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${Month}&Year=${Year}`).subscribe(v => { 
+        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${Month}&Year=${Year}`).subscribe(v => {
             console.log('DADOS DOS DASH EM JANEIRO')
             console.log(v)
         }).add(() => this.dadosDefault.exibirLoader.next(false))
-    } 
+    }
 
     colorValue(v) {
         const classes = {

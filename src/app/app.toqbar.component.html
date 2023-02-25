@@ -1,5 +1,5 @@
-<div class="topbar clearfix">
-    <div class="topbar-left" routerLink="/home">
+<div class="topbar clearfix" style="background-color: #fff;">
+    <div class="topbar-left" routerLink="/home" style="background-color: #fff;">
         <div class="logo"></div>
     </div>
 
@@ -21,7 +21,8 @@
             <div style="width: 250px;
                     display: inline-block;
                     font-size: 14px;
-                    color: #ffffff;
+                    color: #4D4D4D;
+                    text-transform: uppercase;
                     vertical-align: middle;
                     margin-left: 8em;
                     font-weight: bold;
@@ -193,8 +194,21 @@
                 </ul>
             </li> -->
             <li style="margin-top: 0px;">
-                <span *ngIf="counter !== 'true'" (click)="abrirModalTrocarEmpresa()" class="link-pessoa" style="font-size: 13px;color: white;">Empresa:</span><br>
-                <span *ngIf="counter !== 'true'" (click)="abrirModalTrocarEmpresa()" class="link-pessoa" style="color: #dddddd;">{{empresa}}</span>
+                <span
+                    *ngIf="counter !== 'true'"
+                    (click)="abrirModalTrocarEmpresa()"
+                    class="link-pessoa"
+                    style="
+                    font-size: 13px;
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 14px;
+                    text-transform: uppercase;
+                    color: #4D4D4D;
+                    "
+                >Empresa:</span><br>
+                <span *ngIf="counter !== 'true'" (click)="abrirModalTrocarEmpresa()" class="link-pessoa" style="color: #4D4D4D;">{{empresa}}</span>
                 <button *ngIf="counter === 'true'" pButton type="button" class="trocar" style="background: #3B4CC0; margin-top: -20px; margin-right: 20px;" label="Selecionar Empresa" (click)="abrirModalTrocarEmpresa()"></button>
             </li>
             <!-- <li #search class="search-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === search}"

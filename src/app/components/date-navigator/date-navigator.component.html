@@ -1,13 +1,15 @@
 <div class="date-select-container">
     <span class="ui-inputgroup-addon" (click)="backDate()" style="cursor: pointer;">
-        <i class="pi pi-angle-left"></i>
+        <!-- <i class="pi pi-angle-left"></i> -->
+        <img src="../../../assets/images/Vector-Date-Left.svg" id="vector-left" alt="Vetor para esquerda">
     </span>
     <div class="input-date-container">
     <span class="mes-label" [ngStyle]="{'color':colorFont == 0 ? 'black' : 'white'}" (click)="openCloseOpcoes($event)">{{dataLabel}}</span>
 
     </div>
     <span class="ui-inputgroup-addon" (click)="nextDate()" style="cursor: pointer;">
-        <i class="pi pi-angle-right"></i>
+        <!-- <i class="pi pi-angle-right"></i> -->
+        <img src="../../../assets/images/Vector-Date-Rigth.svg" id="vector-right" alt="Vetor para direita">
     </span>
 
     <div class="meses-options" [class.exibir-opcoes-mes]="exibirOpcoesMes" (clickOutside)="clickOutside()">

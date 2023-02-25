@@ -1,13 +1,13 @@
 <div class="p-fluid">
-    <div class="p-col-12 p-grid p-fluid">
-        <div class="p-col-3">
+    <div class="p-grid p-fluid">
+        <div>
             <div class="card cards">
                 <div style="display: flex; justify-content: center;">
                     <div class="date-mes-ano">
                         <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
                     </div>
                 </div>
-                <div class="p-col-8">
+                <div class="dates">
                     <div class="date">
                         <app-date [(ngModel)]="dateStart"></app-date>
                     </div>
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="p-grid p-fluid">
-            <div>
+            <div class="col-main-expenses-card">
                 <div class="card main-expenses-card">
                     <h3 class="centerText">Principais Despesas</h3>
                     <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>

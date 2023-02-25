@@ -12,6 +12,15 @@
     flex-direction: column;
     margin-bottom: 0;
     border-radius: 25px;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+}
+
+.dates {
+    margin-bottom: 1rem;
+}
+.date {
+    width: 16rem;
 }
 
 .card-1-update-button {
@@ -115,6 +124,8 @@
     color: #fff;
 
     margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
     cursor: pointer;
 }
 
@@ -145,22 +156,11 @@
 
 /* CARD DE PRINCIPAIS DESPESAS */
 .main-expenses-card {
-    height: 31.5rem;
-    margin-left: -2rem;
+    margin-left: 2rem;
     margin-right: 2rem;
     border-radius: 25px;
-
     width: 40rem;
-
     margin-top: 1rem;
-
-    /* font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 24px;
-    text-transform: capitalize;
-    color: #4D4D4D; */
 }
 
 .main-expenses-card h3 {
@@ -175,7 +175,6 @@
 
 /* CARD GRAFICO DE BARRAS */
 .bar-chart-card {
-    height: 31.5rem;
     width: 56rem;
     border-radius: 25px;
 
@@ -348,13 +347,94 @@
     text-shadow: rgba(0, 0, 0, 0.5);
 }
 
+@media (max-width: 1024px) {
+    .cards {
+        margin-left: 2rem;
+    }
+    .col-main-expenses-card {
+        display: flex;
+        justify-content: center;
+    }
+    .bar-chart-card {
+        margin-top: 35rem;
+        margin-left: -30rem;
+        width: 50rem;
+    }
+}
+
+@media (max-width: 1440px) {
+    .cards {
+        width: 23rem;
+    }
+    .date {
+        width: 12rem;
+    }
+    .card-1-balance h4 {
+        font-size: 18px;
+        line-height: 20px;
+    }
+    .card-1-amount-balance p {
+        margin-bottom: 0;
+        font-size: 1.2rem;
+    }
+    .card-1-amount-balance span {
+        font-size: 2rem;
+    }
+    .card-1-update-button {
+        margin-left: 14rem;
+    }
+    .card-1-transaction-card {
+        width: 19.5rem;
+    }
+    .reconciliations-button {
+        width: 22rem;
+        margin-bottom: 0rem;
+    }
+    .reconciliations-button p {
+        font-size: 16px;
+        line-height: 30px;
+    }
+    .reconciliations-button span {
+        font-size: 16px;
+        line-height: 30px;
+    }
+    .col-main-expenses-card {
+        margin-top: -33rem;
+        margin-left: 26rem;
+        margin-right: 1rem;
+    }
+    .main-expenses-card {
+        margin-left: 0;
+        margin-right: 1rem;
+        height: 32rem;
+        width: 28rem;
+    }
+    .col-bar-chart-card {
+        margin-top: -33rem;
+        margin-left: 55rem;
+    }
+    .bar-chart-card {
+        width: 45rem;
+        height: 32rem;
+    }
+    .account-management {
+        margin-top: 1rem;
+    }
+    .account-card {
+        width: 23rem;
+    }
+    .account-card:last-child(4) {
+        margin-right: 0;
+    }
+}
+
 @media (max-width: 1920px) {
     .cards {
         height: 23.7rem;
     }
     .date-mes-ano {
         margin-bottom: 1rem;
-    } 
+    }
     .card-1-transaction-card {
         margin-top: 1rem;
         margin-bottom: 1rem;
@@ -371,86 +451,5 @@
     }
     .bar-chart-card {
         height: 32rem;
-    }
-}
-
-@media (max-width: 1440px) {
-    .cards {
-        width: 23rem;
-    }
-    .date {
-        width: 12rem;
-    }
-    .card-1-update-button {
-        margin-left: 14rem;
-    }
-    .card-1-transaction-card {
-        width: 19.5rem;
-    }
-    .reconciliations-button {
-        width: 22rem;
-    }
-    .main-expenses-card {
-        margin-left: 0;
-        height: 30.5rem;
-    }
-    .bar-chart-card {
-        width: 43rem;
-        height: 30.5rem;
-    }
-    .account-management {
-        margin-top: 0.3rem;
-    }
-    .account-card {
-        width: 23rem;
-    }
-    .account-card:last-child(4) {
-        margin-right: 0;
-    }
-}
-
-@media (max-width: 1024px) {
-
-    .cards {
-        width: 34rem;
-    }
-
-    .date-mes-ano {
-        display: flex;
-        justify-content: center;
-    }
-
-    .date {
-        width: 23rem;
-    }
-
-    .card-1-update-button {
-        margin-left: 25rem;
-    }
-
-    .card-1-transaction-card {
-        width: 31rem;
-    }
-
-    .reconciliations-button {
-        width: 33rem;
-    }
-   
-    .main-expenses-card {
-        width: 33rem;
-        height: 30rem;
-
-        margin-top: -30rem;
-        margin-left: 37rem;
-    }
-    .bar-chart-card {
-        margin-top: 32rem;
-        margin-left: -38rem;
-        width: 50rem;
-    }
-    .col-bar-chart-card {
-        width: 100%;
-        margin-top: -30rem;
-        margin-left: 39rem;
     }
 }
