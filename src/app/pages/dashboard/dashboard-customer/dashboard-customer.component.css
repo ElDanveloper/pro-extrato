@@ -206,7 +206,6 @@
     flex-direction: column;
     align-items: center;
     border-radius: 25px;
-
     margin-right: 1rem;
 }
 
@@ -346,9 +345,42 @@
     text-shadow: rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 1024px) {
+/* PARA CORRIGIR A SOBRESCRIÇÃO DA RESOLUÇÃO 1024px */
+
+#container-account-card {
+    margin-top: 0rem;
+    /* margin-left: 1rem; */
+}
+div .account-card {
+    min-width: 30rem;
+    /* margin-right: 1rem; */
+    margin-left: 1rem;
+}
+#last-col-account-card {
+    display: block;
+    padding: 0;
+}
+#last-account-card {
+    min-width: 30rem;
+
+    display: block;
+}
+
+/* #last-account-card .bank-info .bank-account-info {
+    margin-left: 3rem;
+} */
+#last-account-card .bank-info {
+    display: flex;
+    justify-content: center;
+}
+#last-account-card  {
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 1024px ) {
     .cards {
-        margin-left: 4rem;
+        margin-left: 1rem;
         min-width: 28rem;
     }
     /* DATAS */
@@ -366,7 +398,7 @@
         min-width: 24.5rem;
     }
     .part-cards-1 .reconciliations-button {
-        margin-left: 4rem;
+        margin-left: 1rem;
         min-width: 27rem;
     }
     .reconciliations-button > p {
@@ -376,22 +408,40 @@
         font-size: 16px;
     }
     .cards-expenses-revenue .col-main-expenses-card .main-expenses-card {
-        margin-left: 10rem;
+        margin-left: 8rem;
     }
     .col-main-expenses-card {
-        width: 50rem;
+        width: 55rem;
     }
     .main-expenses-card {
         min-width: 35rem;
     }
     .bar-chart-card {
         margin-top: 35rem;
-        margin-left: -47rem;
+        margin-left: -40rem;
         min-width: 50rem;
+    }
+    div .account-management {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    #container-account-card {
+        width: 100rem;
+    }
+    div .account-card {
+        min-width: 10rem;
+        margin-right: 1rem;
+        margin-left: 0rem;
+    }
+    #last-col-account-card {
+        display: none;
+    }
+    #last-account-card {
+        display: none;
     }
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1440px) and (min-width: 1024px) {
     .cards {
         width: 22rem;
     }
