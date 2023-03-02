@@ -93,6 +93,10 @@ export class DashboardCustomerComponent implements OnInit {
         this.loadExpensesDonutChart()
     }
 
+    seeBalance() {
+        console.log('fechar olho')
+    }
+
     labelData() {
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
