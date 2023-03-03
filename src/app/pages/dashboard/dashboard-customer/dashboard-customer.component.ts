@@ -19,6 +19,7 @@ export class DashboardCustomerComponent implements OnInit {
 
     dateStart = Util.getDateComUmMesAntes()
     dateEnd = Util.getLastDayDate()
+    
 
     $subscription3: Subscription;
 
