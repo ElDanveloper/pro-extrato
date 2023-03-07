@@ -77,10 +77,10 @@ const routes: Routes = [
             { path: 'report-dre', component: ReportDreComponent},
             { path: 'report-cash-flow', component: ReportCashFlowComponent},
             { path: 'update-code', component: UpdateCodeListComponent},
-            { path: 'dashboard-home', component: DashboardHomeComponent },
-            { path: 'dashboard-company', component: DashboardCompanyComponent },
-            { path: 'dashboard-teste', component: DashboardTesteComponent },
-            { path: 'dashboard-customer', component: DashboardCustomerComponent },
+            // { path: 'dashboard-home', component: DashboardHomeComponent },
+            // { path: 'dashboard-company', component: DashboardCompanyComponent },
+            { path: 'dashboard-home', component: DashboardTesteComponent }, //dashboard-teste
+            { path: 'dashboard-company', component: DashboardCustomerComponent }, //dashboard-customer
 
 
             //  {path: 'empregador/cadastro/:id', component: EmpregadorCadastroComponent},
