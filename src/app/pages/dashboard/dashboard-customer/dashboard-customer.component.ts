@@ -183,11 +183,25 @@ export class DashboardCustomerComponent implements OnInit {
                 this.loadAccounts(v.Id)
             })
 
-            // PEGANDO AS IMAGENS DE CADA BANCO
-            v['value'].map(v =>  {
+            v['value'].forEach(v => {
+                console.log(v.BankCode)
                 let bankCode = v.BankCode
-                /* console.log('codigo do banco')
-                console.log(bankCode) */
+
+                if (bankCode === 33) {
+                    this.BankImage = '../../../../assets/images/image banco santader.svg'
+                    console.log(this.BankImage)
+                    return this.BankImage
+                }
+                if (bankCode === 404) {
+                    this.BankImage = '../../../../assets/images/image banco cora.svg'
+                    console.log(this.BankImage)
+                    return this.BankImage
+                }
+            });
+
+            // PEGANDO AS IMAGENS DE CADA BANCO
+            /* v['value'].map(v =>  {
+                let bankCode = v.BankCode
 
                 switch (bankCode) {
                     case 1:
@@ -235,7 +249,7 @@ export class DashboardCustomerComponent implements OnInit {
                         // console.log('SEM DADOS')
                         this.BankImage = 'Sem'
                 }
-            })
+            }) */
 
             // Pegando o codigo do banco para mostrar a imagem dele na tela
             /* let bankCode = v['value'].map(v => {
@@ -303,9 +317,7 @@ export class DashboardCustomerComponent implements OnInit {
         /* ProStatementItem?%24filter=40&%24orderby=DateMovement&%24top=5 */
         this.$subscription3 = this.networkService.getSimples(getUrlPro(), `ProStatementItem?filter=(AccountId=${Id})&OrderBy=DateMovement`).subscribe((v: any) => {
             console.log('CARREGANDO LANCAMENTOS')
-            console.log(v)
-            /* console.log(Id) */
-            /* console.log(v['value'].slice(0, 5)) */
+            console.log(v['value'].slice(0, 5))
 
             v['value'].map(v => {
                 this.Historic = v.Historic
