@@ -57,7 +57,83 @@
                 </div>
             </div>
         </div>
-        <h3 class="account-management">Gerenciamento de contas</h3>
+
+        <!-- <div class="p-col-3" class="col-account-card">
+            <div class="card account-card">
+                <div class="bank-info">
+                    <img src="../../../../assets/images/image banco cora.svg" alt="Icone do banco Cora">
+                    <div class="bank-account-info">
+                        <h3>Banco Cora</h3>
+                        <p>Conta: 01</p>
+                    </div>
+                </div>
+                <div class="balance">
+                    <h4>Saldo atual:</h4>
+                    <span>R$ 650,00</span>
+                </div>
+                <div class="summary">
+                    <h5>Resumo</h5>
+                </div>
+                <div class="summary-data">
+                    <p>S boulevard</p>
+                    <span>-R$ 10,99</span>
+                </div>
+                <div class="summary-data">
+                    <p>S boulevard</p>
+                    <span>-R$ 10,99</span>
+                </div>
+                <div class="summary-data">
+                    <p>S boulevard</p>
+                    <span>-R$ 10,99</span>
+                </div>
+                <button>ver mais</button>
+            </div>
+        </div> -->
+
+        <p-carousel [value]="accounts" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h3 class="account-management">Gerenciamento de contas</h3>
+            </ng-template>
+            <!--  -->
+            <ng-template let-account pTemplate="item" class="card">
+                <div class="product-item">
+                    <div class="product-item-content">
+                        <!--  -->
+                        <div class="mb-3">
+                            <!-- <img src="../../../../assets/images/image banco cora.svg" alt="Icone do banco Cora"> -->
+                            <img [src]="BankImage" [alt]="account.BankCode" class="product-image" />
+                        </div>
+                        <div>
+                            <h4 class="mb-1"> {{ account.Name }} </h4>
+                            <h6 class="mt-0 mb-3">Conta: {{ account.AccountNumber }}</h6>
+                            <h6 class="mt-0 mb-3"> R$ {{ account.Balance }} </h6>
+
+                            <h5>Resumo</h5>
+                            <p> {{ Historic }} </p>
+                            <span> {{ ReleaseBalance }} </span>
+
+                            <p> {{ Historic }} </p>
+                            <span> {{ ReleaseBalance }} </span>
+
+                            <p> {{ Historic }} </p>
+                            <span> {{ ReleaseBalance }} </span>
+
+                            <!-- <span [class]="'product-badge status-'+product.inventoryStatus.toLowerCase()">Saldo atual:</span> -->
+                            <!-- <span [class]="'product-badge status-'+accounts.Balance.toLowerCase()">R$ {{accounts.Balance}}</span> -->
+
+                            <!-- <div class="car-buttons mt-5">
+                                <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
+                                <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
+                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
+
+
+        <!-- <h3 class="account-management">Gerenciamento de contas</h3>
         <div class="p-col-12 p-grid p-fluid" id="container-account-card">
             <div class="p-col-3" class="col-account-card">
                 <div class="card account-card">
@@ -183,7 +259,7 @@
                     <button>ver mais</button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
