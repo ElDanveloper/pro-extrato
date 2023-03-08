@@ -122,6 +122,7 @@ export class DashboardCustomerComponent implements OnInit {
         this.loadBarChart()
         this.loadExpensesDonutChart()
         this.loadCards()
+        this.loadAccounts()
     }
 
     seeBalance() {
@@ -178,134 +179,19 @@ export class DashboardCustomerComponent implements OnInit {
             console.log('DADOS DOS CARDS')
             console.log(v['value'])
             this.accounts = v['value']
-
-            v['value'].map(v => {
-                this.loadAccounts(v.Id)
-            })
-
-            // PEGANDO AS IMAGENS DE CADA BANCO
-            v['value'].map(v =>  {
-                let bankCode = v.BankCode
-                /* console.log('codigo do banco')
-                console.log(bankCode) */
-
-                switch (bankCode) {
-                    case 1:
-                        // console.log('Banco Brasil')
-                        this.BankImage = 'Sem'
-                        break
-                    case 4:
-                        // console.log('Banco do Nordeste')
-                        this.BankImage = 'Sem'
-                        break
-                    case 33:
-                        // console.log('Santader')
-                        this.BankImage = '../../../../assets/images/image banco santader.svg'
-                        break
-                    case 77:
-                        // console.log('Inter')
-                        this.BankImage = 'Sem'
-                        break
-                    case 104:
-                        // console.log('Caixa Economica')
-                        this.BankImage = 'Sem'
-                        break
-                    case 237:
-                        // console.log('Bradesco')
-                        this.BankImage = '../../../../assets/images/image banco bradesco.svg'
-                        break
-                    case 341:
-                        // console.log('Itau')
-                        this.BankImage = 'Sem'
-                        break
-                    case 404:
-                        // console.log('Cora')
-                        this.BankImage = ''
-                        this.BankImage = '../../../../assets/images/image banco cora.svg'
-                        break
-                    case 748:
-                        // console.log('Sincredi')
-                        this.BankImage = 'Sem'
-                        break
-                    case 756:
-                        // console.log('Siccob')
-                        this.BankImage = 'Sem'
-                        break
-                    default:
-                        // console.log('SEM DADOS')
-                        this.BankImage = 'Sem'
-                }
-            })
-
-            // Pegando o codigo do banco para mostrar a imagem dele na tela
-            /* let bankCode = v['value'].map(v => {
-                let bankCode = v.BankCode
-                console.log(bankCode)
-                let img = ''
-
-                switch (bankCode) {
-                    case 1:
-                        console.log('Banco Brasil')
-                        this.BankImage = 'Sem'
-                        break
-                    case 4:
-                        console.log('Banco do Nordeste')
-                        this.BankImage = 'Sem'
-                        break
-                    case 33:
-                        console.log('Santader')
-                        this.BankImage = '../../../../assets/images/image banco santader.svg'
-                        break
-                    case 77:
-                        console.log('Inter')
-                        this.BankImage = 'Sem'
-                        break
-                    case 104:
-                        console.log('Caixa Economica')
-                        this.BankImage = 'Sem'
-                        break
-                    case 237:
-                        console.log('Bradesco')
-                        this.BankImage = '../../../../assets/images/image banco bradesco.svg'
-                        break
-                    case 341:
-                        console.log('Itau')
-                        this.BankImage = 'Sem'
-                        break
-                    case 403:
-                        console.log('Cora')
-                        this.BankImage = '../../../../assets/images/image banco cora.svg'
-                        break
-                    case 748:
-                        console.log('Sincredi')
-                        this.BankImage = 'Sem'
-                        break
-                    case 756:
-                        console.log('Siccob')
-                        this.BankImage = 'Sem'
-                        break
-                    default:
-                        console.log('SEM DADOS')
-                        this.BankImage = 'Sem'
-                }
-
-            }) */
-
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     // CARREGA OS LANCAMENTOS DA CONTA QUE TEM NO CARD EM CARROUSSEL
-    loadAccounts(Id) {
+    loadAccounts() {
         this.dadosDefault.exibirLoader.next(true);
         /* ProStatementItem?filter=(AccountId=${Id})&OrderBy=DateMovement */
-        /* ProStatementItem?%24filter=40&%24orderby=DateMovement&%24top=5 */
-        this.$subscription3 = this.networkService.getSimples(getUrlPro(), `ProStatementItem?filter=(AccountId=${Id})&OrderBy=DateMovement`).subscribe((v: any) => {
+
+        this.$subscription3 = this.networkService.getSimples(getUrlPro(), 'ProStatementItem?24filter=AccountId3D41&24orderby=DateMovement&24top=5').subscribe((v: any) => {
             console.log('CARREGANDO LANCAMENTOS')
-            console.log(v)
-            /* console.log(Id) */
-            /* console.log(v['value'].slice(0, 5)) */
+            console.log(v['value']) //.slice(0, 5)
 
             v['value'].map(v => {
                 this.Historic = v.Historic
