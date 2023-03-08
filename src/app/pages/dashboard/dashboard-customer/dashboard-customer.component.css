@@ -381,9 +381,9 @@ div .account-card {
 .product-item .product-item-content {
     border: 1px solid var(--surface-d);
     border-radius: 3px;
-    margin: .3rem;
+    margin: 1rem;
     text-align: center;
-    padding: 2rem 0;
+    padding: 1rem 0;
 }
 
 .product-item .product-image {

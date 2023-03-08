@@ -65,9 +65,9 @@
                     </li>
                 </ul>
             </li> -->
-            <li nfI #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}" style="background-color: #4D4D4D;">
+            <li nfI #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}">
                 <a href="#" (click)="app.onTopbarItemClick($event,settings)">
-                    <i class="topbar-icon pi pi-cog"></i>
+                    <i style="color: #4D4D4D;" class="topbar-icon pi pi-cog"></i>
                     <span class="topbar-item-name">Settings</span>
                 </a>
                 <ul class="ultima-menu animated fadeInDown">
