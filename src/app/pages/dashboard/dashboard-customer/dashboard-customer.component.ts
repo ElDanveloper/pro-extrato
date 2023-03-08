@@ -98,7 +98,7 @@ export class DashboardCustomerComponent implements OnInit {
     }
     // private carService: CarService
 
-    ngOnInit() {
+    ngOnInit() {        
         this.loadAll()
 
         //this.labelData()
