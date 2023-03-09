@@ -81,7 +81,7 @@ export class DashboardCustomerComponent implements OnInit {
         this.responsiveOptions = [
             {
                 breakpoint: '1024px',
-                numVisible: 3,
+                numVisible: 5,
                 numScroll: 3
             },
             {
@@ -98,7 +98,7 @@ export class DashboardCustomerComponent implements OnInit {
     }
     // private carService: CarService
 
-    ngOnInit() {        
+    ngOnInit() {
         this.loadAll()
 
         //this.labelData()
@@ -122,11 +122,20 @@ export class DashboardCustomerComponent implements OnInit {
         this.loadBarChart()
         this.loadExpensesDonutChart()
         this.loadCards()
-        this.loadAccounts()
+        //this.loadAccounts()
     }
 
     seeBalance() {
         console.log('fechar olho')
+    }
+
+    reconciliations() {
+        console.log('reconciliations')
+    }
+
+    // QUANDO CLICAR NO BOTAO VER MAIS DO CARD IRÁ REDIRECIONAR PARA UMA PÁGINA
+    viewAccountPage() {
+        console.log('Pagina de conta')
     }
 
     labelData() {
@@ -138,11 +147,7 @@ export class DashboardCustomerComponent implements OnInit {
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    reconciliations() {
-        console.log('reconciliations')
-    }
-
-    // Carregar dados do card do grafico de barras
+    // PASSANDO DADOS PARA O CARD DE GRAFICO DE BARRAS
     loadBarChart() {
         let dataStart = Util.dataParaStringComZero(this.dateStart)
         let dataEnd = Util.dataParaStringComZero(this.dateEnd)
@@ -162,7 +167,7 @@ export class DashboardCustomerComponent implements OnInit {
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    // Carregar dados do card de Principais Despesas
+    // PASSANDO DADOS PARA O CARD DE PRINCIPAIS DESPESAS
     loadExpensesDonutChart() {
         let dataStart = Util.dataParaStringComZero(this.dateStart)
         let dataEnd = Util.dataParaStringComZero(this.dateEnd)
@@ -176,33 +181,38 @@ export class DashboardCustomerComponent implements OnInit {
 
     loadCards() {
         this.networkService.getSimples(getUrlPro(), 'ProAccount').subscribe((v: any) => {
-            console.log('DADOS DOS CARDS')
-            console.log(v['value'])
+            /* console.log('DADOS DOS CARDS')
+            console.log(v['value']) */
             this.accounts = v['value']
+
+            v['value'].map(v => {
+                this.loadAccounts(v.Id)
+            })
+
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     // CARREGA OS LANCAMENTOS DA CONTA QUE TEM NO CARD EM CARROUSSEL
-    loadAccounts() {
-        this.dadosDefault.exibirLoader.next(true);
+    loadAccounts(Id) {
         /* ProStatementItem?filter=(AccountId=${Id})&OrderBy=DateMovement */
-
-        this.$subscription3 = this.networkService.getSimples(getUrlPro(), 'ProStatementItem?24filter=AccountId3D41&24orderby=DateMovement&24top=5').subscribe((v: any) => {
+        this.dadosDefault.exibirLoader.next(true);
+        this.$subscription3 = this.networkService.getSimples(getUrlPro(), `ProStatementItem?24filter=AccountId3D${Id}&24orderby=DateMovement&24top=3`).subscribe((v: any) => {
             console.log('CARREGANDO LANCAMENTOS')
-            console.log(v['value']) //.slice(0, 5)
+            console.log(v['value'].slice(0, 3))
 
             v['value'].map(v => {
                 this.Historic = v.Historic
                 this.ReleaseBalance = v.Amount
             })
+
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
-    // CARD DO GRAFICO DE BARRAS
+    // DADOS DO CARD DO GRAFICO DE BARRAS
     barChart(revenues, expenses){
         let r = revenues.map(v => v.Amount)
         let d = expenses.map(v => v.Amount)
@@ -281,7 +291,7 @@ export class DashboardCustomerComponent implements OnInit {
         };
     }
 
-    // CARD DE PRINCIPAIS DESPESAS
+    // DADOS DO CARD DE PRINCIPAIS DESPESAS
     expenseDonutChart(value) {
         let labels = value.map(v => v.Description).slice(3)
         let data = value.map(v => v.Amount).slice(3)
