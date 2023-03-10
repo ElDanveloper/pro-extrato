@@ -12,6 +12,8 @@ import { HttpClient } from '@angular/common/http';
 
 import {CarouselModule} from 'primeng/carousel';
 
+import {Router} from "@angular/router";
+
 @Component({
     selector: 'app-dashboard-customer',
     templateUrl: './dashboard-customer.component.html',
@@ -74,10 +76,11 @@ export class DashboardCustomerComponent implements OnInit {
 
     BankImage = ''
 
-    Historic = ''
-    ReleaseBalance = 0
+    Historic: ''
+    ReleaseBalance: 0
+    //releaseData: any[] = []
 
-    constructor( private networkService: NetworkService, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {
+    constructor( private networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {
         this.responsiveOptions = [
             {
                 breakpoint: '1024px',
@@ -134,8 +137,8 @@ export class DashboardCustomerComponent implements OnInit {
     }
 
     // QUANDO CLICAR NO BOTAO VER MAIS DO CARD IRÁ REDIRECIONAR PARA UMA PÁGINA
-    viewAccountPage() {
-        console.log('Pagina de conta')
+    viewAccountPage(bankCode) {
+        this.router.navigate([`/account-launch/${bankCode}`])
     }
 
     labelData() {
@@ -186,7 +189,7 @@ export class DashboardCustomerComponent implements OnInit {
             this.accounts = v['value']
 
             v['value'].map(v => {
-                this.loadAccounts(v.Id)
+                if(v.ContractorId) this.loadAccounts(v.Id, v.ContractorId)
             })
 
         }, e => {
@@ -195,16 +198,21 @@ export class DashboardCustomerComponent implements OnInit {
     }
 
     // CARREGA OS LANCAMENTOS DA CONTA QUE TEM NO CARD EM CARROUSSEL
-    loadAccounts(Id) {
-        /* ProStatementItem?filter=(AccountId=${Id})&OrderBy=DateMovement */
+    loadAccounts(Id, ContractorId) {
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.getSimples(getUrlPro(), `ProStatementItem?24filter=AccountId3D${Id}&24orderby=DateMovement&24top=3`).subscribe((v: any) => {
-            console.log('CARREGANDO LANCAMENTOS')
-            console.log(v['value'].slice(0, 3))
+            /* console.log('CARREGANDO LANCAMENTOS')
+            console.log(v['value'].slice(0, 3)) */
 
-            v['value'].map(v => {
-                this.Historic = v.Historic
-                this.ReleaseBalance = v.Amount
+            v['value'].slice(0, 3).map(v => {
+                if(ContractorId === v.ContractorId) {
+                    this.Historic = v.Historic
+                    this.ReleaseBalance = v.Amount
+
+                    //this.releaseData = v
+                    // verifica se o lancamentos é da conta que está sendo exibida em tela
+                    //this.ContractorIdLanc = v.ContractorId
+                }
             })
 
         }, e => {

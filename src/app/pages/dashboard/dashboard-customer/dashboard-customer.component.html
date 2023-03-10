@@ -115,6 +115,12 @@
                             <h5>Resumo</h5>
                         </div>
 
+                        <!-- <ul *ngFor="let data of releaseData">
+                            <li>{{ data }}</li>
+                            <li>{{ data.Historic }}</li>
+                            <li>{{ data.Amount }}</li>
+                        </ul>  -->
+
                         <div class="summary-data">
                             <p> {{ Historic }} </p>
                             <span> {{ ReleaseBalance }} </span>
@@ -128,7 +134,8 @@
                             <span> {{ ReleaseBalance }} </span>
                         </div>
 
-                        <button (click)="viewAccountPage()">Ver mais</button>
+
+                        <button (click)="viewAccountPage(account.BankCode)">Ver mais</button>
 
                             <!-- <span [class]="'product-badge status-'+product.inventoryStatus.toLowerCase()">Saldo atual:</span> -->
                             <!-- <span [class]="'product-badge status-'+accounts.Balance.toLowerCase()">R$ {{accounts.Balance}}</span> -->
