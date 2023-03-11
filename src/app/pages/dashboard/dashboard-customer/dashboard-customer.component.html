@@ -57,7 +57,51 @@
                 </div>
             </div>
         </div>
-        <h3 class="account-management">Gerenciamento de contas</h3>
+
+        <p-carousel [value]="accounts" [numVisible]="6" [numScroll]="2" [circular]="false" [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h3 class="account-management">Gerenciamento de contas</h3>
+            </ng-template>
+            <ng-template let-account pTemplate="item">
+                <div class="product-item col-account-card">
+                    <div class="card account-card">
+
+                        <div class="bank-info product-image">
+                            <img [src]="'../../../../assets/images/' + account.BankCode + '.svg'" [alt]="account.BankCode" class="product-image" />
+                            <div class="bank-account-info">
+                                <h3> {{ account.Name }} </h3>
+                                <p>Conta: {{ account.AccountNumber }} </p>
+                            </div>
+                        </div>
+
+                        <div class="balance">
+                            <h4>Saldo atual:</h4>
+                            <span> R$ {{ account.Balance || virgulaPipe }} </span>
+                        </div>
+
+                        <div class="summary">
+                            <h5>Resumo</h5>
+                        </div>
+
+                        <div class="summary-data">
+                            <p> {{ Historic }} </p>
+                            <span> {{ ReleaseBalance || virgulaPipe }} </span>
+                        </div>
+                        <div class="summary-data">
+                            <p> {{ Historic }} </p>
+                            <span> {{ ReleaseBalance || virgulaPipe }} </span>
+                        </div>
+                        <div class="summary-data">
+                            <p> {{ Historic }} </p>
+                            <span> {{ ReleaseBalance || virgulaPipe }} </span>
+                        </div>
+
+                        <button (click)="viewAccountPage(account.Id)">Ver mais</button>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
+        <!-- <h3 class="account-management">Gerenciamento de contas</h3>
         <div class="p-col-12 p-grid p-fluid" id="container-account-card">
             <div class="p-col-3" class="col-account-card">
                 <div class="card account-card">
@@ -121,37 +165,6 @@
                     <button>ver mais</button>
                 </div>
             </div>
-            <div class="p-col-3" class="col-account-card">
-                <div class="card account-card">
-                    <div class="bank-info">
-                        <img src="../../../../assets/images/image banco mastercard.svg" alt="Icone do Master Card">
-                        <div class="bank-account-info">
-                            <h3>Banco Master Card</h3>
-                            <p>Conta: 01</p>
-                        </div>
-                    </div>
-                    <div class="balance">
-                        <h4>Saldo atual:</h4>
-                        <span>R$ 650,00</span>
-                    </div>
-                    <div class="summary">
-                        <h5>Resumo</h5>
-                    </div>
-                    <div class="summary-data">
-                        <p>S boulevard</p>
-                        <span>-R$ 10,99</span>
-                    </div>
-                    <div class="summary-data">
-                        <p>S boulevard</p>
-                        <span>-R$ 10,99</span>
-                    </div>
-                    <div class="summary-data">
-                        <p>S boulevard</p>
-                        <span>-R$ 10,99</span>
-                    </div>
-                    <button>ver mais</button>
-                </div>
-            </div>
             <div class="p-col-3" id="last-col-account-card">
                 <div class="card account-card" id="last-account-card" style="margin-right: 0;">
                     <div class="bank-info">
@@ -183,7 +196,7 @@
                     <button>ver mais</button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 

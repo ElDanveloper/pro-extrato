@@ -28,6 +28,10 @@ export class AuthService {
     public segundaAuthenticacao() {
         return this.http.get(`https://app.hunno.com.br/api/suport/client`).pipe(catchError(this.errorHandler))
     }
+
+    public secondAuthenticationForEnterprise(id) {
+        return this.http.get(`https://app.hunno.com.br/api/client/vinculo/${id}`).pipe(catchError(this.errorHandler))
+    }
     
     public terceiraAuthenticacao() {
         return this.http.get(`https://app.hunno.com.br/api/suport/contractor`).pipe(catchError(this.errorHandler))

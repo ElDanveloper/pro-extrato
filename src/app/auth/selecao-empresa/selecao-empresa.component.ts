@@ -82,8 +82,10 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
     }
 
     home(v) {
+        console.log('Objeto ---> ' + JSON.stringify(v))
         let client_id = this.lista.find(x => x['id'] === v.id)
         sessionStorage.setItem(EMPRESA_STORAGE_KEY, JSON.stringify(client_id))
+        console.log('Client_id ---> ' + JSON.stringify(client_id))
         let body = {}
         if (this.value === 2) {
             body = { contractor_id: client_id.id }

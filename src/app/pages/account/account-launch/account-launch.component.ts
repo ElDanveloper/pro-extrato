@@ -68,6 +68,8 @@ export class AccountLaunchComponent implements OnInit {
 
         this.route.params.subscribe(v => {
             this.id = v.id
+            console.log('id q vem do dash')
+            console.log(this.id)
         });
         if (this.contaCaixa === undefined) {
             this.nome = sessionStorage.getItem('caixaBanco')
@@ -78,6 +80,10 @@ export class AccountLaunchComponent implements OnInit {
             // this.carregarLista()
         })
 
+        /* this.networkService.getSimples(getUrlPro(), `ProAccount/${this.id}`).subscribe(v => {
+            console.log('Pro account id')
+            console.log(v)
+        }) */
     }
 
     contaTrocada() {
