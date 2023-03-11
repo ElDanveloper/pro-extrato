@@ -58,38 +58,6 @@
             </div>
         </div>
 
-        <!-- <div class="p-col-3" class="col-account-card">
-            <div class="card account-card">
-                <div class="bank-info">
-                    <img src="../../../../assets/images/image banco cora.svg" alt="Icone do banco Cora">
-                    <div class="bank-account-info">
-                        <h3>Banco Cora</h3>
-                        <p>Conta: 01</p>
-                    </div>
-                </div>
-                <div class="balance">
-                    <h4>Saldo atual:</h4>
-                    <span>R$ 650,00</span>
-                </div>
-                <div class="summary">
-                    <h5>Resumo</h5>
-                </div>
-                <div class="summary-data">
-                    <p>S boulevard</p>
-                    <span>-R$ 10,99</span>
-                </div>
-                <div class="summary-data">
-                    <p>S boulevard</p>
-                    <span>-R$ 10,99</span>
-                </div>
-                <div class="summary-data">
-                    <p>S boulevard</p>
-                    <span>-R$ 10,99</span>
-                </div>
-                <button>ver mais</button>
-            </div>
-        </div> -->
-
         <p-carousel [value]="accounts" [numVisible]="6" [numScroll]="2" [circular]="false" [responsiveOptions]="responsiveOptions">
             <ng-template pTemplate="header">
                 <h3 class="account-management">Gerenciamento de contas</h3>
@@ -108,50 +76,31 @@
 
                         <div class="balance">
                             <h4>Saldo atual:</h4>
-                            <span> R$ {{ account.Balance }} </span>
+                            <span> R$ {{ account.Balance || virgulaPipe }} </span>
                         </div>
 
                         <div class="summary">
                             <h5>Resumo</h5>
                         </div>
 
-                        <!-- <ul *ngFor="let data of releaseData">
-                            <li>{{ data }}</li>
-                            <li>{{ data.Historic }}</li>
-                            <li>{{ data.Amount }}</li>
-                        </ul>  -->
-
                         <div class="summary-data">
                             <p> {{ Historic }} </p>
-                            <span> {{ ReleaseBalance }} </span>
+                            <span> {{ ReleaseBalance || virgulaPipe }} </span>
                         </div>
                         <div class="summary-data">
                             <p> {{ Historic }} </p>
-                            <span> {{ ReleaseBalance }} </span>
+                            <span> {{ ReleaseBalance || virgulaPipe }} </span>
                         </div>
                         <div class="summary-data">
                             <p> {{ Historic }} </p>
-                            <span> {{ ReleaseBalance }} </span>
+                            <span> {{ ReleaseBalance || virgulaPipe }} </span>
                         </div>
 
-
-                        <button (click)="viewAccountPage(account.BankCode)">Ver mais</button>
-
-                            <!-- <span [class]="'product-badge status-'+product.inventoryStatus.toLowerCase()">Saldo atual:</span> -->
-                            <!-- <span [class]="'product-badge status-'+accounts.Balance.toLowerCase()">R$ {{accounts.Balance}}</span> -->
-
-                            <!-- <div class="car-buttons mt-5">
-                                <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
-                                <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
-                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
-                            </div> -->
-
+                        <button (click)="viewAccountPage(account.Id)">Ver mais</button>
                     </div>
                 </div>
             </ng-template>
         </p-carousel>
-
-
         <!-- <h3 class="account-management">Gerenciamento de contas</h3>
         <div class="p-col-12 p-grid p-fluid" id="container-account-card">
             <div class="p-col-3" class="col-account-card">
@@ -191,37 +140,6 @@
                         <img src="../../../../assets/images/image banco bradesco.svg" alt="Icone do banco Bradesco">
                         <div class="bank-account-info">
                             <h3>Banco Bradesco</h3>
-                            <p>Conta: 01</p>
-                        </div>
-                    </div>
-                    <div class="balance">
-                        <h4>Saldo atual:</h4>
-                        <span>R$ 650,00</span>
-                    </div>
-                    <div class="summary">
-                        <h5>Resumo</h5>
-                    </div>
-                    <div class="summary-data">
-                        <p>S boulevard</p>
-                        <span>-R$ 10,99</span>
-                    </div>
-                    <div class="summary-data">
-                        <p>S boulevard</p>
-                        <span>-R$ 10,99</span>
-                    </div>
-                    <div class="summary-data">
-                        <p>S boulevard</p>
-                        <span>-R$ 10,99</span>
-                    </div>
-                    <button>ver mais</button>
-                </div>
-            </div>
-            <div class="p-col-3" class="col-account-card">
-                <div class="card account-card">
-                    <div class="bank-info">
-                        <img src="../../../../assets/images/image banco mastercard.svg" alt="Icone do Master Card">
-                        <div class="bank-account-info">
-                            <h3>Banco Master Card</h3>
                             <p>Conta: 01</p>
                         </div>
                     </div>

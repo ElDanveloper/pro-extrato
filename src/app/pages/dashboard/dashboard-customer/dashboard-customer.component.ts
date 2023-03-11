@@ -70,15 +70,11 @@ export class DashboardCustomerComponent implements OnInit {
     expenses: any = null
 
     /* Carroussel */
-    /* products: []; */
     responsiveOptions;
     accounts: []
-
     BankImage = ''
-
-    Historic: ''
+    Historic: string[]
     ReleaseBalance: 0
-    //releaseData: any[] = []
 
     constructor( private networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {
         this.responsiveOptions = [
@@ -103,8 +99,6 @@ export class DashboardCustomerComponent implements OnInit {
 
     ngOnInit() {
         this.loadAll()
-
-        //this.labelData()
 
         // this.carService.getCarsSmall().then(cars => this.cars = cars);
 
@@ -137,8 +131,8 @@ export class DashboardCustomerComponent implements OnInit {
     }
 
     // QUANDO CLICAR NO BOTAO VER MAIS DO CARD IRÁ REDIRECIONAR PARA UMA PÁGINA
-    viewAccountPage(bankCode) {
-        this.router.navigate([`/account-launch/${bankCode}`])
+    viewAccountPage(Id) {
+        this.router.navigate([`/account-launch/${Id}`])
     }
 
     labelData() {
@@ -189,7 +183,7 @@ export class DashboardCustomerComponent implements OnInit {
             this.accounts = v['value']
 
             v['value'].map(v => {
-                if(v.ContractorId) this.loadAccounts(v.Id, v.ContractorId)
+                this.loadAccounts(v.Id)
             })
 
         }, e => {
@@ -198,21 +192,15 @@ export class DashboardCustomerComponent implements OnInit {
     }
 
     // CARREGA OS LANCAMENTOS DA CONTA QUE TEM NO CARD EM CARROUSSEL
-    loadAccounts(Id, ContractorId) {
+    loadAccounts(Id) {
         this.dadosDefault.exibirLoader.next(true);
         this.$subscription3 = this.networkService.getSimples(getUrlPro(), `ProStatementItem?24filter=AccountId3D${Id}&24orderby=DateMovement&24top=3`).subscribe((v: any) => {
             /* console.log('CARREGANDO LANCAMENTOS')
             console.log(v['value'].slice(0, 3)) */
 
-            v['value'].slice(0, 3).map(v => {
-                if(ContractorId === v.ContractorId) {
-                    this.Historic = v.Historic
-                    this.ReleaseBalance = v.Amount
-
-                    //this.releaseData = v
-                    // verifica se o lancamentos é da conta que está sendo exibida em tela
-                    //this.ContractorIdLanc = v.ContractorId
-                }
+            v['value'].map(v => {
+                this.Historic = v.Historic
+                this.ReleaseBalance = v.Amount
             })
 
         }, e => {
