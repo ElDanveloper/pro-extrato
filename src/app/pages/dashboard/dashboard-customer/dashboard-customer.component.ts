@@ -11,7 +11,6 @@ import { HttpClient } from '@angular/common/http';
 // import { Car } from '../domain/car';
 
 import {CarouselModule} from 'primeng/carousel';
-
 import {Router} from "@angular/router";
 
 @Component({
@@ -59,7 +58,7 @@ export class DashboardCustomerComponent implements OnInit {
     dataInit = Util.getDateComUmMesAntes();
     dataFim = Util.getLastDayDate();
 
-    cars: Car[];
+    //cars: Car[];
 
     value1: number;
     value2: number;
@@ -135,6 +134,22 @@ export class DashboardCustomerComponent implements OnInit {
         this.router.navigate([`/account-launch/${Id}`])
     }
 
+    alterouData(e) {
+        this.dateStart = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
+        this.dateEnd = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
+        this.loadAll()
+        this.updateData()
+    }
+
+    updateData(){
+        let Month = this.dataFim.getMonth() + 1
+        let Year = this.dataFim.getFullYear()
+        this.dadosDefault.exibirLoader.next(true);
+        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${Month}&Year=${Year}`).subscribe(v => {
+            // console.log(v)
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
     labelData() {
         let Month = this.dataFim.getMonth() + 1
         let Year = this.dataFim.getFullYear()
@@ -197,12 +212,10 @@ export class DashboardCustomerComponent implements OnInit {
         this.$subscription3 = this.networkService.getSimples(getUrlPro(), `ProStatementItem?24filter=AccountId3D${Id}&24orderby=DateMovement&24top=3`).subscribe((v: any) => {
             /* console.log('CARREGANDO LANCAMENTOS')
             console.log(v['value'].slice(0, 3)) */
-
             v['value'].map(v => {
                 this.Historic = v.Historic
                 this.ReleaseBalance = v.Amount
             })
-
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))
@@ -365,107 +378,19 @@ export class DashboardCustomerComponent implements OnInit {
                 }
             ]
         };
-
     }
 
-    alterouData(e) {
-        this.dateStart = new Date(e.dataInicial.getFullYear(), e.dataInicial.getMonth(), e.dataInicial.getDate())
-        this.dateEnd = new Date(e.dataFinal.getFullYear(), e.dataFinal.getMonth(), e.dataFinal.getDate())
-        this.loadAll()
-        this.updateData()
-    }
-
-    updateData(){
-        let Month = this.dataFim.getMonth() + 1
-        let Year = this.dataFim.getFullYear()
-        this.dadosDefault.exibirLoader.next(true);
-        this.networkService.getSimples(getUrlPro(), `Dash1?Month=${Month}&Year=${Year}`).subscribe(v => {
-            // console.log(v)
-        }).add(() => this.dadosDefault.exibirLoader.next(false))
-    }
-
-    colorValue(v) {
+    /* colorValue(v) {
         const classes = {
             'texto-verde': false,
             'texto-vermelho': false,
         }
         return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
-    }
+    } */
 
     get Balance() {
         if (!this.data.Balance) return 0
         return this.data.Balance
-    }
-
-    // VERIFICAR PARA TIRAR ALGUNS DESSES
-    get Value1(){
-        if (!this.value1 || this.value1 <= 0) return 0
-        return Util.toNumber(this.value1);
-    }
-
-    get Value2(){
-        if (!this.value2 || this.value2 <= 0) return 0
-        return Util.toNumber(this.value2);
-    }
-
-    get Value3(){
-        if (!this.value3 || this.value3 <= 0) return 0
-        return Util.toNumber(this.value3);
-    }
-
-    get Amount(){
-        if (!this.data.Amount || this.data.Amount <= 0) return 0
-        return Util.toNumber(this.data.Amount);
-    }
-
-    get AnalistPending() {
-        if (!this.data.AnalistPending || this.data.AnalistPending <= 0) return 0
-        return Util.toNumber(this.data.AnalistPending);
-    }
-
-    get CompanyPendingAnalist() {
-        if (!this.data.CompanyPendingAnalist || this.data.CompanyPendingAnalist <= 0) return 0
-        return Util.toNumber(this.data.CompanyPendingAnalist);
-    }
-
-    get CostomerPending() {
-        if (!this.data.CostomerPending || this.data.CostomerPending <= 0) return 0
-        return Util.toNumber(this.data.CostomerPending);
-    }
-
-    get CompanyPendingCostomer() {
-        if (!this.data.CompanyPendingCostomer || this.data.CompanyPendingCostomer <= 0) return 0
-        return Util.toNumber(this.data.CompanyPendingCostomer);
-    }
-
-    get AmountReconciled() {
-        if (!this.data.AmountReconciled || this.data.AmountReconciled <= 0) return 0
-        return Util.toNumber(this.data.AmountReconciled);
-    }
-
-    get IaReconciled() {
-        if (!this.data.IaReconciled || this.data.IaReconciled <= 0) return 0
-        return Util.toNumber(this.data.IaReconciled);
-    }
-
-    get AnalistReconciled() {
-        if (!this.data.AnalistReconciled || this.data.AnalistReconciled <= 0) return 0
-        return Util.toNumber(this.data.AnalistReconciled);
-    }
-
-    get CostomerReconciled() {
-        if (!this.data.CostomerReconciled || this.data.CostomerReconciled <= 0) return 0
-        return Util.toNumber(this.data.CostomerReconciled);
-    }
-
-    get ActiveAccount() {
-        if (!this.data.ActiveAccount || this.data.ActiveAccount <= 0) return 0
-        return Util.toNumber(this.data.ActiveAccount);
-    }
-
-    get ActiveCompany() {
-        if (!this.data.ActiveCompany || this.data.ActiveCompany <= 0) return 0
-        return Util.toNumber(this.data.ActiveCompany);
     }
 
     // COMPONENTE TABLE DE ANALISTA
@@ -955,9 +880,9 @@ export class DashboardCustomerComponent implements OnInit {
 }
 
 // exportando classe da tabela de analista
-export interface Car {
+/* export interface Car {
     vin;
     year;
     brand;
     color;
-}
+} */
