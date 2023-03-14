@@ -78,8 +78,13 @@ export class DashboardCustomerComponent implements OnInit {
     constructor( private networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {
         this.responsiveOptions = [
             {
+                breakpoint: '1440px',
+                numVisible: 4,
+                numScroll: 4
+            },
+            {
                 breakpoint: '1024px',
-                numVisible: 5,
+                numVisible: 3,
                 numScroll: 3
             },
             {
@@ -879,10 +884,3 @@ export class DashboardCustomerComponent implements OnInit {
         */
 }
 
-// exportando classe da tabela de analista
-/* export interface Car {
-    vin;
-    year;
-    brand;
-    color;
-} */

@@ -58,7 +58,8 @@
             </div>
         </div>
 
-        <p-carousel [value]="accounts" [numVisible]="6" [numScroll]="2" [circular]="false" [responsiveOptions]="responsiveOptions">
+
+        <p-carousel [value]="accounts" [numVisible]="4" [numScroll]="4" [responsiveOptions]="responsiveOptions" [circular]="true" [style]="{'width':'1870px'}">
             <ng-template pTemplate="header">
                 <h3 class="account-management">Gerenciamento de contas</h3>
             </ng-template>
@@ -101,6 +102,9 @@
                 </div>
             </ng-template>
         </p-carousel>
+
+
+
         <!-- <div class="p-col-12 p-grid p-fluid" id="container-account-card">
             <div class="p-col-3" class="col-account-card">
                 <div class="card account-card">
