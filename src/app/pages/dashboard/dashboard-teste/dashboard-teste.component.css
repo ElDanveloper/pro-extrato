@@ -1,7 +1,7 @@
-@font-face {
+/* @font-face {
     font-family: 'Poppins', sans-serif;
     src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap')
-}
+} */
 
 /* TODOS OS CARDS */
 .cards-container {
@@ -14,8 +14,8 @@
     width: 28rem;
     display: flex;
     flex-direction: column;
-
     border-radius: 25px;
+    /* width: 250px; */
 }
 
 .card-1-transaction-card {
@@ -23,6 +23,7 @@
     width: 24rem;
     color: #fff;
     border-radius: 25px;
+    /* width: 200px; */
 }
 
 .card-1-transaction-card h3 {
@@ -40,7 +41,7 @@
 }
 
 .card-1-active-securities p {
-    font-family: 'Poppins'; 
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -61,6 +62,7 @@
 
 .card-1-update-button {
     margin-left: 18rem;
+    /* margin-left: 150px; */
     margin-top: -7rem;
     display: flex;
     flex-direction: column;
@@ -71,7 +73,7 @@
     box-shadow: 1px 4px 16px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     padding: 15px;
-    margin-top: -7.5rem;
+    /* margin-top: -7.5rem; */
 }
 
 .card-1-update-button:hover {
@@ -99,6 +101,13 @@
 }
 
 /* CARD DE PENDECIAS */
+.pending-card {
+    width: 24rem;
+    background: #3B4CC0;
+    border-radius: 25px;
+    color: #fff;
+}
+
 .pending-card-title {
     font-family: 'Poppins',sans-serif;
     font-style: normal;
@@ -107,13 +116,6 @@
     line-height: 24px;
     text-transform: capitalize;
     color: #4D4D4D;
-}
-
-.pending-card {
-    width: 24rem;
-    background: #3B4CC0;
-    border-radius: 25px;
-    color: #fff;
 }
 
 .pending-card h5 {
@@ -202,4 +204,85 @@
     color: #4D4D4D;
     background: #E6E6E6;
     border: 1px solid #FFFFFF;
+}
+
+@media (max-width: 1366px) {
+    .cards {
+        width: 350px;
+    }
+
+    .card-1-transaction-card {
+        width: 300px;
+        margin-top: 10px;
+    }
+
+    .card-1-update-button {
+        margin-left: 210px;
+        margin-bottom: 10px;
+    }
+
+    .card-1-transaction-card h3 {
+        font-size: 18px;
+    }
+
+    .card-1-active-securities {
+        margin-top: 10px;
+    }
+
+    .pending-card {
+        width: 300px;
+    }
+
+    .pending-card h5 {
+        font-size: 16px;
+    }
+
+    .pending-card-title {
+        font-size: 18px;
+    }
+
+    /* GRAFICO DE BARRAS */
+    .bar-chart-card {
+        margin-left: 50px;
+        width: 550px;
+        height: 360px;
+    }
+
+    .bar-chart-card h3 {
+        font-size: 18px;
+    }
+
+    /* GRAFICO DE ROSCA */
+    .donut-chart-card {
+        width: 350px;
+        height: 360px !important;
+        margin-left: 80px;
+    }
+
+    .donut-chart-card h3 {
+        font-size: 18px;
+    }
+
+    /* CARD DE TABELA */
+    .table-card {
+        /* margin-left: -3rem;
+        margin-top: 2rem; */
+
+        margin-left: 50px;
+        width: 930px;
+        margin-top: -70px;
+    }
+
+    .table-card h3 {
+        /* font-size: 24px;
+        line-height: 24px; */
+        font-size: 18px;
+
+    }
+
+    .table-card th {
+        font-size: 12px;
+        /* line-height: 24px; */
+    }
+
 }
