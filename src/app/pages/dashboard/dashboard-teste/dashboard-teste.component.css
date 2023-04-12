@@ -216,6 +216,10 @@
         margin-top: 10px;
     }
 
+    /* .card-1-transaction-card span {
+        font-size: 10px;
+    } */
+
     .card-1-update-button {
         margin-left: 210px;
         margin-bottom: 10px;
@@ -233,12 +237,16 @@
         width: 300px;
     }
 
-    .pending-card h5 {
-        font-size: 16px;
-    }
-
     .pending-card-title {
         font-size: 18px;
+    }
+
+    .pending-card h5 {
+        font-size: 14px;
+    }
+
+    .pending-card p {
+        font-size: 12px;
     }
 
     /* GRAFICO DE BARRAS */
