@@ -10,21 +10,21 @@
              (keypress)="pressionaEnter($event)" (click)="pressionaEnter()"
             <app-select #selectValue [options]="selectSort"></app-select>
         </div> -->
-        <div class="p-field p-col-12 p-md-2" style="margin-top: 15px;">
+        <div class="p-field p-col-12 p-md-2" style="margin-top: 6px;">
             <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 25px; cursor: pointer;"></i>
             <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 35px; cursor: pointer"></i>
         </div>
         <div class="p-field p-col-12 p-md-2">
             <button pButton label="Nova Empresa" (click)="navegar()"></button>
-            
+
         </div>
     </div>
 
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="opcoesLinhas">
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th [ngStyle]="{width: '5%'}"> Código </th>                
-            <th [ngStyle]="{width: '40%'}"> Nome </th>            
+                <th [ngStyle]="{width: '5%'}"> Código </th>
+            <th [ngStyle]="{width: '40%'}"> Nome </th>
             <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>
             <th [ngStyle]="{width: '10%'}"> Fone </th>
             <th [ngStyle]="{width: '20%'}"> Email </th>
@@ -33,7 +33,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
             <tr>
-            <td>{{rowData.code_client}}</td>    
+            <td>{{rowData.code_client}}</td>
             <td><span (click)="linkPessoa(rowData)" class="link-pessoa">{{rowData.nome}}</span></td>
             <td>{{rowData.cpf_cnpj | cpfCnpj}}</td>
             <td>{{rowData.fone_format}}</td>
