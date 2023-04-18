@@ -41,15 +41,18 @@ export class DashboardCustomerComponent implements OnInit {
     Historic: string[]
     ReleaseBalance: 0
 
+    Visible = 0
+    Scroll = 0
+
     constructor( private networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {
         this.responsiveOptions = [
             {
                 breakpoint: '1440px',
                 numVisible: 4,
                 numScroll: 4
-            },
+            },            
             {
-                breakpoint: '1024px',
+                breakpoint: '1366px',
                 numVisible: 3,
                 numScroll: 3
             },
@@ -67,6 +70,11 @@ export class DashboardCustomerComponent implements OnInit {
     }
 
     ngOnInit() {
+        //pegar a quantidade de visualização e de scroll do carrosel de acordo com o width do monitor do cliente
+        let resolution = this.responsiveOptions.find(x => x.breakpoint === window.innerWidth.toString()+'px');  
+        this.Visible = resolution.numVisible
+        this.Scroll = resolution.numScroll
+        
         this.loadAll()
     }
 

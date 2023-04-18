@@ -413,6 +413,7 @@ div .account-card {
     #last-account-card {
         display: none;
     }
+
 }
 
 @media (max-width: 1440px) and (min-width: 1024px) {
@@ -530,4 +531,38 @@ div .account-card {
         height: 32rem;
     }
     
+}
+
+@media (min-width: 1366px){
+    /* .col-main-expenses-card {
+        width: 20rem;
+    } */
+
+    .main-expenses-card {
+        /* margin-left: 1rem; */
+        border-radius: 25px;
+        width: 25rem;
+        margin-top: 1rem;
+    }
+
+    /* .col-bar-chart-card {
+        margin-top: -33rem;
+        margin-left: 52rem;
+    } */
+
+    .bar-chart-card {
+        width: 43rem;
+        border-radius: 25px;
+        margin-top: 1rem;
+        margin-left: -0.6rem;
+    }
+    
+    div .account-card {
+        min-width: 28rem;
+        margin-left: 1rem;
+    }
+   /* Ajuste no tamanho do carrosel de acordo com cada resolução */
+    .carousel {
+        width: 1320px;
+    }
 }
