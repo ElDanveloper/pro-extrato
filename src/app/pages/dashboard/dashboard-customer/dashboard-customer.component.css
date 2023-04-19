@@ -69,20 +69,22 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 1.5rem;
 }
 
 .card-1-balance h4 {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 20px;
+    /* font-size: 20px; */
+    font-size: 1.5rem;
+    /* line-height: 20px; */
     color: #FFFFFF;
 }
 
-.card-1-balance i {
+/* .card-1-balance i {
     font-size: 1.5rem;
-}
+} */
 
 .card-1-button {
     background: #ffffff00;
@@ -160,16 +162,23 @@
     width: 40rem;
     /* height: 30.5rem; */
 
+    background-color: #ffffff;
+    padding: 1.1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
 }
 
 .main-expenses-card h3 {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
-    line-height: 24px;
+    /* font-size: 24px; */
+    font-size: 1.3rem;
+    /* line-height: 24px; */
     text-transform: capitalize;
     color: #4D4D4D;
+    margin: 0;
+    margin-bottom: 2rem;
 }
 
 /* CARD GRAFICO DE BARRAS */
@@ -190,6 +199,7 @@
 
     text-transform: capitalize;
     color: #4D4D4D;
+    margin: 0;
 }
 
 
