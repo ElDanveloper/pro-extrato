@@ -46,10 +46,15 @@ export class DashboardCustomerComponent implements OnInit {
     constructor( private networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService, public messageService: MessageService, private http: HttpClient ) {
         this.responsiveOptions = [
             {
+                breakpoint: '1920px',
+                numVisible: 4,
+                numScroll: 4
+            },
+            {
                 breakpoint: '1440px',
                 numVisible: 4,
                 numScroll: 4
-            },            
+            },
             {
                 breakpoint: '1366px',
                 numVisible: 3,
@@ -70,10 +75,10 @@ export class DashboardCustomerComponent implements OnInit {
 
     ngOnInit() {
         //pegar a quantidade de visualização e de scroll do carrosel de acordo com o width do monitor do cliente
-        let resolution = this.responsiveOptions.find(x => x.breakpoint === window.innerWidth.toString()+'px');  
+        let resolution = this.responsiveOptions.find(x => x.breakpoint === window.innerWidth.toString()+'px');
         this.Visible = resolution.numVisible
         this.Scroll = resolution.numScroll
-        
+
         this.loadAll()
     }
 
@@ -206,7 +211,8 @@ export class DashboardCustomerComponent implements OnInit {
             }
         }
 
-        const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+        /* const monthLabel = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'] */
+        const monthLabel = ['Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
         let label = monthLabel.map(m => `${m}`)
         this.dataBar = {
             labels: label,

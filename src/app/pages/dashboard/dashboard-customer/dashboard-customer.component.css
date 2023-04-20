@@ -50,8 +50,9 @@
 .card-1-update-button p {
     font-family: 'Poppins';
     font-style: normal;
-    font-size: 13px;
-    line-height: 16px;
+    /* font-size: 13px; */
+    font-size: 0.9rem;
+    /* line-height: 16px; */
     color: #9C9C9C;
 }
 
@@ -135,8 +136,9 @@
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 30px;
+    /* font-size: 20px; */
+    font-size: 1.25rem;
+    /* line-height: 30px; */
     color: #FFFFFF;
     margin: 0;
 }
@@ -145,8 +147,9 @@
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 30px;
+    /* font-size: 20px; */
+    font-size: 1.25rem;
+    /* line-height: 30px; */
     text-align: center;
     color: #FFFFFF;
 }
@@ -159,7 +162,7 @@
 /* CARD DE PRINCIPAIS DESPESAS */
 .main-expenses-card {
     border-radius: 25px;
-    width: 40rem;
+    width: 39rem;
     /* height: 30.5rem; */
 
     background-color: #ffffff;
@@ -205,13 +208,28 @@
 
 
 /* CARD CONTAS */
+
+div .account-card {
+    min-width: 26rem;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Ajuste no tamanho do carrosel de acordo com cada resolução */
+.carousel {
+    width: 100%;
+}
+
 .account-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 25px;
-    width: 20rem;
+    min-width: 10rem;
     margin: none;
+
+    /* min-width: 28rem; */
+    margin-left: 1rem;
 }
 
 .account-card .bank-info {
@@ -239,8 +257,9 @@
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
+    /* font-size: 20px; */
+    font-size: 1.25rem;
+    /* line-height: 24px; */
     color: #3B4CC0;
     margin-bottom: 1px;
 }
@@ -249,8 +268,9 @@
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
+    /* font-size: 16px; */
+    font-size: 1rem;
+    /* line-height: 24px; */
     color: #828282;
 }
 
@@ -258,8 +278,9 @@
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 15px;
-    line-height: 24px;
+    /* font-size: 15px; */
+    font-size: 1rem;
+    /* line-height: 24px; */
     color: #3B4CC0;
     display: flex;
     justify-content: flex-start;
@@ -268,6 +289,7 @@
 .balance {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
@@ -275,18 +297,20 @@
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 18px;
-    line-height: 24px;
+    /* font-size: 18px; */
+    font-size: 1.25rem;
+    /* line-height: 24px; */
     color: #4D4D4D;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
 .balance span {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 18px;
-    line-height: 24px;
+    /* font-size: 18px; */
+    font-size: 1.25rem;
+    /* line-height: 24px; */
     color: #12D90B;
 }
 
@@ -299,7 +323,9 @@
 
 .summary h5 {
     font-family: 'Poppins', sans-serif;
-    margin-bottom: 2px;
+    /* margin-bottom: 2px; */
+    margin-bottom: 0.2rem;
+    margin-top: -0.4rem;
 }
 
 .summary-data {
@@ -312,18 +338,21 @@
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 24px;
+    /* font-size: 12px; */
+    font-size: 0.9rem;
+    /* line-height: 24px; */
     color: #828282;
-    margin-bottom: 2px;
+    /* margin-bottom: 2px; */
+    margin-bottom: 0.2rem;
 }
 
 .summary-data span {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 24px;
+    /* font-size: 12px; */
+    font-size: 0.9rem;
+    /* line-height: 24px; */
     color: #FF1414;
 }
 
@@ -337,8 +366,9 @@
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 18px;
-    line-height: 24px;
+    /* font-size: 18px; */
+    font-size: 1.2rem;
+    /* line-height: 24px; */
     color: #FFFFFF;
 }
 
@@ -348,10 +378,10 @@
 }
 
 /* PARA CORRIGIR A SOBRESCRIÇÃO DA RESOLUÇÃO 1024px */
-div .account-card {
+/* div .account-card {
     min-width: 30rem;
     margin-left: 1rem;
-}
+} */
 
 /* CARROUSSEL */
 .product-item .product-item-content {
@@ -426,7 +456,8 @@ div .account-card {
 
 }
 
-@media (max-width: 1440px) and (min-width: 1024px) {
+/* and (min-width: 1024px) */
+@media (max-width: 1440px) {
     .cards {
         width: 22rem;
     }
@@ -567,12 +598,12 @@ div .account-card {
         /* margin-left: -0.6rem; */
     }
 
-    div .account-card {
+    /* div .account-card {
         min-width: 28rem;
         margin-left: 1rem;
-    }
+    } */
    /* Ajuste no tamanho do carrosel de acordo com cada resolução */
-    .carousel {
+    /* .carousel {
         width: 1320px;
-    }
+    } */
 }
