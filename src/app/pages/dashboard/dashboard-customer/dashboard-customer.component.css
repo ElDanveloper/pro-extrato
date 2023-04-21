@@ -456,7 +456,38 @@ div .account-card {
 
 }
 
-/* and (min-width: 1024px) */
+@media (max-width: 1366px){
+    .card-1-amount-balance span {
+        font-size: 2.5rem;
+    }
+
+    .card-1-balance {
+        margin-bottom: 0.9rem;
+    }
+
+    .reconciliations-button {
+        width: 100%;
+    }
+
+    .main-expenses-card {
+        width: 23rem;
+    }
+
+    /* .bar-chart-card {
+        width: 60rem;
+    } */
+
+    .bar-chart-card h3 {
+        margin-bottom: 2rem;
+    }
+
+    .account-card .bank-info {
+        justify-content: flex-start;
+        width: 100%;
+    }
+}
+
+
 @media (max-width: 1440px) {
     .cards {
         width: 22rem;
@@ -472,20 +503,20 @@ div .account-card {
         margin-bottom: 0;
         font-size: 1.2rem;
     }
-    .card-1-amount-balance span {
+    /* .card-1-amount-balance span {
         font-size: 2rem;
-    }
-    .card-1-update-button {
+    } */
+    /* .card-1-update-button {
         margin-left: 13rem;
-    }
-    .card-1-transaction-card {
+    } */
+    /* .card-1-transaction-card {
         width: 18rem;
-    }
-    .reconciliations-button {
+    } */
+    /* .reconciliations-button {
         width: 22rem;
         margin-bottom: 0rem;
         margin-left: 0.5rem;
-    }
+    } */
     .reconciliations-button p {
         font-size: 16px;
         line-height: 30px;
@@ -499,11 +530,11 @@ div .account-card {
         margin-left: 25rem;
         margin-right: 1rem;
     }
-    .main-expenses-card {
+    /* .main-expenses-card {
         margin-left: 0;
         height: 32rem;
         width: 27rem;
-    }
+    } */
     .col-bar-chart-card {
         margin-top: -33rem;
         margin-left: 52rem;
@@ -547,6 +578,7 @@ div .account-card {
     }
 }
 
+
 /*
 @media (max-width: 1920px) {
     .cards {
@@ -574,36 +606,4 @@ div .account-card {
     }
 }
 */
-@media (min-width: 1366px){
-    /* .col-main-expenses-card {
-        width: 20rem;
-    } */
 
-    .main-expenses-card {
-        /* margin-left: 1rem; */
-        border-radius: 25px;
-        /* width: 25rem; */
-        /* margin-top: 1rem; */
-    }
-
-    /* .col-bar-chart-card {
-        margin-top: -33rem;
-        margin-left: 52rem;
-    } */
-
-    .bar-chart-card {
-        /* width: 43rem; */
-        border-radius: 25px;
-        /* margin-top: 1rem; */
-        /* margin-left: -0.6rem; */
-    }
-
-    /* div .account-card {
-        min-width: 28rem;
-        margin-left: 1rem;
-    } */
-   /* Ajuste no tamanho do carrosel de acordo com cada resolução */
-    /* .carousel {
-        width: 1320px;
-    } */
-}
