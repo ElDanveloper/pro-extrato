@@ -13,7 +13,6 @@
     flex-direction: column;
     margin-bottom: 0;
     border-radius: 25px;
-
     padding: 1.5rem;
 }
 
@@ -50,9 +49,7 @@
 .card-1-update-button p {
     font-family: 'Poppins';
     font-style: normal;
-    /* font-size: 13px; */
     font-size: 0.9rem;
-    /* line-height: 16px; */
     color: #9C9C9C;
 }
 
@@ -77,15 +74,9 @@
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
-    /* font-size: 20px; */
     font-size: 1.5rem;
-    /* line-height: 20px; */
     color: #FFFFFF;
 }
-
-/* .card-1-balance i {
-    font-size: 1.5rem;
-} */
 
 .card-1-button {
     background: #ffffff00;
@@ -136,9 +127,7 @@
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
-    /* font-size: 20px; */
     font-size: 1.25rem;
-    /* line-height: 30px; */
     color: #FFFFFF;
     margin: 0;
 }
@@ -147,9 +136,7 @@
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
-    /* font-size: 20px; */
     font-size: 1.25rem;
-    /* line-height: 30px; */
     text-align: center;
     color: #FFFFFF;
 }
@@ -163,21 +150,23 @@
 .main-expenses-card {
     border-radius: 25px;
     width: 39rem;
-    /* height: 30.5rem; */
-
     background-color: #ffffff;
     padding: 1.1rem;
     margin-bottom: 2rem;
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
 }
 
+.main-expenses-card p chart canvas.chartjs-render-monitor {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .main-expenses-card h3 {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
-    /* font-size: 24px; */
     font-size: 1.3rem;
-    /* line-height: 24px; */
     text-transform: capitalize;
     color: #4D4D4D;
     margin: 0;
@@ -199,14 +188,12 @@
     font-style: normal;
     font-weight: 700;
     font-size: 1.3rem;
-
     text-transform: capitalize;
     color: #4D4D4D;
     margin: 0;
 }
 
 /* CARD CONTAS */
-
 div .account-card {
     min-width: 26rem;
     margin-left: 2rem;
@@ -225,8 +212,6 @@ div .account-card {
     border-radius: 25px;
     min-width: 10rem;
     margin: none;
-
-    /* min-width: 28rem; */
     margin-left: 1rem;
 }
 
@@ -235,6 +220,9 @@ div .account-card {
     flex-direction: row;
     gap: 1rem;
     margin-bottom: 1rem;
+
+    justify-content: flex-start;
+    width: 100%;
 }
 
 .account-card .bank-info img {
@@ -255,9 +243,7 @@ div .account-card {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
-    /* font-size: 20px; */
     font-size: 1.25rem;
-    /* line-height: 24px; */
     color: #3B4CC0;
     margin-bottom: 1px;
 }
@@ -266,9 +252,7 @@ div .account-card {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 500;
-    /* font-size: 16px; */
     font-size: 1rem;
-    /* line-height: 24px; */
     color: #828282;
 }
 
@@ -276,9 +260,7 @@ div .account-card {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 600;
-    /* font-size: 15px; */
     font-size: 1rem;
-    /* line-height: 24px; */
     color: #3B4CC0;
     display: flex;
     justify-content: flex-start;
@@ -295,20 +277,15 @@ div .account-card {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
-    /* font-size: 18px; */
     font-size: 1.25rem;
-    /* line-height: 24px; */
     color: #4D4D4D;
-    /* margin-bottom: 5px; */
 }
 
 .balance span {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
-    /* font-size: 18px; */
     font-size: 1.25rem;
-    /* line-height: 24px; */
     color: #12D90B;
 }
 
@@ -321,7 +298,6 @@ div .account-card {
 
 .summary h5 {
     font-family: 'Poppins', sans-serif;
-    /* margin-bottom: 2px; */
     margin-bottom: 0.2rem;
     margin-top: -0.4rem;
 }
@@ -336,11 +312,8 @@ div .account-card {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
-    /* font-size: 12px; */
     font-size: 0.9rem;
-    /* line-height: 24px; */
     color: #828282;
-    /* margin-bottom: 2px; */
     margin-bottom: 0.2rem;
 }
 
@@ -348,9 +321,7 @@ div .account-card {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
-    /* font-size: 12px; */
     font-size: 0.9rem;
-    /* line-height: 24px; */
     color: #FF1414;
 }
 
@@ -364,9 +335,7 @@ div .account-card {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 500;
-    /* font-size: 18px; */
     font-size: 1.2rem;
-    /* line-height: 24px; */
     color: #FFFFFF;
 }
 
@@ -391,9 +360,8 @@ div .account-card {
 }
 
 .product-item .product-image {
-    width: 80%;
+    width: 100%;
 }
-
 
 @media (max-width: 1024px ) {
     .cards {
@@ -471,10 +439,6 @@ div .account-card {
         width: 23rem;
     }
 
-    /* .bar-chart-card {
-        width: 60rem;
-    } */
-
     .bar-chart-card h3 {
         margin-bottom: 2rem;
     }
@@ -501,20 +465,6 @@ div .account-card {
         margin-bottom: 0;
         font-size: 1.2rem;
     }
-    /* .card-1-amount-balance span {
-        font-size: 2rem;
-    } */
-    /* .card-1-update-button {
-        margin-left: 13rem;
-    } */
-    /* .card-1-transaction-card {
-        width: 18rem;
-    } */
-    /* .reconciliations-button {
-        width: 22rem;
-        margin-bottom: 0rem;
-        margin-left: 0.5rem;
-    } */
     .reconciliations-button p {
         font-size: 16px;
         line-height: 30px;
@@ -528,11 +478,7 @@ div .account-card {
         margin-left: 25rem;
         margin-right: 1rem;
     }
-    /* .main-expenses-card {
-        margin-left: 0;
-        height: 32rem;
-        width: 27rem;
-    } */
+
     .col-bar-chart-card {
         margin-top: -33rem;
         margin-left: 52rem;
@@ -604,4 +550,3 @@ div .account-card {
     }
 }
 */
-
