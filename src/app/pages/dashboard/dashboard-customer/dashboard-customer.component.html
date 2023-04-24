@@ -1,26 +1,31 @@
 <div class="p-fluid">
-    <div class="p-grid p-fluid">
-        <div class="part-cards-1">
-            <div class="card cards">
-                <div style="display: flex; justify-content: center;">
-                    <div class="date-mes-ano">
-                        <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+    <div class="p-grid p-fluid" style="padding: 1.1rem 1.5rem;">
+
+        <div class="container-cards">
+
+            <div class="part-cards-1">
+                <div class="card cards">
+                    <div style="display: flex; justify-content: center;">
+                        <div class="date-mes-ano">
+                            <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+                        </div>
                     </div>
-                </div>
-                <div class="dates">
-                    <div class="date">
-                        <app-date [(ngModel)]="dateStart"></app-date>
+                    <div class="container-dates-button">
+                        <div class="dates">
+                            <div class="date">
+                                <app-date [(ngModel)]="dateStart"></app-date>
+                            </div>
+                            <div class="date">
+                                <app-date [(ngModel)]="dateEnd"></app-date>
+                            </div>
+                        </div>
+                        <div class="card-1-update-button" (click)="labelData()">
+                            <p>Atualizar</p>
+                            <img src="../../../../assets/images/Vector.png" alt="Vetor de Atualizar">
+                        </div>
                     </div>
-                    <div class="date">
-                        <app-date [(ngModel)]="dateEnd"></app-date>
-                    </div>
-                </div>
-                <div class="p-col card-1-update-button" (click)="labelData()">
-                    <p>Atualizar</p>
-                    <img src="../../../../assets/images/Vector.png" alt="Vetor de Atualizar">
-                </div>
-                <div class="p-col">
-                    <div class="card card-1-transaction-card">
+
+                    <div class="card-1-transaction-card">
                         <div class="card-1-balance">
                             <h4>Saldo</h4>
                             <button class="card-1-button" (click)="seeBalance()">
@@ -32,35 +37,30 @@
                             <span *ngIf="this.data" appAlignLeft> {{ Balance | virgulaPipe }} </span>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="p-col-3">
-                <button class="reconciliations-button" (click)="reconciliations()">
-                    <p>você tem novas</p>
-                    <span>Conciliações</span>
-                </button>
-            </div>
-        </div>
 
-        <div class="p-grid p-fluid cards-expenses-revenue">
-            <div class="col-main-expenses-card">
-                <div class="card main-expenses-card">
-                    <h3 class="centerText">Principais Despesas</h3>
-                    <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
+                    <button class="reconciliations-button" (click)="reconciliations()">
+                        <p>você tem novas</p>
+                        <span>Conciliações</span>
+                    </button>
                 </div>
+
             </div>
-            <div class="col-bar-chart-card">
-                <div class="card bar-chart-card">
-                    <h3 class="centerText">Receitas Vs Despesas</h3>
-                    <p-chart type="bar" [data]="dataBar" [options]="optionsBar"></p-chart>
-                </div>
+
+            <div class="main-expenses-card">
+                <h3>Principais Despesas</h3>
+                <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
+            </div>
+
+            <div class="bar-chart-card">
+                <h3 class="centerText">Receitas Vs Despesas</h3>
+                <p-chart type="bar" [data]="dataBar" [options]="optionsBar"></p-chart>
             </div>
         </div>
 
         <p-carousel [value]="accounts" [numVisible]="Visible" [numScroll]="Scroll" [responsiveOptions]="responsiveOptions" [circular]="true" class="carousel">
-            <ng-template pTemplate="header">
+            <!-- <ng-template pTemplate="header">
                 <h3 class="account-management">Gerenciamento de contas</h3>
-            </ng-template>
+            </ng-template> -->
             <ng-template let-account pTemplate="item">
                 <div class="product-item">
                     <div class="card account-card">

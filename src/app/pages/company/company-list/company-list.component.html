@@ -20,26 +20,27 @@
         </div>
     </div>
 
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="opcoesLinhas">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
+        [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista"
+        (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="opcoesLinhas">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th [ngStyle]="{width: '5%'}"> Código </th>
-            <th [ngStyle]="{width: '40%'}"> Nome </th>
-            <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>
-            <th [ngStyle]="{width: '10%'}"> Fone </th>
-            <th [ngStyle]="{width: '20%'}"> Email </th>
-            <th [ngStyle]="{width: '5%'}"> Ações </th>
+                <th [ngStyle]="{width: '40%'}"> Nome </th>
+                <th [ngStyle]="{width: '20%'}"> Cpf / Cnpj </th>
+                <th [ngStyle]="{width: '10%'}"> Fone </th>
+                <th [ngStyle]="{width: '20%'}"> Email </th>
+                <th [ngStyle]="{width: '5%'}"> Ações </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData>
             <tr>
-            <td>{{rowData.code_client}}</td>
-            <td><span (click)="linkPessoa(rowData)" class="link-pessoa">{{rowData.nome}}</span></td>
-            <td>{{rowData.cpf_cnpj | cpfCnpj}}</td>
-            <td>{{rowData.fone_format}}</td>
-            <td>{{rowData.email}}</td>
-            <td><app-opcoes-table [value]="rowData"
-                                  [opcoes]="opcoesTable"></app-opcoes-table></td>
+                <td>{{rowData.code_client}}</td>
+                <td><span (click)="linkPessoa(rowData)" class="link-pessoa">{{rowData.nome}}</span></td>
+                <td>{{rowData.cpf_cnpj | cpfCnpj}}</td>
+                <td>{{rowData.fone_format}}</td>
+                <td>{{rowData.email}}</td>
+                <td><app-opcoes-table [value]="rowData" [opcoes]="opcoesTable"></app-opcoes-table></td>
             </tr>
         </ng-template>
     </p-table>
@@ -57,4 +58,5 @@
     <app-modal-empresa-cadastro #content></app-modal-empresa-cadastro>
 </app-modal> -->
 
-<app-modal-empresa-cadastro [modalVisible]="modalCadastrarEmpresa" #content (closeModal)="modalCadastrarEmpresa = false"></app-modal-empresa-cadastro>
+<app-modal-empresa-cadastro [modalVisible]="modalCadastrarEmpresa" #content
+    (closeModal)="modalCadastrarEmpresa = false"></app-modal-empresa-cadastro>

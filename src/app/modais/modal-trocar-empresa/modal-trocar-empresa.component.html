@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="empresas"
-                [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="empresas.length" dataKey="Id" [rowsPerPageOptions]="count" [lazy]="true" (onLazyLoad)="lazyLoad($event)">
+                [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="empresas.length" [lazy]="false">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th [ngStyle]="{width: '70%'}" > Empresa</th>
