@@ -37,6 +37,7 @@ export class DashboardCustomerComponent implements OnInit {
     /* Carroussel */
     responsiveOptions;
     accounts: []
+    proStatement: []
     Historic: string[]
     ReleaseBalance: 0
 
@@ -152,11 +153,12 @@ export class DashboardCustomerComponent implements OnInit {
     }
 
     loadCards() {
+        this.dadosDefault.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), 'ProAccount').subscribe((v: any) => {
             this.accounts = v['value']
-            /* v['value'].map(v => {
-                this.loadAccounts(v.Id)
-            }) */
+            // v['value'].map(v => {
+            //     this.loadAccounts(v.Id)
+            // })
             this.loadAccounts(v['value'].Id)
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
@@ -166,9 +168,8 @@ export class DashboardCustomerComponent implements OnInit {
     // CARREGA OS LANCAMENTOS DA CONTA NO CARD EM CARROUSSEL
     loadAccounts(Id) {
         this.dadosDefault.exibirLoader.next(true);
-        this.$subscription3 = this.networkService.getSimples(getUrlPro(), `ProStatementItem?24filter=AccountId3D${Id}&24orderby=DateMovement&24top=3`).subscribe((v: any) => {
-            //console.log(v['value'].slice(0, 3))
-            v['value'].map(v => {
+        this.$subscription3 = this.networkService.getSimples(getUrlPro(), `ProStatementItem?24filter=AccountId3D${Id}&24orderby=DateMovement&24top=3`).subscribe((v: any) => {            
+            v['value'].map(v => {                
                 this.Historic = v.Historic
                 this.ReleaseBalance = v.Amount
             })

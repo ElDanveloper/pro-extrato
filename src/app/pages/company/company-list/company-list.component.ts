@@ -75,7 +75,7 @@ export class CompanyListComponent extends BaseListSimplesHeaders implements OnIn
     }
 
     pressionaEnter(e?) {    
-        if (e.key === 'Enter') this.carregarLista()
+        if (e.key === 'Enter') this.carregarLista()        
     }
 
 
