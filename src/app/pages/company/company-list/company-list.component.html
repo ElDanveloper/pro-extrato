@@ -2,8 +2,8 @@
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 p-md-8">
             <div class="p-inputgroup">
-                <input #inputPesquisa appUppercaseNotForm (keypress)="pressionaEnter($event)" pInputText>
-                <button pButton type="button" icon="fa fa-search" (click)="carregarLista()"></button>
+                <input #inputPesquisa appUppercaseNotForm [(ngModel)]="filtro" pInputText>
+                <!-- <button pButton type="button" icon="fa fa-search"></button> -->
             </div>
         </div>
         <!-- <div class="p-field p-col-12 p-md-2" style="position: relative;">
@@ -21,8 +21,8 @@
     </div>
 
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
-        [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista"
-        (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="opcoesLinhas">
+        [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="empresas.length" [value]="empresas"
+        [rowsPerPageOptions]="opcoesLinhas"  [lazy]="false">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th [ngStyle]="{width: '5%'}"> Código </th>
