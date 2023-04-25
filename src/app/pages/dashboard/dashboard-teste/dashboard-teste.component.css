@@ -1,8 +1,154 @@
-/* @font-face {
-    font-family: 'Poppins', sans-serif;
-    src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap')
-} */
+/* LAYOUT NOVO */
+.container-cards-top {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10rem;
+}
 
+.card {
+    background: #FFFFFF;
+    border-radius: 25px;
+
+    width: 380px;
+    height: 240px;
+}
+
+.container-transaction-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    padding: 20px;
+}
+
+.month-year {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.transaction-card {
+    background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
+    color: #fff;
+    border-radius: 25px;
+
+    width: 100%;
+    height: 70%;
+
+    padding: 20px;
+}
+
+.transactions-refreshButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transactions h3 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.transactions span {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.update-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
+    background-color: #FFFFFF;
+    box-shadow: 1px 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.update-button:hover {
+    opacity: 80%;
+    text-shadow: rgba(0, 0, 0, 0.6);
+}
+
+.update-button p {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-size: 13px;
+    color: #9C9C9C;
+}
+
+
+/* card de empresas e contas ativas */
+.card-active-accounts-companies {
+    /* width: 15rem;
+    margin-top: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+.container-image-company-account {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+}
+
+.card-active-accounts-companies p {
+    /* font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #3B5CBF;
+    margin-bottom: 1px;
+    margin-top: 10px; */
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 15px;
+    text-transform: uppercase;
+    color: #3B5CBF;
+}
+
+.card-active-accounts-companies span {
+    /* font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #4D4D4D; */
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #9C9C9C;
+}
+
+
+
+/* LAYOUT ANTIGO */
 /* TODOS OS CARDS */
 .cards-container {
     background: #FFFFFF;
@@ -15,7 +161,6 @@
     display: flex;
     flex-direction: column;
     border-radius: 25px;
-    /* width: 250px; */
 }
 
 .card-1-transaction-card {
@@ -23,7 +168,6 @@
     width: 24rem;
     color: #fff;
     border-radius: 25px;
-    /* width: 200px; */
 }
 
 .card-1-transaction-card h3 {
@@ -62,7 +206,6 @@
 
 .card-1-update-button {
     margin-left: 18rem;
-    /* margin-left: 150px; */
     margin-top: -7rem;
     display: flex;
     flex-direction: column;
@@ -73,7 +216,6 @@
     box-shadow: 1px 4px 16px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     padding: 15px;
-    /* margin-top: -7.5rem; */
 }
 
 .card-1-update-button:hover {
