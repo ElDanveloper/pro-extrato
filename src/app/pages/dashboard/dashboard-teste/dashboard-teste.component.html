@@ -140,25 +140,50 @@
 
 
         <div class="card pending-card">
-            <h5>Pendências COM ANALISTAS</h5>
-            <p>Lançamentos</p>
-            <span *ngIf="this.data" appAlignLeft> {{ AnalistPending }}</span>
-            <p>Empresas</p>
-            <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingAnalist }}</span>
+            <div class="container-pendingTitle-icon">
+                <img src="../../../../assets/images/pendencia-analista.svg" alt="Ícone de pessoas">
+                <h5>Pendências Com Analistas</h5>
+            </div>
+            <div>
+                <span *ngIf="this.data" appAlignLeft> {{ AnalistPending }}</span>
+                <p>Lançamentos</p>
+            </div>
+            <div>
+                <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingAnalist }}</span>
+                <p>Empresas</p>
+            </div>
         </div>
 
 
         <div class="card pending-card">
-            <h5>Pendências COM EMPRESAS</h5>
-            <p>Lançamentos</p>
-            <span *ngIf="this.data" appAlignLeft> {{ CostomerPending }}</span>
-            <p>Empresas</p>
-            <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingCostomer }}</span>
+            <div class="container-pendingTitle-icon">
+                <img src="../../../../assets/images/pendencia-empresa.svg" alt="Ícone de negócio">
+                <h5>Pendências Com Empresas</h5>
+            </div>
+            <div>
+                <span *ngIf="this.data" appAlignLeft> {{ CostomerPending }}</span>
+                <p>Lançamentos</p>
+            </div>
+            <div>
+                <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingCostomer }}</span>
+                <p>Empresas</p>
+            </div>
         </div>
 
     </div>
 
-    <div class="container-cards-bottom"></div>
+    <div class="container-cards-bottom">
+
+        <div class="card donutChart-card">
+            <h3 class="centerText">Transações Conciliadas</h3>
+            <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
+        </div>
+        <div class="card barChart-card">
+            <h3 class="centerText">Lançamentos</h3>
+            <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
+        </div>
+
+    </div>
 </div>
 
 <!--
