@@ -78,6 +78,22 @@ export class CompanyListComponent extends BaseListSimplesHeaders implements OnIn
         if (e.key === 'Enter') this.carregarLista()        
     }
 
+    get empresas() {
+
+        return this.lista.filter(v => {
+            if (v.nome === null) {
+                v.nome = ''
+            }
+            if (v.concat === null) {
+                v.concat = ''
+            }
+            if (v.cpf_cnpj === null) {
+                v.cpf_cnpj = ''
+            }
+            return v.nome.toLowerCase().includes(this.filtro.toLowerCase()) || v.concat.toLowerCase().includes(this.filtro.toLowerCase()) || v.cpf_cnpj.toString().includes(this.filtro)
+        })
+    }
+
 
 
     linkPessoa(v) {

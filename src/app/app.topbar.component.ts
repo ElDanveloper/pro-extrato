@@ -14,6 +14,8 @@ export class AppTopbarComponent {
 
     public counter = ''
 
+    public home = ''
+
     public labelEnvironment = ''
 
 
@@ -27,8 +29,10 @@ export class AppTopbarComponent {
         if (this.counter === 'false') {
             this.labelEnvironment = 'Ambiente Empresa'
             this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['nome']
+            this.home = "dashboard-company"
         } else {
             this.labelEnvironment = 'Ambiente Contador'
+            this.home = "dashboard-home"
         }
         // if(JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome'])
         //     this.empresa = JSON.parse(sessionStorage.getItem(EMPRESA_STORAGE_KEY))['Nome']

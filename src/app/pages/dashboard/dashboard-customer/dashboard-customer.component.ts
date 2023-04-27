@@ -160,7 +160,7 @@ export class DashboardCustomerComponent implements OnInit {
             // v['value'].map(v => {
             //     this.loadAccounts(v.Id)
             // })
-            this.loadAccounts(v['value'].Id)
+            // this.loadAccounts(v['value'].Id)
         }, e => {
             this.messageService.add(Util.pushErrorMsg(e))
         }).add(() => this.dadosDefault.exibirLoader.next(false))

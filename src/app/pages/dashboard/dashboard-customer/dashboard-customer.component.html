@@ -76,9 +76,9 @@
                             <span> R$ {{ account.Balance || virgulaPipe }} </span>
                         </div>
                         <div class="summary">
-                            <h5>Resumo</h5>
+                            <!-- <h5>Resumo</h5> -->
                         </div>
-                        <div class="summary-data">
+                        <!-- <div class="summary-data">
                             <p> {{ Historic }} </p>
                             <span> {{ ReleaseBalance || virgulaPipe }} </span>
                         </div>
@@ -89,8 +89,8 @@
                         <div class="summary-data">
                             <p> {{ Historic }} </p>
                             <span> {{ ReleaseBalance || virgulaPipe }} </span>
-                        </div>
-                        <button (click)="viewAccountPage(account.Id)">Ver mais</button>
+                        </div> -->
+                        <button style="margin-top: 10px;" (click)="viewAccountPage(account.Id)">Ver mais</button>
                     </div>
                 </div>
             </ng-template>
