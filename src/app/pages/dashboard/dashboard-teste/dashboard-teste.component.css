@@ -206,7 +206,7 @@
 
 /* grafico de rosca */
 .donutChart-card {
-    width: 30%;
+    width: 42%;
     /* height: 100%; */
     /* width: 400px; */
     /* height: 520px; */
@@ -267,8 +267,12 @@
         padding: 15px;
     }
 
+    .donutChart-card {
+        width: 34%;
+    }
+
     .barChart-card {
-        width: 65%;
+        width: 64%;
     }
 }
 
