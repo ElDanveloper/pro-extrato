@@ -1,5 +1,5 @@
 import { Util } from './../../../controller/Util';
-import { qtdLinhas, opcoesLinhas, getUrlPro } from './../../../controller/staticValues';
+import { qtdLinhas, opcoesLinhas, getUrlPro, getUrlReport } from './../../../controller/staticValues';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, Message, MessageService } from "primeng/api";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -28,15 +28,37 @@ export class AccountLaunchComponent implements OnInit {
     opcoesLinhas = opcoesLinhas()
     modalTrocarConta = false
     modalEditStatementItems = false
+    public top: number = qtdLinhas()
+
+    jaPesquisou = false
+    public loading: boolean
+
+    quantityItems = 0
 
     dados = null
+
+    filtro = ''
+
+    first = false
 
     classificacao = '3.07.02'
 
     @ViewChild('paymentviaaccount') paymentviaaccount: ElementRef;
-    @ViewChild('openingbalance') openingbalance: ElementRef;
     @ViewChild('uploadInput') uploadInput: ElementRef;
     @ViewChild('editstatementitems') editstatementitems: ElementRef;
+
+    itemsReport = [
+        {
+            label: 'Detalhado por Natureza', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.report('pdf', 'DetailExtractNature', 'Detalhado por Natureza');
+            }
+        },
+        {
+            label: 'Resumo por Categoria', icon: 'fa fa-file-pdf-o', command: (e) => {
+                this.report('pdf', 'ResumeNature', 'Resumo por Categoria')
+            }
+        }
+    ];
 
 
     constructor(public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public messageService: MessageService, private dadosDefault: DadosDefaultService, private route: ActivatedRoute) { }
@@ -46,20 +68,29 @@ export class AccountLaunchComponent implements OnInit {
 
         this.route.params.subscribe(v => {
             this.id = v.id
+            console.log('id q vem do dash')
+            console.log(this.id)
         });
         if (this.contaCaixa === undefined) {
             this.nome = sessionStorage.getItem('caixaBanco')
         }
 
-        // this.networkService.buscar('contacaixa', this.id, null, getUrlCad()).subscribe(v => {
-        //     this.contaCaixa = v
-        //     this.carregarLista()
-        // })
+        this.networkService.buscar('ProAccount', this.id, null, getUrlPro()).subscribe(v => {
+            this.contaCaixa = v
+            // this.carregarLista()
+        })
 
+        /* this.networkService.getSimples(getUrlPro(), `ProAccount/${this.id}`).subscribe(v => {
+            console.log('Pro account id')
+            console.log(v)
+        }) */
     }
 
     contaTrocada() {
-        this.nome = sessionStorage.getItem('caixaBanco')
+        this.networkService.buscar('ProAccount', this.id, null, getUrlPro()).subscribe(v => {
+            this.contaCaixa = v
+            // this.carregarLista()
+        })
         this.modalTrocarConta = false
     }
 
@@ -107,7 +138,7 @@ export class AccountLaunchComponent implements OnInit {
         {
             label: 'Editar', icon: 'fa fa-edit', command: (e) => {
                 this.dadosEdit = e
-                this.editstatementitems.nativeElement.click();                
+                this.editstatementitems.nativeElement.click();
             }
         }, {
             label: 'Excluir', icon: 'fa fa-trash', command: (e) => {
@@ -152,22 +183,47 @@ export class AccountLaunchComponent implements OnInit {
 
     }
 
-    tableExpand(v, expanded) {        
+    tableExpand(v, expanded, pag = 1, top = 7) {
         if (expanded) return
-        if (!v) return       
+        if (!v) return
         this.dados = v
 
-        // const filtro = `IdPlanoConta=${v.IdPlanoConta}&Limit=50&pagina=0&Data=${v.Data}`
+        let parametro = ''
+
+        if (this.filtro === '') {
+            parametro = `?DateIni=${v.DateBalance}&DateEnd=${v.DateBalance}&AccountId=${this.id}${Util.expandedQuery(['FinancialCategoryId'], true)}`
+        }
+        if (this.filtro !== '') {
+            parametro = `?DateIni=${v.DateBalance}&DateEnd=${v.DateBalance}&Text=${this.filtro}&AccountId=${this.id}${Util.expandedQuery(['FinancialCategoryId'], true)}`
+        }
 
         this.dadosDefault.exibirLoader.next(true)
-        this.networkService.getSimples(getUrlPro(), `StatementItems?DateIni=${v.DateBalance}&DateEnd=${v.DateBalance}&AccountId=${this.id}${Util.expandedQuery(['FinancialCategoryId'], true)}`).subscribe((v: any) => {
-            this.lista2 = v.value;
+        this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems${parametro}`, pag, top).subscribe((v: any) => {
+            this.lista2 = v['body'].value;
+            this.quantityItems = Util.toNumber(v.headers.get('total'))
+            this.jaPesquisou = true
         }).add(() => this.dadosDefault.exibirLoader.next(false))
 
         // this.networkService.salvarPost(getUrlRelatorio(), 'Contas/RelBoletosReceber', filtro).subscribe((v: any) => {
         //     this.jaPesquisou = true
         //     this.lista2 = v
         // }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
+    public lazyLoad(event): void {
+        if (!this.jaPesquisou && !this.first) {
+            this.first = true
+            return;
+        }
+        this.loading = true
+        if (this.lista2) {
+            if (this.top !== event.rows && event.rows !== undefined) {
+                this.top = event.rows
+                event.first = 0
+            }
+            this.tableExpand(this.dados, false, (event.first / this.top) + 1, this.top)
+            this.loading = false
+        }
     }
 
     pressionaEnter($event: KeyboardEvent) {
@@ -197,12 +253,17 @@ export class AccountLaunchComponent implements OnInit {
 
     abrirModalPagamentoViaConta(value) {
         // const nomeConta = this.contaCaixa ? this.contaCaixa.Nome : this.nome
-        this.data = { idConta: this.id, tipo: value};
+        this.data = { idConta: this.id, tipo: value };
         this.paymentviaaccount.nativeElement.click();
     }
 
-    openModalOpeningBalance() {        
-        this.openingbalance.nativeElement.click();
+    Partialclosure() {
+        let dataInicial = Util.dataParaStringComZero(this.dataInit)
+        let dataFim = Util.dataParaStringComZero(this.dataFim)
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `ProcessCloseMonthlyPartial?DateIni=${dataInicial}&DateEnd=${dataFim}`).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Fechamento Parcial realizado com sucesso!'))
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
     }
 
     conciliacao() {
@@ -225,18 +286,27 @@ export class AccountLaunchComponent implements OnInit {
         return v
     }
 
-    downloadPdf() {
-        // this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.visualizarPdf(getUrlRelatorio(), `contabil/RazaoPDF?DataIni=${Util.dataParaStringComZero(this.dataInit)}&DataFim=${Util.dataParaStringComZero(this.dataFim)}&IdCaixa=${this.id}`).subscribe(v => {
-        //     Util.savePdf(v);
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
-    }
+    report(type, endpoint = 'DetailExtract', name = 'Extrato Detalhado') {
+        let body = {
+            type: type,
+            date_ini: this.dataInit,
+            date_end: this.dataFim,
+            account_id: this.id,
+        }
 
-    downloadCsv() {
-        // this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.visualizarPdf(getUrlRelatorio(), `contabil/RazaoCSV?DataIni=${Util.dataParaStringComZero(this.dataInit)}&DataFim=${Util.dataParaStringComZero(this.dataFim)}&IdCaixa=${this.id}`).subscribe(v => {
-        //     Util.saveExcelFile(v);
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+        if (type === 'pdf') {
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), endpoint, body).subscribe(v => {
+                Util.savePdf(v, name)
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
+        }
+        if (type === 'xls') {
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.baixarXls(getUrlReport(), endpoint, body).subscribe(v => {
+                Util.saveXls(v, name + '.xls')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
+        }
+
     }
 
     choseUploadOfx() {
@@ -251,7 +321,7 @@ export class AccountLaunchComponent implements OnInit {
         return result;
     }
 
-    uploadOfx(e) {        
+    uploadOfx(e) {
         const hoje = new Date()
         if (!e.target.files) return
         const reader = new FileReader();

@@ -1,20 +1,20 @@
 import { ProKeyWord } from './../../model/pro-key-word.model';
 import { ProMonthlyClose } from './../../model/pro-monthly-close.model';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import {BaseFormPost} from "../../controller/BaseFormPost";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {NetworkService} from "../../services/network.service";
-import {DadosDefaultService} from "../../services/dados-default.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MessageService} from "primeng/api";
-import {Formulario} from "../../controller/Formulario";
-import {Util} from "../../controller/Util";
+import { BaseFormPost } from "../../controller/BaseFormPost";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { NetworkService } from "../../services/network.service";
+import { DadosDefaultService } from "../../services/dados-default.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MessageService } from "primeng/api";
+import { Formulario } from "../../controller/Formulario";
+import { Util } from "../../controller/Util";
 import { getUrlPro } from 'src/app/controller/staticValues';
 
 @Component({
-  selector: 'app-modal-key-word-registration',
-  templateUrl: './modal-key-word-registration.component.html',
-  styleUrls: ['./modal-key-word-registration.component.css']
+    selector: 'app-modal-key-word-registration',
+    templateUrl: './modal-key-word-registration.component.html',
+    styleUrls: ['./modal-key-word-registration.component.css']
 })
 export class ModalKeyWordRegistrationComponent extends BaseFormPost implements OnInit {
 
@@ -29,13 +29,13 @@ export class ModalKeyWordRegistrationComponent extends BaseFormPost implements O
     constructor(public networkService: NetworkService, public dadosDefault: DadosDefaultService, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, public messageService: MessageService) {
         super(networkService, dadosDefault, router, 'IncludeKeyWord', messageService);
 
-        this.form = Formulario.createForm(this.entObj, this.fb)        
-        
+        this.form = Formulario.createForm(this.entObj, this.fb)
+
     }
 
     ngOnInit() {
         this.dadosDefault.pessoa().subscribe(v => {
-            const defaultValue = {label: '-', value: null}
+            const defaultValue = { label: '-', value: null }
             this.selectCategory = v[0]
             this.selectCategory.unshift(defaultValue)
         })
@@ -51,10 +51,18 @@ export class ModalKeyWordRegistrationComponent extends BaseFormPost implements O
 
     }
 
+    natureControlCode() {
+        if (this.form.get('FinancialCategoryId').value === null) return
+
+        let financial = this.form.get('FinancialCategoryId').value
+
+        this.form.get('CodeControl').setValue(financial.CodeControl)
+    }
+
     fecharModal() {
         this.closeModal.emit(false)
         this.dadosDefault.closeModal(this.hash)
-        this.form.reset()        
-      }
+        this.form.reset()
+    }
 
 }

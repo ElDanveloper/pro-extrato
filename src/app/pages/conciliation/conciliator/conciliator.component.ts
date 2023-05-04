@@ -1,3 +1,4 @@
+import { getUrlReport } from './../../../controller/staticValues';
 import { ProStatementItem } from '../../../model/pro-statement-item.model';
 import { getUrlPro } from '../../../controller/staticValues';
 import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
@@ -23,8 +24,8 @@ export class conciliatorComponent implements OnInit, OnDestroy {
     $subscriptionPreConciliadoNaoConciliadoQTD: Subscription;
     lista = []
 
-    selectContaCaixa = []
     selectNaturezaFinanceira = []
+    selectAccount = []
 
     dataPesquisa
 
@@ -32,16 +33,21 @@ export class conciliatorComponent implements OnInit, OnDestroy {
     dataFim;
     id;
 
-    top = 10
+
+    top = 7
     skip = 0
-    
+    lastPage = 1
+
 
     totalItens;
 
     constructor(private networkService: NetworkService, private dadosDefault: DadosDefaultService, private route: ActivatedRoute, private messageService: MessageService, private router: Router) { }
 
-    
-    ngOnInit() {
+
+    ngOnInit() {        
+        this.dadosDefault.conciliator().subscribe(value => {
+            this.selectAccount = value[0]
+        })
         setTimeout(() => {
 
             this.$subscription = this.route.parent.paramMap.subscribe((parametros: any) => {
@@ -69,36 +75,63 @@ export class conciliatorComponent implements OnInit, OnDestroy {
         if (this.$subscriptionPreConciliadoNaoConciliadoQTD) this.$subscriptionPreConciliadoNaoConciliadoQTD.unsubscribe();
     }
 
-    downloadPdf() {
-        // this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.baixarPdf(getUrlFinanceiro(), `contabil/ExtratoPDF?DataIni=${this.dataIni}&DataFim=${this.dataFim}&IdConta=${Number(this.id)}&tipo=0`).subscribe(v => {
-        //     Util.savePdf(v)
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+    report(type) {
+        let body = {
+            type: type,
+            date_ini: this.dataIni,
+            date_end: this.dataFim,
+            account_id: this.id,
+            reconcilied: "N"
+        }
+
+        this.dadosDefault.exibirLoader.next(true)
+        if (type === 'pdf') {
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+                Util.savePdf(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+        if (type === 'xls') {
+            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+                Util.saveXls(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
     }
 
-    loadData() {
-        this.dadosDefault.exibirLoader.next(true)
+    loadData(next?) {
+        let pag = 1
+        console.log('lastPage ---> ' + this.lastPage)
+        console.log('next ---> ' + next)
+        
+        if (next) {
+            console.log('Entrei ---- > ')
+            this.lastPage = this.lastPage + next
+            pag = this.lastPage
+        }
 
+        console.log('Pag ---> ' + pag)
+
+        this.dadosDefault.exibirLoader.next(true)        
         // this.$subscriptionPreConciliadoNaoConciliadoQTD = this.networkService.getSimplesQtd(getUrlFinanceiro(),
         //     `LancamentoPreConciliado?$filter=(IdContaCaixa eq ${this.dataPesquisa.idContaCaixa} and DataExtrato ge ${this.dataPesquisa.dataInicial} and DataExtrato le ${this.dataPesquisa.dataFinal} and (Conciliado eq 'N' or Conciliado eq 'P'))&$inlinecount=allpages&$top=0${Util.expandedQuery(LancamentoPreConciliado.expanded(), true)}`).subscribe(qtd => {
         //         this.totalItens = qtd
-        this.$subscriptionPreConciliadoNaoConciliado = this.networkService.getSimples(getUrlPro(), `StatementItems?AccountId=${this.dataPesquisa.idContaCaixa}&DateIni=${this.dataPesquisa.dataInicial}&DateEnd=${this.dataPesquisa.dataFinal}&Reconciled='S'${Util.expandedQuery(ProStatementItem.expanded(), true)}`).pipe(map((x: any) => x.value)).subscribe(x => {                     
-            this.lista = x
+        this.$subscriptionPreConciliadoNaoConciliado = this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.dataPesquisa.idContaCaixa}&DateIni=${this.dataPesquisa.dataInicial}&DateEnd=${this.dataPesquisa.dataFinal}&Reconciled='N'&Pendentes=true${Util.expandedQuery(ProStatementItem.expanded(), true)}`, pag, this.top).pipe(map((x: any) => x)).subscribe(x => {
+            this.lista = [...this.lista, ...x['body'].value]
             this.skip = this.skip + this.top
+            this.totalItens = Util.toNumber(x.headers.get('total'))
         }).add(() => this.dadosDefault.exibirLoader.next(false));
         // })
 
     }
-   
-    removeItem(index) {        
+
+    removeItem(index) {
         this.lista.splice(index, 1)
     }
 
     processConciliation() {
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `ProcessConciliate?DateIni=${this.dataIni}&DateEnd=${this.dataFim}&AccountId=${this.id}`).subscribe(v => {
-            this.messageService.add(Util.pushSuccessMsg('Processo Realizado com Sucesso!'))
-        }).add(this.dadosDefault.exibirLoader.next(false))        
+            this.messageService.add(Util.pushSuccessMsg('Processo Realizado com Sucesso!'))            
+        }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
 }

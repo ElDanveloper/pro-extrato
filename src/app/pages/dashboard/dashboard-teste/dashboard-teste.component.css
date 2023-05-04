@@ -1,0 +1,567 @@
+/* LAYOUT NOVO */
+.container {
+    display: flex;
+    flex-direction: column;
+    /* padding: 10px; */
+}
+
+.container-cards-top {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* gap: 10rem; */
+    justify-content: space-between;
+}
+
+.card {
+    background: #FFFFFF;
+    border-radius: 25px;
+    width: 380px;
+    /* height: 220px; */
+}
+
+.card:last-child {
+    margin-bottom: 2rem;
+}
+
+.container-transaction-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    /* padding: 20px; */
+    width: 24%;
+}
+
+.month-year {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.transaction-card {
+    background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
+    color: #fff;
+    border-radius: 25px;
+    width: 100%;
+    height: 70%;
+    padding: 20px;
+}
+
+.transactions-refreshButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transactions h3 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.transactions span {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.update-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: 6rem; */
+    background-color: #FFFFFF;
+    box-shadow: 1px 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.update-button p {
+    margin-bottom: 0.5rem;
+}
+
+.update-button:hover {
+    opacity: 80%;
+    text-shadow: rgba(0, 0, 0, 0.6);
+}
+
+.update-button p {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-size: 13px;
+    color: #9C9C9C;
+}
+
+
+/* card de empresas e contas ativas */
+.card-active-accounts-companies {
+    /* width: 15rem;
+    margin-top: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 24%;
+}
+
+
+.container-image-company-account {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+    /* align-items: center; */
+}
+
+.card-active-accounts-companies p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 15px;
+    text-transform: uppercase;
+    color: #3B5CBF;
+}
+
+.card-active-accounts-companies span {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #9C9C9C;
+}
+
+/* cards de pendecia */
+.pending-card {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 20px;
+    width: 24%;
+}
+
+.container-pendingTitle-icon {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.container-pendingTitle-icon h5 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+    margin: 0;
+}
+
+/* .container-launch-company span {
+    height: 50px;
+}
+
+.container-launch-company p {
+    height: 50px;
+} */
+
+.pending-card span {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #9C9C9C;
+}
+
+.pending-card p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #3B5CBF;
+    margin: 0;
+}
+
+
+.container-cards-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* grafico de rosca */
+.donutChart-card {
+    width: 42%;
+    /* height: 100%; */
+    /* width: 400px; */
+    /* height: 520px; */
+}
+
+.donutChart-card h3 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+}
+
+/* grafico de barras */
+.barChart-card {
+    /* width: 50%; */
+    /* height: 100%; */
+
+    width: 75rem;
+    /* height: 520px; */
+}
+
+.barChart-card h3 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+}
+
+@media (max-width: 1366px) {
+    .container-transaction-card {
+        width: 24%;
+    }
+
+    .transaction-card {
+        padding: 15px;
+    }
+
+    .transactions h3 {
+        font-size: 15px;
+    }
+
+    .transactions span {
+        font-size: 23px;
+    }
+
+    .card-active-accounts-companies {
+        width: 24%;
+    }
+
+    .pending-card {
+        width: 24%;
+        padding: 15px;
+    }
+
+    .donutChart-card {
+        width: 34%;
+    }
+
+    .barChart-card {
+        width: 64%;
+    }
+}
+
+
+/* LAYOUT ANTIGO */
+/* TODOS OS CARDS */
+.cards-container {
+    background: #FFFFFF;
+    border-radius: 25px;
+}
+
+/* 1 CARD */
+.cards {
+    width: 28rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+}
+
+.card-1-transaction-card {
+    background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
+    width: 24rem;
+    color: #fff;
+    border-radius: 25px;
+}
+
+.card-1-transaction-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    text-transform: capitalize;
+    color: #fff;
+}
+
+.card-1-active-securities {
+    width: 15rem;
+    margin-top: 10px;
+}
+
+.card-1-active-securities p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #3B5CBF;
+    margin-bottom: 1px;
+    margin-top: 10px;
+}
+
+.card-1-active-securities span {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #4D4D4D;
+}
+
+.card-1-update-button {
+    margin-left: 18rem;
+    margin-top: -7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
+    background: #FFFFFF;
+    box-shadow: 1px 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.card-1-update-button:hover {
+    cursor: pointer;
+    opacity: 60%;
+    text-shadow: rgba(0, 0, 0, 0.6);
+}
+
+.card-1-update-button p {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 16px;
+    color: #9C9C9C;
+}
+
+/* .card-1-update-button button {
+    background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
+} */
+
+.card-1-update-button button:hover {
+    /* background: linear-gradient(293.01deg, #4ac8ee -1.68%, #53e4b1 88.05%); */
+    opacity: 60%;
+    text-shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* CARD DE PENDECIAS */
+/* .pending-card {
+    width: 24rem;
+    background: #3B4CC0;
+    border-radius: 25px;
+    color: #fff;
+}
+
+.pending-card-title {
+    font-family: 'Poppins',sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+}
+
+.pending-card h5 {
+    font-family: 'Popins',sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.pending-card p {
+    font-family: 'Popins',sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-bottom: 1px;
+    margin-top: 10px;
+}
+
+.pending-card span {
+    font-family: 'Popins',sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+} */
+
+/* CARD GRAFICO DE BARRAS */
+/* .bar-chart-card {
+    margin-left: -3rem;
+}
+
+.bar-chart-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+} */
+
+/* CARD DO GRAFICO DE ROSCA */
+/* .donut-chart-card {
+    margin-left: 1rem;
+}
+
+.donut-chart-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+} */
+
+/* CARD DE TABELA */
+.table-card {
+    margin-left: -3rem;
+    margin-top: 2rem;
+}
+
+.table-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+}
+
+.table-card th {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #4D4D4D;
+    background: #E6E6E6;
+    border: 1px solid #FFFFFF;
+}
+
+@media (max-width: 1366px) {
+    .cards {
+        width: 350px;
+    }
+
+    .card-1-transaction-card {
+        width: 300px;
+        margin-top: 10px;
+    }
+
+    /* .card-1-transaction-card span {
+        font-size: 10px;
+    } */
+
+    .card-1-update-button {
+        margin-left: 210px;
+        margin-bottom: 10px;
+    }
+
+    .card-1-transaction-card h3 {
+        font-size: 18px;
+    }
+
+    .card-1-active-securities {
+        margin-top: 10px;
+    }
+
+    /* .pending-card {
+        width: 300px;
+    }
+
+    .pending-card-title {
+        font-size: 18px;
+    }
+
+    .pending-card h5 {
+        font-size: 14px;
+    }
+
+    .pending-card p {
+        font-size: 12px;
+    } */
+
+    /* GRAFICO DE BARRAS */
+    .bar-chart-card {
+        margin-left: 50px;
+        width: 550px;
+        height: 360px;
+    }
+
+    .bar-chart-card h3 {
+        font-size: 18px;
+    }
+
+    /* GRAFICO DE ROSCA */
+    .donut-chart-card {
+        width: 350px;
+        height: 360px !important;
+        margin-left: 80px;
+    }
+
+    .donut-chart-card h3 {
+        font-size: 18px;
+    }
+
+    /* CARD DE TABELA */
+    .table-card {
+        /* margin-left: -3rem;
+        margin-top: 2rem; */
+
+        margin-left: 50px;
+        width: 930px;
+        margin-top: -70px;
+    }
+
+    .table-card h3 {
+        /* font-size: 24px;
+        line-height: 24px; */
+        font-size: 18px;
+
+    }
+
+    .table-card th {
+        font-size: 12px;
+        /* line-height: 24px; */
+    }
+
+}

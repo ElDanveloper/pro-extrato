@@ -20,8 +20,8 @@ export const URL_API_STORAGE_KEY = 'url_api'
 export const PERMISSOES = 'permissoes'
 export const VERSAO_SISTEMA = 'versao_sistema'
 
-export const qtdLinhas = () => 10
-export const opcoesLinhas = () => [10,20,30,40,50,60,70,80,90,100, 500, 1000]
+export const qtdLinhas = () => 7
+export const opcoesLinhas = () => [7,10,20,30,40,50,60,70,80,90,100, 500, 1000]
 
 export const getUrlCad = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}cad/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
 // export const getUrlVenda = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}venda/${sessionStorage.getItem(URL_BANCO_STORAGE_KEY)}`
@@ -37,10 +37,13 @@ export const getUrlCad = () => `${sessionStorage.getItem(URL_API_STORAGE_KEY)}ca
 export const getUrlCnpj = () => `https://api.toqweb.com.br:2004/cad/sandbox/`
 // export const getUrlPro = () => `${API_AUTH_HUNNO}/pro/hunnoDEV`
 export const getUrlPro = () => `${API_AUTH_HUNNO}/pro/hunno`
+export const getUrlApiPro = () => `${URL_BASE}/api/proextrato`
 export const getUrlClient = () => `${URL_BASE}/api/client`
 export const getUrlUser = () => `${URL_BASE}/api/user`
 export const getUrlToken = () => `https://app.hunno.com.br/api/update/token`
-export const getUrlReport = () => `https://app.hunno.com.br/api/proextrato/report`
+export const getUrlReport = () => `${URL_BASE}/api/proextrato/report`
+
+export const getCnpj = () => `https://bpoymh2e3b.execute-api.us-east-1.amazonaws.com/prod/consulta-cnpj`
 
 //Base teste
 export const URL_BASE = `https://api.hunno.com.br`

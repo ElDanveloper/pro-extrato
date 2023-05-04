@@ -25,7 +25,8 @@
             "aot": true,
             "assets": [
               "src/assets",
-              "src/upload.php"
+              "src/upload.php",
+              "src/OneSignalSDKWorker.js"
             ],
             "styles": [
               "node_modules/font-awesome/css/font-awesome.min.css",
@@ -109,7 +110,8 @@
             ],
             "assets": [
               "src/assets",
-              "src/upload.php"
+              "src/upload.php",
+              "src/OneSignalSDKWorker.js"
             ]
           }
         },

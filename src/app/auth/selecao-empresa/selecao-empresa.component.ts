@@ -82,8 +82,10 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
     }
 
     home(v) {
-        let client_id = this.lista.find(x => x['id'] === v.id)        
+        console.log('Objeto ---> ' + JSON.stringify(v))
+        let client_id = this.lista.find(x => x['id'] === v.id)
         sessionStorage.setItem(EMPRESA_STORAGE_KEY, JSON.stringify(client_id))
+        console.log('Client_id ---> ' + JSON.stringify(client_id))
         let body = {}
         if (this.value === 2) {
             body = { contractor_id: client_id.id }
@@ -93,10 +95,16 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
         }
 
         // sessionStorage.removeItem(TOKEN_TEMP_STORAGE_KEY)
+        this.networkService.exibirLoader.next(true)
         this.$buscarTokenSelectSubscribe = this.authService.selectAuthenticacao(body).subscribe(res => {
             sessionStorage.setItem(TOKEN_STORAGE_KEY, res["token"])
-        })
-        this.router.navigate(['/home'], { replaceUrl: true })
+
+            if (this.value === 1) this.router.navigate(['/dashboard-company'], { replaceUrl: true })
+            if (this.value === 2) this.router.navigate(['/dashboard-home'], { replaceUrl: true })
+        }).add(() => this.networkService.exibirLoader.next(false))
+
+
+        // this.router.navigate(['/'], { replaceUrl: true })
     }
 
     quartaAuthenticacao(v) {
@@ -127,7 +135,7 @@ export class SelecaoEmpresaComponent implements OnInit, OnDestroy {
                                 this.router.navigate(['/parametrizarsegmento'], { replaceUrl: true })
                                 return
                             } else {
-                                this.router.navigate(['/home'], { replaceUrl: true })
+                                this.router.navigate(['/'], { replaceUrl: true })
                             }
                         })
                 })

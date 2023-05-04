@@ -24,7 +24,7 @@ img {
     /* top: -2px; */
     /* opacity: 80%; */
     /* box-shadow: 0 2px 2px #666; */
-        
+
 }
 
 ::ng-deep .test { background: red; color: yellow;}

@@ -27,6 +27,7 @@ let array = [
         label: "menu empresa",
         couter: 'false',
         rotas: [
+            "dashboard-company",
             "home",
             "account",
             "account-launch",
@@ -35,15 +36,16 @@ let array = [
             "person",
             "memorized-histories",
             "key-word",
-            "parameters",
-            "users-list",
-            "users-registration",              
+            "parameters-company",
+            "user-company-list",
+            "user-company-registration",              
         ]
     },
     {
         label: "menu contador",
         couter: 'true',
         rotas: [
+            "dashboard-home",
             "home",
             "account",
             "account-launch",

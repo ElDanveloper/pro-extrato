@@ -1,0 +1,79 @@
+<p-card [header]="'Atualização de Código'">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-formgrid p-grid p-col-4">
+            <div class="p-col-5">
+                <app-date #dataInicial [(ngModel)]="dataInit"></app-date>
+            </div>
+            <div class="p-col-5">
+                <app-date #dataFinal [(ngModel)]="dataFim"></app-date>
+            </div>
+        </div>
+        <div class="p-col-2" style="margin-top: 5px; margin-left: -65px;">
+            <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+        </div>
+        <!--
+        <div class="p-col-2" style="margin-left: 65px;">
+            <button pButton pRipple type="button" label="Atualizar Código" *ngIf="editing" pInitEditableRow (click)="onRowEditInit(lista)"></button>
+        </div>
+        <div class="p-col-2" style="margin-left: 65px;">
+            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(lista)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+        </div>
+        -->
+        <div class="p-col-2" style="margin-left: 65px;">
+            <button pButton type="button" label="Atualizar Código" (click)="updateCode()"></button>
+        </div>
+        <div class="p-offset-2 p-field p-col-12 p-md-2" style="position: relative;">
+            <button pButton label="Pesquisar" (click)="loadList()"></button>
+        </div>
+    </div>
+    &nbsp;
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
+        [paginator]="true" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="lista" dataKey="Id"
+        (onLazyLoad)="lazyLoad($event)" [rowsPerPageOptions]="opcoesLinhas">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th [ngStyle]="{width: '4%'}"> </th>
+                <th [ngStyle]="{width: '25%'}"> Descrição </th>
+                <th [ngStyle]="{width: '10%'}"> Classificação </th>
+                <th [ngStyle]="{width: '15%'}"> Código Plano Contas</th>
+                <th [ngStyle]="{width: '20%'}"> Histórico </th>
+                <th [ngStyle]="{width: '15%'}"> Código de Integração </th>
+                <th [ngStyle]="{width: '10%'}"> Código Control </th>
+                <th [ngStyle]="{width: '4%'}"> Ações </th>
+            </tr>
+        </ng-template>
+        <!-- let-editing="editing" -->
+        <ng-template pTemplate="body" let-rowData>
+            <tr>
+                <td> <p-checkbox name="lista" value="lista" [value]="lista"  [(ngModel)]="selectedLista" [inputId]="lista.Id"></p-checkbox> </td>
+                <td>{{rowData.Description}}</td>
+                <td>{{rowData.Classificate}}</td>
+                <td pEditableColumn appAlignRight>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.CodeAccountPlan">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{rowData.CodeAccountPlan}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>{{rowData.Historic}}</td>
+                <td pEditableColumn appAlignRight>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.CodeIntegration">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{rowData.CodeIntegration}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td appAlignRight>{{rowData.CodeControl}}</td>
+                <td appAlignCenter>
+                    <app-opcoes-table [value]="rowData" [opcoes]="opcoesTable"></app-opcoes-table>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

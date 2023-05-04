@@ -31,21 +31,23 @@ export class ModalOpeningBalanceComponent extends BaseFormPost implements OnInit
         this.form = Formulario.createForm(this.entObj, this.fb)        
 
         this.form.get('DateBalance').setValue(new Date());
+        // this.form.get('AccountId').setValue(this.data.Id)
     }
 
     ngOnInit() {
-        this.dadosDefault.modalOpeningbalance().subscribe(v => {
-            const defaultValue = {label: '-', value: null}
-            this.selectContaCaixa = v[0]
-            this.selectContaCaixa.unshift(defaultValue)
-        })
+        // this.dadosDefault.modalOpeningbalance().subscribe(v => {
+        //     const defaultValue = {label: '-', value: null}
+        //     this.selectContaCaixa = v[0]
+        //     this.selectContaCaixa.unshift(defaultValue)
+        // })
+        
     }
 
     public processarFormulario(modal?) {
-        if(this.form.get('Balance').value === '' || this.form.get('Balance').value === null) {
-            this.messageService.add(Util.pushErrorMsg('Favor informar o valor a ser lançado.'))
-            return
-        }
+        // if(this.form.get('Balance').value === '' || this.form.get('Balance').value === null) {
+        //     this.messageService.add(Util.pushErrorMsg('Favor informar o valor a ser lançado.'))
+        //     return
+        // }
 
         const value = Formulario.parseForm(this.entObj, Object.assign({}, this.form.value), ProMonthlyClose.referencias(), null, ProMonthlyClose.datas(), null, null, null)
         this.dadosDefault.exibirLoader.next(true)
@@ -57,7 +59,7 @@ export class ModalOpeningBalanceComponent extends BaseFormPost implements OnInit
     }
 
     fecharModal() {
-        this.closeModal.emit(false)
+        this.dadosDefault.closeModal(this.hash)
         this.form.reset()        
       }
 

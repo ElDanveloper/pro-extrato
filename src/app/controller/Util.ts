@@ -133,11 +133,55 @@ export class Util {
     static getDateComTresMesAntes(){
         const currentDate = new Date()
         return new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDay() - 60)
-    }
+    }    
 
     static getDateComUmMesAntes() {
         const currentDate = new Date()
         return new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
+    }
+
+    static getDateFromYearCurrent() {
+        const currentDate = new Date()
+        return new Date(currentDate.getFullYear(), currentDate.getMonth() - 11, 1)
+    }
+
+    static getDatefrom3Month() {
+        const currentDate = new Date()        
+        return new Date(currentDate.getFullYear(), currentDate.getMonth() - 3, 1 )
+    }
+
+    //ultimo dia do mês a 3 meses atras
+    static getLastDateFrom3Month() {
+        const currentDate = new Date()
+        return new Date(currentDate.getFullYear(), currentDate.getMonth(), 0)
+    }
+
+    //Primeiro dia do mês passado
+    static getDateFromMonthprevious(){
+        const currentDate = new Date()        
+        return new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1 )
+    }
+
+    //Data do inicio do mês seguindo sendo um ano atras
+    static getDateFromYearPrevious() {
+        const currentDate = new Date()        
+        return new Date(currentDate.getFullYear() - 1, currentDate.getMonth() - 11, 1 )
+    }
+
+    //Data do final do mês do ano anterios
+    static getDateFromLastYearPrevious() {
+        const currentDate = new Date()        
+        return new Date(currentDate.getFullYear() - 1, currentDate.getMonth() + 1, 0 )
+    }
+
+    static getDatefrom6Month() {
+        const currentDate = new Date()        
+        return new Date(currentDate.getFullYear(), currentDate.getMonth() - 6, 1 )
+    }
+
+    static getLastDateFrom6Month() {
+        const currentDate = new Date()
+        return new Date(currentDate.getFullYear(), currentDate.getMonth(), 0)
     }
 
     static getDatePreviousMonth(d: Date) {
@@ -233,8 +277,8 @@ export class Util {
         saveAs(blob, fileName)
     }
 
-    static savePdf(v) {
-        const fileName = v.headers.get('file-name')
+    static savePdf(v, name?) {
+        const fileName = v.headers.get('file-name') ? v.headers.get('file-name') : name
         const file = new Blob([v.body], {type: 'application/pdf'});
         const fileURL = window.URL.createObjectURL(file);
         window.open(fileURL, '_blank');
@@ -245,6 +289,14 @@ export class Util {
         const fileName = v.headers.get('file-name')
         const file = new Blob([v.body], {type: 'text/xml'});
         saveAs(file, fileName)
+    }
+
+    static  saveXls(v, name?) {
+        // let decoded = String.fromCharCode(...new Uint8Array(v.body));
+        const filename = v.headers.get('file-name') ? v.headers.get('file-name') : name
+        const file = new Blob([v.body], {type: 'application/octet-stream'});
+
+        saveAs(file, filename)
     }
 
     static saveExcelFile(v) {

@@ -1,7 +1,8 @@
+import { BaseListSimplesHeaders } from 'src/app/controller/BaseListSimplesHeaders';
 import { Router } from '@angular/router';
 import { NetworkService } from './../../../services/network.service';
 import { SelectItem, MessageService, ConfirmationService } from 'primeng/api';
-import { qtdLinhas, getUrlPro } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlPro, opcoesLinhas } from './../../../controller/staticValues';
 import { BaseListSimples } from './../../../controller/BaseListSimples';
 import { Component, OnDestroy, OnInit } from "@angular/core";
 
@@ -10,7 +11,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
   templateUrl: './invoices-list.component.html',
   styleUrls: ['./invoices-list.component.css']
 })
-export class InvoicesListComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class InvoicesListComponent extends BaseListSimplesHeaders implements OnInit, OnDestroy {
 
     jaPesquisou = false
     pagina = 0;
@@ -18,6 +19,7 @@ export class InvoicesListComponent extends BaseListSimples implements OnInit, On
     public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     public totalItens: number   
     opcoesTable = [        
         {label: 'Boleto', icon: 'fa fa-edit', command: (e) => {}},

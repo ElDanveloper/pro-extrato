@@ -9,7 +9,7 @@ import { OnDestroy, ViewChild } from '@angular/core';
 export class BaseListSimplesHeaders implements OnDestroy {
 
     entidade
-    pagina = 0
+    pagina = 1
     jaPesquisou = false
     loading = false
     public lista: any[] = []
@@ -31,7 +31,7 @@ export class BaseListSimplesHeaders implements OnDestroy {
     subscriptionLista: Subscription;
     subscriptionDeletar: Subscription;
 
-    constructor(public networkService: NetworkService, public url = getUrlPro(), entidad, expanded = null, top = 10, page = 1) {
+    constructor(public networkService: NetworkService, public url = getUrlPro(), entidad, expanded = null, top = 7, page = 1) {
         this.expanded = expanded
         this.entidade = entidad
         this.top = top
@@ -53,9 +53,9 @@ export class BaseListSimplesHeaders implements OnDestroy {
         }
     }
 
-    public carregarLista(page?): void {
+    public carregarLista(page?, id = null): void {
         this.loading = false
-        this.jaPesquisou = true
+        // this.jaPesquisou = true
         let v;
         try {
             v = this.inputPesquisa.nativeElement.value || ''
@@ -63,7 +63,7 @@ export class BaseListSimplesHeaders implements OnDestroy {
             v = ''
         }
 
-        let parametro = ''
+        let parametro = id ? id : ''
 
         if (v !== '') {
             this.totalItens = null
@@ -72,28 +72,31 @@ export class BaseListSimplesHeaders implements OnDestroy {
 
         if (this.expanded) {
             this.totalItens = null
-            parametro = `?Texto=${v}&${this.expanded}`
+            parametro = parametro + `${this.expanded}`
         }
 
         this.carregarDados(parametro)
     }
 
     public carregarDados(parametros = ''): void {
-        this.$subscriptionListar = this.networkService.getSimplesComHeaders(this.url, `${this.entidade}${parametros}`, this.pagina, this.top).subscribe((listaSec: any) => {
-            if (listaSec[0]) {
+        if(this.pagina === null) this.pagina = 1
+        this.$subscriptionListar = this.networkService.getSimplesComHeaders(this.url, `${this.entidade}${parametros}`, this.pagina, this.top).subscribe((listaSec: any) => {            
+            if (listaSec[0]) {                
                 this.totalItens = listaSec[0] ? listaSec[0]['QtdReg'] : 0;
             } else {
 
             }
+            
             this.lista = listaSec.body.value ? listaSec.body.value : listaSec.body
+            
             // listaSec.value ? listaSec.value : listaSec                            
             this.pagina = listaSec.headers.get('total')            
             if (this.pagina === null && this.totalItens === 0) {
-                this.totalItens = this.lista.length
+                this.totalItens = this.lista.length                
             } else {
                 this.totalItens = Util.toNumber(this.pagina)
             }
-
+            this.jaPesquisou = true            
 
         })
 

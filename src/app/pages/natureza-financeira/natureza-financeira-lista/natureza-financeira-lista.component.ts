@@ -1,7 +1,7 @@
 import { Util } from './../../../controller/Util';
 import { DadosDefaultService } from 'src/app/services/dados-default.service';
 import { NetworkService } from './../../../services/network.service';
-import { qtdLinhas, getUrlClient, getUrlPro, getUrlReport } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlClient, getUrlPro, getUrlReport, opcoesLinhas } from './../../../controller/staticValues';
 import { BaseListSimples } from 'src/app/controller/BaseListSimples';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, Message, MessageService, SelectItem } from "primeng/api";
@@ -16,6 +16,7 @@ import { Router } from "@angular/router";
 export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
 
     @ViewChild('cadastrarNatureza') cadastrarNatureza: ElementRef;
+    @ViewChild('simpleRegistration') simpleRegistration: ElementRef;
 
     exibirLoader = this.dadosDefault.exibirLoader
     exibirLoaderNetwork = this.networkService.exibirLoader
@@ -30,6 +31,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     public totalItens2: number
     modalCadastrarNatureza = false
     natureza = null
@@ -42,7 +44,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     cadastrar = false
     opcoesTable = [
         {
-            label: 'Incluir Natureza', icon: 'fa fa-plus', command: (e) => {                          
+            label: 'Incluir Natureza', icon: 'fa fa-plus', command: (e) => {
                 this.natureza = e
                 this.include = true
                 this.modalCadastrarNatureza = true
@@ -89,7 +91,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) { }
 
     ngOnInit() {
-        this.loadList(1, 10)
+        this.loadList(1, 7)
         // this.totalItens2 = this.lista.length
     }
 
@@ -97,7 +99,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
         if (e.key === 'Enter') this.loadList(1, 1000)
     }
 
-    loadList(page?, top?) {        
+    loadList(page?, top?) {
         let body = {}
         if (this.filtro !== '') {
             body = {
@@ -109,23 +111,46 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
             this.lista = v.body['value']
             let pagina = v.headers.get('total')
             this.totalItens = Util.toNumber(pagina)
+            this.jaPesquisou = true
         }).add(this.networkService.exibirLoader.next(false))
     }
 
-    expanded(){
+    expanded() {
         return ['IdNaturezaFinGrupo']
     }
 
-    public lazyLoad(event): void {        
-        // if (!this.jaPesquisou) return
+    report(type) {
+        let body = {
+            type: type,
+        }
+
+        this.dadosDefault.exibirLoader.next(true)
+        if (type === 'pdf') {
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'listCategoryFinance', body).subscribe(v => {                
+                Util.savePdf(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+        if (type === 'xls') {
+            this.networkService.baixarXls(getUrlReport(), 'listCategoryFinance', body).subscribe(v => {                
+                Util.saveXls(v)
+            }).add(this.dadosDefault.exibirLoader.next(false))
+        }
+    }
+
+    openModalSimpleRegistration(){
+        this.simpleRegistration.nativeElement.click();
+    }
+
+    public lazyLoad(event): void {
+        if (!this.jaPesquisou) return
         this.loading = true
         if (this.lista) {
             if (this.top !== event.rows && event.rows !== undefined) {
                 this.top = event.rows
                 event.first = 0
             }
-            
-            this.loadList((event.first / 10) + 1, this.top)
+
+            this.loadList((event.first / this.top) + 1, this.top)
             this.loading = false
         }
     }
@@ -143,7 +168,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     filtrarEPesquisar(e?, page = 0) {
         if (e && e.key !== 'Enter') return
 
-       this.loadList(1, 10)
+        this.loadList(1, 10)
     }
 
 
@@ -175,7 +200,7 @@ export class NaturezaFinanceiraListaComponent implements OnInit, OnDestroy {
     //     this.router.navigate([`/${this.entidade}/${Util.cadastroRoute()}/${rowData.IdPessoaEmpresa}`])
     // }
 
-    pdf(){
+    pdf() {
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.salvarEBaixarArquivo(getUrlReport(), 'listCategoryFinance', { type: "pdf" }).subscribe(v => {
             Util.savePdf(v)

@@ -1,3 +1,8 @@
+import { UpdateCodeListComponent } from './pages/report/update-code/update-code-list.component';
+import { ReportCashFlowComponent } from './pages/report/report-cash-flow/report-cash-flow.component';
+import { ReportDreComponent } from './pages/report/report-DRE/report-dre.component';
+import { UserCompanyListComponent } from './pages/user-company/user-company-list/user-company-list.component';
+import { ParametersCompanyComponent } from './pages/parameters-company/parameters-company.component';
 import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import { MemorizedHistoriesListComponent } from './pages/memorized-histories/memorized-histories-list/memorized-histories-list.component';
 import { OutstandingComponent } from './pages/conciliation/outstanding/outstanding.component';
@@ -8,7 +13,6 @@ import { AccountRegisterComponent } from './pages/account/account-register/accou
 import { CompanyRegistrationComponent } from './pages/company/company-registration/company-registration.component';
 import { CompanyListComponent } from './pages/company/company-list/company-list.component';
 import { AccountStatusComponent } from './pages/settings-page/account-status/account-status.component';
-import { ParametersComponent } from './pages/settings-page/parameters/parameters.component';
 import { InvoicesListComponent } from './pages/settings-page/invoices-list/invoices-list.component';
 import { DepartmentsListComponent } from './pages/settings-page/departments/departments-list/departments-list.component';
 import { UsersListComponent } from './pages/settings-page/users/users-list/users-list.component';
@@ -71,8 +75,17 @@ import {MenuService} from './app.menu.service';
 import {TemaModule} from './tema.module';
 import { LayoutsModule } from './layout/layouts.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { DashboardHomeComponent } from './pages/dashboard/dashboard-home/dashboard-home.component';
+import { DashboardCompanyComponent } from './pages/dashboard/dashboard-company/dashboard-company.component';
+import { AccountingParametersComponent } from './pages/settings-page/accounting-parameters/accounting-parameters.component'
+import { SupportComponent } from './pages/settings-page/support/support.component'
+import { DashboardTesteComponent } from './pages/dashboard/dashboard-teste/dashboard-teste.component';
 
-
+// import {SliderModule} from 'primeng/slider';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {ButtonModule} from 'primeng/button';
+import {CheckboxModule} from 'primeng/checkbox';
+import { DashboardCustomerComponent } from './pages/dashboard/dashboard-customer/dashboard-customer.component';
 
 
 @NgModule({
@@ -87,12 +100,16 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         DiretivasModule,
         ComponentsModule,
         PipesModule,
-        ModaisModule,   
-        LayoutsModule, 
-        ImageCropperModule,  
-        NgxViacepModule,      
-        
-        
+        ModaisModule,
+        LayoutsModule,
+        ImageCropperModule,
+        NgxViacepModule,
+        ProgressBarModule,
+        ButtonModule,
+        // SliderModule,
+        CheckboxModule,
+
+
     ],
     declarations: [
         AppComponent,
@@ -109,10 +126,10 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         SelecaoEmpresaComponent,
         GeralEvolucaoSaldoLivroCaixaChartComponent,
         GeralLivroCaixaXNotasChartComponent,
-        VisaoGeralComponent,        
+        VisaoGeralComponent,
         CompanyListComponent,
-        UsersListComponent,                
-        UsersRegistrationComponent,        
+        UsersListComponent,
+        UsersRegistrationComponent,
         CompanyRegistrationComponent,
         PersonListComponent,
         PersonRegistrationComponent,
@@ -134,7 +151,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         MainAccountantComponent,
         DepartmentsListComponent,
         InvoicesListComponent,
-        ParametersComponent,
+        ParametersCompanyComponent,
         AccountStatusComponent,
         AccountRegisterComponent,
         AppNotfoundComponent,
@@ -142,6 +159,18 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         KeyWordRegistrationComponent,
         OutstandingComponent,
         MemorizedHistoriesListComponent,
+        UserCompanyListComponent,
+        ReportDreComponent,
+        ReportCashFlowComponent,
+        UpdateCodeListComponent,
+        DashboardHomeComponent,
+        DashboardCompanyComponent,
+        AccountingParametersComponent,
+        SupportComponent,
+        DashboardTesteComponent,
+        DashboardCustomerComponent
+
+
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

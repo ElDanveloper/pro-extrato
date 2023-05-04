@@ -1,9 +1,9 @@
 <div class="content">
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-col-2">
-            <label>Conta: &nbsp; {{contaCaixa ? contaCaixa.Nome : nome}}</label><br>
+            <label style="font-weight: bold;">Conta: &nbsp; {{contaCaixa ? contaCaixa.Name : nome}}</label><br>
             <div class="p-inputgroup">
-                <input type="text" pInputText placeholder="Filtrar" (keypress)="pressionaEnter($event)" #inputPesquisa>
+                <input type="text" pInputText placeholder="Filtrar" (keypress)="pressionaEnter($event)" [(ngModel)]="filtro" #inputPesquisa>
                 <button style="width: 15%;" pButton type="button" icon="fa fa-search" (click)="update()"></button>
             </div>
         </div>
@@ -19,27 +19,30 @@
             <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
         </div>
 
-        <div class="p-fluid p-formgrid p-grid p-col-4" style="margin-top: 20px;">
+        <div class="p-fluid p-formgrid p-grid p-col-4" style="margin-top: 20px; margin-left: 80px;">
             <div class="p-col-4">
                 <button pButton class="p-button-success" label="Recebimento"
                     (click)="abrirModalPagamentoViaConta('R')"></button>
             </div>
-            <div class="p-col-4">
+            <div class="p-col-3">
                 <button pButton class="ui-button-danger" label="Pagamento"
                     (click)="abrirModalPagamentoViaConta('P')"></button>
             </div>
-            <div class="p-col-4">
-                <button pButton label="Saldo Inicial" (click)="openModalOpeningBalance()"></button>
+            <div class="p-col-5">
+                <button pButton label="Fechamento Parcial" (click)="Partialclosure()"></button>
             </div>
         </div>
         <div class="p-field p-col-1 p-md-2" style="margin-top: 15px;">
-            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 25px; cursor: pointer;"></i>
-            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 35px; cursor: pointer"></i>
+            <i class="pi pi-file-excel" style="font-size: 2rem; margin-left: 25px; cursor: pointer;" (click)="report('xls')"></i>
+            <i class="pi pi-file-pdf" style="font-size: 2rem; margin-left: 35px; cursor: pointer" (click)="report('pdf')"></i>
         </div>
         <!-- <div class="ui-g-1">
             <app-tutorial [Classificacao]="'3.07.02'"></app-tutorial>
         </div> -->
-        <div class="p-offset-2 p-col-2" style="margin-top: 10px;">
+        <div class="p-col-2" style="margin-top: 10px;">
+            <p-splitButton label="Relatórios" [model]="itemsReport"></p-splitButton>
+        </div>
+        <div class="p-col-2" style="margin-top: 10px;">
             <button pButton label="Atualizar" (click)="update()"></button>
         </div>
         <div class=" p-col-2" style="margin-top: 10px;">
@@ -65,7 +68,7 @@
     <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="lista" dataKey="DateBalance" rowExpandMode="single" [totalRecords]="lista.length">
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 5%"></th>
+                <th style="width: 3%"></th>
                 <th style="width: 17%;">Data</th>
                 <th style="width: 10%;">Saldo Ant.</th>
                 <th style="width: 10%;">Entradas</th>
@@ -101,13 +104,12 @@
             <tr>
                 <td colspan="6">
                     <p-table [paginator]="true" [(rows)]="qtdLinhas" [rowsPerPageOptions]="opcoesLinhas"
-                        [totalRecords]="lista2.length" [value]="lista2">
-                        <ng-template pTemplate="header">
+                        [totalRecords]="quantityItems" [value]="lista2" (onLazyLoad)="lazyLoad($event)" [lazy]="true">
+                        <ng-template pTemplate="header" let-columns>
             <tr>
                 <th style="width: 60%;">Histórico</th>
-                <th style="width: 10%;">Documento</th>
-                <th style="width: 10%;">Entrada</th>
-                <th style="width: 10%;">Saída</th>
+                <th style="width: 10%;">Documento</th>                
+                <th style="width: 10%;">Valor</th>
                 <th style="width: 10%;">Tipo</th>
                 <th style="width: 45px;"></th>
             </tr>
@@ -115,10 +117,8 @@
         <ng-template pTemplate="body" let-rowData2 let-columns="columns">
             <tr>
                 <td>{{rowData2.Historic}}</td>
-                <td>{{rowData2.Document}}</td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData2.Debitos)">{{getValor(rowData2.Debitos) |
-                    CommaPipeZero}}</td>
-                <td appAlinharDireita [ngClass]="colorValue(rowData2.Amount)">{{getValor(rowData2.Amount) |
+                <td>{{rowData2.Document}}</td>                
+                <td appAlignRight [ngClass]="colorValue(rowData2.Amount)">{{getValor(rowData2.Amount) |
                     CommaPipeZero}}</td>
                 <td>{{rowData2.Specie}}</td>
                 <td>
@@ -138,10 +138,6 @@
 </div>
 
 <div style="position: fixed; top: -200%">
-    <button pButton type="button" label="" #openingbalance></button>
-</div>
-
-<div style="position: fixed; top: -200%">
     <button pButton type="button" label="" #editstatementitems></button>
 </div>
 
@@ -151,10 +147,6 @@
 
 <app-modal [styleScroll]="{width: '100%', height: '500px'}" [fundo]="true" *appModalOpenOnClick="[editstatementitems, '1Acd5WGj3']" [hash]="'1Acd5WGj3'">
     <app-modal-edit-statement-items #content (dadosSalvos)="dadosSalvos()" [data]="dadosEdit" [hash]="'1Acd5WGj3'"></app-modal-edit-statement-items>
-</app-modal>
-
-<app-modal [styleScroll]="{width: '100%', height: '450px'}" [fundo]="true" *appModalOpenOnClick="[openingbalance, '1Acd5WGj2']" [hash]="'1Acd5WGj2'">
-    <app-modal-opening-balance  #content (dadosSalvos)="dadosSalvos()" [data]="data"></app-modal-opening-balance>
 </app-modal>
 
 <app-modal-switch-account [modalVisible]="modalTrocarConta" #content (closeModal)="contaTrocada()"></app-modal-switch-account>

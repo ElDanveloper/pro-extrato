@@ -1,3 +1,6 @@
+import { ModalReportCashFlowComponent } from './modal-report-cash-flow/modal-report-cash-flow.component';
+import { ModalReportDreComponent } from './modal-report-dre/modal-report-dre.component';
+import { ModalSimpleRegistrationComponent } from './modal-simple-registration/modal-simple-registration.component';
 import { ModalKeyWordRegistrationComponent } from './modal-key-word-registration/modal-key-word-registration.component';
 import { ModalAccountRegistrationComponent } from './modal-account-registration/modal-account-registration.component';
 import { ModalEditStatementItemsComponent } from './modal-edit-statement-items/modal-edit-statement-items.component';
@@ -32,10 +35,11 @@ import {PipesModule} from '../pipes/pipes.module';
 import {DiretivasModule} from '../diretivas/diretivas.module';
 import {ComponentsModule} from '../components/components.module';
 import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecionar-empresa-escritorio/modal-selecionar-empresa-escritorio.component';
+import { ModalSupportComponent } from '../modais/modal-support/modal-support.component'
 
 @NgModule({
   declarations: [
-      ModalSelecionarEmpresaEscritorioComponent,      
+      ModalSelecionarEmpresaEscritorioComponent,
       ModalTrocarEmpresaComponent,
       ModalEmpresaCadastroComponent,
       ModalUserRegistrationComponent,
@@ -58,7 +62,12 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
       ModalEditStatementItemsComponent,
       ModalAccountRegistrationComponent,
       ModalKeyWordRegistrationComponent,
+      ModalSimpleRegistrationComponent,
+      ModalReportDreComponent,
+      ModalReportCashFlowComponent,
       //ModalPagamentoViaContaCorrenteComponent,
+      ModalSupportComponent,
+
   ],
     imports: [
         CommonModule,
@@ -72,10 +81,10 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         DiretivasModule,
         ComponentsModule,
         LayoutsModule,
-        
+
     ],
     exports: [
-        ModalSelecionarEmpresaEscritorioComponent,        
+        ModalSelecionarEmpresaEscritorioComponent,
         ModalTrocarEmpresaComponent,
         ModalEmpresaCadastroComponent,
         ModalUserRegistrationComponent,
@@ -97,8 +106,11 @@ import {ModalSelecionarEmpresaEscritorioComponent} from '../modais/modal-selecio
         ModalEditStatementItemsComponent,
         ModalAccountRegistrationComponent,
         ModalKeyWordRegistrationComponent,
-     
+        ModalSimpleRegistrationComponent,
+        ModalReportDreComponent,
+        ModalReportCashFlowComponent,
         //ModalPagamentoViaContaCorrenteComponent,
+        ModalSupportComponent,
     ]
 })
 export class ModaisModule { }

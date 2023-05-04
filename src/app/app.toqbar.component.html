@@ -1,9 +1,9 @@
-<div class="topbar clearfix">
-    <div class="topbar-left" routerLink="/home">
+<div class="topbar clearfix" style="background-color: #fff;">
+    <div class="topbar-left" [routerLink]="home" style="background-color: #fff;">
         <div class="logo"></div>
     </div>
 
-    <div class="topbar-right">
+    <div class="topbar-right" style="display: flex; justify-content: space-between;">
         <a id="menu-button" href="#" (click)="app.onMenuButtonClick($event)">
             <i class="pi pi-angle-left"></i>
         </a>
@@ -21,12 +21,13 @@
             <div style="width: 250px;
                     display: inline-block;
                     font-size: 14px;
-                    color: #ffffff;
+                    color: #4D4D4D;
+                    text-transform: uppercase;
                     vertical-align: middle;
-                    margin-left: 8em;
                     font-weight: bold;
-                    margin-right: 200px;">
-            <app-browse-environment></app-browse-environment>
+                    margin-right: 450px;
+                    margin-top: 10px">
+           <span class="mes-label">{{labelEnvironment}}</span>
         </div>
             <!-- <li #profile class="profile-item" *ngIf="app.profileMode==='top'||app.isHorizontal()"
                 [ngClass]="{'active-top-menu':app.activeTopbarItem === profile}">
@@ -63,40 +64,52 @@
                     </li>
                 </ul>
             </li> -->
-            <li #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}">
+            <li nfI #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}">
                 <a href="#" (click)="app.onTopbarItemClick($event,settings)">
-                    <i class="topbar-icon pi pi-cog"></i>
+                    <i style="color: #4D4D4D;" class="topbar-icon pi pi-cog"></i>
                     <span class="topbar-item-name">Settings</span>
                 </a>
                 <ul class="ultima-menu animated fadeInDown">
-                    <li role="menuitem">
+                    <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/parameters')">
                             <i class="pi pi-cog"></i>
                             <span>Configuração</span>
                         </a>
                     </li>
-                    <li role="menuitem">
+                    <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings')">
                             <i class="pi pi-briefcase"></i>
                             <span>Dados da Contabilidade</span>
                         </a>
                     </li>
-                    <li role="menuitem">
+                    <li *ngIf="counter === 'true'" role="menuitem">
+                        <a href="#" (click)="app.onTopbarSubItemClick($event, 'development')">
+                            <i class="pi pi-user-plus"></i>
+                            <span>Incluir Contratante</span>
+                        </a>
+                    </li>
+                    <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/users-list')">
                             <i class="pi pi-users"></i>
                             <span>Usuarios</span>
                         </a>
                     </li>
-                    <li role="menuitem">
+                    <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event)">
                             <i class="pi pi-upload"></i>
                             <span>Exportação</span>
                         </a>
                     </li>
-                    <li role="menuitem">
+                    <li *ngIf="counter === 'true'" role="menuitem">
                         <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/invoices-list')">
                             <i class="pi pi-dollar"></i>
                             <span>Faturas</span>
+                        </a>
+                    </li>
+                    <li *ngIf="counter === 'true'" role="menuitem">
+                        <a href="#" (click)="app.onTopbarSubItemClick($event, 'settings/support')">
+                            <i class="pi pi-user-edit"></i>
+                            <span>Suporte</span>
                         </a>
                     </li>
                     <li role="menuitem">
@@ -180,8 +193,21 @@
                 </ul>
             </li> -->
             <li style="margin-top: 0px;">
-                <span *ngIf="counter !== 'true'" (click)="abrirModalTrocarEmpresa()" class="link-pessoa" style="font-size: 13px;color: white;">Empresa:</span><br>
-                <span *ngIf="counter !== 'true'" (click)="abrirModalTrocarEmpresa()" class="link-pessoa" style="color: #dddddd;">{{empresa}}</span>
+                <span
+                    *ngIf="counter !== 'true'"
+                    (click)="abrirModalTrocarEmpresa()"
+                    class="link-pessoa"
+                    style="
+                    font-size: 13px;
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 14px;
+                    text-transform: uppercase;
+                    color: #4D4D4D;
+                    "
+                >Empresa:</span><br>
+                <span *ngIf="counter !== 'true'" (click)="abrirModalTrocarEmpresa()" class="link-pessoa" style="color: #4D4D4D;">{{empresa}}</span>
                 <button *ngIf="counter === 'true'" pButton type="button" class="trocar" style="background: #3B4CC0; margin-top: -20px; margin-right: 20px;" label="Selecionar Empresa" (click)="abrirModalTrocarEmpresa()"></button>
             </li>
             <!-- <li #search class="search-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === search}"

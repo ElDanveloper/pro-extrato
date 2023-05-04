@@ -1,16 +1,19 @@
 <div class="p-fluid p-formgrid p-grid">
-    <div class="p-col-1">       
+    <div class="p-col-1">
     </div>
-    <div class="p-col-1 p-offset-8" style="font-size: 18px; margin-right: -50px;">
-        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="downloadPdf()"></i>
-    </div>   
+    <div class="p-col-1 p-offset-8" style="font-size: 18px; margin-top: 5px; margin-right: -20px;">
+        <i class="pi pi-file-excel" style="font-size: 2rem; cursor: pointer; margin-right: 20px;"
+            (click)="report('xls')"></i>
+        <i class="pi pi-file-pdf" style="font-size: 2rem; cursor: pointer" (click)="report('pdf')"></i>
+    </div>
     <div class="p-col-2">
         <button pButton label="Processar Conciliação" (click)="processConciliation()"></button>
     </div>
 </div>
 <div class="p-col p-fluid">
-    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="extratoContaBanco" (onLazyLoad)="lazyLoad($event)" [lazy]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80,90,100]">    
-        [rowsPerPageOptions]="opcoesLinhas">
+    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm"
+        [paginator]="true" dataKey="Id" [(rows)]="qtdLinhas" [totalRecords]="totalItens" [value]="extratoContaBanco"
+        (onLazyLoad)="lazyLoad($event)" [lazy]="true" [rowsPerPageOptions]="opcoesLinhas">
         <ng-template pTemplate="header">
             <tr>
                 <th style="width: 12%;" pSortableColumn="DateMovement">Data do Movemto
@@ -28,12 +31,12 @@
                 <th style="width: 5%;"></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <ng-template pTemplate="body" let-rowData>
             <tr>
                 <td appAlignCenter>{{rowData.DateMovement | date}}</td>
                 <td>{{rowData.Historic}}</td>
                 <td appAlinharDireita [ngClass]="colorValue(rowData.Amount)">{{rowData.Amount | virgulaPipe}}</td>
-                <td>{{rowData.Reconciled === 'N' ? 'Não' : 'Sim'}}</td>
+                <td>{{status(rowData.Reconciled)}}</td>
                 <td>
                     <app-opcoes-table [value]="rowData" [opcoes]="itemsRow"></app-opcoes-table>
                 </td>

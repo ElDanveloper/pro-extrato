@@ -1,0 +1,23 @@
+<ng-container *ngTemplateOutlet="conteudo"></ng-container>
+<ng-template #conteudo>
+    <div class="p-col-12 p-fluid p-formgrid p-grid">
+        <div *ngIf="nameFile === 'consolidado'" class="p-col-4">
+            <app-date label="Data Inicio" [(ngModel)]="dateStart"></app-date>
+        </div>
+        <div class="p-col-4">
+            <app-date label="Data Final" [(ngModel)]="dateEnd"></app-date>
+        </div>
+    <!-- </div>
+    <div class="p-col-12 p-fluid p-formgrid p-grid"> -->
+        <div class="p-offset-1 p-field p-col-4 p-md-2" style="margin-top: 15px;">
+            <i class="pi pi-file-excel" style="font-size: 3rem; margin-left: 5px; cursor: pointer;" (click)="report('xls')"></i>
+            <i class="pi pi-file-pdf" style="font-size: 3rem; margin-left: 15px; cursor: pointer" (click)="report('pdf')"></i>
+        </div>
+        <!-- <div class="p-offset-6 p-col-3">
+            <button class="button-fixo" pButton type="button" label="Baixar PDF" icon="fa fa-file-pdf-o" (click)="report('pdf')"></button>
+        </div>
+        <div class="p-col-3">
+            <button class="button-fixo" pButton type="button" label="Baixar Excel" icon="fa fa-file-excel-o" (click)="repor('xls')"></button>
+        </div> -->
+    </div>
+</ng-template>

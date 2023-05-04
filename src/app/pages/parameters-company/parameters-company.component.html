@@ -1,8 +1,8 @@
 <ng-container *ngTemplateOutlet="conteudo"></ng-container>
 <ng-template #conteudo>
     <div>
-        <p-card [formGroup]="form">
-            <div class="p-fluid p-formgrid p-grid">
+        <p-card [header]="'Parametros'" [formGroup]="form">
+            <!-- <div class="p-fluid p-formgrid p-grid">
                 <div class="p-col-4">
                     <app-input [label]="'Ultimo Disparo WhatsApp'"></app-input>
                 </div>
@@ -10,7 +10,7 @@
                     <app-input [label]="'Ultimo Disparo E-mail'"></app-input>
                 </div>
             </div>
-            &nbsp;
+            &nbsp; -->
             <app-painel title="Despesas Financeira">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-col-6">

@@ -20,6 +20,7 @@ export class FinancialCategory {
     public SpecieFlow: string = '' //S = Saida, E = Entrada
     public FixVariable: string = '' //F = Fixo, V = Variavel, N = Nenhum
     public IdNaturezaFinGrupo: any = ''
+    public ShortDescription: any = ''
 
     constructor() {}
 

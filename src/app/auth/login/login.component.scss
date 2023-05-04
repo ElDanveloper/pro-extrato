@@ -9,25 +9,75 @@ h1 {
 }
 
 .login-body-fixo {
-    padding: 1px;
-    padding-bottom: 400px;    
+    padding: 0;
+    padding-bottom: 0;
     background-color: #2C3E50;
     // background-color: #2f4050;
-    background-size: 100% auto;
+    background-size: auto auto auto auto;
     height: auto;
     box-sizing: border-box;
 }
 
-.login-panel-fixo {
+.login-body-imagem {
+    position: relative;
+    height: 90vh;
+    width: 60vw;
+    background-image: url("../../../assets/images/login.svg");
+    background-size: 100% 100%;
+    margin-left: 130px;
+    // box-sizing: border-box;
+}
+
+.image-google {
+    position: relative;
+    height: 12vh;
+    width: 12vw;
+    background-image: url("../../../assets/images/google.svg");
+    background-size: 100% 100%;
     text-align: center;
-    width: 500px;
+    margin-left: 65px;
+    margin-top: 10px;
+}
+
+.image-apple {
+    position: relative;
+    height: 12vh;
+    width: 12vw;
+    background-image: url("../../../assets/images/apple.svg");
+    background-size: 100% 100%;
+    text-align: center;
+    margin-left: 60px;
+    margin-top: -5px;
+}
+
+.login-panel {
+    text-align: center;
+    width: 350px;
     min-height: 440px;
-    padding: 10px 10px 10px 130px;
+    padding: 50px 20px;
     margin: 100px auto 0 auto;
+}
+
+.link-esqueci-senha {
+    color: black;
+    margin-left: 11px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.link-esqueci-senha:hover {
+    color: #3B4CC0;
+    transition: all .3s;
+    text-decoration: underline;
+}
+
+.link-app {
+    cursor: pointer;
 }
 
 .button-fixo {
     background-color: #3B4CC0;
+
     // #2C3E50;
     // background-color: #2f4050;
     &:hover {
@@ -48,7 +98,35 @@ h1 {
 
         &:focus {
             outline: 0 none;
-            background-color: lighten(#1ab394,10%);
+            background-color: lighten(#1ab394, 10%);
         }
+    }
+}
+
+@media (max-width: 1920px) {
+    .login-panel-fixo {
+        text-align: center;
+        width: 500px;
+        height: 905px;
+        min-height: 440px;
+        padding: 50px 90px 0 40px;
+        background-color: white;
+        // margin-bottom: -10px;
+        // margin: auto auto auto auto;
+
+    }
+}
+
+@media (max-width: 1367px) {
+    .login-panel-fixo {
+        text-align: center;
+        width: 400px;
+        height: 595px;
+        min-height: 440px;
+        padding: 50px 90px 0 40px;
+        background-color: white;
+        // margin-bottom: -10px;
+        // margin: auto auto auto auto;
+
     }
 }

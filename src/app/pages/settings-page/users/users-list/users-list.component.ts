@@ -1,3 +1,4 @@
+import { opcoesLinhas } from './../../../../controller/staticValues';
 import { BaseListSimplesHeaders } from './../../../../controller/BaseListSimplesHeaders';
 import { NetworkService } from '../../../../services/network.service';
 import { qtdLinhas, getUrlClient, getUrlUser } from '../../../../controller/staticValues';
@@ -25,6 +26,7 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     public totalItens: number
     lista2 = []
     @ViewChild('inputPesquisa') public inputPesquisa
@@ -32,20 +34,19 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     public selectSort: SelectItem[] = [{label: 'ID', value: 'ID'}, {label: 'NOME', value: 'NOME'}]
     opcoesTable = [
         {label: 'Alterar', icon: 'fa fa-edit', command: (e) => {
-            console.log(JSON.stringify(e))
             this.router.navigate([`settings/users-registration/${e.id}`])
         }},
         {label: 'Excluir', icon: 'fa fa-close', command: (e) => {}},
         {label: 'Ver Histórico', icon: 'fa fa-eye', command: (e) => {}},
     ]
 
-    
+
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
         super(networkService, getUrlUser(), 'contractor')
     }
 
-    ngOnInit() {        
+    ngOnInit() {
         this.carregarLista()
     }
 
@@ -53,16 +54,16 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
         if (e.key === 'Enter') this.carregarLista()
     }
 
-    
+
 
     linkPessoa(v) {
         this.router.navigate([`/historico-pessoa/${v.Id}/pedido`])
     }
 
-    getActive(active){        
-        if(active === true) {            
+    getActive(active){
+        if(active === true) {
             return 'S'
-        } else {            
+        } else {
             return 'N'
         }
     }
@@ -72,9 +73,9 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     }
 
 
-    
 
-    
+
+
 
 
     // public deletar(rowData) {
@@ -95,7 +96,7 @@ export class UsersListComponent extends BaseListSimplesHeaders implements OnInit
     // }
 
     // public navegar() {
-    //     this.cadastrarPessoa.nativeElement.click()        
+    //     this.cadastrarPessoa.nativeElement.click()
     // }
 
     ngOnDestroy(): void {

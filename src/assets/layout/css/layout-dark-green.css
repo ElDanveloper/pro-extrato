@@ -1682,7 +1682,7 @@ body a {
   vertical-align: middle;
   width: 200px;
   height: 30px;
-  background: url("../../../assets/images/logo-nome.png") top left no-repeat;
+  background: url("../../../assets/images/logo-nome.svg") top left no-repeat;
   background-size: 200px 30px;
 }
 .layout-container .topbar .topbar-left {
@@ -1692,9 +1692,9 @@ body a {
   width: 250px;
   background-color: #0e2031;
   float: left;
-  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3); */
+  /* -webkit-box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3); */
 }
 .layout-container .topbar .topbar-right {
   padding: 15px 15px 15px 0;
@@ -1703,7 +1703,6 @@ body a {
   float: right;
 }
 .layout-container .topbar .topbar-right #menu-button {
-  color: #ffffff;
   display: inline-block;
   vertical-align: middle;
   height: 36px;
@@ -1712,17 +1711,17 @@ body a {
   position: relative;
   left: -16px;
   top: 3px;
-  background-color: #1ab394;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
+  background-color: #fff;
+  /* -moz-border-radius: 50%;
+  -webkit-border-radius: 50%; */
+  /* border-radius: 50%; */
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
-  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
-  -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+  /* -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16); */
+  /* box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16); */
 }
 .layout-container .topbar .topbar-right #menu-button:hover {
   -webkit-transform: scale(1.2);
@@ -1738,6 +1737,7 @@ body a {
   transition: all 0.2s;
   font-size: 30px;
   margin-top: 3px;
+  color: #4D4D4D;
 }
 .layout-container .topbar .topbar-right #topbar-menu-button, .layout-container .topbar .topbar-right #rightpanel-menu-button {
   display: none;
@@ -1842,8 +1842,11 @@ body a {
 .layout-container .layout-menu .profile-menu li:last-child {
   margin-bottom: 1em;
 }
+
+/* MENU DA BARRA LATERAL */
 .layout-container .layout-menu.layout-menu-dark {
-  background-color: #0e2031;
+  /* background-color: #0e2031; */
+  background-color: #fff;
 }
 .layout-container .layout-menu.layout-menu-dark .profile {
   background-image: url("../images/profile-bg-dark.png");
@@ -1858,13 +1861,24 @@ body a {
   border-bottom: 1px solid #545454;
 }
 .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li a {
-  color: #ffffff;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 45px;
+    text-transform: capitalize;
+    color: #4D4D4D;
+    align-items: center;
 }
 .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li a i {
-  color: #ffffff;
+    /* color: #ffffff; */
+    color: #4D4D4D;
 }
 .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li a:hover {
-  background-color: #5b6976;
+  background-color: #E6E6E6;
+}
+.layout-container .layout-menu.layout-menu-dark ul.ultima-menu li a:hover i {
+    color: #4D4D4D;
 }
 .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li a.active-menuitem-routerlink {
   color: #1ab394;
@@ -1882,12 +1896,17 @@ body a {
   color: #ffffff;
   background-color: #1ab394;
 }
+.layout-container .layout-menu.layout-menu-dark ul.ultima-menu li.active-menuitem > a > i {
+    color: #ffffff;
+    background-color: #1ab394;
+  }
 .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li.active-menuitem > a.active-menuitem-routerlink {
   color: #ffffff;
   background-color: #1ab394;
 }
 .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li.active-menuitem > a.active-menuitem-routerlink i {
-  color: #000001;
+  /* color: #000001; */
+  color: #fff;
 }
 .layout-container .layout-menu .menuitem-badge {
   position: absolute;

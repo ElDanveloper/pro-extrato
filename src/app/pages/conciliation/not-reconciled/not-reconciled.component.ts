@@ -1,5 +1,5 @@
 import { Category } from './../../../model/category.model';
-import { qtdLinhas } from './../../../controller/staticValues';
+import { qtdLinhas, getUrlReport } from './../../../controller/staticValues';
 import { ProStatementItem } from './../../../model/pro-statement-item.model';
 import { opcoesLinhas, getUrlPro } from '../../../controller/staticValues';
 import { DadosDefaultService } from '../../../services/dados-default.service';
@@ -32,6 +32,7 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
 
     public loading: boolean
     public top: number = 7
+    jaPesquisou = false
 
     totalItens;
 
@@ -89,11 +90,37 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
         if (this.$subscriptionContabilNaoConciliado) this.$subscriptionContabilNaoConciliado.unsubscribe();
     }
 
-    downloadPdf() {
-        this.dadosDefault.exibirLoader.next(true)
-        // this.networkService.baixarPdf(getUrlFinanceiro(), `contabil/ExtratoPDF?DataIni=${this.dataInicial}&DataFim=${this.dataFinal}&IdConta=${Number(this.id)}&tipo=1`).subscribe(v => {
-        //     Util.savePdf(v)
-        // }).add(() => this.dadosDefault.exibirLoader.next(false))
+    report(type) {
+        let body = {
+            type: type,
+            date_ini: this.dataInicial,
+            date_end: this.dataFinal,
+            account_id: this.id,
+            Reconcilied: 'N',
+        }
+
+        if (type === 'pdf') {
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.salvarEBaixarArquivo(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+                Util.savePdf(v, 'Extrato Não Conciliado')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
+        }
+        if (type === 'xls') {
+            this.dadosDefault.exibirLoader.next(true)
+            this.networkService.baixarXls(getUrlReport(), 'DetailExtract', body).subscribe(v => {
+                Util.saveXls(v, 'Extrato Não Conciliado.xls')
+            }).add(() => this.dadosDefault.exibirLoader.next(false))
+        }
+
+    }
+
+    descriptionSpecie(v) {
+        switch (v) {
+            case 'C':
+                return 'Crédito'
+            case 'D':
+                return 'Débito'
+        }
     }
 
     colorValue(v) {
@@ -104,32 +131,33 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
         return Util.isNegative(v) ? { ...classes, 'texto-vermelho': true } : { ...classes, 'texto-verde': true }
     }
 
-    private carregarLista(page = 1, top = 10) {
-        if (this.filterCategory) {
-            this.dadosDefault.exibirLoader.next(true)
-            this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'&FinancialId=${this.category.Id}${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
-                this.totalItens = x.headers.get('total')
-                this.lista = x.body['value']
-            }).add(() => this.dadosDefault.exibirLoader.next(false));
-        } else {
+    private carregarLista(page = 1, top = 7) {
+        // if (this.filterCategory) {
+        //     this.dadosDefault.exibirLoader.next(true)
+        //     this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
+        //         this.totalItens = x.headers.get('total')
+        //         this.lista = x.body['value']
+        //     }).add(() => this.dadosDefault.exibirLoader.next(false));
+        // } else {
             this.dadosDefault.exibirLoader.next(true)
             // ${Util.expandedQuery(ProStatementItem.expanded(), true)}
             this.networkService.getSimplesComHeaders(getUrlPro(), `StatementItems?AccountId=${this.id}&DateIni=${this.dataInicial}&DateEnd=${this.dataFinal}&Reconciled='N'${Util.expandedQuery(ProStatementItem.expanded(), true)}`, page, top).subscribe((x: any) => {
                 this.totalItens = x.headers.get('total')
                 this.lista = x.body['value']
+                this.jaPesquisou = true
                 // this.lista = x
             }).add(() => this.dadosDefault.exibirLoader.next(false));
-        }
+        // }
     }
 
     selectedCategory(event) {
-        this.category = event
+        this.category = event        
         this.filterCategory = true
-        this.carregarLista()
+        // this.carregarLista()
     }
 
     public lazyLoad(event): void {
-        // if (!this.jaPesquisou) return
+        if (!this.jaPesquisou) return
         this.loading = true
         if (this.lista) {
             if (this.top !== event.rows && event.rows !== undefined) {
@@ -137,9 +165,34 @@ export class NotReconciledComponent implements OnInit, OnDestroy {
                 event.first = 0
             }
 
-            this.carregarLista((event.first / 10) + 1, 7)
+            this.carregarLista((event.first / this.top) + 1, this.top)
             this.loading = false
         }
+    }
+
+    reconcileSelected() {
+        if (this.selected.length < 1) {
+            this.messageService.add(Util.pushInfoMessage('Favor selecionar uma conta para conciliação!'))
+            return
+        }
+
+        let listIds = this.selected.map(v => v.Id.toString())
+
+        let body = {
+            ListIds: listIds,
+            FinancialId: this.category.Id
+        }
+
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.salvarPost(getUrlPro(), 'UpdateStatementItems', body).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Conciliação feita com sucesso!'))
+            this.carregarLista()
+            listIds = []
+            body.FinancialId = 0
+            body.ListIds = []
+            this.selected = []
+        }).add(this.dadosDefault.exibirLoader.next(false))
+                
     }
 
     processConciliation() {

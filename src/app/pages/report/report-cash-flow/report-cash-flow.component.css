@@ -1,0 +1,64 @@
+.card-banco {
+    cursor: pointer;
+}
+
+.card-banco img {
+    width: auto;
+    height: 64px;
+}
+
+.card-banco h2 {
+    line-height: 0;
+}
+
+.card-info {
+    background-color: #F5F8F9;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #e2e5e6;
+}
+
+
+.card-resumo-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.card-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin: 10px 0;
+    /* font-weight: bold; */
+}
+
+.card-valor {
+    /* display: flex; */
+    justify-content: space-between;
+    font-size: 14px;
+    /* margin: 10px 0; */
+    font-weight: bold;
+}
+
+.item-azul {
+    color: #9999FF;
+}
+.item-vermelho {
+    color: #FF0000;
+}
+.item-verde {
+    color: #4ab858;
+}
+
+.vertical {
+    border-left: 2px solid black;
+    margin-top: -10px;
+    height: 310px;
+    position:absolute;
+    left: 40%;
+}

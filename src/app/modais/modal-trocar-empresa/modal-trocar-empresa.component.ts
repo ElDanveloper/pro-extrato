@@ -60,6 +60,7 @@ export class ModalTrocarEmpresaComponent extends BaseFormPost implements OnInit 
         this.$buscarTokenSelectSubscribe = this.authService.selectAuthenticacao({ client_id: client_id.id }).subscribe(res => {
             sessionStorage.setItem(TOKEN_STORAGE_KEY, res["token"])
             this.fecharModal()
+            // window.location.reload()
             this.router.navigate(['/home'], { replaceUrl: true })
         })
         

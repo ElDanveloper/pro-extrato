@@ -22,16 +22,24 @@
 .ui-inputgroup-addon {
     height: 25px;
     width: 25px;
-    background-color: #E6E6E6;
+    /* background-color: #E6E6E6; */
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 1px;
-    border: 1px solid rgba(212, 208, 208, 0.6);
+    /* border: 1px solid rgba(212, 208, 208, 0.6); */
 }
 
-i {
+/* i {
     color: #2d353c;
+} */
+
+#vector-left {
+    margin-right: 2rem;
+}
+
+#vector-right {
+    margin-left: 2rem;
 }
 
 .input-date-container {

@@ -1,5 +1,5 @@
 import { BaseListSimplesHeaders } from './../../../../controller/BaseListSimplesHeaders';
-import { getUrlPro, qtdLinhas } from './../../../../controller/staticValues';
+import { getUrlPro, qtdLinhas, opcoesLinhas } from './../../../../controller/staticValues';
 import { Router } from '@angular/router';
 import { NetworkService } from './../../../../services/network.service';
 import { MessageService, ConfirmationService, SelectItem } from 'primeng/api';
@@ -11,7 +11,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/co
   templateUrl: './departments-list.component.html',
   styleUrls: ['./departments-list.component.css']
 })
-export class DepartmentsListComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class DepartmentsListComponent extends BaseListSimplesHeaders implements OnInit, OnDestroy {
 
     @ViewChild('registrationDepartments') registrationDepartments: ElementRef;
    
@@ -21,11 +21,12 @@ export class DepartmentsListComponent extends BaseListSimples implements OnInit,
     public loading: boolean
     public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    opcoesLinhas = opcoesLinhas()
     public totalItens: number
     
 
     constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'department', null, 'Description', 'Description')
+        super(networkService, getUrlPro(), 'department', null)
         
     }
 

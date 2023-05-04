@@ -1,0 +1,148 @@
+<div class="p-fluid">
+    <div class="p-col-12 p-grid p-fluid">
+        <div class="p-col-12 p-grid p-fluid">
+            <div class="p-col-3">
+                <p-card header="Total de Transações" [style]="{'width': '20rem', 'height': '137px'}">
+                    <p *ngIf="this.data" [ngClass]="colorValue(Amount)" appAlignRight style="font-size: large; font-weight: bold;"> {{ Amount | virgulaPipe}} </p>
+                </p-card>
+            </div>
+            <div class="p-col-3">
+                <p-card header="Pendências com analistas" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                    <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ AnalistPending }}  Lançamentos</p>
+                    <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ CompanyPendingAnalist }}  Empresas</p>
+                </p-card>
+            </div>
+            <div class="p-col-3">
+                <p-card header="Pendências com clientes" [style]="{'width': '20rem', 'margin-bottom': '1em'}">
+                    <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ CostomerPending }} Lançamentos</p>
+                    <p *ngIf="this.data" appAlignRight style="font-size: larger;"> {{ CompanyPendingCostomer }} Empresas</p>
+                </p-card>
+            </div>
+            <div class="p-col-3">
+                <div class="4">
+                    <div class="card" style="height: 138px;">
+                        <h5 *ngIf="this.data" class="centerText">Empresas Ativas {{ ActiveCompany }}</h5>
+                        <h5 *ngIf="this.data" class="centerText">Conta Ativa {{ ActiveAccount }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-col-12 p-grid p-fluid">
+        <div class="p-col-3">
+            <div style="display: flex; justify-content: center;">
+                <div class="p-col-2" style="width: 200px; margin-right: 10px;">
+                    <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+                </div>
+                <div class="p-col-4">
+                    <button pButton type="button" class="p-button-raised p-button-rounded" icon="pi pi-refresh" (click)="updateData()"></button>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 10px; height: 257px;">
+                <h5 *ngIf="this.data" class="centerText">Transações Conciliadas: {{ AmountReconciled }}</h5>
+                <p>Inteligência Artificial</p>
+                <!-- value1.toFixed(2) -->
+                <p-progressBar [value]="Value1" [style]="{'height': '15px'}"></p-progressBar>
+                <p style="margin-top: 10px;">Analista</p>
+                <!-- value2.toFixed(2) -->
+                <p-progressBar [value]="Value2" [style]="{'height': '15px'}"></p-progressBar>
+                <p style="margin-top: 10px;">Cliente</p>
+                <!-- value3.toFixed(2) -->
+                <p-progressBar [value]="Value3" [style]="{'height': '15px'}"></p-progressBar>
+            </div>
+        </div>
+        <div class="p-col-5">
+            <div class="card">
+                <h5 class="centerText">Transações</h5>
+                <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
+            </div>
+        </div>
+        <div class="p-col-4">
+            <div class="card">
+                <h5 class="centerText">Analistas</h5>
+                <p-table [value]="cars">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Estado</th>
+                            <th>Data</th>
+                            <th>Empresa</th>
+                        </tr>
+                    </ng-template>
+                    <!--
+                    <ng-template pTemplate="body" let-car>
+                        <tr>
+                            <td>{{car.vin}}</td>
+                            <td>{{car.year}}</td>
+                            <td>{{car.brand}}</td>
+                            <td>{{car.color}}</td>
+                        </tr>
+                    </ng-template>
+                    -->
+                </p-table>
+            </div>
+        </div>
+        <div class="p-col-12 p-grid p-fluid">
+            <div class="p-col-6">
+                <div class="card">
+                    <h5 class="centerText">Por tempo de atraso</h5>
+                    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th [ngStyle]="{width: '20%'}"> 760 dias </th>
+                                <th [ngStyle]="{width: '20%'}"> Empresas 20 </th>
+                                <th [ngStyle]="{width: '20%'}"> C/ Analistas 80 </th>
+                                <th [ngStyle]="{width: '20%'}"> C/ Clientes 150 </th>
+                                <th [ngStyle]="{width: '20%'}"> TOTAL </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData>
+                            <tr>
+                                <!--
+                                <td>{{rowData.Historic}}</td>
+                                <td appAlignCenter>{{rowData.Level}}</td>
+                                <td appAlignRight>{{rowData.CodeControl}}</td>
+                                -->
+                                <!--
+                                <td appAlignCenter>
+                                    <app-opcoes-table [value]="rowData" [opcoes]="opcoesTable"></app-opcoes-table>
+                                </td>
+                                -->
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="p-col-5">
+                <div class="card">
+                    <h5 class="centerText">Pendências por Empresas</h5>
+                    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th [ngStyle]="{width: '20%'}"> Empresas </th>
+                                <th [ngStyle]="{width: '20%'}"> Contas </th>
+                                <th [ngStyle]="{width: '20%'}"> C/ Analistas </th>
+                                <th [ngStyle]="{width: '20%'}"> C/ Clientes </th>
+                                <th [ngStyle]="{width: '20%'}"> TOTAL </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData>
+                            <tr>
+                                <!--
+                                <td>{{rowData.Historic}}</td>
+                                <td appAlignCenter>{{rowData.Level}}</td>
+                                <td appAlignRight>{{rowData.CodeControl}}</td>
+                                -->
+                                <!--
+                                <td appAlignCenter>
+                                    <app-opcoes-table [value]="rowData" [opcoes]="opcoesTable"></app-opcoes-table>
+                                </td>
+                                -->
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

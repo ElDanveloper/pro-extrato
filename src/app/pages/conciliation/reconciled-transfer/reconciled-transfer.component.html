@@ -1,5 +1,5 @@
 <div class="p-fluid p-formgrid p-grid" [formGroup]="form">
-    <div class="p-col-3">
+    <div class="p-col-4">
         <p-card>
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-col-8">
@@ -21,58 +21,73 @@
                         <div class="p-col-12"> {{data ? data.Historic : ''}} </div>
                     </div>
                      <br>
-                    <div class="p-col-12 p-col-nopad">
+                     <div class="p-offset-9 p-col-9">
+                        <button pButton type="button" label="Quero Ajuda do Cliente" (click)="helpClient(data)"></button>
+                     </div>
+                    <!-- <div class="p-col-12 p-col-nopad">
                         <p-checkbox binary="true" formControlName="selecionar"></p-checkbox>
                         <label style="margin-left: 5px; font-weight: bold;">Selecionado</label>
+                    </div>                                         -->
+                </div>   
+                <div class="p-col-4 p-g-nopad">
+                    <div class="p-col-12">
+                        <button pButton type="button" label="Novo" (click)="transfer(0)"></button>
+                    </div>
+                    &nbsp;        
+                    <div class="p-col-12">
+                        <button pButton type="button" label="Transferência" (click)="transfer(2)"></button>
                     </div>                    
-                </div>               
+                </div>            
             </div>
             &nbsp;
         </p-card>
     </div>
 
-    <div class="p-col-9" *ngIf="index == 0">
+    <div class="p-col-8" *ngIf="index === 0">
         <p-card>
-            <div class="o-col-12 p-fluid p-formgrid p-grid">                
-                <div class="p-col-8 p-fluid p-formgrid p-grid" style="margin-right: -150px;">
-                    <div class="p-col-8">                      
+            <div class="p-col-12 p-fluid p-formgrid p-grid">                
+                <div class="p-col-6 p-fluid p-formgrid p-grid">
+                    <div class="p-col-12">                      
                             <app-input-search-person [label]="'Pessoa'" formControlName="IdPessoa"
                                                         (ngModelChange)="selecionouPessoa($event)"
                                                         field="Nome"></app-input-search-person>                        
                     </div>
-                    <div class="p-col-8">                        
+                    <div class="p-col-12">                        
                             <app-input-financial-category-search [label]="'Categoria Financeira'"
                                 (ngModelChange)="selecionouNaturezaFinanceira($event)" formControlName="IdNatureza"
                                 ></app-input-financial-category-search>                        
                     </div>                    
                 </div>
-                <div class="p-col-4 p-fluid p-formgrid p-grid" style="width: 450px;">                   
+
+                <!-- <div class="p-col-4 p-fluid p-formgrid p-grid" style="width: 400px;">                    -->
+
+                <div class="p-col-6 p-fluid p-formgrid p-grid">                   
                     <div class="p-col-12">
                         <app-input  [label]="'Obs. Complementar'" formControlName="Obs"></app-input>                        
+                    </div>               
+                    <br>
+                    <div class="p-fluid p-formgrid p-grid" style="margin-top: 5px; margin-left: 15px;">
+                        <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
+                        <label style="margin-left: 5px; margin-top: 5px; font-weight: bold;">Memorizar Procedimento</label>
                     </div>
-                    &nbsp;
-                    <div class="buttons p-col-4 center-content">
+                    <div class="p-fluid p-formgrid p-grid" style="margin-left: 20px; margin-top: 5px;">
+                        <p-checkbox binary="true" formControlName="memorizarPessoa"></p-checkbox>
+                        <label style="margin-left: 5px; margin-top: 5px; font-weight: bold;">Memorizar Pessoa</label>
+                    </div>
+                    <div class="buttons p-col-4 center-content" style="margin-top: 5px;">
                         <button pButton type="button" label="Conciliar" class="p-button-success"
                                 (click)="reconcileSingle()"></button>
                     </div>                    
-                    <div class="buttons p-col-4 center-content">
+                    <div class="buttons p-col-4 center-content" style="margin-top: 5px;">
                         <button pButton type="button" label="Desconciliar" class="p-button"
                                 (click)="toReconcile()"></button>
                     </div>                    
-                </div>
-                <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 6px;">
-                    <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
-                    <label style="margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
-                </div>
-                <div class="p-fluid p-formgrid p-grid" style="margin-top: 30px; margin-left: 20px;">
-                    <p-checkbox binary="true" formControlName="memorizarPessoa"></p-checkbox>
-                    <label style="margin-left: 5px; font-weight: bold;">Memorizar Pessoa</label>
-                </div>
+                </div>                
             </div>                        
         </p-card>
     </div>
 
-    <div class="p-col-8" *ngIf="index == 1">
+    <div class="p-col-8" *ngIf="index === 1">
         <p-card>
             <div class="p-col-12">
                 <div style="margin-bottom: 10px; color: #000;">
@@ -105,19 +120,18 @@
 
     <div class="p-col-8" *ngIf="index == 2">
         <p-card>
-            <div class="p-col-12 p-fluid">
-
+            <div class="p-col-12 p-fluid p-formgrid p-grid">
                 <div class="p-col-12">
-                    <app-select label="Conta de Destino" [options]="selectContaDestino"
-                                formControlName="IdContaCaixaDestino"></app-select>
+                    <app-select [label]="'Conta de Destino'" [options]="optionsConta" formControlName="AccountDestinyId"></app-select>
                 </div>
-                <div class="p-col-3">
+                &nbsp;
+                <div class="buttons p-col-3 center-content" style="margin-top: 15px; margin-left: 3px;">
                     <button pButton type="button" label="Conciliar" class="p-button-success"
-                            (click)="conciliarParaUnico('2')"></button>
-                </div>
-                <div class="p-col-6" style="margin-top: 5px;">
+                            (click)="reconcileSingle()"></button>
+                </div>                
+                <div class="p-fluid p-formgrid p-grid" style="margin-left: 20px;">
                     <p-checkbox binary="true" formControlName="memorizar"></p-checkbox>
-                    <label style="margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
+                    <label style="margin-top: 18px; margin-left: 5px; font-weight: bold;">Memorizar Procedimento</label>
                 </div>
             </div>
             &nbsp;

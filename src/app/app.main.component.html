@@ -1,7 +1,7 @@
 <div class="layout-wrapper" (click)="onLayoutClick()">
 
     <div class="layout-container"
-         [ngClass]="{'menu-layout-static': !isOverlay(),
+        [ngClass]="{'menu-layout-static': !isOverlay(),
             'menu-layout-overlay': isOverlay(),
             'layout-menu-overlay-active': overlayMenuActive,
             'menu-layout-horizontal': isHorizontal(),
@@ -9,14 +9,14 @@
             'layout-menu-static-inactive': staticMenuDesktopInactive,
             'layout-menu-static-active': staticMenuMobileActive, 'p-ripple-disabled': !ripple, 'p-input-filled': inputStyle === 'filled'}">
 
-            <app-topbar></app-topbar>
-          
+        <app-topbar></app-topbar>
+
 
         <div class="layout-menu" [ngClass]="{'layout-menu-dark':darkMenu}" (click)="onMenuClick()">
             <app-inline-profile *ngIf="profileMode=='inline'&&!isHorizontal()"></app-inline-profile>
             <app-menu></app-menu>
         </div>
-     
+
         <div class="layout-main">
             <!-- <app-breadcrumb></app-breadcrumb> -->
 
@@ -29,6 +29,40 @@
 
         <!-- <app-rightpanel></app-rightpanel>  -->
         <!-- <app-config></app-config> -->
+
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+        <script>window.OneSignal = window.OneSignal || [];</script>
+        <!-- <script>
+            var OneSignal = window.OneSignal || [];
+            console.log("Init OneSignal");
+            OneSignal.push(["init", {
+                appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb",
+                autoRegister: false,
+                allowLocalhostAsSecureOrigin: true,
+                notifyButton: {
+                    enable: true
+                }
+            }]);
+            console.log('OneSignal Initialized');
+            OneSignal.push(function () {
+                console.log('Registered For Push');
+                OneSignal.getUserId().then(function (userId) {
+                    console.log("User ID is", userId);
+                });
+            });
+        </script> -->
+        <!-- <script>
+            window.OneSignal = window.OneSignal || [];
+            OneSignal.push(function () {
+                OneSignal.init({
+                    appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb",
+                    safari_web_id: "web.onesignal.auto.257d0569-0e14-4d06-8d17-3d55d768ff68",
+                    notifyButton: {
+                        enable: true,
+                    },
+                });
+            });
+        </script> -->
 
         <div class="layout-mask"></div>
     </div>

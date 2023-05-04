@@ -1,9 +1,11 @@
+import { OneSignal } from 'onesignal-ngx';
 import { NetworkService } from 'src/app/services/network.service';
 import { Router } from '@angular/router';
 import { DadosDefaultService } from './services/dados-default.service';
 import {Component, OnInit} from '@angular/core';
 import { MenuService } from './app.menu.service';
 import { PrimeNGConfig, MessageService } from 'primeng/api';
+
 
 @Component({
     selector: 'app-main',
@@ -53,12 +55,41 @@ export class AppMainComponent implements OnInit {
 
     compactMode = true;
 
-    constructor(private menuService: MenuService, private primengConfig: PrimeNGConfig, private dadosDefault: DadosDefaultService, private messageService: MessageService, private router: Router, private networkService: NetworkService) {}
+    constructor(private menuService: MenuService, private primengConfig: PrimeNGConfig, private dadosDefault: DadosDefaultService, private messageService: MessageService, private router: Router, private networkService: NetworkService, private oneSignal: OneSignal) {
+          
+    }
 
     exibirLoader = this.dadosDefault.exibirLoader
     exibirLoaderNetwork = this.networkService.exibirLoader
 
+    onHandletTag(tag: string) {
+        this.oneSignal.sendTag('Tech', tag).then(() => {
+            console.log('Sent tag: ' + tag)
+        })
+    }
+
     ngOnInit() {
+        // this.oneSignal.init({
+        //     appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb"
+        // })    
+        // var oneSignal = window['OneSignal'] || [];
+        // oneSignal.push(["init", {
+        //     appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb",
+        //     autoRegister: false,
+        //     allowLocalhostAsSecureOrigin: true,
+        //     notifyButton: {
+        //         enable: false
+        //     }
+        // }]);
+        // oneSignal.push(function () {
+            // this.oneSignal.on('subscriptionChange', function (isSubscribed) {
+            //     console.log('Teste ----> ' + isSubscribed)
+            //     this.oneSignal.getUserId().then(function (userId) {
+
+            //     })
+            // })
+        // })
+
         this.primengConfig.ripple = true;
     }
 

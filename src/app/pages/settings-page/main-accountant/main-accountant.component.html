@@ -1,8 +1,17 @@
 <ng-container *ngTemplateOutlet="conteudo"></ng-container>
 <ng-template #conteudo>
     <div [formGroup]="form">
-        <p-card>
-            <h1 style="font-size: 18px; margin-top: 3px;">Dados da Contabilidade</h1>
+        <p-card [header]="'Dados da Contabilidade'">
+            <div style="margin-left: 5px;" class="p-fluid p-formgrid p-grid">
+                <!-- <h1 style="font-size: 18px;margin-right:10px;">Dados da Contabilidade</h1> -->
+                <div class="p-field p-col-4 p-md-3">
+                    <app-input-cpf-cnpj [label]="'CNPJ'" formControlName="Cnpj"></app-input-cpf-cnpj>
+                </div>
+                <div class="p-field p-col-4 p-md-3" style="margin-top: 1.5rem;">
+                    <button pButton label="Buscar CNPJ" (click)="takeCnpj()"></button>
+                </div>
+            </div>
+
             <app-page-divided>
                 <div principal class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-6 p-md-6">
@@ -11,17 +20,15 @@
                     <div class="p-field p-col-6 p-md-6">
                         <app-input [label]="'Nome fantasia'" formControlName="Fantasia"></app-input>
                     </div>
-                    <!-- <div class="p-fluid p-formgrid p-grid"> -->
-                        <div class="p-field p-col-4 p-md-4">
-                            <app-input-telefone [label]="'Telefone'" formControlName="Phone1"></app-input-telefone>
-                        </div>
-                        <div class="p-field p-col-4 p-md-4">
-                            <app-input-telefone [label]="'Celular'" formControlName="Cel"></app-input-telefone>
-                        </div>
-                        <div class="p-field p-col-4 p-md-4">
-                            <app-input [label]="'Contato'" formControlName="Contato"></app-input>
-                        </div>
-                    <!-- </div> -->
+                    <div class="p-field p-col-4 p-md-4">
+                        <app-input-telefone [label]="'Telefone'" formControlName="Phone1"></app-input-telefone>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4">
+                        <app-input-telefone [label]="'Celular'" formControlName="Cel"></app-input-telefone>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4">
+                        <app-input [label]="'Contato'" formControlName="Contato"></app-input>
+                    </div>
                 </div>
                 <div secundario class="p-col-12" style="margin-left: 70px;">
                     <p-card (click)="clickUploadImagem()" [style]="{marginTop: '10px', width: '150px', height: '120px', cursor: 'pointer'}">
@@ -39,8 +46,8 @@
                         <!-- <button pButton label="Upload" (click)="clickUploadImagem()"></button> -->
                     </p-card>
                 </div>
-                
-            </app-page-divided>                
+
+            </app-page-divided>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-3 p-md-3" style="margin-left: 7px;">
                         <div>Cep</div>
@@ -79,7 +86,7 @@
                     <div class="p-field p-col-12 p-md-12" style="margin-top: 10px;">
                         <app-footer-page [end]="true" [tamanhoConfirma]="'p-col-2'" [tamanhoCancelar]="'p-col-2'"
                             (confirmar)="processarFormulario()" (cancelar)="cancelarLocal()"
-                            [labelConfirmar]="'Confirmar'">
+                            [labelConfirmar]="'Salvar'">
                         </app-footer-page>
                     </div>
                 </div>

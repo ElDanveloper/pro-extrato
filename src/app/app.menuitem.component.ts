@@ -18,7 +18,7 @@ import { AppMainComponent } from './app.main.component';
 				<i *ngIf="item.icon" [ngClass]="item.icon"></i>
 				<span>{{item.label}}</span>
 				<span class="menuitem-badge" *ngIf="item.badge">{{item.badge}}</span>
-				<i class="pi pi-fw pi-angle-down submenu-icon" *ngIf="item.items"></i>
+				<i class="pi pi-fw pi-angle-down submenu-icon" style="margin-top: 10px;" *ngIf="item.items"></i>
 			</a>
 			<a (click)="itemClick($event)" (mouseenter)="onMouseEnter()" *ngIf="item.routerLink && !item.items"
 			   [routerLink]="item.routerLink" routerLinkActive="active-menuitem-routerlink" pRipple
@@ -26,7 +26,7 @@ import { AppMainComponent } from './app.main.component';
 				<i *ngIf="item.icon" [ngClass]="item.icon"></i>
 				<span>{{item.label}}</span>
 				<span class="menuitem-badge" *ngIf="item.badge">{{item.badge}}</span>
-				<i class="pi pi-fw pi-angle-down submenu-icon" *ngIf="item.items"></i>
+				<i class="pi pi-fw pi-angle-down submenu-icon" style="margin-top: 10px;" *ngIf="item.items"></i>
 			</a>
 			<div class="layout-menu-tooltip">
 				<div class="layout-menu-tooltip-arrow"></div>

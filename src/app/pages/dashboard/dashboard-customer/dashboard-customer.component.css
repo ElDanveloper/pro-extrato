@@ -1,0 +1,552 @@
+
+.container-cards {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* 1 CARD */
+.cards {
+    width: 28rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    border-radius: 25px;
+    padding: 1.5rem;
+}
+
+.container-dates-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.date {
+    width: 16rem;
+}
+
+.card-1-update-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
+    background: #FFFFFF;
+    box-shadow: 1px 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    padding: 0.6rem;
+}
+
+.card-1-update-button:hover {
+    cursor: pointer;
+    opacity: 60%;
+    text-shadow: rgba(0, 0, 0, 0.6);
+}
+
+.card-1-update-button p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 0.9rem;
+    color: #9C9C9C;
+}
+
+.card-1-transaction-card {
+    background: linear-gradient(90deg, #04B6EB 0%, #0AC684 100%);
+    width: 100%;
+    color: #fff;
+    border-radius: 25px;
+    margin-top: 1.3rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card-1-balance {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.card-1-balance h4 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+}
+
+.card-1-button {
+    background: #ffffff00;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.card-1-amount-balance {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.card-1-amount-balance p {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.card-1-amount-balance span {
+    font-family: 'Popins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+/* CARD DE PENDENCIAS */
+.reconciliations-button {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    padding: 1rem;
+    background: #3B4CC0;
+    border-radius: 25px;
+    color: #fff;
+    margin-top: 1.5rem;
+    cursor: pointer;
+}
+
+.reconciliations-button p {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.reconciliations-button span {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.reconciliations-button:hover {
+    opacity: 60%;
+    text-shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* CARD DE PRINCIPAIS DESPESAS */
+.main-expenses-card {
+    border-radius: 25px;
+    width: 39rem;
+    background-color: #ffffff;
+    padding: 1.1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.main-expenses-card p chart canvas.chartjs-render-monitor {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-expenses-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    color: #4D4D4D;
+    margin: 0;
+    margin-bottom: 2rem;
+}
+
+/* CARD GRAFICO DE BARRAS */
+.bar-chart-card {
+    width: 60rem;
+    border-radius: 25px;
+    background-color: #ffffff;
+    padding: 1.1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.bar-chart-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    color: #4D4D4D;
+    margin: 0;
+}
+
+/* CARD CONTAS */
+div .account-card {
+    min-width: 26rem;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Ajuste no tamanho do carrosel de acordo com cada resolução */
+.carousel {
+    width: 100%;
+}
+
+.account-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
+    min-width: 10rem;
+    margin: none;
+    margin-left: 1rem;
+}
+
+.account-card .bank-info {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.account-card .bank-info img {
+    width: 4rem;
+    height: 4rem;
+}
+
+.bank-info .bank-account-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.bank-info .bank-account-info h3 {
+    margin-top: 1rem;
+}
+
+.account-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #3B4CC0;
+    margin-bottom: 1px;
+}
+
+.account-card p {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #828282;
+}
+
+.account-card h5 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #3B4CC0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.balance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.balance h4 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #4D4D4D;
+}
+
+.balance span {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #12D90B;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.summary h5 {
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0.2rem;
+    margin-top: -0.4rem;
+}
+
+.summary-data {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.summary-data p {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: #828282;
+    margin-bottom: 0.2rem;
+}
+
+.summary-data span {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: #FF1414;
+}
+
+.account-card button {
+    background: linear-gradient(293.01deg, #04B6EB -1.68%, #0AC684 88.05%);
+    border-radius: 8px;
+    border: none;
+    padding: 1rem;
+    width: 65%;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+}
+
+.account-card button:hover {
+    opacity: 60%;
+    text-shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* PARA CORRIGIR A SOBRESCRIÇÃO DA RESOLUÇÃO 1024px */
+/* div .account-card {
+    min-width: 30rem;
+    margin-left: 1rem;
+} */
+
+/* CARROUSSEL */
+.product-item .product-item-content {
+    border: 1px solid var(--surface-d);
+    border-radius: 5px;
+    margin: 1rem;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.product-item .product-image {
+    width: 100%;
+}
+
+@media (max-width: 1024px ) {
+    .cards {
+        margin-left: 1rem;
+        min-width: 28rem;
+    }
+    /* DATAS */
+    .dates {
+        width: 20rem;
+    }
+    .dates .date {
+        width: 18rem;
+    }
+    /* BOTAO DE ATUALIZAR */
+    .cards .card-1-update-button {
+        margin-left: 19rem;
+    }
+    .card-1-transaction-card {
+        min-width: 24.5rem;
+    }
+    .part-cards-1 .reconciliations-button {
+        margin-left: 1rem;
+        min-width: 27rem;
+    }
+    .reconciliations-button > p {
+        font-size: 16px;
+    }
+    .reconciliations-button > span {
+        font-size: 16px;
+    }
+
+    .main-expenses-card {
+        min-width: 35rem;
+    }
+    .bar-chart-card {
+        margin-top: 35rem;
+        margin-left: -40rem;
+        min-width: 50rem;
+    }
+    div .account-management {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    #container-account-card {
+        width: 100rem;
+    }
+    /* CONTAINER DO CARD EM 1024px */
+    div .account-card {
+        width: 10rem;
+        margin-right: -5rem;
+    }
+    #last-col-account-card {
+        display: none;
+    }
+    #last-account-card {
+        display: none;
+    }
+
+}
+
+@media (max-width: 1366px){
+    .card-1-amount-balance span {
+        font-size: 2.5rem;
+    }
+
+    .card-1-balance {
+        margin-bottom: 0.9rem;
+    }
+
+    .reconciliations-button {
+        width: 100%;
+    }
+
+    .main-expenses-card {
+        width: 23rem;
+    }
+
+    .bar-chart-card h3 {
+        margin-bottom: 2rem;
+    }
+
+    .account-card .bank-info {
+        justify-content: flex-start;
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 1440px) {
+    .cards {
+        width: 22rem;
+    }
+    .date {
+        width: 12rem;
+    }
+    .card-1-balance h4 {
+        font-size: 18px;
+        line-height: 20px;
+    }
+    .card-1-amount-balance p {
+        margin-bottom: 0;
+        font-size: 1.2rem;
+    }
+    .reconciliations-button p {
+        font-size: 16px;
+        line-height: 30px;
+    }
+    .reconciliations-button span {
+        font-size: 16px;
+        line-height: 30px;
+    }
+    .col-main-expenses-card {
+        margin-top: -32.5rem;
+        margin-left: 25rem;
+        margin-right: 1rem;
+    }
+
+    .col-bar-chart-card {
+        margin-top: -33rem;
+        margin-left: 52rem;
+    }
+    .bar-chart-card {
+        width: 45rem;
+        height: 32rem;
+    }
+    .account-management {
+        margin-top: 1rem;
+    }
+    .account-card {
+        width: 23rem;
+    }
+    .account-card:last-child(4) {
+        margin-right: 0;
+    }
+    .account-card {
+        margin-left: 0.5rem;
+    }
+    .account-card h3 {
+        font-size: 16px;
+    }
+    .account-card p {
+        font-size: 13px;
+    }
+    .account-card button {
+        font-size: 16px;
+    }
+    .balance h4 {
+        font-size: 16px;
+    }
+    .balance span {
+        font-size: 16px;
+    }
+    .summary h5 {
+        font-size: 14px;
+    }
+    .summary-data p {
+        font-size: 12px;
+    }
+}
+
+
+/*
+@media (max-width: 1920px) {
+    .cards {
+        height: 23.7rem;
+    }
+    .date-mes-ano {
+        margin-bottom: 1rem;
+    }
+    .card-1-transaction-card {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        height: 9rem;
+    }
+    .card-1-balance {
+        margin-bottom: 1rem;
+    }
+    .reconciliations-button {
+        margin-top: 1rem;
+    }
+    .main-expenses-card {
+        height: 32rem;
+    }
+    .bar-chart-card {
+        height: 32rem;
+    }
+}
+*/

@@ -1,0 +1,258 @@
+<!-- LAYOUT ANTIGO -->
+<!-- <div class="p-fluid">
+    <div class="p-col-12 p-grid p-fluid">
+        <div class="p-col-3">
+            <div class="card cards">
+                <div style="display: flex; justify-content: center;">
+                    <div class="p-col-8">
+                        <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+                    </div>
+                </div>
+                <div class="p-col-3">
+                    <div class="card card-1-transaction-card cards-container">
+                        <h3>Total de Transações</h3>
+                        <span *ngIf="this.data" appAlignLeft style="font-size: 3rem; font-weight: bold;"> {{ Amount }} </span>
+                    </div>
+                </div>
+                <div class="p-col-4 p-grid p-fluid">
+                    <div class="p-col-4">
+                        <div class="card-1-active-securities">
+                            <p>Empresas Ativas </p>
+                            <span *ngIf="this.data">{{ ActiveCompany }}</span>
+                            <p>Conta Ativa </p>
+                            <span *ngIf="this.data">{{ ActiveAccount }}</span>
+                        </div>
+                    </div>
+
+                    <div class="p-col-3 card-1-update-button" (click)="updateData()">
+                        <p>Atualizar</p>
+                        <img src="../../../../assets/images/Vector.png" alt="Vetor de Atualizar">
+                    </div>
+
+                </div>
+            </div>
+            <div class="card cards cards-container">
+                <h3 class="pending-card-title">Pendências</h3>
+                <div class="p-col-3">
+                    <div class="card pending-card">
+                        <h5>COM ANALISTAS</h5>
+                        <p>Lançamentos</p>
+                        <span *ngIf="this.data" appAlignLeft> {{ AnalistPending }}</span>
+                        <p>Empresas</p>
+                        <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingAnalist }}</span>
+                    </div>
+                </div>
+                <div class="p-col-3">
+                    <div class="card pending-card">
+                        <h5>COM EMPRESAS</h5>
+                        <p>Lançamentos</p>
+                        <span *ngIf="this.data" appAlignLeft> {{ CostomerPending }}</span>
+                        <p>Empresas</p>
+                        <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingCostomer }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-col-5">
+            <div class="card cards-container bar-chart-card">
+                <h3 class="centerText">Lançamentos</h3>
+                <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
+            </div>
+        </div>
+        <div class="p-col-4">
+            <div class="card cards-container donut-chart-card" style="height: 30rem;">
+                <h3 class="centerText">Transações Conciliadas</h3>
+                <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
+            </div>
+        </div>
+        <div class="p-col-12 p-grid p-fluid">
+            <div class="p-col-3">
+            </div>
+            <div class="p-col-9" style="margin-top: -30rem;">
+                <div class="card table-card cards-container">
+                    <h3 class="centerText">Pendências por Empresas</h3>
+                    <p-table styleClass="p-datatable-customers p-datatable-gridlines p-datatable-striped p-datatable-sm">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th [ngStyle]="{width: '20%'}"> EMPRESAS </th>
+                                <th [ngStyle]="{width: '20%'}"> CONTAS </th>
+                                <th [ngStyle]="{width: '20%'}"> RESPONSÁVEL </th>
+                                <th [ngStyle]="{width: '20%'}"> DIAS </th>
+                                <th [ngStyle]="{width: '20%'}"> TOTAL </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData>
+                            <tr>
+                                <td>{{rowData.Historic}}</td>
+                                <td appAlignCenter>{{rowData.Level}}</td>
+                                <td appAlignRight>{{rowData.CodeControl}}</td>
+                                <td appAlignCenter>
+                                    <app-opcoes-table [value]="rowData" [opcoes]="opcoesTable"></app-opcoes-table>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- LAYOUT COM FLEX -->
+<div class="container">
+    <div class="container-cards-top">
+        <div class="card container-transaction-card">
+            <div class="month-year">
+                <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+            </div>
+            <div class="transaction-card">
+                <div class="transactions-refreshButton">
+                    <div class="transactions">
+                        <h3>Total de Transações</h3>
+                        <span *ngIf="this.data"> {{ Amount }} <!-- 1.000.000.000 --> </span>
+                    </div>
+
+                    <div class="update-button" (click)="updateData()">
+                        <p>Atualizar</p>
+                        <img src="../../../../assets/images/Vector.png" alt="Vetor de Atualizar">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-active-accounts-companies">
+            <div class="container-image-company-account">
+                <img src="../../../../assets/images/icone-empresa.svg" alt="Ícone de empresa">
+                <div>
+                    <p>Empresas Ativas </p>
+                    <span *ngIf="this.data">{{ ActiveCompany }}</span>
+                </div>
+            </div>
+
+            <div class="container-image-company-account">
+                <img src="../../../../assets/images/icone-conta.svg" alt="Ícone de conta">
+                <div>
+                    <p>Conta Ativa </p>
+                    <span *ngIf="this.data">{{ ActiveAccount }}</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card pending-card">
+            <div class="container-pendingTitle-icon">
+                <img src="../../../../assets/images/pendencia-analista.svg" alt="Ícone de pessoas">
+                <h5>Pendências Com Analistas</h5>
+            </div>
+            <div class="container-launch-company">
+                <span *ngIf="this.data" appAlignLeft> {{ AnalistPending }}</span>
+                <p>Lançamentos</p>
+            </div>
+            <div class="container-launch-company">
+                <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingAnalist }}</span>
+                <p>Empresas</p>
+            </div>
+        </div>
+
+
+        <div class="card pending-card">
+            <div class="container-pendingTitle-icon">
+                <img src="../../../../assets/images/pendencia-empresa.svg" alt="Ícone de negócio">
+                <h5>Pendências Com Empresas</h5>
+            </div>
+            <div class="container-launch-company">
+                <span *ngIf="this.data" appAlignLeft> {{ CostomerPending }}</span>
+                <p>Lançamentos</p>
+            </div>
+            <div class="container-launch-company">
+                <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingCostomer }}</span>
+                <p>Empresas</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container-cards-bottom">
+
+        <div class="card donutChart-card">
+            <h3 class="centerText">Transações Conciliadas</h3>
+            <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
+        </div>
+        <div class="card barChart-card">
+            <h3 class="centerText">Lançamentos</h3>
+            <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
+        </div>
+
+    </div>
+</div>
+
+<!--
+<div class="p-fluid">
+    <div class="p-col-12 p-grid p-fluid">
+        <div class="p-col-3">
+            <div class="card cards">
+                <div style="display: flex; justify-content: center;">
+                    <div class="p-col-8">
+                        <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+                    </div>
+                </div>
+                <div class="p-col-3">
+                    <div class="card card-1-transaction-card cards-container">
+                        <h3>Total de Transações</h3>
+                        <span *ngIf="this.data" appAlignLeft style="font-size: 3rem; font-weight: bold;"> {{ Amount }} </span>
+                    </div>
+                </div>
+                <div class="p-col-4 p-grid p-fluid">
+                    <div class="p-col-4">
+                        <div class="card-1-active-securities">
+                            <p>Empresas Ativas </p>
+                            <span *ngIf="this.data">{{ ActiveCompany }}</span>
+                            <p>Conta Ativa </p>
+                            <span *ngIf="this.data">{{ ActiveAccount }}</span>
+                        </div>
+                    </div>
+
+                    <div class="p-col-3 card-1-update-button" (click)="updateData()">
+                        <p>Atualizar</p>
+                        <img src="../../../../assets/images/Vector.png" alt="Vetor de Atualizar">
+                    </div>
+
+                </div>
+            </div>
+            <div class="card cards cards-container">
+                <h3 class="pending-card-title">Pendências</h3>
+                <div class="p-col-3">
+                    <div class="card pending-card">
+                        <h5>COM ANALISTAS</h5>
+                        <p>Lançamentos</p>
+                        <span *ngIf="this.data" appAlignLeft> {{ AnalistPending }}</span>
+                        <p>Empresas</p>
+                        <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingAnalist }}</span>
+                    </div>
+                </div>
+                <div class="p-col-3">
+                    <div class="card pending-card">
+                        <h5>COM EMPRESAS</h5>
+                        <p>Lançamentos</p>
+                        <span *ngIf="this.data" appAlignLeft> {{ CostomerPending }}</span>
+                        <p>Empresas</p>
+                        <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingCostomer }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-col-5">
+            <div class="card cards-container bar-chart-card">
+                <h3 class="centerText">Lançamentos</h3>
+                <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
+            </div>
+        </div>
+        <div class="p-col-4">
+            <div class="card cards-container donut-chart-card" style="height: 30rem;">
+                <h3 class="centerText">Transações Conciliadas</h3>
+                <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
+            </div>
+        </div>
+    </div>
+</div>
+-->

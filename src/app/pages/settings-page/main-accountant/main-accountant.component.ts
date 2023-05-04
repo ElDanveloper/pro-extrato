@@ -2,7 +2,7 @@ import { Contractor } from './../../../model/contractor.model';
 import { Util, hasValue } from './../../../controller/Util';
 import { Dimensions } from 'ngx-image-cropper';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { getEstados } from './../../../controller/staticValues';
+import { getCnpj, getEstados, getUrlCnpj } from './../../../controller/staticValues';
 import { ErroCep } from '@brunoc/ngx-viacep';
 import { Endereco } from '@brunoc/ngx-viacep';
 import { NgxViacepService } from '@brunoc/ngx-viacep';
@@ -15,6 +15,8 @@ import { NetworkService } from './../../../services/network.service';
 import { MessageService } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from "@angular/core";
+
+import { Subscription } from "rxjs";
 
 @Component({
     selector: 'app-main-accountant',
@@ -37,14 +39,71 @@ export class MainAccountantComponent extends BaseFormPost implements OnInit {
     showCropper = false;
     imageChangedEvent: any = '';
 
-    
+    $subscription3: Subscription;
+
+
     constructor(public router: Router, private route: ActivatedRoute, public messageService: MessageService, public networkService: NetworkService, public dadosDefault: DadosDefaultService,private fb: FormBuilder, private viaCep: NgxViacepService) {
         super(networkService, dadosDefault, router, 'contractor', messageService);
         this.form = Formulario.createForm(new Contractor(), this.fb);
-     }
+    }
 
-    ngOnInit() {        
-      
+    ngOnInit() {
+
+    }
+
+    takeCnpj() {
+        // 20367555000183 - para teste
+        if(!this.form.get('Cnpj').value){
+            this.messageService.add(Util.pushErrorMsg('Favor informar o CNPJ!'))
+            return
+        }
+        const cnpj = this.form.get('Cnpj').value.toString().match(/\d/g);
+        this.dadosDefault.exibirLoader.next(true);
+        this.$subscription3 = this.networkService.getSimples(getCnpj(), cnpj.join('')).subscribe((v: any) => {
+            this.form.get('Nome').setValue(v.nome)
+            this.form.get('Fantasia').setValue(v.fantasia)
+            this.form.get('Phone1').setValue(v.telefone)
+            // this.form.get('Cel').setValue(v.telefone)
+            this.form.get('Contato').setValue(v.email) // email usado como contato
+            this.form.get('Cep').setValue(v.cep)
+            this.form.get('Numero').setValue(v.numero)
+            this.form.get('Logradouro').setValue(v.logradouro)
+            this.form.get('Bairro').setValue(v.bairro)
+            this.form.get('Complemento').setValue(v.complemento)
+            this.form.get('Uf').setValue(v.uf)
+            // this.form.get('Cidade').setValue(v.)
+        }, e => {
+            this.messageService.add(Util.pushErrorMsg(e))
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
+    // processarFormulario() {
+    //     let inv = false
+    //     if (this.form.invalid) {
+    //         Object.keys(this.form.controls).forEach(c => {
+    //             if (this.form.get(c).invalid) {
+    //                 this.messageService.add({ severity: 'error', summary: `O campo ${c} e obrigatorio` })
+    //                 inv = true
+    //             }
+    //         })
+    //         if (inv) return
+    //     }
+
+    //     const {Cnpj, ...data} = Object.assign({}, this.form.value)
+
+    //     let value: any = { ...Formulario.parseForm(new Contractor(), data, Contractor.referencias(), null, null, null, null) };
+
+    //     const cnpj = this.form.get('Cnpj').value.toString().match(/\d/g);
+    //     this.dadosDefault.exibirLoader.next(true);
+    //     this.$subscription3 = this.networkService.salvarPost(getCnpj(), 'InsertContractor', value).subscribe((v: any) => {
+    //         this.messageService.add(Util.pushSuccessMsg('Alteração salva!'))
+    //         this.router.navigate(['settings/main-accountant'])
+    //     }).add(() => this.dadosDefault.exibirLoader.next(false))
+
+    // }
+
+    cancelarLocal() {
+        this.router.navigate(['/settings/main-accountant'])
     }
 
     verificaCepValido(event) {
@@ -58,7 +117,7 @@ export class MainAccountantComponent extends BaseFormPost implements OnInit {
                         if (event === true) {
                             this.form.get('PessoaForm').get('CodigoIbge').setValue(endereco.ibge)
                             return
-                        }                        
+                        }
                         this.form.get('PessoaForm').get('Logradouro').setValue(endereco.logradouro);
                         this.form.get('PessoaForm').get('Complemento').setValue(endereco.complemento);
                         this.form.get('PessoaForm').get('Bairro').setValue(endereco.bairro);
@@ -125,9 +184,9 @@ export class MainAccountantComponent extends BaseFormPost implements OnInit {
 
     get imagem() {
         const staticImg = '../../../../../assets/images/user.png'
-        const img = null        
+        const img = null
         return hasValue(img) ? img : staticImg
     };
-     
+
 
 }

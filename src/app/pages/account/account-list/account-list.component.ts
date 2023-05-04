@@ -1,12 +1,14 @@
+import { DadosDefaultService } from './../../../services/dados-default.service';
 import { Util } from './../../../controller/Util';
 import { BaseListSimplesHeaders } from './../../../controller/BaseListSimplesHeaders';
-import { getUrlPro } from './../../../controller/staticValues';
+import { getUrlPro, getUrlClient, getUrlApiPro } from './../../../controller/staticValues';
 import { BaseListSimples } from '../../../controller/BaseListSimples';
 import { NetworkService } from '../../../services/network.service';
 import { qtdLinhas, } from '../../../controller/staticValues';
 import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import { Router } from "@angular/router";
+import { BaseListCompleta } from 'src/app/controller/base-list-completa';
 
 
 @Component({
@@ -14,9 +16,11 @@ import { Router } from "@angular/router";
     templateUrl: './account-list.component.html',
     styleUrls: ['./account-list.component.css']
 })
-export class AccountListComponent extends BaseListSimples implements OnInit, OnDestroy {
+export class AccountListComponent extends BaseListCompleta implements OnInit, OnDestroy {
 
     @ViewChild('registrationAccount') registrationAccount: ElementRef;
+
+    @ViewChild('openingbalance') openingbalance: ElementRef;
 
     // modalCadastrarPessoa = false
 
@@ -27,6 +31,7 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
     // public loading: boolean
     // public top: number = qtdLinhas()
     qtdLinhas = qtdLinhas()
+    data;
     // public totalItens: number
     // lista2 = []
     // @ViewChild('inputPesquisa') public inputPesquisa
@@ -43,20 +48,40 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
             if(e.ItemId === null) {
                 this.messageService.add(Util.pushErrorMsg('O ID do Item está NULO... Verifique com o suporte.'))
                 return
-            }            
+            }
             this.networkService.exibirLoader.next(true)
             this.networkService.getSimples(getUrlPro(), `GetTransactions?ItemId=${e.ItemId}`).subscribe(v => {
                 this.messageService.add(Util.pushSuccessMsg('Extrato Atualizado com Sucesso!'))
                 this.carregarLista()
             }).add(this.networkService.exibirLoader.next(false))
          } },
+         {
+            label: 'Saldo Inicial', icon: 'fa fa-money', command: (e) => {
+                this.data = e
+                this.openingbalance.nativeElement.click();
+            }
+         },
+         {
+            label: 'Copiar ID', icon: 'pi pi-copy', command: (e) => {
+                if(e.AccountId) {
+                    navigator.clipboard.writeText(e.AccountId);
+                    this.messageService.add(Util.pushSuccessMsg('ID copiado para área de transferência! Use Ctrl+V para colar'))
+                } else {
+                    this.messageService.add(Util.pushErrorMsg('ID não foi copiado para área de transferência! Veja com o suporte a falta do ID'))
+                }
+            }
+         }
     ]
 
     filtro = ''
 
-    constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router) {
-        super(networkService, getUrlPro(), 'proaccount', null, 'Name')
-        
+    constructor(public messageService: MessageService, public confirmationService: ConfirmationService, public networkService: NetworkService, public router: Router, public dadosDefault: DadosDefaultService) {
+        super(messageService, confirmationService, networkService, router, 'proaccount', getUrlPro(), null, [{ campo: 'Name', tipo: 'string' },])
+        this.sortField = 'Name'
+        this.sortOrder = 'desc'
+        // this.atributoFiltroComData = 'Datacadastro'
+        // this.filtroCampo = 'Status'
+
     }
 
     ngOnInit() {
@@ -67,7 +92,43 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
         if (e.key === 'Enter') this.carregarLista()
     }
 
+    typeAccount(value) {
+        switch (value) {
+            case 1:
+                return 'Conta Corrente'
+            case 2:
+                return 'Poupança'
+            case 3:
+                return 'Aplicação'
+            case 4:
+                return 'Garantia'
+            case 5:
+                return 'Cartão de Crédito'
+            case 6:
+                return 'Crediario'
+            case 7:
+                return 'Empréstimo'
+            case 8:
+                return 'Carteira Virtual'
+            case 9:
+                return 'Mutuo'
+            case 10:
+                return 'Caixa Interno'
+        }
 
+    }
+
+    updateItens(){
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlApiPro(), 'update/items').subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Extrato Atualizado com Sucesso!'))
+            this.carregarLista()
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+
+    dadosSalvos() {
+        this.carregarLista()
+    }
 
     linkLaunch(v) {
         this.router.navigate([`/account-launch/${v.Id}`])
@@ -103,7 +164,7 @@ export class AccountListComponent extends BaseListSimples implements OnInit, OnD
     //     this.router.navigate([`/${this.entidade}/${Util.cadastroRoute()}/${rowData.IdPessoaEmpresa}`])
     // }
 
-    public newAccount() {        
+    public newAccount() {
         this.registrationAccount.nativeElement.click()
     }
 

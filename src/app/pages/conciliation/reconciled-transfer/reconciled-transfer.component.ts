@@ -1,3 +1,4 @@
+import { hasValue } from './../../../controller/Util';
 import { getUrlPro } from './../../../controller/staticValues';
 import { map } from 'rxjs/operators';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
@@ -38,9 +39,9 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
     $buscarNaturezaSubscription: Subscription;
     index = 0;
     IdParcela = null
-  
+
     pessoa = null;
-    naturezaFinanceira = null;
+    naturezaFinanceira = null;    
 
     constructor(private fb: FormBuilder, private networkService: NetworkService, private router: Router, private dadosDefault: DadosDefaultService, private messageService: MessageService) {
         this.form = fb.group({
@@ -48,6 +49,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
             IdNatureza: '',
             IdNaturezaInput: '',
             Obs: '',
+            AccountDestinyId: '',
             IdPessoa: '',
             Documento: '',
             selecionar: '',
@@ -73,11 +75,11 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         return this.data.Amount
     }
 
-    ngOnInit() {
+    ngOnInit() {            
         if (this.data) {
-            if (this.data.Reconciled === "P") {
-                this.index = 1
-            }
+            // if (this.data.Reconciled === "P") {
+            //     this.index = 1
+            // }
             this.form.get('IdContaCaixaDestino').setValue(this.data.AccountId.Id)
             this.form.get('IdNatureza').setValue(this.data.IdNatureza?.Id)
             // this.form.get('Historico').setValue(this.data.Historic)
@@ -86,7 +88,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
 
             this.pessoa = this.data.PersonId
             if (this.pessoa) {
-                this.networkService.buscar('getPersonClient',`?PersonId='${this.pessoa}'`).subscribe(v => {
+                this.networkService.getSimples(getUrlPro(), `getPersonClient?PersonId=${this.pessoa}`).subscribe(v => {
                     this.form.get('IdPessoa').setValue(v)
                 })
                 // this.form.get('IdNatureza').setValue(this.pessoa.CodNatFinanceira)
@@ -108,6 +110,7 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
 
     ngOnChanges(changes: SimpleChanges): void {
         if (this.optionsConta) this.selectContaDestino = this.optionsConta
+        
         if (this.optionsNaturezaFinanceira) this.selectNaturezaFinanceira = this.optionsNaturezaFinanceira
     }
 
@@ -118,43 +121,56 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         if (this.$memorizarSubscription) this.$memorizarSubscription.unsubscribe();
         if (this.$buscarNaturezaSubscription) this.$buscarNaturezaSubscription.unsubscribe();
     }
-   
-    reconcileSingle() {
-        
-        // if(this.form.get('IdPessoa').value === ''){
-        //     this.messageService.add(Util.pushInfoMessage('Favor informar a Pessoa!'))
-        //     return
-        // }
 
-        if(this.form.get('IdNatureza').value === undefined){
-            this.messageService.add(Util.pushInfoMessage('Favor informar a Categoria Financeira!'))
+    transfer(n) {
+        this.index = n
+    }
+
+    helpClient(value) {
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples(getUrlPro(), `HelpForCostumer?Id=${value.Id}`).subscribe(v => {
+            this.messageService.add(Util.pushSuccessMsg('Processo Realizado!'))
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
+    }
+    
+
+    reconcileSingle() {        
+        if(this.form.get('AccountDestinyId').value === '' && this.index === 2){
+            this.messageService.add(Util.pushInfoMessage('Favor informar a conta de destino!'))
             return
         }
 
-        let natureza = this.form.get('IdNatureza').value
-        let person = this.form.get('IdPessoa').value                
-
+        if (this.form.get('IdNatureza').value === undefined && this.index === 0) {
+            this.messageService.add(Util.pushInfoMessage('Favor informar a Categoria Financeira!'))
+            return
+        }
+        
+        let natureza = this.form.get('IdNatureza').value ? this.form.get('IdNatureza').value : 0
+        let person = this.form.get('IdPessoa').value ? this.form.get('IdPessoa').value : 0
+        let conta = this.form.get('AccountDestinyId').value ? this.form.get('AccountDestinyId').value : 0
+        
         const body = {
             Id: this.data.Id,
-            FinancialId: natureza.Id,
-            PersonId: person.PersonId,
+            FinancialId: natureza.Id ? natureza.Id : 0,
+            PersonId: person.PersonId ? person.PersonId : 0,
             Obs: this.form.get('Obs').value,
             SavePerson: this.form.get('memorizarPessoa').value == true,
-            SaveHistoric: this.form.get('memorizar').value == true
+            SaveHistoric: this.form.get('memorizar').value == true,
+            AccountDestinyId: conta
         }
 
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.atualizarPost(getUrlPro(), 'UpdateStatementItem', body).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Conciliado com Sucesso!'))
-            this.recarregarDados.emit(true)            
+            this.recarregarDados.emit(true)
         }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
-    toReconcile() {        
+    toReconcile() {
         this.dadosDefault.exibirLoader.next(true)
         this.networkService.getSimples(getUrlPro(), `Desconciliate?Id=${this.data.Id}`).subscribe(v => {
             this.messageService.add(Util.pushSuccessMsg('Desconciliado com Sucesso!'))
-            this.recarregarDados.emit(true) 
+            this.recarregarDados.emit(true)
         }).add(this.dadosDefault.exibirLoader.next(false))
     }
 
@@ -189,10 +205,10 @@ export class ReconciledTransferComponent implements OnInit, OnChanges, OnDestroy
         // this.form.get('Historico').setValue(this.data.Historic + '  ' + e.Historic)
     }
 
-    selecionouPessoa(e) {                
-        if (e.FinancialCategoryId !== null) {
+    selecionouPessoa(e) {
+        if (e.FinancialCategoryId !== null && e.FinancialCategoryId !== undefined) {
             this.dadosDefault.exibirLoader.next(true)
-            this.networkService.getSimples(getUrlPro(), `FinancialCategory/${e.FinancialCategoryId}`).subscribe(v => {                
+            this.networkService.getSimples(getUrlPro(), `FinancialCategory/${e.FinancialCategoryId}`).subscribe(v => {
                 this.form.get('IdNatureza').setValue(v)
             }).add(this.dadosDefault.exibirLoader.next(false))
             // this.networkService.getSimples(getUrlCad(), `naturezaFinanceira?$filter=CodControle eq ${IdNatureza}`).subscribe((v: any) => {
