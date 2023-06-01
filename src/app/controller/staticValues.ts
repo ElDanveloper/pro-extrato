@@ -47,20 +47,20 @@ export const getUrlPluggy = () => `https://api.pluggy.ai`
 export const getCnpj = () => `https://bpoymh2e3b.execute-api.us-east-1.amazonaws.com/prod/consulta-cnpj`
 
 //Base original
-// export const URL_BASE = `https://api.hunno.com.br`
-// export const API_AUTH = `https://api.hunno.com.br:8089`
+export const URL_BASE = `https://api.hunno.com.br`
+export const API_AUTH = `https://api.hunno.com.br:8089`
 // export const URL_BASE = `http://75.119.134.38:8089`
 // export const API_AUTH = `http://75.119.134.38:8089`
 
 //Base Teste
-export const URL_BASE = `http://sandbox.hunno.com.br/api`
-export const API_AUTH = `http://sandbox.hunno.com.br:8089`
+// export const URL_BASE = `http://sandbox.hunno.com.br/api`
+// export const API_AUTH = `http://sandbox.hunno.com.br:8089`
 
-export const API_AUTH_HUNNO = `http://sandbox.hunno.com.br:2004`
+// export const API_AUTH_HUNNO = `http://sandbox.hunno.com.br:2004`
 
 //Base Original
 // export const URL_BASE = `https://api.hunnodev.com.br:2004`
-// export const API_AUTH_HUNNO = `https://api.hunno.com.br:2004`
+export const API_AUTH_HUNNO = `https://api.hunno.com.br:2004`
 export const URL_UPLOAD = `https://bpoymh2e3b.execute-api.us-east-1.amazonaws.com/prod/upload-file`
 
 export const S3_BUCKET_URL = `https://toqweb-images.s3.amazonaws.com/`
