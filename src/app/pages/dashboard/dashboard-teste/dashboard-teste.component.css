@@ -2,7 +2,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    /* padding: 10px; */
 }
 
 .container-cards-top {
@@ -17,7 +17,11 @@
     background: #FFFFFF;
     border-radius: 25px;
     width: 380px;
-    height: 240px;
+    /* height: 220px; */
+}
+
+.card:last-child {
+    margin-bottom: 2rem;
 }
 
 .container-transaction-card {
@@ -25,8 +29,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    padding: 20px;
-    width: 20%;
+    /* padding: 20px; */
+    width: 24%;
 }
 
 .month-year {
@@ -55,7 +59,7 @@
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 16px;
     text-transform: uppercase;
     color: #FFFFFF;
     margin: 0;
@@ -75,12 +79,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 6rem;
+    /* width: 6rem; */
     background-color: #FFFFFF;
     box-shadow: 1px 4px 16px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     padding: 10px;
     cursor: pointer;
+}
+
+.update-button p {
+    margin-bottom: 0.5rem;
 }
 
 .update-button:hover {
@@ -103,7 +111,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 20%;
+    width: 24%;
 }
 
 
@@ -129,7 +137,7 @@
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
-    font-size: 35px;
+    font-size: 25px;
     line-height: 20px;
     text-transform: uppercase;
     color: #9C9C9C;
@@ -141,7 +149,7 @@
     justify-content: space-between;
     flex-direction: column;
     padding: 20px;
-    width: 20%;
+    width: 24%;
 }
 
 .container-pendingTitle-icon {
@@ -161,11 +169,19 @@
     margin: 0;
 }
 
+/* .container-launch-company span {
+    height: 50px;
+}
+
+.container-launch-company p {
+    height: 50px;
+} */
+
 .pending-card span {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
-    font-size: 35px;
+    font-size: 25px;
     text-transform: uppercase;
     color: #9C9C9C;
 }
@@ -190,8 +206,8 @@
 
 /* grafico de rosca */
 .donutChart-card {
-    width: 30%;
-    height: 100%;
+    width: 42%;
+    /* height: 100%; */
     /* width: 400px; */
     /* height: 520px; */
 }
@@ -208,10 +224,10 @@
 
 /* grafico de barras */
 .barChart-card {
-    width: 60%;
-    height: 100%;
+    /* width: 50%; */
+    /* height: 100%; */
 
-    /* width: 944px; */
+    width: 75rem;
     /* height: 520px; */
 }
 
@@ -227,23 +243,36 @@
 
 @media (max-width: 1366px) {
     .container-transaction-card {
-        width: 23%;
+        width: 24%;
+    }
+
+    .transaction-card {
+        padding: 15px;
     }
 
     .transactions h3 {
-        font-size: 18px;
+        font-size: 15px;
+    }
+
+    .transactions span {
+        font-size: 23px;
     }
 
     .card-active-accounts-companies {
-        width: 23%;
+        width: 24%;
     }
 
     .pending-card {
-        width: 23%;
+        width: 24%;
+        padding: 15px;
+    }
+
+    .donutChart-card {
+        width: 34%;
     }
 
     .barChart-card {
-        width: 65%;
+        width: 64%;
     }
 }
 

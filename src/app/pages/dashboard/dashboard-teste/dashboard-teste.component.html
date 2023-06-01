@@ -109,7 +109,7 @@
                 <div class="transactions-refreshButton">
                     <div class="transactions">
                         <h3>Total de Transações</h3>
-                        <span *ngIf="this.data"> {{ Amount }} </span>
+                        <span *ngIf="this.data"> {{ Amount }} <!-- 1.000.000.000 --> </span>
                     </div>
 
                     <div class="update-button" (click)="updateData()">
@@ -144,11 +144,11 @@
                 <img src="../../../../assets/images/pendencia-analista.svg" alt="Ícone de pessoas">
                 <h5>Pendências Com Analistas</h5>
             </div>
-            <div>
+            <div class="container-launch-company">
                 <span *ngIf="this.data" appAlignLeft> {{ AnalistPending }}</span>
                 <p>Lançamentos</p>
             </div>
-            <div>
+            <div class="container-launch-company">
                 <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingAnalist }}</span>
                 <p>Empresas</p>
             </div>
@@ -160,11 +160,11 @@
                 <img src="../../../../assets/images/pendencia-empresa.svg" alt="Ícone de negócio">
                 <h5>Pendências Com Empresas</h5>
             </div>
-            <div>
+            <div class="container-launch-company">
                 <span *ngIf="this.data" appAlignLeft> {{ CostomerPending }}</span>
                 <p>Lançamentos</p>
             </div>
-            <div>
+            <div class="container-launch-company">
                 <span *ngIf="this.data" appAlignLeft> {{ CompanyPendingCostomer }}</span>
                 <p>Empresas</p>
             </div>

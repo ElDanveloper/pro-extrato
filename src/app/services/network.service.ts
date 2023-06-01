@@ -167,6 +167,13 @@ export class NetworkService {
         return this.http.post(`${url}/${endpoint}`, file, {headers, responseType: 'arraybuffer', observe: 'response' })
     }
 
+    postPluggy(url, endpoint, header) {
+        console.log('Header ---> ' + header)
+        let headers = new HttpHeaders();
+        headers = headers.set('X-API-KEY', header.toString() )
+        return this.http.post(`${url}/${endpoint}`, {headers}).pipe(catchError(this.errorHandler))
+    }
+
     // uploadXML(file) {
     //     const formData: FormData = new FormData();
     //     formData.append('xml', file, file.name);

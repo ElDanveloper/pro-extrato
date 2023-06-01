@@ -1,4 +1,117 @@
-<div class="p-fluid">
+<!-- Layout com p-col; p-md; p-sd -->
+
+
+<!-- <div class="fluid"> -->
+    <!-- <div class="grid" style="padding: 1.1rem 1.5rem;"> -->
+        <!-- <div> -->
+        <div class="container-cards">
+
+            <!-- <div class="card">container-cards -->
+            <!-- <div class="card cards xl:col-3 lg:col-3 md:col-6 sm:col-12"> -->
+            <div class="card cards xl:col-3 lg:col-3 md:col-5 sm:col-12">
+                <div style="display: flex; justify-content: center;">
+                    <div>
+                        <app-date-navigator (alterouData)="alterouData($event)"></app-date-navigator>
+                    </div>
+                </div>
+                <div class="container-dates-button">
+                    <div>
+                        <div class="date">
+                            <app-date [(ngModel)]="dateStart"></app-date>
+                        </div>
+                        <div class="date">
+                            <app-date [(ngModel)]="dateEnd"></app-date>
+                        </div>
+                    </div>
+                    <div class="card-1-update-button" (click)="labelData()">
+                        <p>Atualizar</p>
+                        <img src="../../../../assets/images/Vector.png" alt="Vetor de Atualizar">
+                    </div>
+                </div>
+
+                <div class="card-1-transaction-card">
+                    <div class="card-1-balance">
+                        <h4>Saldo</h4>
+                        <button class="card-1-button" (click)="seeBalance()">
+                            <img src="../../../../assets/images/olhinho-aberto.svg" alt="Olho">
+                        </button>
+                    </div>
+                    <div class="card-1-amount-balance">
+                        <p>R$</p>
+                        <span *ngIf="this.data" appAlignLeft> {{ Balance | virgulaPipe }} </span>
+                    </div>
+                </div>
+
+                <button class="reconciliations-button" (click)="reconciliations()">
+                    <p>você tem novas</p>
+                    <span>Conciliações</span>
+                </button>
+            </div>
+
+            <!-- </div> -->
+
+            <div class="xl:col-3 lg:col-3 md:col-6 sm:col-12 main-expenses-card">
+                <h3>Principais Despesas</h3>
+                <p-chart type="doughnut" [data]="donutChartExpenseData" [options]="optionsDoughnutExpense"></p-chart>
+            </div>
+
+            <div class="xl:col-6 lg:col-6 md:col-12 sm:col-12 bar-chart-card">
+                <h3>Receitas Vs Despesas</h3>
+                <p-chart type="bar" [data]="dataBar" [options]="optionsBar"></p-chart>
+            </div>
+        </div>
+
+        <p-carousel [value]="accounts" [numVisible]="Visible" [numScroll]="Scroll"
+            [responsiveOptions]="responsiveOptions" class="col-12" [circular]="true">
+            <ng-template pTemplate="header">
+                <!-- <h3 class="account-management">Gerenciamento de contas</h3> -->
+            </ng-template>
+            <ng-template let-account pTemplate="item">
+                <div class="product-item">
+                    <div class="card account-card">
+                        <div class="bank-info product-image">
+                            <img [src]="'../../../../assets/images/' + account.BankCode + '.svg'"
+                                [alt]="account.BankCode" />
+                            <div class="bank-account-info">
+                                <h3> {{ account.Name }} </h3>
+                                <p>Conta: {{ account.AccountNumber }} </p>
+                            </div>
+                        </div>
+                        <div class="balance">
+                            <h4>Saldo atual:</h4>
+                            <span> R$ {{ account.Balance || virgulaPipe }} </span>
+                        </div>
+                        <div class="summary">
+                            <h5>Resumo</h5>
+                        </div>
+                        <!-- <div class="summary-data">
+                            <p> {{ Historic }} </p>
+                            <span> {{ ReleaseBalance || virgulaPipe }} </span>
+                        </div>
+                        <div class="summary-data">
+                            <p> {{ Historic }} </p>
+                            <span> {{ ReleaseBalance || virgulaPipe }} </span>
+                        </div>
+                        <div class="summary-data">
+                            <p> {{ Historic }} </p>
+                            <span> {{ ReleaseBalance || virgulaPipe }} </span>
+                        </div> -->
+                        <button style="margin-top: 10px;" (click)="viewAccountPage(account.Id)">Ver mais</button>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
+
+    <!-- </div> -->
+<!-- </div> -->
+
+
+
+
+<!-- Layout antigo -->
+
+
+<!-- <div class="p-fluid">
     <div class="p-grid p-fluid" style="padding: 1.1rem 1.5rem;">
 
         <div class="container-cards">
@@ -57,11 +170,11 @@
             </div>
         </div>
 
-        <p-carousel [value]="accounts" [numVisible]="Visible" [numScroll]="Scroll" [responsiveOptions]="responsiveOptions" [circular]="true" class="carousel">
-            <!-- <ng-template pTemplate="header">
+        <p-carousel [value]="accounts" [numVisible]="Visible" [numScroll]="Scroll" [responsiveOptions]="responsiveOptions" [circular]="true" class="carousel">-->
+<!-- <ng-template pTemplate="header">
                 <h3 class="account-management">Gerenciamento de contas</h3>
             </ng-template> -->
-            <ng-template let-account pTemplate="item">
+<!-- <ng-template let-account pTemplate="item">
                 <div class="product-item">
                     <div class="card account-card">
                         <div class="bank-info product-image">
@@ -75,10 +188,10 @@
                             <h4>Saldo atual:</h4>
                             <span> R$ {{ account.Balance || virgulaPipe }} </span>
                         </div>
-                        <div class="summary">
-                            <!-- <h5>Resumo</h5> -->
-                        </div>
-                        <!-- <div class="summary-data">
+                        <div class="summary"> -->
+<!-- <h5>Resumo</h5> -->
+<!-- </div> -->
+<!-- <div class="summary-data">
                             <p> {{ Historic }} </p>
                             <span> {{ ReleaseBalance || virgulaPipe }} </span>
                         </div>
@@ -90,12 +203,11 @@
                             <p> {{ Historic }} </p>
                             <span> {{ ReleaseBalance || virgulaPipe }} </span>
                         </div> -->
-                        <button style="margin-top: 10px;" (click)="viewAccountPage(account.Id)">Ver mais</button>
+<!-- <button style="margin-top: 10px;" (click)="viewAccountPage(account.Id)">Ver mais</button>
                     </div>
                 </div>
             </ng-template>
         </p-carousel>
 
     </div>
-</div>
-
+</div> -->
