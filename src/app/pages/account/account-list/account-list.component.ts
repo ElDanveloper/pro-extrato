@@ -1,7 +1,7 @@
 import { DadosDefaultService } from './../../../services/dados-default.service';
 import { Util } from './../../../controller/Util';
 import { BaseListSimplesHeaders } from './../../../controller/BaseListSimplesHeaders';
-import { getUrlPro, getUrlClient, getUrlApiPro } from './../../../controller/staticValues';
+import { getUrlPro, getUrlClient, getUrlApiPro, getUrlPluggy } from './../../../controller/staticValues';
 import { BaseListSimples } from '../../../controller/BaseListSimples';
 import { NetworkService } from '../../../services/network.service';
 import { qtdLinhas, } from '../../../controller/staticValues';
@@ -165,7 +165,13 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
     // }
 
     public newAccount() {
-        this.registrationAccount.nativeElement.click()
+        this.dadosDefault.exibirLoader.next(true)
+        this.networkService.getSimples('https://app.hunno.com.br/api/proextrato', 'apikey').subscribe(v => {
+            this.networkService.postPluggy(getUrlPluggy(), 'connect_token', v['apiKey']).subscribe(value => {
+                console.log('Teste 2 -----> ' + value)
+            })
+        }).add(() => this.dadosDefault.exibirLoader.next(false))
+        // this.registrationAccount.nativeElement.click()
     }
 
     ngOnDestroy(): void {

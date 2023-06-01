@@ -62,6 +62,11 @@ export class DashboardCustomerComponent implements OnInit {
                 numScroll: 3
             },
             {
+                breakpoint: '991px',
+                numVisible: 2,
+                numScroll: 2
+            },
+            {
                 breakpoint: '768px',
                 numVisible: 2,
                 numScroll: 2
@@ -79,6 +84,7 @@ export class DashboardCustomerComponent implements OnInit {
         let resolution = this.responsiveOptions.find(x => x.breakpoint === window.innerWidth.toString()+'px');
         this.Visible = resolution.numVisible
         this.Scroll = resolution.numScroll
+        console.log('Teste de resolução ---> ' + this.Visible + ' --- ' + this.Scroll )
 
         this.loadAll()
     }
