@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
     constructor(private dadosDefault: DadosDefaultService, private networkService: NetworkService, private oneSignal: OneSignal) {
         this.oneSignal.init({
-            appId: "8c39c189-54b0-4160-82c9-b9e7e4e2e0cb",
+            appId: "e49063a5-f1b1-4daf-9f2e-5b7873a88762",
             serviceWorkerParam: {
                 scope: "/OneSignalSDKWorker.js"
               },
