@@ -22,23 +22,23 @@ export class AuthService {
     }
 
     public primeiraAuthenticacao(usuario: {}) {
-        return this.http.post(`https://app.hunno.com.br/api/login`, usuario).pipe(catchError(this.errorHandler))
+        return this.http.post(`https://api.hunno.com.br/api/login`, usuario).pipe(catchError(this.errorHandler))
     }
 
     public segundaAuthenticacao() {
-        return this.http.get(`https://app.hunno.com.br/api/suport/client`).pipe(catchError(this.errorHandler))
+        return this.http.get(`https://api.hunno.com.br/api/suport/client`).pipe(catchError(this.errorHandler))
     }
 
     public secondAuthenticationForEnterprise(id) {
-        return this.http.get(`https://app.hunno.com.br/api/client/vinculo/${id}`).pipe(catchError(this.errorHandler))
+        return this.http.get(`https://api.hunno.com.br/api/client/vinculo/${id}`).pipe(catchError(this.errorHandler))
     }
     
     public terceiraAuthenticacao() {
-        return this.http.get(`https://app.hunno.com.br/api/suport/contractor`).pipe(catchError(this.errorHandler))
+        return this.http.get(`https://api.hunno.com.br/api/suport/contractor`).pipe(catchError(this.errorHandler))
     }
 
     public selectAuthenticacao(contractor: {}) {
-        return this.http.post(`https://app.hunno.com.br/api/update/token/selected`, contractor).pipe(map(res => res)).pipe(catchError(this.errorHandler))
+        return this.http.post(`https://api.hunno.com.br/api/update/token/selected`, contractor).pipe(map(res => res)).pipe(catchError(this.errorHandler))
     }
 
     public quartaAuthenticacao(usuarioEmpresa: {}) {

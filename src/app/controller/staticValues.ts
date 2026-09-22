@@ -40,7 +40,7 @@ export const getUrlPro = () => `${API_AUTH_HUNNO}/pro/hunno`
 export const getUrlApiPro = () => `${URL_BASE}/api/proextrato`
 export const getUrlClient = () => `${URL_BASE}/api/client`
 export const getUrlUser = () => `${URL_BASE}/api/user`
-export const getUrlToken = () => `https://app.hunno.com.br/api/update/token`
+export const getUrlToken = () => `https://api.hunno.com.br/api/update/token`
 export const getUrlReport = () => `${URL_BASE}/api/proextrato/report`
 export const getUrlPluggy = () => `https://api.pluggy.ai`
 
