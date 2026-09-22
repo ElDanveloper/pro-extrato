@@ -166,7 +166,7 @@ export class AccountListComponent extends BaseListCompleta implements OnInit, On
 
     public newAccount() {
         this.dadosDefault.exibirLoader.next(true)
-        this.networkService.getSimples('https://api.hunno.com.br/api/proextrato', 'apikey').subscribe(v => {
+        this.networkService.getSimples('https://app.hunno.com.br/api/proextrato', 'apikey').subscribe(v => {
             this.networkService.postPluggy(getUrlPluggy(), 'connect_token', v['apiKey']).subscribe(value => {
                 console.log('Teste 2 -----> ' + value)
             })
